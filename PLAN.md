@@ -31,7 +31,8 @@ Thứ tự dưới đây là thứ tự **làm**, không theo thứ tự mục c
 - [x] **S5. Script chạy** – `npm run feature -- <fA|fB|fC>` chạy feature trên 3 trình duyệt, mỗi lần chạy ra một báo cáo `reports/<feature>/<browser>/`. Cả bài là 9 lần chạy.
 - [x] **S6. Smoke test** – `npm run smoke`: API, web, admin. Đạt 6/6 trên Chromium + Firefox (16/11); WebKit chạy lại sau S3.
 - [x] **S7. `CLAUDE.md`** – hồ sơ dự án cho agent: MSSV, URL, thư mục, quy tắc commit / AI-02, repo issue.
-- [x] **S8. Biểu mẫu AI** – khung AI-02, AI-05 (chép từ HW03), `prompt_log.md`. AI-03 điền ở giai đoạn 5.
+- [x] **S8. Biểu mẫu AI** – khung AI-02, AI-05 (chép từ HW03), `prompt_log.md`, AI-03 (phần đầu). Nội dung AI-03 điền ở giai đoạn 5.
+- [x] **S10. Khung file nộp** – `README.md`, `HW04_Report.md`, `AI_Critique.md`, `bugs/BUG_REPORT.md`, `features/<feature>/automation_design.md`, `demo/shot_list.md` (17/11).
 - [ ] **S9. Repo public** – đề §12 yêu cầu repo public; hiện repo đang PRIVATE. SV tự đổi sau khi xác nhận repo không có file riêng tư.
 
 ### Giai đoạn 1 – Feature A: FR-03 (≈ 2,5 giờ, chưa quay)
@@ -45,7 +46,7 @@ Mỗi bước 1 prompt + 1 commit, SV review trước khi qua bước sau:
 - [ ] **A5. Review & sửa** – chạy trên Chromium; SV sửa selector dễ gãy, assertion yếu, thiếu edge case, wait gây flaky. Ghi bảng "AI sai gì / vì sao" (prompt, giới hạn model, hay đặc điểm feature).
 - [ ] **A6. Chạy 3 trình duyệt** – xử lý lỗi chỉ xảy ra trên Firefox / WebKit.
 - [ ] **A7. Bug** – test fail do bug thật → đối chiếu các bug FR-03 đã có ở HW02 (`bugs/BUG_REPORT.md` của HW02), ghi vào `bugs/BUG_REPORT.md`.
-- [ ] **A8. Viết skill** – skill tự động hóa (generic, theo chủ đề) rút ra từ A1–A7.
+- [ ] **A8. Tinh chỉnh skill** – đã có bản nháp 3 skill (`skills/`: test-automation, automation-bug-reporting, recording-test-demo-videos; viết sẵn 17/11, SV review). Sửa skill ở chỗ vướng khi làm A1–A7.
 
 ### Giai đoạn 2 – Feature B: FR-08 (≈ 1,5 giờ, chưa quay)
 
