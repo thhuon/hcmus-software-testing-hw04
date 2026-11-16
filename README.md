@@ -30,7 +30,7 @@ The same three web features as HW02 (brief §5; group allocation: [HW02 group re
 | **Total** | | | | | | |
 
 - Number of features: **3**
-- Browsers: Chromium <v> · Firefox <v> · WebKit <v> (Playwright 1.64.1, Ubuntu 26.04)
+- Browsers: Chromium 156.0.8078.4 · Firefox 157.0 · WebKit 27.2 (Playwright 1.64.1, Ubuntu 26.04)
 - HTML reports (`Run by: 23120046` + ISO timestamp in the title): [reports/](reports/)
 - Bugs: [bugs/BUG_REPORT.md](bugs/BUG_REPORT.md) · GitHub Issues: [HW02 group repo, label `hw: HW04`](https://github.com/angquoc/software-testing-2026-HW02-group/issues?q=label%3A%22hw%3A+HW04%22) + comments on HW02 issues
 - Demo video (Task 2): <YouTube link>

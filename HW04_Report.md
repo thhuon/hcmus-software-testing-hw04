@@ -29,9 +29,9 @@
 | SUT | EShop, `ttbhanh/eshop-sut` @ commit `85af3ba`; Web `:5173`, Admin `:5174`, API `:3000`; database re-seeded at every backend start |
 | Test basis | `eshop-sut/README.md` (SRS) + HW02 test cases (domain testing, BVA) |
 | Automation | Playwright `@playwright/test` 1.64.1, TypeScript specs, page objects, JSON / CSV data files |
-| Browsers | Chromium <v> · Firefox <v> · WebKit <v> |
+| Browsers | Chromium 156.0.8078.4 · Firefox 157.0 · WebKit 27.2 |
 | Reports | Playwright HTML reporter, one per feature × browser, title `HW04 · <feature> · <browser> · Run by: 23120046 · <ISO timestamp>` |
-| Machine | Ubuntu 26.04, Node <v> |
+| Machine | Ubuntu 26.04, Node 22.22.1 |
 | AI tool | Claude Code (claude-opus-5-5) |
 
 ## 2. Approach

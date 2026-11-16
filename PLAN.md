@@ -26,10 +26,10 @@ Thứ tự dưới đây là thứ tự **làm**, không theo thứ tự mục c
 
 - [x] **S1. SUT** – chép `eshop-sut` từ `../seminar/eshop-security-t09-group05/eshop-sut` (đã có `node_modules`, cùng commit upstream `85af3ba`), khôi phục `backend/database.sqlite` về bản gốc. Thư mục nằm trong `.gitignore`. Backend tạo lại và seed DB **mỗi lần khởi động** (`database.js` gọi `initDatabase()`), nên muốn reset dữ liệu chỉ cần khởi động lại backend.
 - [x] **S2. Playwright** – `@playwright/test` 1.64.1 (cố định version), cài Chromium, Firefox, WebKit.
-- [ ] **S3. Thư viện hệ thống cho WebKit** – SV tự chạy (cần sudo): `sudo apt-get install -y libevent-2.1-7t64 libavif16 libmanette-0.2-0`.
+- [x] **S3. Thư viện hệ thống cho WebKit** – SV tự chạy (cần sudo): `sudo apt-get install -y libevent-2.1-7t64 libavif16 libmanette-0.2-0`.
 - [x] **S4. `playwright.config.ts`** – 3 project chromium / firefox / webkit; `webServer` tự bật backend `:3000`, web `:5173`, admin `:5174`; báo cáo HTML có tiêu đề `Run by: 23120046` + timestamp ISO (đề §6 Task 1, §11).
 - [x] **S5. Script chạy** – `npm run feature -- <fA|fB|fC>` chạy feature trên 3 trình duyệt, mỗi lần chạy ra một báo cáo `reports/<feature>/<browser>/`. Cả bài là 9 lần chạy.
-- [x] **S6. Smoke test** – `npm run smoke`: API, web, admin. Đạt 6/6 trên Chromium + Firefox (16/11); WebKit chạy lại sau S3.
+- [x] **S6. Smoke test** – `npm run smoke`: API, web, admin. Đạt 9/9 trên Chromium 156.0.8078.4, Firefox 157.0, WebKit 27.2 (17/11).
 - [x] **S7. `CLAUDE.md`** – hồ sơ dự án cho agent: MSSV, URL, thư mục, quy tắc commit / AI-02, repo issue.
 - [x] **S8. Biểu mẫu AI** – khung AI-02, AI-05 (chép từ HW03), `prompt_log.md`, AI-03 (phần đầu). Nội dung AI-03 điền ở giai đoạn 5.
 - [x] **S10. Khung file nộp** – `README.md`, `HW04_Report.md`, `AI_Critique.md`, `bugs/BUG_REPORT.md`, `features/<feature>/automation_design.md`, `demo/shot_list.md` (17/11).
