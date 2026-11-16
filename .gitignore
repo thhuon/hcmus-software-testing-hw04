@@ -1,0 +1,28 @@
+# Submission archives (built locally, uploaded to Moodle)
+*.zip
+*.z[0-9][0-9]
+*.7z
+
+# Raw videos go to YouTube (Unlisted), not to git
+*.mp4
+*.mov
+*.mkv
+
+# Office / editor temp files
+~$*
+.~lock.*
+.DS_Store
+
+# SUT clone (keep outside the submission)
+eshop-sut/
+
+# Node / Playwright output (HTML reports are copied to reports/ on purpose)
+node_modules/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+allure-results/
+
+# Python cache
+__pycache__/
