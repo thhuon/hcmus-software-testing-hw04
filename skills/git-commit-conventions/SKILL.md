@@ -11,6 +11,15 @@ description: Use when changes are about to be committed or pushed — deciding h
 
 **Core rule: one commit = one meaningful change. Small changes with the same purpose may go into one commit; changes with different purposes never share a commit. The message says what changed, nothing else.**
 
+## Which repository
+
+| Repository | Convention |
+| --- | --- |
+| Your own repository (the project's working repo) | This skill |
+| A shared repository that documents its own convention (group repo, upstream, team repo: README, CONTRIBUTING) | **That repository's convention**, for message format, scopes and push rules. This skill's message format does not apply there. |
+
+Before committing, check which repository you are in (`git remote -v`). In a shared repository, read its convention section first and copy the format of its recent commits (`git log --oneline -10`). Issues and comments on a shared repository are not commits: they follow its issue rules.
+
 ## Splitting work into commits
 
 | Situation | Commits |

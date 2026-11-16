@@ -8,7 +8,7 @@ Thang điểm, gate và phần cuối câu trả lời như [../review-rubric-sh
 | --- | --- | --- | --- |
 | 1 | M | Mỗi commit một mục đích | `git show --stat <hash>`: mọi file thuộc đúng mục đích ghi trong message |
 | 2 | M | Phần sửa của người dùng là commit riêng | Không gộp (amend) thay đổi của người dùng vào commit của agent |
-| 3 | M | Message đúng định dạng | `<type> (<scope>): <what changed>`; type nằm trong danh sách; chữ thường, câu mệnh lệnh, không dấu chấm cuối, khoảng 50–72 ký tự |
+| 3 | M | Message đúng định dạng của repo | Repo của mình: `<type> (<scope>): <what changed>`; type nằm trong danh sách; chữ thường, câu mệnh lệnh, không dấu chấm cuối, khoảng 50–72 ký tự. Repo dùng chung có quy ước riêng: theo quy ước đó, giống các commit gần đây của repo |
 | 4 | M | Không ghi ai làm và không có trailer AI | Không "AI draft", "review", "step n", "WIP"; không `Co-Authored-By` trừ khi dự án yêu cầu |
 | 5 | M | Chỉ stage đúng file cần commit | Ghi rõ đường dẫn; `git diff --cached --name-only` không có file bị ignore, file riêng tư hay file không liên quan |
 | 6 | M | Mỗi commit để dự án ở trạng thái nhất quán | Đổi tên (`git mv`) đi cùng việc sửa các chỗ tham chiếu; không có link hỏng |

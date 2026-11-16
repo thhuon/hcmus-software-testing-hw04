@@ -6,7 +6,7 @@ Scoring, gate and output as in [../review-rubric-shared.md](../review-rubric-sha
 | --- | --- | --- | --- |
 | 1 | M | One purpose per commit | `git show --stat <hash>`: every file belongs to the purpose in the message |
 | 2 | M | The human's corrections are their own commit | No human change amended into the agent's commit |
-| 3 | M | Message format | `<type> (<scope>): <what changed>`; type from the list; lower case, imperative, no full stop, about 50–72 characters |
+| 3 | M | Message format of the repository | Own repository: `<type> (<scope>): <what changed>`; type from the list; lower case, imperative, no full stop, about 50–72 characters. Shared repository with its own convention: that convention, like its recent commits |
 | 4 | M | No who-labels or AI trailers | No "AI draft", "review", "step n", "WIP"; no `Co-Authored-By` unless the project asks |
 | 5 | M | Only intended files are staged | Explicit paths; no ignored, private or unrelated file in `git diff --cached --name-only` |
 | 6 | M | Each commit leaves the project consistent | Renames (`git mv`) together with their reference updates; no broken link |

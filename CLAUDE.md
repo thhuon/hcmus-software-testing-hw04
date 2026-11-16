@@ -53,7 +53,7 @@ HW02 bugs to compare against: `../week02/bugs/BUG_REPORT.md` (group issues `angq
 
 ## Rules for this homework
 
-- **One technique step per prompt, one commit per step**, pushed right away (git-commit-conventions). ≥ 8 commits must change `.spec.ts` files (brief §12). **No `Co-Authored-By` trailer**. Remote `git@github-home:thhuon/hcmus-software-testing-hw04.git`, branch `master`.
+- **One technique step per prompt, one commit per step**, pushed right away (git-commit-conventions, for this personal repo only). A commit to the HW02 group repo follows the group README §3 (`[<scope>][<step>] Verb …`, e.g. `[docs] Update feature allocation`), as in earlier homeworks. ≥ 8 commits must change `.spec.ts` files (brief §12). **No `Co-Authored-By` trailer**. Remote `git@github-home:thhuon/hcmus-software-testing-hw04.git`, branch `master`.
 - **The student decides** every verdict, severity and "why the AI missed it"; agent proposals are marked `(proposed)` (`(đề xuất)` in AI-02).
 - **Review notes at fix time**: every correction of an AI-generated script goes into `features/<key>/` review table (what was wrong, why the AI missed it: prompt quality, model limitation, feature characteristic) in the same step.
 - **AI-02 row in the same turn as every artifact** (`AI-02_AI_Audit_Report.md` §3, Vietnamese as the course form), committed on its own (`docs (ai): add AI-02 row for <artifact>`). Columns and wording as in HW03 (`../week03/CLAUDE.md`). Skill changes are `Artifact #Sn`.
