@@ -1,0 +1,56 @@
+# HW04 – Automation Testing: project profile for the testing skills
+
+Skills are generic (one per testing topic). Every value that belongs to this homework is here; a skill reads it from this file.
+
+## Assignment and policies
+
+- Brief: `HW04_Automation_Testing_Original.md` (original) · Vietnamese reading copy `HW04_Automation_Testing_Vietnamese.md` · task list and execution order `PLAN.md`.
+- Policies: `../___2026.Homework.Policies.md`. Integrity: brief §11 (HTML reports and the demo video are verified by the TAs; never edit a report by hand, never fabricate a run).
+- Tester: **HỒ THÙY HƯƠNG – 23120046** (CQ2023/3).
+
+## Language
+
+- Skills, `CLAUDE.md`, scripts, test code and commit messages: English.
+- `PLAN.md`: Vietnamese (as HW02/HW03). The course AI forms (AI-02, AI-03, AI-05) stay in Vietnamese.
+- Verbatim records stay as they are: prompts, requirement quotes, UI labels of the app.
+
+## System under test
+
+- EShop, local copy `eshop-sut/` (git-ignored; copied from the seminar repo, upstream `ttbhanh/eshop-sut` commit `85af3ba`). Web `http://localhost:5173` · Admin `http://localhost:5174` · API `http://localhost:3000`.
+- Requirement document: `eshop-sut/README.md`; API: `eshop-sut/api_specification.md`.
+- The backend drops and re-seeds the SQLite database at every start (`backend/database.js`), so a fresh server = clean data.
+- Seed accounts and data: read them from `eshop-sut/README.md` / `backend/database.js`, never invent them.
+
+## Features (reused from HW02, brief §5)
+
+| Key | FR | Feature | Frontend | Tests | Data | HW02 test cases |
+| --- | --- | --- | --- | --- | --- | --- |
+| fA | FR-03 | Forgot & reset password (2 steps) | Web | `tests/fA-fr03/` | `data/fA-fr03/` | `../week02/features/fA-pool-A/02_domain_testing.md`, `03_boundary_value_analysis.md` |
+| fB | FR-08 | Checkout | Web | `tests/fB-fr08/` | `data/fB-fr08/` | `../week02/features/fB-pool-B/…` |
+| fC | FR-15 | Product CRUD | Admin web | `tests/fC-fr15/` | `data/fC-fr15/` | `../week02/features/fC-pool-C/…` |
+
+HW02 bugs to compare against: `../week02/bugs/BUG_REPORT.md` (group issues `angquoc/software-testing-2026-HW02-group` #1–#41).
+
+## Automation setup
+
+- Playwright `@playwright/test` 1.64.1 (TypeScript specs), browsers Chromium, Firefox, WebKit. Config `playwright.config.ts`: `webServer` starts the three SUT servers; `workers: 1` (one shared database).
+- HTML report title: `HW04 · <feature> · <browser> · Run by: 23120046 · <ISO timestamp>` (brief §6 Task 1, §11).
+- Minimums per feature (brief §6 Task 1): ≥ 12 automated test cases; test data in a separate `.json` / `.csv` file (no inline arrays); ≥ 3 distinct assertion patterns; all 3 browsers.
+- Commands:
+  - `npm run smoke` – environment check (add `--project=chromium` to limit).
+  - `npm run feature -- fA` – one feature on 3 browsers, reports in `reports/fA/<browser>/` (fresh SUT per run; `--reuse` keeps running servers; `--browsers chromium` limits).
+  - `npm run all` – the 9 official runs (3 features × 3 browsers).
+- During development use `npx playwright test tests/fA-fr03 --project=chromium` (output in the ignored `playwright-report/`); only the official runs go to `reports/` and are committed.
+
+## Bug reports
+
+- Report `bugs/BUG_REPORT.md`; screenshots `bugs/screenshots/`.
+- Issues on the **personal repo `thhuon/hcmus-software-testing-hw04`** (`gh` account `thhuon`), one issue per bug, screenshot attached, `Related angquoc/software-testing-2026-HW02-group#n` when HW02 already reported it. BUG-NN = issue #NN where possible. Screenshot of the Issues page for the submission.
+
+## Rules for this homework
+
+- **One technique step per prompt, one commit per step**, pushed right away (git-commit-conventions). ≥ 8 commits must change `.spec.ts` files (brief §12). **No `Co-Authored-By` trailer**. Remote `git@github-home:thhuon/hcmus-software-testing-hw04.git`, branch `master`.
+- **The student decides** every verdict, severity and "why the AI missed it"; agent proposals are marked `(proposed)` (`(đề xuất)` in AI-02).
+- **Review notes at fix time**: every correction of an AI-generated script goes into `features/<key>/` review table (what was wrong, why the AI missed it: prompt quality, model limitation, feature characteristic) in the same step.
+- **AI-02 row in the same turn as every artifact** (`AI-02_AI_Audit_Report.md` §3, Vietnamese as the course form), committed on its own (`docs (ai): add AI-02 row for <artifact>`). Columns and wording as in HW03 (`../week03/CLAUDE.md`). Skill changes are `Artifact #Sn`.
+- Prompt log: `prompt_log.md`, filled with the `logging-ai-prompts` skill at the end of each work session.
