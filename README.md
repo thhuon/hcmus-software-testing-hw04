@@ -40,13 +40,14 @@ The same three web features as HW02 (brief §5; group allocation: [HW02 group re
 
 **Skill demo video:** <YouTube link>
 
-The skills are generic (one per testing topic, sources in [skills/SOURCES.md](skills/SOURCES.md)); the HW04 values they use are in [CLAUDE.md](CLAUDE.md) and [automation.config.json](automation.config.json).
+The skills are generic (one per testing topic, sources in [skills/SOURCES.md](skills/SOURCES.md)), each with a Vietnamese reading copy (`SKILL.vi.md`, `review-rubric.vi.md`); the HW04 values they use are in [CLAUDE.md](CLAUDE.md) and [automation.config.json](automation.config.json).
 
 | Skill | Topic | Used for in HW04 |
 | --- | --- | --- |
 | [test-automation](skills/test-automation/SKILL.md) | Test automation | Task 1: T1–T8 for FR-03, FR-08, FR-15 (selection, page objects, data files, data-driven specs, review and fix, multi-browser runs, triage, summary) |
 | [automation-bug-reporting](skills/automation-bug-reporting/SKILL.md) | Defect reporting | Task 1: comments on HW02 issues / new issues for failing assertions |
 | [recording-test-demo-videos](skills/recording-test-demo-videos/SKILL.md) | Demo video | Task 2 and the skill video: shot list, preparation, final check |
+| [git-commit-conventions](skills/git-commit-conventions/SKILL.md) | Version control | One commit per step in this personal repo (≥ 8 commits changing `.spec.ts`, brief §12); the group repo keeps its own README convention |
 
 ## 4. Self-assessment
 
