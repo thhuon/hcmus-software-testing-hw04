@@ -7,8 +7,11 @@ Claude Code skills (Agent Skills format: one folder per skill, `SKILL.md` with `
 | Test automation | [test-automation](test-automation/SKILL.md) | T1 select test cases → T2 locators and page objects → T3 test data file → T4 generate data-driven specs → T5 review and fix → T6 multi-browser runs → T7 failure triage → T8 summary | `scripts/run-browsers.mjs` (one run + HTML report per feature × browser), `scripts/summarize-results.mjs` (counts from the JSON results), `templates/`: Playwright config, `automation.config.json`, automation design |
 | Defect reporting | [automation-bug-reporting](automation-bug-reporting/SKILL.md) | Step 1 match against the tracker and write the entry → Step 2 comment on the existing issue or file a new one | `scripts/upload_attachments.js` (screenshot markup for an issue or comment), `templates/bug-report.md` |
 | Demo video | [recording-test-demo-videos](recording-test-demo-videos/SKILL.md) | V1 requirements → V2 shot list → V3 prepare → V4 record (tester) → V5 cut and check | `templates/shot-list.md` |
+| Version control | [git-commit-conventions](git-commit-conventions/SKILL.md) | Which repository → split work into commits → message format → commit and push (own repositories only; a shared repository keeps its own convention) | – |
 
-Typical chain: test-automation → automation-bug-reporting (every confirmed product defect) → recording-test-demo-videos. Reused from earlier work: git-commit-conventions (commit after every step), logging-ai-prompts (prompt log from the session transcript).
+Typical chain: test-automation → automation-bug-reporting (every confirmed product defect) → recording-test-demo-videos; git-commit-conventions after every step. Reused from earlier work: logging-ai-prompts (prompt log from the session transcript).
+
+**Vietnamese reading copies:** every skill has `SKILL.vi.md` and `review-rubric.vi.md` (shared rules: [review-rubric-shared.vi.md](review-rubric-shared.vi.md)). The English files are the ones the agent uses; if the two differ, the English file wins.
 
 ## Using the skills in a project
 
