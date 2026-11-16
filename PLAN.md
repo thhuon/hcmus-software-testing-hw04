@@ -63,7 +63,7 @@ Mỗi bước 1 prompt + 1 commit, SV review trước khi qua bước sau:
 ### Giai đoạn 4 – Chạy chính thức & bug (≈ 1 giờ)
 
 - [ ] **R1. Chạy chính thức** – reset DB (khởi động lại backend), chạy 9 lần (3 feature × 3 trình duyệt), báo cáo vào `reports/`, commit.
-- [ ] **R2. Bug** – chụp ảnh, hoàn thiện `bugs/BUG_REPORT.md`, tạo issue trên **repo cá nhân** `thhuon/hcmus-software-testing-hw04` (có ảnh), ghi link issue HW02 khi trùng bug. Chụp ảnh trang Issues.
+- [ ] **R2. Bug** – repo nhóm HW02 `angquoc/software-testing-2026-HW02-group` (README §4, §6). Bug đã có issue ở HW02 → **bình luận** vào issue cũ (script, trình duyệt, kết quả assertion, ảnh, ghi "HW04"; nếu hành vi khác HW02 thì nói rõ khác gì). Bug mới → **issue mới** có thêm label `hw: HW04`. Hoàn thiện `bugs/BUG_REPORT.md`; chụp trang Issues lọc theo `hw: HW04` và các issue đã bình luận.
 
 ### Giai đoạn 5 – Tài liệu & nộp (≈ 1,5 giờ)
 

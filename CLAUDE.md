@@ -45,7 +45,10 @@ HW02 bugs to compare against: `../week02/bugs/BUG_REPORT.md` (group issues `angq
 ## Bug reports
 
 - Report `bugs/BUG_REPORT.md`; screenshots `bugs/screenshots/`.
-- Issues on the **personal repo `thhuon/hcmus-software-testing-hw04`** (`gh` account `thhuon`), one issue per bug, screenshot attached, `Related angquoc/software-testing-2026-HW02-group#n` when HW02 already reported it. BUG-NN = issue #NN where possible. Screenshot of the Issues page for the submission.
+- Issue tracker: the **HW02 group repo `angquoc/software-testing-2026-HW02-group`** (`gh` account `thhuon`), following its README §4 (template "Bug report", title `[23120046][FR-xx][Web|Admin] …`, labels 1 severity + 1 platform + technique of the automated HW02 test case + 1 pool, assignee self) and §6 (HW04 rules).
+- **Defect already filed in HW02** (`../week02/bugs/BUG_REPORT.md`, issues #1–#41): no new issue. Comment on the existing issue with the script, browser, assertion result, screenshot, and the word "HW04"; also when the behaviour now differs from the HW02 report (say what differs).
+- **New defect**: a new issue with the extra label `hw: HW04`.
+- Reporter line: `HỒ THÙY HƯƠNG – 23120046`. Proof for the submission: screenshot of the Issues page filtered by `label:"hw: HW04"` plus the commented issues.
 
 ## Rules for this homework
 
