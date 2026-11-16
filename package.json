@@ -1,0 +1,14 @@
+{
+  "name": "hcmus-software-testing-hw04",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HW04 – Playwright automation of EShop web features FR-03, FR-08, FR-15",
+  "repository": {
+    "type": "git",
+    "url": "git@github-home:thhuon/hcmus-software-testing-hw04.git"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "1.64.1"
+  }
+}
