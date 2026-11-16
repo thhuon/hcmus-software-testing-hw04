@@ -89,7 +89,7 @@ One row per designed test case of the feature: `TC ID | Technique | Partition / 
 
 The AI generates the specs from §1–§3 in one prompt per spec file. The generated code must:
 
-- Loop over the data file: `for (const row of rows) test(`${row.id} – ${row.title}`, …)`. The title starts with the TC ID (the summary script reads it).
+- Loop over the data file: `` for (const row of rows) test(`${row.id} – ${row.title}`, …) ``. The title starts with the TC ID (the summary script reads it).
 - Use **web-first assertions** (`await expect(locator).toHaveText(…)`), which wait by themselves; no `waitForTimeout`, no `if` on page state, no `try/catch` around an assertion.
 - Use at least the project's minimum of **distinct assertion patterns**, each chosen for what the TC checks, e.g.:
 
