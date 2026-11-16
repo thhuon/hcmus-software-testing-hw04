@@ -5,8 +5,9 @@
   "description": "HW04 – Playwright automation of EShop web features FR-03, FR-08, FR-15",
   "scripts": {
     "smoke": "playwright test tests/smoke.spec.ts",
-    "feature": "node scripts/run-feature.mjs",
-    "all": "node scripts/run-feature.mjs all"
+    "feature": "node skills/test-automation/scripts/run-browsers.mjs --config automation.config.json",
+    "all": "node skills/test-automation/scripts/run-browsers.mjs --config automation.config.json all",
+    "summary": "node skills/test-automation/scripts/summarize-results.mjs --config automation.config.json --markdown"
   },
   "repository": {
     "type": "git",

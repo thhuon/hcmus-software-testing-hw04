@@ -83,7 +83,7 @@ Mỗi bước 1 prompt + 1 commit, SV review trước khi qua bước sau:
 | `features/<feature>/` | Chọn TC, bảng review "AI sai gì / vì sao", TC không tự động hóa được |
 | `reports/<feature>/<browser>/` | Báo cáo HTML chính thức (9 bộ) |
 | `bugs/` | `BUG_REPORT.md` + ảnh chụp |
-| `scripts/` | Script chạy feature trên 3 trình duyệt |
+| `automation.config.json` | Feature, thư mục spec, trình duyệt cho script chạy / tổng hợp của skill test-automation |
 
 ## 3. Lưu ý chống gian lận (đề §11)
 

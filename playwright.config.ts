@@ -6,7 +6,7 @@ const STUDENT_ID = '23120046';
 process.env.RUN_STARTED ??= new Date().toISOString();
 const RUN_STARTED = process.env.RUN_STARTED;
 
-// Set by scripts/run-feature.mjs; empty when Playwright is called directly.
+// Set by skills/test-automation/scripts/run-browsers.mjs; empty when Playwright is called directly.
 const FEATURE = process.env.FEATURE ?? '';
 const BROWSER = process.env.BROWSER ?? '';
 const reportTitle = ['HW04', FEATURE, BROWSER, `Run by: ${STUDENT_ID}`, RUN_STARTED]
@@ -37,6 +37,7 @@ export default defineConfig({
         open: 'never',
       },
     ],
+    ['json', { outputFile: `${process.env.REPORT_DIR ?? 'playwright-report'}/results.json` }],
   ],
   metadata: {
     'Run by': STUDENT_ID,

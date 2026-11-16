@@ -35,11 +35,12 @@ HW02 bugs to compare against: `../week02/bugs/BUG_REPORT.md` (group issues `angq
 
 - Playwright `@playwright/test` 1.64.1 (TypeScript specs), browsers Chromium, Firefox, WebKit. Config `playwright.config.ts`: `webServer` starts the three SUT servers; `workers: 1` (one shared database).
 - HTML report title: `HW04 · <feature> · <browser> · Run by: 23120046 · <ISO timestamp>` (brief §6 Task 1, §11).
+- Working file per feature: `features/<key>/automation_design.md` (template of the test-automation skill).
 - Minimums per feature (brief §6 Task 1): ≥ 12 automated test cases; test data in a separate `.json` / `.csv` file (no inline arrays); ≥ 3 distinct assertion patterns; all 3 browsers.
-- Commands:
-  - `npm run smoke` – environment check (add `--project=chromium` to limit).
-  - `npm run feature -- fA` – one feature on 3 browsers, reports in `reports/fA/<browser>/` (fresh SUT per run; `--reuse` keeps running servers; `--browsers chromium` limits).
-  - `npm run all` – the 9 official runs (3 features × 3 browsers).
+- Feature keys and spec folders for the skill scripts: `automation.config.json`. Commands:
+  - `npm run smoke` – environment check (add `-- --project=chromium` to limit).
+  - `npm run feature -- fA` – one feature on 3 browsers, HTML report + `results.json` in `reports/fA/<browser>/` (fresh SUT per run; `--reuse` keeps running servers; `--browsers chromium` limits).
+  - `npm run all` – the 9 official runs (3 features × 3 browsers); `npm run summary` – counts for the README and report.
 - During development use `npx playwright test tests/fA-fr03 --project=chromium` (output in the ignored `playwright-report/`); only the official runs go to `reports/` and are committed.
 
 ## Bug reports
