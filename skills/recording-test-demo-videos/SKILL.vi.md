@@ -75,7 +75,7 @@ Theo git-commit-conventions: `docs (video): add the shot list for <video>`, `doc
 
 ## Tính trung thực
 
-| Cái cớ | Thực tế |
+| Lý do bào chữa | Thực tế |
 |--------|---------|
 | "Dùng giọng text-to-speech đi, nghe sạch hơn" | Khi dự án yêu cầu giọng thật của tester, giọng tổng hợp làm video không hợp lệ. |
 | "Mở report hôm qua đi, chạy lâu quá" | Cho thấy một lần chạy thật; cắt đoạn chờ, không cắt lần chạy. |

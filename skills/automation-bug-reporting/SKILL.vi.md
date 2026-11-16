@@ -100,9 +100,9 @@ git commit -m "docs (bugs): link BUG-NN to <comment on #n | issue #n>"   # after
 
 Nếu dự án có AI audit log hoặc prompt log, thêm một mục cho mỗi bug trong cùng lượt.
 
-## Tính trung thực (Integrity)
+## Tính trung thực
 
-| Lời biện hộ | Thực tế |
+| Lý do bào chữa | Thực tế |
 |--------|---------|
 | "Cùng tính năng, gần giống rồi — comment vào issue đó" | Muốn tính là trùng thì phải cùng câu yêu cầu và cùng hành vi sai. Nếu không thì là bug mới. |
 | "Cứ mở issue mới, nhiều bug trông đẹp hơn" | Lỗi đã có trên tracker thì comment; issue trùng sẽ bị đóng là duplicate và không được tính. |
