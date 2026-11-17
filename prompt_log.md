@@ -1014,3 +1014,215 @@ Hai prompt cần lưu ý:
 - **Used in:** `page-objects/LoginPage.ts`, `page-objects/ForgotPasswordPage.ts`, `api/EshopApi.ts`, `features/forgot-password/automation_design.md` §2, `PLAN.md`, `CLAUDE.md`, `prompt_log.md` (AI-02 Artifact #10)
 
 ---
+
+## Prompt010 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 18:05 17/11/2026
+- **Output received:** 18:18 17/11/2026
+- **Feature / step:** forgot-password (fA) – T2 review: folder names, locator options, codegen format
+- **Purpose:** Why no `expect` in page objects; rename `pages/` and the feature folders; try every locator for the unnamed fields; format for the codegen result
+- **Prompt (verbatim):**
+
+```text
+- mục expect có cần thiết trong các locator và page object ko? đặc biệt là trong bài tập này, ứng dụng cụ thể này 
+- mục đích của các ffile bạn vừa mới thêm vào folder pages là gì? tại sao lại đặt tên gây hiểu nhầm như vậy -> đưa ra một số option tên khác để tôi lựa chọn và bạn đỏi tên folder theo tên đó
+các folder fA-fr03,.... bên trong folder feature là gì, tương tự naming cũng là vấn đề, tên các folder này đọc rất khó hiểu và tôi ko nghĩ là bạn cần chú thích nhiều thông tin đến vậy thông qua tên file/folder
+- tìm các ô nhập ko có tên thì tôi nghĩ nên thử tất cả các option có thể chứ ko cần cố định một option nào (a và b hợp lý)
+- có thể báo lỗi nếu như ko có option nào có thể tìm ra được, nếu có lỗi thì có thể tạo issue mới nếu đủ lớn ko thì có thể comment vào một issue liên quan đã có (cần cho tôi biết kết quả sau khi thử các option trước khi đưa ra quyết định comment hoặc tạo issue mới)
+- tôi đã run được codegen nhưng cần ghi kết quả theo format nào để đảm báo đúng thông tin và ko bị lan man -> bạn gợi ý format giúp tôi và tôi sẽ điền vào; hoặc bạn có thể đưa ra câu hỏi -> tôi trả lời -> bạn ghi vào
+```
+
+- **AI output (verbatim):**
+
+```text
+Bash Show repo status, layout and config
+Bash Read page objects, design §2 and find references to folder names
+Bash Check SUT start script and ports
+Bash Find seed account in requirement document
+Bash Dump the live DOM of the login and forgot-password forms
+Mình đang thử từng cách tìm ô nhập trên app đang chạy bằng 3 trình duyệt. App dùng các server bạn đang mở cho codegen.
+Bash Count matches of eight locator strategies per unnamed field on three browsers
+Bash Search HW02 bug report for label or input-type defects
+Bash Show HW02 bug overview rows for FR-03
+AskUserQuestion
+Bash List every reference to pages/ and the feature folder names
+Bash Find uses of the fA key outside the logs
+Bash Check scripts and configs for feature-key assumptions
+Bash Move page objects and API client to new folders and update references
+Bash Find the page-object rule line in the skill
+Mình đang đổi `pages/` thành `page-objects/` và `api/`, rồi cập nhật các chỗ tham chiếu. Sau đó sẽ đổi tên các thư mục feature.
+Bash Add API-client and no-assert reason to skill, commit and push folder split
+Bash Commit and push the folder split
+Bash Rename feature folders and update paths and config keys
+Bash Drop pool prefix from design titles and update keys in docs
+Bash Locate the scripts paragraph in both skill files
+Bash Add feature naming rule to the skill
+Mình đang đổi tên các thư mục feature thành `forgot-password`, `checkout`, `product-crud`. Các đường dẫn đã cập nhật xong, giờ commit.
+Bash Note commit scope, verify no old names left, commit and push
+Bash Search group issues for related label or password-type defects
+Bash Check Playwright config for testDir and server reuse
+Now the page object: per the student's decision, each unnamed field uses option a `.or()` option b.
+Bash Combine role/type and label-block locators with .or() in the page object
+Bash Run a throw-away check of the combined locators on three browsers
+Bash Write locator options results and codegen table into design §2
+Read /home/hg/source/software-testing/week04/features/forgot-password/automation_design.md
+Bash Move the options table after the findings list
+Bash Commit locator change and design §2, inspect AI-02 table
+Đã commit phần locator và bảng thử. Giờ mình thêm dòng AI-02 cho lượt này.
+Bash Read AI-02 rows #8–#S7 and the totals section
+Bash List unlogged prompts with their sent times via the log script
+Bash Finalize the unfinished Prompt009 log entry
+Bash Check remaining TODO fields in the log
+Bash Check Used-in field of Prompt009 after update
+Prompt009 đã đủ. Mình commit log rồi cập nhật AI-02 (dòng #10 thêm review của bạn, thêm #11 và #S8).
+Bash Commit the log, then update AI-02 rows and totals
+Bash Commit and push AI-02 update
+Mình đã đổi tên cả hai loại thư mục theo lựa chọn của bạn, thử 7 cách tìm ô nhập không có tên trên 3 trình duyệt, và thêm vào §2 một bảng để bạn điền kết quả codegen. Mọi thứ đã commit và push; repo đồng bộ với `origin/master`.
+
+## 1. `expect` trong page object: không cần, và không nên đặt
+
+Page object chỉ làm việc như một người dùng (gõ, bấm). Việc kết quả đúng hay sai thuộc về test case, nên nằm ở spec. Với FR-03 thì rõ hơn:
+- **Một thao tác dùng cho cả case đúng lẫn case sai.** Cùng `requestOtp(email)`: với email đúng, mong đợi là OTP hiện ra; với email sai, mong đợi là thông báo lỗi. Nếu đặt `expect(OTP hiện ra)` trong page object, mọi TC email sai sẽ fail ở chỗ không liên quan.
+- **App này có nhiều bug.** Ví dụ BUG-01: mật khẩu hợp lệ cũng bị từ chối. Page object phải gõ và bấm như thường. Spec so kết quả với giá trị trong TC và fail đúng chỗ, và lần fail đó là bằng chứng của bug.
+- **Ngoại lệ là chờ trang sẵn sàng.** Firefox và WebKit hiện trang chậm sau khi bấm link. Chỗ này chờ bằng `locator.waitFor()`, không dùng `expect`.
+
+Mình đã ghi lý do này vào bước T2 của skill (`SKILL.md` và bản `.vi`).
+
+## 2. Đổi tên thư mục (bạn đã chọn)
+
+| Trước | Sau | Bên trong |
+| --- | --- | --- |
+| `pages/` | `page-objects/` | `LoginPage.ts`, `ForgotPasswordPage.ts`: mỗi màn hình một lớp, gồm locator và thao tác |
+| | `api/` | `EshopApi.ts`: gọi API để chuẩn bị dữ liệu, chạy TC `Yes (API)` và kiểm tra mật khẩu có thật sự đổi không |
+| `features/fA-fr03`, `fB-fr08`, `fC-fr15` | `features/forgot-password`, `checkout`, `product-crud` | File làm việc `automation_design.md` (T1–T8) của từng feature |
+
+- Tên feature mới dùng giống nhau ở `tests/`, `data/`, `reports/`, làm key trong `automation.config.json` và trong lệnh: `npm run feature -- forgot-password`.
+- Mã FR và nhóm HW02 (fA) giờ chỉ ghi ở đầu file design và trong bảng của `CLAUDE.md`.
+- Skill có thêm quy tắc: tên thư mục feature ngắn, dễ đọc; mã yêu cầu không đưa vào tên thư mục.
+- Phần verbatim trong `prompt_log.md` vẫn giữ tên cũ. Chỉ các trường "Used in" được sửa theo tên mới.
+
+## 3. Thử mọi cách tìm ô nhập không có tên
+
+Kết quả giống nhau trên Chromium, Firefox và WebKit. Mỗi ô là số phần tử tìm được:
+
+| Cách | Đăng nhập: Username | Đăng nhập: Mật khẩu | Bước 1: Email | Bước 2: OTP | Bước 2: Mật khẩu mới |
+| --- | --- | --- | --- | --- | --- |
+| `getByRole` + tên, `getByLabel` | 0 | 0 | 0 | 0 | 0 |
+| placeholder / test id / id / name | 0 (DOM không có các thuộc tính này) | 0 | 0 | 0 | 0 |
+| **(b)** khối chứa label → ô nhập | **1** | **1** | **1** | **1** | **1** |
+| **(a)** role / type trong form | 2 | 2 | **1** | **1** | **1** |
+| Layout `:below(label)` | 2 | 1 | 1 | 2 | 1 |
+| XPath | không thử, vì skill cấm | | | | |
+
+- Cả (a) và (b) đều tìm được 3 ô của FR-03. Page object giờ dùng cả hai, nối bằng `(a).or(b)`.
+  - Mình đã chạy kiểm tra trên 3 trình duyệt: mỗi ô ra đúng 1 phần tử và gõ được.
+  - Nếu một cách hỏng, cách kia vẫn tìm được ô. Ví dụ: khi label OTP sửa từ "4 số" thành "6 số", cách (b) không còn khớp nhưng (a) vẫn khớp.
+  - Nếu hai cách tìm ra hai ô khác nhau, test báo lỗi ngay thay vì gõ nhầm ô.
+- Hai ô ở trang Đăng nhập cho thấy chỗ yếu của (a): cả hai ô đều là `type="text"`, nên tìm theo type ra 2 kết quả. FR-03 không dùng hai ô này.
+- Bảng đầy đủ nằm ở §2 của [automation_design.md](features/forgot-password/automation_design.md).
+
+## 4. Có báo lỗi không?
+
+**Kết quả: không có ô nào tìm không ra**, vì ô nào cũng có ít nhất một cách tìm được. Theo tiêu chí của bạn, chưa có lỗi "không định vị được".
+
+Vấn đề còn lại là **ô nhập không có accessible name** (tên mà trình đọc màn hình và `getByLabel` dùng): `getByLabel` và `getByRole` + tên đều ra 0 ở mọi ô.
+
+Các lỗi ở trang Đăng nhập gặp trong lúc thử đã có thành viên nhóm báo, nên không cần làm gì thêm:
+- #92: ô mật khẩu là `type="text"`;
+- #93: ô email là `type="text"`;
+- #95: tiêu đề "Đăng Ký", label "Username", thiếu dấu `*`.
+
+## 5. Ghi kết quả codegen
+
+Mình đã thêm vào cuối §2 mục **"Codegen check"**:
+- Một dòng để ghi ngày và trình duyệt.
+- Một bảng 7 dòng, mỗi dòng một phần tử. Cột 2 dán locator codegen đã chọn, cột 3 ghi Yes/No (có giống bảng §2 không), cột 4 ghi một dòng nếu khác: cách nào tốt hơn và vì sao.
+- Một câu kết luận.
+
+Bạn có thể tự điền. Hoặc bạn dán nguyên đoạn code trong cửa sổ codegen vào chat, mình sẽ điền cột 2–3 và hỏi bạn cột 4.
+
+## AI tự review (T2, sau khi chỉnh)
+
+| # | Điểm | Bằng chứng |
+| --- | --- | --- |
+| P1–P6 | 2 | Mỗi việc một commit; các quyết định về tên và locator là của bạn; AI-02 có #10 (review của bạn), #11 và #S8 |
+| 5 | 2 | Bảng thử chạy trên app đang chạy, 3 trình duyệt |
+| 6 | 2 | Không có XPath, `nth()` hay `first()`; dùng CSS theo `type` và lọc theo chữ của label |
+| 7 | 2 | Mỗi locator dự phòng có lý do và có số liệu trong bảng thử |
+| 8 | 2 | Không có `expect` trong `page-objects/` và `api/` |
+| 32 (S) | 1 | Còn chờ bạn điền mục Codegen check |
+
+**Gate: passed**
+
+## Cần bạn quyết định
+
+1. **Ô nhập không có accessible name: báo hay không?**
+   - Không ô nào tìm không ra, nên theo tiêu chí bạn đặt thì chưa đủ để báo lỗi.
+   - FR-22 không có câu nào yêu cầu label phải gắn với ô nhập. Bug sẽ phải dựa vào WCAG, mà WCAG nằm ngoài tài liệu yêu cầu.
+   - Các lựa chọn:
+     - (a) chỉ ghi là phát hiện testability (hiện đã ghi ở §2);
+     - (b) comment vào #7. Đây là issue gần nhất: cùng ô email Bước 1, cùng nói về label, theo FR-22. Nhưng #7 nói về dấu `*`, nên sẽ trộn hai vấn đề;
+     - (c) tạo issue mới với nhãn `hw: HW04`, dựa vào WCAG.
+   - **Đề xuất (a).**
+2. **Verdict của AI-02 #10.** Mình đề xuất đổi VALID → **INCOMPLETE**, vì kết quả T2 chỉ được chấp nhận sau khi sửa theo góp ý của bạn (tên thư mục, cách tìm ô nhập). Bạn xác nhận hoặc đổi.
+
+## Commit (đã push)
+
+- `f40922d` refactor (fA): split pages/ into page-objects/ and api/
+- `a55ef08` refactor: name the feature folders after the features
+- `171aa2e` test (forgot-password): find unnamed fields by role or by label block
+- `1f80bce` docs (ai): complete Prompt009 in the prompt log
+- `a3b60d7` docs (ai): add AI-02 rows for the folder renames and locator options
+
+Prompt này (18:05) chưa vào log. Lần chạy `/logging-ai-prompts` tới sẽ thêm nó thành Prompt010, và cập nhật luôn các ghi chú "logged later" ở dòng #11 và #S8.
+
+**Bước tiếp theo:**
+1. Điền mục Codegen check.
+2. Chọn quyết định 1.
+3. Gửi prompt "bước T3 cho forgot-password: file dữ liệu test `data/forgot-password/`".
+```
+
+- **Used in:** `page-objects/`, `api/` (renamed from `pages/`); `features/forgot-password`, `checkout`, `product-crud` (renamed); `automation.config.json`; `page-objects/ForgotPasswordPage.ts`; `features/forgot-password/automation_design.md` §2; `skills/test-automation/` (T2 step 4, `<feature>` naming); `CLAUDE.md`, `PLAN.md`, `README.md` (AI-02 Artifact #10, #11, #S8)
+
+---
+
+## Prompt011 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 18:44 17/11/2026
+- **Output received:** 18:46 17/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Feature / step:** forgot-password (fA) – T2 review: codegen check, decisions; prompt log
+- **Purpose:** No issue for the unnamed fields; AI-02 review done; codegen notes; log the prompts
+- **Prompt (verbatim):**
+
+```text
+- báo bug việc ô nhập ko có accessible name, chỉ ghi là đã phát hiện như phương án a mà bạn đã đề xuất
+- đã check doc AI-02 và tôi ko có ý kiến gì, đánh là complete
+- /logging-ai-prompts log các prompt chưa được log trong session này 
+-  tôi đã run xong codegen và điền thông tin vào mục 2, bao gồm cả phần nhận xét, một số việc cụ thể cần lưu ý 
+1. email field: page.getByRole('textbox') chưa đủ cụ thể. Codegen sử dụng .first() ở thao tác click nhưng không sử dụng .first() khi nhập email
+2. OTP field: input[type="text"] có thể xác định OTP nếu đây là input text duy nhất, nhưng chưa chắc chắn nếu trang có nhiều input text
+3. password field: input[type="password"] có thể khớp với nhiều trường mật khẩu, nên cần locator cụ thể hơn
+4. lấy OTP: Code bạn gửi không có thao tác click nút này, vì vậy không thể xác định Locator được Codegen sinh ra
+nếu có gì cần chỉnh sửa từ các quyết định này của tôi thì hãy bổ sung vào docs AI-02
+```
+
+- **AI output (verbatim):**
+
+```text
+Bash Show the student's edits to the codegen section
+Skill
+Bash Commit the student's codegen notes on their own
+Bash Count page-wide textboxes on the forgot-password page
+Bash Record the no-issue decision in design §2 and commit
+Now the AI-02 review: mark every row as reviewed by the student, with the verdict confirmed.
+Bash Inspect AI-02 verdict cells and header text
+Bash Check how HW03 AI-02 recorded confirmed verdicts
+Bash See HW03 verdict cell wording
+Bash Print verdict and student columns of HW03 rows
+Bash Preview unlogged prompts of this session
+Bash Append Prompt010 and the running Prompt011 to the log
+```
+
+- **Used in:** `features/forgot-password/automation_design.md` §2 (decision on the unnamed fields); `AI-02_AI_Audit_Report.md` §3 column (5), Artifact #11; `prompt_log.md`
+
+---
