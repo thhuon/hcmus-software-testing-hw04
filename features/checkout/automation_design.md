@@ -122,10 +122,24 @@ The comparisons in the last column were proposed by the agent and accepted by th
 
 ## 3. Test data (T3)
 
+Inputs are the HW02 test-case values (§1); expected values come from FR-08, FR-07, FR-23, SEC-02 and the HW02 assumptions A1–A15 with the decisions Q1–Q10 approved by the student on 20/10 (`../week02/features/fB-pool-B/01_test_basis.md` §4–§5), never from the running app. Product ids and catalog prices: seed script `eshop-sut/backend/database.js:98-102` (HW02 fixture F2). Every expected total was recomputed from them (catalog price × quantity, A3): 126,000,000 · 12,000,000 · 36,000,000 · 118,000,000 · 122,000,000 ₫.
+
 | File | Rows | Columns | Data reset / uniqueness |
 | --- | --- | --- | --- |
+| `data/checkout/web.json` | 7 (`web/<ID>` of §1: DT-01, DT-03, DT-07, BVA-01 … 04) | file level: `accountEmail`, `accountPassword`, `admin` (SRS §1 seed admin, for the all-orders count), `products` (id, name, catalog price); rows: `id`, `technique`, `title`, `partition`, `flow` (`checkout`, `guest`, `emptyCart`), `loggedIn`, `cart` (product key + quantity, added on the product pages in this order), `paths` (DT-03), `apiBody` (DT-07 API part), `address`; `expected` (`kind`: `accepted` / `refused`; `items`, `totalText`, `totalEditable`, `breadcrumb`, `newOrders`, `newOrdersAll`, `orderStatus`, `orderTotal`, `cartEmptyAfter`, `emptyState`, `checkoutButton`, `serverCartLinesAfter`, `recordOnly`); `source` | Every logged-in row registers its own account through the API before the test (`POST /api/register`, as FR-03): `fr08.{id}.{run}@example.com` with `{run}` = start time of the run + browser, so no two tests, browsers or runs share an account, a cart or an order list. A new account has an empty server cart and 0 orders, so "N orders before" is 0 and no backend restart is needed (HW02 fixtures F4, F6 replaced). The Web cart starts empty because each test opens a new page |
+| `data/checkout/api.json` | 11 (`api/<ID>`: DT-02, DT-04 … 06, DT-07 API part, DT-08, DT-09 … 13) | file level as above; rows: `id`, `technique`, `title`, `partition`, `flow`, `cart` (lines sent with `POST /api/cart`; `price` only where the TC sends a client price: DT-08), `authorization` (`"user"` = the account's JWT, `null` = no header, other strings sent as the header value: DT-05 forged token, DT-06 `Bearer abc`), `body` of `POST /api/checkout`; `expected` (`kind`: `accepted` / `refused` / `serverTotalOrRefused`; `newOrders`, `newOrdersAll`, `orderStatus`, `orderTotal`, `serverTotal`, `cartLinesBefore`, `serverCartLinesAfter`); `source` | Same rule; the server cart of the new account is built with `POST /api/cart` at catalog prices (HW02 fixture F11 / F12), so the cart cannot hold lines from another test (it is never emptied, BUG-14) |
 
-Open expected values (`<CONFIRM>`):
+Changes against the HW02 inputs (as FR-03, student 17/11): a new account per test instead of `test@eshop.com` (same partition EC-V1-1 "logged in"; keeps the tests independent). DT-05 keeps the HW02 forged token literally (its payload names user id 2, the seed user), and DT-03 … 06 count every order through the admin account, as the HW02 TCs do.
+
+How each oracle is read (from the decisions, not from the app):
+
+- **Accepted / refused** (A7, A9, Q1, Q5): accepted = exactly one new order of the account, `pending`, with the server total, and the cart empty afterwards; refused = no new order (own orders, or all orders for the rows without a valid user token) and the cart unchanged. The HTTP status is recorded as an annotation, not asserted (Q1: "the status code is recorded, not judged").
+- **DT-09 … 13** (A5, Q2): `serverTotalOrRefused` – either one new order with `total_amount` 126000000 and an empty cart, or no new order and 3 cart lines; a new order with any other total fails.
+- **DT-01 page checks** (A10, A11, Q6): every cart line listed by name and quantity; the total shown with `₫` and any thousand separator (`totalText` pattern `126[.,]000[.,]000 ₫`); the total cannot be typed into; a breadcrumb (FR-23). The HW02 address `123 Le Loi, TP.HCM` has no field on the Web page: kept in the data, not typed and not judged (A12, Q7: no class for the address).
+- **Cart emptied** (A8): on the Web, the cart page shows the empty-cart state after the checkout; through the API, `GET /api/cart` returns no line. The badge part of A8 cannot be checked: the Web has no badge (group issue #79).
+- **DT-03** (A2): what the Web shows a guest (dialog text, URL) is recorded, not judged; only "no new order" is asserted, after each path.
+
+Open expected values (`<CONFIRM>`): none. One scoping question for the student (reply, decision 1): DT-07's `emptyState.image` comes from the FR-07 sentence the TC quotes; the Web has no image (group issue #80, FR-07, another member's feature).
 
 ## 4. Specs and assertion patterns (T4)
 

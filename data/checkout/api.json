@@ -1,0 +1,363 @@
+{
+  "about": "FR-08 API test data (design §3). Each row registers a new account through the API (accountEmail with {id} in lower case and {run}), logs it in and builds its server cart with POST /api/cart (cart lines at the catalog price unless the line gives a price). authorization: \"user\" = Bearer + the account's JWT, null = no Authorization header, any other string = sent as the header value. The status code is recorded, not judged (Q1); the stored orders and the server cart are the oracle.",
+  "accountEmail": "fr08.{id}.{run}@example.com",
+  "accountPassword": "Test1234!",
+  "admin": {
+    "email": "admin@eshop.com",
+    "password": "Admin123!",
+    "source": "eshop-sut/README.md:23"
+  },
+  "products": {
+    "keychron": {
+      "id": 5,
+      "name": "Bàn phím cơ Keychron Q1",
+      "price": 4000000
+    },
+    "airpods": {
+      "id": 4,
+      "name": "Tai nghe AirPods Pro 2",
+      "price": 6000000
+    },
+    "iphone": {
+      "id": 1,
+      "name": "iPhone 15 Pro Max",
+      "price": 30000000
+    }
+  },
+  "productsSource": "eshop-sut/backend/database.js:98-102 (seed); HW02 fB fixture F2 (ids 1, 4, 5 checked with GET /api/products, 20/10)",
+  "rows": [
+    {
+      "id": "DT-02",
+      "technique": "DT",
+      "title": "total_amount missing: order with the server total",
+      "partition": "EC-V5-2, V1-1, V2-1, V3-1, V4-1, O1-1, O2-1, O3-1",
+      "flow": "checkout",
+      "cart": [
+        {
+          "product": "keychron",
+          "quantity": 3
+        },
+        {
+          "product": "airpods",
+          "quantity": 4
+        },
+        {
+          "product": "iphone",
+          "quantity": 3
+        }
+      ],
+      "authorization": "user",
+      "body": {
+        "shipping_address": "123 Le Loi, TP.HCM"
+      },
+      "expected": {
+        "kind": "accepted",
+        "newOrders": 1,
+        "orderStatus": "pending",
+        "orderTotal": 126000000,
+        "serverCartLinesAfter": 0
+      },
+      "source": "FR-08 README:105, :107, :108; A3, A5 (a missing total_amount is a valid input, Q2), A7, A8"
+    },
+    {
+      "id": "DT-04",
+      "technique": "DT",
+      "title": "no Authorization header: refused",
+      "partition": "EC-V1-3, O1-2, O2-2, O3-2",
+      "flow": "checkout",
+      "cart": [
+        {
+          "product": "keychron",
+          "quantity": 3
+        },
+        {
+          "product": "airpods",
+          "quantity": 4
+        },
+        {
+          "product": "iphone",
+          "quantity": 3
+        }
+      ],
+      "authorization": null,
+      "body": {
+        "total_amount": 126000000,
+        "shipping_address": "123 Le Loi, TP.HCM"
+      },
+      "expected": {
+        "kind": "refused",
+        "newOrdersAll": 0,
+        "serverCartLinesAfter": 3
+      },
+      "source": "SEC-02 README:279 \"Các API có tính bảo mật phải yêu cầu JWT Token hợp lệ.\"; FR-08 README:104; A1, A9; Q1 (status recorded, not judged)"
+    },
+    {
+      "id": "DT-05",
+      "technique": "DT",
+      "title": "forged token (wrong signature): refused",
+      "partition": "EC-V1-4, O1-2, O2-2, O3-2",
+      "flow": "checkout",
+      "cart": [
+        {
+          "product": "keychron",
+          "quantity": 3
+        },
+        {
+          "product": "airpods",
+          "quantity": 4
+        },
+        {
+          "product": "iphone",
+          "quantity": 3
+        }
+      ],
+      "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0QGVzaG9wLmNvbSIsInJvbGUiOiJ1c2VyIn0.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "body": {
+        "total_amount": 126000000,
+        "shipping_address": "123 Le Loi, TP.HCM"
+      },
+      "expected": {
+        "kind": "refused",
+        "newOrdersAll": 0,
+        "serverCartLinesAfter": 3
+      },
+      "source": "SEC-02 README:279 \"Các API có tính bảo mật phải yêu cầu JWT Token hợp lệ.\"; FR-08 README:104; A1, A9; Q1 (status recorded, not judged)"
+    },
+    {
+      "id": "DT-06",
+      "technique": "DT",
+      "title": "not a JWT: refused",
+      "partition": "EC-V1-5, O1-2, O2-2, O3-2",
+      "flow": "checkout",
+      "cart": [
+        {
+          "product": "keychron",
+          "quantity": 3
+        },
+        {
+          "product": "airpods",
+          "quantity": 4
+        },
+        {
+          "product": "iphone",
+          "quantity": 3
+        }
+      ],
+      "authorization": "Bearer abc",
+      "body": {
+        "total_amount": 126000000,
+        "shipping_address": "123 Le Loi, TP.HCM"
+      },
+      "expected": {
+        "kind": "refused",
+        "newOrdersAll": 0,
+        "serverCartLinesAfter": 3
+      },
+      "source": "SEC-02 README:279 \"Các API có tính bảo mật phải yêu cầu JWT Token hợp lệ.\"; FR-08 README:104; A1, A9; Q1 (status recorded, not judged)"
+    },
+    {
+      "id": "DT-07",
+      "technique": "DT",
+      "title": "empty cart: refused (API part)",
+      "partition": "EC-V2-2, O1-2, O2-2, O3-2",
+      "flow": "checkout",
+      "cart": [],
+      "authorization": "user",
+      "body": {
+        "shipping_address": "123 Le Loi, TP.HCM"
+      },
+      "expected": {
+        "kind": "refused",
+        "newOrders": 0,
+        "serverCartLinesAfter": 0
+      },
+      "source": "A6 (Q4), A9; student 17/11: bug BUG-01 (#116)"
+    },
+    {
+      "id": "DT-08",
+      "technique": "DT",
+      "title": "cart line with a client price: order at the catalog price",
+      "partition": "EC-V4-2, O1-1, O2-1, O3-1",
+      "flow": "checkout",
+      "cart": [
+        {
+          "product": "keychron",
+          "quantity": 3,
+          "price": 1000
+        }
+      ],
+      "authorization": "user",
+      "body": {
+        "shipping_address": "123 Le Loi, TP.HCM"
+      },
+      "expected": {
+        "kind": "accepted",
+        "newOrders": 1,
+        "orderStatus": "pending",
+        "orderTotal": 12000000,
+        "serverCartLinesAfter": 0
+      },
+      "source": "FR-08 README:107; A3, A4 (Q3: the catalog price counts, 3000 = Fail), A7, A8"
+    },
+    {
+      "id": "DT-09",
+      "technique": "DT",
+      "title": "total_amount lower than the server total",
+      "partition": "EC-V5-3",
+      "flow": "checkout",
+      "cart": [
+        {
+          "product": "keychron",
+          "quantity": 3
+        },
+        {
+          "product": "airpods",
+          "quantity": 4
+        },
+        {
+          "product": "iphone",
+          "quantity": 3
+        }
+      ],
+      "authorization": "user",
+      "body": {
+        "total_amount": 1000,
+        "shipping_address": "123 Le Loi, TP.HCM"
+      },
+      "expected": {
+        "kind": "serverTotalOrRefused",
+        "serverTotal": 126000000,
+        "cartLinesBefore": 3
+      },
+      "source": "FR-08 README:107 \"Backend phải tự tính lại tổng tiền; không chấp nhận giá trị `total_amount` do client gửi lên.\"; A3, A5, A8, A9; Q2 (accepted with the server total or refused both pass)"
+    },
+    {
+      "id": "DT-10",
+      "technique": "DT",
+      "title": "total_amount higher than the server total",
+      "partition": "EC-V5-4",
+      "flow": "checkout",
+      "cart": [
+        {
+          "product": "keychron",
+          "quantity": 3
+        },
+        {
+          "product": "airpods",
+          "quantity": 4
+        },
+        {
+          "product": "iphone",
+          "quantity": 3
+        }
+      ],
+      "authorization": "user",
+      "body": {
+        "total_amount": 200000000,
+        "shipping_address": "123 Le Loi, TP.HCM"
+      },
+      "expected": {
+        "kind": "serverTotalOrRefused",
+        "serverTotal": 126000000,
+        "cartLinesBefore": 3
+      },
+      "source": "FR-08 README:107 \"Backend phải tự tính lại tổng tiền; không chấp nhận giá trị `total_amount` do client gửi lên.\"; A3, A5, A8, A9; Q2 (accepted with the server total or refused both pass)"
+    },
+    {
+      "id": "DT-11",
+      "technique": "DT",
+      "title": "total_amount zero",
+      "partition": "EC-V5-5",
+      "flow": "checkout",
+      "cart": [
+        {
+          "product": "keychron",
+          "quantity": 3
+        },
+        {
+          "product": "airpods",
+          "quantity": 4
+        },
+        {
+          "product": "iphone",
+          "quantity": 3
+        }
+      ],
+      "authorization": "user",
+      "body": {
+        "total_amount": 0,
+        "shipping_address": "123 Le Loi, TP.HCM"
+      },
+      "expected": {
+        "kind": "serverTotalOrRefused",
+        "serverTotal": 126000000,
+        "cartLinesBefore": 3
+      },
+      "source": "FR-08 README:107 \"Backend phải tự tính lại tổng tiền; không chấp nhận giá trị `total_amount` do client gửi lên.\"; A3, A5, A8, A9; Q2 (accepted with the server total or refused both pass)"
+    },
+    {
+      "id": "DT-12",
+      "technique": "DT",
+      "title": "total_amount negative",
+      "partition": "EC-V5-6",
+      "flow": "checkout",
+      "cart": [
+        {
+          "product": "keychron",
+          "quantity": 3
+        },
+        {
+          "product": "airpods",
+          "quantity": 4
+        },
+        {
+          "product": "iphone",
+          "quantity": 3
+        }
+      ],
+      "authorization": "user",
+      "body": {
+        "total_amount": -1000,
+        "shipping_address": "123 Le Loi, TP.HCM"
+      },
+      "expected": {
+        "kind": "serverTotalOrRefused",
+        "serverTotal": 126000000,
+        "cartLinesBefore": 3
+      },
+      "source": "FR-08 README:107 \"Backend phải tự tính lại tổng tiền; không chấp nhận giá trị `total_amount` do client gửi lên.\"; A3, A5, A8, A9; Q2 (accepted with the server total or refused both pass)"
+    },
+    {
+      "id": "DT-13",
+      "technique": "DT",
+      "title": "total_amount not a number",
+      "partition": "EC-V5-7",
+      "flow": "checkout",
+      "cart": [
+        {
+          "product": "keychron",
+          "quantity": 3
+        },
+        {
+          "product": "airpods",
+          "quantity": 4
+        },
+        {
+          "product": "iphone",
+          "quantity": 3
+        }
+      ],
+      "authorization": "user",
+      "body": {
+        "total_amount": "abc",
+        "shipping_address": "123 Le Loi, TP.HCM"
+      },
+      "expected": {
+        "kind": "serverTotalOrRefused",
+        "serverTotal": 126000000,
+        "cartLinesBefore": 3
+      },
+      "source": "FR-08 README:107 \"Backend phải tự tính lại tổng tiền; không chấp nhận giá trị `total_amount` do client gửi lên.\"; A3, A5, A8, A9; Q2 (accepted with the server total or refused both pass)"
+    }
+  ]
+}

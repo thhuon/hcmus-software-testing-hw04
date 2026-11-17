@@ -1,0 +1,236 @@
+{
+  "about": "FR-08 Web test data (design §3). Each row registers a new account through the API (accountEmail with {id} in lower case and {run} = start time of the run + browser) and logs in on the Web, except the guest row. cart = lines added on the product pages (quantity field + \"Thêm vào giỏ hàng\"), in this order. Amounts in ₫ (VND). totalText: the amount with any thousand separator ('.' or ','), A10.",
+  "accountEmail": "fr08.{id}.{run}@example.com",
+  "accountPassword": "Test1234!",
+  "admin": {
+    "email": "admin@eshop.com",
+    "password": "Admin123!",
+    "source": "eshop-sut/README.md:23"
+  },
+  "products": {
+    "keychron": {
+      "id": 5,
+      "name": "Bàn phím cơ Keychron Q1",
+      "price": 4000000
+    },
+    "airpods": {
+      "id": 4,
+      "name": "Tai nghe AirPods Pro 2",
+      "price": 6000000
+    },
+    "iphone": {
+      "id": 1,
+      "name": "iPhone 15 Pro Max",
+      "price": 30000000
+    }
+  },
+  "productsSource": "eshop-sut/backend/database.js:98-102 (seed); HW02 fB fixture F2 (ids 1, 4, 5 checked with GET /api/products, 20/10)",
+  "rows": [
+    {
+      "id": "DT-01",
+      "technique": "DT",
+      "title": "all valid: Web checkout of cart 3 / 4 / 3",
+      "partition": "EC-V1-1, V2-1, V3-1, V4-1, V5-1, O1-1 … O5-1",
+      "flow": "checkout",
+      "loggedIn": true,
+      "cart": [
+        {
+          "product": "keychron",
+          "quantity": 3
+        },
+        {
+          "product": "airpods",
+          "quantity": 4
+        },
+        {
+          "product": "iphone",
+          "quantity": 3
+        }
+      ],
+      "address": "123 Le Loi, TP.HCM",
+      "expected": {
+        "kind": "accepted",
+        "items": [
+          {
+            "name": "Bàn phím cơ Keychron Q1",
+            "quantity": 3
+          },
+          {
+            "name": "Tai nghe AirPods Pro 2",
+            "quantity": 4
+          },
+          {
+            "name": "iPhone 15 Pro Max",
+            "quantity": 3
+          }
+        ],
+        "totalText": "126[.,]000[.,]000 ₫",
+        "totalEditable": false,
+        "breadcrumb": true,
+        "newOrders": 1,
+        "orderStatus": "pending",
+        "orderTotal": 126000000,
+        "cartEmptyAfter": true
+      },
+      "source": "FR-08 README:105 \"không cho phép người dùng chỉnh sửa trực tiếp\", :106 \"đầy đủ danh sách sản phẩm đặt mua\", :108 \"Sau thanh toán thành công, giỏ hàng được xóa.\"; FR-23 README:263 breadcrumb on Thanh toán; A3, A7, A8, A10, A11"
+    },
+    {
+      "id": "DT-03",
+      "technique": "DT",
+      "title": "guest: no order on either path (cart button, typed /checkout)",
+      "partition": "EC-V1-2, O1-2, O2-2",
+      "flow": "guest",
+      "loggedIn": false,
+      "cart": [
+        {
+          "product": "keychron",
+          "quantity": 3
+        }
+      ],
+      "paths": [
+        "cartButton",
+        "typedCheckoutUrl"
+      ],
+      "expected": {
+        "kind": "refused",
+        "newOrdersAll": 0,
+        "recordOnly": [
+          "dialog messages",
+          "URL after each path"
+        ]
+      },
+      "source": "FR-08 README:104 \"Chỉ người dùng **đã đăng nhập** mới tiến hành thanh toán được.\"; A2 (what the Web shows is recorded, not judged), A9; Q1; student 17/11: both paths in one test"
+    },
+    {
+      "id": "DT-07",
+      "technique": "DT",
+      "title": "empty cart: no order on the Web (cart page, typed /checkout) or through the API",
+      "partition": "EC-V2-2, O1-2, O2-2, O3-2",
+      "flow": "emptyCart",
+      "loggedIn": true,
+      "cart": [],
+      "apiBody": {
+        "shipping_address": "123 Le Loi, TP.HCM"
+      },
+      "expected": {
+        "kind": "refused",
+        "emptyState": {
+          "message": true,
+          "image": true
+        },
+        "checkoutButton": false,
+        "newOrders": 0,
+        "serverCartLinesAfter": 0
+      },
+      "source": "FR-07 README:100 \"Giỏ hàng trống phải có hình minh họa và thông báo rõ ràng.\"; A6 (Q4), A9; student 17/11: an accepted empty-cart checkout is a bug (BUG-01, #116)"
+    },
+    {
+      "id": "BVA-01",
+      "technique": "BVA",
+      "title": "B1 LB: 1 cart line",
+      "partition": "B1 LB",
+      "flow": "checkout",
+      "loggedIn": true,
+      "cart": [
+        {
+          "product": "keychron",
+          "quantity": 3
+        }
+      ],
+      "expected": {
+        "kind": "accepted",
+        "newOrders": 1,
+        "orderStatus": "pending",
+        "orderTotal": 12000000,
+        "cartEmptyAfter": true
+      },
+      "source": "FR-08 README:105, :108; A3, A7, A8"
+    },
+    {
+      "id": "BVA-02",
+      "technique": "BVA",
+      "title": "B1 LB+1: 2 cart lines",
+      "partition": "B1 LB+1",
+      "flow": "checkout",
+      "loggedIn": true,
+      "cart": [
+        {
+          "product": "keychron",
+          "quantity": 3
+        },
+        {
+          "product": "airpods",
+          "quantity": 4
+        }
+      ],
+      "expected": {
+        "kind": "accepted",
+        "newOrders": 1,
+        "orderStatus": "pending",
+        "orderTotal": 36000000,
+        "cartEmptyAfter": true
+      },
+      "source": "FR-08 README:105, :108; A3, A7, A8"
+    },
+    {
+      "id": "BVA-03",
+      "technique": "BVA",
+      "title": "B2 LB: quantity 1 on one line",
+      "partition": "B2 LB",
+      "flow": "checkout",
+      "loggedIn": true,
+      "cart": [
+        {
+          "product": "keychron",
+          "quantity": 1
+        },
+        {
+          "product": "airpods",
+          "quantity": 4
+        },
+        {
+          "product": "iphone",
+          "quantity": 3
+        }
+      ],
+      "expected": {
+        "kind": "accepted",
+        "newOrders": 1,
+        "orderStatus": "pending",
+        "orderTotal": 118000000,
+        "cartEmptyAfter": true
+      },
+      "source": "FR-08 README:105, :108; A3, A7, A8"
+    },
+    {
+      "id": "BVA-04",
+      "technique": "BVA",
+      "title": "B2 LB+1: quantity 2 on one line",
+      "partition": "B2 LB+1",
+      "flow": "checkout",
+      "loggedIn": true,
+      "cart": [
+        {
+          "product": "keychron",
+          "quantity": 2
+        },
+        {
+          "product": "airpods",
+          "quantity": 4
+        },
+        {
+          "product": "iphone",
+          "quantity": 3
+        }
+      ],
+      "expected": {
+        "kind": "accepted",
+        "newOrders": 1,
+        "orderStatus": "pending",
+        "orderTotal": 122000000,
+        "cartEmptyAfter": true
+      },
+      "source": "FR-08 README:105, :108; A3, A7, A8"
+    }
+  ]
+}
