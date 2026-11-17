@@ -33,7 +33,7 @@ Thứ tự dưới đây là thứ tự **làm**, không theo thứ tự mục c
 - [x] **S7. `CLAUDE.md`** – hồ sơ dự án cho agent: MSSV, URL, thư mục, quy tắc commit / AI-02, repo issue.
 - [x] **S8. Biểu mẫu AI** – khung AI-02, AI-05 (chép từ HW03), `prompt_log.md`, AI-03 (phần đầu). Nội dung AI-03 điền ở giai đoạn 5.
 - [x] **S10. Khung file nộp** – `README.md`, `HW04_Report.md`, `AI_Critique.md`, `bugs/BUG_REPORT.md`, `features/<feature>/automation_design.md`, `demo/shot_list.md` (17/11).
-- [ ] **S9. Repo public** – đề §12 yêu cầu repo public; hiện repo đang PRIVATE. SV tự đổi sau khi xác nhận repo không có file riêng tư.
+- [x] **S9. Repo public** – đề §12 yêu cầu repo public; đã chuyển sang PUBLIC 18/11 (theo yêu cầu SV, sau khi kiểm không có token / mật khẩu trong repo).
 
 ### Giai đoạn 1 – Feature A: FR-03 (≈ 2,5 giờ, chưa quay)
 
