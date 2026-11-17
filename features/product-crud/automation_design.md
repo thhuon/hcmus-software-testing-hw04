@@ -250,7 +250,7 @@ Categories: fragile selector · weak assertion · wrong oracle · missing edge c
 | product-crud | firefox | `reports/product-crud/firefox/index.html` | 2026-11-17T19:16:40.213Z | 41 | 17 | 24 | 0 |
 | product-crud | webkit | `reports/product-crud/webkit/index.html` | 2026-11-17T19:18:38.884Z | 41 | 17 | 24 | 0 |
 
-41 tests = 36 TCs (DT-09, 14 … 17 have a Web and an API test). Per test case (`summarize-results.mjs --markdown`): 17 TCs passed and 19 failed on every browser; a TC with a Web and an API test counts as failed when either fails.
+41 tests = 36 TCs (DT-09, 14 … 17 have a Web and an API test). Per test case (`summarize-results.mjs --markdown`, after its fix in T7): 14 TCs passed and 22 failed on every browser; a TC with a Web and an API test counts as failed when either fails. Before the fix (skill commit `f74f237`) the script kept only the result of the test that ran last for a TC, so DT-09, 14, 17 (API failed, Web passed) were counted as passed (17 / 19); FR-03 and FR-08 counts are unchanged by the fix.
 
 **Browser differences:** none. Every test has the same result on Chromium, Firefox and WebKit (compared test by test from the three `results.json`), so no test needs a rerun on one browser. What the browsers do differently is only recorded: the validation message of the empty name and of the price field (design §2), and Firefox keeping `abc` in the price field as an invalid value where Chromium and WebKit drop it (DT-14 passes on all three).
 
