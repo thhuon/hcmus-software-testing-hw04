@@ -47,15 +47,33 @@
 - **Selection** ([design §1](features/forgot-password/automation_design.md#1-test-cases-selected-t1)): 45 test cases (44 from HW02 + DT-35 added in HW04), **33 automated** (30 through the Web UI, 7 of them also send the same OTP to the API; 3 API only: DT-17, DT-27, DT-32) and 12 not automated (API-only request shapes already covered, an assumption-only oracle, real-time OTP expiry, duplicates), each with its reason.
 - **Locators and page objects** ([design §2](features/forgot-password/automation_design.md#2-locators-and-page-objects-t2)): `page-objects/LoginPage.ts`, `page-objects/ForgotPasswordPage.ts`, API client `api/EshopApi.ts`. No input of the page has an accessible name; seven locator options were counted on Chromium, Firefox and WebKit, and the fields are found by the textbox under a label that starts with the field name (student decision). Codegen check by the student: codegen picks generic `getByRole('textbox')` / `input[type=…]` for these fields.
 - **Test data** ([design §3](features/forgot-password/automation_design.md#3-test-data-t3)): `data/forgot-password/web.json` (30 rows) and `api.json` (3 rows); inputs from the HW02 test cases, expected values from FR-03, FR-01, FR-22, SEC-07 and the HW02 assumptions; every test registers its own account through the API, so tests and runs do not share data.
-- **Assertion patterns**: after T4.
+- **Specs and assertion patterns** ([design §4](features/forgot-password/automation_design.md#4-specs-and-assertion-patterns-t4)): `tests/forgot-password/web.spec.ts` (30 tests) and `api.spec.ts` (3 tests), one test per data row, title starting with the TC ID; 8 assertion patterns: stored outcome (login through the API), soft assertions, visible text, element state, value format, URL, negative, API response status.
 
 ### 3.2 Review of the AI-generated scripts
 
 <!-- From design §5: what the AI got wrong or missed, the fix, why (Prompt / Model / Feature). -->
 
+First run on Chromium: 6 passed, 27 failed. The review ([design §5](features/forgot-password/automation_design.md#5-review-of-the-ai-generated-scripts-t5)) found three mistakes of the AI in the Web spec, all fixed as the student decided, cause type **Model** (student):
+
+| # | What the AI got wrong | Category | Fix |
+| --- | --- | --- | --- |
+| 1 | DT-05 passed although the Web refused the reset: with new = current password the login check cannot tell the outcomes apart, so BUG-01 was hidden | weak assertion | after an accepted reset the same OTP must be refused by the API (SEC-07 "vô hiệu hóa sau khi dùng") (eb9d9d8) |
+| 2 | The FR-22 check required `role="alert"`, which FR-22 does not ask for | wrong oracle | any error text above the submit button (e2a210a) |
+| 3 | No assertion before acting on an element the app lacks: 30 s timeout without naming the missing FR-03 element | weak assertion | `toBeVisible()` with the FR-03 name before the action (63f8508) |
+
+After the fixes: 5 passed, 28 failed (DT-05 now fails on BUG-01), run time 5.4 → 3.4 min; the passing tests are stable (`--repeat-each=3`). No issue found in fragile selectors, flaky waits, missing edge cases, hidden dependencies or hard-coded data.
+
 ### 3.3 Results
 
 <!-- Per browser: passed / failed; failing tests and their bugs. -->
+
+| Browser | Report | Tests | Passed | Failed | Flaky |
+| --- | --- | --- | --- | --- | --- |
+| Chromium | [reports/forgot-password/chromium](reports/forgot-password/chromium/index.html) | 33 | 5 | 28 | 0 |
+| Firefox | [reports/forgot-password/firefox](reports/forgot-password/firefox/index.html) | 33 | 5 | 28 | 0 |
+| WebKit | [reports/forgot-password/webkit](reports/forgot-password/webkit/index.html) | 33 | 5 | 28 | 0 |
+
+The same tests pass (DT-07, 08, 09, 17, 32) and fail on every browser ([design §6](features/forgot-password/automation_design.md#6-runs-t6)). Bugs behind the failures: after T7.
 
 ## 4. Feature B – FR-08 Thanh toán
 
