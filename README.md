@@ -33,7 +33,7 @@ The same three web features as HW02 (brief §5; group allocation: [HW02 group re
 - Browsers: Chromium 156.0.8078.4 · Firefox 157.0 · WebKit 27.2 (Playwright 1.64.1, Ubuntu 26.04)
 - HTML reports (`Run by: 23120046` + ISO timestamp in the title): [reports/](reports/)
 - Bugs: [bugs/BUG_REPORT.md](bugs/BUG_REPORT.md) · GitHub Issues: [HW02 group repo, label `hw: HW04`](https://github.com/angquoc/software-testing-2026-HW02-group/issues?q=label%3A%22hw%3A+HW04%22) + comments on HW02 issues
-- Demo video (Task 2): <YouTube link>
+- Demo video (Task 2): [https://www.youtube.com/watch?v=6ro7cYrT5Ew](https://www.youtube.com/watch?v=6ro7cYrT5Ew) – FR-15 scripts, one fix, the official run on Chromium, Firefox and WebKit, the HTML reports (8:04, unlisted, own voice)
 - Main report: [HW04_Report.md](HW04_Report.md) · PDF: [pdf/](pdf/)
 
 ## 3. Agent Skills

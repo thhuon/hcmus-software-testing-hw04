@@ -161,6 +161,21 @@ Screenshots of the eight comments: `bugs/screenshots/checkout_comment_<issue>.pn
 
 <!-- Link (unlisted), what it shows with timestamps (from demo/shot_list.md §4), the fix narrated. -->
 
+**Link:** [https://www.youtube.com/watch?v=6ro7cYrT5Ew](https://www.youtube.com/watch?v=6ro7cYrT5Ew) (8:04, unlisted). Vietnamese narration in the student's own voice; screen recording of the FR-15 Product CRUD scripts.
+
+| Time | What is shown |
+| --- | --- |
+| 0:00 | Identity: `whoami && hostname && date -Iseconds && pwd` (hg / hg, 2026-11-18T04:05:50+07:00, `week04`) |
+| 0:57 | The scripts: `tests/product-crud/web.spec.ts` reads `data/product-crud/web.json` (one test per row, title starts with the TC ID), the row DT-25, the page object `AdminProductsPage.ts`, three assertion patterns (stored products through the API, text on the page, negative check) |
+| 3:00 | The fix narrated: DT-17 (design §5 row 2, flaky wait, cause: model) – the generated test read the category options once while the Admin web was still loading them; `git log` shows the generated commit `8be9fac` and the fix `a278a51`; `git show --oneline a278a51` shows the one-time read replaced by the web-first `toHaveText` |
+| 5:31 | DT-17 rerun three times on the three browsers: `9 passed` |
+| 5:41 | Official run: `whoami && hostname && date` (04:59:14) in the same terminal, then `npm run feature -- product-crud`, fresh EShop, Chromium → Firefox → WebKit (sped up ×12, labelled), run summary: 41 tests per browser, 17 passed, 24 failed |
+| 6:46 | The HTML reports just produced: title "HW04 · FR-15 Product CRUD (admin) · chromium · Run by: 23120046 · 2026-11-17T21:59:59.473Z", a passing test (DT-01) and a failing one (DT-10, expected vs received, screenshot), then the Firefox and WebKit reports |
+| 7:26 | Failures and bugs: the product defects were already filed in HW02; HW04 evidence added as comments (issue #34 shown) |
+| 8:00 | Summary (design §6) |
+
+The reports shown are the submitted ones (`reports/product-crud/`, committed unchanged right after the recording, design §6).
+
 ## 10. Agent Skills
 
 <!-- Skills, what each does, skill demo video link. -->
