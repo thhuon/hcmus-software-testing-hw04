@@ -1,0 +1,754 @@
+{
+  "about": "FR-15 Admin web test data (design §3). Every test logs in on the Admin web as `admin`, opens the tab \"Sản phẩm\" and reads the stored products through `GET /api/products` before and after its action. {tag} = `{id}.{browser}.{run}.r{repeat}t{retry}`, so a name the test must find in the list is used by no other test, browser, run or attempt. A name {repeat, times} is the character repeated (NFC). Prices are typed as text into the number field. newProducts = ids after − ids before (0 = nothing saved). recordOnly = recorded as an annotation, not asserted.",
+  "admin": {
+    "email": "admin@eshop.com",
+    "password": "Admin123!",
+    "source": "eshop-sut/README.md:23; HW02 fC F1 (login checked by the student, Q9)"
+  },
+  "user": {
+    "email": "test@eshop.com",
+    "password": "Test1234!",
+    "source": "eshop-sut/README.md:24; HW02 fC F2"
+  },
+  "categories": {
+    "Điện thoại": 1,
+    "Laptop": 2,
+    "Phụ kiện": 3
+  },
+  "seedProducts": [
+    {
+      "id": 1,
+      "name": "iPhone 15 Pro Max",
+      "price": 30000000,
+      "category_id": 1
+    },
+    {
+      "id": 2,
+      "name": "Samsung Galaxy S24 Ultra",
+      "price": 28000000,
+      "category_id": 1
+    },
+    {
+      "id": 3,
+      "name": "MacBook Pro M3",
+      "price": 45000000,
+      "category_id": 2
+    },
+    {
+      "id": 4,
+      "name": "Tai nghe AirPods Pro 2",
+      "price": 6000000,
+      "category_id": 3
+    },
+    {
+      "id": 5,
+      "name": "Bàn phím cơ Keychron Q1",
+      "price": 4000000,
+      "category_id": 3
+    }
+  ],
+  "seedSource": "eshop-sut/backend/database.js:85-87 (categories), :98-102 (products); HW02 fC F3 compares every field of ids 1–5 before and after",
+  "targetProduct": {
+    "body": {
+      "name": "Ốp lưng iPhone 15 silicon {tag}",
+      "price": 250000,
+      "description": "Mô tả test",
+      "imageUrl": "",
+      "category_id": 3
+    },
+    "source": "HW02 fC F4 (target product P, nominal body of 02 Step 4), created through the API by the test itself"
+  },
+  "rows": [
+    {
+      "id": "DT-01",
+      "technique": "DT",
+      "title": "all valid: add on the Admin web",
+      "partition": "EC-V1-1, V2-1, V2-2, V3-1, V3-4, V3-6, V3-8, V4-1, V4-3, V4-6, V5-1, V5-3, O1-1, O2-1, O3-1",
+      "flow": "add",
+      "form": {
+        "name": "Ốp lưng iPhone 15 silicon {tag}",
+        "price": "250000",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "accepted",
+        "newProducts": 1,
+        "stored": {
+          "name": "Ốp lưng iPhone 15 silicon {tag}",
+          "price": 250000,
+          "category_id": 3
+        },
+        "rowShown": true,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "confirmation message"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:193 \"Admin có thể Thêm / Xem / Sửa / Xóa sản phẩm.\"; FR-15 eshop-sut/README.md:198 \"Khi Sửa một sản phẩm, chỉ sản phẩm đó bị thay đổi — các sản phẩm khác giữ nguyên.\"; HW02 A10, A12"
+    },
+    {
+      "id": "DT-02",
+      "technique": "DT",
+      "title": "valid edit of P on the Admin web",
+      "partition": "EC-V1-1, V2-3, V6-1, O1-1, O2-2, O3-1",
+      "flow": "edit",
+      "setupTarget": true,
+      "form": {
+        "name": "Ốp lưng iPhone 15 silicon xanh {tag}",
+        "price": "300000",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "accepted",
+        "newProducts": 0,
+        "target": {
+          "name": "Ốp lưng iPhone 15 silicon xanh {tag}",
+          "price": 300000,
+          "category_id": 3
+        },
+        "seedUnchanged": true
+      },
+      "source": "FR-15 eshop-sut/README.md:198 \"Khi Sửa một sản phẩm, chỉ sản phẩm đó bị thay đổi — các sản phẩm khác giữ nguyên.\"; HW02 A10"
+    },
+    {
+      "id": "DT-03",
+      "technique": "DT",
+      "title": "valid delete of P on the Admin web",
+      "partition": "EC-V1-1, V2-4, V6-1, O1-1, O2-3, O3-1",
+      "flow": "delete",
+      "setupTarget": true,
+      "expected": {
+        "kind": "accepted",
+        "newProducts": 0,
+        "targetListed": false,
+        "targetByIdReturned": false,
+        "seedUnchanged": true
+      },
+      "source": "FR-15 eshop-sut/README.md:193 \"Admin có thể Thêm / Xem / Sửa / Xóa sản phẩm.\"; FR-15 eshop-sut/README.md:198 \"Khi Sửa một sản phẩm, chỉ sản phẩm đó bị thay đổi — các sản phẩm khác giữ nguyên.\"; HW02 A12, Q8"
+    },
+    {
+      "id": "DT-04",
+      "technique": "DT",
+      "title": "name with HTML tags is saved as typed and shown as text",
+      "partition": "EC-V3-9, V1-1, V2-1, O1-1, O2-1, O4-2",
+      "flow": "add",
+      "form": {
+        "name": "<b>Ốp lưng</b> test {tag}",
+        "price": "250000",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "accepted",
+        "newProducts": 1,
+        "stored": {
+          "name": "<b>Ốp lưng</b> test {tag}",
+          "price": 250000,
+          "category_id": 3
+        },
+        "rowNameText": "<b>Ốp lưng</b> test {tag}",
+        "rowBoldElements": 0,
+        "seedUnchanged": true
+      },
+      "source": "SEC-04 eshop-sut/README.md:281 \"phải được escape đúng cách, không dùng `innerHTML` trực tiếp.\"; FR-15 eshop-sut/README.md:195 \"Tên sản phẩm: bắt buộc, tối đa 255 ký tự.\"; HW02 A14, Q11"
+    },
+    {
+      "id": "DT-05",
+      "technique": "DT",
+      "title": "name with a single quote is saved as typed",
+      "partition": "EC-V3-10, V1-1, V2-1, O1-1, O2-1",
+      "flow": "add",
+      "form": {
+        "name": "Ốp lưng 'Silicon' test",
+        "price": "250000",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "accepted",
+        "newProducts": 1,
+        "stored": {
+          "name": "Ốp lưng 'Silicon' test",
+          "price": 250000,
+          "category_id": 3
+        },
+        "seedUnchanged": true
+      },
+      "source": "SEC-05 eshop-sut/README.md:282 \"Truy vấn CSDL phải dùng Parameterized Query\"; FR-15 eshop-sut/README.md:195 \"Tên sản phẩm: bắt buộc, tối đa 255 ký tự.\"; HW02 A14, Q11"
+    },
+    {
+      "id": "DT-09",
+      "technique": "DT",
+      "title": "empty name: the Admin web does not send the form",
+      "partition": "EC-V3-2, V1-1, V2-1, O1-2, O2-4, O3-1",
+      "flow": "addBlocked",
+      "form": {
+        "name": "",
+        "price": "250000",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "submit": true,
+      "expected": {
+        "kind": "blocked",
+        "invalidField": "name",
+        "requestSent": false,
+        "newProducts": 0,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "browser validation message"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:195 \"Tên sản phẩm: bắt buộc, tối đa 255 ký tự.\"; HW02 A2 (a field that blocks the value meets the rule for the Web part), A3"
+    },
+    {
+      "id": "DT-10",
+      "technique": "DT",
+      "title": "name of 300 characters is refused, not saved cut",
+      "partition": "EC-V3-3, V1-1, V2-1, O1-2, O2-4, O3-1",
+      "flow": "add",
+      "form": {
+        "name": {
+          "repeat": "X",
+          "times": 300
+        },
+        "price": "250000",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "refused",
+        "newProducts": 0,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "response status",
+          "dialog messages"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:195 \"Tên sản phẩm: bắt buộc, tối đa 255 ký tự.\"; HW02 A4, Q3 (not saved cut to 255)"
+    },
+    {
+      "id": "DT-11",
+      "technique": "DT",
+      "title": "name of only spaces is refused",
+      "partition": "EC-V3-5, V1-1, V2-1, O1-2, O2-4, O3-1",
+      "flow": "add",
+      "form": {
+        "name": "     ",
+        "price": "250000",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "refused",
+        "newProducts": 0,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "response status",
+          "dialog messages"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:195 \"Tên sản phẩm: bắt buộc, tối đa 255 ký tự.\"; HW02 A3, Q2"
+    },
+    {
+      "id": "DT-13",
+      "technique": "DT",
+      "title": "negative price is refused",
+      "partition": "EC-V4-2, V1-1, V2-1, O1-2, O2-4, O3-1",
+      "flow": "add",
+      "form": {
+        "name": "Ốp lưng iPhone 15 silicon",
+        "price": "-50000",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "refused",
+        "newProducts": 0,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "response status",
+          "dialog messages"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:196 \"Giá: bắt buộc, phải là số **dương** (> 0).\"; HW02 A5"
+    },
+    {
+      "id": "DT-14",
+      "technique": "DT",
+      "title": "price abc: the price field does not take it (Web part)",
+      "partition": "EC-V4-4, V1-1, V2-1, O1-2, O2-4, O3-1",
+      "flow": "typePrice",
+      "form": {
+        "name": "Ốp lưng iPhone 15 silicon",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "typePrice": "abc",
+      "submit": false,
+      "expected": {
+        "kind": "blocked",
+        "fieldDoesNotHold": "abc",
+        "newProducts": 0,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "field value and browser validation message"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:196 \"Giá: bắt buộc, phải là số **dương** (> 0).\"; HW02 A2, A5 (Firefox keeps the letters and marks the field invalid; Chromium and WebKit drop them – design §2)"
+    },
+    {
+      "id": "DT-15",
+      "technique": "DT",
+      "title": "empty price is refused (Web part)",
+      "partition": "EC-V4-5, V1-1, V2-1, O1-2, O2-4, O3-1",
+      "flow": "add",
+      "form": {
+        "name": "Ốp lưng iPhone 15 silicon",
+        "price": "",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "refused",
+        "newProducts": 0,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "response status",
+          "dialog messages"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:196 \"Giá: bắt buộc, phải là số **dương** (> 0).\"; HW02 A5 (\"empty field\")"
+    },
+    {
+      "id": "DT-16",
+      "technique": "DT",
+      "title": "fractional price: the Admin web does not send the form (Web part)",
+      "partition": "EC-V4-7, V1-1, V2-1, O1-2, O2-4, O3-1",
+      "flow": "addBlocked",
+      "form": {
+        "name": "Ốp lưng iPhone 15 silicon",
+        "price": "250000.5",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "submit": true,
+      "expected": {
+        "kind": "blocked",
+        "invalidField": "price",
+        "requestSent": false,
+        "newProducts": 0,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "browser validation message"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:196 \"Giá: bắt buộc, phải là số **dương** (> 0).\"; HW02 A2, A6, Q4"
+    },
+    {
+      "id": "DT-17",
+      "technique": "DT",
+      "title": "no category: the list offers only the existing categories (Web part)",
+      "partition": "EC-V5-2, V1-1, V2-1, O1-2, O2-4, O3-1",
+      "flow": "categoryChoice",
+      "expected": {
+        "kind": "display",
+        "categoryOptionsEqualApi": true,
+        "recordOnly": [
+          "empty choice present or not",
+          "option selected by default"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:197 \"Danh mục: bắt buộc, phải chọn từ danh sách có sẵn.\"; HW02 A7, F7 (the list matches the categories page)"
+    },
+    {
+      "id": "DT-22",
+      "technique": "DT",
+      "title": "edit of P with a negative price is refused",
+      "partition": "EC-V2-3, V4-2, V1-1, V6-1, O1-2, O2-4, O3-1",
+      "flow": "edit",
+      "setupTarget": true,
+      "form": {
+        "name": "Ốp lưng iPhone 15 silicon {tag}",
+        "price": "-50000",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "refused",
+        "newProducts": 0,
+        "targetUnchanged": true,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "response status",
+          "dialog messages"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:196 \"Giá: bắt buộc, phải là số **dương** (> 0).\"; FR-15 eshop-sut/README.md:198 \"Khi Sửa một sản phẩm, chỉ sản phẩm đó bị thay đổi — các sản phẩm khác giữ nguyên.\"; HW02 A8, A11"
+    },
+    {
+      "id": "DT-23",
+      "technique": "DT",
+      "title": "required fields carry * next to their label",
+      "partition": "EC-V3-1, V4-1, V5-1",
+      "flow": "formLabels",
+      "requiredFields": [
+        "Tên sản phẩm",
+        "Giá tiền",
+        "Danh mục"
+      ],
+      "expected": {
+        "kind": "display",
+        "labelsWithStar": 3
+      },
+      "source": "FR-22 eshop-sut/README.md:252 \"Tất cả trường bắt buộc phải có ký hiệu `*` bên cạnh nhãn.\""
+    },
+    {
+      "id": "DT-24",
+      "technique": "DT",
+      "title": "every row shows its own name, after an add and after an edit",
+      "partition": "O4-1",
+      "flow": "addThenEdit",
+      "form": {
+        "name": "Ốp lưng iPhone 15 silicon {tag}",
+        "price": "250000",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "editName": "Ốp lưng iPhone 15 silicon xanh {tag}",
+      "expected": {
+        "kind": "display",
+        "listNamesEqualApi": {
+          "afterAdd": true,
+          "afterEdit": true
+        }
+      },
+      "source": "FR-15 eshop-sut/README.md:193 \"Admin có thể Thêm / Xem / Sửa / Xóa sản phẩm.\"; HW02 A12, Q8; student 18/11 (the list is also read after an edit)"
+    },
+    {
+      "id": "DT-25",
+      "technique": "DT",
+      "title": "the new row shows its price with ₫ and thousand separators",
+      "partition": "O4-1",
+      "flow": "add",
+      "form": {
+        "name": "Ốp lưng iPhone 15 silicon {tag}",
+        "price": "250000",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "display",
+        "rowPriceText": "^250[.,]000 ₫$"
+      },
+      "source": "FR-21 eshop-sut/README.md:246 \"Luôn dùng ký hiệu `₫` với định dạng phân cách hàng nghìn.\"; HW02 A12"
+    },
+    {
+      "id": "DT-26",
+      "technique": "DT",
+      "title": "seed rows show their prices with ₫ and thousand separators",
+      "partition": "O4-1",
+      "flow": "list",
+      "expected": {
+        "kind": "display",
+        "seedPriceTexts": {
+          "iPhone 15 Pro Max": "^30[.,]000[.,]000 ₫$",
+          "Samsung Galaxy S24 Ultra": "^28[.,]000[.,]000 ₫$",
+          "MacBook Pro M3": "^45[.,]000[.,]000 ₫$",
+          "Tai nghe AirPods Pro 2": "^6[.,]000[.,]000 ₫$",
+          "Bàn phím cơ Keychron Q1": "^4[.,]000[.,]000 ₫$"
+        }
+      },
+      "source": "FR-21 eshop-sut/README.md:246 \"Luôn dùng ký hiệu `₫` với định dạng phân cách hàng nghìn.\"; HW02 A12"
+    },
+    {
+      "id": "DT-27",
+      "technique": "DT",
+      "title": "the new row shows its category",
+      "partition": "O4-1",
+      "flow": "add",
+      "form": {
+        "name": "Ốp lưng iPhone 15 silicon {tag}",
+        "price": "250000",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "display",
+        "rowCategoryText": "Phụ kiện"
+      },
+      "source": "FR-15 eshop-sut/README.md:193 \"Admin có thể Thêm / Xem / Sửa / Xóa sản phẩm.\"; HW02 A12, Q8 (student kept the category check, 20/10)"
+    },
+    {
+      "id": "BVA-01",
+      "technique": "BVA",
+      "title": "name length 1 (B1 LB)",
+      "partition": "B1 LB (EC-V3-1)",
+      "flow": "add",
+      "form": {
+        "name": {
+          "repeat": "Ố",
+          "times": 1
+        },
+        "price": "250000",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "accepted",
+        "newProducts": 1,
+        "stored": {
+          "name": {
+            "repeat": "Ố",
+            "times": 1
+          },
+          "nameLength": 1,
+          "price": 250000,
+          "category_id": 3
+        },
+        "seedUnchanged": true
+      },
+      "source": "FR-15 eshop-sut/README.md:195 \"Tên sản phẩm: bắt buộc, tối đa 255 ký tự.\"; HW02 A4, Q3 (U+1ED0, 3 bytes in UTF-8: a byte count would show here)"
+    },
+    {
+      "id": "BVA-02",
+      "technique": "BVA",
+      "title": "name length 2 (B1 LB+1)",
+      "partition": "B1 LB+1 (EC-V3-1)",
+      "flow": "add",
+      "form": {
+        "name": {
+          "repeat": "Ố",
+          "times": 2
+        },
+        "price": "250000",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "accepted",
+        "newProducts": 1,
+        "stored": {
+          "name": {
+            "repeat": "Ố",
+            "times": 2
+          },
+          "nameLength": 2,
+          "price": 250000,
+          "category_id": 3
+        },
+        "seedUnchanged": true
+      },
+      "source": "FR-15 eshop-sut/README.md:195 \"Tên sản phẩm: bắt buộc, tối đa 255 ký tự.\"; HW02 A4, Q3 (U+1ED0, 3 bytes in UTF-8: a byte count would show here)"
+    },
+    {
+      "id": "BVA-03",
+      "technique": "BVA",
+      "title": "name length 254 (B1 UB−1)",
+      "partition": "B1 UB−1 (EC-V3-1)",
+      "flow": "add",
+      "form": {
+        "name": {
+          "repeat": "Ố",
+          "times": 254
+        },
+        "price": "250000",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "accepted",
+        "newProducts": 1,
+        "stored": {
+          "name": {
+            "repeat": "Ố",
+            "times": 254
+          },
+          "nameLength": 254,
+          "price": 250000,
+          "category_id": 3
+        },
+        "seedUnchanged": true
+      },
+      "source": "FR-15 eshop-sut/README.md:195 \"Tên sản phẩm: bắt buộc, tối đa 255 ký tự.\"; HW02 A4, Q3 (U+1ED0, 3 bytes in UTF-8: a byte count would show here)"
+    },
+    {
+      "id": "BVA-04",
+      "technique": "BVA",
+      "title": "name length 255 (B1 UB)",
+      "partition": "B1 UB (EC-V3-1)",
+      "flow": "add",
+      "form": {
+        "name": {
+          "repeat": "Ố",
+          "times": 255
+        },
+        "price": "250000",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "accepted",
+        "newProducts": 1,
+        "stored": {
+          "name": {
+            "repeat": "Ố",
+            "times": 255
+          },
+          "nameLength": 255,
+          "price": 250000,
+          "category_id": 3
+        },
+        "seedUnchanged": true
+      },
+      "source": "FR-15 eshop-sut/README.md:195 \"Tên sản phẩm: bắt buộc, tối đa 255 ký tự.\"; HW02 A4, Q3 (U+1ED0, 3 bytes in UTF-8: a byte count would show here)"
+    },
+    {
+      "id": "BVA-05",
+      "technique": "BVA",
+      "title": "name length 256 (B1 UB+1)",
+      "partition": "B1 UB+1 (EC-V3-3)",
+      "flow": "add",
+      "form": {
+        "name": {
+          "repeat": "Ố",
+          "times": 256
+        },
+        "price": "250000",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "refused",
+        "newProducts": 0,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "response status",
+          "dialog messages"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:195 \"Tên sản phẩm: bắt buộc, tối đa 255 ký tự.\"; HW02 A4, Q3 (U+1ED0, 3 bytes in UTF-8: a byte count would show here)"
+    },
+    {
+      "id": "BVA-06",
+      "technique": "BVA",
+      "title": "price 0 (B2 LB−1)",
+      "partition": "B2 LB−1 (EC-V4-2)",
+      "flow": "add",
+      "form": {
+        "name": "Ốp lưng iPhone 15 silicon",
+        "price": "0",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "refused",
+        "newProducts": 0,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "response status",
+          "dialog messages"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:196 \"Giá: bắt buộc, phải là số **dương** (> 0).\"; HW02 A5, A6, Q4"
+    },
+    {
+      "id": "BVA-07",
+      "technique": "BVA",
+      "title": "price 1 (B2 LB)",
+      "partition": "B2 LB (EC-V4-1)",
+      "flow": "add",
+      "form": {
+        "name": "Ốp lưng iPhone 15 silicon",
+        "price": "1",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "accepted",
+        "newProducts": 1,
+        "stored": {
+          "name": "Ốp lưng iPhone 15 silicon",
+          "price": 1,
+          "category_id": 3
+        },
+        "seedUnchanged": true
+      },
+      "source": "FR-15 eshop-sut/README.md:196 \"Giá: bắt buộc, phải là số **dương** (> 0).\"; HW02 A5, A6, Q4"
+    },
+    {
+      "id": "BVA-08",
+      "technique": "BVA",
+      "title": "price 2 (B2 LB+1)",
+      "partition": "B2 LB+1 (EC-V4-1)",
+      "flow": "add",
+      "form": {
+        "name": "Ốp lưng iPhone 15 silicon",
+        "price": "2",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "accepted",
+        "newProducts": 1,
+        "stored": {
+          "name": "Ốp lưng iPhone 15 silicon",
+          "price": 2,
+          "category_id": 3
+        },
+        "seedUnchanged": true
+      },
+      "source": "FR-15 eshop-sut/README.md:196 \"Giá: bắt buộc, phải là số **dương** (> 0).\"; HW02 A5, A6, Q4"
+    },
+    {
+      "id": "BVA-09",
+      "technique": "BVA",
+      "title": "price 9999999999 (B2 extreme-max)",
+      "partition": "B2 extreme-max (EC-V4-1)",
+      "flow": "add",
+      "form": {
+        "name": "Ốp lưng iPhone 15 silicon",
+        "price": "9999999999",
+        "category": "Phụ kiện",
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "accepted",
+        "newProducts": 1,
+        "stored": {
+          "name": "Ốp lưng iPhone 15 silicon",
+          "price": 9999999999,
+          "category_id": 3
+        },
+        "seedUnchanged": true
+      },
+      "source": "FR-15 eshop-sut/README.md:196 \"Giá: bắt buộc, phải là số **dương** (> 0).\"; HW02 A5, A6, Q4"
+    }
+  ]
+}

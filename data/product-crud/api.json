@@ -1,0 +1,382 @@
+{
+  "about": "FR-15 API test data (design §3). authorization: \"admin\" / \"user\" = `Bearer <JWT>` of that account from `POST /api/login`, null = no header, any other string = sent as the header value. target: \"new\" = POST, \"P\" = the product the test creates through the API first (targetProduct), \"999999\" = an id that does not exist. {deletedCategory} = the id of the category the test creates and deletes first. newProducts / seedUnchanged / targetUnchanged / targetListed are read through `GET /api/products` before and after. The status code is recorded, not asserted (HW02 Q1).",
+  "admin": {
+    "email": "admin@eshop.com",
+    "password": "Admin123!",
+    "source": "eshop-sut/README.md:23; HW02 fC F1 (login checked by the student, Q9)"
+  },
+  "user": {
+    "email": "test@eshop.com",
+    "password": "Test1234!",
+    "source": "eshop-sut/README.md:24; HW02 fC F2"
+  },
+  "categories": {
+    "Điện thoại": 1,
+    "Laptop": 2,
+    "Phụ kiện": 3
+  },
+  "seedProducts": [
+    {
+      "id": 1,
+      "name": "iPhone 15 Pro Max",
+      "price": 30000000,
+      "category_id": 1
+    },
+    {
+      "id": 2,
+      "name": "Samsung Galaxy S24 Ultra",
+      "price": 28000000,
+      "category_id": 1
+    },
+    {
+      "id": 3,
+      "name": "MacBook Pro M3",
+      "price": 45000000,
+      "category_id": 2
+    },
+    {
+      "id": 4,
+      "name": "Tai nghe AirPods Pro 2",
+      "price": 6000000,
+      "category_id": 3
+    },
+    {
+      "id": 5,
+      "name": "Bàn phím cơ Keychron Q1",
+      "price": 4000000,
+      "category_id": 3
+    }
+  ],
+  "seedSource": "eshop-sut/backend/database.js:85-87 (categories), :98-102 (products); HW02 fC F3 compares every field of ids 1–5 before and after",
+  "targetProduct": {
+    "body": {
+      "name": "Ốp lưng iPhone 15 silicon {tag}",
+      "price": 250000,
+      "description": "Mô tả test",
+      "imageUrl": "",
+      "category_id": 3
+    },
+    "source": "HW02 fC F4 (target product P, nominal body of 02 Step 4), created through the API by the test itself"
+  },
+  "rows": [
+    {
+      "id": "DT-06",
+      "technique": "DT",
+      "title": "add with no token is refused",
+      "partition": "EC-V1-2, V2-1, O1-2, O2-4, O3-1",
+      "method": "POST",
+      "target": "new",
+      "authorization": null,
+      "body": {
+        "name": "Ốp lưng iPhone 15 silicon",
+        "price": 250000,
+        "description": "Mô tả test",
+        "imageUrl": "",
+        "category_id": 3
+      },
+      "expected": {
+        "kind": "refused",
+        "newProducts": 0,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "response status"
+        ]
+      },
+      "source": "FR-12 eshop-sut/README.md:178 \"Token JWT hợp lệ.\", :179 \"`role = 'admin'` trong Token.\"; HW02 A1, Q1"
+    },
+    {
+      "id": "DT-07",
+      "technique": "DT",
+      "title": "edit with a forged token is refused",
+      "partition": "EC-V1-3, V2-3, V6-1, O1-2, O2-4, O3-1",
+      "method": "PUT",
+      "target": "P",
+      "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBlc2hvcC5jb20iLCJyb2xlIjoiYWRtaW4ifQ.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "body": {
+        "name": "Sản phẩm bị sửa trái phép",
+        "price": 1000,
+        "description": "Mô tả test",
+        "imageUrl": "",
+        "category_id": 3
+      },
+      "expected": {
+        "kind": "refused",
+        "newProducts": 0,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "response status"
+        ],
+        "targetUnchanged": true
+      },
+      "source": "SEC-02 eshop-sut/README.md:279 \"Các API có tính bảo mật phải yêu cầu JWT Token hợp lệ.\"; HW02 A1, Q1 (forged JWT of the TC, signature AAAA…)",
+      "setupTarget": true
+    },
+    {
+      "id": "DT-08",
+      "technique": "DT",
+      "title": "delete with a user token is refused",
+      "partition": "EC-V1-4, V2-4, V6-1, O1-2, O2-4, O3-1",
+      "method": "DELETE",
+      "target": "P",
+      "authorization": "user",
+      "expected": {
+        "kind": "refused",
+        "newProducts": 0,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "response status"
+        ],
+        "targetListed": true
+      },
+      "source": "SEC-03 eshop-sut/README.md:280 \"không chỉ kiểm tra sự tồn tại của Token.\"; HW02 A1, Q1",
+      "setupTarget": true
+    },
+    {
+      "id": "DT-09",
+      "technique": "DT",
+      "title": "empty name is refused (API part)",
+      "partition": "EC-V3-2, V1-1, V2-1, O1-2, O2-4, O3-1",
+      "method": "POST",
+      "target": "new",
+      "authorization": "admin",
+      "body": {
+        "name": "",
+        "price": 250000,
+        "description": "Mô tả test",
+        "imageUrl": "",
+        "category_id": 3
+      },
+      "expected": {
+        "kind": "refused",
+        "newProducts": 0,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "response status"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:195 \"Tên sản phẩm: bắt buộc, tối đa 255 ký tự.\"; HW02 A3"
+    },
+    {
+      "id": "DT-12",
+      "technique": "DT",
+      "title": "no name key is refused",
+      "partition": "EC-V3-7, V1-1, V2-1, O1-2, O2-4, O3-1",
+      "method": "POST",
+      "target": "new",
+      "authorization": "admin",
+      "body": {
+        "price": 250000,
+        "description": "Mô tả test",
+        "imageUrl": "",
+        "category_id": 3
+      },
+      "expected": {
+        "kind": "refused",
+        "newProducts": 0,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "response status"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:195 \"Tên sản phẩm: bắt buộc, tối đa 255 ký tự.\"; HW02 A3"
+    },
+    {
+      "id": "DT-14",
+      "technique": "DT",
+      "title": "price abc is refused (API part)",
+      "partition": "EC-V4-4, V1-1, V2-1, O1-2, O2-4, O3-1",
+      "method": "POST",
+      "target": "new",
+      "authorization": "admin",
+      "body": {
+        "name": "Ốp lưng iPhone 15 silicon",
+        "price": "abc",
+        "description": "Mô tả test",
+        "imageUrl": "",
+        "category_id": 3
+      },
+      "expected": {
+        "kind": "refused",
+        "newProducts": 0,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "response status"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:196 \"Giá: bắt buộc, phải là số **dương** (> 0).\"; HW02 A5"
+    },
+    {
+      "id": "DT-15",
+      "technique": "DT",
+      "title": "no price key is refused (API part)",
+      "partition": "EC-V4-5, V1-1, V2-1, O1-2, O2-4, O3-1",
+      "method": "POST",
+      "target": "new",
+      "authorization": "admin",
+      "body": {
+        "name": "Ốp lưng iPhone 15 silicon",
+        "description": "Mô tả test",
+        "imageUrl": "",
+        "category_id": 3
+      },
+      "expected": {
+        "kind": "refused",
+        "newProducts": 0,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "response status"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:196 \"Giá: bắt buộc, phải là số **dương** (> 0).\"; HW02 A5"
+    },
+    {
+      "id": "DT-16",
+      "technique": "DT",
+      "title": "fractional price is refused (API part)",
+      "partition": "EC-V4-7, V1-1, V2-1, O1-2, O2-4, O3-1",
+      "method": "POST",
+      "target": "new",
+      "authorization": "admin",
+      "body": {
+        "name": "Ốp lưng iPhone 15 silicon",
+        "price": 250000.5,
+        "description": "Mô tả test",
+        "imageUrl": "",
+        "category_id": 3
+      },
+      "expected": {
+        "kind": "refused",
+        "newProducts": 0,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "response status"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:196 \"Giá: bắt buộc, phải là số **dương** (> 0).\"; HW02 A6, Q4"
+    },
+    {
+      "id": "DT-17",
+      "technique": "DT",
+      "title": "no category_id key is refused (API part)",
+      "partition": "EC-V5-2, V1-1, V2-1, O1-2, O2-4, O3-1",
+      "method": "POST",
+      "target": "new",
+      "authorization": "admin",
+      "body": {
+        "name": "Ốp lưng iPhone 15 silicon",
+        "price": 250000,
+        "description": "Mô tả test",
+        "imageUrl": ""
+      },
+      "expected": {
+        "kind": "refused",
+        "newProducts": 0,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "response status"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:197 \"Danh mục: bắt buộc, phải chọn từ danh sách có sẵn.\"; HW02 A7"
+    },
+    {
+      "id": "DT-18",
+      "technique": "DT",
+      "title": "category id not in the list is refused",
+      "partition": "EC-V5-4, V1-1, V2-1, O1-2, O2-4, O3-1",
+      "method": "POST",
+      "target": "new",
+      "authorization": "admin",
+      "body": {
+        "name": "Ốp lưng iPhone 15 silicon",
+        "price": 250000,
+        "description": "Mô tả test",
+        "imageUrl": "",
+        "category_id": 9999
+      },
+      "expected": {
+        "kind": "refused",
+        "newProducts": 0,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "response status"
+        ],
+        "categoryAbsent": 9999
+      },
+      "source": "FR-15 eshop-sut/README.md:197 \"Danh mục: bắt buộc, phải chọn từ danh sách có sẵn.\"; HW02 A7"
+    },
+    {
+      "id": "DT-19",
+      "technique": "DT",
+      "title": "deleted category is refused",
+      "partition": "EC-V5-5, V1-1, V2-1, O1-2, O2-4, O3-1",
+      "method": "POST",
+      "target": "new",
+      "authorization": "admin",
+      "setupDeletedCategory": "Danh mục tạm FR-15 {tag}",
+      "body": {
+        "name": "Ốp lưng iPhone 15 silicon",
+        "price": 250000,
+        "description": "Mô tả test",
+        "imageUrl": "",
+        "category_id": "{deletedCategory}"
+      },
+      "expected": {
+        "kind": "refused",
+        "newProducts": 0,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "response status"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:197 \"Danh mục: bắt buộc, phải chọn từ danh sách có sẵn.\"; HW02 A7, Q5, F5"
+    },
+    {
+      "id": "DT-20",
+      "technique": "DT",
+      "title": "edit of an id that does not exist changes nothing",
+      "partition": "EC-V6-2, V1-1, V2-3, O2-4, O3-1",
+      "method": "PUT",
+      "target": "999999",
+      "setupTarget": true,
+      "authorization": "admin",
+      "body": {
+        "name": "Sản phẩm không tồn tại",
+        "price": 1000,
+        "description": "Mô tả test",
+        "imageUrl": "",
+        "category_id": 3
+      },
+      "expected": {
+        "kind": "noChange",
+        "newProducts": 0,
+        "noProductNamed": "Sản phẩm không tồn tại",
+        "targetUnchanged": true,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "response status and body"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:198 \"Khi Sửa một sản phẩm, chỉ sản phẩm đó bị thay đổi — các sản phẩm khác giữ nguyên.\"; HW02 A9, Q7"
+    },
+    {
+      "id": "DT-21",
+      "technique": "DT",
+      "title": "delete of an id that does not exist removes nothing",
+      "partition": "EC-V6-2, V1-1, V2-4, O2-4, O3-1",
+      "method": "DELETE",
+      "target": "999999",
+      "setupTarget": true,
+      "authorization": "admin",
+      "expected": {
+        "kind": "noChange",
+        "newProducts": 0,
+        "targetListed": true,
+        "seedUnchanged": true,
+        "recordOnly": [
+          "response status and body"
+        ]
+      },
+      "source": "FR-15 eshop-sut/README.md:198 \"Khi Sửa một sản phẩm, chỉ sản phẩm đó bị thay đổi — các sản phẩm khác giữ nguyên.\"; HW02 A9, Q7"
+    }
+  ]
+}
