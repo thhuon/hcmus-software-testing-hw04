@@ -150,13 +150,44 @@ Open expected values (`<CONFIRM>`): none. Every expected value is a TC value, a 
 
 ## 4. Specs and assertion patterns (T4)
 
-Prompt used for generation: see the AI-use log entry of this step.
+Prompt used for generation: see the AI-use log entries of this step (prompt 01:45 18/11/2026 … for `web.spec.ts`; `api.spec.ts` in the next prompt). One prompt per spec file; the generated code is committed as it came (`8be9fac`) and is reviewed in T5.
 
 | Spec | TC IDs | Assertion patterns |
 | --- | --- | --- |
+| `tests/product-crud/web.spec.ts` (28 tests: one loop over `web.json`, one `switch` on the row's `flow`; login, product tab and the ids / seed products before the action in `beforeEach`, the test's own products deleted in `afterEach`) | DT-01, 04, 05, 10, 11, 13, 15, 25, 27, BVA-01 … 09 (`add`) | Persisted outcome (`toHaveLength` of the new ids, `toMatchObject` of name / price / category_id of the stored product, name length in characters), element state (`toHaveCount(1)` of the new row), visible text (`toHaveText` of the name and price cells, `toContainText` of the row), negative (`toHaveCount(0)` of `<b>` in the name cell), soft assertions (stored product, products 1–5 equal to the snapshot before) |
+| | DT-02, 22 (`edit`), DT-03 (`delete`) | Persisted outcome (`toMatchObject` of P after the edit, `toEqual` of P before / after when refused, P listed or not, `GET /api/products/<P>` returns P or not), element state (`toHaveCount(0)` of P's row after the delete), soft (products 1–5) |
+| | DT-09, 16 (`addBlocked`), DT-14 (`typePrice`) | Element state (`validity.valid` of the field), negative (no `POST /api/products` sent, no new id); the browser message is recorded |
+| | DT-17 (`categoryChoice`), DT-23 (`formLabels`), DT-24 (`addThenEdit`), DT-26 (`list`) | Value comparison of a list (`toEqual` of the options with `GET /api/categories`, of the list names with `GET /api/products` after the add and after the edit), element state (`toHaveCount(3)` of labels with `*`), visible text (`toHaveText` of the five seed price cells, soft) |
 
 | Assertion pattern | Used by |
 | --- | --- |
+| Persisted outcome (API) | DT-01 … 05, 10, 11, 13, 15, 22, BVA-01 … 09 (new ids, stored values, P before / after), DT-09, 14, 16 (no new id), every row with `seedUnchanged` |
+| Visible text | DT-04 (name cell), DT-25 (price cell), DT-26 (seed price cells), DT-27 (row text) |
+| Element state | DT-01 (new row), DT-03 (row gone), DT-09, 14, 16 (field validity), DT-23 (labels with `*`) |
+| Negative assertion | DT-04 (no `<b>`), DT-09, 16 (no request sent) |
+| Value comparison of a list | DT-17 (category options), DT-24 (list names after add and edit) |
+| Soft assertions | stored product of the `add` rows, products 1–5, DT-24, DT-26 |
+
+**First run of the generated Web spec** (agent, 18/11 01:52, Chromium only, `REPORT_DIR` and `--output` in a temporary folder outside the repository; the first command used `--reporter=list` and wrote no `results.json`, so it was run a second time with the config reporters – same 15 passed / 13 failed; not an official run, nothing fixed). Products afterwards: ids 1–5 (the `afterEach` deleted every product a test created).
+
+| Test | Result | Failed assertions (expected vs received) |
+| --- | --- | --- |
+| DT-01 … 05, DT-09, DT-14, DT-17, BVA-01 … 04, BVA-07 … 09 | passed (15) | – |
+| DT-10 | failed | new products: expected 0, received 1 (name `X` × 300 stored, not cut; HW02 BUG-26). [Screenshot](screenshots/first-run/DT-10-chromium.png) |
+| DT-11 | failed | new products: expected 0, received 1 (name `"     "` stored; BUG-27). [Screenshot](screenshots/first-run/DT-11-chromium.png) |
+| DT-13 | failed | new products: expected 0, received 1 (price −50000 stored; BUG-28). [Screenshot](screenshots/first-run/DT-13-chromium.png) |
+| DT-15 | failed | new products: expected 0, received 1 (price `""` stored; the Web part of the "no price" class, HW02 BUG-29 was the API part). [Screenshot](screenshots/first-run/DT-15-chromium.png) |
+| DT-16 | failed | "the price field blocks the form": expected `valid` false, received true, value `""` – the form had been sent and reset. A check by hand-written script (agent, 3 browsers): right after `fill('250000.5')` the field is invalid, but once another field is filled React writes the `value` attribute again, the step base becomes 250000.5 and the field is valid; "Lưu sản phẩm" then sends `"price": "250000.5"` on Chromium, Firefox and WebKit. The T2 finding "the browser does not send `250000.5`" held only right after the fill (to review in T5). [Screenshot](screenshots/first-run/DT-16-chromium.png) |
+| DT-22 | failed | P keeps its values: expected price 250000, received −50000 (BUG-32); dialog "Cập nhật thành công!". [Screenshot](screenshots/first-run/DT-22-chromium.png) |
+| DT-23 | failed | labels with `*`: expected 3, received 0 (no label at all; BUG-33). [Screenshot](screenshots/first-run/DT-23-chromium.png) |
+| DT-24 | failed | after the add: list = `GET /api/products` (passed); after the edit: every row shows the edited name instead of its own (BUG-34). [Screenshot](screenshots/first-run/DT-24-chromium.png) |
+| DT-25 | failed | price cell: expected `/^250[.,]000 ₫$/`, received `250000 ₫` (no thousand separators; HW02 BUG-35 had "₫" only). [Screenshot](screenshots/first-run/DT-25-chromium.png) |
+| DT-26 | failed | five seed price cells, e.g. expected `/^30[.,]000[.,]000 ₫$/`, received `30000000 ₫` (BUG-36); 25.6 s (five 5 s waits of the soft assertions). [Screenshot](screenshots/first-run/DT-26-chromium.png) |
+| DT-27 | failed | the row contains `Phụ kiện`: received `Ốp lưng iPhone 15 silicon DT-27.…250000 ₫SửaXóa` (no category column; BUG-37). [Screenshot](screenshots/first-run/DT-27-chromium.png) |
+| BVA-05 | failed | new products: expected 0, received 1 (`Ố` × 256 stored; BUG-38). [Screenshot](screenshots/first-run/BVA-05-chromium.png) |
+| BVA-06 | failed | new products: expected 0, received 1 (price 0 stored; BUG-39). [Screenshot](screenshots/first-run/BVA-06-chromium.png) |
+
+The verdicts (product defect or script defect) are for T7; the BUG numbers are the HW02 reports of the same class, for comparison only.
 
 ## 5. Review of the AI-generated scripts (T5)
 
