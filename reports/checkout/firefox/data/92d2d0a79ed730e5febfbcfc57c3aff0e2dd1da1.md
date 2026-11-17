@@ -18,7 +18,7 @@ expect(received).toHaveLength(expected)
 
 Expected length: 0
 Received length: 1
-Received array:  [{"created_at": "2026-11-17 14:15:31", "id": 135, "shipping_address": "123 Le Loi, TP.HCM", "status": "pending", "total_amount": null, "user_id": 479}]
+Received array:  [{"created_at": "2026-11-17 15:40:24", "id": 177, "shipping_address": "123 Le Loi, TP.HCM", "status": "pending", "total_amount": null, "user_id": 541}]
 ```
 
 # Test source
