@@ -3348,6 +3348,6 @@ Giờ ghi log prompt (dùng đúng file transcript của session này), rồi c�
 Bash Write this session's pending prompts to the log
 ```
 
-- **Used in:** `features/forgot-password/automation_design.md` §7; `HW04_Report.md` §3.1, `PLAN.md` A8; `prompt_log.md` (AI-02 Artifact #31)
+- **Used in:** `features/forgot-password/automation_design.md` §7; `HW04_Report.md` §3.1, `PLAN.md` A8; `prompt_log.md` (AI-02 Artifact #32)
 
 ---
