@@ -1,5 +1,5 @@
 {
-  "about": "FR-03 Web test data (design §3). account = a new account registered through the API before the test, e-mail from accountEmail with {id} and {run} filled in by the spec; email null = that account's e-mail. otp \"issued\" = the OTP shown on Bước 2.",
+  "about": "FR-03 Web test data (design §3). account = a new account registered through the API before the test, e-mail from accountEmail with {id} (lower case) and {run} (start time of the run + browser) filled in by the spec; email null = that account's e-mail. otp \"issued\" = the OTP shown on Bước 2. fillConfirm: the confirm field is filled only where the test case checks it (student 17/11, BUG-04).",
   "accountEmail": "fr03.{id}.{run}@example.com",
   "rows": [
     {
@@ -15,6 +15,7 @@
       "otp": "issued",
       "newPassword": "NewPass@2026",
       "confirm": "NewPass@2026",
+      "fillConfirm": true,
       "expected": {
         "kind": "success",
         "newPasswordLogsIn": true,
@@ -82,6 +83,7 @@
       "otp": "issued",
       "newPassword": "NewPass@2026#",
       "confirm": "NewPass@2026#",
+      "fillConfirm": false,
       "expected": {
         "kind": "success",
         "newPasswordLogsIn": true,
@@ -102,6 +104,7 @@
       "otp": "issued",
       "newPassword": "Current@2026",
       "confirm": "Current@2026",
+      "fillConfirm": false,
       "expected": {
         "kind": "success",
         "newPasswordLogsIn": true
@@ -193,6 +196,7 @@
       "otp": "482",
       "newPassword": "NewPass@2026",
       "confirm": "NewPass@2026",
+      "fillConfirm": false,
       "expected": {
         "kind": "error",
         "errorAboveSubmit": true,
@@ -214,6 +218,7 @@
       "otp": "482913123",
       "newPassword": "NewPass@2026",
       "confirm": "NewPass@2026",
+      "fillConfirm": false,
       "expected": {
         "kind": "error",
         "errorAboveSubmit": true,
@@ -235,6 +240,7 @@
       "otp": "",
       "newPassword": "NewPass@2026",
       "confirm": "NewPass@2026",
+      "fillConfirm": false,
       "expected": {
         "kind": "error",
         "errorAboveSubmit": true,
@@ -256,6 +262,7 @@
       "otp": "48291A",
       "newPassword": "NewPass@2026",
       "confirm": "NewPass@2026",
+      "fillConfirm": false,
       "expected": {
         "kind": "error",
         "errorAboveSubmit": true,
@@ -277,6 +284,7 @@
       "otp": "482914",
       "newPassword": "NewPass@2026",
       "confirm": "NewPass@2026",
+      "fillConfirm": false,
       "expected": {
         "kind": "error",
         "errorAboveSubmit": true,
@@ -298,6 +306,7 @@
       "otp": "issued",
       "newPassword": "Ab1@x",
       "confirm": "Ab1@x",
+      "fillConfirm": false,
       "expected": {
         "kind": "error",
         "errorAboveSubmit": true,
@@ -318,6 +327,7 @@
       "otp": "issued",
       "newPassword": "",
       "confirm": "",
+      "fillConfirm": false,
       "expected": {
         "kind": "error",
         "errorAboveSubmit": true,
@@ -338,6 +348,7 @@
       "otp": "issued",
       "newPassword": "newpass@2026",
       "confirm": "newpass@2026",
+      "fillConfirm": false,
       "expected": {
         "kind": "error",
         "errorAboveSubmit": true,
@@ -358,6 +369,7 @@
       "otp": "issued",
       "newPassword": "NEWPASS@2026",
       "confirm": "NEWPASS@2026",
+      "fillConfirm": false,
       "expected": {
         "kind": "error",
         "errorAboveSubmit": true,
@@ -378,6 +390,7 @@
       "otp": "issued",
       "newPassword": "NewPass@word",
       "confirm": "NewPass@word",
+      "fillConfirm": false,
       "expected": {
         "kind": "error",
         "errorAboveSubmit": true,
@@ -398,6 +411,7 @@
       "otp": "issued",
       "newPassword": "NewPass2026",
       "confirm": "NewPass2026",
+      "fillConfirm": false,
       "expected": {
         "kind": "error",
         "errorAboveSubmit": true,
@@ -418,6 +432,7 @@
       "otp": "issued",
       "newPassword": "NewPass#2026",
       "confirm": "NewPass#2026",
+      "fillConfirm": false,
       "expected": {
         "kind": "error",
         "errorAboveSubmit": true,
@@ -439,6 +454,7 @@
       "otp": "issued",
       "newPassword": "NewPass@2026",
       "confirm": "NewPass@2025",
+      "fillConfirm": true,
       "expected": {
         "kind": "error",
         "errorAboveSubmit": true,
@@ -460,6 +476,7 @@
       "otp": "issued",
       "newPassword": "NewPass@2026",
       "confirm": "",
+      "fillConfirm": true,
       "expected": {
         "kind": "error",
         "errorAboveSubmit": true,
@@ -481,6 +498,7 @@
       "otp": "issued",
       "newPassword": "NewPass@2026",
       "confirm": "newPass@2026",
+      "fillConfirm": true,
       "expected": {
         "kind": "error",
         "errorAboveSubmit": true,
@@ -501,6 +519,7 @@
       "otp": "issued",
       "newPassword": "NewPass 2026",
       "confirm": "NewPass 2026",
+      "fillConfirm": false,
       "expected": {
         "kind": "error",
         "errorAboveSubmit": true,
@@ -521,6 +540,7 @@
       "otp": "48291",
       "newPassword": "NewPass@2026",
       "confirm": "NewPass@2026",
+      "fillConfirm": false,
       "expected": {
         "kind": "error",
         "errorAboveSubmit": true,
@@ -542,6 +562,7 @@
       "otp": "4829131",
       "newPassword": "NewPass@2026",
       "confirm": "NewPass@2026",
+      "fillConfirm": false,
       "expected": {
         "kind": "error",
         "errorAboveSubmit": true,
@@ -563,6 +584,7 @@
       "otp": "issued",
       "newPassword": "NewP@26",
       "confirm": "NewP@26",
+      "fillConfirm": false,
       "expected": {
         "kind": "error",
         "errorAboveSubmit": true,
@@ -584,6 +606,7 @@
       "otp": "issued",
       "newPassword": "NewP@202",
       "confirm": "NewP@202",
+      "fillConfirm": false,
       "expected": {
         "kind": "success",
         "newPasswordLogsIn": true,
@@ -604,6 +627,7 @@
       "otp": "issued",
       "newPassword": "NewP@2026",
       "confirm": "NewP@2026",
+      "fillConfirm": false,
       "expected": {
         "kind": "success",
         "newPasswordLogsIn": true,
