@@ -7,7 +7,7 @@
 | Earlier bug reports matched | HW02 `bugs/BUG_REPORT.md` (BUG-01 … BUG-41 = issues #1 … #41) |
 | Reporter | HỒ THÙY HƯƠNG – 23120046 |
 | Proof (Issues page) | [issues-label-hw04.png](screenshots/issues-label-hw04.png) – filter `is:issue state:open author:thhuon label:"hw: HW04"`, 17/11/2026 22:35: #117 (FR-03), #116 (FR-08). Commented HW02 issues: links in the overview; FR-08 comments (18/11/2026): [#12](screenshots/checkout_comment_12.png), [#13](screenshots/checkout_comment_13.png), [#14](screenshots/checkout_comment_14.png), [#15](screenshots/checkout_comment_15.png), [#16](screenshots/checkout_comment_16.png), [#17](screenshots/checkout_comment_17.png), [#116](screenshots/checkout_comment_116.png), [#80](screenshots/checkout_comment_80.png) |
-| Count | Bugs: 17 · Confirmed: 13 · Changed: 2 · New: 2 |
+| Count | Bugs: 39 · Confirmed: 33 · Changed: 4 · New: 2 |
 
 ## 1. Severity / priority scale
 
@@ -47,6 +47,28 @@ Copied from the group README §4.3 (first "yes" wins).
 | [BUG-15](#bug-15) | FR-23 | Thanh toán page has no breadcrumb | `web.spec.ts` › DT-01 | Chromium, Firefox, WebKit | Confirmed #16 | [comment on #16](https://github.com/angquoc/software-testing-2026-HW02-group/issues/16#issuecomment-6955370947) – sent 18/11/2026 by thhuon, with screenshots | Low / Low (from #16) |
 | [BUG-16](#bug-16) | FR-08 | A guest who is not logged in can check out on the Web – **not reproduced in HW04** | `web.spec.ts` › DT-03 (passes) | – (passes) | Changed #17 | [comment on #17](https://github.com/angquoc/software-testing-2026-HW02-group/issues/17#issuecomment-6955371671) – sent 18/11/2026 by thhuon, with screenshots | High / High (from #17) |
 | [BUG-17](#bug-17) | FR-07 | Empty cart has no illustration (found again by FR-08 DT-07) | `web.spec.ts` › DT-07 | Chromium, Firefox, WebKit | Confirmed #80 (Related, FR-07, 23120061) | [comment on #80](https://github.com/angquoc/software-testing-2026-HW02-group/issues/80#issuecomment-6955373092) – sent 18/11/2026 by thhuon, with screenshots | Low / – (from #80) |
+| [BUG-18](#bug-18) | FR-12 | Add product API creates a product for a request with no token (`POST /api/products`) | `api.spec.ts` › DT-06 | Chromium, Firefox, WebKit | Confirmed #18 | comment on [#18](https://github.com/angquoc/software-testing-2026-HW02-group/issues/18) – drafted, not sent | Critical / High (from #18) |
+| [BUG-19](#bug-19) | SEC-02, FR-12 | Edit product API accepts a forged JWT and changes the product (`PUT /api/products/:id`) | `api.spec.ts` › DT-07 | Chromium, Firefox, WebKit | Confirmed #19 | comment on [#19](https://github.com/angquoc/software-testing-2026-HW02-group/issues/19) – drafted, not sent | Critical / High (from #19) |
+| [BUG-20](#bug-20) | SEC-03, FR-12 | Delete product API accepts the token of a non-admin user and deletes the product (`DELETE /api/products/:id`) | `api.spec.ts` › DT-08 | Chromium, Firefox, WebKit | Confirmed #20 | comment on [#20](https://github.com/angquoc/software-testing-2026-HW02-group/issues/20) – drafted, not sent | Critical / High (from #20) |
+| [BUG-21](#bug-21) | FR-15 | Add product API saves a product with no name (`name` missing → `null`) | `api.spec.ts` › DT-12 | Chromium, Firefox, WebKit | Confirmed #21 | comment on [#21](https://github.com/angquoc/software-testing-2026-HW02-group/issues/21) – drafted, not sent | High / Medium (from #21) |
+| [BUG-22](#bug-22) | FR-15 | Add product API saves a price that is not a number (`"abc"`) | `api.spec.ts` › DT-14 | Chromium, Firefox, WebKit | Confirmed #22 | comment on [#22](https://github.com/angquoc/software-testing-2026-HW02-group/issues/22) – drafted, not sent | High / High (from #22) |
+| [BUG-23](#bug-23) | FR-15 | Add product API saves a product with no category (`category_id` missing → `null`) | `api.spec.ts` › DT-17 | Chromium, Firefox, WebKit | Confirmed #23 | comment on [#23](https://github.com/angquoc/software-testing-2026-HW02-group/issues/23) – drafted, not sent | High / Medium (from #23) |
+| [BUG-24](#bug-24) | FR-15 | Add product API saves a category id that never existed (`9999`) | `api.spec.ts` › DT-18 | Chromium, Firefox, WebKit | Confirmed #24 | comment on [#24](https://github.com/angquoc/software-testing-2026-HW02-group/issues/24) – drafted, not sent | High / Medium (from #24) |
+| [BUG-25](#bug-25) | FR-15 | Add product API saves a product with an empty name (`""`) | `api.spec.ts` › DT-09 | Chromium, Firefox, WebKit | Confirmed #25 | comment on [#25](https://github.com/angquoc/software-testing-2026-HW02-group/issues/25) – drafted, not sent | High / Medium (from #25) |
+| [BUG-26](#bug-26) | FR-15 | A name longer than 255 characters (300 × `X`) is saved, through the Admin web | `web.spec.ts` › DT-10 | Chromium, Firefox, WebKit | Confirmed #26 | comment on [#26](https://github.com/angquoc/software-testing-2026-HW02-group/issues/26) – drafted, not sent | Medium / Medium (from #26) |
+| [BUG-27](#bug-27) | FR-15 | A name made only of spaces (5 spaces) is saved, through the Admin web | `web.spec.ts` › DT-11 | Chromium, Firefox, WebKit | Confirmed #27 | comment on [#27](https://github.com/angquoc/software-testing-2026-HW02-group/issues/27) – drafted, not sent | High / Medium (from #27) |
+| [BUG-28](#bug-28) | FR-15 | A negative price (`-50000`) is saved, through the Admin web | `web.spec.ts` › DT-13 | Chromium, Firefox, WebKit | Confirmed #28 | comment on [#28](https://github.com/angquoc/software-testing-2026-HW02-group/issues/28) – drafted, not sent | High / High (from #28) |
+| [BUG-29](#bug-29) | FR-15 | A product with no price is saved (Admin web: empty price field; API: `price` missing) | `web.spec.ts, api.spec.ts` › DT-15 | Chromium, Firefox, WebKit | Confirmed #29 | comment on [#29](https://github.com/angquoc/software-testing-2026-HW02-group/issues/29) – drafted, not sent | High / High (from #29) |
+| [BUG-30](#bug-30) | FR-15 | A price with a fractional part (`250000.5`) is saved, through the Admin web and the API | `web.spec.ts, api.spec.ts` › DT-16 | Chromium, Firefox, WebKit | Confirmed #30 | comment on [#30](https://github.com/angquoc/software-testing-2026-HW02-group/issues/30) – drafted, not sent | Medium / Medium (from #30) |
+| [BUG-31](#bug-31) | FR-15 | Add product API saves the id of a deleted category | `api.spec.ts` › DT-19 | Chromium, Firefox, WebKit | Confirmed #31 | comment on [#31](https://github.com/angquoc/software-testing-2026-HW02-group/issues/31) – drafted, not sent | High / Medium (from #31) |
+| [BUG-32](#bug-32) | FR-15 | Editing a product with a negative price (`-50000`) is saved, through the Admin web | `web.spec.ts` › DT-22 | Chromium, Firefox, WebKit | Confirmed #32 | comment on [#32](https://github.com/angquoc/software-testing-2026-HW02-group/issues/32) – drafted, not sent | High / High (from #32) |
+| [BUG-33](#bug-33) | FR-22 | Required fields of the add-product form have no `*` (name, price, category) | `web.spec.ts` › DT-23 | Chromium, Firefox, WebKit | Confirmed #33 | comment on [#33](https://github.com/angquoc/software-testing-2026-HW02-group/issues/33) – drafted, not sent | Low / Low (from #33) |
+| [BUG-34](#bug-34) | FR-15 | After an edit on the Admin web, every row of the product list shows the edited name | `web.spec.ts` › DT-24 | Chromium, Firefox, WebKit | Changed #34 | comment on [#34](https://github.com/angquoc/software-testing-2026-HW02-group/issues/34) – drafted, not sent | High / Medium (from #34) |
+| [BUG-35](#bug-35) | FR-15 | The new row of the product list shows its price without thousand separators (`250000 ₫`) | `web.spec.ts` › DT-25 | Chromium, Firefox, WebKit | Changed #35 | comment on [#35](https://github.com/angquoc/software-testing-2026-HW02-group/issues/35) – drafted, not sent | Medium / Medium (from #35) |
+| [BUG-36](#bug-36) | FR-21 | Product list shows prices without thousand separators (`30000000 ₫`) | `web.spec.ts` › DT-26 | Chromium, Firefox, WebKit | Confirmed #36 | comment on [#36](https://github.com/angquoc/software-testing-2026-HW02-group/issues/36) – drafted, not sent | Low / Low (from #36) |
+| [BUG-37](#bug-37) | FR-15 | Product list has no category column | `web.spec.ts` › DT-27 | Chromium, Firefox, WebKit | Confirmed #37 | comment on [#37](https://github.com/angquoc/software-testing-2026-HW02-group/issues/37) – drafted, not sent | Low / Low (from #37) |
+| [BUG-38](#bug-38) | FR-15 | A name of 256 characters (`Ố` × 256) is saved, through the Admin web | `web.spec.ts` › BVA-05 | Chromium, Firefox, WebKit | Confirmed #38 | comment on [#38](https://github.com/angquoc/software-testing-2026-HW02-group/issues/38) – drafted, not sent | Medium / Medium (from #38) |
+| [BUG-39](#bug-39) | FR-15 | A price of 0 is saved, through the Admin web | `web.spec.ts` › BVA-06 | Chromium, Firefox, WebKit | Confirmed #39 | comment on [#39](https://github.com/angquoc/software-testing-2026-HW02-group/issues/39) – drafted, not sent | High / High (from #39) |
 
 Outcome: `Confirmed #n` (same behaviour as the existing issue) · `Changed #n` (behaviour differs; say how) · `New #n`.
 
@@ -358,3 +380,399 @@ Outcome: `Confirmed #n` (same behaviour as the existing issue) · `Changed #n` (
 | Outcome | Same requirement sentence and same wrong behaviour as #80 (another member's FR-07 issue; group README §4.1: no duplicate, a comment marked Related) |
 | Tracker | [comment on #80](https://github.com/angquoc/software-testing-2026-HW02-group/issues/80#issuecomment-6955373092) – sent 18/11/2026 by thhuon, with screenshots |
 | Severity / Priority | Low / – (from #80) |
+
+### BUG-18
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] Add product API creates a product for a request with no token (`POST /api/products`) |
+| Requirement | `eshop-sut/README.md:178` "Token JWT hợp lệ.", `:179` "`role = 'admin'` trong Token." (FR-12) |
+| Found by | `tests/product-crud/api.spec.ts` › DT-06, rows in `data/product-crud/api.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin and user JWT from `POST /api/login` (`admin@eshop.com` / `Admin123!`, `test@eshop.com` / `Test1234!`); products ids 1–5 (seed) read through `GET /api/products` before the request |
+| Steps to reproduce | 1. `POST /api/products` with no `Authorization` header and body `{"name":"Ốp lưng iPhone 15 silicon","price":250000,"description":"Mô tả test","imageUrl":"","category_id":3}`<br>2. `GET /api/products` |
+| Test data | No `Authorization` header (EC-V1-2) |
+| Expected | The request is refused: no new product (HW02 A1, Q1; the status is recorded only) |
+| Actual | Step 1: `200 {"message":"Product created",…}`. Assertion "new products stored by the request": expected length 0, received 1 (the product is stored). Same on the three browsers |
+| Evidence | [report entry DT-06-api](screenshots/product-crud_DT-06-api_report_chromium.png) |
+| Outcome | Same requirement sentence and same wrong behaviour as #18 (HW02 BUG-18, fC/DT-06): none – same behaviour |
+| Tracker | comment on [#18](https://github.com/angquoc/software-testing-2026-HW02-group/issues/18) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | Critical / High (from #18) |
+
+### BUG-19
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] Edit product API accepts a forged JWT and changes the product (`PUT /api/products/:id`) |
+| Requirement | `eshop-sut/README.md:279` SEC-02 "Các API có tính bảo mật phải yêu cầu JWT Token hợp lệ." |
+| Found by | `tests/product-crud/api.spec.ts` › DT-07, rows in `data/product-crud/api.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin and user JWT from `POST /api/login` (`admin@eshop.com` / `Admin123!`, `test@eshop.com` / `Test1234!`); products ids 1–5 (seed) read through `GET /api/products` before the request; product P created by the test through `POST /api/products` (admin) with `{"name":"Ốp lưng iPhone 15 silicon <tag>","price":250000,"description":"Mô tả test","imageUrl":"","category_id":3}` |
+| Steps to reproduce | 1. `PUT /api/products/<P>` with `Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBlc2hvcC5jb20iLCJyb2xlIjoiYWRtaW4ifQ.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA` and body `{"name":"Sản phẩm bị sửa trái phép","price":1000,"description":"Mô tả test","imageUrl":"","category_id":3}`<br>2. `GET /api/products` |
+| Test data | Forged JWT (valid header and payload, signature `AAAA…`, EC-V1-3) |
+| Expected | The request is refused: P keeps its values (HW02 A1, A11) |
+| Actual | Step 1: `200 {"message":"Product updated"}`. Assertion "P keeps its values": P now has name `Sản phẩm bị sửa trái phép` and price 1000. Same on the three browsers |
+| Evidence | [report entry DT-07-api](screenshots/product-crud_DT-07-api_report_chromium.png) |
+| Outcome | Same requirement sentence and same wrong behaviour as #19 (HW02 BUG-19, fC/DT-07): none – same behaviour |
+| Tracker | comment on [#19](https://github.com/angquoc/software-testing-2026-HW02-group/issues/19) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | Critical / High (from #19) |
+
+### BUG-20
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] Delete product API accepts the token of a non-admin user and deletes the product (`DELETE /api/products/:id`) |
+| Requirement | `eshop-sut/README.md:280` SEC-03 "API Admin phải kiểm tra `role = 'admin'` trong Token, không chỉ kiểm tra sự tồn tại của Token." |
+| Found by | `tests/product-crud/api.spec.ts` › DT-08, rows in `data/product-crud/api.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin and user JWT from `POST /api/login` (`admin@eshop.com` / `Admin123!`, `test@eshop.com` / `Test1234!`); products ids 1–5 (seed) read through `GET /api/products` before the request; product P created by the test through `POST /api/products` (admin) with `{"name":"Ốp lưng iPhone 15 silicon <tag>","price":250000,"description":"Mô tả test","imageUrl":"","category_id":3}` |
+| Steps to reproduce | 1. `DELETE /api/products/<P>` with `Authorization: Bearer <JWT of test@eshop.com>`<br>2. `GET /api/products` |
+| Test data | Valid JWT of the user `test@eshop.com` (role `user`, EC-V1-4) |
+| Expected | The request is refused: P is still listed (HW02 A1, A11) |
+| Actual | Step 1: `200 {"message":"Product deleted"}`. Assertion "P is still listed": expected true, received false. Same on the three browsers |
+| Evidence | [report entry DT-08-api](screenshots/product-crud_DT-08-api_report_chromium.png) |
+| Outcome | Same requirement sentence and same wrong behaviour as #20 (HW02 BUG-20, fC/DT-08): none – same behaviour |
+| Tracker | comment on [#20](https://github.com/angquoc/software-testing-2026-HW02-group/issues/20) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | Critical / High (from #20) |
+
+### BUG-21
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] Add product API saves a product with no name (`name` missing → `null`) |
+| Requirement | `eshop-sut/README.md:195` FR-15 "Tên sản phẩm: bắt buộc, tối đa 255 ký tự." |
+| Found by | `tests/product-crud/api.spec.ts` › DT-12, rows in `data/product-crud/api.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin and user JWT from `POST /api/login` (`admin@eshop.com` / `Admin123!`, `test@eshop.com` / `Test1234!`); products ids 1–5 (seed) read through `GET /api/products` before the request |
+| Steps to reproduce | 1. `POST /api/products` (admin JWT) with body `{"price":250000,"description":"Mô tả test","imageUrl":"","category_id":3}`<br>2. `GET /api/products` |
+| Test data | No `name` key (EC-V3-7) |
+| Expected | Refused: no new product (HW02 A3) |
+| Actual | Step 1: `200 Product created`. Assertion "new products stored by the request": expected 0, received 1 – stored with `name` `null`. Same on the three browsers |
+| Evidence | [report entry DT-12-api](screenshots/product-crud_DT-12-api_report_chromium.png) |
+| Outcome | Same requirement sentence and same wrong behaviour as #21 (HW02 BUG-21, fC/DT-12): none – same behaviour |
+| Tracker | comment on [#21](https://github.com/angquoc/software-testing-2026-HW02-group/issues/21) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | High / Medium (from #21) |
+
+### BUG-22
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] Add product API saves a price that is not a number (`"abc"`) |
+| Requirement | `eshop-sut/README.md:196` FR-15 "Giá: bắt buộc, phải là số **dương** (> 0)." |
+| Found by | `tests/product-crud/api.spec.ts` › DT-14, rows in `data/product-crud/api.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin and user JWT from `POST /api/login` (`admin@eshop.com` / `Admin123!`, `test@eshop.com` / `Test1234!`); products ids 1–5 (seed) read through `GET /api/products` before the request |
+| Steps to reproduce | 1. `POST /api/products` (admin JWT) with the nominal body and `"price":"abc"`<br>2. `GET /api/products` |
+| Test data | `price` `"abc"` (EC-V4-4) |
+| Expected | Refused: no new product (HW02 A5) |
+| Actual | Step 1: `200 Product created`. Assertion: expected 0 new products, received 1 – stored with price `"abc"`. The Web part (`web.spec.ts` › DT-14) passes on the three browsers: the number field does not take `abc`. Same on the three browsers |
+| Evidence | [report entry DT-14-api](screenshots/product-crud_DT-14-api_report_chromium.png) |
+| Outcome | Same requirement sentence and same wrong behaviour as #22 (HW02 BUG-22, fC/DT-14): none – same behaviour; the Admin web field blocks `abc` (Web part passes) |
+| Tracker | comment on [#22](https://github.com/angquoc/software-testing-2026-HW02-group/issues/22) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | High / High (from #22) |
+
+### BUG-23
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] Add product API saves a product with no category (`category_id` missing → `null`) |
+| Requirement | `eshop-sut/README.md:197` FR-15 "Danh mục: bắt buộc, phải chọn từ danh sách có sẵn." |
+| Found by | `tests/product-crud/api.spec.ts` › DT-17, rows in `data/product-crud/api.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin and user JWT from `POST /api/login` (`admin@eshop.com` / `Admin123!`, `test@eshop.com` / `Test1234!`); products ids 1–5 (seed) read through `GET /api/products` before the request |
+| Steps to reproduce | 1. `POST /api/products` (admin JWT) with body `{"name":"Ốp lưng iPhone 15 silicon","price":250000,"description":"Mô tả test","imageUrl":""}`<br>2. `GET /api/products` |
+| Test data | No `category_id` key (EC-V5-2) |
+| Expected | Refused: no new product (HW02 A7) |
+| Actual | Step 1: `200 Product created`. Assertion: expected 0 new products, received 1 – stored with `category_id` `null`. The Web part passes: the list offers exactly the categories of `GET /api/categories`, with no empty choice. Same on the three browsers |
+| Evidence | [report entry DT-17-api](screenshots/product-crud_DT-17-api_report_chromium.png) |
+| Outcome | Same requirement sentence and same wrong behaviour as #23 (HW02 BUG-23, fC/DT-17): none – same behaviour |
+| Tracker | comment on [#23](https://github.com/angquoc/software-testing-2026-HW02-group/issues/23) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | High / Medium (from #23) |
+
+### BUG-24
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] Add product API saves a category id that never existed (`9999`) |
+| Requirement | `eshop-sut/README.md:197` FR-15 "Danh mục: bắt buộc, phải chọn từ danh sách có sẵn." |
+| Found by | `tests/product-crud/api.spec.ts` › DT-18, rows in `data/product-crud/api.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin and user JWT from `POST /api/login` (`admin@eshop.com` / `Admin123!`, `test@eshop.com` / `Test1234!`); products ids 1–5 (seed) read through `GET /api/products` before the request |
+| Steps to reproduce | 1. `POST /api/products` (admin JWT) with the nominal body and `"category_id":9999`<br>2. `GET /api/products`, `GET /api/categories` |
+| Test data | `category_id` `9999` (EC-V5-4) |
+| Expected | Refused: no new product; 9999 still not a category (HW02 A7) |
+| Actual | Step 1: `200 Product created`. Assertion: expected 0 new products, received 1 – stored with `category_id` 9999. Same on the three browsers |
+| Evidence | [report entry DT-18-api](screenshots/product-crud_DT-18-api_report_chromium.png) |
+| Outcome | Same requirement sentence and same wrong behaviour as #24 (HW02 BUG-24, fC/DT-18): none – same behaviour |
+| Tracker | comment on [#24](https://github.com/angquoc/software-testing-2026-HW02-group/issues/24) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | High / Medium (from #24) |
+
+### BUG-25
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] Add product API saves a product with an empty name (`""`) |
+| Requirement | `eshop-sut/README.md:195` FR-15 "Tên sản phẩm: bắt buộc, tối đa 255 ký tự." |
+| Found by | `tests/product-crud/api.spec.ts` › DT-09, rows in `data/product-crud/api.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin and user JWT from `POST /api/login` (`admin@eshop.com` / `Admin123!`, `test@eshop.com` / `Test1234!`); products ids 1–5 (seed) read through `GET /api/products` before the request |
+| Steps to reproduce | 1. `POST /api/products` (admin JWT) with the nominal body and `"name":""`<br>2. `GET /api/products` |
+| Test data | `name` `""` (EC-V3-2) |
+| Expected | Refused: no new product (HW02 A3) |
+| Actual | Step 1: `200 Product created`. Assertion: expected 0 new products, received 1 – stored with name `""`. The Web part (`web.spec.ts` › DT-09) passes: the name field is `required` and the form is not sent. Same on the three browsers |
+| Evidence | [report entry DT-09-api](screenshots/product-crud_DT-09-api_report_chromium.png) |
+| Outcome | Same requirement sentence and same wrong behaviour as #25 (HW02 BUG-25, fC/DT-09): none – same behaviour; the Admin web blocks the empty name (Web part passes) |
+| Tracker | comment on [#25](https://github.com/angquoc/software-testing-2026-HW02-group/issues/25) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | High / Medium (from #25) |
+
+### BUG-26
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] A name longer than 255 characters (300 × `X`) is saved, through the Admin web |
+| Requirement | `eshop-sut/README.md:195` FR-15 "Tên sản phẩm: bắt buộc, tối đa 255 ký tự." |
+| Found by | `tests/product-crud/web.spec.ts` › DT-10, rows in `data/product-crud/web.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin web http://localhost:5174 logged in as `admin@eshop.com` / `Admin123!`, tab "Sản phẩm"; products ids 1–5 (seed) read through `GET /api/products` before the action |
+| Steps to reproduce | 1. Admin web, form "Thêm sản phẩm mới": name = `X` × 300; other fields as the nominal values<br>2. Click "Lưu sản phẩm"<br>3. `GET /api/products` |
+| Test data | Name `X` × 300 (EC-V3-3) |
+| Expected | Refused, not saved cut to 255 characters: no new product (HW02 A4, Q3) |
+| Actual | `POST /api/products` → `200 Product created`. Assertion "new products stored": expected 0, received 1 – the 300-character name is stored in full. Same on the three browsers |
+| Evidence | [failure screenshot DT-10](screenshots/product-crud_DT-10_chromium.png) · [report entry DT-10-web](screenshots/product-crud_DT-10-web_report_chromium.png) · Firefox / WebKit: `reports/product-crud/<browser>/screenshots/<TC ID>.png` |
+| Outcome | Same requirement sentence and same wrong behaviour as #26 (HW02 BUG-26, fC/DT-10): same behaviour; HW04 reaches it on the Admin web form (HW02 sent it through the API): the name field has no length limit |
+| Tracker | comment on [#26](https://github.com/angquoc/software-testing-2026-HW02-group/issues/26) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | Medium / Medium (from #26) |
+
+### BUG-27
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] A name made only of spaces (5 spaces) is saved, through the Admin web |
+| Requirement | `eshop-sut/README.md:195` FR-15 "Tên sản phẩm: bắt buộc, tối đa 255 ký tự." |
+| Found by | `tests/product-crud/web.spec.ts` › DT-11, rows in `data/product-crud/web.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin web http://localhost:5174 logged in as `admin@eshop.com` / `Admin123!`, tab "Sản phẩm"; products ids 1–5 (seed) read through `GET /api/products` before the action |
+| Steps to reproduce | 1. Admin web, form "Thêm sản phẩm mới": name = 5 spaces; other fields as the nominal values<br>2. Click "Lưu sản phẩm"<br>3. `GET /api/products` |
+| Test data | Name `"     "` (EC-V3-5) |
+| Expected | Refused: no new product (HW02 A3, Q2) |
+| Actual | `200 Product created`. Assertion: expected 0 new products, received 1 – stored with name `"     "`. Same on the three browsers |
+| Evidence | [failure screenshot DT-11](screenshots/product-crud_DT-11_chromium.png) · [report entry DT-11-web](screenshots/product-crud_DT-11-web_report_chromium.png) · Firefox / WebKit: `reports/product-crud/<browser>/screenshots/<TC ID>.png` |
+| Outcome | Same requirement sentence and same wrong behaviour as #27 (HW02 BUG-27, fC/DT-11): same behaviour; HW04 reaches it on the Admin web (the `required` name field accepts spaces); HW02 used the API |
+| Tracker | comment on [#27](https://github.com/angquoc/software-testing-2026-HW02-group/issues/27) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | High / Medium (from #27) |
+
+### BUG-28
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] A negative price (`-50000`) is saved, through the Admin web |
+| Requirement | `eshop-sut/README.md:196` FR-15 "Giá: bắt buộc, phải là số **dương** (> 0)." |
+| Found by | `tests/product-crud/web.spec.ts` › DT-13, rows in `data/product-crud/web.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin web http://localhost:5174 logged in as `admin@eshop.com` / `Admin123!`, tab "Sản phẩm"; products ids 1–5 (seed) read through `GET /api/products` before the action |
+| Steps to reproduce | 1. Admin web, form "Thêm sản phẩm mới": price = `-50000`; other fields as the nominal values<br>2. Click "Lưu sản phẩm"<br>3. `GET /api/products` |
+| Test data | Price `-50000` (EC-V4-2) |
+| Expected | Refused: no new product (HW02 A5) |
+| Actual | `200 Product created`. Assertion: expected 0 new products, received 1 – stored with price −50000. Same on the three browsers |
+| Evidence | [failure screenshot DT-13](screenshots/product-crud_DT-13_chromium.png) · [report entry DT-13-web](screenshots/product-crud_DT-13-web_report_chromium.png) · Firefox / WebKit: `reports/product-crud/<browser>/screenshots/<TC ID>.png` |
+| Outcome | Same requirement sentence and same wrong behaviour as #28 (HW02 BUG-28, fC/DT-13): same behaviour; HW04 reaches it on the Admin web (the price field has no minimum); HW02 used the API |
+| Tracker | comment on [#28](https://github.com/angquoc/software-testing-2026-HW02-group/issues/28) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | High / High (from #28) |
+
+### BUG-29
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] A product with no price is saved (Admin web: empty price field; API: `price` missing) |
+| Requirement | `eshop-sut/README.md:196` FR-15 "Giá: bắt buộc, phải là số **dương** (> 0)." |
+| Found by | `tests/product-crud/web.spec.ts` and `tests/product-crud/api.spec.ts` › DT-15, rows in `data/product-crud/web.json` and `api.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin web http://localhost:5174 logged in as `admin@eshop.com` / `Admin123!`, tab "Sản phẩm"; products ids 1–5 (seed) read through `GET /api/products` before the action (Web part); Admin and user JWT from `POST /api/login` (`admin@eshop.com` / `Admin123!`, `test@eshop.com` / `Test1234!`); products ids 1–5 (seed) read through `GET /api/products` before the request (API part) |
+| Steps to reproduce | 1. Admin web, form "Thêm sản phẩm mới": price field left empty; other fields as the nominal values<br>2. Click "Lưu sản phẩm"<br>3. `GET /api/products`<br>API: `POST /api/products` (admin JWT) with the nominal body without `price`, then `GET /api/products` |
+| Test data | Web: price field empty · API: no `price` key (EC-V4-5) |
+| Expected | Refused: no new product (HW02 A5) |
+| Actual | Both parts `200 Product created`. Assertion: expected 0 new products, received 1 – Web part stored with price `""`, API part with price `null`. Same on the three browsers |
+| Evidence | [failure screenshot DT-15](screenshots/product-crud_DT-15_chromium.png) · [report entry DT-15-web](screenshots/product-crud_DT-15-web_report_chromium.png) · [report entry DT-15-api](screenshots/product-crud_DT-15-api_report_chromium.png) · Firefox / WebKit: `reports/product-crud/<browser>/screenshots/<TC ID>.png` |
+| Outcome | Same requirement sentence and same wrong behaviour as #29 (HW02 BUG-29, fC/DT-15): API part as in HW02; new in HW04: the Admin web also saves a product with the price field left empty (stored `""`) |
+| Tracker | comment on [#29](https://github.com/angquoc/software-testing-2026-HW02-group/issues/29) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | High / High (from #29) |
+
+### BUG-30
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] A price with a fractional part (`250000.5`) is saved, through the Admin web and the API |
+| Requirement | `eshop-sut/README.md:196` FR-15 "Giá: bắt buộc, phải là số **dương** (> 0)." |
+| Found by | `tests/product-crud/web.spec.ts` and `tests/product-crud/api.spec.ts` › DT-16, rows in `data/product-crud/web.json` and `api.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin web http://localhost:5174 logged in as `admin@eshop.com` / `Admin123!`, tab "Sản phẩm"; products ids 1–5 (seed) read through `GET /api/products` before the action (Web part); Admin and user JWT from `POST /api/login` (`admin@eshop.com` / `Admin123!`, `test@eshop.com` / `Test1234!`); products ids 1–5 (seed) read through `GET /api/products` before the request (API part) |
+| Steps to reproduce | 1. Admin web, form "Thêm sản phẩm mới": price = `250000.5`; other fields as the nominal values<br>2. Click "Lưu sản phẩm"<br>3. `GET /api/products`<br>API: `POST /api/products` (admin JWT) with the nominal body and `"price":250000.5` |
+| Test data | Price `250000.5` (EC-V4-7) |
+| Expected | Refused: no new product (HW02 A6, Q4: whole đồng) |
+| Actual | Both parts `200 Product created`. Assertion: expected 0 new products, received 1 – stored with price 250000.5. Same on the three browsers |
+| Evidence | [failure screenshot DT-16](screenshots/product-crud_DT-16_chromium.png) · [report entry DT-16-web](screenshots/product-crud_DT-16-web_report_chromium.png) · [report entry DT-16-api](screenshots/product-crud_DT-16-api_report_chromium.png) · Firefox / WebKit: `reports/product-crud/<browser>/screenshots/<TC ID>.png` |
+| Outcome | Same requirement sentence and same wrong behaviour as #30 (HW02 BUG-30, fC/DT-16): API part as in HW02; new in HW04: the Admin web sends `250000.5` too (the number field marks it invalid only until the next field is filled) |
+| Tracker | comment on [#30](https://github.com/angquoc/software-testing-2026-HW02-group/issues/30) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | Medium / Medium (from #30) |
+
+### BUG-31
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] Add product API saves the id of a deleted category |
+| Requirement | `eshop-sut/README.md:197` FR-15 "Danh mục: bắt buộc, phải chọn từ danh sách có sẵn." |
+| Found by | `tests/product-crud/api.spec.ts` › DT-19, rows in `data/product-crud/api.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin and user JWT from `POST /api/login` (`admin@eshop.com` / `Admin123!`, `test@eshop.com` / `Test1234!`); products ids 1–5 (seed) read through `GET /api/products` before the request; category C created through `POST /api/categories` (`Danh mục tạm FR-15 <tag>`) and deleted through `DELETE /api/categories/<C>`, no longer listed |
+| Steps to reproduce | 1. `POST /api/products` (admin JWT) with the nominal body and `"category_id":<C>`<br>2. `GET /api/products` |
+| Test data | `category_id` = the deleted category (EC-V5-5; id 10 in the Chromium run) |
+| Expected | Refused: no new product (HW02 A7, Q5) |
+| Actual | Step 1: `200 Product created`. Assertion: expected 0 new products, received 1 – stored with the deleted category id. Same on the three browsers |
+| Evidence | [report entry DT-19-api](screenshots/product-crud_DT-19-api_report_chromium.png) |
+| Outcome | Same requirement sentence and same wrong behaviour as #31 (HW02 BUG-31, fC/DT-19): none – same behaviour (category id 10 instead of 4: categories made by earlier runs) |
+| Tracker | comment on [#31](https://github.com/angquoc/software-testing-2026-HW02-group/issues/31) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | High / Medium (from #31) |
+
+### BUG-32
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] Editing a product with a negative price (`-50000`) is saved, through the Admin web |
+| Requirement | `eshop-sut/README.md:196` FR-15 "Giá: bắt buộc, phải là số **dương** (> 0)." |
+| Found by | `tests/product-crud/web.spec.ts` › DT-22, rows in `data/product-crud/web.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin web http://localhost:5174 logged in as `admin@eshop.com` / `Admin123!`, tab "Sản phẩm"; products ids 1–5 (seed) read through `GET /api/products` before the action; product P created through the API and shown in the list |
+| Steps to reproduce | 1. Admin web: "Sửa" on P's row<br>2. Price `-50000`, other fields unchanged<br>3. "Lưu sản phẩm"<br>4. `GET /api/products` |
+| Test data | Price `-50000` on edit (EC-V2-3, V4-2) |
+| Expected | Refused: P keeps price 250000 (HW02 A8, A11) |
+| Actual | `PUT /api/products/<P>` → `200 Product updated`, `alert` "Cập nhật thành công!". Assertion "P keeps the values read before the edit": expected price 250000, received −50000. Same on the three browsers |
+| Evidence | [failure screenshot DT-22](screenshots/product-crud_DT-22_chromium.png) · [report entry DT-22-web](screenshots/product-crud_DT-22-web_report_chromium.png) · Firefox / WebKit: `reports/product-crud/<browser>/screenshots/<TC ID>.png` |
+| Outcome | Same requirement sentence and same wrong behaviour as #32 (HW02 BUG-32, fC/DT-22): same behaviour; HW04 edits on the Admin web ("Sửa"), HW02 used the API |
+| Tracker | comment on [#32](https://github.com/angquoc/software-testing-2026-HW02-group/issues/32) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | High / High (from #32) |
+
+### BUG-33
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] Required fields of the add-product form have no `*` (name, price, category) |
+| Requirement | `eshop-sut/README.md:252` FR-22 "Tất cả trường bắt buộc phải có ký hiệu `*` bên cạnh nhãn." |
+| Found by | `tests/product-crud/web.spec.ts` › DT-23, rows in `data/product-crud/web.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin web http://localhost:5174 logged in as `admin@eshop.com` / `Admin123!`, tab "Sản phẩm"; products ids 1–5 (seed) read through `GET /api/products` before the action |
+| Steps to reproduce | 1. Admin web: tab "Sản phẩm", form "Thêm sản phẩm mới"<br>2. Read the labels of the name, price and category fields |
+| Test data | – |
+| Expected | Three labels with `*` (name, price, category) |
+| Actual | Assertion "labels with * for Tên sản phẩm, Giá tiền, Danh mục": expected 3, received 0 – the form has no `<label>` at all (placeholders only). Same on the three browsers |
+| Evidence | [failure screenshot DT-23](screenshots/product-crud_DT-23_chromium.png) · [report entry DT-23-web](screenshots/product-crud_DT-23-web_report_chromium.png) · Firefox / WebKit: `reports/product-crud/<browser>/screenshots/<TC ID>.png` |
+| Outcome | Same requirement sentence and same wrong behaviour as #33 (HW02 BUG-33, fC/DT-23): none – same behaviour |
+| Tracker | comment on [#33](https://github.com/angquoc/software-testing-2026-HW02-group/issues/33) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | Low / Low (from #33) |
+
+### BUG-34
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] After an edit on the Admin web, every row of the product list shows the edited name |
+| Requirement | `eshop-sut/README.md:193` FR-15 "Admin có thể Thêm / Xem / Sửa / Xóa sản phẩm." |
+| Found by | `tests/product-crud/web.spec.ts` › DT-24, rows in `data/product-crud/web.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin web http://localhost:5174 logged in as `admin@eshop.com` / `Admin123!`, tab "Sản phẩm"; products ids 1–5 (seed) read through `GET /api/products` before the action |
+| Steps to reproduce | 1. Admin web: add `Ốp lưng iPhone 15 silicon <tag>`, 250000, Phụ kiện; read the names of the list<br>2. "Sửa" on its row, name `Ốp lưng iPhone 15 silicon xanh <tag>`, "Lưu sản phẩm" (`alert` "Cập nhật thành công!")<br>3. Read the names of the list; `GET /api/products` |
+| Test data | – |
+| Expected | Every row shows the name of its own product, as `GET /api/products` (HW02 A12, Q8) |
+| Actual | After the add: the list equals `GET /api/products` (passed). After the edit: assertion "list names after the edit = GET /api/products" – all 6 rows show `Ốp lưng iPhone 15 silicon xanh <tag>` with their own prices, while `GET /api/products` has the real names. A reload shows the right names again. Same on the three browsers |
+| Evidence | [failure screenshot DT-24](screenshots/product-crud_DT-24_chromium.png) · [report entry DT-24-web](screenshots/product-crud_DT-24-web_report_chromium.png) · Firefox / WebKit: `reports/product-crud/<browser>/screenshots/<TC ID>.png` |
+| Outcome | Same requirement sentence as #34 (HW02 BUG-34, fC/DT-24); the behaviour differs: HW02 reported it after an add; HW04 sees the list right after an add and wrong only after an edit. HW02 DT-04 (`Not run`, step 4 masked by this issue) now runs and passes |
+| Tracker | comment on [#34](https://github.com/angquoc/software-testing-2026-HW02-group/issues/34) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | High / Medium (from #34) |
+
+### BUG-35
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] The new row of the product list shows its price without thousand separators (`250000 ₫`) |
+| Requirement | `eshop-sut/README.md:193` FR-15 "Admin có thể Thêm / Xem / Sửa / Xóa sản phẩm." |
+| Found by | `tests/product-crud/web.spec.ts` › DT-25, rows in `data/product-crud/web.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin web http://localhost:5174 logged in as `admin@eshop.com` / `Admin123!`, tab "Sản phẩm"; products ids 1–5 (seed) read through `GET /api/products` before the action |
+| Steps to reproduce | 1. Admin web, form "Thêm sản phẩm mới": the nominal values; other fields as the nominal values<br>2. Click "Lưu sản phẩm"<br>3. `GET /api/products`<br>4. Read the price of the new row |
+| Test data | Price `250000` |
+| Expected | The new row shows `250.000 ₫` (or `250,000 ₫`) (HW02 A12; FR-21) |
+| Actual | Assertion "price with ₫ and thousand separators": expected `/^250[.,]000 ₫$/`, received `250000 ₫`. Same on the three browsers |
+| Evidence | [failure screenshot DT-25](screenshots/product-crud_DT-25_chromium.png) · [report entry DT-25-web](screenshots/product-crud_DT-25-web_report_chromium.png) · Firefox / WebKit: `reports/product-crud/<browser>/screenshots/<TC ID>.png` |
+| Outcome | Same requirement sentence as #35 (HW02 BUG-35, fC/DT-25); the behaviour differs: HW02 saw "₫" only (no price); HW04 shows the price on the new row, only without thousand separators (the format defect of #36) |
+| Tracker | comment on [#35](https://github.com/angquoc/software-testing-2026-HW02-group/issues/35) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | Medium / Medium (from #35) |
+
+### BUG-36
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] Product list shows prices without thousand separators (`30000000 ₫`) |
+| Requirement | `eshop-sut/README.md:246` FR-21 "Luôn dùng ký hiệu `₫` với định dạng phân cách hàng nghìn." |
+| Found by | `tests/product-crud/web.spec.ts` › DT-26, rows in `data/product-crud/web.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin web http://localhost:5174 logged in as `admin@eshop.com` / `Admin123!`, tab "Sản phẩm"; products ids 1–5 (seed) read through `GET /api/products` before the action |
+| Steps to reproduce | 1. Admin web: tab "Sản phẩm"<br>2. Read the price of the seed rows |
+| Test data | Seed prices 30000000 / 28000000 / 45000000 / 6000000 / 4000000 |
+| Expected | `30.000.000 ₫` (or `30,000,000 ₫`) and so on |
+| Actual | Five soft assertions failed, e.g. expected `/^30[.,]000[.,]000 ₫$/`, received `30000000 ₫`. Same on the three browsers |
+| Evidence | [failure screenshot DT-26](screenshots/product-crud_DT-26_chromium.png) · [report entry DT-26-web](screenshots/product-crud_DT-26-web_report_chromium.png) · Firefox / WebKit: `reports/product-crud/<browser>/screenshots/<TC ID>.png` |
+| Outcome | Same requirement sentence and same wrong behaviour as #36 (HW02 BUG-36, fC/DT-26): none – same behaviour |
+| Tracker | comment on [#36](https://github.com/angquoc/software-testing-2026-HW02-group/issues/36) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | Low / Low (from #36) |
+
+### BUG-37
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] Product list has no category column |
+| Requirement | `eshop-sut/README.md:193` FR-15 "Admin có thể Thêm / Xem / Sửa / Xóa sản phẩm." |
+| Found by | `tests/product-crud/web.spec.ts` › DT-27, rows in `data/product-crud/web.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin web http://localhost:5174 logged in as `admin@eshop.com` / `Admin123!`, tab "Sản phẩm"; products ids 1–5 (seed) read through `GET /api/products` before the action |
+| Steps to reproduce | 1. Admin web, form "Thêm sản phẩm mới": the nominal values; other fields as the nominal values<br>2. Click "Lưu sản phẩm"<br>3. `GET /api/products`<br>4. Read the new row |
+| Test data | Category "Phụ kiện" |
+| Expected | The new row shows its category `Phụ kiện` (HW02 A12, Q8) |
+| Actual | Assertion "the row shows the category": received `<name>250000 ₫SửaXóa` – columns "Ảnh", "Tên SP", "Giá", "Hành động" only. Same on the three browsers |
+| Evidence | [failure screenshot DT-27](screenshots/product-crud_DT-27_chromium.png) · [report entry DT-27-web](screenshots/product-crud_DT-27-web_report_chromium.png) · Firefox / WebKit: `reports/product-crud/<browser>/screenshots/<TC ID>.png` |
+| Outcome | Same requirement sentence and same wrong behaviour as #37 (HW02 BUG-37, fC/DT-27): none – same behaviour |
+| Tracker | comment on [#37](https://github.com/angquoc/software-testing-2026-HW02-group/issues/37) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | Low / Low (from #37) |
+
+### BUG-38
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] A name of 256 characters (`Ố` × 256) is saved, through the Admin web |
+| Requirement | `eshop-sut/README.md:195` FR-15 "Tên sản phẩm: bắt buộc, tối đa 255 ký tự." |
+| Found by | `tests/product-crud/web.spec.ts` › BVA-05, rows in `data/product-crud/web.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin web http://localhost:5174 logged in as `admin@eshop.com` / `Admin123!`, tab "Sản phẩm"; products ids 1–5 (seed) read through `GET /api/products` before the action |
+| Steps to reproduce | 1. Admin web, form "Thêm sản phẩm mới": name = `Ố` (U+1ED0) × 256; other fields as the nominal values<br>2. Click "Lưu sản phẩm"<br>3. `GET /api/products` |
+| Test data | Name `Ố` × 256 (B1 UB+1) |
+| Expected | Refused, not saved cut: no new product (HW02 A4, Q3) |
+| Actual | `200 Product created`. Assertion: expected 0 new products, received 1 – the 256-character name is stored. Same on the three browsers |
+| Evidence | [failure screenshot BVA-05](screenshots/product-crud_BVA-05_chromium.png) · [report entry BVA-05-web](screenshots/product-crud_BVA-05-web_report_chromium.png) · Firefox / WebKit: `reports/product-crud/<browser>/screenshots/<TC ID>.png` |
+| Outcome | Same requirement sentence and same wrong behaviour as #38 (HW02 BUG-38, fC/BVA-05): same behaviour; HW04 types the value on the Admin web, HW02 sent it through the API |
+| Tracker | comment on [#38](https://github.com/angquoc/software-testing-2026-HW02-group/issues/38) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | Medium / Medium (from #38) |
+
+### BUG-39
+
+| Field | Value |
+| --- | --- |
+| Title | [23120046][FR-15][Admin] A price of 0 is saved, through the Admin web |
+| Requirement | `eshop-sut/README.md:196` FR-15 "Giá: bắt buộc, phải là số **dương** (> 0)." |
+| Found by | `tests/product-crud/web.spec.ts` › BVA-06, rows in `data/product-crud/web.json`; T6 run 18/11/2026: Chromium `2026-11-17T19:15:21.038Z`, Firefox `…19:16:40.213Z`, WebKit `…19:18:38.884Z` (reports `reports/product-crud/<browser>/index.html`; specs at a278a51) |
+| Browsers | Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1) |
+| Preconditions | Admin web http://localhost:5174 logged in as `admin@eshop.com` / `Admin123!`, tab "Sản phẩm"; products ids 1–5 (seed) read through `GET /api/products` before the action |
+| Steps to reproduce | 1. Admin web, form "Thêm sản phẩm mới": price = `0`; other fields as the nominal values<br>2. Click "Lưu sản phẩm"<br>3. `GET /api/products` |
+| Test data | Price `0` (B2 LB−1) |
+| Expected | Refused: no new product (HW02 A5) |
+| Actual | `200 Product created`. Assertion: expected 0 new products, received 1 – stored with price 0. Same on the three browsers |
+| Evidence | [failure screenshot BVA-06](screenshots/product-crud_BVA-06_chromium.png) · [report entry BVA-06-web](screenshots/product-crud_BVA-06-web_report_chromium.png) · Firefox / WebKit: `reports/product-crud/<browser>/screenshots/<TC ID>.png` |
+| Outcome | Same requirement sentence and same wrong behaviour as #39 (HW02 BUG-39, fC/BVA-06): same behaviour; HW04 types the value on the Admin web, HW02 sent it through the API |
+| Tracker | comment on [#39](https://github.com/angquoc/software-testing-2026-HW02-group/issues/39) – drafted 18/11/2026, not sent (waiting for the student's OK) |
+| Severity / Priority | High / High (from #39) |
