@@ -40,13 +40,15 @@ Thứ tự dưới đây là thứ tự **làm**, không theo thứ tự mục c
 Mỗi bước 1 prompt + 1 commit, SV review trước khi qua bước sau:
 
 - [ ] **A1. Chọn TC** – ≥ 12 TC từ HW02 (`features/fA-pool-A/` của HW02, có 34 DT + 10 BVA); ghi TC không tự động hóa được và lý do (đề Task 1 ý cuối).
-- [ ] **A2. Khảo sát UI** – AI lấy selector (ưu tiên role / label / text), viết page object.
+- [ ] **A2. Khảo sát UI** – AI lấy selector (ưu tiên role / label / text), viết page object. **SV tự dùng:** `npm run sut` rồi `npm run codegen` (ghi lại luồng Quên mật khẩu, so locator của codegen với locator AI chọn), nút Pick locator, ARIA snapshot.
 - [ ] **A3. Dữ liệu** – file `.json` / `.csv` riêng trong `data/fA-fr03/`.
-- [ ] **A4. Sinh script** – AI sinh `.spec.ts` data-driven, ≥ 3 kiểu assertion khác nhau.
-- [ ] **A5. Review & sửa** – chạy trên Chromium; SV sửa selector dễ gãy, assertion yếu, thiếu edge case, wait gây flaky. Ghi bảng "AI sai gì / vì sao" (prompt, giới hạn model, hay đặc điểm feature).
-- [ ] **A6. Chạy 3 trình duyệt** – xử lý lỗi chỉ xảy ra trên Firefox / WebKit.
+- [ ] **A4. Sinh script** – AI sinh `.spec.ts` data-driven, ≥ 3 kiểu assertion khác nhau (phương pháp: Page Object Model + data-driven + API cho các dòng `Yes (API)`).
+- [ ] **A5. Review & sửa** – chạy trên Chromium; SV sửa selector dễ gãy, assertion yếu, thiếu edge case, wait gây flaky. Ghi bảng "AI sai gì / vì sao" (prompt, giới hạn model, hay đặc điểm feature). **SV tự dùng:** `npm run ui -- tests/fA-fr03` (UI mode, tua từng bước), `npx playwright test tests/fA-fr03 --debug -g "DT-01"` (Inspector), `--repeat-each=3`.
+- [ ] **A6. Chạy 3 trình duyệt** – xử lý lỗi chỉ xảy ra trên Firefox / WebKit. **SV tự dùng:** `npm run report -- reports/fA/<browser>` (mở HTML report), `npm run trace -- <file trace.zip>` (trace viewer, xem DOM / network / console tại bước fail).
 - [ ] **A7. Bug** – test fail do bug thật → đối chiếu các bug FR-03 đã có ở HW02 (`bugs/BUG_REPORT.md` của HW02), ghi vào `bugs/BUG_REPORT.md`.
 - [ ] **A8. Tinh chỉnh skill** – đã có bản nháp 3 skill (`skills/`: test-automation, automation-bug-reporting, recording-test-demo-videos; viết sẵn 17/11, SV review). Sửa skill ở chỗ vướng khi làm A1–A7.
+
+**Công cụ và phương pháp automation được thực hành** (skill test-automation, mục "Tools and approaches"): codegen (ghi và phát lại) · Pick locator / ARIA snapshot · Page Object Model · data-driven · kiểm thử API (`request`) · UI mode · Inspector · HTML report · trace viewer. Tùy chọn, chờ SV chọn: Playwright Test Agents (`npm run init-agents`), CI bằng GitHub Actions, BDD, visual regression, quét accessibility, Allure.
 
 ### Giai đoạn 2 – Feature B: FR-08 (≈ 1,5 giờ, chưa quay)
 
