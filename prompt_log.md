@@ -6904,7 +6904,7 @@ Bạn muốn mình làm luôn các mục 1–7 không? Mình sẽ commit từng 
 ## Prompt069 – Claude Code (claude-opus-5-5)
 
 - **Prompt sent:** 05:21 18/11/2026
-- **Output received:** 05:26 18/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Output received:** 05:28 18/11/2026
 - **Feature / step:** Submission – documents
 - **Purpose:** Hoàn thiện các file làm được từ kết quả đã có, báo file cần SV sửa; log prompt
 - **Prompt (verbatim):**
@@ -6957,6 +6957,84 @@ Skill
 Bash List recent session transcripts
 Bash Preview unlogged prompts of recent sessions
 Bash Append the unlogged prompts to the log
+Bash Show the new entries' fields and prompts
+Bash Locate TODO fields in prompt log
+Đã thêm Prompt056–069 vào log. Đang điền các trường Feature / Purpose / Used in.
+Bash Fill TODO fields of the new log entries
+Bash Check Prompt055 fields
+Bash Find AI-02 time cells waiting for prompt numbers
+Bash Read rows #36 and #S11 column 1
+Bash Find the #S11 prompt in the log
+Bash Check older sessions for unlogged prompts
+Bash Log the remaining HW04 prompts
+Bash Fill Prompt070-071 fields and verify updated entries
+Bash Replace logged-later cells and commit the log
+Bash Read the logging skill review rubric
+Bash Count remaining student cells and check git status
+Mình đã điền xong mọi phần làm được từ kết quả có sẵn, và đã log hết các prompt. Mỗi file một commit riêng, đều đã push lên remote. Còn lại là những phần bạn phải tự viết, quyết định hoặc ký.
+
+## Đã điền xong
+- **[README.md](week04/README.md) §2:** thêm dòng C và dòng Total, số liệu lấy từ `npm run summary`.
+  - FR-15: 36 TC tự động hóa, 14 passed, 22 failed; bug 20 Confirmed / 2 Changed / 0 New.
+  - Tổng: 86 TC, 23 passed, 63 failed, 9 lần chạy, 39 bug.
+- **[HW04_Report.md](week04/HW04_Report.md):**
+  - Viết §2 Approach (các bước T1–T8: AI làm gì, bạn làm gì).
+  - Viết §5 FR-15, tóm tắt từ file design.
+  - §6–§8 nay đủ cả 3 feature: bảng 9 lần chạy, bảng bug theo feature, bảng 12 TC của FR-03 không tự động hóa.
+- **[product-crud design](week04/features/product-crud/automation_design.md) §7:** ghi rõ không có TC nào bị bỏ.
+- **[AI_Critique.md](week04/AI_Critique.md):** thêm bảng bằng chứng. Có 11 lỗi trong script AI sinh, xếp theo 3 câu hỏi của đề kèm ID và file. Đoạn văn vẫn để trống cho bạn viết.
+- **[AI-03](week04/AI-03_AI_Disclosure_Form.md):** soạn nháp mục 1–6 theo khuôn AI-03 của HW03, trích nguyên văn 3 prompt.
+- **[AI-02](week04/AI-02_AI_Audit_Report.md):**
+  - 3 dòng sinh spec ở T4 (#24, #27, #46) đổi đề xuất sang INCOMPLETE, vì T5 đã phải sửa chính các spec đó.
+  - 6 dòng (#20, #29, #37, #38, #47, #50) ghi lại xác nhận của bạn, kèm prompt tương ứng.
+  - Thêm 4 dòng mới (#54–#57) cho phần việc lần này.
+  - §4 tính lại: 70 artifact, 62 VALID, 8 INCOMPLETE.
+  - Các ô "logged later" đã thay bằng số prompt.
+- **[demo/shot_list.md](week04/demo/shot_list.md) §6:** điền mốc thời gian của video 2 và link 2 video.
+- **Prompt log:**
+  - Thêm Prompt056–071, gồm phiên dựng video, phiên lỗi đăng nhập Admin web lúc 01:14 và 2 prompt lúc 00:28 / 00:33.
+  - Hoàn tất các mục Prompt038, Prompt042, Prompt055 còn dở.
+  - Prompt069 (lượt này) đang mang nhãn UNFINISHED; lần log sau sẽ tự cập nhật.
+
+## Việc bạn cần làm
+1. **AI Critique:** viết đoạn 200–300 từ ở mục `## Critique` của [AI_Critique.md](week04/AI_Critique.md), cập nhật số từ, rồi xóa mục Evidence.
+2. **AI-02:**
+   - Viết §5 Kết luận (80–150 chữ) và §6 Mandatory Disclosure, điền Ngày, ký.
+   - Còn 28 ô `[SV điền]` ở cột 5 cần bạn review.
+   - Kiểm tra các verdict mình vừa đổi.
+   - Ở dòng #50: quyết định có báo issue mới cho lỗi `GET /api/products/:id` trả giá dạng chuỗi khi id chẵn hay không.
+3. **AI-03:** đọc lại bản nháp, điền Ngày (đầu form và phần chữ ký), ký.
+4. **AI-05:** tick các mục ở phần 3 sau khi làm xong, điền Ngày, ký.
+5. **README §4:** điền điểm tự đánh giá và thay `<XXX>` trong tên file zip.
+6. **BUG-02 (#117):** severity / priority vẫn đang ghi "High / High (proposed – to be confirmed)", cần bạn xác nhận.
+7. **Đổi repo `hcmus-software-testing-hw04` sang public.**
+8. **Chụp lại ảnh Issues:** trang Issues lọc theo label `hw: HW04`, và các comment HW04 trên issue của FR-03 (#1–#11) và FR-15 (#18–#39). Hiện mới có ảnh comment của FR-08.
+9. **Bảng kiểm video:** điền cột "Đạt?" và mốc thời gian của video 1 (mình không xem được video).
+10. **`New Recording.m4a`** (bản ghi âm của bạn): không cho vào repo hay zip. `demo/shot_list.pdf` thì bạn quyết định có nộp hay không.
+
+Khi bạn xong các mục trên, mình sẽ làm nốt bước nộp:
+- **Dọn file (PLAN D5):** xóa các file `*.vi.md` và đề bài, sửa các chỗ còn nhắc tới chúng.
+- **Tạo file:** `git_log.txt` và các PDF trong `pdf/`.
+- **Đóng gói:** tạo file zip.
+
+Mình để bước này đến cuối vì file PDF và git log phải lấy từ bản cuối cùng.
+
+| ID | Score | Evidence | Action |
+| --- | --- | --- | --- |
+| LOG-1 | 2 | Đã chạy `--list` cho mọi phiên HW04; 16 mục mới, 3 mục cập nhật, không trùng | – |
+| LOG-2 | 2 | Chỉ ghi các phiên HW04 (16–18/11); các phiên của bài tập khác không ghi | – |
+| LOG-3 | 2 | Prompt và output lấy nguyên văn từ script | – |
+| LOG-4 | 2 | Giờ UTC+7, đủ dạng `HH:MM dd/mm/yyyy` | – |
+| LOG-5 | 2 | Số tiếp nối 056–071, không đánh số lại | – |
+| LOG-6 | 2 | Prompt069 ghi nhãn UNFINISHED; Prompt023 (lượt bạn ngắt) giữ nguyên | Chạy lại skill ở lượt sau |
+| LOG-12 | 2 | Không có prompt nào bạn dặn không ghi log | – |
+| LOG-7 | 2 | Không còn TODO trong các mục mới | – |
+| LOG-8 | 2 | Không yêu cầu chụp màn hình | – |
+| LOG-9 | N/A | Chỉ dùng Claude Code | – |
+| LOG-10 | 2 | Transcript chỉ đọc qua `extract_prompts.py` | – |
+| LOG-11 | 2 | Đã commit và push (5ca3526), không có trailer `Co-Authored-By` | – |
+
+Gate: mọi tiêu chí M đều đạt 2.
 ```
 
 - **Used in:** `README.md` §2, `HW04_Report.md` §2, §5 – §8, `features/product-crud/automation_design.md` §7, `AI_Critique.md` Evidence, `AI-03_AI_Disclosure_Form.md`, `AI-02_AI_Audit_Report.md`, `demo/shot_list.md` §6, `prompt_log.md` (AI-02 Artifact #54 – #57)
@@ -7039,5 +7117,62 @@ Cả hai đều đang có, chỉ khác ở bước nào:
 ```
 
 - **Used in:** not used (answer in chat)
+
+---
+
+## Prompt072 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 05:38 18/11/2026
+- **Output received:** 05:41 18/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Feature / step:** Submission – documents
+- **Purpose:** Viết nháp AI Critique, ghi SV đồng ý vào AI-02, dùng lại AI-05 của HW03, xác nhận mức độ BUG-02, thêm ảnh trang Issues mới, bỏ bản ghi âm khỏi thư mục nộp
+- **Prompt (verbatim):**
+
+```text
+- bạn viết phần AI critique giúp tôi rồi tôi sẽ tự review lại và chỉnh sửa cho phù hợp
+- AI-02: các cột cần tôi review chỉ cần điền là tôi đã đồng ý 
+- AI-05 dùng lại docs của tuần trước
+- BUG-02 tôi đồng ý với mức độ hiện tại -> xóa đi các ghi chú cần SV xác nhận
+- ảnh screenshot mới nhất là ảnh issue cho tuần này, hãy thêm vào
+- xóa đi bảng ghi âm. ko cho vào folder bài nộp
+```
+
+- **AI output (verbatim):**
+
+```text
+Bash Find the newest screenshots
+Read /home/hg/Pictures/Screenshots/Screenshot From 2026-11-18 05-30-59.png
+Ảnh mới chụp trang Issues lọc theo label `hw: HW04` lúc 05:30, thấy #117 và #116. Mình sẽ ghi đè lên ảnh cũ trong bug report.
+Bash Replace Issues screenshot; compare AI-05; check HW03 critique
+Bash Check HW03 critique format and BUG-02 notes
+Bash Remove BUG-02 confirmation note and update screenshot date
+Bash Check the deleted demo files
+Bash Move the recording out and find references to demo files
+Bash Find shot list and scene references
+Bash Remove references to the deleted demo files
+Bash Commit bug and demo-file changes
+Bash Check what the last commit contains
+Hai lần xóa file của `demo/` bị gộp nhầm vào commit bug. Commit này chưa push nên mình tách lại cho đúng.
+Bash Split the bundled commit and push
+Đã tách xong và push. Tiếp theo là AI-05 (lấy lại bản của tuần trước), rồi AI-02 và AI Critique.
+Bash Reuse last week's AI-05 with today's date
+Bash Read HW03 AI-02 conclusion and disclosure
+Bash Commit AI-05 and list pending AI-02 cells
+Bash Show the bare [SV điền] cells in context
+Bash Read column 5 of rows with partial placeholders
+Bash Fill student agreement into AI-02 cells
+Bash Find the remaining pending verdict
+Đang viết đoạn AI Critique bằng tiếng Anh, giống HW03, dựa trên bảng bằng chứng đã có.
+Bash Draft critique and count words
+Bash Insert the critique paragraph
+Bash Write AI-02 §5-§6, update AI-03, commit
+Bash Add AI-02 rows #58-#59 and recount
+Bash Find the AI-02 row that wrote BUG-02
+Bash Record BUG-02 change in AI-02 and commit
+Đã ghi các dòng AI-02 cho phần việc lần này. Giờ chạy lại phần log prompt để hoàn tất Prompt069 và ghi lượt này.
+Bash Complete Prompt069 and log the current prompt
+```
+
+- **Used in:** `AI_Critique.md`, `AI-02_AI_Audit_Report.md` cột (3), (5), §4 – §6 (Artifact #58, #59), `AI-03_AI_Disclosure_Form.md` §4, `AI-05_AI_Privacy_Checklist.md`, `bugs/BUG_REPORT.md`, `bugs/screenshots/issues-label-hw04.png`, `HW04_Report.md` §7, `README.md` §5, `CLAUDE.md`, `features/product-crud/automation_design.md` §6
 
 ---
