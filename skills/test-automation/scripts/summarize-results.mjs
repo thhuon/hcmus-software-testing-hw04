@@ -22,6 +22,9 @@ function collect(suite, out) {
   return out;
 }
 const STATUS = { expected: 'passed', unexpected: 'failed', flaky: 'flaky', skipped: 'skipped' };
+const RANK = ['skipped', 'passed', 'flaky', 'failed'];
+/** The worse of two results of the same TC in one run (failed > flaky > passed > skipped). */
+const worst = (a, b) => (a === undefined || RANK.indexOf(b) > RANK.indexOf(a) ? b : a);
 
 const runs = [];
 const cases = new Map(); // `${feature}|${id}` -> { feature, id, title, byBrowser: {} }
@@ -42,7 +45,10 @@ for (const [key, feature] of Object.entries(config.features)) {
       const id = t.title.match(tcId)?.[0] ?? t.title;
       const k = `${key}|${id}`;
       if (!cases.has(k)) cases.set(k, { feature: key, id, title: t.title, byBrowser: {} });
-      cases.get(k).byBrowser[browser] = STATUS[t.status] ?? t.status;
+      // One TC can have several tests in a run (e.g. a Web and an API test): keep the worst result,
+      // so a later passing test does not hide an earlier failing one.
+      const byBrowser = cases.get(k).byBrowser;
+      byBrowser[browser] = worst(byBrowser[browser], STATUS[t.status] ?? t.status);
     }
   }
 }
