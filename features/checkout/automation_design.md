@@ -144,13 +144,32 @@ Open expected values (`<CONFIRM>`): none. DT-07 keeps the TC as it is (student 1
 
 ## 4. Specs and assertion patterns (T4)
 
-Prompt used for generation: see the AI-use log entry of this step.
+Prompt used for generation: see the AI-use log entry of this step (prompt 17/11 19:59 for `web.spec.ts`; `api.spec.ts` in the next prompt). One prompt per spec file; the generated code is committed as it came (`e32f37b`) and is reviewed in T5.
 
 | Spec | TC IDs | Assertion patterns |
 | --- | --- | --- |
+| `tests/checkout/web.spec.ts` (7 tests: one loop per `flow` of `web.json`) | DT-01, BVA-01 … 04 (`checkout`) | Visible text (`toHaveText` on each list item: name + quantity; `toContainText` on the total, pattern from the data), element state (`toHaveCount` of the list items, of the cart lines), negative (`toHaveCount(0)` of an editable total field), persisted outcome (`expect.poll` on the account's orders, `toMatchObject` status + `total_amount` through the API), soft assertions for the page checks |
+| | DT-03 (`guest`) | Persisted outcome (all orders through the admin API, after each path); the dialog text, URL and response status are recorded as annotations, not asserted (A2, Q1) |
+| | DT-07 (`emptyCart`, Web part) | Visible state (`toBeVisible` of the empty message and illustration), negative (`toHaveCount(0)` of "Tiến hành thanh toán"), persisted outcome (`toHaveLength(0)` of the account's orders); soft for the page checks |
 
 | Assertion pattern | Used by |
 | --- | --- |
+| Visible message / text | DT-01 (items, total text), DT-07 (empty-cart message) |
+| Element state | DT-01, BVA-01 … 04 (item count, cart lines after the checkout), DT-07 (illustration) |
+| Negative assertion | DT-01 (no editable total), DT-07 (no checkout button) |
+| Persisted outcome (API) | DT-01, BVA-01 … 04 (new order, status, total), DT-03 (all orders unchanged), DT-07 (no order) |
+| Soft assertions | DT-01 page checks, DT-07 page checks |
+
+**First run of the generated Web spec** (agent, 17/11 20:02, Chromium only, `REPORT_DIR` and `--output` in a temporary folder outside the repository so that a parallel session's `playwright-report/` is not overwritten; not an official run, nothing fixed): 1 passed, 6 failed.
+
+| Test | Result | Failed assertions (expected vs received) |
+| --- | --- | --- |
+| DT-01 | failed | editable total field: expected 0, received 1 (HW02 BUG-15) · breadcrumb: not found (BUG-16) · cart lines after the checkout: expected 0, received 3 (BUG-14). Items, total text and the stored order (`pending`, 126000000) passed |
+| BVA-01 … 04 | failed | cart lines after the checkout: expected 0, received 1 / 2 / 3 / 3 (BUG-14); the stored orders (12000000, 36000000, 118000000, 122000000, `pending`) passed |
+| DT-03 | passed | path (a): dialog "Bạn cần đăng nhập để thanh toán!", URL `/login`; path (b): response 401, dialog "Lỗi khi thanh toán: Unauthorized"; all orders unchanged after each path |
+| DT-07 | failed | empty-cart illustration: not found (group issue #80) · orders after "Xác Nhận Thanh Toán" on the typed `/checkout`: expected 0, received 1 (order 0 ₫, BUG-01 #116). Empty message and "no checkout button" passed |
+
+Every test that built a cart recorded the second click of "Thêm vào giỏ hàng" (#73). Triage (product vs script defect) is T7; the review of the generated code is T5.
 
 ## 5. Review of the AI-generated scripts (T5)
 
