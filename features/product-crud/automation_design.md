@@ -150,7 +150,7 @@ Open expected values (`<CONFIRM>`): none. Every expected value is a TC value, a 
 
 ## 4. Specs and assertion patterns (T4)
 
-Prompt used for generation: see the AI-use log entries of this step (the T4 prompt of 18/11/2026, logged later, for `web.spec.ts`; `api.spec.ts` in the next prompt). One prompt per spec file; the generated code is committed as it came (`8be9fac`) and is reviewed in T5.
+Prompt used for generation: see the AI-use log entries of this step (the T4 prompts of 18/11/2026, logged later: one for `web.spec.ts`, the next for `api.spec.ts`). One prompt per spec file; the generated code is committed as it came (`8be9fac`, `bd0006d`) and is reviewed in T5.
 
 | Spec | TC IDs | Assertion patterns |
 | --- | --- | --- |
@@ -158,15 +158,18 @@ Prompt used for generation: see the AI-use log entries of this step (the T4 prom
 | | DT-02, 22 (`edit`), DT-03 (`delete`) | Persisted outcome (`toMatchObject` of P after the edit, `toEqual` of P before / after when refused, P listed or not, `GET /api/products/<P>` returns P or not), element state (`toHaveCount(0)` of P's row after the delete), soft (products 1–5) |
 | | DT-09, 16 (`addBlocked`), DT-14 (`typePrice`) | Element state (`validity.valid` of the field), negative (no `POST /api/products` sent, no new id); the browser message is recorded |
 | | DT-17 (`categoryChoice`), DT-23 (`formLabels`), DT-24 (`addThenEdit`), DT-26 (`list`) | Value comparison of a list (`toEqual` of the options with `GET /api/categories`, of the list names with `GET /api/products` after the add and after the edit), element state (`toHaveCount(3)` of labels with `*`), visible text (`toHaveText` of the five seed price cells, soft) |
+| `tests/product-crud/api.spec.ts` (13 tests: one loop over `api.json`, one `switch` on the row's `method`; tokens and the ids / seed products before in `beforeEach`, P and the deleted category C created in the test, the test's own products deleted in `afterEach`) | DT-06, 09, 12, 14 … 19 (`POST`, refused) | Persisted outcome (`toHaveLength(0)` of the products the request stored), value comparison of a list (`not.toContain` of 9999 in the category ids: DT-18), soft (products 1–5). The status is an annotation only (Q1) |
+| | DT-07 (`PUT` P, forged token), DT-08 (`DELETE` P, user token) | Persisted outcome (`toEqual` of P before / after; P still listed), soft |
+| | DT-20 (`PUT` 999999), DT-21 (`DELETE` 999999) | Persisted outcome (no new product, P unchanged / still listed, `not.toContain` of the name `Sản phẩm không tồn tại`), soft |
 
 | Assertion pattern | Used by |
 | --- | --- |
-| Persisted outcome (API) | DT-01 … 05, 10, 11, 13, 15, 22, BVA-01 … 09 (new ids, stored values, P before / after), DT-09, 14, 16 (no new id), every row with `seedUnchanged` |
+| Persisted outcome (API) | Web: DT-01 … 05, 10, 11, 13, 15, 22, BVA-01 … 09 (new ids, stored values, P before / after), DT-09, 14, 16 (no new id), every row with `seedUnchanged`; API spec: every row |
 | Visible text | DT-04 (name cell), DT-25 (price cell), DT-26 (seed price cells), DT-27 (row text) |
 | Element state | DT-01 (new row), DT-03 (row gone), DT-09, 14, 16 (field validity), DT-23 (labels with `*`) |
 | Negative assertion | DT-04 (no `<b>`), DT-09, 16 (no request sent) |
-| Value comparison of a list | DT-17 (category options), DT-24 (list names after add and edit) |
-| Soft assertions | stored product of the `add` rows, products 1–5, DT-24, DT-26 |
+| Value comparison of a list | DT-17 (category options), DT-24 (list names after add and edit); API: DT-18 (category ids), DT-20 (product names) |
+| Soft assertions | stored product of the `add` rows, products 1–5, DT-24, DT-26; API: P, products 1–5, names, category ids |
 
 **First run of the generated Web spec** (agent, 18/11 01:52, Chromium only, `REPORT_DIR` and `--output` in a temporary folder outside the repository; the first command used `--reporter=list` and wrote no `results.json`, so it was run a second time with the config reporters – same 15 passed / 13 failed; not an official run, nothing fixed). Products afterwards: ids 1–5 (the `afterEach` deleted every product a test created).
 
@@ -186,6 +189,25 @@ Prompt used for generation: see the AI-use log entries of this step (the T4 prom
 | DT-27 | failed | the row contains `Phụ kiện`: received `Ốp lưng iPhone 15 silicon DT-27.…250000 ₫SửaXóa` (no category column; BUG-37). [Screenshot](screenshots/first-run/DT-27-chromium.png) |
 | BVA-05 | failed | new products: expected 0, received 1 (`Ố` × 256 stored; BUG-38). [Screenshot](screenshots/first-run/BVA-05-chromium.png) |
 | BVA-06 | failed | new products: expected 0, received 1 (price 0 stored; BUG-39). [Screenshot](screenshots/first-run/BVA-06-chromium.png) |
+
+**First run of the generated API spec** (agent, 18/11 02:0x, Chromium project, temporary `REPORT_DIR` / `--output`; nothing fixed): 2 passed, 11 failed. Every request answered 200 (`Product created` / `Product updated` / `Product deleted`). Products afterwards: ids 1–5; categories 1–3 (DT-19's category was created and deleted, id 10).
+
+| Test | Result | Failed assertions (expected vs received) |
+| --- | --- | --- |
+| DT-20, DT-21 | passed (2) | – (no new product, P unchanged / still listed, as in HW02) |
+| DT-06 | failed | new products: expected 0, received 1 (stored with no `Authorization` header; HW02 BUG-18) |
+| DT-07 | failed | P keeps its values: name and price changed to `Sản phẩm bị sửa trái phép` / 1000 with the forged token (BUG-19) |
+| DT-08 | failed | P still listed: expected true, received false (deleted with the user token; BUG-20) |
+| DT-09 | failed | new products: expected 0, received 1 (name `""`; BUG-25) |
+| DT-12 | failed | new products: expected 0, received 1 (name `null`; BUG-21) |
+| DT-14 | failed | new products: expected 0, received 1 (price `"abc"`; BUG-22) |
+| DT-15 | failed | new products: expected 0, received 1 (price `null`; BUG-29) |
+| DT-16 | failed | new products: expected 0, received 1 (price 250000.5; BUG-30) |
+| DT-17 | failed | new products: expected 0, received 1 (category_id `null`; BUG-23) |
+| DT-18 | failed | new products: expected 0, received 1 (category_id 9999; BUG-24) |
+| DT-19 | failed | new products: expected 0, received 1 (category_id 10, the deleted category; BUG-31) |
+
+API tests open no page, so they have no screenshot; the request and response are in the report annotations.
 
 The verdicts (product defect or script defect) are for T7; the BUG numbers are the HW02 reports of the same class, for comparison only.
 
