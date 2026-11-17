@@ -3852,7 +3852,7 @@ AI-02 có thêm #33 (commit `212b560`). Prompt này (22:35) sẽ vào log ở l�
 ## Prompt034 – Claude Code (claude-opus-5-5)
 
 - **Prompt sent:** 22:43 17/11/2026
-- **Output received:** 22:44 17/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Output received:** 22:45 17/11/2026
 - **Feature / step:** forgot-password (fA) – trace viewer result; Issues proof per feature; prompt log
 - **Purpose:** Record the student's trace viewer check of DT-35; one Issues screenshot or one per feature?
 - **Prompt (verbatim):**
@@ -3874,6 +3874,59 @@ Session FR-08 đang commit report của nó cùng lúc. Mình kiểm tra commit 
 Bash Check which commit holds my trace-viewer edits
 Bash Preview this session's pending prompts
 Bash Write the pending prompts to the log
+Bash Fill log fields, update AI-02 and the design header, commit together
+Session FR-08 đã lấy số #34, nên dòng của mình là **#35**. Mình sửa lại số trong log.
+Bash Fix the artifact number in the Prompt034 entry
+Bash Note in memory: take the AI-02 number before writing it into the log
+Mình đã ghi nhận xét trace viewer của bạn vào docs, kèm một ghi chú nhỏ về thông báo "thành công", và ghi log prompt.
+
+## 1. Ảnh trang Issues: một ảnh chung cho cả bài
+
+Ảnh bạn chụp đã có **2 feature**: #117 là FR-03 (feature A), #116 là FR-08 (feature B, do session kia tạo cho bạn). Bộ lọc `label:"hw: HW04"` gom mọi issue HW04 của bạn, không chia theo feature.
+
+Vì vậy nộp **một ảnh**, chụp lại khi đã xong cả 3 feature (A, B, C) để ảnh có đủ mọi issue mới. Ảnh hiện tại đã lưu ở `bugs/screenshots/issues-label-hw04.png`; khi chụp lại chỉ cần ghi đè file này.
+
+README nhóm §6 còn yêu cầu ảnh chụp các issue HW02 đã được comment (#1, #3, #4, #6, #7, #8, #9, #11 của FR-03, cộng các issue FR-08 / FR-15). Phần này cũng làm lúc nộp.
+
+## 2. Kết quả trace viewer: đã ghi vào docs
+
+Ý của bạn được ghi nguyên vào:
+- dòng "What it showed" cuối §8 của [automation_design.md](week04/features/forgot-password/automation_design.md);
+- mục **Notes** của BUG-02 trong [bugs/BUG_REPORT.md](week04/bugs/BUG_REPORT.md);
+- HW04_Report §3.3.
+
+Nội dung ghi: API reset trả `200` nhưng trang không có thông báo đổi mật khẩu thành công. Trên giao diện, bug này bị **BUG-01 che**: không bao giờ đặt được một mật khẩu hợp lệ, nên reset chỉ thành công với mật khẩu sai quy tắc như `NewPass 2026`.
+
+Mình thêm một **ghi chú riêng của agent**, vì có một điểm khác với bằng chứng. Mình đã đọc file trace của bạn:
+- trace có sự kiện `dialog` loại `alert` với nội dung **"Đổi mật khẩu thành công!"**;
+- request `POST /api/reset-password` trả `200`.
+
+Tức là thông báo thành công **có**, nhưng là **hộp thoại của trình duyệt, không nằm trong trang**, nên ảnh chụp trang trong trace không hiện nó. Câu "trang không có thông báo" vẫn đúng; ghi chú chỉ nói rõ thông báo nằm ở đâu.
+
+## Log prompt
+
+- **Prompt030:** đã cập nhật giờ nhận.
+- **Prompt033** (22:35): lệnh trace viewer, nhãn `hw: HW04`.
+- **Prompt034** (22:43): lượt này, ghi `UNFINISHED`.
+- Prompt031–032 là của session FR-08.
+
+AI-02 có thêm **#35**. Ban đầu mình ghi nhầm #34 vào log, vì session FR-08 vừa lấy số đó; đã sửa trong commit `5ce918e`. Mình cũng lưu vào memory: phải ghi dòng AI-02 trước, đọc số của nó, rồi mới ghi số vào log.
+
+| ID | Điểm | Bằng chứng |
+| --- | --- | --- |
+| LOG-1, 2, 3, 5, 10 | 2 | Dùng đúng transcript của session này; nội dung nguyên văn do script trích; số nối tiếp sau các mục của session FR-08 |
+| LOG-4, 6, 7, 8, 11 | 2 | Giờ UTC+7; Prompt034 có đánh dấu UNFINISHED; không còn TODO trong các mục của mình; đã commit |
+| LOG-9, 12 | N/A | Không dùng tool AI khác; không có prompt nào bạn dặn không ghi log |
+
+**Gate: passed**
+
+## Commit (đã push)
+
+- `8f59858` docs (forgot-password): record the student's trace viewer check of DT-35
+- `b867cc2` docs (ai): log Prompt033–Prompt034 and add the AI-02 row for the trace viewer check
+- `5ce918e` docs (ai): fix the AI-02 row number of Prompt034
+
+Feature A (FR-03) giờ đã đủ mọi bước. Còn chờ bạn: review AI-02 #23 – #35 (cột 5), và quyết định có đổi mô tả 6 nhãn chung (`severity: *`, `technique: *`) sang tiếng Anh không. Bước tiếp theo có thể là feature C (FR-15, Admin).
 ```
 
 - **Used in:** `features/forgot-password/automation_design.md` §8 (trace viewer line), `bugs/BUG_REPORT.md` BUG-02 notes, `HW04_Report.md` §3.3; `prompt_log.md` (AI-02 Artifact #35)
@@ -4037,5 +4090,130 @@ Bash Write Prompt036 as unfinished and list remaining TODO lines
 ```
 
 - **Used in:** design §2, §5 (commit 1af2fc5), `tests/checkout/web.spec.ts` + `data/checkout/web.json` (commit b32d917), `reports/checkout/` + design §6 + `HW04_Report.md` + `PLAN.md` (commit 1b1414f); AI-02 Artifact #34
+
+---
+
+## Prompt037 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 22:49 17/11/2026
+- **Output received:** 22:52 17/11/2026
+- **Feature / step:** Documents – clean-up before closing feature A; tracker labels
+- **Purpose:** Remind to retake the Issues screenshots; drop the design header table; trim AI-02; English label descriptions
+- **Prompt (verbatim):**
+
+```text
+ghi chú vào: nhăc tôi chụp lại ảnh các issue khi đã xong các feature 
+bỏ đi phần các dònig mà tôi đã chọn trong tất cả các docs tương tự vì ko cần thiết
+hoàn thiện các docs, báo cáo liên quan rồi tôi sẽ review lại để đóng feature A
+mục số 4 trong AI-02 đã có từ trước trong template chưa? nếu ko có thì xóa đi, đừng viết những gì thừa ko cần thiết vào báo cáo
+đổi 6 nhãn chung trên github sang tiếng anh
+```
+
+- **AI output (verbatim):**
+
+```text
+Mình làm 5 việc theo thứ tự. Trước hết kiểm tra mục 4 của AI-02 có trong template gốc của môn không, và xem trạng thái các file design (session FR-08 có thể đang sửa file của nó).
+Bash Find the AI-02 template and check file status
+Bash Compare section 4 of the AI-02 template with HW04's AI-02
+Bash Compare the §3 preamble and header of AI-02 with the template
+Bash Show the header tables of the three design files and the template
+Bash Find references to the design header in skills and docs
+Bash Remove the header table from the design files and template, update skill and CLAUDE.md
+Bash Commit the header removal in one command
+Đã bỏ bảng đầu (commit `73b8bb5`). Giờ dọn AI-02 và PLAN. Trước đó mình đọc lại phần §3 (feature A) của HW04_Report xem còn gì thừa.
+Bash Read the feature A section of the report
+Bash Find the submission steps in PLAN
+Bash Read the stage 4 lines of PLAN
+Bash Add the PLAN reminder, drop report hints, trim AI-02 sections 3 and 4
+Giờ đổi mô tả 6 nhãn chung trên GitHub sang tiếng Anh, giữ đúng nghĩa của bảng nhãn trong README nhóm §4.3.
+Bash Change the six shared label descriptions to English and list all labels
+Mọi nhãn trên repo nhóm giờ đều có mô tả tiếng Anh. Mình thêm một dòng AI-02 ngắn cho lượt này, theo quy tắc mỗi artifact một dòng.
+Bash Add a short AI-02 row for this turn and commit
+Lại có commit của session FR-08 chen vào. Mình kiểm tra dòng AI-02 của mình nằm ở commit nào.
+Bash Check which commit contains the new AI-02 row
+Đã làm xong cả 5 việc. Các commit của mình đều đã lên remote (commit `bc0de04` sau cùng là của session FR-08, nó tự push).
+
+## 1. Nhắc chụp lại ảnh Issues
+
+Mình thêm bước **R3** vào `PLAN.md` (Giai đoạn 4): khi xong cả 3 feature, chụp lại:
+- trang Issues lọc `is:issue author:thhuon label:"hw: HW04"`, ghi đè `bugs/screenshots/issues-label-hw04.png`;
+- ảnh từng issue HW02 đã được comment HW04.
+
+Ảnh hiện tại (17/11) mới có #117 và #116.
+
+## 2. Bỏ bảng đầu (Field / Value) ở mọi file tương tự
+
+- **Đã xóa ở 4 nơi:** file design của FR-03, FR-08, FR-15 và template của skill. File design giờ bắt đầu bằng tiêu đề rồi tới ngay §1.
+- **Sửa các chỗ đang dựa vào bảng này:**
+  - tiêu chí rubric 31 giờ kiểm "số dòng §1 = số dòng spec chạy (§4) + số dòng §7", thay cho dòng `Count`;
+  - câu trong `SKILL.md`: mã yêu cầu ghi ở **tiêu đề** file design;
+  - `CLAUDE.md`: bỏ qua bước cập nhật `Prompt log entries` của skill log. Skill log nằm trong repo `week02` (bài đã nộp), nên mình không sửa ở đó.
+- File FR-08 do session kia đang làm, nhưng lúc mình sửa nó không có thay đổi chưa commit. Mình chỉ xóa bảng đầu, không đụng phần khác.
+
+## 3. Mục 4 của AI-02
+
+**Có trong template** (`AI Templates/md/[AI-02] … _Vn.md`, mục "4. Tổng kết Độ chính xác AI"), nên giữ lại. Mình đã bỏ:
+- câu tự thêm sau dòng hướng dẫn của template ("Số liệu theo verdict của 45 dòng …");
+- câu "logged later" ở mục 3, vì đó là quy ước nội bộ của agent.
+
+Phần còn lại ở mục 3 vẫn cần nên giữ: lời khai báo (đề §9 yêu cầu), danh sách nguồn mà cột (4) trích tới, và quy ước `#n` / `#Sn`.
+
+## 4. Sáu nhãn chung trên GitHub
+
+Đã đổi theo đúng nghĩa của bảng ở README nhóm §4.3. Giờ mọi nhãn trên repo nhóm đều có mô tả tiếng Anh.
+
+| Nhãn | Mô tả mới |
+| --- | --- |
+| `severity: critical` | Data exposed or lost, access beyond the role, or a main flow blocked |
+| `severity: high` | Wrong data accepted or wrong calculation, no workaround |
+| `severity: medium` | Business or validation rule broken, with a workaround |
+| `severity: low` | UI, wording or message only |
+| `technique: EP` | Found by Equivalence Partitioning |
+| `technique: BVA` | Found by Boundary Value Analysis |
+
+## 5. Tài liệu feature A, sẵn sàng để bạn review
+
+- [HW04_Report.md](week04/HW04_Report.md) §3 (3.1 – 3.3): đã đủ nội dung; bỏ 3 dòng chú thích hướng dẫn `<!-- … -->`.
+- [features/forgot-password/automation_design.md](week04/features/forgot-password/automation_design.md) §1 – §8.
+- [bugs/BUG_REPORT.md](week04/bugs/BUG_REPORT.md) BUG-02 – BUG-10.
+- `README.md` dòng FR-03; `PLAN.md` A1 – A8 đã đánh dấu xong.
+- AI-02 có thêm **#36** cho lượt này; các dòng #23 – #36 đang chờ bạn review (cột 5).
+
+**Commit (đã push):**
+- `73b8bb5` docs: drop the header table of the automation design files
+- `0edea17` docs: remind to retake the Issues screenshots and drop the filled report hints
+- `19f71bd` docs (ai): keep only the template text in AI-02 sections 3 and 4
+- `9b2ec85` docs (ai): add AI-02 row for the document clean-up and label descriptions
+
+Prompt này (22:49) sẽ vào log ở lần chạy `/logging-ai-prompts` tới.
+```
+
+- **Used in:** `features/*/automation_design.md`, `skills/test-automation/` (template, rubric 31), `CLAUDE.md`, `PLAN.md` R3, `HW04_Report.md` §3, `AI-02_AI_Audit_Report.md` §3–§4; labels of the HW02 group repo (AI-02 Artifact #36)
+
+---
+
+## Prompt038 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 22:58 17/11/2026
+- **Output received:** 22:59 17/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Feature / step:** Tracker – `hw: HW04` label check; prompt log
+- **Purpose:** The `hw` label still looks Vietnamese; log the prompts
+- **Prompt (verbatim):**
+
+```text
+còn label hw chưa dược chuyển sang tiếng anh
+/logging-ai-prompts
+```
+
+- **AI output (verbatim):**
+
+```text
+Skill
+Bạn nói nhãn `hw` vẫn chưa sang tiếng Anh. Mình kiểm tra lại trực tiếp trên GitHub: tên, mô tả nhãn, và cả README nhóm (README cũng có mô tả nhãn này).
+Bash Read the hw label from the API and its mentions in the group README
+Bash Write this session's pending prompts to the log
+```
+
+- **Used in:** not used (the label was already in English); `prompt_log.md`
 
 ---
