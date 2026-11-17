@@ -1720,3 +1720,563 @@ Bash Add AI-02 row #16 with recounted totals and commit
 - **Used in:** `tests/forgot-password/api.spec.ts`; `features/forgot-password/automation_design.md` §4, §5 (AI-02 Artifact #16); `prompt_log.md`
 
 ---
+
+## Prompt016 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 19:13 17/11/2026
+- **Output received:** 19:17 17/11/2026
+- **Feature / step:** checkout (fB) FR-08 – T1 select test cases
+- **Purpose:** Chọn test case FR-08 cần tự động hóa (bước T1)
+- **Prompt (verbatim):**
+
+```text
+thực hiện design các TC cho các feature thuộc feature B, bắt đầu thực hiện từ bước T1
+```
+
+- **AI output (verbatim):**
+
+```text
+Bash List workspace and find files mentioning step T1
+Bash Inspect features folders and search for feature B
+Skill
+Bash Read week04 project instructions, plan and git state
+Bash Read checkout design file, FR-03 §1 example, list HW02 fB files
+Đang đọc test case HW02 của FR-08 (checkout) để lập bảng T1.
+Bash Read FR-08 domain testing test cases
+Bash Show section headings of the FR-08 test files
+Bash Read FR-08 variables and DT test cases
+Read /home/hg/source/software-testing/week02/features/fB-pool-B/02_domain_testing.md
+Read /home/hg/source/software-testing/week02/features/fB-pool-B/03_boundary_value_analysis.md
+Bash Read FR-08 requirement and cart/checkout backend routes
+Bash Read cart/checkout backend code and Web checkout/cart pages
+Đã đọc xong 17 TC của HW02 và mã trang Checkout; đang kiểm tra giỏ hàng Web lưu ở đâu (ảnh hưởng tới cách reset dữ liệu).
+Bash Check where the Web cart is stored
+Bash Read brief Task 1 and FR-08 HW02 bug titles
+Bash Show titles of HW02 bugs 12-17
+Bash Check config, existing tests/data and register API
+Bash Inspect earlier commits and AI-02 artifact rows
+Bash Read AI-02 format and prompt log tail
+Bash Check checkout route guard, breadcrumb, auth storage, time
+Đủ dữ liệu. Đang ghi bảng §1 vào file thiết kế checkout.
+Edit /home/hg/source/software-testing/week04/features/checkout/automation_design.md
+Bash Confirm the /checkout route has no guard
+Bash Fix log entry text and read T1 rubric
+Ghi xong §1. Commit bước T1, rồi thêm dòng AI-02.
+Bash Commit the T1 selection and inspect AI-02 table end
+Bash Add AI-02 row, commit and push both commits
+Bash Confirm branch is in sync with remote
+Bash Show commits not yet pushed
+**Bước T1, feature B (checkout, FR-08).** Bước trước của feature này không có gì chưa commit, nên được làm T1.
+
+## Kết quả T1: design §1, [features/checkout/automation_design.md](features/checkout/automation_design.md)
+
+Bảng có đủ 17 TC của HW02 (13 DT, 4 BVA). ID và kết quả mong đợi giữ nguyên chữ trong TC gốc.
+
+| Nhóm | TC | Cách chạy |
+| --- | --- | --- |
+| Web | DT-01 (luồng hợp lệ), DT-03 (khách chưa đăng nhập), DT-07 (giỏ rỗng) | Thao tác trên UI; đơn hàng đã lưu và số đơn đọc qua API |
+| Web (đề xuất) | BVA-01 … 04 (số dòng trong giỏ, số lượng một dòng) | Thêm sản phẩm ở trang sản phẩm, rồi checkout trên Web |
+| Chỉ API | DT-02, 04, 05, 06, 08, DT-09 … 13 | Phần thân request hoặc header mà Web không cho người dùng gửi |
+
+- **Đề xuất tự động hóa cả 17 TC, không có dòng "No".** Lý do: không TC nào cần người đánh giá, cần hệ thống ngoài hay phải chờ thời gian thật, và không có 2 TC nào trùng cả lớp tương đương lẫn kết quả mong đợi. Cả 17 TC gồm hợp lệ (DT-01, 02, 08), không hợp lệ (DT-03 … 07, 09 … 13) và biên (BVA-01 … 04).
+- **Ghi chú cho T2–T4**, rút ra từ mã nguồn trang Web và backend:
+  - Giỏ hàng trên Web chỉ nằm trong bộ nhớ của trang: Web không bao giờ gọi `POST /api/cart`, và `GET /api/cart` không thấy giỏ này.
+  - Giỏ hàng trên server không bao giờ được xóa khi checkout. Muốn mỗi test bắt đầu với giỏ rỗng và 0 đơn hàng mà không phải khởi động lại server, mình đề xuất mỗi test tạo một tài khoản mới; việc này sẽ chốt ở T3.
+  - Trang checkout trên Web không có ô địa chỉ, và ô tổng tiền là ô số người dùng sửa được.
+  - Trang `/checkout` không chặn khách chưa đăng nhập.
+  - DT-09 … 13 chấp nhận 2 kết quả (đơn được lưu với tổng đúng, hoặc bị từ chối). Script sẽ phải viết oracle sao cho không có `if` theo kết quả.
+
+## AI tự đánh giá
+
+| # | Điểm | Bằng chứng | Việc cần làm |
+| --- | --- | --- | --- |
+| P1 | 2 | Chỉ sửa header và §1 của file thiết kế, cộng dòng AI-02 | – |
+| P2 | 2 | Không có thay đổi nào của checkout chưa commit | – |
+| P3 | N/A | Đây là bước đầu tiên của feature B | – |
+| P4 | 2 | Cách chạy Web của DT-07 và BVA được đánh dấu "(proposed)"; chưa có kết quả hay kết luận nào | – |
+| P5 | 2 | 3 câu hỏi bên dưới, mỗi câu có khuyến nghị | – |
+| P6 | 2 | Commit `77671ac` (T1) và `d6cb5c8` (dòng AI-02 #14), đã push | Log prompt ở cuối buổi |
+| 1 | 2 | 17 dòng §1 = 13 TC trong `02_domain_testing.md` + 4 TC trong `03_boundary_value_analysis.md` | – |
+| 2 | 1 | 17 TC tự động hóa, nhiều hơn mức tối thiểu 12, có đủ hợp lệ / không hợp lệ / biên | Chờ câu hỏi 1 và 2 |
+| 3 | N/A | Không có dòng "No" | – |
+| 4 | 2 | Kết quả mong đợi chép từ TC; chỉ bỏ các mã A#/Q#/F# (ghi rõ ở đầu §1) | – |
+
+**Gate: passed** (mục 2 chỉ chờ bạn quyết định).
+
+## Cần bạn quyết định
+
+1. **DT-07, các bước 3–5 qua API (checkout khi giỏ rỗng, kết quả mong đợi là "bị từ chối")**
+   - Ở HW02 bạn đã chấm Pass và không tính việc API chấp nhận checkout giỏ rỗng là bug (Prompt065).
+   - Nếu tự động hóa đúng như TC, test sẽ fail, trái với kết luận của bạn ở HW02.
+   - Lựa chọn: (a) chỉ chạy bước 2 trên Web (thấy trạng thái giỏ rỗng, không có cách nào đặt hàng); (b) chạy luôn các bước API theo TC và để test fail. **Khuyến nghị (a)**, vì khớp với kết luận ở HW02.
+2. **BVA-01 … 04 chạy trên Web hay qua API như HW02**
+   - Backend bỏ qua giỏ hàng và lưu đúng `total_amount` mà request gửi lên. Nếu chạy qua API, test gửi sẵn tổng đúng rồi kiểm lại chính số đó, nên giá trị biên không ảnh hưởng gì đến kết quả.
+   - Trên Web, chính trang Web tính tổng từ các dòng người dùng thêm vào, nên giá trị biên thực sự được kiểm. Test cũng thấy được danh sách sản phẩm và giỏ hàng sau khi thanh toán.
+   - Bạn quyết định vì đây là đổi cách chạy so với thiết kế HW02. **Khuyến nghị: Web**, đơn hàng đã lưu đọc qua API.
+3. **DT-03 (khách chưa đăng nhập) đi đường nào**
+   - TC ghi "mở giỏ hàng → Thanh toán, hoặc mở trang checkout".
+   - Nút ở trang giỏ hàng hiện `alert` rồi chuyển sang trang đăng nhập. Còn gõ thẳng `/checkout` thì vẫn bấm "Xác Nhận Thanh Toán" được.
+   - Lựa chọn: (a) cả 2 đường trong cùng 1 test, kiểm số đơn hàng không tăng sau mỗi đường; (b) chỉ đi qua trang giỏ hàng. **Khuyến nghị (a)**.
+
+## Commit
+
+Đã commit và push `77671ac test (checkout): select FR-08 test cases to automate` và `d6cb5c8 docs (ai): add AI-02 row for the FR-08 test case selection`.
+
+Repo đang có thay đổi của forgot-password (`tests/forgot-password/`, commit `d438b99` chưa push). Đó là của phiên làm feature A chạy song song, mình không đụng vào.
+
+## Bước tiếp theo
+
+Sau khi bạn trả lời 3 câu trên (mình sẽ sửa §1 thành một commit riêng):
+
+> "bắt đầu bước T2 cho checkout: khảo sát UI các trang Giỏ hàng, Thanh toán, Chi tiết sản phẩm, viết page object"
+
+Ở bước này bạn tự chạy `npm run sut`, rồi `npm run codegen` để ghi lại luồng thêm vào giỏ → thanh toán.
+```
+
+- **Used in:** `features/checkout/automation_design.md` §1 (commit 77671ac); AI-02 Artifact #14
+
+---
+
+## Prompt017 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 19:31 17/11/2026
+- **Output received:** 19:38 17/11/2026
+- **Feature / step:** checkout (fB) FR-08 – T1 decisions, T2 locators
+- **Purpose:** Kiểm tra checkout giỏ rỗng có phải bug, ưu nhược Web / API cho BVA, DT-03 thử 2 đường, điền bảng locator từ codegen
+- **Prompt (verbatim):**
+
+```text
+- cần check lại bước checkout mà giỏ rỗng có là bug ko qua việc check lại spec/các tài liệu liên quan trước khi tôi đưa ra quyết đinh khác
+-  list ra các pros và cons giữa việc chọn web và api rồi tôi mới có thể đưa ra quyết định và lý do mà bạn đưa ra đề xuất là web
+- ở DT03 khi khách chưa đăng nhập có thế test cả hai đường cho cùng 1 test
+-  tôi đã run codegen và bên dưới là code bên trong inspector hãy điền thông tin vào bảng locator
+
+<pasted_content id="fe18">
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('http://localhost:5173/');
+  await page.getByRole('button', { name: 'Thêm vào giỏ' }).nth(1).click();
+  await page.getByRole('button', { name: 'Thêm vào giỏ' }).first().click();
+  await page.getByRole('link', { name: 'Giỏ hàng' }).click();
+  page.once('dialog', dialog => {
+    console.log(`Dialog message: ${dialog.message()}`);
+    dialog.dismiss().catch(() => {});
+  });
+  await page.getByRole('button', { name: 'Tiến hành thanh toán' }).click();
+  await page.getByRole('textbox').first().click();
+  await page.getByRole('textbox').first().fill('test@eshop.com');
+  await page.getByRole('textbox').nth(1).click();
+  await page.getByRole('textbox').nth(1).fill('Test@1234');
+  await page.getByRole('textbox').nth(1).press('Enter');
+  await page.getByRole('textbox').nth(1).dblclick();
+  await page.getByRole('textbox').nth(1).dblclick();
+  await page.getByRole('textbox').nth(1).click();
+  await page.getByRole('textbox').nth(1).fill('Test@1234!');
+  await page.getByRole('textbox').nth(1).press('ArrowLeft');
+  await page.getByRole('textbox').nth(1).press('ArrowLeft');
+  await page.getByRole('textbox').nth(1).press('ArrowLeft');
+  await page.getByRole('textbox').nth(1).press('ArrowLeft');
+  await page.getByRole('textbox').nth(1).press('ArrowLeft');
+  await page.getByRole('textbox').nth(1).fill('Test1234!');
+  await page.getByRole('textbox').nth(1).press('Enter');
+  await page.getByRole('link', { name: 'Giỏ hàng' }).click();
+  await page.getByRole('button', { name: 'Tiến hành thanh toán' }).click();
+  await page.getByRole('textbox', { name: 'Nhập mã giảm giá' }).click();
+  await page.getByRole('button', { name: 'Xác Nhận Thanh Toán' }).click();
+  await page.getByRole('button', { name: 'Quay lại trang chủ' }).click();
+});
+</pasted_content id="fe18">
+
+việc này đã làm một phần cho bước T2, còn gì cần hoàn thành ở bước T2 hãy cho tôi biết
+```
+
+- **AI output (verbatim):**
+
+```text
+Bash Read FR-03 §2 locator section for format
+Bash Find empty-cart assumption A6/Q4 and API spec cart/checkout lines
+Bash Read API checkout spec, SRS order sentences, HW02 Prompt065
+Bash Read gap-analysis G2 and other empty-cart references
+Đã đọc spec và các tài liệu HW02 liên quan. Giờ mình kiểm tra trên app đang chạy xem Web có checkout được giỏ rỗng hay không (khi vào thẳng `/checkout`).
+Bash Check SUT servers and existing page objects
+Bash Read auth context, nav bar, home and product detail markup
+Bash Read product detail and home product card markup
+Bash Read register API spec and existing API client
+Mình viết một script khảo sát (chỉ đọc giao diện, tài khoản test tạo mới) để chụp ARIA snapshot các màn hình và đếm locator trên 3 trình duyệt.
+Write /tmp/claude-1000/-home-hg-source-software-testing/d83bae80-f26f-4f2b-9278-13e75bf75654/scratchpad/explore-fr08.cjs
+Bash Run the FR-08 UI exploration on Chromium
+Bash Scope login fields to the form and rerun on Chromium
+Bash Remove stray line and rerun on Chromium
+Bash Show ARIA snapshots of the FR-08 screens
+Bash Wait for the cart page after checkout and run on all 3 browsers
+Kết quả giống nhau trên cả 3 trình duyệt. Mình thử thêm đường "đăng nhập → Thoát → thanh toán" (cách tái hiện BUG-17 ở HW02).
+Bash Check the logout-then-checkout path on 3 browsers
+Bash Check HW02 bugs for add-to-cart and empty-cart image, list API client methods
+Bash List cart and checkout issues on the HW02 group repo
+Đã có đủ bằng chứng. Giờ ghi quyết định DT-03 vào §1 (commit riêng), sau đó điền §2.
+Bash Locate the lines to edit in §1
+Bash Apply the DT-03 decision to §1 and commit
+Giờ viết §2 (bảng locator, bảng codegen, các phát hiện về testability).
+Bash Write §2 locator table, findings and codegen check
+Thay locator "All product lines" (đang dùng `.nth(1)` theo vị trí) bằng cách lọc dòng có ô `cell`, rồi kiểm tra lại trên trình duyệt.
+Bash Replace positional row locator and verify on 3 browsers
+Bash Commit the §2 locator table
+Bash Add AI-02 rows, commit and push
+Bash Read T2 rubric criteria
+Bước T1 (quyết định) và một phần T2 của checkout (FR-08). §1 đã ghi quyết định DT-03, §2 đã có bảng locator. 3 commit (`63e6e8c`, `16da9ad`, `dde7e39`) đã push.
+
+## 1. Checkout khi giỏ rỗng có phải bug không
+
+**Tài liệu nói gì:**
+
+| Nguồn | Nội dung |
+| --- | --- |
+| SRS FR-08 | Không có câu nào nói thẳng "giỏ rỗng thì từ chối". Chỉ suy ra gián tiếp: tổng tiền "được tính tự động từ giỏ hàng", và giao diện "hiển thị đầy đủ danh sách sản phẩm đặt mua", tức đơn hàng gồm các sản phẩm trong giỏ. |
+| SRS FR-07 | "Giỏ hàng trống phải có hình minh họa và thông báo rõ ràng." Câu này chỉ quy định cách hiển thị giỏ rỗng. |
+| API spec §4.3 | Body chỉ có `total_amount`, `shipping_address`; không có quy tắc nào về giỏ hàng. |
+| HW02 A6 / Q4 | "Checkout khi giỏ rỗng bị từ chối, không tạo đơn." Đây là suy luận của AI, nhưng **bạn đã duyệt Q4 ngày 20/10**, nên nó là oracle chính thức của DT-07. |
+| Kết luận HW02 (Prompt065) | DT-07 Pass, lý do "khi giỏ hàng rỗng thì không thể checkout được". |
+
+**Kiểm tra lại trên app hôm nay (cả 3 trình duyệt cho cùng kết quả):**
+- Trên trang Giỏ hàng, giỏ rỗng thì không có nút thanh toán. Phần này đúng như HW02.
+- Nhưng nếu người dùng đã đăng nhập **gõ thẳng `/checkout`**: trang hiện danh sách trống, tổng 0, nút "Xác Nhận Thanh Toán" vẫn bấm được.
+  - Web gửi `{"items": [], "total_amount": 0}` và nhận về 200.
+  - Trang hiện "Thanh toán thành công!" và **lưu một đơn 0 ₫**.
+- Tức là Web vẫn đặt được đơn với giỏ rỗng. Lý do kết luận ở HW02 chỉ đúng khi đi qua trang Giỏ hàng.
+- Repo nhóm chưa có issue nào về việc này.
+
+→ So với oracle A6/Q4 bạn đã duyệt thì đây là sai lệch. Nếu bạn công nhận là bug, đây là defect mới: tạo issue mới có label `hw: HW04`.
+
+## 2. BVA-01 … 04: chạy trên Web hay qua API
+
+**Điểm mấu chốt:** backend bỏ qua giỏ hàng và lưu nguyên `total_amount` mà request gửi lên.
+
+| | Web | API (như HW02) |
+| --- | --- | --- |
+| Giá trị biên có ảnh hưởng tới kết quả không | **Có.** Trang Web tự tính tổng từ các dòng người dùng thêm vào, nên số dòng và số lượng ở biên quyết định tổng được lưu. | **Không.** Test tự gửi sẵn tổng đúng rồi kiểm lại chính số đó, nên phần kiểm tổng luôn đúng. Còn lại có nghĩa chỉ là bước "giỏ không bị xóa" (BUG-14), giống nhau ở cả 4 TC. |
+| Câu nào của FR-08 được kiểm | Danh sách sản phẩm đặt mua, tổng hiển thị, giỏ được xóa (trên giỏ người dùng thấy), đơn đã lưu (đọc qua API) | Đơn đã lưu, giỏ trên server |
+| So với thiết kế HW02 | Đổi cách chạy (HW02 quyết định chạy qua API ở bước BVA3), phải ghi lý do | Giữ nguyên các bước của TC |
+| Độ ổn định khi dựng giỏ | Dễ vỡ hơn: phải đi qua 3 lỗi của FR-07 (nút thêm phải bấm 2 lần #73, thêm lại cùng sản phẩm tạo dòng mới #70, tải lại trang mất giỏ #74) | Ổn định, chỉ cần `POST /api/cart` |
+| Thời gian | Chậm hơn: mỗi test mở khoảng 3 trang sản phẩm, × 3 trình duyệt | Nhanh |
+| Số test Web của feature B | 7 | 3 |
+
+**Vì sao mình đề xuất Web:**
+- Chỉ trên Web thì giá trị biên mới thật sự ảnh hưởng tới tổng được lưu. Qua API, 4 TC BVA thực chất chỉ còn kiểm việc giỏ không được xóa.
+- Bài HW04 là automation giao diện; feature B mà chỉ có 3 test Web thì phần UI rất mỏng.
+
+Nhược điểm chính của Web là phần dựng giỏ dễ vỡ, nhưng cả 3 lỗi đó đều có cách vòng qua (xem câu 3 bên dưới).
+
+## 3. DT-03: đã cập nhật §1 (commit `63e6e8c`)
+
+Một test thử cả 2 đường của khách chưa đăng nhập: (a) bấm "Tiến hành thanh toán" ở trang Giỏ hàng; (b) gõ `/checkout` rồi bấm "Xác Nhận Thanh Toán". Sau mỗi đường đều kiểm số đơn hàng qua API admin.
+
+Lúc khảo sát, cả 2 đường đều bị chặn trên 3 trình duyệt, kể cả khi đăng nhập rồi bấm "Thoát". Kết quả này khác BUG-17 của HW02 (khách thanh toán được); để sang T7 xử lý.
+
+## 4. Bảng locator T2: đã điền §2 (commit `16da9ad`)
+
+- **Cách lấy locator:** từ đoạn codegen của bạn, cộng ARIA snapshot của từng màn hình (header, Đăng nhập, Trang chủ, Chi tiết sản phẩm, Giỏ hàng, Thanh toán, trang thành công).
+- **Đếm trên app đang chạy:** mỗi locator khớp đúng 1 phần tử trên Chromium, Firefox và WebKit. Riêng badge giỏ hàng, ô địa chỉ và breadcrumb khớp 0, vì app không có các phần tử này.
+- **Bảng so sánh với codegen:**
+  - Trùng với bảng: link "Giỏ hàng", nút "Tiến hành thanh toán", "Xác Nhận Thanh Toán", "Quay lại trang chủ".
+  - Không trùng (codegen chọn theo vị trí): `.nth(1)` / `.first()` cho nút thêm vào giỏ ở Trang chủ, `textbox().first()` / `.nth(1)` cho 2 ô đăng nhập. Cột "tốt hơn" mình chỉ ghi đề xuất (proposed).
+- **Phát hiện ảnh hưởng tới cách viết test:**
+  - Giỏ hàng trên Web mất khi tải lại trang, nên sau khi thêm hàng chỉ được di chuyển bằng link/nút, không dùng `page.goto`.
+  - Trên Chromium, URL đổi sang `/cart` trước khi trang vẽ xong, nên phải chờ tiêu đề trang chứ không chờ URL.
+  - Nút "Thêm vào giỏ hàng" ở trang sản phẩm phải bấm 2 lần (#73).
+  - Không có badge giỏ hàng (#79).
+
+**Việc còn lại của T2:**
+1. **Bạn:** điền ngày và trình duyệt đã chạy codegen, xem lại cột "(proposed)" và viết câu kết luận ở cuối bảng codegen.
+2. **Bạn:** trả lời các câu hỏi bên dưới.
+3. **Mình:** viết page object (`HomePage`, `ProductPage`, `CartPage`, `CheckoutPage`, `SiteHeader`, mở rộng `LoginPage`), thêm vào `api/EshopApi.ts` các hàm `addToCart`, `getCart`, `checkout` (có hoặc không có token), `myOrders`, `adminOrders`, rồi kiểm lại trên 3 trình duyệt và commit.
+
+## AI tự đánh giá
+
+| # | Điểm | Bằng chứng | Việc cần làm |
+| --- | --- | --- | --- |
+| P1 | 2 | Chỉ sửa §1 (quyết định DT-03), §2, dòng log ở header và AI-02 | – |
+| P2 | 2 | Bước T1 đã commit (`77671ac`) trước khi làm tiếp | – |
+| P3 | 2 | Quyết định DT-03 đã áp dụng, commit riêng `63e6e8c` | – |
+| P4 | 2 | Cột "tốt hơn" và mọi nhận định về bug đều ghi (proposed) hoặc để sang T7; ngày, trình duyệt và câu kết luận codegen để bạn điền | – |
+| P5 | 2 | 3 câu hỏi bên dưới | – |
+| P6 | 2 | Commit `16da9ad`, AI-02 #15 và #16 (`dde7e39`), đã push | Log prompt cuối buổi |
+| 5 | 2 | Locator lấy từ codegen và ARIA snapshot của app đang chạy, đếm trên 3 trình duyệt | – |
+| 6 | 2 | Ưu tiên role + name; không dùng XPath, `nth`. Locator đếm dòng giỏ hàng ban đầu dùng `rowgroup.nth(1)`, mình đã đổi sang lọc dòng có `cell` và kiểm lại trên 3 trình duyệt | – |
+| 7 | 2 | Ô nhập không có tên (tìm theo phần đầu label) và thẻ sản phẩm (tìm bằng CSS `div:has(> h2)`) đều ghi lý do và đã ghi vào mục phát hiện | – |
+| 8 | N/A | Chưa viết page object | Lần tới |
+
+**Gate: blocked by mục 8.** Chưa viết page object, và đang chờ bạn trả lời câu 1–3 cùng phần codegen.
+
+## Cần bạn quyết định
+
+1. **DT-07: có tính checkout giỏ rỗng là bug không**
+   - Oracle A6/Q4 bạn đã duyệt nói "từ chối, không tạo đơn". Thực tế Web gõ `/checkout` vẫn lưu được đơn 0 ₫.
+   - Kết luận ở HW02 là của bạn, nên đổi hay giữ cũng do bạn quyết.
+   - Lựa chọn:
+     - (a) Tự động hóa đủ: bước 2 trên trang Giỏ hàng, thêm đường gõ `/checkout`, và các bước 3–5 qua API. Test sẽ fail, ghi thành issue mới ở T7.
+     - (b) Giữ kết luận HW02, chỉ kiểm trang Giỏ hàng.
+   - **Khuyến nghị (a).**
+2. **BVA-01 … 04 chạy trên Web hay API** (bảng ở mục 2). **Khuyến nghị Web**, đơn đã lưu đọc qua API.
+3. **Cách thêm sản phẩm ở trang chi tiết khi nút cần bấm 2 lần (#73)**
+   - DT-01 và BVA (nếu chạy Web) cần số lượng lớn hơn 1, mà chỉ trang chi tiết sản phẩm mới chỉnh được số lượng.
+   - Lựa chọn:
+     - (a) Page object bấm cho tới khi nút hiện "Đã thêm", tối đa 2 lần, và ghi annotation link tới #73 để lỗi vẫn hiện trong report.
+     - (b) Chỉ bấm 1 lần: mọi test Web sẽ fail ngay ở bước dựng giỏ vì lỗi của FR-07, không phải lỗi FR-08.
+     - (c) Bấm nút ở Trang chủ nhiều lần: mỗi lần bấm tạo một dòng mới (#70), làm sai kết quả mong đợi về danh sách sản phẩm.
+   - **Khuyến nghị (a).**
+
+## Commit
+
+Đã push `63e6e8c`, `16da9ad`, `dde7e39`. Lần push này cũng đẩy luôn commit `d438b99` (spec forgot-password) của phiên feature A chạy song song, vì commit đó đã nằm trên `master`.
+
+## Bước tiếp theo
+
+Sau khi bạn trả lời 3 câu trên và điền phần codegen:
+
+> "áp dụng các quyết định, viết page object và API client cho checkout (hoàn tất T2)"
+```
+
+- **Used in:** `features/checkout/automation_design.md` §1 (commit 63e6e8c), §2 (commit 16da9ad); AI-02 Artifact #15, #16
+
+---
+
+## Prompt018 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 19:45 17/11/2026
+- **Output received:** 19:50 17/11/2026
+- **Feature / step:** checkout (fB) FR-08 – T1 decisions, T2 page objects, BUG-01
+- **Purpose:** Áp dụng quyết định (DT-07 là bug, BVA trên Web), hoàn tất T2 (page object, API client), soạn BUG-01
+- **Prompt (verbatim):**
+
+```text
+1. công nhận việc checkout khi giỏ hàng rỗng là bug và tạo issue
+2. thực hiện trên web
+- ngày và trình duyệt tương tự với feature A, bạn copy lại 
+- thực hiệncác vấn đề còn lại theo các đề xuất của bạn
+- thực hiện các việc còn lại để hoàn thiện bước T2
+```
+
+- **AI output (verbatim):**
+
+```text
+Skill
+Bash Check gh account, labels, issue templates, HW04 bug report
+Bash Read group repo README §4–§6 and the issue template fields
+Bash Read issue #17 body as a format example
+Bắt đầu áp dụng các quyết định vào §1 (DT-07 tự động hóa đủ, BVA chạy trên Web).
+Bash Apply DT-07 and BVA decisions to §1 and commit
+Bash Record codegen date, conclusion and add-to-cart decision
+Giờ viết page object. Kiểm tra trước xem phiên feature A có đang sửa các file dùng chung không.
+Bash Check shared files state and existing page object style
+Bash Check testDir and server reuse settings
+Viết các page object và mở rộng API client.
+Write /home/hg/source/software-testing/week04/page-objects/SiteHeader.ts
+Write /home/hg/source/software-testing/week04/page-objects/Dialogs.ts
+Write /home/hg/source/software-testing/week04/page-objects/HomePage.ts
+Write /home/hg/source/software-testing/week04/page-objects/ProductPage.ts
+Write /home/hg/source/software-testing/week04/page-objects/CartPage.ts
+Write /home/hg/source/software-testing/week04/page-objects/CheckoutPage.ts
+Mở rộng `LoginPage` và `EshopApi` (file dùng chung với feature A, chỉ thêm, không sửa phần cũ).
+Edit /home/hg/source/software-testing/week04/page-objects/LoginPage.ts
+Edit /home/hg/source/software-testing/week04/api/EshopApi.ts
+Bash Check API client header and TypeScript availability
+Bash Run a temporary page-object check on 3 browsers
+Page object chạy đúng trên cả 3 trình duyệt. Xóa spec tạm, xem ảnh chụp dùng cho bug.
+Bash Remove the temporary spec and keep the Chromium screenshots
+Read /home/hg/source/software-testing/week04/bugs/screenshots/DT-07_empty-checkout_chromium.png
+Ảnh rõ ràng. Cập nhật §2 (page object đã viết, kết quả kiểm tra) rồi commit.
+Bash Record page-object check in §2 and commit page objects
+Giờ ghi BUG-01 vào bug report và soạn nội dung issue (chưa gửi).
+Bash Read the rest of the bug report template and an env example
+Bash Write BUG-01 in the bug report
+Bash Link BUG-01 in §8, commit, draft the issue body
+Bash Add AI-02 rows, commit and push
+Đã làm xong T2 cho checkout. BUG-01 đã ghi vào bug report, nhưng **issue chưa gửi**: theo quy trình của skill, bạn cần xem nội dung trước. Mình đã commit và push 6 commit.
+
+## Đã làm
+
+**Áp dụng quyết định T1 vào §1** (`7a73bee`)
+- DT-07 tự động hóa đủ: kiểm cả trang Giỏ hàng lẫn đường gõ thẳng `/checkout`, sau đó chạy bước 3–5 qua API.
+- BVA-01 … 04 chạy trên Web. Tổng số đã chốt: 17 TC, cả 17 đều tự động hóa.
+
+**§2, phần codegen** (`581a82b`)
+- Ngày / trình duyệt chép từ feature A: "17/11/26 - Firefox". Câu kết luận cũng dùng lại câu của feature A.
+- Bỏ "(proposed)" ở các dòng so sánh.
+- Nút thêm giỏ hàng: `addToCart` bấm tối đa 2 lần và trả về số lần đã bấm. Khi phải bấm lần 2, spec sẽ ghi annotation link tới #73 để lỗi vẫn hiện trong report.
+
+**Page object và API client** (`69b2dcc`)
+- Page object mới: `SiteHeader`, `HomePage`, `ProductPage`, `CartPage`, `CheckoutPage`, `Dialogs` (ghi lại mọi `alert`).
+- Mở rộng `LoginPage`: thêm 2 ô nhập và hàm `login()`.
+- Mở rộng `EshopApi`: `getCart`, `addToCart`, `checkout` (gửi được header bất kỳ hoặc không có header), `myOrders`, `adminOrders`.
+- Không có `expect` nào trong `page-objects/` và `api/`.
+- Kiểm tra bằng một spec tạm chạy qua page object (đã xóa, không commit): **3 passed** trên Chromium / Firefox / WebKit.
+  - Luồng đầy đủ: giỏ 3 / 4 / 3 → trang thanh toán hiện 126,000,000 ₫ → đơn được lưu với tổng 126000000.
+  - Giỏ rỗng gõ `/checkout` → lưu đơn 0 ₫. Khách chưa đăng nhập → 401.
+  - Mọi locator đều khớp đúng 1 phần tử. `addToCart` cần 2 lần bấm ở cả 3 trình duyệt.
+
+**BUG-01** (`4393e8d`)
+- Đã ghi vào [bugs/BUG_REPORT.md](bugs/BUG_REPORT.md) và §8 của file thiết kế.
+- Có 2 ảnh Chromium trong `bugs/screenshots/`: trang thanh toán với giỏ rỗng, và màn hình sau khi bấm thanh toán.
+
+**AI-02** (`0982d8f`): thêm dòng #17 và #18.
+
+## Nội dung issue chờ bạn duyệt
+
+- **Tiêu đề:** `[23120046][FR-08][Web] Checkout with an empty cart (typed URL /checkout) is accepted and stores an order of 0 ₫`
+- **Label:** `bug`, `severity: medium`, `platform: web`, `technique: EP`, `pool: B`, `hw: HW04`; tự gán cho bạn.
+- **Nội dung đầy đủ:** `/tmp/claude-1000/-home-hg-source-software-testing/d83bae80-f26f-4f2b-9278-13e75bf75654/scratchpad/bug01-issue.md`, theo đúng template nhóm. Các ý chính:
+  - **Kết quả mong đợi:** dẫn 2 câu FR-08 (dòng 105–106). Mình ghi rõ là **FR-08 không có câu nào nói thẳng về giỏ rỗng**; oracle là giả định A6 / quyết định Q4 của HW02 mà bạn đã duyệt.
+  - **Kết quả thực tế:** Web gửi `{"items": [], "total_amount": 0}` và nhận 200; trang hiện "Thanh toán thành công!"; đơn `total_amount` 0 được lưu. Giống nhau trên cả 3 trình duyệt.
+  - **Ghi chú:** issue này khác #12, #13, #14. Khi chạy DT-07 tự động sẽ bình luận thêm report và ảnh lỗi.
+
+## Cần bạn xác nhận
+
+1. **Gửi issue này không?**
+   - Issue công khai và đứng tên bạn, nên cần bạn đồng ý với nội dung.
+   - Bằng chứng hiện là ảnh từ lần kiểm tra ở T2, chưa phải ảnh từ lần chạy test tự động. Ảnh lỗi của lần chạy thật sẽ được bổ sung bằng một bình luận ở T7.
+   - **Khuyến nghị:** gửi ngay, như bạn đã yêu cầu.
+2. **Severity Medium / Priority Medium** (đề xuất)
+   - Xét theo README nhóm §4.3: hệ thống sai quy tắc "đơn hàng phải có sản phẩm", nhưng người dùng tránh được nếu không tự gõ URL, và không ảnh hưởng dữ liệu của người khác.
+   - Có thể nâng lên High nếu bạn cho rằng đơn 0 ₫ là "chấp nhận dữ liệu sai mà không tránh được".
+3. **Cách đính kèm ảnh**
+   - `gh` không tải ảnh lên được.
+   - Lựa chọn: (a) mình tạo issue, sau đó bạn kéo 2 ảnh vào một bình luận hoặc sửa phần "Ảnh chụp"; (b) chạy script `upload_attachments.js` của skill (mở Chrome, bạn đăng nhập GitHub) để lấy link ảnh và đưa thẳng vào nội dung trước khi tạo issue.
+   - **Khuyến nghị (b)**, vì template nhóm yêu cầu ảnh nằm trong phần "Ảnh chụp".
+
+## AI tự đánh giá (T2)
+
+| # | Điểm | Bằng chứng | Việc cần làm |
+| --- | --- | --- | --- |
+| P1 | 2 | Chỉ sửa §1 (quyết định), §2, §8, page object, API client, BUG-01, AI-02 | – |
+| P2 | 2 | Bước trước đã commit trước khi làm tiếp | – |
+| P3 | 2 | Mỗi quyết định của bạn là một commit riêng (`7a73bee`, `581a82b`) | – |
+| P4 | 2 | Severity ghi "(proposed – to be confirmed)"; issue chưa gửi | – |
+| P5 | 2 | 3 câu hỏi ở trên | – |
+| P6 | 2 | Mỗi việc một commit, AI-02 cùng lượt, đã push | Log prompt cuối buổi |
+| 5 | 2 | Locator lấy từ codegen + ARIA snapshot, kiểm lại qua page object trên 3 trình duyệt | – |
+| 6 | 2 | Không dùng XPath, `nth`, class; thẻ sản phẩm tìm bằng heading | – |
+| 7 | 2 | Các locator dự phòng (ô nhập không có tên, thẻ sản phẩm) đều có lý do trong §2 và mục phát hiện | – |
+| 8 | 2 | Không có `expect` trong `page-objects/` và `api/` | – |
+
+**Gate: passed.**
+
+Repo của bạn còn file `HW04_Automation_Testing_Vietnamese.pdf` chưa commit; file này có từ trước, không phải do phiên này, nên mình để nguyên.
+
+## Bước tiếp theo
+
+Bạn trả lời 3 câu ở trên để mình gửi issue. Sau đó:
+
+> "bắt đầu bước T3 cho checkout: file dữ liệu test (web.json, api.json)"
+```
+
+- **Used in:** design §1 (commit 7a73bee), §2 (commits 581a82b, 69b2dcc), `page-objects/`, `api/EshopApi.ts`, `bugs/BUG_REPORT.md` BUG-01 (commit 4393e8d); AI-02 Artifact #17, #18
+
+---
+
+## Prompt019 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 19:53 17/11/2026
+- **Output received:** 19:57 17/11/2026
+- **Feature / step:** checkout (fB) FR-08 – BUG-01 filing, T3 test data
+- **Purpose:** Sửa câu kết luận codegen, gửi issue BUG-01 lên repo nhóm kèm ảnh, bắt đầu T3
+- **Prompt (verbatim):**
+
+```text
+chỉnh sửa lại comment như sau: Playwright Codegen provides useful initial locators, but some generated locators rely on element positions and are not sufficiently stable, so I compared them with the ARIA snapshot and selected more specific role-based or label-based locators to improve test reliability and maintainability.
+tôi đồng ý với nội dung của issue, push lên repo nhóm cho bài tập 2 nha
+bạn cần câu lệnh sudo nào để cấp quyền gh? dùng gh để dán ảnh, tôi sẽ chạy lệnh cấp quyền sau đó bạn dùng gh tự lấy ảnh và post lên issue
+còn lại tôi đồng ý với đề xuất của bạn
+tiếp tục bước T3
+```
+
+- **AI output (verbatim):**
+
+```text
+Bash Read the attachment upload script header and check display
+Bash Replace the codegen conclusion with the student's sentence and commit
+Tạo issue trên repo nhóm HW02 với nội dung bạn đã duyệt.
+Bash File BUG-01 as a new issue on the HW02 group repo
+Issue #116 đã tạo. Giờ mở cửa sổ Chrome để tải ảnh lên (bạn cần đăng nhập GitHub trong cửa sổ đó).
+Bash Upload the two screenshots as GitHub attachments (browser login)
+Trong lúc chờ bạn đăng nhập, mình ghi link issue #116 vào bug report và §8.
+Bash Link BUG-01 to issue #116 and commit
+Bắt đầu T3. Xem cách feature A làm §3 và file dữ liệu để giữ cùng định dạng.
+Bash Read FR-03 §3 and sample web.json rows
+Bash Read the FR-08 HW02 assumptions and decisions
+Đã đủ thông tin từ test basis HW02 (A1–A15, Q1–Q10 đều đã được bạn duyệt). Đang viết file dữ liệu.
+Bash Find seed accounts and products in the SRS and seed script
+Bash Write data/checkout/web.json and api.json and check cited SRS lines
+Kiểm tra nhanh: tổng tiền mong đợi trong file dữ liệu khớp với giá catalog × số lượng (tính lại từ test basis, không lấy từ app).
+Bash Cross-check expected totals against catalog prices
+Ghi §3 vào file thiết kế.
+Bash Write §3 and commit the checkout test data
+Bash Read the upload result and the attachment markup
+Bạn đã đăng nhập, ảnh đã tải lên. Đưa 2 ảnh vào mục "Ảnh chụp" của issue #116.
+Bash Put the screenshots into issue #116 and clean up temp files
+Issue #116 đã có ảnh. Thêm dòng AI-02 rồi push.
+Bash Add AI-02 rows, commit and push
+Bash Read T3 rubric criteria
+Bước T3 của checkout đã xong. Issue BUG-01 cũng đã lên repo nhóm HW02, có ảnh. Tất cả commit đã push.
+
+## Câu hỏi về sudo và `gh`
+
+Không cần lệnh sudo nào. `gh` không tải được ảnh vì GitHub không có API đính kèm ảnh vào issue, nên cấp thêm quyền cũng không giải quyết được. Mình dùng script `upload_attachments.js` của skill: nó mở Chrome, bạn đăng nhập (bạn đã làm), script tải 2 ảnh lên rồi lấy link về. Sau đó mình đưa 2 ảnh vào mục "Ảnh chụp" bằng `gh issue edit`. Profile trình duyệt (có phiên đăng nhập) và các file nội dung tạm đã xóa.
+
+## Đã làm
+
+- **Câu kết luận codegen:** đã thay bằng câu của bạn (`70f6e82`).
+- **Issue [#116](https://github.com/angquoc/software-testing-2026-HW02-group/issues/116):**
+  - Label `bug`, `severity: medium`, `platform: web`, `technique: EP`, `pool: B`, `hw: HW04`; gán cho `thhuon`.
+  - Có 2 ảnh trong mục "Ảnh chụp".
+  - Link đã ghi vào `bugs/BUG_REPORT.md` và §8 (`7583307`).
+- **T3, dữ liệu test** (`65d47f5`):
+
+| File | Số dòng | Nội dung |
+| --- | --- | --- |
+| [data/checkout/web.json](data/checkout/web.json) | 7 | DT-01, DT-03, DT-07, BVA-01 … 04; giỏ hàng được dựng trên trang sản phẩm |
+| [data/checkout/api.json](data/checkout/api.json) | 11 | DT-02, DT-04 … 06, phần API của DT-07, DT-08, DT-09 … 13; giỏ dựng bằng `POST /api/cart` |
+
+- **Nguồn giá trị:**
+  - Giá sản phẩm lấy từ seed (`database.js:98-102`).
+  - Mọi tổng mong đợi được tính lại bằng giá × số lượng và đã đối chiếu bằng script, không lấy từ app.
+  - Oracle theo đúng A1–A15 / Q1–Q10 bạn đã duyệt ở HW02:
+    - Mã HTTP status chỉ ghi lại, không chấm (Q1).
+    - DT-09 … 13 chấp nhận 2 kết quả: lưu đơn với tổng của server, hoặc bị từ chối (Q2).
+    - Trang Web không có ô địa chỉ, nên phần địa chỉ không chấm (Q7).
+    - App không có badge giỏ hàng (#79), nên phần badge không kiểm được.
+- **Dữ liệu không đụng nhau giữa các lần chạy:** mỗi test đăng ký một tài khoản mới `fr08.{id}.{run}@example.com`. Tài khoản mới có giỏ trên server rỗng và 0 đơn, nên không phải khởi động lại backend giữa các test.
+- **AI-02:** thêm dòng #19, #20 (`eeaaff1`).
+
+## AI tự đánh giá (T3)
+
+| # | Điểm | Bằng chứng | Việc cần làm |
+| --- | --- | --- | --- |
+| P1 | 2 | Chỉ sửa §3, thêm `data/checkout/`; phần bug (#116) làm theo yêu cầu của bạn | – |
+| P2 | 2 | T2 đã commit (`69b2dcc`) trước khi làm T3 | – |
+| P3 | 2 | Câu kết luận của bạn được sửa thành commit riêng | – |
+| P4 | 2 | Issue chỉ gửi sau khi bạn duyệt nội dung | – |
+| P5 | 2 | 1 câu hỏi bên dưới | – |
+| P6 | 2 | Mỗi việc một commit; AI-02 cùng lượt; đã push | Log prompt cuối buổi |
+| 9 | 2 | Toàn bộ dữ liệu nằm trong `data/checkout/`; chưa có spec nào | Kiểm lại ở T4 |
+| 10 | 2 | Mỗi dòng có `source` (dòng README / A# / Q#); không còn `<CONFIRM>` | – |
+| 11 | 2 | Mỗi test và mỗi lần chạy dùng tài khoản riêng (ghi trong §3) | – |
+
+**Gate: passed**
+
+## Cần bạn quyết định
+
+1. **DT-07 có kiểm "hình minh họa" của giỏ rỗng không**
+   - TC trích câu FR-07 "Giỏ hàng trống phải có hình minh họa và thông báo rõ ràng.", nhưng Web không có ảnh. Lỗi này đã có issue #80 trong feature FR-07 của bạn khác.
+   - Nếu giữ, DT-07 sẽ fail vì 2 lý do: BUG-01 (#116) và #80.
+   - Lựa chọn: (a) giữ, dùng `expect.soft` để report ghi nhận cả 2 lỗi, rồi ở T7 bình luận "Related" trên #80; (b) bỏ phần hình, chỉ kiểm thông báo và việc không tạo được đơn.
+   - **Khuyến nghị (a):** giữ đúng như TC.
+
+## Bước tiếp theo
+
+> "bắt đầu bước T4 cho checkout: sinh spec web.spec.ts và api.spec.ts từ §1–§3"
+```
+
+- **Used in:** design §2 (commit 70f6e82), issue #116 + `bugs/BUG_REPORT.md` (commit 7583307), `data/checkout/` + design §3 (commit 65d47f5); AI-02 Artifact #19, #20
+
+---
