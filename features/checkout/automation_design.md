@@ -211,7 +211,7 @@ Categories: fragile selector · weak assertion · wrong oracle · missing edge c
 - **Reports:** `reports/checkout/<browser>/index.html` + `results.json`, committed as the tool wrote them. Title checked on all three ([Chromium](screenshots/t6/report-chromium.png), [Firefox](screenshots/t6/report-firefox.png), [WebKit](screenshots/t6/report-webkit.png)): "HW04 · FR-08 Checkout · <browser> · Run by: 23120046 · <ISO start time>".
 - **Screenshots:** `reports/checkout/<browser>/screenshots/<TC ID>.png`, one per failed Web test (6 per browser: DT-01, BVA-01 … 04, DT-07), copied by the run script. The 8 failed API tests have no page; their evidence is the report entry.
 
-Script output (`summarize-results.mjs --markdown`, FR-08 rows):
+Script output (`summarize-results.mjs --markdown`, FR-08 rows, T8 18/11/2026 from the fourth set's `results.json`; not counted by hand):
 
 **Runs**
 
@@ -257,8 +257,21 @@ The same 4 tests pass (DT-03, DT-04 … 06) and the same 14 fail on every browse
 
 ## 7. Not automated (T8)
 
+**No test case is left out:** §1 has no `No` row; all 17 HW02 test cases are automated (7 Web, 10 API only; DT-07 has a Web and an API test).
+
 | TC ID | Reason | Tested instead |
 | --- | --- | --- |
+| – | – | – |
+
+Parts of the HW02 expected results that the tests record but do not judge, and why (decisions of HW02, design §3):
+
+| TC ID | Part of the expected result | Why not asserted | Recorded as |
+| --- | --- | --- | --- |
+| DT-01 | "the screen is recorded (A7)" | A7: the confirmation is recorded, not judged | annotation `checkout response` |
+| DT-01 | address `123 Le Loi, TP.HCM` typed on the page | the Web page has no address field; A12 / Q7 give the address no class | annotation `address` (0 fields) |
+| DT-01 | "the badge no longer shows the old count" (A8) | the Web has no cart badge (group issue #79); the cart page is checked instead | – |
+| DT-03 | what the Web shows a guest | A2 / Q1: recorded, not judged | annotations `dialog`, `page after the cart button (a)`, `checkout response (b)` |
+| DT-04 … 06, DT-07 (API), DT-09 … 13 | the HTTP status of a refused request | Q1: the status is recorded, not judged; the stored orders are the oracle | annotation `checkout response` |
 
 ## 8. Failures and bugs (T7)
 
@@ -292,3 +305,5 @@ Passed: DT-03 (both guest paths refused, no order), DT-04 (401), DT-05 (403), DT
 | [#80](https://github.com/angquoc/software-testing-2026-HW02-group/issues/80) empty cart without illustration (FR-07, 23120061) | FR-07 README:100 | DT-07 (Web, soft) | Yes | Related – comment (student 17/11) (BUG-17) – [sent](https://github.com/angquoc/software-testing-2026-HW02-group/issues/80#issuecomment-6955373092) |
 
 Not asserted, recorded only: "Thêm vào giỏ hàng" needs two clicks on every add (group issue [#73](https://github.com/angquoc/software-testing-2026-HW02-group/issues/73): its title speaks of the default quantity 1; HW04 sees it with quantity 3 as well), no cart badge ([#79](https://github.com/angquoc/software-testing-2026-HW02-group/issues/79)).
+
+**Proof of the comments** (18/11/2026, public view of the group repo): [#12](../../bugs/screenshots/checkout_comment_12.png) · [#13](../../bugs/screenshots/checkout_comment_13.png) · [#14](../../bugs/screenshots/checkout_comment_14.png) · [#15](../../bugs/screenshots/checkout_comment_15.png) · [#16](../../bugs/screenshots/checkout_comment_16.png) · [#17](../../bugs/screenshots/checkout_comment_17.png) · [#116](../../bugs/screenshots/checkout_comment_116.png) · [#80](../../bugs/screenshots/checkout_comment_80.png).

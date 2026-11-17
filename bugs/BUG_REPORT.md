@@ -6,7 +6,7 @@
 | Issue tracker | [angquoc/software-testing-2026-HW02-group](https://github.com/angquoc/software-testing-2026-HW02-group/issues) – rules: group README §4 (template, title, labels) and §6 (HW04: comment on HW02 issues, new issues with label `hw: HW04`) |
 | Earlier bug reports matched | HW02 `bugs/BUG_REPORT.md` (BUG-01 … BUG-41 = issues #1 … #41) |
 | Reporter | HỒ THÙY HƯƠNG – 23120046 |
-| Proof (Issues page) | [issues-label-hw04.png](screenshots/issues-label-hw04.png) – filter `is:issue state:open author:thhuon label:"hw: HW04"`, 17/11/2026 22:35: #117 (FR-03), #116 (FR-08). Commented HW02 issues: links in the overview |
+| Proof (Issues page) | [issues-label-hw04.png](screenshots/issues-label-hw04.png) – filter `is:issue state:open author:thhuon label:"hw: HW04"`, 17/11/2026 22:35: #117 (FR-03), #116 (FR-08). Commented HW02 issues: links in the overview; FR-08 comments (18/11/2026): [#12](screenshots/checkout_comment_12.png), [#13](screenshots/checkout_comment_13.png), [#14](screenshots/checkout_comment_14.png), [#15](screenshots/checkout_comment_15.png), [#16](screenshots/checkout_comment_16.png), [#17](screenshots/checkout_comment_17.png), [#116](screenshots/checkout_comment_116.png), [#80](screenshots/checkout_comment_80.png) |
 | Count | Bugs: 17 · Confirmed: 13 · Changed: 2 · New: 2 |
 
 ## 1. Severity / priority scale
