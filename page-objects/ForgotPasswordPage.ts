@@ -19,6 +19,7 @@ export class ForgotPasswordPage {
   readonly backToLoginButton: Locator;
 
   // Bước 1
+  readonly emailLabel: Locator;
   readonly emailInput: Locator;
   readonly requestOtpButton: Locator;
 
@@ -41,6 +42,7 @@ export class ForgotPasswordPage {
       .getByRole('button', { name: 'Quay lại đăng nhập' })
       .or(page.getByRole('link', { name: 'Quay lại đăng nhập' }));
 
+    this.emailLabel = this.form.locator('label').filter({ hasText: /^Nhập Email/ });
     this.emailInput = this.fieldUnderLabel(/^Nhập Email/);
     this.requestOtpButton = page.getByRole('button', { name: 'Lấy mã OTP' });
 
@@ -94,6 +96,11 @@ export class ForgotPasswordPage {
     await this.newPasswordInput.fill(newPassword);
     if (confirm !== undefined) await this.confirmPasswordInput.fill(confirm);
     await this.resetPasswordButton.click();
+  }
+
+  /** FR-03 "Quay lại đăng nhập" (missing today, HW02 BUG-11). */
+  async backToLogin() {
+    await this.backToLoginButton.click();
   }
 
   async backToStep1() {

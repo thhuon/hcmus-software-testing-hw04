@@ -6,7 +6,7 @@
 | Designed test cases | `../week02/features/fA-pool-A/02_domain_testing.md` (34 TC), `03_boundary_value_analysis.md` (10 TC); DT-35 added in HW04 (§1) |
 | Screens / URLs | Web – Đăng nhập `http://localhost:5173/login` → Quên mật khẩu `http://localhost:5173/forgot-password` (Bước 1 email, Bước 2 OTP + mật khẩu mới) |
 | Specs · page objects · API client · data | `tests/forgot-password/` · `page-objects/` · `api/` · `data/forgot-password/` |
-| Count | Designed: 44 + 1 added in HW04 (DT-35) · Automated: 33 · Not automated: 12 · Assertion patterns: 0 |
+| Count | Designed: 44 + 1 added in HW04 (DT-35) · Automated: 33 · Not automated: 12 · Assertion patterns: 8 |
 | Prompt log entries | Prompt006, Prompt008 (T1) · Prompt009 – Prompt013 (T2) · Prompt012, Prompt013 (T3) |
 
 ## 1. Test cases selected (T1)
@@ -154,13 +154,31 @@ No `<CONFIRM>` left.
 
 ## 4. Specs and assertion patterns (T4)
 
-Prompt used for generation: see the AI-use log entry of this step.
+Prompt used for generation: see the AI-use log entry of this step (prompt 19:12 17/11/2026, Web spec; the API spec follows in the next prompt, one prompt per spec file).
+
+The spec reads `data/forgot-password/web.json` and makes one test per row, title `<TC ID> – <title>`, grouped by the row's `flow`. Generated as is, not run yet (T5 runs and reviews it); checked only with `npx playwright test tests/forgot-password --list`: 30 tests per browser, 90 in all.
 
 | Spec | TC IDs | Assertion patterns |
 | --- | --- | --- |
+| `tests/forgot-password/web.spec.ts` › flow `reset` | DT-01, 04, 05, 20 … 26, 28, 29, 30, 35, BVA-03, 04, 05 | Persisted outcome; Soft (FR-22 error above submit, and DT-01's form checks); Text (DT-01 step indicator, `*`); Element state (DT-01 fields visible, `type="password"`); Value format (DT-01 OTP) |
+| › flow `otpFormat` | DT-02 | Value format (each OTP `^\d{6}$`, soft); distinct values (A17) |
+| › flow `backToLogin` | DT-03 | Text (step indicator, soft); URL / navigation (`/login`); Element state ("Sign In" visible) |
+| › flow `retryAfterError` | DT-06 | Soft (error above submit); Persisted outcome (rejected password refused, then the new one logs in, the old one refused) |
+| › flow `requestOnly` | DT-07, 08, 09 | Negative (no OTP message, no Bước 2 button); Element state ("Lấy mã OTP" still visible) |
+| › flow `otpWebThenApi` | DT-11 … 15, BVA-01, 02 | Soft (error above submit); Response (API reset `4xx`); Persisted outcome (old password logs in, new one refused) |
 
 | Assertion pattern | Used by |
 | --- | --- |
+| Persisted outcome: login through the API with old / new password (`expect.poll`, `200` / `4xx`; A5, A6) | every row with an account except DT-02: 25 tests |
+| Soft assertions (`expect.soft`): several checks of one result, the test goes on to the stored-password check | DT-01, 02, 03, 06, every `error` row (FR-22 `[role="alert"]` above `button[type="submit"]`) |
+| Visible text (`toHaveText`, `toContainText`) | DT-01, DT-03 |
+| Element state (`toBeVisible`, `toHaveAttribute`) | DT-01, DT-03, DT-07 … 09 |
+| Value format (`toMatch` a pattern from the data, distinct values) | DT-01, DT-02 |
+| URL / navigation (`toHaveURL`) | DT-03 |
+| Negative (`not.toBeVisible`) | DT-07 … 09 |
+| Response (status of the API reset) | DT-11 … 15, BVA-01, 02 |
+
+Page object additions made with the spec: `emailLabel` (for the `*` check) and `backToLogin()` in `page-objects/ForgotPasswordPage.ts`.
 
 ## 5. Review of the AI-generated scripts (T5)
 
