@@ -139,7 +139,7 @@ How each oracle is read (from the decisions, not from the app):
 - **Cart emptied** (A8): on the Web, the cart page shows the empty-cart state after the checkout; through the API, `GET /api/cart` returns no line. The badge part of A8 cannot be checked: the Web has no badge (group issue #79).
 - **DT-03** (A2): what the Web shows a guest (dialog text, URL) is recorded, not judged; only "no new order" is asserted, after each path.
 
-Open expected values (`<CONFIRM>`): none. One scoping question for the student (reply, decision 1): DT-07's `emptyState.image` comes from the FR-07 sentence the TC quotes; the Web has no image (group issue #80, FR-07, another member's feature).
+Open expected values (`<CONFIRM>`): none. DT-07 keeps the TC as it is (student 17/11): `emptyState.image` comes from the FR-07 sentence the TC quotes and stays, as a soft assertion next to the order checks; the Web has no image (group issue #80, FR-07, another member's feature), so T7 links DT-07 to #80 as well as to #116.
 
 ## 4. Specs and assertion patterns (T4)
 
