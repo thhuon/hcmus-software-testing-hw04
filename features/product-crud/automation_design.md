@@ -56,10 +56,71 @@ DT = domain testing (`../week02/features/fC-pool-C/02_domain_testing.md` §2.2),
 
 ## 2. Locators and page objects (T2)
 
+**How the locators were found:** codegen by the student (Admin Login → "Sản phẩm" → table → add form → "Lưu sản phẩm" → "Xóa"; see "Codegen check" at the end of this section), then an ARIA snapshot (`page.locator('body').ariaSnapshot()`) of the login screen and the product tab of the running Admin web, and every locator counted on the live page on Chromium 156.0.8078.4, Firefox 157.0 and WebKit 27.2 (exploration script in the agent's scratchpad, 18/11; one temporary product per browser added, edited and deleted on the Admin web, none left: `GET /api/products` = ids 1–5 afterwards). The ARIA snapshots and the counts were the same on the three browsers.
+
 | Screen | Element | Locator | Why this locator |
 | --- | --- | --- | --- |
+| Admin Login | Heading | `getByRole('heading', { name: 'Admin Login', level: 2 })` | Role + name; the login screen is shown (no URL change: the Admin web is one page) |
+| Admin Login | "Email" field | `getByRole('textbox', { name: 'Email' })` | Role + name; the name comes from the placeholder (no label). Same as codegen |
+| Admin Login | "Password" field | `getByRole('textbox', { name: 'Password' })` | As above. Same as codegen |
+| Admin Login | "Login" button | `getByRole('button', { name: 'Login' })` | Role + name; codegen pressed Enter instead |
+| Sidebar (logged in) | "EShop Admin" heading | `getByRole('heading', { name: 'EShop Admin', level: 1 })` | Role + name; the page is ready after login |
+| Sidebar | "Sản phẩm" tab | `getByRole('listitem').filter({ hasText: /^Sản phẩm$/ })` | The tabs are `<li>` with a click handler: no `button` / `link` role and no name (testability finding). Filtered by the whole text; 1 match. Codegen `getByText('Sản phẩm')` matches 1 element on the dashboard but 6 on the product tab |
+| Sidebar | "Đăng xuất" tab | `getByRole('listitem').filter({ hasText: /^Đăng xuất$/ })` | As above; 1 match |
+| Sản phẩm | Page heading | `getByRole('heading', { name: 'Quản lý Sản phẩm', level: 2 })` | Role + name; the product tab is ready |
+| Sản phẩm | Product form | `locator('form').filter({ has: getByRole('button', { name: 'Lưu sản phẩm' }) })` | The form has no name, so no `form` role; the page has one form with this button (the CSV import is not a form); 1 match. Scope for the category list and the labels |
+| Sản phẩm | Form heading (add / edit mode) | `getByRole('heading', { name: 'Thêm sản phẩm mới', level: 3 })` / `{ name: 'Sửa sản phẩm', level: 3 }` | Role + name; tells whether "Lưu sản phẩm" will add or edit. After a save the add heading comes back |
+| Sản phẩm | "Tên sản phẩm" field | `getByRole('textbox', { name: 'Tên sản phẩm' })` | Role + name from the placeholder; same as codegen. `required`, no `maxlength`: takes 300 characters and 5 spaces (valid) on the three browsers |
+| Sản phẩm | "Giá tiền" field | `getByRole('spinbutton', { name: 'Giá tiền' })` | Role + name from the placeholder; same as codegen. `type="number"` with no `min`, `max` or `step`: `-50000`, `0` and `9999999999` are valid; `250000.5` is invalid (the browser does not send the form) |
+| Sản phẩm | "URL Ảnh" / "Mô tả" fields | `getByRole('textbox', { name: 'URL Ảnh' })` / `getByRole('textbox', { name: 'Mô tả' })` | Role + name from the placeholder; same as codegen. Fixed values only (HW02 A13) |
+| Sản phẩm | Category list | `productForm.getByRole('combobox')` · `selectOption({ label: 'Phụ kiện' })` | The `<select>` has no label and no accessible name (testability finding); it is the only combobox of the form. Options = the categories of `GET /api/categories` (Điện thoại, Laptop, Phụ kiện), no empty option, "Điện thoại" selected by default. Codegen did not record a choice |
+| Sản phẩm | Field labels (FR-22 `*`) | `productForm.locator('label')` | For DT-23. The form has no `<label>` (0 elements; HW02 BUG-33): the fields show placeholders only, so there is no label to carry `*` |
+| Sản phẩm | "Lưu sản phẩm" button | `getByRole('button', { name: 'Lưu sản phẩm' })` | Role + name; same as codegen |
+| Sản phẩm (edit) | "Hủy sửa" button | `getByRole('button', { name: 'Hủy sửa' })` | Role + name; shown only in edit mode |
+| Sản phẩm | Product table | `getByRole('table')` | Role; 1 match |
+| Sản phẩm | Column headers | `getByRole('columnheader', { name: 'Tên SP' })` / `'Giá'` (also `'Ảnh'`, `'Hành động'`) | Role + name; same as codegen. The position of "Tên SP" and "Giá" among the headers gives the column of the name and price cells (below). No "Danh mục" header (0; HW02 BUG-37) |
+| Sản phẩm | All product rows | `getByRole('row').filter({ has: getByRole('cell') })` | Rows that have data cells; the header row has only column headers, so it is left out without a position. Count = number of products |
+| Sản phẩm | Row of a product | `productRows.filter({ has: getByRole('cell', { name: <product>, exact: true }) })` | 1 row per product name. Two cells of the row have the product name as accessible name (the image cell, through the image `alt`, and the name cell), which is why codegen needed `.first()`; filtering the row by "has such a cell" is not affected. Needs a name that no other product has (T3) |
+| Sản phẩm | Name / price cell of a row | `row.getByRole('cell').nth(<index of the "Tên SP" / "Giá" header>)` | The cells have no column name; the index is read from the header texts at run time, not written in the code, so a new column does not shift it. DT-24 reads the name cell of every row and compares it with `GET /api/products`. Price shown as `45000000 ₫` (no thousand separators; HW02 BUG-36) |
+| Sản phẩm | Product image of a row | `row.getByRole('img', { name: <product> })` | Role + name (`alt` = product name); not used by the TCs |
+| Sản phẩm | "Sửa" / "Xóa" of a row | `row.getByRole('button', { name: 'Sửa' })` / `row.getByRole('button', { name: 'Xóa' })` | Role + name inside the row; 1 match each. Codegen: `getByRole('button', { name: 'Xóa' }).nth(5)` and `getByRole('cell', { name: 'Sửa Xóa' }).first()` = by position |
+| Every screen | `alert` messages | `page.on('dialog')` → `page-objects/Dialogs.ts` (reused from FR-08) | Seen: "Cập nhật thành công!" after an edit (3 browsers); nothing after an add. In the code: "Bạn không phải là admin!", "Đăng nhập thất bại", "Lỗi lưu sản phẩm: …", "Lỗi xóa SP: …" |
+| – (form validation) | Browser message of a blocked field | `field.evaluate(e => ({ valid: e.validity.valid, message: e.validationMessage }))` | Not an element. Empty name: "Please fill out this field." (Chromium, Firefox) / "Fill out this field" (WebKit); `250000.5`: "Please enter a valid value. …" (Chromium) / "Please select a valid value. …" (Firefox) / "Enter a valid value" (WebKit). Text differs per browser, so a test checks `valid`, not the message |
+| – (responses) | `POST /api/products`, `PUT` / `DELETE /api/products/:id` | `page.waitForResponse(r => r.url().endsWith('/api/products') && r.request().method() === 'POST')` (and `/\/api\/products\/\d+$/` with `PUT` / `DELETE`) | Body and status the Admin web sent; an add returned 200 `{"message": "Product created", "id": …}` |
 
-Testability findings (elements without an accessible name, unstable text):
+Testability findings (elements without an accessible name, unstable text, behaviour that changes how the tests are built):
+
+- **No `<label>` anywhere in the product form and the login form:** the fields get their accessible name from the placeholder only; the category `<select>` has no name at all. FR-22 asks for a `*` next to each required label (DT-23, HW02 BUG-33).
+- **The sidebar tabs are `<li>` elements with a click handler** (no role, `tabIndex` −1): not reachable with the keyboard, found by their text. The Admin web is one page: no URL per tab, and a reload brings back the dashboard (the login stays: the token is kept in `localStorage` `adminToken`), so a test clicks "Sản phẩm" again after a reload.
+- **An edit on the Admin web writes the edited name into every row** (3 browsers, 18/11): after "Sửa" → new name → "Lưu sản phẩm" and the `alert` "Cập nhật thành công!", all 6 rows showed the new name with their own prices, while `GET /api/products` still had the right names; a reload showed the right names again. HW02 BUG-34 is this behaviour; DT-24 checks the list after the edit (student 18/11).
+- **The price field is a number field:** Chromium and WebKit do not let `abc` be typed (`fill` fails, `pressSequentially` leaves the old value); Firefox takes the letters, the value becomes empty and invalid ("Please enter a number."). On the three browsers the form cannot send `abc` (DT-14 Web part) or `250000.5` (DT-16 Web part). Spaces in the name, `-50000` and `0` in the price pass the browser check and are sent (DT-11, DT-13, BVA-06).
+- **The add sends strings:** the form sends `{"price": "250000", "category_id": "3", "id": null, …}` (text, from the inputs); an edit sends numbers. For T3 / T7: the stored result is read through the API, and the type is recorded, not judged (HW02 has no TC on it).
+- **A product name is not unique** and is the only text that identifies a row: two products with the same name give two rows for one row locator. Each test uses a name no other product has (T3); the BVA names `Ố` × n are the same for every run, so T3 must decide how BVA finds its row (by the id the API returns, or by deleting it at the end).
+
+**Codegen check (student, by hand).** `npm run sut`, then `npm run codegen:admin`; recorded: Admin Login (Email, Password, Enter) → "Sản phẩm" → column headers → cells of the first row → form heading → the four fields → name `iphone 12`, price `12`, description `ko có` → "Lưu sản phẩm" → the new row → "Xóa" of the 6th row. Date / browser: 18/11/26 – [student].
+
+| Element | Locator codegen picked (copied from the codegen window) | Same as the table above? | If not: which is better, and why (one line) |
+| --- | --- | --- | --- |
+| Email / Password fields | `page.getByRole('textbox', { name: 'Email' })`, `{ name: 'Password' }` | Yes | |
+| Login | Not captured (Enter pressed in the password field) | No | `getByRole('button', { name: 'Login' })`: the test clicks what the user sees |
+| "Sản phẩm" tab | `page.getByText('Sản phẩm')` | No | The `listitem` filtered by the whole text: `getByText` matches 6 elements once the product tab is open (heading "Quản lý Sản phẩm", the form …), so a second click fails in strict mode |
+| Column headers | `page.getByRole('columnheader', { name: 'Ảnh' })` … `'Hành động'` | Yes | Used to find the column index of the name and price |
+| Name cell of the first product | `page.getByRole('cell', { name: 'iPhone 15 Pro Max' }).first()`; `page.getByText('iPhone 15 Pro Max')` | No | The row filtered by a cell with the exact name: `.first()` is needed only because the image cell has the same name, and it hides which cell is meant |
+| Price cell | `page.getByRole('cell', { name: '30000000 ₫' })` | No | The price column of the product's row: the text `30000000 ₫` is data and changes when the price or its format changes |
+| "Sửa Xóa" cell | `page.getByRole('cell', { name: 'Sửa Xóa' }).first()` | No | `row.getByRole('button', { name: 'Sửa' })`: `.first()` picks whatever product is first, and the click lands on the cell, not on a button |
+| Form heading | `page.getByRole('heading', { name: 'Thêm sản phẩm mới' })` | Yes (`level: 3` added) | |
+| Form container | `page.getByText('Thêm sản phẩm mớiĐiện thoạ')` | No | A click on the form background; the text joins the heading and the first option, so it breaks when the categories change. The form is scoped by its "Lưu sản phẩm" button |
+| Tên sản phẩm / Giá tiền / URL Ảnh / Mô tả | `page.getByRole('textbox', { name: 'Tên sản phẩm' })`, `getByRole('spinbutton', { name: 'Giá tiền' })`, `getByRole('textbox', { name: 'URL Ảnh' })`, `{ name: 'Mô tả' }` | Yes | |
+| Category list | Not captured (no choice made; the default "Điện thoại" was saved) | No | `productForm.getByRole('combobox')` + `selectOption({ label })`: the TCs need "Phụ kiện" (id 3) |
+| "Lưu sản phẩm" | `page.getByRole('button', { name: 'Lưu sản phẩm' })` | Yes | |
+| The new row | `page.getByRole('cell', { name: 'iphone' }).nth(2)` | No | The row filtered by the exact name: `iphone` (a case-insensitive part of the name) matches 4 cells – the image and name cells of iPhone 15 Pro Max and of `iphone 12` – and `.nth(2)` depends on the order of the products |
+| "Xóa" of the new row | `page.getByRole('button', { name: 'Xóa' }).nth(5)` | No | `row.getByRole('button', { name: 'Xóa' })`: `.nth(5)` deletes whatever product is 6th |
+
+Conclusion (one sentence, student): [student]
+
+The comparisons in the last column were proposed by the agent (18/11).
+
+**T2 status (18/11):** codegen check done by the student; locator table and findings written from the running app on the three browsers. Still to do in T2: the page objects (`page-objects/AdminLoginPage.ts`, `AdminProductsPage.ts`, `Dialogs.ts` reused) and the product methods of the API client (`api/EshopApi.ts`: products and categories with any or no `Authorization` header), checked on the three browsers.
 
 ## 3. Test data (T3)
 
