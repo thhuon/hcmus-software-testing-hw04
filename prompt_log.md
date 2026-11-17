@@ -2895,7 +2895,7 @@ Các ảnh này lấy từ lần chạy thử. Ảnh của lần chạy chính t
 ## Prompt025 – Claude Code (claude-opus-5-5)
 
 - **Prompt sent:** 20:27 17/11/2026
-- **Output received:** 20:28 17/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Output received:** 20:28 17/11/2026
 - **Feature / step:** checkout (fB) FR-08 – prompt log
 - **Purpose:** Log các prompt chưa được log của phiên này (Prompt023–025)
 - **Prompt (verbatim):**
@@ -2906,10 +2906,50 @@ Các ảnh này lấy từ lần chạy thử. Ảnh của lần chạy chính t
 
 - **AI output (verbatim):**
 
-```text
+````text
 Bash Preview this session's unlogged prompts
 Bash Preview with interrupted turns included
+Bash Write Prompt023–025 and show their headers and TODO lines
+Bash Fill the TODO fields, link AI-02 and design header, commit and push
+Bash Read the logging rubric criteria
+Mình đã ghi thêm 3 prompt vào [prompt_log.md](prompt_log.md), đã commit và push (`25e7f23`).
+
+| Entry | Gửi lúc | Nội dung | Ghi chú |
+| --- | --- | --- | --- |
+| Prompt023 | 20:09 | "sau khi ghi kết quả vào file tạm…" | Bạn đã ngắt lượt này nên nó không có output. Phần việc được làm tiếp ở Prompt024. |
+| Prompt024 | 20:22 → 20:26 | "tiếp tục" | Gồm spec API, ảnh minh họa, báo cáo và PLAN. |
+| Prompt025 | 20:27 | lệnh log hiện tại | Đang ghi dở vì lượt này chưa kết thúc. |
+
+- **Ghi cả lượt bị ngắt:** script mặc định bỏ qua lượt chưa có output, nên mình chạy thêm tùy chọn `--include-incomplete` để Prompt023 được ghi, giữ đúng thứ tự 20:09 → 20:22. Prompt023 và Prompt025 vẫn mang nhãn "UNFINISHED"; lần log sau script sẽ cập nhật lại tại chỗ, giữ nguyên số.
+- **Các trường đã điền:** Feature / step, Purpose, Used in của cả 3 entry.
+- **AI-02 #27:** thay "logged later" bằng Prompt023 + Prompt024 và giờ gửi/nhận.
+- **Header file thiết kế checkout:** thêm Prompt022–024.
+
+| ID | Score | Bằng chứng | Việc cần làm |
+| --- | --- | --- | --- |
+| LOG-1 | 2 | Cả 3 lượt 20:09, 20:22, 20:27 đều có entry, không trùng | – |
+| LOG-2 | 2 | Đúng phiên của feature B, ngày 17/11 | – |
+| LOG-3 | 2 | Prompt và output lấy nguyên văn từ script | – |
+| LOG-4 | 2 | Giờ địa phương, định dạng `HH:MM dd/mm/yyyy` | – |
+| LOG-5 | 2 | Số tiếp nối sau Prompt022, không đánh lại số cũ | – |
+| LOG-6 | 2 | Prompt023 và Prompt025 có nhãn UNFINISHED | Lần log sau sẽ hoàn tất Prompt025 |
+| LOG-7 | 2 | Không còn TODO trong 3 entry mới | – |
+| LOG-8 | 2 | Không cần ảnh chụp màn hình phiên làm việc | – |
+| LOG-9 | N/A | Chỉ dùng Claude Code | – |
+| LOG-10 | 2 | Transcript chỉ đọc qua script | – |
+| LOG-11 | 2 | Commit 1 đã chạy và push | – |
+| LOG-12 | 2 | Không có prompt nào bạn dặn không ghi | – |
+
+**Gate: passed**
+
+**Commit gợi ý:** commit của mình đã chạy (`docs (ai): log Prompt023–Prompt025`). Nếu bạn sửa gì trong log thì commit riêng:
+```bash
+git -C /home/hg/source/software-testing/week04 add prompt_log.md
+git -C /home/hg/source/software-testing/week04 commit -m "docs (ai): <điều bạn đã sửa trong log>"
 ```
+
+**Bước tiếp theo:** "bắt đầu bước T5 cho checkout: review 2 spec"
+````
 
 - **Used in:** `prompt_log.md` Prompt023–025, AI-02 Artifact #27 (thời gian), design header
 
@@ -3349,5 +3389,234 @@ Bash Write this session's pending prompts to the log
 ```
 
 - **Used in:** `features/forgot-password/automation_design.md` §7; `HW04_Report.md` §3.1, `PLAN.md` A8; `prompt_log.md` (AI-02 Artifact #32)
+
+---
+
+## Prompt031 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 20:28 17/11/2026
+- **Output received:** 20:35 17/11/2026
+- **Feature / step:** checkout (fB) FR-08 – T5 review and fix
+- **Purpose:** Review 2 spec checkout, chạy lặp, sửa lỗi script (bước T5)
+- **Prompt (verbatim):**
+
+```text
+tiếp tục bước T5
+```
+
+- **AI output (verbatim):**
+
+```text
+Bắt đầu T5. Trước hết chạy lại cả 2 spec trên Chromium, sau đó chạy `--repeat-each=3` cho các test đang pass để xem có flaky không. Kết quả ghi vào thư mục tạm rồi gộp vào file chính ngay.
+Bash Rerun both checkout specs on Chromium and repeat the passing tests
+Lần chạy lặp lại có 6/12 lượt fail, dù các test này vừa pass ở lần chạy đơn. Xem chi tiết.
+Bash Show which repeated runs failed and why
+Bash Register the same e-mail twice to see the backend's answer
+Bash Check a guest with a non-empty cart: log out on the checkout page, then confirm
+Phương án này chạy được trên cả 3 trình duyệt: khách vẫn ở trang Thanh toán với 1 sản phẩm, bấm xác nhận nhận 401. Giờ sửa lỗi e-mail trùng ở cả 2 spec.
+Bash Fix the account e-mail uniqueness in both specs and commit
+Sửa tiếp nhánh `refused` của spec API: hiện tại, nếu dòng dữ liệu không ghi cách đếm đơn thì test sẽ không kiểm đơn hàng mà vẫn pass.
+Edit /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts
+Bash Commit the API fix, repeat the passing tests, rerun all on Chromium
+Phiên song song vừa ghi vào bộ nhớ chung rằng commit `f4b4d10` của mình đã vô tình gom cả các mục bug FR-03 mà họ đang stage. Kiểm tra lại.
+Bash Inspect what commits f4b4d10 and f0b2152 contain
+Bash Merge the T5 temp reports into playwright-report/checkout
+Bash Merge the remaining reports and screenshot the repeat runs before and after the fix
+Read /home/hg/source/software-testing/week04/features/checkout/screenshots/t5/repeat-before-fix-chromium.png
+Ảnh report thể hiện rõ: trước khi sửa, 6/12 lượt fail. Ghi §5.
+Bash Write §5 and commit only the checkout files
+Bash Add the AI-02 row for T5, commit only that file, push
+Bash Read T5 rubric criteria
+Bước T5 của checkout đã review xong 2 spec và sửa 2 lỗi script. Còn 2 điểm ở DT-03 cần bạn quyết định. Các commit đã push.
+
+## Kết quả
+
+**Chạy lại trên Chromium:** 4 passed, 14 failed, giống hệt T4. Cả 14 test fail đều vì lỗi sản phẩm đã biết.
+
+**Chạy `--repeat-each=3` cho 4 test đang pass (DT-03, DT-04 … 06): 6/12 lượt fail.** Đây là lỗi thật của script:
+- Mọi lần lặp của cùng một test dùng chung e-mail tài khoản.
+- Backend vẫn cho đăng ký lại e-mail đã có (trả 200, tạo user mới), nhưng khi đăng nhập thì lấy tài khoản đầu tiên.
+- Vì vậy giỏ hàng trên server cộng dồn 3 → 6 → 9 dòng, và bước kiểm tra lúc chuẩn bị dữ liệu báo lỗi.
+
+**Bảng review ở §5** (có ảnh report trước và sau khi sửa):
+
+| # | Lỗi của AI | Loại | Sửa | Loại nguyên nhân (đề xuất) |
+| --- | --- | --- | --- | --- |
+| 1 | E-mail tài khoản trùng giữa các lần lặp / retry | hidden dependency | Thêm chỉ số lặp và retry vào e-mail (`f4b4d10`). Chạy lặp lại: **12/12 passed** | Feature |
+| 2 | Nhánh `refused` của spec API: nếu dòng dữ liệu không ghi cách đếm đơn thì không kiểm đơn nào mà vẫn pass | weak assertion | Bắt buộc dòng dữ liệu phải ghi ít nhất một cách đếm đơn (`f0b2152`) | Model |
+| 3 | DT-03 đường (b): gõ `/checkout` làm tải lại trang nên giỏ của khách bị mất. Test này đang kiểm khách + giỏ rỗng, tức 2 lớp không hợp lệ cùng lúc | missing edge case | **Chưa sửa**, chờ câu hỏi 1 | Prompt |
+| 4 | DT-03 đường (a): có `if (isVisible())`, tức rẽ nhánh theo trạng thái trang | weak assertion | **Chưa sửa**, sẽ xử lý theo câu hỏi 1 | Model |
+
+**Đã kiểm theo checklist, không thấy lỗi:**
+- Fragile selector: chỉ có 2 chỗ dùng CSS (thẻ sản phẩm, ô tổng không sửa được), đều có lý do ghi rõ.
+- Wrong oracle: mọi giá trị mong đợi lấy từ file dữ liệu.
+- Flaky wait: không có `waitForTimeout`; chỉ còn khoảng chờ 1,5 s của nút thêm giỏ, do bạn đã quyết định.
+- Hard-coded data: không có dữ liệu viết cứng trong spec.
+- Thiếu TC: đủ 17/17.
+
+**Không có assertion nào bị nới lỏng** để test pass.
+
+**Gộp kết quả:** report HTML của các lần chạy đã chép vào `playwright-report/checkout/t5-*`; ảnh report nằm ở `features/checkout/screenshots/t5/`.
+
+**Hai việc cần bạn biết:**
+- **Commit `f4b4d10` lỡ gom cả các file bug FR-03** mà phiên song song đang stage. Phiên kia đã commit chồng lên và đã ghi nhận chuyện này, nên mình không viết lại lịch sử, chỉ ghi chú ở §5 và AI-02 #29. Từ giờ mình commit theo đường dẫn cụ thể (`git commit -m … -- <paths>`).
+- **Spec FR-03 có cùng lỗi e-mail trùng khi chạy lặp**, vì cách đặt e-mail của checkout chép từ FR-03. Mình không sửa vì đó là phần của phiên kia; bạn nên báo phiên FR-03.
+
+## AI tự đánh giá (T5)
+
+| # | Điểm | Bằng chứng | Việc cần làm |
+| --- | --- | --- | --- |
+| P1 | 2 | Chỉ sửa spec, §5 và AI-02 | – |
+| P2 | 2 | T4 đã commit trước khi làm T5 | – |
+| P3 | N/A | Không có chỉnh sửa nào bạn yêu cầu ở lượt trước | – |
+| P4 | 2 | Cột "vì sao AI bỏ sót" và loại nguyên nhân đều ghi (proposed) | Chờ bạn xác nhận |
+| P5 | 2 | 2 câu hỏi bên dưới | – |
+| P6 | 1 | Mỗi lần sửa một commit, AI-02 #29, đã push. Nhưng `f4b4d10` gom nhầm file của phiên kia | Đã ghi chú; từ giờ commit theo đường dẫn |
+| 17 | 2 | Đủ 7 loại lỗi đã được xét, cho cả 2 spec | – |
+| 18 | 2 | §5 có 4 dòng, đủ các cột | – |
+| 19 | 1 | Cột "vì sao" và loại nguyên nhân đang là (proposed) | Chờ bạn |
+| 20 | 2 | Không assertion nào bị nới lỏng hay bỏ qua | – |
+| 21 | 2 | Chạy lặp sau khi sửa: 12/12 passed | – |
+
+**Gate: blocked by 19 và câu hỏi 1** (chờ bạn).
+
+## Cần bạn quyết định
+
+1. **DT-03 đường (b) và (a)**
+   - Gõ `/checkout` làm tải lại trang, nên khách không còn giỏ hàng. Test đang kiểm "khách + giỏ rỗng", không đúng lớp EC-V1-2 (khách chưa đăng nhập) với giỏ có hàng như TC.
+   - Mình đã thử trên 3 trình duyệt cách sau: người dùng đăng nhập, thêm hàng, mở trang Thanh toán, bấm "Thoát" ngay trên trang đó. Trang vẫn hiện 1 sản phẩm, bấm "Xác Nhận Thanh Toán" thì gửi request không có token và nhận 401. Đây cũng là cách tái hiện BUG-17 ở HW02 (đăng xuất rồi thanh toán).
+   - Lựa chọn:
+     - (a) Thay đường (b) bằng "Thoát trên trang Thanh toán rồi xác nhận". Khi đó bỏ được `if` ở đường (a): đường (a) chỉ ghi lại nút giỏ hàng dẫn tới đâu, đường (b) luôn thử đặt hàng.
+     - (b) Thêm cách này thành đường (c), giữ nguyên đường (b) gõ URL.
+     - (c) Giữ như cũ, chỉ ghi chú.
+   - **Khuyến nghị (a).**
+2. **Cột "vì sao AI bỏ sót" và loại nguyên nhân của dòng 1–4** (Feature / Model / Prompt / Model)
+   - Đây là phần bạn phải tự quyết theo quy định của bài.
+   - Lựa chọn: đồng ý như đề xuất, hoặc sửa từng dòng.
+
+## Bước tiếp theo
+
+Sau khi bạn trả lời: mình sửa DT-03, chạy lại, chạy lặp, cập nhật §5. Sau đó:
+
+> "bắt đầu bước T6 cho checkout: chạy chính thức 3 trình duyệt"
+```
+
+- **Used in:** `tests/checkout/` (commits f4b4d10, f0b2152), design §5 + `features/checkout/screenshots/t5/` (commit b6672d0); AI-02 Artifact #29
+
+---
+
+## Prompt032 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 20:59 17/11/2026
+- **Output received:** 21:20 17/11/2026
+- **Feature / step:** checkout (fB) FR-08 – T6 multi-browser runs
+- **Purpose:** Chạy chính thức 3 trình duyệt mà không ảnh hưởng phiên song song (bước T6)
+- **Prompt (verbatim):**
+
+```text
+tiếp tục thực hiện bước T6, đảm bảo ko ảnh hưởng đến session đang chạy song song
+```
+
+- **AI output (verbatim):**
+
+```text
+T6 cần chạy chính thức trên 3 trình duyệt. Trước hết mình xem script chạy chính thức xử lý server SUT thế nào, vì nếu khởi động lại backend sẽ xóa dữ liệu của phiên song song.
+Bash Read the multi-browser run script and list running SUT/test processes
+Bash Check catalog prices, frozen spec commit, output folders, running tests
+Giá catalog đúng như seed, specs đã đóng băng ở commit `f0b2152`, và không có phiên nào đang chạy test. Chạy chính thức trên 3 trình duyệt.
+Bash Run the official checkout runs on Chromium, Firefox and WebKit reusing the SUT
+Chromium và WebKit cho cùng kết quả (4 passed, 14 failed). Firefox có thêm **DT-03 fail**, chỉ trên trình duyệt này. Xem lỗi.
+Bash Show the Firefox DT-03 error and annotations
+Bash Rerun DT-03 five times on Firefox in a temp folder
+DT-03 trên Firefox **flaky**: 1 trong 5 lần fail. Theo skill, không được thêm retry để che, phải tìm và sửa chỗ chờ gây lỗi. Xem trace của lần fail.
+Bash Find the trace and page snapshot of the failed Firefox repeat
+Bash Read the product page state setup and trace setting
+Report chính thức tắt trace. Để xem nguyên nhân, mình chạy lại trong thư mục tạm với `--trace=retain-on-failure`, lặp 8 lần.
+Bash Repeat DT-03 on Firefox with traces kept on failure
+Bash Count how many clicks the add button needs over 20 Firefox page loads
+Edit /home/hg/source/software-testing/week04/page-objects/ProductPage.ts
+Bash Commit the page-object fix and repeat the Web spec 3 times on Firefox
+Firefox lặp 3 lần: DT-03 pass cả 3, 6 test kia fail ổn định ở đúng các assertion lỗi sản phẩm. Kiểm tra xem có lượt nào phải bấm nhiều hơn 2 lần không.
+Bash Count the clicks recorded in the Firefox repeat run
+Bash Keep the first official set locally, then rerun the official checkout runs
+Bộ chạy chính thức lần 2: cả 3 trình duyệt đều **4 passed, 14 failed**, cùng các test. Lấy số liệu bằng script tổng hợp và kiểm tra tiêu đề report.
+Bash Get run counts from the summary script and check report titles
+Bash Screenshot the three official reports and list checkout per-TC results
+Read /home/hg/source/software-testing/week04/features/checkout/screenshots/t6/report-firefox.png
+Bash Read the current checkout §6 and the FR-03 §6 layout
+Bash Write §6 from the summary script and add review row 5
+Bash Read the totals table header from the summary script
+Bash Fix the totals table and commit the official reports and §5/§6
+Commit xong. Giờ cập nhật báo cáo chính (§4.2, §4.3), PLAN và AI-02.
+Bash Update the report §4.2–4.3 and PLAN B5–B6, commit
+Lệnh `git pull` vừa báo lỗi vì trong thư mục làm việc chung có thay đổi chưa commit. Kiểm tra xem đó là thay đổi của ai và remote có commit mới không.
+Bash Check working tree changes and divergence from the remote
+Remote không có gì mới. `prompt_log.md` đang được phiên song song sửa dở, nên mình không đụng vào. Thêm dòng AI-02 (chỉ commit file này), rồi push.
+Bash Add the AI-02 row, commit only that file and push
+Bash Confirm the AI-02 commit is on the remote
+Bash Read the T6 rubric criteria
+Bước T6 của checkout đã xong: chạy chính thức trên Chromium, Firefox và WebKit, không làm ảnh hưởng phiên FR-03 đang chạy song song. Report đã commit đúng như tool tạo ra, mọi thứ đã push.
+
+## Cách tránh ảnh hưởng phiên song song
+- **Không bật server mới:** server SUT đang chạy được phiên FR-03 dùng chung. Nếu chạy theo mặc định, Playwright sẽ khởi động server mới và seed lại database đang dùng chung, nên mình chạy với `--reuse`. Mỗi test tự tạo tài khoản riêng và chỉ kiểm giỏ hàng, đơn hàng của tài khoản đó, nên không cần reset database.
+- **Kiểm tra trước khi chạy:** không có tiến trình Playwright nào của phiên khác đang chạy, và giá catalog của sản phẩm 1, 4, 5 vẫn đúng như seed.
+- **Thư mục riêng:** report ghi vào `reports/checkout/`, ảnh vào `test-output/checkout/`; không đụng thư mục của FR-03.
+- **Git:** `prompt_log.md` đang được phiên kia sửa dở nên mình không đụng vào; mỗi commit chỉ chứa file của checkout.
+
+## Kết quả
+
+| Trình duyệt | Test | Passed | Failed | Flaky |
+| --- | --- | --- | --- | --- |
+| Chromium | 18 | 4 | 14 | 0 |
+| Firefox | 18 | 4 | 14 | 0 |
+| WebKit | 18 | 4 | 14 | 0 |
+
+- **Theo test case:** 17 TC, 4 passed (DT-03, DT-04 … 06), 13 failed. Cả 3 trình duyệt cho cùng một kết quả.
+- **Tiêu đề report:** có "Run by: 23120046" và thời gian ISO, ví dụ `HW04 · FR-08 Checkout · firefox · Run by: 23120046 · 2026-11-17T14:15:27.997Z`. Mình đã chụp ảnh header report của cả 3 trình duyệt.
+- **Ảnh lỗi:** mỗi trình duyệt 6 ảnh, nằm trong `reports/checkout/<browser>/screenshots/`.
+
+**Lỗi flaky ở bộ chạy đầu tiên:** DT-03 fail riêng trên Firefox, ngay ở bước dựng giỏ: sau lần bấm thứ hai, nút không chuyển thành "Đã thêm".
+- Chạy lại 5 lần: 1 lần fail, tức là test **flaky**, không phải lỗi riêng của Firefox.
+- Mình không thêm retry để che lỗi. `ProductPage.addToCart` giờ bấm cho tới khi nút hiện "Đã thêm", tối đa 4 lần, và ghi lại số lần bấm (`35b0c42`).
+- Lý do an toàn: lần bấm nào thêm được hàng thì nút luôn hiện "Đã thêm", nên cách này không thể thêm trùng sản phẩm.
+- Sau khi sửa, chạy Firefox lặp 3 lần đều ổn định, 39 lần thêm hàng đều cần đúng 2 lần bấm. Sau đó mình chạy lại toàn bộ 3 trình duyệt.
+- Đã ghi vào §5 (dòng 5) và §6; report của bộ đầu cất trong `playwright-report/checkout/t6-official-set1-*`.
+
+**Báo cáo chính:** đã cập nhật `HW04_Report.md` §4.2–4.3 và PLAN B5–B6 (`8222ae1`). AI-02 thêm dòng #31 (`6284d9b`).
+
+## AI tự đánh giá (T6)
+
+| # | Điểm | Bằng chứng | Việc cần làm |
+| --- | --- | --- | --- |
+| P1 | 2 | Chỉ commit file của checkout | – |
+| P2 | 1 | Lỗi flaky phải sửa trong lúc T6 (đúng như skill T6.2 yêu cầu); DT-03 vẫn còn câu hỏi T5 chưa trả lời | Câu hỏi 1 |
+| P4 | 2 | Cột "vì sao" và loại nguyên nhân vẫn ghi (proposed) | Chờ bạn |
+| P6 | 2 | Mỗi việc một commit, AI-02 #31, đã push | – |
+| 22 | 2 | Có đủ `reports/checkout/{chromium,firefox,webkit}/index.html` và `results.json` | – |
+| 23 | 2 | Có ảnh header của cả 3 report | – |
+| 24 | 2 | Specs đóng băng ở `35b0c42`; ghi rõ là dùng lại server và mỗi test có dữ liệu riêng; report không sửa tay | – |
+| 25 | 2 | `retries: 0`; lỗi flaky được ghi lại và sửa, không che | – |
+
+**Gate: passed.** Lưu ý: nếu bạn chọn sửa DT-03 (câu 1), mình sẽ phải chạy lại bộ chính thức, mất khoảng 5 phút.
+
+## Cần bạn quyết định
+
+1. **DT-03 (câu hỏi từ T5, chưa trả lời)**
+   - Lựa chọn:
+     - (a) Đổi đường (b) thành "bấm Thoát trên trang Thanh toán rồi xác nhận", để khách vẫn còn giỏ có hàng, và bỏ `if` ở đường (a).
+     - (b) Thêm cách này thành đường (c), giữ nguyên đường (b) gõ URL.
+     - (c) Giữ nguyên, chỉ ghi chú.
+   - **Khuyến nghị (a).** Bộ chạy chính thức hiện tại đang tương ứng với (c).
+2. **Cột "vì sao AI bỏ sót" và loại nguyên nhân của 5 dòng ở §5**: đề xuất là Feature / Model / Prompt / Model / Feature. Bạn đồng ý hay sửa dòng nào?
+3. **Giới hạn số lần bấm nút thêm giỏ** đổi từ "tối đa 2" (bạn quyết định ở T2) thành "tối đa 4", để sửa lỗi flaky. Mỗi lần bấm thừa vẫn hiện trong report. Bạn có đồng ý không?
+
+## Bước tiếp theo
+
+> "bắt đầu bước T7 cho checkout: phân loại các test fail và đối chiếu bug HW02"
+
+Ở bước này, mỗi test fail sẽ được phân loại là lỗi sản phẩm, lỗi script hay lỗi môi trường, rồi đối chiếu với HW02 BUG-12 … 17, #73, #79, #80 và #116.
+```
+
+- **Used in:** `page-objects/ProductPage.ts` (commit 35b0c42), `reports/checkout/` + design §5–§6 (commit cc8aee7), `HW04_Report.md` §4.2–4.3 + `PLAN.md` B5–B6 (commit 8222ae1); AI-02 Artifact #31
 
 ---
