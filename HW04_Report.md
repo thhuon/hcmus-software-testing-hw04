@@ -91,9 +91,29 @@ The same tests pass (DT-07, 08, 09, 17, 32) and fail on every browser ([design �
 
 <!-- From design §5: what the AI got wrong or missed, the fix, why (Prompt / Model / Feature). -->
 
-First run of the generated specs on Chromium (17/11, development runs): Web 1 passed, 6 failed ([report](features/checkout/screenshots/first-run/web-report-chromium.png)); API 3 passed, 8 failed ([report](features/checkout/screenshots/first-run/api-report-chromium.png)). Every failed assertion has an oracle quoted from the requirement or the HW02 decisions (HW02 BUG-12, 13, 14, 15, 16, group issue #80, BUG-01 #116); the stored order totals of the Web tests were right. The review of the code (T5) is still to do.
+First run of the generated specs on Chromium (17/11, development runs): Web 1 passed, 6 failed ([report](features/checkout/screenshots/first-run/web-report-chromium.png)); API 3 passed, 8 failed ([report](features/checkout/screenshots/first-run/api-report-chromium.png)). Every failed assertion has an oracle quoted from the requirement or the HW02 decisions. The review ([design §5](features/checkout/automation_design.md#5-review-of-the-ai-generated-scripts-t5)) found five problems; "why" and cause type are proposals waiting for the student:
+
+| # | What the AI got wrong | Category | Fix |
+| --- | --- | --- | --- |
+| 1 | The account e-mail was the same for every repeat / retry of a test; the backend registers a taken e-mail again and logs in the first account, so with `--repeat-each=3` the repeats shared a cart and 6 of 12 runs failed | hidden dependency | repeat and retry index in the e-mail (f4b4d10); 12 of 12 passed ([before](features/checkout/screenshots/t5/repeat-before-fix-chromium.png), [after](features/checkout/screenshots/t5/repeat-after-fix-chromium.png)) |
+| 2 | A refused API row naming no order count would check no order and pass | weak assertion | hard check (f0b2152) |
+| 3 | DT-03 path (b): typing `/checkout` reloads the page, so the guest's cart is empty – two invalid classes in one test | missing edge case | open: student decision |
+| 4 | DT-03 path (a): an `if` on page state | weak assertion | open: depends on 3 |
+| 5 | `ProductPage.addToCart`: two clicks with a fixed probe; on a busy Firefox the second click was once counted as the first again (DT-03 flaky in the first official set) | flaky wait | click until "Đã thêm", up to 4 clicks, each extra click recorded (35b0c42); Firefox `--repeat-each=3` stable |
+
+No issue found in fragile selectors, wrong oracles or hard-coded data; no assertion was weakened.
 
 ### 4.3 Results
+
+<!-- Per browser: passed / failed; failing tests and their bugs. -->
+
+| Browser | Report | Tests | Passed | Failed | Flaky |
+| --- | --- | --- | --- | --- | --- |
+| Chromium | [reports/checkout/chromium](reports/checkout/chromium/index.html) ([screenshot](features/checkout/screenshots/t6/report-chromium.png)) | 18 | 4 | 14 | 0 |
+| Firefox | [reports/checkout/firefox](reports/checkout/firefox/index.html) ([screenshot](features/checkout/screenshots/t6/report-firefox.png)) | 18 | 4 | 14 | 0 |
+| WebKit | [reports/checkout/webkit](reports/checkout/webkit/index.html) ([screenshot](features/checkout/screenshots/t6/report-webkit.png)) | 18 | 4 | 14 | 0 |
+
+Official runs 17/11 21:14–21:19 ([design §6](features/checkout/automation_design.md#6-runs-t6)), reusing the running SUT so the parallel FR-03 session was not disturbed (each test uses its own account). The same tests pass (DT-03, DT-04 … 06) and fail on every browser: 17 test cases, 4 passed, 13 failed. A first set had DT-03 fail on Firefox only; it was flaky (1 of 5 on rerun), fixed (review #5) and the set was run again. Bugs behind the failures: after T7.
 
 ## 5. Feature C – FR-15 Quản lý sản phẩm
 

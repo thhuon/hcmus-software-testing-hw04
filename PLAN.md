@@ -58,8 +58,9 @@ Như A1–A7 nhưng **dùng skill**. Chỗ nào skill vướng thì sửa skill 
 - [x] **B2. Khảo sát UI** (17/11: SV chạy codegen (Firefox), ARIA snapshot, đếm locator trên 3 trình duyệt; page object `SiteHeader`, `HomePage`, `ProductPage`, `CartPage`, `CheckoutPage`, `Dialogs`, mở rộng `LoginPage`, `EshopApi` – design §2). Bug mới BUG-01 → issue nhóm #116.
 - [x] **B3. Dữ liệu** (17/11: `web.json` 7 dòng, `api.json` 11 dòng, mỗi test một tài khoản mới – design §3).
 - [x] **B4. Sinh script** (17/11: `web.spec.ts` 7 test, `api.spec.ts` 11 test; lần chạy đầu Chromium: Web 1/7 passed, API 3/11 passed – design §4; ảnh trong `features/checkout/screenshots/`).
-- [ ] **B5. Review & sửa** – review 2 spec cùng SV (đã thấy: `if` theo trạng thái trang ở DT-03 đường (a); kiểm "không sửa được tổng" bằng CSS thuộc tính; đường (b) của DT-03 chạy với giỏ rỗng vì gõ URL làm tải lại trang).
-- [ ] **B6. Chạy 3 trình duyệt** · [ ] **B7. Bug** (đối chiếu HW02 BUG-12 … 17, #73, #79, #80; bình luận "HW04" vào issue cũ).
+- [x] **B5. Review & sửa** (17/11: 5 lỗi script – e-mail trùng khi chạy lặp, nhánh `refused` không kiểm đơn, nút thêm giỏ flaky trên Firefox đã sửa; DT-03 đường (a) / (b) còn chờ SV – design §5).
+- [x] **B6. Chạy 3 trình duyệt** (17/11 21:14–21:19, `--reuse` để không ảnh hưởng phiên FR-03: mỗi trình duyệt 18 test, 4 passed, 14 failed – design §6, `reports/checkout/`).
+- [ ] **B7. Bug** (đối chiếu HW02 BUG-12 … 17, #73, #79, #80; bình luận "HW04" vào issue cũ).
 
 ### Giai đoạn 3 – Feature C: FR-15 + quay video (≈ 2 giờ)
 
