@@ -3361,7 +3361,7 @@ Việc của bạn khi chuẩn bị nộp: chụp trang Issues lọc theo `label
 ## Prompt030 – Claude Code (claude-opus-5-5)
 
 - **Prompt sent:** 21:18 17/11/2026
-- **Output received:** 21:19 17/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Output received:** 21:20 17/11/2026
 - **Feature / step:** forgot-password (fA) – T8 summary, closing feature A; prompt log
 - **Purpose:** Log the prompts; finish T8 and the rest of feature A
 - **Prompt (verbatim):**
@@ -3373,7 +3373,7 @@ tiếp tục hòan thiện bước T8, và các việc còn lại để đóng f
 
 - **AI output (verbatim):**
 
-```text
+````text
 Mình làm T8 trước, sau đó dọn các việc còn lại của feature A, và ghi log prompt ở cuối. Bước đầu: lấy 12 TC "No" ở §1 cùng kết quả HW02 tương ứng, để điền cột "Tested instead" của §7.
 Bash List the not-automated TCs with their HW02 results
 Giờ mình xem HW02 đã chạy 12 TC này qua giao diện nào (API hay Web).
@@ -3386,7 +3386,82 @@ Bash Find the PLAN A8 line and the report's not-automated sentence
 Bash Update PLAN A8 and the report's not-automated part, commit
 Giờ ghi log prompt (dùng đúng file transcript của session này), rồi cập nhật AI-02 trong cùng một commit: thay các chỗ "logged later" và thêm dòng cho T8.
 Bash Write this session's pending prompts to the log
-```
+Bash Fill log fields, replace placeholders, add the T8 AI-02 row, commit together
+Dòng AI-02 lấy số **#32**, vì session FR-08 đã dùng #31. Mình sửa lại số trong trường "Used in" của Prompt030 cho khớp.
+Bash Fix the artifact number in the Prompt030 entry
+T8 đã xong và feature A (FR-03) đã đóng về phía mình. Còn 2 việc nhỏ chờ bạn, ở cuối. Mọi thứ đã commit và push.
+
+## Bước T8 – tổng kết
+
+- **§7, 12 TC không tự động hóa** ([automation_design.md](features/forgot-password/automation_design.md)): mỗi dòng có lý do (lấy từ §1, bạn đã xác nhận) và cách đã test thay. Cả 12 TC đã chạy qua API ở HW02 ngày 20/10:
+
+  | Lý do | TC | Kết quả HW02 |
+  | --- | --- | --- |
+  | Request chỉ API gửi được | DT-10, 16, 18, 19, 31 | Pass |
+  | Oracle chỉ là giả định (A8) | DT-33 | Pass |
+  | Cần chờ 10–11 phút thời gian thật của server | DT-34, BVA-08, 09, 10 | DT-34 và BVA-10 **Fail** (BUG-05, #5); BVA-08, 09 Pass |
+  | Trùng phân hoạch đã tự động hóa | BVA-06, 07 | Pass |
+
+- **§6:** khớp đủ 37 dòng output của `summarize-results.mjs`; không có số nào đếm tay.
+- **Dòng `Count`** khớp với §1 (45 TC thiết kế, 33 tự động, 12 không), §4 (8 kiểu assertion) và §7 (12 dòng).
+
+**AI tự review (T8)**
+
+| # | Điểm | Bằng chứng |
+| --- | --- | --- |
+| P1–P6 | 2 | Mỗi việc một commit, add và commit trong cùng một lệnh; chỉ sửa dòng của mình |
+| 29 | 2 | §6 khớp 37/37 dòng của script |
+| 30 | 2 | §7 có 12 dòng, bằng số dòng "No" ở §1 |
+| 31 (S) | 2 | `Count`: 44 + 1 / 33 / 12 / 8 |
+
+**Gate: passed**
+
+## Các việc khác để đóng feature A
+
+- **HW04_Report §3.1:** có đoạn về 12 TC không tự động hóa và link tới §7. Toàn bộ §3 (3.1 chọn TC, locator, dữ liệu, spec; 3.2 review AI; 3.3 kết quả và bug) giờ đã đủ nội dung.
+- **PLAN:** đánh dấu xong A1 – A8. A8 ghi các thay đổi skill khi làm FR-03:
+  - #S8: page object, thư mục `api/`, đặt tên thư mục feature;
+  - #S9: mỗi lần chạy có thư mục kết quả riêng;
+  - #S10: không giữ trace, ảnh lúc fail đặt theo TC ID;
+  - script upload nhiều ảnh cho một issue.
+- **README:** FR-03 có 33 test tự động, 33 chạy, 5 pass, 28 fail, 3 lần chạy; bug `7 / 1 / 1`.
+- **AI-02:** thêm #32 (T8). Các dòng #26, #28, #30 đã có số prompt. Tổng: 42 dòng, VALID 37, INCOMPLETE 5.
+
+## Log prompt
+
+- **Prompt021:** đã cập nhật giờ nhận (20:22).
+- **Prompt026** (20:23) T7 · **Prompt027** (20:28) viết mục bug · **Prompt028** (20:46) gửi bug · **Prompt029** (20:50) ảnh cho #1 – #41.
+- **Prompt030** (21:18): lượt này, ghi `UNFINISHED`.
+- Prompt022–025 là của session FR-08; mình không động vào.
+
+| ID | Điểm | Bằng chứng |
+| --- | --- | --- |
+| LOG-1, 2, 3, 5, 10 | 2 | Dùng đúng transcript của session này; nội dung nguyên văn do script trích; số nối tiếp sau các mục của session FR-08 |
+| LOG-4, 6, 7, 8, 11 | 2 | Giờ UTC+7; Prompt030 có đánh dấu UNFINISHED; không còn TODO trong các mục của mình; đã commit |
+| LOG-9, 12 | N/A | Không dùng tool AI khác; không có prompt nào bạn dặn không ghi log |
+
+**Gate: passed**
+
+## Commit (đã push)
+
+- `fa049ce` test (forgot-password): list the test cases not automated
+- `120afdf` docs: record the FR-03 summary and skill changes in the report and plan
+- `b43c672` docs (ai): log Prompt021 and Prompt026–Prompt030, add the AI-02 row for the FR-03 summary
+- `3e4aa05` docs (ai): fix the AI-02 row number of Prompt030 (session FR-08 đã dùng #31)
+
+## Còn chờ bạn
+
+1. **Trace viewer** (tiêu chí 32, mục cuối §8): chạy hai lệnh dưới, rồi điền một câu vào "What it showed".
+
+   ```bash
+   npx playwright test tests/forgot-password/web.spec.ts --project=chromium -g "DT-35 " --output=test-output/dev
+   npm run trace -- test-output/dev/<thư mục DT-35>/trace.zip
+   ```
+
+2. **Review AI-02 #23 – #32:** điền cột (5), hoặc nói "không có ý kiến" để mình điền như lần trước.
+
+Video demo (Task 2) và ảnh chụp trang Issues lọc theo `hw: HW04` để làm ở giai đoạn nộp bài. Bước tiếp theo: feature C (FR-15, Admin); feature B đang do session kia làm.
+````
 
 - **Used in:** `features/forgot-password/automation_design.md` §7; `HW04_Report.md` §3.1, `PLAN.md` A8; `prompt_log.md` (AI-02 Artifact #32)
 
@@ -3618,5 +3693,189 @@ Bước T6 của checkout đã xong: chạy chính thức trên Chromium, Firefo
 ```
 
 - **Used in:** `page-objects/ProductPage.ts` (commit 35b0c42), `reports/checkout/` + design §5–§6 (commit cc8aee7), `HW04_Report.md` §4.2–4.3 + `PLAN.md` B5–B6 (commit 8222ae1); AI-02 Artifact #31
+
+---
+
+## Prompt033 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 22:35 17/11/2026
+- **Output received:** 22:37 17/11/2026
+- **Feature / step:** forgot-password (fA) – trace viewer command; HW04 label; Issues proof
+- **Purpose:** Explain the test / trace commands and their output; English description for the `hw: HW04` label
+- **Prompt (verbatim):**
+
+```text
+tôi chạy lệnh này đã đúng chưa, tại sao lại hiện kết quả như này? kết quả như này có ý nghĩa gì?
+
+<pasted_content id="4cb0">
+hg@hg:~/source/software-testing/week04$ npx playwright test tests/forgot-password/web.spec.ts --project=chromium -g "DT-35 " --output=test-output/dev
+npm run trace -- test-output/dev/<thư mục DT-35>/trace.zip
+
+Running 1 test using 1 worker
+
+  ✘  1 [chromium] › tests/forgot-password/web.spec.ts:141:9 › FR-03 forgot & reset password – Web › DT-35 – special character only outside the set (space) (10.4s)
+
+
+  1) [chromium] › tests/forgot-password/web.spec.ts:141:9 › FR-03 forgot & reset password – Web › DT-35 – special character only outside the set (space) 
+
+    Error: error message in the page, above the submit button (FR-22)
+
+    expect(locator).toBeVisible() failed
+
+    Locator: getByRole('main').locator('form').locator(':is(p, span, div, [role="alert"]):not(:has(*)):above(button[type="submit"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\s*\d\s*\/\s*\d/ }).filter({ hasText: /\S/ })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role="alert"]):not(:has(*)):above(button[type="submit"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\s*\d\s*\/\s*\d/ }).filter({ hasText: /\S/ }) with timeout 5000ms
+      - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role="alert"]):not(:has(*)):above(button[type="submit"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\s*\d\s*\/\s*\d/ }).filter({ hasText: /\S/ })
+
+
+      79 |  */
+      80 | async function expectErrorAboveSubmit(fp: ForgotPasswordPage) {
+    > 81 |   await expect.soft(fp.errorAboveSubmit, 'error message in the page, above the submit button (FR-22)').toBeVisible();
+         |                                                                                                        ^
+      82 | }
+      83 |
+      84 | /** A5 / A6: the stored password, checked by logging in through the API ("200" = token, "4xx" = refused). */
+        at expectErrorAboveSubmit (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:81:104)
+        at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:170:39
+
+    Error: login with "Test1234!" succeeds
+
+    login with "Test1234!" succeeds
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "200"
+    Received: "4xx"
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+      89 |       message: `login with "${password}" ${succeeds ? 'succeeds' : 'is refused'}`,
+      90 |     })
+    > 91 |     .toBe(succeeds ? '200' : '4xx');
+         |      ^
+      92 | }
+      93 |
+      94 | /**
+        at expectLogin (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:91:6)
+        at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:171:15
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-output/dev/forgot-password-web-FR-03--e6d4e-only-outside-the-set-space--chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-output/dev/forgot-password-web-FR-03--e6d4e-only-outside-the-set-space--chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-output/dev/forgot-password-web-FR-03--e6d4e-only-outside-the-set-space--chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-output/dev/forgot-password-web-FR-03--e6d4e-only-outside-the-set-space--chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/forgot-password/web.spec.ts:141:9 › FR-03 forgot & reset password – Web › DT-35 – special character only outside the set (space) 
+
+To open last HTML report run:
+
+  npx playwright show-report
+
+bash: thư: No such file or directory
+</pasted_content id="4cb0">
+
+ảnh tôi vừa thêm vào là ảnh chụp trang issue được tạo thêm cho bài tập tuần này, gồm 2 issue 
+label của hw: hw04 vẫn còn phần chú thích bằng tiếng việt, hãy chuyển sang tiếng anh
+```
+
+- **AI output (verbatim):**
+
+````text
+Mình kiểm tra ba việc:
+- ảnh bạn vừa thêm nằm ở đâu trong repo;
+- phần mô tả hiện tại của nhãn `hw: HW04`;
+- tên thư mục DT-35 thật trong `test-output/dev`.
+Bash Find the student's new image, read the label, list the trace folder
+Bash Look for an image added in the last hour
+Read /home/hg/Pictures/Screenshots/Screenshot From 2026-11-17 22-35-00.png
+Bash Change the hw: HW04 label description to English and check the others
+Bash Save the student's Issues-page screenshot as submission proof, commit
+Bash Add the AI-02 row and get this prompt's time
+Bash Fix the prompt time and commit the AI-02 row
+Lệnh thứ nhất bạn chạy đúng, kết quả cũng đúng như mong đợi. Lệnh thứ hai lỗi vì `<thư mục DT-35>` là chỗ cần thay bằng tên thư mục thật; mình đã ghi chưa rõ.
+
+## 1. Lệnh test: đúng, và test fail là kết quả mong đợi
+
+`npx playwright test … -g "DT-35 " --output=test-output/dev` chạy riêng DT-35 trên Chromium. Test **fail**, giống hệt các lần chạy chính thức, vì app có bug thật. Hai lỗi trong output:
+
+- **`error message in the page, above the submit button (FR-22)` → `element(s) not found`**
+  - FR-22 yêu cầu thông báo hiện **phía trên nút submit**, nhưng trong form không có dòng chữ nào như vậy.
+  - Đây là bug #9 (BUG-09). Ở DT-35, Web còn báo thành công bằng hộp thoại thay vì báo lỗi.
+- **`login with "Test1234!" succeeds` → Expected `"200"`, Received `"4xx"`**
+  - Sau khi bạn đặt mật khẩu mới `NewPass 2026`, mật khẩu cũ `Test1234!` không đăng nhập được nữa, tức là Web **đã đổi mật khẩu** sang một mật khẩu sai quy tắc FR-01 (dấu cách không phải ký tự đặc biệt hợp lệ).
+  - Đây là bug mới #117 (BUG-02).
+
+Cuối output có 3 file đính kèm: ảnh chụp lúc fail, `error-context.md` và **`trace.zip`**. File trace là thứ bạn cần cho bước tiếp theo.
+
+## 2. Lệnh trace: lỗi vì còn chỗ giữ chỗ
+
+`bash: thư: No such file or directory` xảy ra vì bash hiểu dấu `<` trong `<thư mục DT-35>` là "đọc dữ liệu từ file tên `thư`". Trace viewer chưa hề được mở. Thư mục thật là tên in trong output. Chạy lại:
+
+```bash
+npm run trace -- test-output/dev/forgot-password-web-FR-03--e6d4e-only-outside-the-set-space--chromium/trace.zip
+```
+
+Trong cửa sổ trace viewer:
+1. Bấm bước **Click "Đặt lại mật khẩu"** trong danh sách bên trái.
+2. Mở tab **Network** để xem request `POST /api/reset-password` có `"newPassword": "NewPass 2026"` và nhận `200`.
+3. Xem tab **Console / Dialog**: hộp thoại "Đổi mật khẩu thành công!".
+
+Sau đó ghi một câu vào dòng "What it showed" ở cuối §8 của [automation_design.md](features/forgot-password/automation_design.md). Ví dụ: "Trace shows the Web sending `NewPass 2026` to `/api/reset-password` (200) and the dialog 'Đổi mật khẩu thành công!'". Câu này phải là bạn tự xem rồi ghi.
+
+## 3. Ảnh trang Issues và nhãn `hw: HW04`
+
+- **Ảnh của bạn:** lọc `label:"hw: HW04"`, có #117 (FR-03) và #116 (FR-08), đúng ảnh chứng minh mà README nhóm §6 yêu cầu. Mình đã lưu vào [bugs/screenshots/issues-label-hw04.png](bugs/screenshots/issues-label-hw04.png) và ghi vào đầu bug report (commit `4ac1c46`).
+- **Nhãn `hw: HW04`:** mô tả đổi từ "Bug tìm được ở HW04 Automation Testing" thành **"Bug found in HW04 Automation Testing"**. Màu `#0E8A16` giữ nguyên.
+- **Vẫn còn 6 nhãn chung có mô tả tiếng Việt:** `severity: critical/high/medium/low`, `technique: EP/BVA`. Các nhãn này cả nhóm dùng từ HW02 và README nhóm §4.3 mô tả bằng tiếng Việt, nên mình **chưa sửa**. Bạn có muốn đổi luôn sang tiếng Anh không?
+
+AI-02 có thêm #33 (commit `212b560`). Prompt này (22:35) sẽ vào log ở lần chạy `/logging-ai-prompts` tới.
+````
+
+- **Used in:** Label `hw: HW04` on the HW02 group repo; `bugs/screenshots/issues-label-hw04.png`, `bugs/BUG_REPORT.md` header (AI-02 Artifact #33)
+
+---
+
+## Prompt034 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 22:43 17/11/2026
+- **Output received:** 22:44 17/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Feature / step:** forgot-password (fA) – trace viewer result; Issues proof per feature; prompt log
+- **Purpose:** Record the student's trace viewer check of DT-35; one Issues screenshot or one per feature?
+- **Prompt (verbatim):**
+
+```text
+ảnh chụp màn hình issue đó chỉ mởi là bug được thêm vào cho nhóm feature A, vậy ở mỗi nhóm feature sẽ được thêm ảnh khác nhau hả
+api reset password trả về mã 200, nhưng ko có thông báo nào cho việc đổi mật khẩu thành công, vì trên giao diện phần bug này bị lắp, ko bao giờ đặt được mật khẩu thỏa điều kiện để đặt lại mật khẩu -> ghi vào docs giúp tôi
+/logging-ai-prompts
+```
+
+- **AI output (verbatim):**
+
+```text
+Skill
+Bash Look for the dialog and the reset request inside the DT-35 trace
+Bash Read the dialog event and the reset request from the trace
+Bash Write the student's trace observation to §8, BUG-02 and the report
+Session FR-08 đang commit report của nó cùng lúc. Mình kiểm tra commit của mình có vào đúng và không lẫn file của nó không.
+Bash Check which commit holds my trace-viewer edits
+Bash Preview this session's pending prompts
+Bash Write the pending prompts to the log
+```
+
+- **Used in:** `features/forgot-password/automation_design.md` §8 (trace viewer line), `bugs/BUG_REPORT.md` BUG-02 notes, `HW04_Report.md` §3.3; `prompt_log.md` (AI-02 Artifact #34)
 
 ---
