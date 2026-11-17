@@ -882,7 +882,7 @@ Trong AI-02, các chỗ sửa theo góp ý của bạn đều ghi **"Chỉnh s�
 ## Prompt009 – Claude Code (claude-opus-5-5)
 
 - **Prompt sent:** 16:56 17/11/2026
-- **Output received:** 16:59 17/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Output received:** 17:01 17/11/2026
 - **Feature / step:** fA – T2 locators and page objects; prompt log
 - **Purpose:** No optional approach; step T2 for FR-03; log the prompts
 - **Prompt (verbatim):**
@@ -913,6 +913,102 @@ Bash T=$(date '+%d/%m %H:%M') T="$T" python3 - <<'EOF'
 Done T2. Now running the prompt-log skill.
 Skill
 Bash ls -t ~/.claude/projects/-home-hg-source-software-testing/*.jsonl | head -3; cd /home/hg/source/soft
+Bash S=~/.claude/projects/-home-hg-source-software-testing/fc5a277e-e51e-4a5c-b0af-eca264cbfd6b.jsonl; py
+Bash grep -n 'UNFINISHED' /home/hg/source/software-testing/.claude/skills/logging-ai-prompts/scripts/extr
+Bash grep -o '^| \*\*Artifact #[0-9S]*\|prompt [0-9/]* [0-9:]* (logged later)\|prompt [0-9/]* (logged lat
+Bash cd /home/hg/source/software-testing && grep -o 'Thời gian: [^<]*' week03/AI-02_AI_Audit_Report.md |
+Đã đưa 9 prompt vào log (Prompt001–009). Giờ mình điền các trường TODO và thay các ghi chú "logged later" trong AI-02 bằng số prompt tương ứng.
+Bash cd /home/hg/source/software-testing/week04 && python3 - <<'EOF'
+Bash grep -rn -i 'prompt log entries\|Prompt used for generation' features/ | head; git add prompt_log.md
+Bash sed -n 3,10p features/fA-fr03/automation_design.md | cut -c1-80 && python3 - <<'EOF'
+Bash cat /home/hg/source/software-testing/.claude/skills/logging-ai-prompts/review-rubric.md | head -30
+Bash grep -n -A10 'FR-22' eshop-sut/README.md | head -16
+Xong bước T2 cho FR-03 và đã ghi log prompt. Repo đang đồng bộ với `origin/master`.
+
+**Phương pháp tùy chọn:** theo quyết định của bạn, không thêm cái nào. Đã ghi vào `PLAN.md` và `CLAUDE.md` (commit 216f87f).
+
+## Bước T2 – fA (FR-03): locator và page object
+
+Lúc bắt đầu, bước T1 đã được commit hết.
+
+Mình bật app lên, đọc cây accessibility (ARIA snapshot) của từng màn hình, rồi đếm từng locator trên trang thật bằng Chromium, Firefox và WebKit:
+- Mỗi locator khớp đúng 1 phần tử.
+- 3 phần tử FR-03 yêu cầu nhưng app không có thì khớp 0: chỉ báo bước, nút "Quay lại đăng nhập", ô "Xác nhận mật khẩu mới".
+
+Đã tạo 3 file:
+- [pages/LoginPage.ts](pages/LoginPage.ts): link "Quên mật khẩu?" và nút "Sign In".
+- [pages/ForgotPasswordPage.ts](pages/ForgotPasswordPage.ts):
+  - locator của cả hai bước;
+  - các thao tác `requestOtp(email)`, `readOtp()`, `resetPassword(otp, pw, confirm?)`, `backToStep1()`;
+  - ghi lại nội dung mọi hộp thoại `alert` vào `dialogMessages`.
+- [pages/EshopApi.ts](pages/EshopApi.ts): các hàm gọi API register, login, forgot-password, reset-password. Dùng để chuẩn bị dữ liệu, chạy các dòng `Yes (API)` và kiểm tra mật khẩu có bị đổi hay không.
+
+Trong các file này không có `expect` nào. Bảng 15 phần tử nằm ở [automation_design.md](features/fA-fr03/automation_design.md) §2.
+
+**Phát hiện về testability:**
+- **Không ô nhập nào có accessible name**, cả ở trang Đăng nhập, Bước 1 và Bước 2. Thẻ `<label>` không gắn với ô nhập, nên `getByLabel` không tìm được gì. Vì vậy ô nhập được tìm theo vai trò (role) hoặc thuộc tính `type` bên trong form của từng bước.
+- Mọi thông báo đều hiện bằng `alert` (BUG-09). Test phải đọc chúng qua sự kiện `dialog`.
+- Trang Đăng nhập có tiêu đề "Đăng Ký". Trang này thuộc FR-02, nên mình chỉ ghi chú, không báo bug.
+- Firefox và WebKit hiện trang quên mật khẩu chậm hơn sau khi bấm link. Lần đếm đầu cho kết quả 0; chờ tiêu đề hiện ra rồi mới đếm thì khớp đủ. Ghi chú cho T4: mỗi bước phải chờ trang sẵn sàng bằng một assertion web-first rồi mới thao tác.
+
+**Việc bạn tự làm:** chạy `npm run sut` rồi `npm run codegen`, ghi lại luồng Đăng nhập → Quên mật khẩu → Bước 1 → Bước 2. Sau đó so locator codegen chọn với bảng §2 và điền kết quả vào dòng cuối §2 (đang để `<student fills in>`).
+
+**AI tự review**
+
+| # | Điểm | Bằng chứng | Việc cần làm |
+| --- | --- | --- | --- |
+| P1 | 2 | Chỉ sửa §2 và `pages/`. Quyết định (a) commit riêng | – |
+| P2 | 2 | Trước khi làm, `git status` chỉ còn file PDF chưa track | – |
+| P3 | 2 | Quyết định "không thêm gì" đã ghi (commit 216f87f) | – |
+| P4 | 2 | Kết quả codegen để trống cho bạn điền | – |
+| P5 | 2 | Có 2 quyết định bên dưới | – |
+| P6 | 2 | Các commit d2ba1fc, 8519295 (AI-02 #10) | – |
+| 5 | 2 | Lấy từ ARIA snapshot và đếm trên 3 trình duyệt, không chép từ mã nguồn | – |
+| 6 | 2 | Link và nút tìm theo vai trò + tên. Chỉ báo bước và thông báo OTP tìm theo chữ. Chỉ dùng CSS `type` khi phần tử không có tên. Không có XPath hay `nth()`; mình đã bỏ một chỗ `.first()` | – |
+| 7 | 2 | Mỗi locator dự phòng đều ghi lý do là không có accessible name, và có trong mục phát hiện | – |
+| 8 | 2 | `pages/` không có `expect` | – |
+| 32 (S) | 1 | Đã ghi cách dùng ARIA snapshot; còn thiếu phần codegen | Bạn chạy codegen |
+
+**Gate: passed**
+
+**Cần bạn quyết định**
+
+1. **Cách tìm các ô nhập không có tên**
+   - Skill để người kiểm thử chọn ở chỗ này.
+   - (a) Tìm theo role hoặc `type` trong form, như hiện tại.
+   - (b) Tìm theo chữ của label, ví dụ `label:has-text("Mật khẩu mới") + input`. Cách này hỏng khi đổi chữ. Riêng label OTP còn ghi sai "4 số".
+   - (c) Thêm `data-testid` vào app. Không được, vì không sửa SUT.
+   - **Đề xuất (a).**
+2. **Có báo lỗi "ô nhập không có accessible name" không?**
+   - FR-22 không có câu nào yêu cầu label phải gắn với ô nhập, nên không có oracle để báo bug.
+   - (a) Chỉ ghi là phát hiện testability trong báo cáo.
+   - (b) Tạo issue mới với nhãn `hw: HW04`, dựa vào WCAG.
+   - **Đề xuất (a).**
+
+## Log prompt
+
+Đã thêm Prompt001–Prompt009 vào [prompt_log.md](prompt_log.md):
+- Điền đủ các trường Feature / step, Purpose, Used in.
+- Các dòng AI-02 trước đây ghi "logged later" giờ đã có số prompt và giờ gửi, giờ nhận.
+- Thêm dòng "Prompt log entries" vào phần đầu file design của fA.
+
+Commit 50cb038 và 2cedf6a.
+
+Hai prompt cần lưu ý:
+- **Prompt007** là tin nhắn bạn ngắt giữa chừng. Nó được ghi là "NO OUTPUT – interrupted, sent again as Prompt008".
+- **Prompt009** là lượt hiện tại, đang ghi là `UNFINISHED`. Lần chạy `/logging-ai-prompts` tiếp theo sẽ cập nhật giờ nhận và output của nó, vẫn giữ số 009.
+
+| ID | Điểm | Bằng chứng |
+| --- | --- | --- |
+| LOG-1, 2, 3, 5, 10 | 2 | 9 mục, đúng session HW04, nội dung nguyên văn do script trích, đánh số 001–009, chỉ đọc transcript qua script |
+| LOG-4 | 2 | Giờ UTC+7, chính xác đến phút |
+| LOG-6 | 2 | Prompt009 có đánh dấu UNFINISHED, cần chạy lại sau lượt này |
+| LOG-7, 8, 11 | 2 | Không còn TODO; không đòi ảnh chụp màn hình; đã commit |
+| LOG-9, 12 | N/A | Không dùng tool AI khác; không có prompt nào bạn dặn không ghi log |
+
+**Gate: passed**
+
+**Bước tiếp theo:** gửi prompt "bước T3 cho fA: tách dữ liệu test ra file `data/fA-fr03/`". Bạn có thể chạy codegen trước hoặc song song với T3.
 ```
 
 - **Used in:** `page-objects/LoginPage.ts`, `page-objects/ForgotPasswordPage.ts`, `api/EshopApi.ts`, `features/forgot-password/automation_design.md` §2, `PLAN.md`, `CLAUDE.md`, `prompt_log.md` (AI-02 Artifact #10)
