@@ -2580,3 +2580,106 @@ Bash Write this session's pending prompts to the shared log
 - **Used in:** `playwright.config.ts`, `skills/test-automation/` (no traces, screenshots per TC); `reports/forgot-password/` (second official set, screenshots); `features/forgot-password/screenshots/`; design §6 (ENV-01); `PLAN.md` A6, `HW04_Report.md` §3.3 (AI-02 Artifact #25, #S10)
 
 ---
+
+## Prompt022 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 19:59 17/11/2026
+- **Output received:** 20:04 17/11/2026
+- **Feature / step:** checkout (fB) FR-08 – T3 decision, prompt log, T4 Web spec
+- **Purpose:** Giữ DT-07 đúng TC, chạy test vào thư mục tạm khi có phiên song song, log prompt, sinh spec Web (bước T4)
+- **Prompt (verbatim):**
+
+```text
+vẫn giữ DT-07 đúng như TC
+khi run test nếu như có session nào cũng đang run song song và ghi đè vào playwright-report thì hãy ghi kết quả vào file tạm và bảo sung vào file report sau
+/logging-ai-prompts log các prompt chưa được log cho session này, cứ đánh số thứ tự tiếp nối với các prompt hiện tại được ghi trong file
+bắt dầu bước T4 sinh spec
+```
+
+- **AI output (verbatim):**
+
+```text
+Skill
+Bash Find this session transcript and preview unlogged prompts
+Bash Append Prompt016–019 and list their TODO fields
+Bash Show TODO fields of the new log entries
+Bash Fill TODO fields, link AI-02 rows and design header, commit and push
+Log đã ghi (Prompt016–019), nhưng phần thay số prompt trong AI-02 bị lỗi ở dòng #15. Đang sửa.
+Bash Inspect the time fields of AI-02 rows 14–20
+Bash Renumber this session's AI-02 rows and fill their prompt times
+Bash Fix the Used-in references, verify rows, commit and push
+Log xong. Giờ ghi quyết định DT-07 vào §3, rồi xem cấu hình report để chạy test không đè lên phiên song song.
+Bash Record the DT-07 decision and read the Playwright config
+Bash Read the FR-03 Web spec for conventions
+Bash Remove the duplicate API part of DT-07 from web.json and commit
+Edit /home/hg/source/software-testing/week04/page-objects/CartPage.ts
+Edit /home/hg/source/software-testing/week04/page-objects/CartPage.ts
+Bash Record the new locator in §2 and commit
+Write /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts
+Bash List the generated Web tests and commit the spec
+Spec đã commit (bản thô do AI sinh, làm bằng chứng cho T5). Chạy một lần trên Chromium, ghi report vào thư mục tạm riêng để không đè lên phiên song song.
+Bash Run the Web spec once on Chromium into a separate temp folder
+Bash Summarise results and annotations of the temp run
+Ghi §4 (spec Web, các kiểu assertion, kết quả lần chạy đầu).
+Bash Write §4 for the Web spec and commit
+Bash Add the AI-02 row for the Web spec, commit and push
+Bash Read T4 rubric and grep the spec for inline data or fixed waits
+Bước T4 cho feature checkout đã xong phần Web: spec `web.spec.ts` sinh ra và chạy thử 1 lần trên Chromium được 1 passed, 6 failed. Cả 6 test fail đúng ở các lỗi sản phẩm đã biết, không phải lỗi script. `api.spec.ts` để prompt sau, vì skill quy định mỗi spec một prompt. Tất cả commit đã push.
+
+## 1. DT-07 giữ đúng như TC
+Ghi vào §3 (`878527b`): phần kiểm ảnh minh họa của giỏ rỗng vẫn giữ, dùng soft assertion. Ở T7, DT-07 sẽ link tới cả #116 và #80.
+
+Đi kèm có 2 chỉnh sửa nhỏ:
+- Phần API của DT-07 trước đây có ở cả hai file dữ liệu; giờ chỉ để ở `api.json` (`90a1e6c`).
+- `CartPage` thêm locator `emptyImage` cho ảnh minh họa, và §2 thêm một dòng tương ứng (`569a507`).
+
+## 2. Chạy test khi có phiên song song
+Mỗi lần chạy thử, mình đặt `REPORT_DIR` và `--output` vào một thư mục tạm ngoài repo, nên không đụng tới `playwright-report/` hay `test-results/` của phiên feature A. Kết quả lấy từ `results.json` của thư mục tạm đó rồi chép vào §4 của file thiết kế. Các lần chạy chính thức (T6) vẫn dùng `npm run feature`, mỗi trình duyệt một thư mục riêng.
+
+## 3. Log prompt
+- Đã ghi **Prompt016–Prompt019** (19:13 → 19:57), đánh số tiếp sau Prompt015 của phiên song song, và điền đủ các trường TODO (`eed1682`).
+- Phiên feature A cũng đã dùng số Artifact #15 và #16 trong AI-02. Mình đổi số các dòng của phiên này từ #15–#20 thành #17–#22 và gắn số prompt vào; dòng của phiên kia giữ nguyên (`3be7fe9`).
+- Prompt hiện tại (19:59) đang chạy nên chưa ghi được; sẽ ghi ở lần log sau.
+
+## 4. Kết quả T4: [tests/checkout/web.spec.ts](tests/checkout/web.spec.ts)
+- 7 test, mỗi `flow` của `web.json` một vòng lặp, tiêu đề test bắt đầu bằng mã TC. Bản AI sinh được commit nguyên trạng (`e32f37b`) để làm bằng chứng cho T5.
+- Dùng 5 kiểu assertion: kiểm text, kiểm trạng thái phần tử, assertion phủ định, kiểm đơn đã lưu qua API, và soft assertion.
+- Kết quả chạy trên Chromium (§4, `264592b`):
+
+| Test | Kết quả | Assertion fail |
+| --- | --- | --- |
+| DT-01 | ✘ | Ô tổng tiền sửa được (BUG-15), thiếu breadcrumb (BUG-16), giỏ còn 3 dòng sau khi thanh toán (BUG-14). Danh sách sản phẩm, dòng tổng tiền và đơn đã lưu (126000000) đều đúng |
+| BVA-01 … 04 | ✘ | Giỏ không bị xóa (BUG-14). Tổng của đơn đã lưu đúng ở cả 4 test |
+| DT-03 | ✓ | Không tạo đơn ở cả 2 đường; thông báo `alert`, URL và mã 401 được ghi lại |
+| DT-07 | ✘ | Không có ảnh minh họa (#80); gõ `/checkout` với giỏ rỗng vẫn tạo đơn 0 ₫ (BUG-01, #116) |
+
+Mỗi test có dựng giỏ đều ghi lại annotation "phải bấm 2 lần" (#73).
+
+## AI tự đánh giá (T4)
+
+| # | Điểm | Bằng chứng | Việc cần làm |
+| --- | --- | --- | --- |
+| P1 | 2 | Chỉ sửa spec, §4, các chỉnh sửa theo quyết định của bạn (mỗi cái một commit) và log | – |
+| P2 | 2 | T3 đã commit (`65d47f5`) trước khi làm T4 | – |
+| P3 | 2 | Quyết định DT-07 có commit riêng | – |
+| P4 | 2 | Chưa kết luận lỗi sản phẩm hay lỗi script; việc đó để T7 | – |
+| P5 | N/A | Không có câu hỏi mới | – |
+| P6 | 2 | AI-02 #24 (`6562188`), log Prompt016–019; đã push | – |
+| 12 | 2 | Spec đọc dữ liệu từ `web.json`, không có mảng test case viết cứng trong spec | – |
+| 13 | 2 | 5 kiểu assertion (bảng ở §4), nhiều hơn mức tối thiểu 3 | – |
+| 14 | 1 | Không có `waitForTimeout`. Nhưng DT-03 đường (a) có `if (await checkout.heading.isVisible())`, tức là rẽ nhánh theo trạng thái trang | Để T5 sửa; T4 không được sửa |
+| 15 | 2 | Mỗi test tự đăng ký tài khoản riêng | – |
+| 16 | 2 | `e32f37b` là bản AI sinh, chưa sửa gì | – |
+
+**Gate: passed.** Mục 14 được 1 điểm vì T4 không được sửa code; lỗi này để lại cho T5 xử lý.
+
+## Bước tiếp theo
+
+> "T4 cho checkout: sinh api.spec.ts"
+
+Sau đó là T5: review cả 2 spec với bạn. Ngoài lỗi `if` ở DT-03, cần xem thêm: DT-01 kiểm "không sửa được tổng" bằng CSS thuộc tính `:not([readonly])`, và đường (b) của DT-03 thực chất đang kiểm với giỏ rỗng vì gõ URL làm tải lại trang.
+```
+
+- **Used in:** design §3 (commit 878527b), `page-objects/CartPage.ts` (commit 569a507), `tests/checkout/web.spec.ts` (commit e32f37b), design §4 (commit 264592b), `prompt_log.md` Prompt016–019 (commit eed1682); AI-02 Artifact #24
+
+---
