@@ -2,8 +2,9 @@ import type { APIRequestContext, APIResponse } from '@playwright/test';
 
 /**
  * EShop REST API (`eshop-sut/api_specification.md` §1.1–1.4 accounts and
- * passwords, §4 cart and orders) for test setup, the `Yes (API)` test cases and
- * checks of the stored result (did the password change? was an order stored?).
+ * passwords, §3 products and categories, §4 cart and orders) for test setup, the
+ * `Yes (API)` test cases and checks of the stored result (did the password change?
+ * was an order stored? which products are stored?).
  * Returns the raw responses; assertions stay in the specs.
  */
 export class EshopApi {
@@ -61,6 +62,63 @@ export class EshopApi {
   adminOrders(adminToken: string): Promise<APIResponse> {
     return this.request.get(`${this.baseUrl}/api/admin/orders`, { headers: bearer(adminToken) });
   }
+
+  // ---- Products and categories (API spec §3, FR-15). `authorization` is the whole
+  // header value (`Bearer <jwt>`, a forged one, a user's), or `undefined` to send no
+  // `Authorization` header at all (DT-06 … DT-08). Bodies are sent as given, so a test
+  // can leave out a field (`name`, `price`, `category_id`) or send a wrong type.
+
+  products(): Promise<APIResponse> {
+    return this.request.get(`${this.baseUrl}/api/products`);
+  }
+
+  product(id: number | string): Promise<APIResponse> {
+    return this.request.get(`${this.baseUrl}/api/products/${id}`);
+  }
+
+  createProduct(body: Record<string, unknown>, authorization: string | undefined): Promise<APIResponse> {
+    return this.request.post(`${this.baseUrl}/api/products`, {
+      headers: header(authorization),
+      data: body,
+    });
+  }
+
+  updateProduct(
+    id: number | string,
+    body: Record<string, unknown>,
+    authorization: string | undefined,
+  ): Promise<APIResponse> {
+    return this.request.put(`${this.baseUrl}/api/products/${id}`, {
+      headers: header(authorization),
+      data: body,
+    });
+  }
+
+  deleteProduct(id: number | string, authorization: string | undefined): Promise<APIResponse> {
+    return this.request.delete(`${this.baseUrl}/api/products/${id}`, {
+      headers: header(authorization),
+    });
+  }
+
+  categories(): Promise<APIResponse> {
+    return this.request.get(`${this.baseUrl}/api/categories`);
+  }
+
+  /** FR-14; needs an admin token. DT-19 creates a category and deletes it. */
+  createCategory(name: string, adminToken: string): Promise<APIResponse> {
+    return this.request.post(`${this.baseUrl}/api/categories`, {
+      headers: bearer(adminToken),
+      data: { name },
+    });
+  }
+
+  deleteCategory(id: number | string, adminToken: string): Promise<APIResponse> {
+    return this.request.delete(`${this.baseUrl}/api/categories/${id}`, { headers: bearer(adminToken) });
+  }
+}
+
+function header(authorization: string | undefined): Record<string, string> {
+  return authorization === undefined ? {} : { Authorization: authorization };
 }
 
 function bearer(token: string): Record<string, string> {
