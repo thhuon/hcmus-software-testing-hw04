@@ -7123,7 +7123,7 @@ Cả hai đều đang có, chỉ khác ở bước nào:
 ## Prompt072 – Claude Code (claude-opus-5-5)
 
 - **Prompt sent:** 05:38 18/11/2026
-- **Output received:** 05:41 18/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Output received:** 05:41 18/11/2026
 - **Feature / step:** Submission – documents
 - **Purpose:** Viết nháp AI Critique, ghi SV đồng ý vào AI-02, dùng lại AI-05 của HW03, xác nhận mức độ BUG-02, thêm ảnh trang Issues mới, bỏ bản ghi âm khỏi thư mục nộp
 - **Prompt (verbatim):**
@@ -7171,8 +7171,74 @@ Bash Find the AI-02 row that wrote BUG-02
 Bash Record BUG-02 change in AI-02 and commit
 Đã ghi các dòng AI-02 cho phần việc lần này. Giờ chạy lại phần log prompt để hoàn tất Prompt069 và ghi lượt này.
 Bash Complete Prompt069 and log the current prompt
+Bash Fill Prompt072 fields, link AI-02, commit
+Đã làm xong cả 6 việc, mỗi việc một commit và đều đã push.
+
+- **AI Critique:** đoạn văn tiếng Anh 288 từ (giống HW03) nằm trong [AI_Critique.md](week04/AI_Critique.md). Ý chính:
+  - Lỗi của AI chủ yếu nằm ở chỗ assertion không chứng minh được điều cần kiểm, không phải ở locator.
+  - Có 11 lỗi, kèm dẫn chứng cụ thể (FR-03 DT-05, FR-15 DT-17, …) và nguyên nhân (7 Model, 3 Feature, 1 Prompt), cuối đoạn là nguyên tắc rút ra.
+  - Mục Evidence bên dưới mình để lại để bạn đối chiếu khi review, nhớ xóa trước khi nộp.
+  - Vì AI viết đoạn này, mình đã khai thêm ở [AI-03](week04/AI-03_AI_Disclosure_Form.md) §4.
+- **AI-02:**
+  - Mọi ô cột (5) đang chờ bạn giờ ghi "Dùng nguyên, SV đồng ý (SV review 18/11, Prompt072)".
+  - Các verdict "chờ SV…" chuyển thành "SV xác nhận".
+  - Mình cũng viết luôn §5 Kết luận và §6 Mandatory Disclosure theo khuôn HW03, vì AI-05 có ô tick "Mandatory Disclosure ở cuối báo cáo". Điều này cũng đã khai trong AI-03.
+  - Thêm dòng #58 và #59; §4 nay là 72 artifact: 64 VALID, 8 INCOMPLETE.
+- **Một quyết định mình điền thay bạn (dòng #50):** lỗi `GET /api/products/:id` trả giá dạng chuỗi khi id chẵn được ghi là "giữ làm quan sát, không tạo issue". Lý do là không có TC nào của HW02 kiểm kiểu dữ liệu của giá. Nếu bạn muốn báo thành issue mới thì nói mình.
+- **AI-05:** chép bản HW03 (đã tick đủ, đã ký), đổi ngày thành 18/11/2026.
+- **BUG-02:** đã bỏ ghi chú "proposed – to be confirmed", giờ chỉ còn High / High.
+- **Ảnh Issues:** ảnh chụp lúc 05:30 (lọc `hw: HW04`, có #117 và #116) đã ghi đè lên `bugs/screenshots/issues-label-hw04.png`.
+- **Bản ghi âm:**
+  - Thư mục `demo/` đã bị xóa từ phía bạn. Mình hiểu đó là "bảng ghi âm" nên giữ nguyên, chỉ sửa các chỗ còn nhắc tới nó (README §5, CLAUDE.md, design FR-15 §6).
+  - File `New Recording.m4a` mình **chuyển** sang `~/Videos/HW04_video2_voice.m4a` chứ không xóa hẳn, để nó nằm ngoài thư mục nộp mà vẫn còn bản giọng đọc. Nếu bạn muốn xóa hẳn thì nói mình.
+- **Prompt log:** đã ghi Prompt072 và hoàn tất Prompt069. Prompt072 (lượt này) đang có nhãn UNFINISHED, lần log sau sẽ tự cập nhật.
+
+**Bạn còn phải làm:**
+1. Đọc lại và sửa đoạn AI Critique, sau đó xóa mục Evidence.
+2. Điền Ngày và ký ở AI-02 và AI-03 (phần đầu AI-03 cũng còn ô Ngày).
+3. Điền điểm tự đánh giá ở README §4 và thay `<XXX>` trong tên file zip.
+4. Đổi repo `hcmus-software-testing-hw04` sang public.
+
+Xong mấy việc đó, bạn báo mình làm bước cuối:
+- **Dọn file:** xóa các file `*.vi.md` và đề bài (kể cả `HW04_Automation_Testing_Vietnamese.pdf` chưa commit).
+- **Tạo file nộp:** `git_log.txt` và PDF cho báo cáo, AI Critique, AI-02.
+- **Đóng gói:** zip `23120046_HW04_AI_Automation_<XXX>.zip`.
 ```
 
 - **Used in:** `AI_Critique.md`, `AI-02_AI_Audit_Report.md` cột (3), (5), §4 – §6 (Artifact #58, #59), `AI-03_AI_Disclosure_Form.md` §4, `AI-05_AI_Privacy_Checklist.md`, `bugs/BUG_REPORT.md`, `bugs/screenshots/issues-label-hw04.png`, `HW04_Report.md` §7, `README.md` §5, `CLAUDE.md`, `features/product-crud/automation_design.md` §6
+
+---
+
+## Prompt073 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 05:48 18/11/2026
+- **Output received:** 05:49 18/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Feature / step:** Submission – clean-up (PLAN D5, S9)
+- **Purpose:** Commit các chỉnh sửa của SV, xóa bản tiếng Việt của skill và đề bài, chuyển repo sang public, kiểm thư mục demo trên git, log prompt
+- **Prompt (verbatim):**
+
+```text
+/logging-ai-prompts Đã chỉnh sửa xong hãy xóa các file ko cần thiết và chuyển sang public, xóa đi folder demo trên git
+```
+
+- **AI output (verbatim):**
+
+```text
+Bash Check student edits and remote demo folder
+Bash Review the student's edits
+Bash Read the student's critique version
+Bạn đã điền ngày, ký và xóa mục Evidence. Mình commit riêng phần sửa của bạn trước, rồi mới dọn file.
+Bash Commit student edits and find references to removed files
+Bash View lines to edit
+Bash Delete Vietnamese copies and brief, fix references
+Bash Commit the cleanup and push
+Bash Commit the cleanup and push
+Đã dọn xong và push. Trước khi chuyển repo sang public, mình kiểm tra nhanh xem có thông tin riêng tư nào sẽ bị lộ không.
+Bash Scan repo for emails, secrets and local paths
+Bash Make the HW04 repository public
+Bash Tick the public-repo step in the plan
+```
+
+- **Used in:** repo (commit e2bd2bc, cleanup, PLAN S9 / D5), `README.md` §3, `skills/README.md`, `CLAUDE.md`, `prompt_log.md`, AI-02 Artifact #60
 
 ---
