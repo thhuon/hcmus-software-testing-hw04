@@ -335,9 +335,9 @@
     {
       "id": "DT-16",
       "technique": "DT",
-      "title": "fractional price: the Admin web does not send the form (Web part)",
+      "title": "fractional price is refused (Web part)",
       "partition": "EC-V4-7, V1-1, V2-1, O1-2, O2-4, O3-1",
-      "flow": "addBlocked",
+      "flow": "add",
       "form": {
         "name": "Ốp lưng iPhone 15 silicon",
         "price": "250000.5",
@@ -345,18 +345,16 @@
         "description": "Mô tả test",
         "imageUrl": ""
       },
-      "submit": true,
       "expected": {
-        "kind": "blocked",
-        "invalidField": "price",
-        "requestSent": false,
+        "kind": "refused",
         "newProducts": 0,
         "seedUnchanged": true,
         "recordOnly": [
-          "browser validation message"
+          "response status",
+          "dialog messages"
         ]
       },
-      "source": "FR-15 eshop-sut/README.md:196 \"Giá: bắt buộc, phải là số **dương** (> 0).\"; HW02 A2, A6, Q4"
+      "source": "FR-15 eshop-sut/README.md:196 \"Giá: bắt buộc, phải là số **dương** (> 0).\"; HW02 A6, Q4 (the Admin web sends 250000.5: T5 review #1)"
     },
     {
       "id": "DT-17",
