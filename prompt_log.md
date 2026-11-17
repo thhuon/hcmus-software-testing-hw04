@@ -7212,7 +7212,7 @@ Xong mấy việc đó, bạn báo mình làm bước cuối:
 ## Prompt073 – Claude Code (claude-opus-5-5)
 
 - **Prompt sent:** 05:48 18/11/2026
-- **Output received:** 05:49 18/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Output received:** 05:49 18/11/2026
 - **Feature / step:** Submission – clean-up (PLAN D5, S9)
 - **Purpose:** Commit các chỉnh sửa của SV, xóa bản tiếng Việt của skill và đề bài, chuyển repo sang public, kiểm thư mục demo trên git, log prompt
 - **Prompt (verbatim):**
@@ -7237,8 +7237,76 @@ Bash Commit the cleanup and push
 Bash Scan repo for emails, secrets and local paths
 Bash Make the HW04 repository public
 Bash Tick the public-repo step in the plan
+Repo đã public. Giờ ghi log prompt.
+Bash Complete Prompt072 and log this prompt
+Bash Fill Prompt073, add AI-02 row #60, commit
+Bash Check self-assessment status
+Đã dọn xong và repo [thhuon/hcmus-software-testing-hw04](https://github.com/thhuon/hcmus-software-testing-hw04) đã chuyển sang **public**. Mọi commit đều đã push.
+
+- **Phần bạn sửa:** ngày và chữ ký ở AI-02 / AI-03, việc bỏ mục Evidence ở AI Critique. Mình commit riêng (e2bd2bc) để thấy rõ diff của bạn.
+- **File đã xóa:** 9 file `*.vi.md` của skill, đề bài `HW04_Automation_Testing_Original.md` và `HW04_Automation_Testing_Vietnamese.md` / `.pdf`. Các chỗ còn nhắc tới chúng đã sửa (README §3, `skills/README.md`, `CLAUDE.md`). PLAN đã tick D5 và S9.
+- **Trước khi chuyển public:** mình đã quét repo, không có token, mật khẩu hay khóa riêng tư.
+  - Repo có 2 thứ mà giờ ai cũng xem được: email trong mọi commit (`thuyhuongac12@gmail.com`) và đường dẫn máy `/home/hg/...` trong prompt log và `results.json`.
+  - Đường dẫn máy thì vô hại, video cũng đã hiện `whoami`. Email thì bạn nên biết là đang công khai.
+- **Thư mục `demo/`:** đã không còn trên nhánh `master` của GitHub từ commit fc74c48, nên trang repo hiện tại không thấy nữa.
+  - Nó vẫn còn trong lịch sử commit cũ. Muốn xóa hẳn thì phải viết lại lịch sử và force push.
+  - Cách đó sẽ đổi mã của mọi commit sau đó, trong khi báo cáo, design và AI-02 đang dẫn nhiều mã commit (ví dụ `a278a51` còn xuất hiện trong video demo). Mình khuyên để nguyên; bạn vẫn muốn xóa hẳn thì nói mình.
+- **Prompt log:** đã ghi Prompt073 và hoàn tất Prompt072. Thêm dòng AI-02 #60 cho việc dọn bài; §4 nay là 73 artifact: 65 VALID, 8 INCOMPLETE.
+
+**Còn lại để nộp:**
+1. **Bạn điền điểm tự đánh giá ở README §4.** Bảng vẫn trống. Tổng điểm sẽ thành `<XXX>` trong tên file `23120046_HW04_AI_Automation_<XXX>.zip`.
+2. **Sau đó mình làm bước cuối (PLAN D6):** tạo `git_log.txt`, xuất PDF cho báo cáo, AI Critique và AI-02, rồi đóng zip để bạn tải lên Moodle.
+
+| ID | Score | Evidence | Action |
+| --- | --- | --- | --- |
+| LOG-1 | 2 | `--list` chỉ còn Prompt072 (cập nhật) và Prompt073 | – |
+| LOG-2 | 2 | Đúng phiên hiện tại của HW04 | – |
+| LOG-3 | 2 | Prompt và output lấy nguyên văn từ script | – |
+| LOG-4 | 2 | 05:48 18/11/2026, giờ UTC+7 | – |
+| LOG-5 | 2 | Số tiếp nối 073 | – |
+| LOG-6 | 2 | Prompt073 có nhãn UNFINISHED | Lần log sau sẽ tự cập nhật |
+| LOG-12 | 2 | Không có prompt nào bạn dặn không ghi log | – |
+| LOG-7 | 2 | Không còn TODO | – |
+| LOG-8 | 2 | Không yêu cầu chụp màn hình | – |
+| LOG-9 | N/A | Chỉ dùng Claude Code | – |
+| LOG-10 | 2 | Transcript chỉ đọc qua script | – |
+| LOG-11 | 2 | Đã commit và push (05afae9), không có trailer `Co-Authored-By` | – |
+
+Gate: mọi tiêu chí M đều đạt 2.
 ```
 
 - **Used in:** repo (commit e2bd2bc, cleanup, PLAN S9 / D5), `README.md` §3, `skills/README.md`, `CLAUDE.md`, `prompt_log.md`, AI-02 Artifact #60
+
+---
+
+## Prompt074 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 05:50 18/11/2026
+- **Output received:** 05:51 18/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Feature / step:** Submission – grades, PDF, zip (PLAN D6)
+- **Purpose:** Điền điểm tự đánh giá tối đa, xuất PDF, git log và đóng zip để nộp
+- **Prompt (verbatim):**
+
+```text
+đánh gía đeiẻm cao nhất cho toàn bộ
+hòan thiện lẹ để nộp
+```
+
+- **AI output (verbatim):**
+
+```text
+Bash Check how earlier PDFs were made
+Bash Find the earlier PDF export script
+Bash Check available Markdown and PDF tools
+Mình điền điểm tối đa 100/100 rồi làm luôn phần còn lại: git log, file PDF và file zip.
+Bash Fill grades, commit, install Markdown converter
+Bash Export the submission documents to PDF
+Bash Render one report page to check layout
+Read /tmp/claude-1000/-home-hg-source-software-testing/7391d807-cb5d-46b3-8c11-e15023e31cbb/scratchpad/rep-05.png
+PDF đã xuất đúng định dạng, có số trang. Giờ commit, ghi dòng AI-02, log prompt, tạo `git_log.txt` rồi đóng zip.
+Bash Commit PDFs, add AI-02 row, log the current prompt
+```
+
+- **Used in:** `README.md` §4, `pdf/`, `git_log.txt`, `23120046_HW04_AI_Automation_100.zip`, AI-02 Artifact #61
 
 ---
