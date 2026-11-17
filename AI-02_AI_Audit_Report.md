@@ -49,7 +49,7 @@ Nguồn dẫn chiếu trong cột (4):
 - **[SRS]**: `eshop-sut/README.md`
 - **[PW]**: Playwright documentation – https://playwright.dev/docs (Best Practices, Locators, Test assertions, Reporters)
 
-Cột (1): `Artifact #n` cho sản phẩm bài làm, `Artifact #Sn` cho mỗi prompt thay đổi Agent Skill. Prompt chưa được log ghi `prompt dd/mm HH:MM (logged later)`; skill logging-ai-prompts điền số PromptNNN và nguyên văn khi log.
+Cột (1): `Artifact #n` cho sản phẩm bài làm, `Artifact #Sn` cho mỗi prompt thay đổi Agent Skill.
 
 | (1) Prompt + Công cụ | (2) Output AI | (3) Verdict | (4) Lý do (ISTQB) | (5) Bản SV sửa |
 | --- | --- | --- | --- | --- |
@@ -101,7 +101,7 @@ Cột (1): `Artifact #n` cho sản phẩm bài làm, `Artifact #Sn` cho mỗi pr
 
 ## 4. Tổng kết Độ chính xác AI
 
-Tổng hợp verdict từ Mục 3 và điền vào bảng dưới. Số liệu theo verdict của 45 dòng (35 artifact bài làm + 10 thay đổi skill, đếm từ bảng Mục 3): các dòng chưa có review của SV vẫn là đề xuất; đổi khi SV đổi verdict hoặc khi thêm dòng.
+Tổng hợp verdict từ Mục 3 và điền vào bảng dưới.
 
 | Chỉ số | Số lượng | Tỉ lệ |
 | --- | --- | --- |
