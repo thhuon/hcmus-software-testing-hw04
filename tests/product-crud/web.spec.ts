@@ -312,15 +312,20 @@ test.describe('FR-15 product CRUD – Admin web', () => {
         }
 
         case 'categoryChoice': {
-          const options = (await products.categorySelect.getByRole('option').allInnerTexts()).map((o) => o.trim());
           const res = await api.categories();
           const apiNames = ((await res.json()) as { name: string }[]).map((c) => c.name);
+          // Web-first: the Admin web fills the list from the 4th of five requests after the
+          // login, so the options may still be empty when the tab is shown (T5 review #2).
+          await expect(
+            products.categorySelect.getByRole('option'),
+            'the list offers exactly the categories of GET /api/categories',
+          ).toHaveText(apiNames);
+          const options = (await products.categorySelect.getByRole('option').allInnerTexts()).map((o) => o.trim());
           record(testInfo, 'category options', {
             options,
             emptyChoice: options.includes(''),
             selected: await products.categorySelect.inputValue(),
           });
-          expect(options, 'the list offers exactly the categories of GET /api/categories').toEqual(apiNames);
           break;
         }
 
