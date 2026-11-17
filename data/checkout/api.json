@@ -1,6 +1,6 @@
 {
   "about": "FR-08 API test data (design §3). Each row registers a new account through the API (accountEmail with {id} in lower case and {run}), logs it in and builds its server cart with POST /api/cart (cart lines at the catalog price unless the line gives a price). authorization: \"user\" = Bearer + the account's JWT, null = no Authorization header, any other string = sent as the header value. The status code is recorded, not judged (Q1); the stored orders and the server cart are the oracle.",
-  "accountEmail": "fr08.{id}.{run}@example.com",
+  "accountEmail": "fr08.api.{id}.{run}@example.com",
   "accountPassword": "Test1234!",
   "admin": {
     "email": "admin@eshop.com",

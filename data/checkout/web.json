@@ -1,6 +1,6 @@
 {
   "about": "FR-08 Web test data (design §3). Each row registers a new account through the API (accountEmail with {id} in lower case and {run} = start time of the run + browser) and logs in on the Web, except the guest row. cart = lines added on the product pages (quantity field + \"Thêm vào giỏ hàng\"), in this order. Amounts in ₫ (VND). totalText: the amount with any thousand separator ('.' or ','), A10.",
-  "accountEmail": "fr08.{id}.{run}@example.com",
+  "accountEmail": "fr08.web.{id}.{run}@example.com",
   "accountPassword": "Test1234!",
   "admin": {
     "email": "admin@eshop.com",
