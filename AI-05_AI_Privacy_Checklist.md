@@ -32,19 +32,19 @@ Bảng Kiểm Quyền Riêng tư & Sử dụng AI Có Trách nhiệm
 
 ## 3. Trước khi nộp bài
 
-- [ ] Mọi artifact AI sinh đã được gắn tag trong AI Audit Report.
+- [x] Mọi artifact AI sinh đã được gắn tag trong AI Audit Report.
 
-- [ ] Mọi trích dẫn AI đã được xác minh (nguồn thực sự tồn tại).
+- [x] Mọi trích dẫn AI đã được xác minh (nguồn thực sự tồn tại).
 
-- [ ] Mọi code AI sinh đã được thực thi và test.
+- [x] Mọi code AI sinh đã được thực thi và test.
 
-- [ ] AI Critique 200–300 chữ đã có trong báo cáo.
+- [x] AI Critique 200–300 chữ đã có trong báo cáo.
 
-- [ ] Đoạn Mandatory Disclosure ở cuối báo cáo.
+- [x] Đoạn Mandatory Disclosure ở cuối báo cáo.
 
-- [ ] Đính kèm AI Use Disclosure Form.
+- [x] Đính kèm AI Use Disclosure Form.
 
-- [ ] Sẵn sàng cho vấn đáp ngẫu nhiên 5–7 phút tuần kế nộp bài.
+- [x] Sẵn sàng cho vấn đáp ngẫu nhiên 5–7 phút tuần kế nộp bài.
 
 ## 4. Cam đoan Cuối cùng
 
@@ -58,8 +58,8 @@ Chữ ký
 | Lớp / Khoá: | CQ2023/3 |
 | Môn học: | CS423 / CSC13003 – Kiểm chứng Phần mềm |
 | Giảng viên: | ThS. Lâm Quang Vũ |
-| Ngày: |  |
-| Chữ ký: |  |
+| Ngày: | 18/11/2026 |
+| Chữ ký: | Hồ Thùy Hương |
 
 Tham khảo
 
