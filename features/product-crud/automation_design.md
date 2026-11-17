@@ -213,10 +213,26 @@ The verdicts (product defect or script defect) are for T7; the BUG numbers are t
 
 ## 5. Review of the AI-generated scripts (T5)
 
+**How the scripts were reviewed** (agent, 18/11 02:05 – 02:12, Chromium; temporary `REPORT_DIR` / `--output`): both specs run three times (`--repeat-each=3`, 123 tests, 4.0 min): every test gave the same result in the three attempts (17 always passed, 24 always failed), products ids 1–5 afterwards. Then each spec read against the seven categories (table below); the two corrections were checked by a rerun of the test (`-g`), DT-17 three times, and a full rerun of both specs (18/11 02:09): 17 passed, 24 failed – the 24 failing assertions are the T4 ones, quoted from the TCs, for T7.
+
 | # | Spec › test | What the AI got wrong or missed | Category | Fix (commit) | Why the AI missed it | Cause type |
 | --- | --- | --- | --- | --- | --- | --- |
+| 1 | `web.spec.ts` › DT-16 (data `web/DT-16`) | The Web part expected the browser to block `250000.5` (`addBlocked`: field invalid, no request), but the Admin web sends it: right after typing, the number field is invalid (step mismatch); once the next field is filled, React writes the input's `value` attribute again, the step base becomes 250000.5 and the field is valid, so "Lưu sản phẩm" sends `"price": "250000.5"` (Chromium, Firefox, WebKit). The test failed on "the price field blocks the form" (value `""`, the form already sent and reset) instead of on the TC's oracle. Now a refused add as the TC says ("refused … no new product"): it fails on "new products: expected 0, received 1" (price 250000.5 stored, as HW02 BUG-30) | wrong oracle | Data row `flow: add`, `expected.kind: refused`; §2 price-field row and finding, §3 "blocked" bullet corrected (`2626e15`) | (proposed) The T2 exploration read the field's validity right after `fill()` and never filled another field before submitting, so it saw the state before React re-rendered; the T3 data and the T4 spec built the oracle on that finding instead of on the TC, which only says "refused" | Feature (proposed) |
+| 2 | `web.spec.ts` › DT-17 | The options of the category list were read with `allInnerTexts()` and then compared with `toEqual`: a one-time read that does not wait. The Admin web fills the list from `GET /api/categories`, the 4th of five requests it sends after the login, while the tab is already shown. With that request delayed by 1.5 s (`page.route`, hand-written check), the read returned `[]` and the test would fail although the list is right. It passed in the 3 × 3 runs only because the local server answers at once | flaky wait | Web-first `await expect(options).toHaveText(apiNames)`, which retries until the list is filled; the options are recorded after it (`a278a51`); DT-17 3 × passed, and the web-first assertion passed after 1.8 s with the delayed request | (proposed) The generated code reads values first and asserts on them, a pattern the model often prefers for lists; the prompt and the design said nothing about when the list is filled, and on a fast local server the problem does not show | Model (proposed) |
 
 Categories: fragile selector · weak assertion · wrong oracle · missing edge case · flaky wait · hidden dependency · hard-coded data. Cause types: Prompt · Model · Feature.
+
+**Checked with no correction** (per spec, per category):
+
+| Category | `web.spec.ts` | `api.spec.ts` |
+| --- | --- | --- |
+| Fragile selector | No issue: page-object locators only (role + name, the row by a cell with the exact name, columns by header index); no CSS class, XPath or position | N/A (no page) |
+| Weak assertion | No issue: every row asserts the stored result or the cell text; status and dialogs are recorded on purpose (Q1, Q8). DT-23 counts the labels with `*` without tying each to its field: the form has no label at all, so there is nothing to tie it to (noted, not changed) | No issue: every row asserts the stored products, P and products 1–5 |
+| Wrong oracle | #1 | No issue: every expected value is the TC's (`source` of each row) |
+| Missing edge case | No issue: the 28 `web/` rows of §1 are all in the data file and the loop | No issue: the 13 `api/` rows |
+| Flaky wait | #2. DT-24 reads the list names once after the add (after `toHaveCount(1)` of the new row, so the list is loaded) and once after the edit (the Admin web writes the names before the `alert`): not changed, stable 3 × 3 | No issue (no page) |
+| Hidden dependency | No issue: each test reads the ids before, creates its own P, deletes its own products; tags hold TC, browser, run and attempt | No issue: same; DT-19 creates and deletes its own category |
+| Hard-coded data | No issue: no input or expected value in the spec (`grep` of the spec: only messages and the `Bearer` prefix) | No issue |
 
 ## 6. Runs (T6)
 
