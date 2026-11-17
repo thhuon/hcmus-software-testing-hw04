@@ -10,6 +10,12 @@ export class CartPage {
   readonly heading: Locator;
   readonly emptyHeading: Locator;
   readonly continueShoppingLink: Locator;
+  /**
+   * FR-07 "hình minh họa" of the empty cart: any image in the page content. An
+   * illustration may be decorative (`alt=""`, no `img` role), so it is found by
+   * element type inside `main`, not by role. 0 today (group issue #80).
+   */
+  readonly emptyImage: Locator;
   /** Rows with data cells: the product lines, without the header row. */
   readonly lines: Locator;
   readonly checkoutButton: Locator;
@@ -18,6 +24,7 @@ export class CartPage {
     this.heading = page.getByRole('heading', { name: 'Giỏ Hàng', level: 2 });
     this.emptyHeading = page.getByRole('heading', { name: 'Giỏ hàng của bạn đang trống' });
     this.continueShoppingLink = page.getByRole('link', { name: 'Tiếp tục mua sắm' });
+    this.emptyImage = page.getByRole('main').locator('img, svg');
     this.lines = page.getByRole('row').filter({ has: page.getByRole('cell') });
     this.checkoutButton = page.getByRole('button', { name: 'Tiến hành thanh toán' });
   }

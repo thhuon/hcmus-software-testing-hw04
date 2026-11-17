@@ -75,6 +75,7 @@ Page objects: `page-objects/SiteHeader.ts`, `LoginPage.ts` (extended: fields and
 | Giỏ hàng | All product lines | `getByRole('row').filter({ has: getByRole('cell') })` | Rows that have data cells; the header row has only column headers, so it is left out without a position. Count = number of lines |
 | Giỏ hàng | "Tiến hành thanh toán" button | `getByRole('button', { name: 'Tiến hành thanh toán' })` | Role + name; same as codegen |
 | Giỏ hàng (empty) | Empty-cart message | `getByRole('heading', { name: 'Giỏ hàng của bạn đang trống' })` | Role + name; the FR-07 "thông báo rõ ràng". No image (0 `img`, group issue #80) |
+| Giỏ hàng (empty) | Empty-cart illustration (FR-07 "hình minh họa") | `getByRole('main').locator('img, svg')` | Added in T4 for DT-07 (student 17/11: keep the TC as it is). A decorative image has `alt=""` and no `img` role, so it is found by element type inside the `main` landmark. 0 today (group issue #80) |
 | Giỏ hàng (empty) | "Tiếp tục mua sắm" link | `getByRole('link', { name: 'Tiếp tục mua sắm' })` | Role + name |
 | Thanh toán `/checkout` | Page heading | `getByRole('heading', { name: 'Xác Nhận Đơn Hàng', level: 2 })` | Role + name |
 | Thanh toán | Product list items | `getByRole('main').getByRole('listitem')` | One item per line, text `<name> x <qty> — <amount> ₫`; count = lines (FR-08 "danh sách sản phẩm đặt mua") |
