@@ -2577,6 +2577,6 @@ Giờ đến log prompt: dùng đúng file transcript của session này, rồi 
 Bash Write this session's pending prompts to the shared log
 ```
 
-- **Used in:** `playwright.config.ts`, `skills/test-automation/` (no traces, screenshots per TC); `reports/forgot-password/` (second official set, screenshots); `features/forgot-password/screenshots/`; design §6 (ENV-01); `PLAN.md` A6, `HW04_Report.md` §3.3 (AI-02 Artifact #24, #S10)
+- **Used in:** `playwright.config.ts`, `skills/test-automation/` (no traces, screenshots per TC); `reports/forgot-password/` (second official set, screenshots); `features/forgot-password/screenshots/`; design §6 (ENV-01); `PLAN.md` A6, `HW04_Report.md` §3.3 (AI-02 Artifact #25, #S10)
 
 ---
