@@ -97,7 +97,7 @@ Page objects: `page-objects/LoginPage.ts`, `page-objects/ForgotPasswordPage.ts`;
 
 Testability findings (elements without an accessible name, unstable text):
 
-- **No input has an accessible name** on Đăng nhập, Bước 1 and Bước 2: the `<label>` elements have no `for` and do not wrap the input, so `getByRole(…, { name })` and `getByLabel` find nothing and screen readers read "edit text" only (WCAG 2.2 SC 1.3.1, 4.1.2). FR-22 has no sentence about linked labels. Every field is still found by another option (table below), so no field is unreachable; whether to report the missing names is the student's decision (open).
+- **No input has an accessible name** on Đăng nhập, Bước 1 and Bước 2: the `<label>` elements have no `for` and do not wrap the input, so `getByRole(…, { name })` and `getByLabel` find nothing and screen readers read "edit text" only (WCAG 2.2 SC 1.3.1, 4.1.2). FR-22 has no sentence about linked labels. Every field is still found by another option (table below), so no field is unreachable. Student decision 17/11: recorded here as a testability finding only; no issue and no comment (no requirement oracle).
 - **Messages in `alert` dialogs** (HW02 BUG-09): they cannot be located or read by assistive technology inside the page; the tests read them through the `dialog` event.
 - **Wrong heading on Đăng nhập**: "Đăng Ký" (register) on the login page. Outside FR-03 (login page, FR-02); already filed by the group as #95.
 - **Timing seen in the check:** on Firefox and WebKit the forgot-password page was not rendered yet right after the link click (counts 0); after waiting for the heading every locator matched. The specs must start each step with a web-first assertion (e.g. the heading is visible) before acting.
