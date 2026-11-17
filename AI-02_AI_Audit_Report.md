@@ -139,11 +139,11 @@ Tổng hợp verdict từ Mục 3 và điền vào bảng dưới.
 
 Viết 80–150 chữ mô tả pattern quan sát được. AI mạnh ở đâu? AI sai ở đâu? Khuyến nghị của bạn cho việc dùng AI trong loại công việc này?
 
-[Điền ở giai đoạn 5]
+AI làm tốt phần có cấu trúc và kiểm được bằng máy: khảo sát locator trên 3 trình duyệt, page object, file dữ liệu JSON lấy từ TC HW02, spec data-driven, chạy nhiều trình duyệt, đếm số liệu từ `results.json`, viết bug report và bình luận issue nhất quán. AI sai ở chỗ assertion có thật sự chứng minh điều cần kiểm hay không: một test pass giả (FR-03 DT-05), oracle thêm quy ước ngoài yêu cầu (`role="alert"`), đọc giá trị một lần không chờ (FR-15 DT-17), và các lỗi chỉ lộ ra khi app chạy thật (chạy lặp, request chậm, trình duyệt bận). Khuyến nghị: mỗi bước một prompt và một lần review; lấy giá trị mong đợi từ TC và SRS, không lấy từ app; chạy lặp `--repeat-each=3` trên cả 3 trình duyệt trước khi tin kết quả; kiểm tra mỗi assertion có thể fail đúng với lỗi nó nhắm tới.
 
 ## 6. Mandatory Disclosure (dán nguyên văn)
 
-[Điền ở giai đoạn 5]
+*"Script Playwright (page object, API client, file dữ liệu, spec), cấu hình chạy 3 trình duyệt, bug report, nội dung issue và bình luận trên repo nhóm, 4 Agent Skill, các mục tóm tắt của báo cáo và bản nháp AI Critique được sinh phiên bản đầu bởi Claude Code (claude-opus-5-5); tôi đã rà soát và quyết định 11 chỗ sửa script AI sinh cùng nguyên nhân, xác nhận phân loại mọi test fail và mức độ bug trước khi gửi, tự chạy codegen, trace viewer và lần chạy chính thức FR-15, quay toàn bộ clip và thu giọng thuyết minh video demo. Báo cáo HTML do Playwright sinh từ lần chạy thật trên máy tôi, không sửa tay. AI Audit Report chi tiết đính kèm ở Phụ lục A. Tôi cam đoan không dùng AI để sinh bất kỳ artifact nào thuộc danh mục bị cấm."*
 
 Chữ ký
 
