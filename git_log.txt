@@ -1,0 +1,2649 @@
+Git commit log – HW04-AI – HỒ THÙY HƯƠNG – 23120046
+Repository: https://github.com/thhuon/hcmus-software-testing-hw04 (branch master)
+Generated: 2026-11-18T05:51:47+07:00
+Commits: 248 · commits changing .spec.ts files: 14
+
+== Commits changing .spec.ts files ==
+a278a51  2026-11-18 02:09:21 +0700  test (product-crud): wait for the category options in DT-17
+bd0006d  2026-11-18 02:00:43 +0700  test (product-crud): generate the data-driven API spec
+8be9fac  2026-11-18 01:55:28 +0700  test (product-crud): generate the data-driven Admin web spec
+b32d917  2026-11-17 22:38:53 +0700  test (checkout): try the guest path by logging out on the checkout page
+f0b2152  2026-11-17 20:32:32 +0700  test (checkout): fail a refused API row that names no order check
+f4b4d10  2026-11-17 20:32:23 +0700  test (checkout): make the account e-mail unique per repeat and retry
+500f111  2026-11-17 20:24:42 +0700  test (checkout): generate the data-driven API spec
+e32f37b  2026-11-17 20:02:17 +0700  test (checkout): generate the data-driven Web spec
+63f8508  2026-11-17 19:42:11 +0700  test (forgot-password): name the missing FR-03 element before acting on it
+e2a210a  2026-11-17 19:41:38 +0700  test (forgot-password): accept any error text above the submit button (FR-22)
+eb9d9d8  2026-11-17 19:41:06 +0700  test (forgot-password): check that an accepted reset uses up the OTP
+b67ada7  2026-11-17 19:22:26 +0700  test (forgot-password): generate the data-driven API spec
+d438b99  2026-11-17 19:16:45 +0700  test (forgot-password): generate the data-driven Web spec
+b81f38e  2026-11-16 23:47:49 +0700  test (setup): add a smoke test for the backend, web and admin
+
+== Full history (newest first, files changed) ==
+
+25d0aa3  2026-11-18 05:51:42 +0700  thhuon
+    docs (ai): log Prompt074, complete Prompt073 and add the AI-02 row for the submission files
+
+M	AI-02_AI_Audit_Report.md
+M	PLAN.md
+M	pdf/AI-02_AI_Audit_Report.pdf
+M	pdf/prompt_log.pdf
+M	prompt_log.md
+
+df4bd3a  2026-11-18 05:51:32 +0700  thhuon
+    docs: add the PDF copies of the report, AI forms, bug report, prompt log and designs
+
+A	pdf/AI-02_AI_Audit_Report.pdf
+A	pdf/AI-03_AI_Disclosure_Form.pdf
+A	pdf/AI-05_AI_Privacy_Checklist.pdf
+A	pdf/AI_Critique.pdf
+A	pdf/HW04_Report.pdf
+A	pdf/README.pdf
+A	pdf/bugs/BUG_REPORT.pdf
+A	pdf/features/checkout/automation_design.pdf
+A	pdf/features/forgot-password/automation_design.pdf
+A	pdf/features/product-crud/automation_design.pdf
+A	pdf/prompt_log.pdf
+
+f325632  2026-11-18 05:50:46 +0700  thhuon
+    docs: add the self-assessed grades
+
+M	PLAN.md
+M	README.md
+
+05afae9  2026-11-18 05:49:32 +0700  thhuon
+    docs (ai): log Prompt073, complete Prompt072 and add the AI-02 row for the submission clean-up
+
+M	AI-02_AI_Audit_Report.md
+M	prompt_log.md
+
+33da4bd  2026-11-18 05:49:09 +0700  thhuon
+    docs: mark the repository as public in the plan
+
+M	PLAN.md
+
+c0cecf6  2026-11-18 05:48:47 +0700  thhuon
+    chore: remove the Vietnamese skill copies and the course brief before submission
+
+M	CLAUDE.md
+D	HW04_Automation_Testing_Original.md
+D	HW04_Automation_Testing_Vietnamese.md
+M	PLAN.md
+M	README.md
+M	skills/README.md
+D	skills/automation-bug-reporting/SKILL.vi.md
+D	skills/automation-bug-reporting/review-rubric.vi.md
+D	skills/git-commit-conventions/SKILL.vi.md
+D	skills/git-commit-conventions/review-rubric.vi.md
+D	skills/recording-test-demo-videos/SKILL.vi.md
+D	skills/recording-test-demo-videos/review-rubric.vi.md
+D	skills/review-rubric-shared.vi.md
+D	skills/test-automation/SKILL.vi.md
+D	skills/test-automation/review-rubric.vi.md
+
+e2bd2bc  2026-11-18 05:48:23 +0700  thhuon
+    docs (ai): sign the AI forms and remove the critique evidence sheet
+
+M	AI-02_AI_Audit_Report.md
+M	AI-03_AI_Disclosure_Form.md
+M	AI_Critique.md
+
+2a6d617  2026-11-18 05:41:31 +0700  thhuon
+    docs (ai): log Prompt072, complete Prompt069 and link the AI-02 rows
+
+M	AI-02_AI_Audit_Report.md
+M	prompt_log.md
+
+bcadf33  2026-11-18 05:41:13 +0700  thhuon
+    docs (ai): add AI-02 rows for the AI Critique and the AI-02 conclusion, record the BUG-02 change
+
+M	AI-02_AI_Audit_Report.md
+
+b73aeba  2026-11-18 05:40:41 +0700  thhuon
+    docs (ai): declare the AI-drafted critique and AI-02 conclusion in AI-03
+
+M	AI-03_AI_Disclosure_Form.md
+
+57a1a03  2026-11-18 05:40:41 +0700  thhuon
+    docs (ai): write the AI-02 conclusion and mandatory disclosure
+
+M	AI-02_AI_Audit_Report.md
+
+3bab48f  2026-11-18 05:40:41 +0700  thhuon
+    docs (critique): write the AI Critique paragraph
+
+M	AI_Critique.md
+
+a31845c  2026-11-18 05:39:50 +0700  thhuon
+    docs (ai): record the student's agreement in the AI-02 rows
+
+M	AI-02_AI_Audit_Report.md
+
+31f3b3b  2026-11-18 05:39:30 +0700  thhuon
+    docs (ai): fill the AI-05 checklist from HW03
+
+M	AI-05_AI_Privacy_Checklist.md
+
+fc74c48  2026-11-18 05:39:13 +0700  thhuon
+    docs: remove the video planning files from the submission
+
+M	CLAUDE.md
+M	README.md
+D	demo/narration_script.md
+D	demo/shot_list.md
+M	features/product-crud/automation_design.md
+
+265b724  2026-11-18 05:39:13 +0700  thhuon
+    docs (bugs): confirm the BUG-02 severity and update the Issues page screenshot
+
+M	HW04_Report.md
+M	bugs/BUG_REPORT.md
+M	bugs/screenshots/issues-label-hw04.png
+
+5ca3526  2026-11-18 05:27:55 +0700  thhuon
+    docs (ai): log Prompt056–Prompt071, complete Prompt038, Prompt042, Prompt055 and link the AI-02 rows
+
+M	AI-02_AI_Audit_Report.md
+M	prompt_log.md
+
+5fab1c2  2026-11-18 05:26:35 +0700  thhuon
+    docs (ai): add AI-02 rows for the pre-submission documents and recount the totals
+
+M	AI-02_AI_Audit_Report.md
+
+1499577  2026-11-18 05:26:07 +0700  thhuon
+    docs (video): fill the video 2 timestamps and both links in the final check
+
+M	demo/shot_list.md
+
+4684d88  2026-11-18 05:25:55 +0700  thhuon
+    docs (ai): draft the AI-03 disclosure form for HW04
+
+M	AI-03_AI_Disclosure_Form.md
+
+b97b229  2026-11-18 05:25:04 +0700  thhuon
+    docs (ai): update the verdicts of the T4 specs and the rows the student already confirmed
+
+M	AI-02_AI_Audit_Report.md
+
+611de67  2026-11-18 05:25:04 +0700  thhuon
+    docs (critique): add the evidence sheet from the review tables
+
+M	AI_Critique.md
+
+e47fba4  2026-11-18 05:23:29 +0700  thhuon
+    docs (product-crud): state that no test case is left out in T8
+
+M	features/product-crud/automation_design.md
+
+051cbff  2026-11-18 05:23:20 +0700  thhuon
+    docs (report): complete the approach, FR-15 and the runs, bugs and not-automated sections for all features
+
+M	HW04_Report.md
+
+9989d0d  2026-11-18 05:21:42 +0700  thhuon
+    docs: add the FR-15 row and the totals to the test summary
+
+M	README.md
+
+a9b0336  2026-11-18 05:16:42 +0700  thhuon
+    docs: add the Task 2 demo video link and timestamps
+
+M	HW04_Report.md
+M	README.md
+
+74bc4e7  2026-11-18 05:10:24 +0700  thhuon
+    docs (ai): record the final video 2 and the official run in AI-02
+
+M	AI-02_AI_Audit_Report.md
+
+a4d2db9  2026-11-18 05:10:11 +0700  thhuon
+    test (product-crud): record the official multi-browser run
+
+M	features/product-crud/automation_design.md
+
+c3630b6  2026-11-18 05:09:45 +0700  thhuon
+    test (product-crud): add the official multi-browser reports
+
+A	reports/product-crud/chromium/data/05f83f44ac00f17696f583b01e8fb84eee5713b1.png
+A	reports/product-crud/chromium/data/0e369802533654da60e1faead5eee5863bb681f2.md
+A	reports/product-crud/chromium/data/1034aa7942d1b47edfad51ccb75561876577f849.md
+A	reports/product-crud/chromium/data/1a8e376c9e4ff98966047c4b1ba2f04bf489c34b.md
+A	reports/product-crud/chromium/data/1e4911a5fe2ed692848866262fa98e1a74bddd7c.png
+A	reports/product-crud/chromium/data/21e6bc04d04f891c84a4bbbd35138b4942c79297.md
+A	reports/product-crud/chromium/data/261d5f4996691ebe97da3a0aed6359d9009961aa.md
+A	reports/product-crud/chromium/data/2a017729927adabf7f5b377d379dc30f9c040ca5.md
+A	reports/product-crud/chromium/data/3a782840a86ecf9b8a6ade14c4f00cfb246ba0cc.md
+A	reports/product-crud/chromium/data/3c37f0a5eeab674f302a700992db3740c9780a08.md
+A	reports/product-crud/chromium/data/425bf6592bf99362053ee9dbca07120e9ac8cb03.md
+A	reports/product-crud/chromium/data/4a307ddf65092803ffe79995835680e29724b719.png
+A	reports/product-crud/chromium/data/4e14a1313c2a4379da989d288e662026b0fe1fdc.md
+A	reports/product-crud/chromium/data/7b4e867c07d427b6df265cf9f3d0de6ee888c80f.md
+A	reports/product-crud/chromium/data/846247b36a851c1574da11a5bfedd6be0971d7ef.png
+A	reports/product-crud/chromium/data/85ab3f83750899b2e8466ff8ee037713a24f085e.md
+A	reports/product-crud/chromium/data/85bd896b9b62148804f8e56f063ce179706b78d8.md
+A	reports/product-crud/chromium/data/86d20da6a38e5b235291f4ac3d0bd7a435a28b66.png
+A	reports/product-crud/chromium/data/88d0c23dc79f8dfc36428698e87efc255273e9a8.png
+A	reports/product-crud/chromium/data/8a30fc890d6a1cfc7299b79cac930dfa58a2d8d8.md
+A	reports/product-crud/chromium/data/934d1666a607ef2f92ee4dcce373ba8703694559.md
+A	reports/product-crud/chromium/data/9f6e60688367562b1b5b295e85573d66e157a5e5.md
+A	reports/product-crud/chromium/data/9fb8e6db3f7ee52808b1191559cbce50764afd64.md
+A	reports/product-crud/chromium/data/9fedca30615e8b8fbf52c929832247dbc575e7c6.md
+A	reports/product-crud/chromium/data/a6ccd89fa384c22bf80d704035a78b1933bba305.png
+A	reports/product-crud/chromium/data/a7c41e0b1eb984f3a6d3db85219004a67b8a9ca0.md
+A	reports/product-crud/chromium/data/b63db55fdc6f9d2770adb642f6bf0c7f46a51b6d.png
+A	reports/product-crud/chromium/data/c444446aa240ab19b5e6adafbcabafcb88c3ec8b.md
+A	reports/product-crud/chromium/data/cb4a47c733ff23fc1f91328a639e93ad38d279a1.md
+A	reports/product-crud/chromium/data/dac114529f263b88d6bf83dbc4ca4879cee0700b.md
+A	reports/product-crud/chromium/data/e03b5881d4e124879313448c7d52bfa3e6793662.md
+A	reports/product-crud/chromium/data/e0bcd1ecb610b7bf3be0f29963ed4e6eb07ac474.md
+A	reports/product-crud/chromium/index.html
+A	reports/product-crud/chromium/results.json
+A	reports/product-crud/chromium/screenshots/BVA-05.png
+A	reports/product-crud/chromium/screenshots/BVA-06.png
+A	reports/product-crud/chromium/screenshots/DT-10.png
+A	reports/product-crud/chromium/screenshots/DT-11.png
+A	reports/product-crud/chromium/screenshots/DT-13.png
+A	reports/product-crud/chromium/screenshots/DT-15.png
+A	reports/product-crud/chromium/screenshots/DT-16.png
+A	reports/product-crud/chromium/screenshots/DT-22.png
+A	reports/product-crud/chromium/screenshots/DT-23.png
+A	reports/product-crud/chromium/screenshots/DT-24.png
+A	reports/product-crud/chromium/screenshots/DT-25.png
+A	reports/product-crud/chromium/screenshots/DT-26.png
+A	reports/product-crud/chromium/screenshots/DT-27.png
+A	reports/product-crud/firefox/data/00e4de5dcde509b67b6aab11dac2d0c6575fc6ea.md
+A	reports/product-crud/firefox/data/088fd486b9877fdc6856e9d99ccab44989d13505.png
+A	reports/product-crud/firefox/data/0e369802533654da60e1faead5eee5863bb681f2.md
+A	reports/product-crud/firefox/data/1034aa7942d1b47edfad51ccb75561876577f849.md
+A	reports/product-crud/firefox/data/1a8e376c9e4ff98966047c4b1ba2f04bf489c34b.md
+A	reports/product-crud/firefox/data/261d5f4996691ebe97da3a0aed6359d9009961aa.md
+A	reports/product-crud/firefox/data/2a017729927adabf7f5b377d379dc30f9c040ca5.md
+A	reports/product-crud/firefox/data/3a782840a86ecf9b8a6ade14c4f00cfb246ba0cc.md
+A	reports/product-crud/firefox/data/3c37f0a5eeab674f302a700992db3740c9780a08.md
+A	reports/product-crud/firefox/data/3d16875e9a17d4c9e0920d1f3c661df99b292898.png
+A	reports/product-crud/firefox/data/425bf6592bf99362053ee9dbca07120e9ac8cb03.md
+A	reports/product-crud/firefox/data/46256f179d5f3c3e36f1be13a568c193e4b5e875.md
+A	reports/product-crud/firefox/data/4ade57a9f3144a28cdf344a29c784f4639f4ea4d.png
+A	reports/product-crud/firefox/data/4e14a1313c2a4379da989d288e662026b0fe1fdc.md
+A	reports/product-crud/firefox/data/50e8944ba44883010d4488cc37498a85229ffca0.png
+A	reports/product-crud/firefox/data/56b6eb13fecf02f4f7141d6e814eb53b0fa15cdd.png
+A	reports/product-crud/firefox/data/7b4e867c07d427b6df265cf9f3d0de6ee888c80f.md
+A	reports/product-crud/firefox/data/85ab3f83750899b2e8466ff8ee037713a24f085e.md
+A	reports/product-crud/firefox/data/85bd896b9b62148804f8e56f063ce179706b78d8.md
+A	reports/product-crud/firefox/data/8a30fc890d6a1cfc7299b79cac930dfa58a2d8d8.md
+A	reports/product-crud/firefox/data/934d1666a607ef2f92ee4dcce373ba8703694559.md
+A	reports/product-crud/firefox/data/9fb8e6db3f7ee52808b1191559cbce50764afd64.md
+A	reports/product-crud/firefox/data/9fedca30615e8b8fbf52c929832247dbc575e7c6.md
+A	reports/product-crud/firefox/data/a6f85b8c643aba0f68a28b5025efb47efd75b113.png
+A	reports/product-crud/firefox/data/a7c41e0b1eb984f3a6d3db85219004a67b8a9ca0.md
+A	reports/product-crud/firefox/data/cb4a47c733ff23fc1f91328a639e93ad38d279a1.md
+A	reports/product-crud/firefox/data/ce3a31b9a2d5fbd989b0b10d7a4419555193e878.md
+A	reports/product-crud/firefox/data/dac114529f263b88d6bf83dbc4ca4879cee0700b.md
+A	reports/product-crud/firefox/data/e6a1aff2d3cc92c91925277e1baa2ec6bdab0712.md
+A	reports/product-crud/firefox/data/fc95ab6d5fda030882255f3197685057ca94c42e.md
+A	reports/product-crud/firefox/index.html
+A	reports/product-crud/firefox/results.json
+A	reports/product-crud/firefox/screenshots/BVA-05.png
+A	reports/product-crud/firefox/screenshots/BVA-06.png
+A	reports/product-crud/firefox/screenshots/DT-10.png
+A	reports/product-crud/firefox/screenshots/DT-11.png
+A	reports/product-crud/firefox/screenshots/DT-13.png
+A	reports/product-crud/firefox/screenshots/DT-15.png
+A	reports/product-crud/firefox/screenshots/DT-16.png
+A	reports/product-crud/firefox/screenshots/DT-22.png
+A	reports/product-crud/firefox/screenshots/DT-23.png
+A	reports/product-crud/firefox/screenshots/DT-24.png
+A	reports/product-crud/firefox/screenshots/DT-25.png
+A	reports/product-crud/firefox/screenshots/DT-26.png
+A	reports/product-crud/firefox/screenshots/DT-27.png
+A	reports/product-crud/webkit/data/0540ff496c64f26ad2edcafdee42e081e0f2fcc2.png
+A	reports/product-crud/webkit/data/071751e675e3068a856ca9037ba08239c1958f5b.md
+A	reports/product-crud/webkit/data/090759c818240492a28a8566874f7001e9018b67.md
+A	reports/product-crud/webkit/data/0e369802533654da60e1faead5eee5863bb681f2.md
+A	reports/product-crud/webkit/data/1034aa7942d1b47edfad51ccb75561876577f849.md
+A	reports/product-crud/webkit/data/2a017729927adabf7f5b377d379dc30f9c040ca5.md
+A	reports/product-crud/webkit/data/37e523b2f189fe842eb40fda61ac65cfbe39e2ce.png
+A	reports/product-crud/webkit/data/389f518f42c2fbd21fb69d8d67a1bfd13b8833f4.png
+A	reports/product-crud/webkit/data/4249dc76544c3aff0230e51740acb817ac26a1f3.md
+A	reports/product-crud/webkit/data/425bf6592bf99362053ee9dbca07120e9ac8cb03.md
+A	reports/product-crud/webkit/data/4e14a1313c2a4379da989d288e662026b0fe1fdc.md
+A	reports/product-crud/webkit/data/50449f2b266e1bd8ebb890d51e51018568f01a03.md
+A	reports/product-crud/webkit/data/5e20102fc649676dd54abe993c70e825c2c7b677.md
+A	reports/product-crud/webkit/data/709e2276021ca6346d04ef594652d2f7ac72452f.png
+A	reports/product-crud/webkit/data/759c4d744ba16a6d6670229d5fdc9457b6f658c2.md
+A	reports/product-crud/webkit/data/7b4e867c07d427b6df265cf9f3d0de6ee888c80f.md
+A	reports/product-crud/webkit/data/85bd896b9b62148804f8e56f063ce179706b78d8.md
+A	reports/product-crud/webkit/data/8889abf423e85ce58b8c4beedbc7af9229ae1ea0.md
+A	reports/product-crud/webkit/data/88a7d8dbf2f316a3b7e9a9ba6163afa98ca2c026.md
+A	reports/product-crud/webkit/data/8a30fc890d6a1cfc7299b79cac930dfa58a2d8d8.md
+A	reports/product-crud/webkit/data/934d1666a607ef2f92ee4dcce373ba8703694559.md
+A	reports/product-crud/webkit/data/99c7b84d23e62d412e2c25bed596e268b059e1a0.md
+A	reports/product-crud/webkit/data/9fedca30615e8b8fbf52c929832247dbc575e7c6.md
+A	reports/product-crud/webkit/data/a558026d70e5514b4ea8e0260c2c1a17b6f9ce00.md
+A	reports/product-crud/webkit/data/ad3d927a8e6dbd27b57e8254efe81ae90358acde.md
+A	reports/product-crud/webkit/data/cb4a47c733ff23fc1f91328a639e93ad38d279a1.md
+A	reports/product-crud/webkit/data/d861fe75ac711828dd7f667aabe693f20e24547e.md
+A	reports/product-crud/webkit/data/e7924c242321129f0a9ce25e5d9ff26fe7c82bac.md
+A	reports/product-crud/webkit/data/ec5310d42b185e9439e151846608f7f7e0dc7711.png
+A	reports/product-crud/webkit/data/fdd7013df17b12192b76c9ad0558fa10dac254d0.png
+A	reports/product-crud/webkit/index.html
+A	reports/product-crud/webkit/results.json
+A	reports/product-crud/webkit/screenshots/BVA-05.png
+A	reports/product-crud/webkit/screenshots/BVA-06.png
+A	reports/product-crud/webkit/screenshots/DT-10.png
+A	reports/product-crud/webkit/screenshots/DT-11.png
+A	reports/product-crud/webkit/screenshots/DT-13.png
+A	reports/product-crud/webkit/screenshots/DT-15.png
+A	reports/product-crud/webkit/screenshots/DT-16.png
+A	reports/product-crud/webkit/screenshots/DT-22.png
+A	reports/product-crud/webkit/screenshots/DT-23.png
+A	reports/product-crud/webkit/screenshots/DT-24.png
+A	reports/product-crud/webkit/screenshots/DT-25.png
+A	reports/product-crud/webkit/screenshots/DT-26.png
+A	reports/product-crud/webkit/screenshots/DT-27.png
+
+fee4e2b  2026-11-18 04:43:55 +0700  thhuon
+    docs (ai): add AI-02 row for the video 2 audio sync draft
+
+M	AI-02_AI_Audit_Report.md
+
+bc7d2d1  2026-11-18 03:46:32 +0700  thhuon
+    docs (video): plan video 2 around the DT-17 fix with exact steps
+
+M	demo/narration_script.md
+M	demo/shot_list.md
+
+f7d8f8c  2026-11-18 03:45:50 +0700  thhuon
+    docs: add the skill demo video link
+
+M	HW04_Report.md
+M	README.md
+
+6b1e15b  2026-11-18 03:38:49 +0700  thhuon
+    docs (ai): record the final video 1 cut in AI-02
+
+M	AI-02_AI_Audit_Report.md
+
+134156a  2026-11-18 02:59:49 +0700  thhuon
+    docs (ai): record the shortened video 1 in AI-02
+
+M	AI-02_AI_Audit_Report.md
+
+f80392f  2026-11-18 02:55:00 +0700  thhuon
+    docs (ai): add AI-02 rows for the sent bug comments and the video 1 edit
+
+M	AI-02_AI_Audit_Report.md
+
+3094567  2026-11-18 02:54:03 +0700  thhuon
+    docs (bugs): link BUG-18 … BUG-39 to the comments on #18 … #39
+
+M	bugs/BUG_REPORT.md
+M	features/product-crud/automation_design.md
+
+d724720  2026-11-18 02:44:24 +0700  thhuon
+    docs (product-crud): name the T4 prompts in the design
+
+M	features/product-crud/automation_design.md
+
+01cbb96  2026-11-18 02:44:14 +0700  thhuon
+    docs (ai): log Prompt049–Prompt055 and complete Prompt048
+
+M	AI-02_AI_Audit_Report.md
+M	prompt_log.md
+
+c3b04a3  2026-11-18 02:33:51 +0700  thhuon
+    docs (ai): add AI-02 row for the product-crud bug reports
+
+M	AI-02_AI_Audit_Report.md
+
+e6f5d34  2026-11-18 02:33:31 +0700  thhuon
+    docs (bugs): report BUG-18 … BUG-39 for product-crud (confirmed / changed #18 … #39)
+
+M	bugs/BUG_REPORT.md
+A	bugs/screenshots/product-crud_BVA-05-web_report_chromium.png
+A	bugs/screenshots/product-crud_BVA-05_chromium.png
+A	bugs/screenshots/product-crud_BVA-06-web_report_chromium.png
+A	bugs/screenshots/product-crud_BVA-06_chromium.png
+A	bugs/screenshots/product-crud_DT-06-api_report_chromium.png
+A	bugs/screenshots/product-crud_DT-07-api_report_chromium.png
+A	bugs/screenshots/product-crud_DT-08-api_report_chromium.png
+A	bugs/screenshots/product-crud_DT-09-api_report_chromium.png
+A	bugs/screenshots/product-crud_DT-10-web_report_chromium.png
+A	bugs/screenshots/product-crud_DT-10_chromium.png
+A	bugs/screenshots/product-crud_DT-11-web_report_chromium.png
+A	bugs/screenshots/product-crud_DT-11_chromium.png
+A	bugs/screenshots/product-crud_DT-12-api_report_chromium.png
+A	bugs/screenshots/product-crud_DT-13-web_report_chromium.png
+A	bugs/screenshots/product-crud_DT-13_chromium.png
+A	bugs/screenshots/product-crud_DT-14-api_report_chromium.png
+A	bugs/screenshots/product-crud_DT-15-api_report_chromium.png
+A	bugs/screenshots/product-crud_DT-15-web_report_chromium.png
+A	bugs/screenshots/product-crud_DT-15_chromium.png
+A	bugs/screenshots/product-crud_DT-16-api_report_chromium.png
+A	bugs/screenshots/product-crud_DT-16-web_report_chromium.png
+A	bugs/screenshots/product-crud_DT-16_chromium.png
+A	bugs/screenshots/product-crud_DT-17-api_report_chromium.png
+A	bugs/screenshots/product-crud_DT-18-api_report_chromium.png
+A	bugs/screenshots/product-crud_DT-19-api_report_chromium.png
+A	bugs/screenshots/product-crud_DT-22-web_report_chromium.png
+A	bugs/screenshots/product-crud_DT-22_chromium.png
+A	bugs/screenshots/product-crud_DT-23-web_report_chromium.png
+A	bugs/screenshots/product-crud_DT-23_chromium.png
+A	bugs/screenshots/product-crud_DT-24-web_report_chromium.png
+A	bugs/screenshots/product-crud_DT-24_chromium.png
+A	bugs/screenshots/product-crud_DT-25-web_report_chromium.png
+A	bugs/screenshots/product-crud_DT-25_chromium.png
+A	bugs/screenshots/product-crud_DT-26-web_report_chromium.png
+A	bugs/screenshots/product-crud_DT-26_chromium.png
+A	bugs/screenshots/product-crud_DT-27-web_report_chromium.png
+A	bugs/screenshots/product-crud_DT-27_chromium.png
+M	features/product-crud/automation_design.md
+
+3315c02  2026-11-18 02:25:51 +0700  thhuon
+    docs (ai): fix the Admin web count in the AI-02 row for the product-crud triage
+
+M	AI-02_AI_Audit_Report.md
+
+c618e82  2026-11-18 02:25:43 +0700  thhuon
+    docs (ai): add AI-02 rows for the product-crud triage and the summary script fix
+
+M	AI-02_AI_Audit_Report.md
+
+dcc1ca2  2026-11-18 02:25:24 +0700  thhuon
+    docs (product-crud): correct the per-test-case counts of the multi-browser run
+
+M	features/product-crud/automation_design.md
+
+f74f237  2026-11-18 02:25:20 +0700  thhuon
+    fix (skills): keep the worst result when one test case has several tests in a run
+
+M	skills/test-automation/scripts/summarize-results.mjs
+
+4caf096  2026-11-18 02:24:34 +0700  thhuon
+    test (product-crud): triage the failing tests
+
+M	features/product-crud/automation_design.md
+
+20f7ccb  2026-11-18 02:21:11 +0700  thhuon
+    docs (ai): add AI-02 row for the product-crud multi-browser run
+
+M	AI-02_AI_Audit_Report.md
+
+adf7d2f  2026-11-18 02:20:55 +0700  thhuon
+    test (product-crud): record the multi-browser run
+
+M	features/product-crud/automation_design.md
+
+a33e6bb  2026-11-18 02:14:41 +0700  thhuon
+    docs (product-crud): confirm why the AI missed the two script defects
+
+M	features/product-crud/automation_design.md
+
+2bc86a5  2026-11-18 02:11:39 +0700  thhuon
+    docs (ai): add AI-02 row for the product-crud script review
+
+M	AI-02_AI_Audit_Report.md
+
+a5ee3cd  2026-11-18 02:11:22 +0700  thhuon
+    test (product-crud): record the review of the generated specs
+
+M	features/product-crud/automation_design.md
+
+a278a51  2026-11-18 02:09:21 +0700  thhuon
+    test (product-crud): wait for the category options in DT-17
+
+M	tests/product-crud/web.spec.ts
+
+2626e15  2026-11-18 02:09:02 +0700  thhuon
+    test (product-crud): expect the Admin web to send 250000.5 in DT-16
+
+M	data/product-crud/web.json
+M	features/product-crud/automation_design.md
+
+4e1fd5b  2026-11-18 02:01:36 +0700  thhuon
+    docs (ai): add AI-02 row for the product-crud API spec
+
+M	AI-02_AI_Audit_Report.md
+M	features/product-crud/automation_design.md
+
+1b8de50  2026-11-18 02:01:20 +0700  thhuon
+    test (product-crud): record the assertion patterns and the first run of the API spec
+
+M	features/product-crud/automation_design.md
+
+bd0006d  2026-11-18 02:00:43 +0700  thhuon
+    test (product-crud): generate the data-driven API spec
+
+A	tests/product-crud/api.spec.ts
+
+0bb2fb7  2026-11-18 01:59:39 +0700  thhuon
+    docs (ai): add AI-02 row for the product-crud Admin web spec
+
+M	AI-02_AI_Audit_Report.md
+M	features/product-crud/automation_design.md
+
+2461ea2  2026-11-18 01:59:19 +0700  thhuon
+    test (product-crud): record the assertion patterns and the first Chromium run of the Admin web spec
+
+M	features/product-crud/automation_design.md
+A	features/product-crud/screenshots/first-run/BVA-05-chromium.png
+A	features/product-crud/screenshots/first-run/BVA-06-chromium.png
+A	features/product-crud/screenshots/first-run/DT-10-chromium.png
+A	features/product-crud/screenshots/first-run/DT-11-chromium.png
+A	features/product-crud/screenshots/first-run/DT-13-chromium.png
+A	features/product-crud/screenshots/first-run/DT-15-chromium.png
+A	features/product-crud/screenshots/first-run/DT-16-chromium.png
+A	features/product-crud/screenshots/first-run/DT-22-chromium.png
+A	features/product-crud/screenshots/first-run/DT-23-chromium.png
+A	features/product-crud/screenshots/first-run/DT-24-chromium.png
+A	features/product-crud/screenshots/first-run/DT-25-chromium.png
+A	features/product-crud/screenshots/first-run/DT-26-chromium.png
+A	features/product-crud/screenshots/first-run/DT-27-chromium.png
+
+8be9fac  2026-11-18 01:55:28 +0700  thhuon
+    test (product-crud): generate the data-driven Admin web spec
+
+A	tests/product-crud/web.spec.ts
+
+1bea8f6  2026-11-18 01:54:11 +0700  thhuon
+    test (product-crud): confirm the stored-value read, name tags and the DT-17 Web check
+
+M	features/product-crud/automation_design.md
+
+7e8e739  2026-11-18 01:50:29 +0700  thhuon
+    docs (ai): log Prompt043–Prompt048
+
+M	AI-02_AI_Audit_Report.md
+M	prompt_log.md
+
+a1a475d  2026-11-18 01:49:29 +0700  thhuon
+    docs (ai): add AI-02 row for the product-crud test data
+
+M	AI-02_AI_Audit_Report.md
+
+74d4203  2026-11-18 01:49:14 +0700  thhuon
+    test (product-crud): move test data to web.json and api.json
+
+A	data/product-crud/api.json
+A	data/product-crud/web.json
+M	features/product-crud/automation_design.md
+
+65743c4  2026-11-18 01:45:56 +0700  thhuon
+    docs (product-crud): add the student's codegen conclusion
+
+M	features/product-crud/automation_design.md
+
+5a090d2  2026-11-18 01:36:01 +0700  thhuon
+    docs (ai): add AI-02 row for the product-crud page objects
+
+M	AI-02_AI_Audit_Report.md
+
+96f8c5b  2026-11-18 01:35:47 +0700  thhuon
+    test (product-crud): add the Admin web page objects and the product API client
+
+M	api/EshopApi.ts
+M	features/product-crud/automation_design.md
+A	page-objects/AdminLoginPage.ts
+A	page-objects/AdminProductsPage.ts
+
+50008bc  2026-11-18 01:30:35 +0700  thhuon
+    docs (ai): fix the locator count in the AI-02 row for the product-crud locators
+
+M	AI-02_AI_Audit_Report.md
+
+68b73fe  2026-11-18 01:30:21 +0700  thhuon
+    docs (ai): add AI-02 row for the product-crud locators and record the T1 decisions
+
+M	AI-02_AI_Audit_Report.md
+
+1387d9f  2026-11-18 01:30:04 +0700  thhuon
+    test (product-crud): add the Admin web locators and the codegen comparison
+
+M	features/product-crud/automation_design.md
+
+5f2911e  2026-11-18 01:26:53 +0700  thhuon
+    test (product-crud): run the HW02 API test cases on the Admin web and check the list after an edit
+
+M	features/product-crud/automation_design.md
+
+46d7371  2026-11-18 01:07:33 +0700  thhuon
+    docs (ai): add AI-02 row for the product-crud test case selection
+
+M	AI-02_AI_Audit_Report.md
+
+84a1e72  2026-11-18 01:07:21 +0700  thhuon
+    test (product-crud): select test cases to automate
+
+M	features/product-crud/automation_design.md
+
+43ea7c1  2026-11-18 00:39:53 +0700  thhuon
+    docs (ai): update AI-02 row for the video script and add the skill change row
+
+M	AI-02_AI_Audit_Report.md
+
+288e80b  2026-11-18 00:39:53 +0700  thhuon
+    docs (skills): plan one scene list and session per video in recording-test-demo-videos
+
+M	skills/recording-test-demo-videos/SKILL.md
+M	skills/recording-test-demo-videos/SKILL.vi.md
+M	skills/recording-test-demo-videos/review-rubric.md
+M	skills/recording-test-demo-videos/review-rubric.vi.md
+M	skills/recording-test-demo-videos/templates/shot-list.md
+
+8dc5224  2026-11-18 00:39:53 +0700  thhuon
+    docs (video): rewrite the shot list and voice-over script in Vietnamese, one scene list per video
+
+M	CLAUDE.md
+M	PLAN.md
+M	demo/narration_script.md
+M	demo/shot_list.md
+
+d736aae  2026-11-18 00:29:53 +0700  thhuon
+    docs (ai): add AI-02 row for the test-automation skill update
+
+M	AI-02_AI_Audit_Report.md
+
+e20e01c  2026-11-18 00:29:50 +0700  thhuon
+    feat (skills): add unique test data per spec and attempt, and shared-server rules to test-automation
+
+M	skills/test-automation/SKILL.md
+M	skills/test-automation/SKILL.vi.md
+M	skills/test-automation/review-rubric.md
+M	skills/test-automation/review-rubric.vi.md
+
+c597eed  2026-11-18 00:29:00 +0700  thhuon
+    docs (ai): add AI-02 row for the video shot list and voice-over script
+
+M	AI-02_AI_Audit_Report.md
+
+77d8e85  2026-11-18 00:29:00 +0700  thhuon
+    docs (video): add the shot list and voice-over script for the FR-15 videos
+
+A	demo/narration_script.md
+M	demo/shot_list.md
+
+95dc7d9  2026-11-18 00:25:39 +0700  thhuon
+    docs (ai): log Prompt039–Prompt042 and complete Prompt023, Prompt036
+
+M	AI-02_AI_Audit_Report.md
+M	prompt_log.md
+
+d5bd374  2026-11-18 00:25:09 +0700  thhuon
+    docs (ai): add AI-02 row for the FR-08 summary
+
+M	AI-02_AI_Audit_Report.md
+
+e0d0310  2026-11-18 00:24:53 +0700  thhuon
+    docs (checkout): update the notes that still described the typed-URL guest path
+
+M	HW04_Report.md
+M	features/checkout/automation_design.md
+
+9c3be47  2026-11-18 00:24:35 +0700  thhuon
+    docs: record the FR-08 summary in the README, report and plan
+
+M	HW04_Report.md
+M	PLAN.md
+M	README.md
+
+e0656a9  2026-11-18 00:24:16 +0700  thhuon
+    test (checkout): record the summary and the test cases not automated
+
+M	bugs/BUG_REPORT.md
+A	bugs/screenshots/checkout_comment_116.png
+A	bugs/screenshots/checkout_comment_12.png
+A	bugs/screenshots/checkout_comment_13.png
+A	bugs/screenshots/checkout_comment_14.png
+A	bugs/screenshots/checkout_comment_15.png
+A	bugs/screenshots/checkout_comment_16.png
+A	bugs/screenshots/checkout_comment_17.png
+A	bugs/screenshots/checkout_comment_80.png
+M	features/checkout/automation_design.md
+
+8a50681  2026-11-18 00:16:39 +0700  thhuon
+    docs (ai): add AI-02 row for the checkout issue comments
+
+M	AI-02_AI_Audit_Report.md
+
+01ff7c9  2026-11-18 00:16:39 +0700  thhuon
+    docs: record the FR-08 bug comments in the plan and report
+
+M	HW04_Report.md
+M	PLAN.md
+
+8771648  2026-11-18 00:16:23 +0700  thhuon
+    docs (bugs): link BUG-01 and BUG-11 to BUG-17 to the HW04 comments
+
+M	bugs/BUG_REPORT.md
+M	features/checkout/automation_design.md
+
+3abd0c6  2026-11-17 23:14:11 +0700  thhuon
+    docs (ai): add AI-02 row for the checkout bug report entries
+
+M	AI-02_AI_Audit_Report.md
+
+69b972a  2026-11-17 23:13:34 +0700  thhuon
+    docs (bugs): report BUG-11 to BUG-17 for the checkout failures (confirmed #12–#16, #80; changed #17)
+
+M	bugs/BUG_REPORT.md
+A	bugs/screenshots/checkout_BVA-02_chromium.png
+A	bugs/screenshots/checkout_BVA-02_report_chromium.png
+A	bugs/screenshots/checkout_DT-01_chromium.png
+A	bugs/screenshots/checkout_DT-01_report_chromium.png
+A	bugs/screenshots/checkout_DT-02_report_chromium.png
+A	bugs/screenshots/checkout_DT-03_report_chromium.png
+A	bugs/screenshots/checkout_DT-07-api_report_chromium.png
+A	bugs/screenshots/checkout_DT-07-web_report_chromium.png
+A	bugs/screenshots/checkout_DT-07_chromium.png
+A	bugs/screenshots/checkout_DT-08_report_chromium.png
+A	bugs/screenshots/checkout_DT-09_report_chromium.png
+A	bugs/screenshots/checkout_DT-13_report_chromium.png
+M	features/checkout/automation_design.md
+
+f5fd6cd  2026-11-17 22:59:14 +0700  thhuon
+    docs (ai): log Prompt037–Prompt038 and update Prompt034
+
+M	AI-02_AI_Audit_Report.md
+M	prompt_log.md
+
+c5bf244  2026-11-17 22:57:43 +0700  thhuon
+    docs (ai): add AI-02 row for the FR-08 failure triage
+
+M	AI-02_AI_Audit_Report.md
+
+62dd349  2026-11-17 22:57:33 +0700  thhuon
+    docs: record the FR-08 triage in the plan and report
+
+M	HW04_Report.md
+M	PLAN.md
+
+4f6ee4f  2026-11-17 22:57:19 +0700  thhuon
+    test (checkout): record the fourth official runs and triage the failures
+
+M	features/checkout/automation_design.md
+M	features/checkout/screenshots/t6/report-chromium.png
+M	features/checkout/screenshots/t6/report-firefox.png
+M	features/checkout/screenshots/t6/report-webkit.png
+R098	reports/checkout/firefox/data/92d2d0a79ed730e5febfbcfc57c3aff0e2dd1da1.md	reports/checkout/chromium/data/d452ed5061c8bfbae1e137c28c02c621eec4a436.md
+R096	reports/checkout/firefox/data/0429bccda1374829d6a106ce3f17bd931e58d186.md	reports/checkout/chromium/data/f98379bae34dd9883ccc5acb4d433b4950e5cb26.md
+M	reports/checkout/chromium/index.html
+M	reports/checkout/chromium/results.json
+R096	reports/checkout/webkit/data/3bc5ab7f03595251516f530de298c5b228183637.md	reports/checkout/firefox/data/486b6ee5b63db91c47d08154ba80d29afc7adc4a.md
+R098	reports/checkout/webkit/data/e753c9c8878dcd178beee9fe687d7adfd8be832a.md	reports/checkout/firefox/data/493d53b3e4c81f2cef378761732966382baaf042.md
+M	reports/checkout/firefox/index.html
+M	reports/checkout/firefox/results.json
+R096	reports/checkout/chromium/data/d3fb90079a29407b84403a49da106e79993b1102.md	reports/checkout/webkit/data/6ac94c270d178da17ad49ca42f5b6fd7d8e76dcc.md
+R097	reports/checkout/chromium/data/15b64428f35a2022c2e5001dcbf14d7467af7e59.md	reports/checkout/webkit/data/c45eb1a7c432799548cfb243cb3a8ef92eaa1ec5.md
+M	reports/checkout/webkit/index.html
+M	reports/checkout/webkit/results.json
+
+b921d9d  2026-11-17 22:52:01 +0700  thhuon
+    docs (checkout): link the e-mail prefix fix in the review table
+
+M	features/checkout/automation_design.md
+
+bc0de04  2026-11-17 22:51:42 +0700  thhuon
+    test (checkout): give the Web and API test accounts their own e-mail prefix
+
+M	data/checkout/api.json
+M	data/checkout/web.json
+M	features/checkout/automation_design.md
+
+9b2ec85  2026-11-17 22:51:41 +0700  thhuon
+    docs (ai): add AI-02 row for the document clean-up and label descriptions
+
+M	AI-02_AI_Audit_Report.md
+
+19f71bd  2026-11-17 22:51:08 +0700  thhuon
+    docs (ai): keep only the template text in AI-02 sections 3 and 4
+
+M	AI-02_AI_Audit_Report.md
+
+0edea17  2026-11-17 22:51:04 +0700  thhuon
+    docs: remind to retake the Issues screenshots and drop the filled report hints
+
+M	HW04_Report.md
+M	PLAN.md
+
+73b8bb5  2026-11-17 22:50:38 +0700  thhuon
+    docs: drop the header table of the automation design files
+
+M	CLAUDE.md
+M	features/checkout/automation_design.md
+M	features/forgot-password/automation_design.md
+M	features/product-crud/automation_design.md
+M	skills/test-automation/SKILL.md
+M	skills/test-automation/SKILL.vi.md
+M	skills/test-automation/review-rubric.md
+M	skills/test-automation/review-rubric.vi.md
+M	skills/test-automation/templates/automation-design.md
+
+347b0e9  2026-11-17 22:45:21 +0700  thhuon
+    docs (ai): log Prompt035–Prompt036
+
+M	AI-02_AI_Audit_Report.md
+M	features/checkout/automation_design.md
+M	prompt_log.md
+
+5ce918e  2026-11-17 22:45:00 +0700  thhuon
+    docs (ai): fix the AI-02 row number of Prompt034
+
+M	prompt_log.md
+
+b867cc2  2026-11-17 22:44:51 +0700  thhuon
+    docs (ai): log Prompt033–Prompt034 and add the AI-02 row for the trace viewer check
+
+M	AI-02_AI_Audit_Report.md
+M	features/forgot-password/automation_design.md
+M	prompt_log.md
+
+1f00f09  2026-11-17 22:44:35 +0700  thhuon
+    docs (ai): add AI-02 row for the student's T5 decisions and the third official set
+
+M	AI-02_AI_Audit_Report.md
+
+1b1414f  2026-11-17 22:44:11 +0700  thhuon
+    test (checkout): record the official runs after the DT-03 change
+
+M	HW04_Report.md
+M	PLAN.md
+M	features/checkout/automation_design.md
+M	features/checkout/screenshots/t6/report-chromium.png
+M	features/checkout/screenshots/t6/report-firefox.png
+M	features/checkout/screenshots/t6/report-webkit.png
+R097	reports/checkout/firefox/data/658095647785446fc676cd07420d94961758307f.md	reports/checkout/chromium/data/15b64428f35a2022c2e5001dcbf14d7467af7e59.md
+R070	reports/checkout/firefox/data/f8996019a249542cc837b437e4adbea237970525.md	reports/checkout/chromium/data/1d215441c9b6233ef16face65b7508451be652eb.md
+R071	reports/checkout/firefox/data/8aaacba8db8199516cdd44fa191a0f4241aa775b.md	reports/checkout/chromium/data/287f4342944d2b519679593a9de156a898f0ae7a.md
+D	reports/checkout/chromium/data/6430a888c13200c0433ce2de3dba46b9d14a0fb5.md
+R071	reports/checkout/firefox/data/7d8f1d436d784dd8b5f560e644199b6df0707ab3.md	reports/checkout/chromium/data/7547c07d3dc6e6b1b5a0ddf7784ddd1df10092d3.md
+R071	reports/checkout/firefox/data/52162453fc0410aaae9202ff6451a0527f5c7525.md	reports/checkout/chromium/data/a87e63ceffafb17af69ac8102f8e8e0ce7884cff.md
+R070	reports/checkout/chromium/data/2330753c6b19332831b624729cbf38175075ae5a.md	reports/checkout/chromium/data/cd0daafb0433218131f1cdb44c7214c8d7204c67.md
+A	reports/checkout/chromium/data/d3fb90079a29407b84403a49da106e79993b1102.md
+M	reports/checkout/chromium/index.html
+M	reports/checkout/chromium/results.json
+A	reports/checkout/firefox/data/0429bccda1374829d6a106ce3f17bd931e58d186.md
+R070	reports/checkout/chromium/data/f8996019a249542cc837b437e4adbea237970525.md	reports/checkout/firefox/data/1d215441c9b6233ef16face65b7508451be652eb.md
+R071	reports/checkout/webkit/data/8aaacba8db8199516cdd44fa191a0f4241aa775b.md	reports/checkout/firefox/data/287f4342944d2b519679593a9de156a898f0ae7a.md
+R071	reports/checkout/chromium/data/7d8f1d436d784dd8b5f560e644199b6df0707ab3.md	reports/checkout/firefox/data/7547c07d3dc6e6b1b5a0ddf7784ddd1df10092d3.md
+R097	reports/checkout/webkit/data/4d00b5159c9ad7211b6f92a42d73a16227d04f89.md	reports/checkout/firefox/data/92d2d0a79ed730e5febfbcfc57c3aff0e2dd1da1.md
+D	reports/checkout/firefox/data/98d252022c8a75e8070049c7cd096c93544454f4.md
+R071	reports/checkout/chromium/data/52162453fc0410aaae9202ff6451a0527f5c7525.md	reports/checkout/firefox/data/a87e63ceffafb17af69ac8102f8e8e0ce7884cff.md
+R070	reports/checkout/firefox/data/2330753c6b19332831b624729cbf38175075ae5a.md	reports/checkout/firefox/data/cd0daafb0433218131f1cdb44c7214c8d7204c67.md
+M	reports/checkout/firefox/index.html
+M	reports/checkout/firefox/results.json
+R071	reports/checkout/chromium/data/8aaacba8db8199516cdd44fa191a0f4241aa775b.md	reports/checkout/webkit/data/287f4342944d2b519679593a9de156a898f0ae7a.md
+A	reports/checkout/webkit/data/3bc5ab7f03595251516f530de298c5b228183637.md
+R070	reports/checkout/webkit/data/acbb191f8dc3821bbb821003fef68171c8d4f0a8.md	reports/checkout/webkit/data/4445e6d86b5a5d8933d11e0f82969589d1fed0d3.md
+R071	reports/checkout/webkit/data/e032447a897f4599de5be41b628bd2f5e418c6ff.md	reports/checkout/webkit/data/762193d344f1b4ed69ccdd6e74756ab3cc23b941.md
+R069	reports/checkout/webkit/data/df821971802bb076dd390b6d776ff41b0195e550.md	reports/checkout/webkit/data/a4a0aadead2f674b5883a85d598009fb62dc5961.md
+D	reports/checkout/webkit/data/bb9a84775c68cecd7f5f1951c703e7285b9c71d4.md
+R071	reports/checkout/webkit/data/b026d0d528887d8e8757837af92ccfe010aba831.md	reports/checkout/webkit/data/cddf71461af2bf6979dec09761cc73e32c66004a.md
+R098	reports/checkout/chromium/data/b37434e824b225cb4d0980272e4d6ce241c2c3f0.md	reports/checkout/webkit/data/e753c9c8878dcd178beee9fe687d7adfd8be832a.md
+M	reports/checkout/webkit/index.html
+M	reports/checkout/webkit/results.json
+
+8f59858  2026-11-17 22:44:09 +0700  thhuon
+    docs (forgot-password): record the student's trace viewer check of DT-35
+
+M	HW04_Report.md
+M	bugs/BUG_REPORT.md
+M	features/forgot-password/automation_design.md
+
+27a802c  2026-11-17 22:38:53 +0700  thhuon
+    docs (checkout): link the DT-03 fix commit in the review table
+
+M	features/checkout/automation_design.md
+
+b32d917  2026-11-17 22:38:53 +0700  thhuon
+    test (checkout): try the guest path by logging out on the checkout page
+
+M	data/checkout/web.json
+M	features/checkout/automation_design.md
+M	tests/checkout/web.spec.ts
+
+1af2fc5  2026-11-17 22:37:17 +0700  thhuon
+    docs (checkout): confirm the review causes and the add-to-cart limit
+
+M	HW04_Report.md
+M	features/checkout/automation_design.md
+
+212b560  2026-11-17 22:37:02 +0700  thhuon
+    docs (ai): add AI-02 row for the HW04 label description and Issues proof
+
+M	AI-02_AI_Audit_Report.md
+
+4ac1c46  2026-11-17 22:36:39 +0700  thhuon
+    docs (bugs): add the Issues page filtered by the HW04 label
+
+M	bugs/BUG_REPORT.md
+A	bugs/screenshots/issues-label-hw04.png
+
+a444972  2026-11-17 22:32:57 +0700  thhuon
+    docs (ai): log Prompt031–Prompt032 and update Prompt025
+
+M	AI-02_AI_Audit_Report.md
+M	features/checkout/automation_design.md
+M	prompt_log.md
+
+3e4aa05  2026-11-17 21:20:35 +0700  thhuon
+    docs (ai): fix the AI-02 row number of Prompt030
+
+M	prompt_log.md
+
+b43c672  2026-11-17 21:20:24 +0700  thhuon
+    docs (ai): log Prompt021 and Prompt026–Prompt030, add the AI-02 row for the FR-03 summary
+
+M	AI-02_AI_Audit_Report.md
+M	features/forgot-password/automation_design.md
+M	prompt_log.md
+
+6284d9b  2026-11-17 21:20:22 +0700  thhuon
+    docs (ai): add AI-02 row for the FR-08 official runs
+
+M	AI-02_AI_Audit_Report.md
+
+8222ae1  2026-11-17 21:20:00 +0700  thhuon
+    docs: record FR-08 steps T5–T6 in the plan and report
+
+M	HW04_Report.md
+M	PLAN.md
+
+120afdf  2026-11-17 21:19:43 +0700  thhuon
+    docs: record the FR-03 summary and skill changes in the report and plan
+
+M	HW04_Report.md
+M	PLAN.md
+
+cc8aee7  2026-11-17 21:19:42 +0700  thhuon
+    test (checkout): record the official runs on Chromium, Firefox and WebKit
+
+M	features/checkout/automation_design.md
+A	features/checkout/screenshots/t6/DT-03-firefox-set1-flaky.png
+A	features/checkout/screenshots/t6/report-chromium.png
+A	features/checkout/screenshots/t6/report-firefox.png
+A	features/checkout/screenshots/t6/report-webkit.png
+A	reports/checkout/chromium/data/0a3a1d1723ff760942899acec890e5214e6ea3f3.png
+A	reports/checkout/chromium/data/2330753c6b19332831b624729cbf38175075ae5a.md
+A	reports/checkout/chromium/data/2429781efa4124793ed94e4221d7173601f5177e.png
+A	reports/checkout/chromium/data/4557435efdf1b7103896f998f4fe6177149e69b2.png
+A	reports/checkout/chromium/data/52162453fc0410aaae9202ff6451a0527f5c7525.md
+A	reports/checkout/chromium/data/5565b8ba018cd0474dc0c708b2a4b64342853f6b.png
+A	reports/checkout/chromium/data/6430a888c13200c0433ce2de3dba46b9d14a0fb5.md
+A	reports/checkout/chromium/data/728c491d75536372552408d8d1901a049d66cb9b.md
+A	reports/checkout/chromium/data/7d8f1d436d784dd8b5f560e644199b6df0707ab3.md
+A	reports/checkout/chromium/data/84483ba14bd8b1bb387773de749fd671b17a28b5.md
+A	reports/checkout/chromium/data/8aaacba8db8199516cdd44fa191a0f4241aa775b.md
+A	reports/checkout/chromium/data/8eaaa63e3e5a966ad9ba25847f4e1cc1001dd161.md
+A	reports/checkout/chromium/data/91b98bb75645aec6faa15c6c948ae17d60a9c9bd.png
+A	reports/checkout/chromium/data/b37434e824b225cb4d0980272e4d6ce241c2c3f0.md
+A	reports/checkout/chromium/data/cfed1bca3f9fdfbcaf24ee42cd1a3d10022df8d4.png
+A	reports/checkout/chromium/data/d752a40a06aba117469d47ecf4f1a8a136b703f1.md
+A	reports/checkout/chromium/data/e4aef9504b7c09e4898fbc6c032e5a3a6c3e6c51.md
+A	reports/checkout/chromium/data/f08ffca256bdd745593c62b588dd7878f890f566.md
+A	reports/checkout/chromium/data/f148ce77a05d6034e2e0858417b24de23ea40ed0.md
+A	reports/checkout/chromium/data/f8996019a249542cc837b437e4adbea237970525.md
+A	reports/checkout/chromium/index.html
+A	reports/checkout/chromium/results.json
+A	reports/checkout/chromium/screenshots/BVA-01.png
+A	reports/checkout/chromium/screenshots/BVA-02.png
+A	reports/checkout/chromium/screenshots/BVA-03.png
+A	reports/checkout/chromium/screenshots/BVA-04.png
+A	reports/checkout/chromium/screenshots/DT-01.png
+A	reports/checkout/chromium/screenshots/DT-07.png
+A	reports/checkout/firefox/data/2330753c6b19332831b624729cbf38175075ae5a.md
+A	reports/checkout/firefox/data/4de6b9565dc200acb1aba48252176e9d5613373b.png
+A	reports/checkout/firefox/data/52162453fc0410aaae9202ff6451a0527f5c7525.md
+A	reports/checkout/firefox/data/658095647785446fc676cd07420d94961758307f.md
+A	reports/checkout/firefox/data/728c491d75536372552408d8d1901a049d66cb9b.md
+A	reports/checkout/firefox/data/7d8f1d436d784dd8b5f560e644199b6df0707ab3.md
+A	reports/checkout/firefox/data/8125b2f95fdb8a60a4720066ef0937573a00debe.png
+A	reports/checkout/firefox/data/84483ba14bd8b1bb387773de749fd671b17a28b5.md
+A	reports/checkout/firefox/data/8aaacba8db8199516cdd44fa191a0f4241aa775b.md
+A	reports/checkout/firefox/data/8eaaa63e3e5a966ad9ba25847f4e1cc1001dd161.md
+A	reports/checkout/firefox/data/98d252022c8a75e8070049c7cd096c93544454f4.md
+A	reports/checkout/firefox/data/aa852e32684dffc0de86588f0a92e55ccdd27f8b.png
+A	reports/checkout/firefox/data/b79d5238fe5b2fb6f60fae33a09272efde6f11ad.png
+A	reports/checkout/firefox/data/d096be293f3e6400c2f69ea0972f020062abf02a.png
+A	reports/checkout/firefox/data/d752a40a06aba117469d47ecf4f1a8a136b703f1.md
+A	reports/checkout/firefox/data/e4aef9504b7c09e4898fbc6c032e5a3a6c3e6c51.md
+A	reports/checkout/firefox/data/eed47e0d4243f1d98f6a9955ef1bcf8f4c85e403.png
+A	reports/checkout/firefox/data/f08ffca256bdd745593c62b588dd7878f890f566.md
+A	reports/checkout/firefox/data/f148ce77a05d6034e2e0858417b24de23ea40ed0.md
+A	reports/checkout/firefox/data/f8996019a249542cc837b437e4adbea237970525.md
+A	reports/checkout/firefox/index.html
+A	reports/checkout/firefox/results.json
+A	reports/checkout/firefox/screenshots/BVA-01.png
+A	reports/checkout/firefox/screenshots/BVA-02.png
+A	reports/checkout/firefox/screenshots/BVA-03.png
+A	reports/checkout/firefox/screenshots/BVA-04.png
+A	reports/checkout/firefox/screenshots/DT-01.png
+A	reports/checkout/firefox/screenshots/DT-07.png
+A	reports/checkout/webkit/data/2250d2d79a39b3ab25557f92a80dcff0de0dc72c.png
+A	reports/checkout/webkit/data/31e27f9668664997b7f67bb15a1b3cc8999cb077.png
+A	reports/checkout/webkit/data/4d00b5159c9ad7211b6f92a42d73a16227d04f89.md
+A	reports/checkout/webkit/data/608524c8744578c3cc623b404f1eae49279757f7.png
+A	reports/checkout/webkit/data/728c491d75536372552408d8d1901a049d66cb9b.md
+A	reports/checkout/webkit/data/84483ba14bd8b1bb387773de749fd671b17a28b5.md
+A	reports/checkout/webkit/data/8aaacba8db8199516cdd44fa191a0f4241aa775b.md
+A	reports/checkout/webkit/data/8eaaa63e3e5a966ad9ba25847f4e1cc1001dd161.md
+A	reports/checkout/webkit/data/acbb191f8dc3821bbb821003fef68171c8d4f0a8.md
+A	reports/checkout/webkit/data/b026d0d528887d8e8757837af92ccfe010aba831.md
+A	reports/checkout/webkit/data/bb9a84775c68cecd7f5f1951c703e7285b9c71d4.md
+A	reports/checkout/webkit/data/c329ec373ec1e705b52a0ed7199af64fee1c86c7.png
+A	reports/checkout/webkit/data/c60af95f342632d21ad88fa45ddebd00d38f9022.png
+A	reports/checkout/webkit/data/d004e4693ab329578834f9ff78772e831aaa9fcb.png
+A	reports/checkout/webkit/data/d752a40a06aba117469d47ecf4f1a8a136b703f1.md
+A	reports/checkout/webkit/data/df821971802bb076dd390b6d776ff41b0195e550.md
+A	reports/checkout/webkit/data/e032447a897f4599de5be41b628bd2f5e418c6ff.md
+A	reports/checkout/webkit/data/e4aef9504b7c09e4898fbc6c032e5a3a6c3e6c51.md
+A	reports/checkout/webkit/data/f08ffca256bdd745593c62b588dd7878f890f566.md
+A	reports/checkout/webkit/data/f148ce77a05d6034e2e0858417b24de23ea40ed0.md
+A	reports/checkout/webkit/index.html
+A	reports/checkout/webkit/results.json
+A	reports/checkout/webkit/screenshots/BVA-01.png
+A	reports/checkout/webkit/screenshots/BVA-02.png
+A	reports/checkout/webkit/screenshots/BVA-03.png
+A	reports/checkout/webkit/screenshots/BVA-04.png
+A	reports/checkout/webkit/screenshots/DT-01.png
+A	reports/checkout/webkit/screenshots/DT-07.png
+
+fa049ce  2026-11-17 21:19:24 +0700  thhuon
+    test (forgot-password): list the test cases not automated
+
+M	features/forgot-password/automation_design.md
+
+35b0c42  2026-11-17 21:08:51 +0700  thhuon
+    test (checkout): click the add button until the product is added
+
+M	page-objects/ProductPage.ts
+
+38c1fa8  2026-11-17 21:05:40 +0700  thhuon
+    docs: record the FR-03 bugs sent to the tracker in the README, report and plan
+
+M	HW04_Report.md
+M	PLAN.md
+M	README.md
+
+5260a9d  2026-11-17 21:05:26 +0700  thhuon
+    docs (ai): add AI-02 row for the FR-03 tracker actions and the issue screenshots
+
+M	AI-02_AI_Audit_Report.md
+
+7b608a4  2026-11-17 20:53:48 +0700  thhuon
+    docs (bugs): link BUG-02 to issue #117 and BUG-03 … BUG-10 to their comments
+
+M	bugs/BUG_REPORT.md
+M	features/forgot-password/automation_design.md
+
+d6d11f8  2026-11-17 20:47:16 +0700  thhuon
+    chore (skills): upload several images per issue in upload_attachments.js
+
+M	skills/automation-bug-reporting/SKILL.md
+M	skills/automation-bug-reporting/SKILL.vi.md
+M	skills/automation-bug-reporting/scripts/upload_attachments.js
+
+9fee4ac  2026-11-17 20:35:13 +0700  thhuon
+    docs (ai): add AI-02 row for the FR-08 script review
+
+M	AI-02_AI_Audit_Report.md
+
+b6672d0  2026-11-17 20:34:58 +0700  thhuon
+    docs (checkout): record the review of the generated specs and the repeat runs
+
+M	features/checkout/automation_design.md
+A	features/checkout/screenshots/t5/repeat-after-fix-chromium.png
+A	features/checkout/screenshots/t5/repeat-before-fix-chromium.png
+
+4fb6951  2026-11-17 20:33:39 +0700  thhuon
+    docs (ai): add AI-02 row for the FR-03 bug report entries
+
+M	AI-02_AI_Audit_Report.md
+
+f0b2152  2026-11-17 20:32:32 +0700  thhuon
+    test (checkout): fail a refused API row that names no order check
+
+M	tests/checkout/api.spec.ts
+
+f4b4d10  2026-11-17 20:32:23 +0700  thhuon
+    test (checkout): make the account e-mail unique per repeat and retry
+
+M	HW04_Report.md
+M	README.md
+M	bugs/BUG_REPORT.md
+A	bugs/screenshots/DT-01_chromium.png
+A	bugs/screenshots/DT-01_report_chromium.png
+A	bugs/screenshots/DT-02_chromium.png
+A	bugs/screenshots/DT-02_report_chromium.png
+A	bugs/screenshots/DT-03_chromium.png
+A	bugs/screenshots/DT-03_report_chromium.png
+A	bugs/screenshots/DT-04_chromium.png
+A	bugs/screenshots/DT-04_report_chromium.png
+A	bugs/screenshots/DT-05_report_chromium.png
+A	bugs/screenshots/DT-11_chromium.png
+A	bugs/screenshots/DT-11_report_chromium.png
+A	bugs/screenshots/DT-21_chromium.png
+A	bugs/screenshots/DT-21_report_chromium.png
+A	bugs/screenshots/DT-27_report_chromium.png
+A	bugs/screenshots/DT-28_chromium.png
+A	bugs/screenshots/DT-28_report_chromium.png
+A	bugs/screenshots/DT-35_chromium.png
+A	bugs/screenshots/DT-35_report_chromium.png
+M	features/forgot-password/automation_design.md
+M	tests/checkout/api.spec.ts
+M	tests/checkout/web.spec.ts
+
+25e7f23  2026-11-17 20:28:24 +0700  thhuon
+    docs (ai): log Prompt023–Prompt025
+
+M	AI-02_AI_Audit_Report.md
+M	features/checkout/automation_design.md
+M	prompt_log.md
+
+4a78427  2026-11-17 20:26:20 +0700  thhuon
+    docs (ai): log Prompt022 and add the AI-02 row for the FR-08 API spec
+
+M	AI-02_AI_Audit_Report.md
+M	prompt_log.md
+
+fdce2ee  2026-11-17 20:25:54 +0700  thhuon
+    docs: record FR-08 steps T1–T4 in the plan and report
+
+M	HW04_Report.md
+M	PLAN.md
+
+0bd96c5  2026-11-17 20:25:29 +0700  thhuon
+    docs (ai): add AI-02 row for the FR-03 failure triage
+
+M	AI-02_AI_Audit_Report.md
+
+d24e186  2026-11-17 20:25:24 +0700  thhuon
+    docs (checkout): record the API spec patterns, its first run and the report screenshots
+
+M	features/checkout/automation_design.md
+A	features/checkout/screenshots/first-run/api-report-chromium.png
+A	features/checkout/screenshots/first-run/web-report-chromium.png
+
+717c2e8  2026-11-17 20:25:04 +0700  thhuon
+    docs: record the FR-03 failure triage in the report, README and plan
+
+M	HW04_Report.md
+M	PLAN.md
+M	README.md
+
+04cb262  2026-11-17 20:24:45 +0700  thhuon
+    test (forgot-password): triage the failures of the official runs
+
+M	features/forgot-password/automation_design.md
+A	features/forgot-password/screenshots/DT-35-chromium-report.png
+A	features/forgot-password/screenshots/DT-35-firefox-report.png
+A	features/forgot-password/screenshots/DT-35-webkit-report.png
+
+500f111  2026-11-17 20:24:42 +0700  thhuon
+    test (checkout): generate the data-driven API spec
+
+A	tests/checkout/api.spec.ts
+
+9001a58  2026-11-17 20:24:02 +0700  thhuon
+    docs (checkout): add the screenshots of the checkout page and the first Web run
+
+M	features/checkout/automation_design.md
+A	features/checkout/screenshots/DT-01-checkout-page-chromium.png
+A	features/checkout/screenshots/DT-01-total-edited-chromium.png
+A	features/checkout/screenshots/first-run/BVA-01-chromium.png
+A	features/checkout/screenshots/first-run/BVA-02-chromium.png
+A	features/checkout/screenshots/first-run/BVA-03-chromium.png
+A	features/checkout/screenshots/first-run/BVA-04-chromium.png
+A	features/checkout/screenshots/first-run/DT-01-chromium.png
+A	features/checkout/screenshots/first-run/DT-07-chromium.png
+
+95965fa  2026-11-17 20:22:13 +0700  thhuon
+    docs (ai): renumber the FR-03 rerun row to Artifact #25
+
+M	AI-02_AI_Audit_Report.md
+M	prompt_log.md
+
+0a3ea51  2026-11-17 20:21:58 +0700  thhuon
+    docs (ai): log Prompt020–Prompt021 and add AI-02 rows for the second official runs
+
+M	AI-02_AI_Audit_Report.md
+M	features/forgot-password/automation_design.md
+M	prompt_log.md
+
+a1f9da8  2026-11-17 20:21:18 +0700  thhuon
+    docs: record the second FR-03 official runs in the plan and report
+
+M	HW04_Report.md
+M	PLAN.md
+
+21b20d0  2026-11-17 20:20:59 +0700  thhuon
+    test (forgot-password): rerun the official runs with failure screenshots and no traces
+
+M	features/forgot-password/automation_design.md
+A	features/forgot-password/screenshots/DT-27-chromium-report.png
+A	features/forgot-password/screenshots/DT-27-firefox-report.png
+A	features/forgot-password/screenshots/DT-27-webkit-report.png
+D	reports/forgot-password/chromium/data/0172f32d7ac643684bbf135f3df4ab646552c773.zip
+A	reports/forgot-password/chromium/data/024ce685df2156092b840c31080980725787803a.png
+A	reports/forgot-password/chromium/data/02828c248f994032effac9ee0018a80aa80776dc.png
+A	reports/forgot-password/chromium/data/055bbb64f77d206bb8c2474af8759656e60afda5.png
+A	reports/forgot-password/chromium/data/11e59ffb58c77652af80e2331e82f6f1a4f30008.png
+A	reports/forgot-password/chromium/data/1335fe020002fc9ce3c9c9d1f6c05eef9b6d0ecf.png
+R099	reports/forgot-password/chromium/data/fcb8c7c2ba01c99acc1bb94ef9d0845d21f84191.md	reports/forgot-password/chromium/data/142ce700eda09de25decd2c8e56a2ca4ace51e7a.md
+D	reports/forgot-password/chromium/data/14f3a1510056178636eaba8a0a496c8e896a8529.zip
+D	reports/forgot-password/chromium/data/16daeb23a7f7d642d4e25a9fea22331d1eaa364b.png
+D	reports/forgot-password/chromium/data/1a4b3b332acd963a4f4b436ae0d098d4344d296f.zip
+R099	reports/forgot-password/chromium/data/9add7ec5d91449c28921b641f07b240ceb83337e.md	reports/forgot-password/chromium/data/1cb54aec3bdb276612d4a25813f1ddf12785e32f.md
+D	reports/forgot-password/chromium/data/1e7587ef231fcb277cfc8ad8ae4bdeafa317a95a.zip
+R099	reports/forgot-password/chromium/data/b63585170079fa68b472bfbfcc7a5c6154ede040.md	reports/forgot-password/chromium/data/1e8e01fc53a94e46acedaf8c0f128901675dba7d.md
+R099	reports/forgot-password/firefox/data/21868b3a1bdab829dc60d057fd03f46d67d92804.md	reports/forgot-password/chromium/data/23e4348ecb5a59f9cddb29f0029844ddeffbec93.md
+R099	reports/forgot-password/firefox/data/c55ed8fa09038e5c3ece078b94ec898a6fb8df2d.md	reports/forgot-password/chromium/data/297c99f16d9942c73f35415c9ef302fc97ffca90.md
+D	reports/forgot-password/chromium/data/2aee59aa20811db5c685fd388ec55900aab277b7.zip
+D	reports/forgot-password/chromium/data/2f64a7e69e3c11344a090d732c7c0fc96d985bd8.zip
+D	reports/forgot-password/chromium/data/314db1e91dbaeb0b01668f513175bc6a5900d4c0.png
+D	reports/forgot-password/chromium/data/3195324a0f3614bb656ab8e63e249f1e66ae509b.png
+A	reports/forgot-password/chromium/data/324c91d3bb9beac08110227277272739e1e32e17.png
+A	reports/forgot-password/chromium/data/32584e4335c428b657311034b6f1a47935f89e6b.png
+D	reports/forgot-password/chromium/data/39a1d275a15145d68f84da115953eed8d65b0197.png
+D	reports/forgot-password/chromium/data/39af849288d04d001f96abb6bcba8a23ce8d0e97.zip
+R099	reports/forgot-password/webkit/data/f27705a6a270e355816129f9e33b80e10b5fd77c.md	reports/forgot-password/chromium/data/39dd1c8582be9bb6d9300d3d111f0b15d65bb8bf.md
+R099	reports/forgot-password/chromium/data/a4aaf14cb338a69320843206fe9cbd7d0379c3b8.md	reports/forgot-password/chromium/data/3f171e900122e8638cf6d5698e764e574713766f.md
+D	reports/forgot-password/chromium/data/42e7429d1126e9944ad1cd7d2826b6a01aa8ad52.png
+D	reports/forgot-password/chromium/data/45ae69bc04a0f731e3ee954df869f82004f11b97.png
+D	reports/forgot-password/chromium/data/47a649fcf1ce5f06345cefbaf2d9feeba014fee1.png
+D	reports/forgot-password/chromium/data/4e6c329ca3477ca9611f0379baa924f08689ac60.zip
+R099	reports/forgot-password/firefox/data/47e3a1886294f43db8e1e21568cf27a9c77fe681.md	reports/forgot-password/chromium/data/52b973cd14d8dcdea90d9a2bc6532e2670aea6d3.md
+A	reports/forgot-password/chromium/data/577b7ea64f93a2a0e1a83639721f87fa5730363e.png
+A	reports/forgot-password/chromium/data/58002efa7467fd7c40ae4648e32dc20c2256c845.png
+D	reports/forgot-password/chromium/data/597bd03eee93ece7099b8b0437c7a701d29cb5c5.png
+D	reports/forgot-password/chromium/data/5b79a082da8ae4cb187f3f14ccf9375da76bcf40.zip
+D	reports/forgot-password/chromium/data/5ce118b317c051e21e2f81d9256dc3efbb4de2c4.png
+D	reports/forgot-password/chromium/data/5d79689f6da2d847a5998cc4f84977d0848a19b2.png
+A	reports/forgot-password/chromium/data/5f13f2e5b9fa87b1bebd1668fa98964e93040870.png
+D	reports/forgot-password/chromium/data/5f49881f5ebdf662c9332e84b48434021e8bc905.zip
+D	reports/forgot-password/chromium/data/625555cfcdbdc5f43e62b35caa525b2f21b0deb3.zip
+R099	reports/forgot-password/firefox/data/5d89e6d54e010350a6e80e099881eb21759a08f2.md	reports/forgot-password/chromium/data/633c8f82fa89607ab1fb667164a8fbced4380c77.md
+D	reports/forgot-password/chromium/data/6aed65921a2fd6f4c7bb129b94e1e1ccccb15adc.png
+R099	reports/forgot-password/firefox/data/5cff9e6af98c795cdc81d5bdee3bce7b63cb1ecf.md	reports/forgot-password/chromium/data/6ba1639a52f8174325c6050e383c66085d814817.md
+R099	reports/forgot-password/chromium/data/a4319535ff86394219ba27818e59a6a04d76e14a.md	reports/forgot-password/chromium/data/6da5f97ac8234b3b7317632c19af26f8e6995800.md
+D	reports/forgot-password/chromium/data/6dc33a7956ba8155f63d65b945cc260a8a5664b8.zip
+R100	reports/forgot-password/firefox/data/707c882900658ba2dac4bd20d7bd4e1ce67a08ac.md	reports/forgot-password/chromium/data/707c882900658ba2dac4bd20d7bd4e1ce67a08ac.md
+D	reports/forgot-password/chromium/data/70d8900284b9025802a54eaf8f8728b6200dbf60.png
+R098	reports/forgot-password/chromium/data/b333e5cd9916048071c364c1cfd6dcfa8e7914c2.md	reports/forgot-password/chromium/data/7155ea06534dfeac1d751b74eaf0f69c510992e6.md
+R098	reports/forgot-password/firefox/data/21f0f5b30dd3ac4a69dc3fad8344f63fda75309d.md	reports/forgot-password/chromium/data/7285a4a2e940c8789983dc2390fd11f4fba3c77d.md
+D	reports/forgot-password/chromium/data/74b2b143a439a96e185745e992d3bf21b9e84180.png
+D	reports/forgot-password/chromium/data/7804a38419cfa0b5f73988e0b6c496b3bed5e440.png
+D	reports/forgot-password/chromium/data/79ada4ceaddf43b4617d5bdf6b4fbcc9a4ea3ea4.png
+D	reports/forgot-password/chromium/data/7ac02c42fec71fac2462e881cf4716db031bdbe4.zip
+A	reports/forgot-password/chromium/data/7b238d276fa90906d532e01f1b6153efc4d34429.png
+R098	reports/forgot-password/chromium/data/16d9aee0f2b06a567543ef1d42e2db6b6e0d4d89.md	reports/forgot-password/chromium/data/7e14b3f8be245715561cd20730ce83c62e321b45.md
+A	reports/forgot-password/chromium/data/80c8a3c1f2cc242614fb646c92e5f24f3ee96cc7.png
+A	reports/forgot-password/chromium/data/83e2aed528389923dde1452f8c8cec2d45c9f891.png
+A	reports/forgot-password/chromium/data/89266a33c33a1b0f837f56d776ca147cfafcd943.png
+A	reports/forgot-password/chromium/data/8c007905b672d035f2c51b10b36573e26c9c9ebd.png
+R099	reports/forgot-password/chromium/data/f39ba147de43cbef087b67b9bd44a1d796c779df.md	reports/forgot-password/chromium/data/94f5c6ce61a8f36aeeda5b861a73c4c289af419f.md
+A	reports/forgot-password/chromium/data/98273b92a1f9f872cd05e7bdedc9e23d4898f099.png
+D	reports/forgot-password/chromium/data/98f0b0cbb629a3ac0baa3237bf04c3c1b4a3d688.zip
+D	reports/forgot-password/chromium/data/9b3511534229ed78ac8a8a9c7473d42d1dac3cdc.png
+A	reports/forgot-password/chromium/data/9e3db271bb2d905b5d8db1e36c23b987d7bc182f.png
+D	reports/forgot-password/chromium/data/a133fc53b26e71a260190006c429105269c6da2a.zip
+D	reports/forgot-password/chromium/data/a1d5609ba50ddd1d5a39c2c51c6aa14f9b014b3a.zip
+D	reports/forgot-password/chromium/data/a1ffac09a4907d8a7dcee71296e2fc58a2e690e0.png
+D	reports/forgot-password/chromium/data/a24ba45279406435768a045309b3047c739fca1a.zip
+A	reports/forgot-password/chromium/data/a3cd84775781f50c95e44edd9b999eae5926cb4c.png
+A	reports/forgot-password/chromium/data/a83dc7eb19d188cb0723a4a2e4f2acf045ed9942.png
+R099	reports/forgot-password/firefox/data/73c55ab37af681452896d9b017a1700c13d70ad4.md	reports/forgot-password/chromium/data/ae270f7fcd75522fd67e8f8addbd1f0ca48ec434.md
+D	reports/forgot-password/chromium/data/afa2c464dda3471388eba8cd85d276e509096ee0.zip
+A	reports/forgot-password/chromium/data/b196d1335dd422c83f96ad1097012303339e8bb0.png
+A	reports/forgot-password/chromium/data/b960f3a4fe1c08bd20b67308157ccc64cdb90337.png
+D	reports/forgot-password/chromium/data/ba96e563850d1998e777d9c690f0a418493a8465.zip
+R099	reports/forgot-password/chromium/data/3a8d0e848badf281423c31fc2d4874171a269b2d.md	reports/forgot-password/chromium/data/bd71e6eda9443c67d3829023826a981997cd4b11.md
+D	reports/forgot-password/chromium/data/bfce9b46f4b9f5b9d9365ffa83fc68bcddc45310.png
+D	reports/forgot-password/chromium/data/bfd41de613b6365e0fcb864b540b041354b4b959.png
+D	reports/forgot-password/chromium/data/c0e75e317efcb9ed696f0b2881f8eb14fff77bab.zip
+D	reports/forgot-password/chromium/data/c8372f647bc4d8714cca26748bbcc8143812d966.png
+R099	reports/forgot-password/chromium/data/661b5e24d46930ab8d68def36d56c0c4cf38e39c.md	reports/forgot-password/chromium/data/cc2354dc4ed0ae4f16ce3f269c99759270eaddfd.md
+A	reports/forgot-password/chromium/data/d1192eeaaffcb27895139ff40f9000421f0b4fbc.png
+D	reports/forgot-password/chromium/data/d1976325a439be285218d636cbb8bf6c7e64b60f.zip
+R099	reports/forgot-password/firefox/data/a3657acbb7ae6973cc223a53c2014c38917e0642.md	reports/forgot-password/chromium/data/d1da1160575a3c609f425297f93df93e64d9a4ba.md
+D	reports/forgot-password/chromium/data/d797fc66233b45e1abafd950d752417dad5f93e7.zip
+D	reports/forgot-password/chromium/data/dba3b9f4911dcbd5ca412e46776cc7f9cbb9edb5.png
+R099	reports/forgot-password/webkit/data/67f7a9ef7910ca378aac9aaf266df908ed04720b.md	reports/forgot-password/chromium/data/dd81632c071e0f6978a0809414562a78c9523dcc.md
+D	reports/forgot-password/chromium/data/de9f1d21aba731c60c7ebb8cd25ad40ebfa45730.zip
+D	reports/forgot-password/chromium/data/e225c66b9b85d775456e97a928d01986a7c8cf69.zip
+D	reports/forgot-password/chromium/data/e246b1a5b61762c002c8445b9cd909d0389531e2.zip
+R099	reports/forgot-password/chromium/data/8df5b170a2f92739ddb90e5ea01b8819217d1946.md	reports/forgot-password/chromium/data/e2ee44dc20dce141b7f61e1e508f195807a56ab7.md
+D	reports/forgot-password/chromium/data/e43707fd4e6d8c6e56c9e56ad7034895a8d29df9.zip
+A	reports/forgot-password/chromium/data/e7631c505b0a0bb8b39c97dce427a4fd2bb8e0ad.png
+D	reports/forgot-password/chromium/data/e96194d3c12861f404f7897f05e54930465635fa.zip
+D	reports/forgot-password/chromium/data/e9f24b8181e40215bfe355d00990906cfad7120d.png
+R099	reports/forgot-password/firefox/data/e5a2f34bd33e20b38958f710c5b5d75a90b27d2a.md	reports/forgot-password/chromium/data/f213fbab54e79c4c1b7c0442d93dc171af11e72d.md
+A	reports/forgot-password/chromium/data/f29ea4542f73df6739c0bf4180b79030ed670e17.png
+R099	reports/forgot-password/webkit/data/ca4b7963da8d02321cf189b627d925e8a9b06484.md	reports/forgot-password/chromium/data/f2d16d47eebf8a4a417b0afc1556d9c6d6526cad.md
+D	reports/forgot-password/chromium/data/f713fdd67d96d5878c83a510e330c3435c5a898d.zip
+D	reports/forgot-password/chromium/data/f7c50dd6440615e5b438ef64f96f47658e488a30.png
+D	reports/forgot-password/chromium/data/f92db19ef8a601fefbb5ff54c611378b0dcbc600.png
+R099	reports/forgot-password/webkit/data/1bc13315ad1ca65ed1df3ef271d7a37a552799fe.md	reports/forgot-password/chromium/data/fb55b3e27451ecbb57e875fdb6fb45c5ff5e95e8.md
+A	reports/forgot-password/chromium/data/fce9bbc49be0c3db9d2630fee5507ea63552be4c.png
+D	reports/forgot-password/chromium/data/fda3de91d951cb90aa36dc79e5e91b6c08ccc540.png
+M	reports/forgot-password/chromium/index.html
+M	reports/forgot-password/chromium/results.json
+A	reports/forgot-password/chromium/screenshots/BVA-01.png
+A	reports/forgot-password/chromium/screenshots/BVA-02.png
+A	reports/forgot-password/chromium/screenshots/BVA-03.png
+A	reports/forgot-password/chromium/screenshots/BVA-04.png
+A	reports/forgot-password/chromium/screenshots/BVA-05.png
+A	reports/forgot-password/chromium/screenshots/DT-01.png
+A	reports/forgot-password/chromium/screenshots/DT-02.png
+A	reports/forgot-password/chromium/screenshots/DT-03.png
+A	reports/forgot-password/chromium/screenshots/DT-04.png
+A	reports/forgot-password/chromium/screenshots/DT-05.png
+A	reports/forgot-password/chromium/screenshots/DT-06.png
+A	reports/forgot-password/chromium/screenshots/DT-11.png
+A	reports/forgot-password/chromium/screenshots/DT-12.png
+A	reports/forgot-password/chromium/screenshots/DT-13.png
+A	reports/forgot-password/chromium/screenshots/DT-14.png
+A	reports/forgot-password/chromium/screenshots/DT-15.png
+A	reports/forgot-password/chromium/screenshots/DT-20.png
+A	reports/forgot-password/chromium/screenshots/DT-21.png
+A	reports/forgot-password/chromium/screenshots/DT-22.png
+A	reports/forgot-password/chromium/screenshots/DT-23.png
+A	reports/forgot-password/chromium/screenshots/DT-24.png
+A	reports/forgot-password/chromium/screenshots/DT-25.png
+A	reports/forgot-password/chromium/screenshots/DT-26.png
+A	reports/forgot-password/chromium/screenshots/DT-28.png
+A	reports/forgot-password/chromium/screenshots/DT-29.png
+A	reports/forgot-password/chromium/screenshots/DT-30.png
+A	reports/forgot-password/chromium/screenshots/DT-35.png
+D	reports/forgot-password/chromium/trace/assets/codeMirrorModule-BEB2e8M3.js
+D	reports/forgot-password/chromium/trace/assets/defaultSettingsView-D-g2vrvf.js
+D	reports/forgot-password/chromium/trace/assets/urlMatch-L3liM589.js
+D	reports/forgot-password/chromium/trace/codeMirrorModule.-QdMvsKi.css
+D	reports/forgot-password/chromium/trace/codicon.DCmgc-ay.ttf
+D	reports/forgot-password/chromium/trace/defaultSettingsView.C8BeHuxd.css
+D	reports/forgot-password/chromium/trace/index.B_TqY17P.css
+D	reports/forgot-password/chromium/trace/index.html
+D	reports/forgot-password/chromium/trace/index.oNry3Hjv.js
+D	reports/forgot-password/chromium/trace/manifest.webmanifest
+D	reports/forgot-password/chromium/trace/playwright-logo.svg
+D	reports/forgot-password/chromium/trace/snapshot.B_Jk1wbt.js
+D	reports/forgot-password/chromium/trace/snapshot.html
+D	reports/forgot-password/chromium/trace/sw.bundle.js
+D	reports/forgot-password/chromium/trace/uiMode.CYwC_gH1.js
+D	reports/forgot-password/chromium/trace/uiMode.CyMfwkXJ.css
+D	reports/forgot-password/chromium/trace/uiMode.html
+D	reports/forgot-password/chromium/trace/xtermModule.kHJ-D0s7.css
+D	reports/forgot-password/firefox/data/007e0eb9f40cb15a9aa0dedbb5220cf4d5ad0b11.png
+D	reports/forgot-password/firefox/data/030ec3268b6af9065ef827c0b9464129dd6708a5.png
+D	reports/forgot-password/firefox/data/0486ea8782ac04820f98a3c20f1274fa4809fbbd.zip
+A	reports/forgot-password/firefox/data/0a898e74966a7141c80f752848a6a7fa2dc6dd8d.png
+R099	reports/forgot-password/chromium/data/4f98306a6721f824fd6fd2e936e5a19fbe9a1c2a.md	reports/forgot-password/firefox/data/0e8e8054526c82175bc7f8205a1285dc0038ff1c.md
+R099	reports/forgot-password/chromium/data/c96cb6f7262ef49fd1dfb03df3869e07945ede0c.md	reports/forgot-password/firefox/data/113c90644e5d83e2e0c6911f67f27afd09c41f65.md
+D	reports/forgot-password/firefox/data/116bfa0686db3701fa9abffe75b1ddc1fc96401a.zip
+D	reports/forgot-password/firefox/data/11a72391d569019781ec3756acef1a3163bc6120.png
+A	reports/forgot-password/firefox/data/11e4b7637e6726fa17e6a8e1deb26f07e486a9d1.png
+D	reports/forgot-password/firefox/data/16821066d6e9bb02f2c5e9fe69f0a50aaf50e261.zip
+D	reports/forgot-password/firefox/data/169b83a20c6240acaab3e5f0abb90861593b522e.png
+D	reports/forgot-password/firefox/data/1efe4fca58dcd7deed92877cd019a09b4e149c9f.png
+D	reports/forgot-password/firefox/data/20b560e8c296dadf5d8656263d1b061dcca76edc.zip
+A	reports/forgot-password/firefox/data/2db03425bab7817bba9ae5973f0c0f6dca1c2e53.png
+R099	reports/forgot-password/webkit/data/085b2fa4be71200150e512ae2e2097b83f05b31d.md	reports/forgot-password/firefox/data/2f6980f6b95599953310b63a2af33d67d505431d.md
+D	reports/forgot-password/firefox/data/309dc4961250b0e80e8ad9da979d0cf0e0c7c6e5.png
+A	reports/forgot-password/firefox/data/3590ceecd6eac60b127c34b3df314d87045fa896.png
+D	reports/forgot-password/firefox/data/37475f22986c00229f97aff4fe686947a850cc23.zip
+R098	reports/forgot-password/firefox/data/c954ab7f761d633fcf608833a2a13a7e0e95de55.md	reports/forgot-password/firefox/data/38f4bbc7b31c51b4f64b9872a15530fc5c95339b.md
+D	reports/forgot-password/firefox/data/3b8b67ae4dab072992a00f2f31b0ae0199ebddcb.png
+D	reports/forgot-password/firefox/data/3c263e26095e026c7ce6ef4050b576b08b402d23.zip
+A	reports/forgot-password/firefox/data/3dfd07316ab9364978349b6c23a1372a9305067c.png
+A	reports/forgot-password/firefox/data/3e877c98a6516a98d17cf626b71360789bdba235.png
+D	reports/forgot-password/firefox/data/3ec7f32d37049184d35de64cd1c2d70c66b0da42.zip
+A	reports/forgot-password/firefox/data/3fe48a3307de9a9e298bfa052f36f3098b4ff919.png
+D	reports/forgot-password/firefox/data/40ea4eee3ea13bbc026dd460491a0e90b82d3f68.zip
+A	reports/forgot-password/firefox/data/41fcfb6bf84df1d0521def02cddc1299747b27c0.png
+R099	reports/forgot-password/chromium/data/52a69a5e4afb40c345d7e33ab706f7f12249962c.md	reports/forgot-password/firefox/data/43a477893955570e7a984ccc9add6f1792044e8e.md
+D	reports/forgot-password/firefox/data/4721db65b09330ff9e08de374aa0a9709e2cad63.zip
+A	reports/forgot-password/firefox/data/486a5a93dd5c2293eb7240320d327601a291753b.png
+D	reports/forgot-password/firefox/data/4b4b1cd25634236024b43b6d10c53ed0206a379f.png
+D	reports/forgot-password/firefox/data/5152b758f100c6d787962802c8c5e43cf9f2476b.png
+D	reports/forgot-password/firefox/data/53a6d0f3ea289f576b72586f99a8c73c61f8f85d.zip
+D	reports/forgot-password/firefox/data/59280b4fbca009b088073f37165f207b6f02f093.zip
+R099	reports/forgot-password/firefox/data/5a8e3dce95b444370f00dc9c2e57982964929107.md	reports/forgot-password/firefox/data/5af859f4520425fbb1db56b3221aa5f14e3d06ee.md
+R099	reports/forgot-password/firefox/data/a5eb4698023de543e174806e23e3c6bd8b6e6c0c.md	reports/forgot-password/firefox/data/5cad5be10af02e58351c60a6ce4ede598116c4e3.md
+D	reports/forgot-password/firefox/data/5eeb483fd9249206e5f640dcfe7a2a705d954237.zip
+D	reports/forgot-password/firefox/data/6012427d2719876925ff7b03b1c283ff449d2211.png
+A	reports/forgot-password/firefox/data/60bd45e0b5ff662d48ab0aae41584ffb63dcd409.png
+A	reports/forgot-password/firefox/data/62b70229d1a59bb3e75b165856c08253e02cb0ae.png
+A	reports/forgot-password/firefox/data/62be43b8a5d3a372648bd05e632cdf8de805a589.png
+A	reports/forgot-password/firefox/data/636d99e96c409c75e71a8a2bb2bb009ad6719ebb.png
+A	reports/forgot-password/firefox/data/68edf2de1c6a813fab85b1246933c09f47a75978.png
+A	reports/forgot-password/firefox/data/70112274293c17b673cdf79a5085f19c1297cde8.png
+R099	reports/forgot-password/webkit/data/e7cb4fb20127785e1e88962ab4435b7988eddfb3.md	reports/forgot-password/firefox/data/748bcdc9d8aaab57758a48d2cf1f1a69732d56fa.md
+D	reports/forgot-password/firefox/data/7a8e78a46ecf667e4515c0be0df6c0b1488ef9a0.zip
+D	reports/forgot-password/firefox/data/7afda5ad64c25df40deb36ff1bfbc3474dccad2c.zip
+A	reports/forgot-password/firefox/data/7b2310271e4a71d385cd9beb91efa8335a9df590.png
+D	reports/forgot-password/firefox/data/7dac6ad00ac6ae280f37b0830a59fb0fb43ed7e4.zip
+D	reports/forgot-password/firefox/data/82182c46add882c9a8ba2e4859827a9d65dfc846.png
+D	reports/forgot-password/firefox/data/851ecacb825a05377dec1925479c40c64c5d8a5f.zip
+A	reports/forgot-password/firefox/data/8534fd93424dff5a7cb35190bc71b81aecf9b9b5.png
+R099	reports/forgot-password/webkit/data/82e06d4da13335cead8412762033dc2eb7b3b7a0.md	reports/forgot-password/firefox/data/86de94abfe56fe5debd1a7bb07920357a744d46e.md
+D	reports/forgot-password/firefox/data/89cd373e6806b1b91551be1dd342bbe74c9356f6.png
+D	reports/forgot-password/firefox/data/8add7a3858c399b1a97bf172835c5e2f15eb01ed.png
+A	reports/forgot-password/firefox/data/8d89d6d5c83ad852fefbdf2687bfad5f32138f49.png
+R099	reports/forgot-password/firefox/data/11c8d92a8e89b493a0ff1e8b1660ec8152b58ea9.md	reports/forgot-password/firefox/data/9220c308dc96ed49a88ae77aff9e7c78df226aef.md
+A	reports/forgot-password/firefox/data/92c5fe0a3e525b0075b0f2adc2e00748fe97c3bf.png
+R099	reports/forgot-password/chromium/data/45b291668dd683bd17dc15d4217b814b9acb4687.md	reports/forgot-password/firefox/data/94d0775c359fa0c4cf19e1716c9b62adfc24d689.md
+D	reports/forgot-password/firefox/data/968fd9f24407b62c98792ef7679cdc686e95e312.png
+D	reports/forgot-password/firefox/data/9a926e05ac374400f555bc31dbfa68a41e1b598a.png
+D	reports/forgot-password/firefox/data/9e8b2cf720214dff18c55dcfab07fe7be023a1ff.zip
+D	reports/forgot-password/firefox/data/9fc769b662844aea96984c921b4958a3d32c12c7.zip
+R099	reports/forgot-password/firefox/data/302f1e17cb8b2229e590c43bd5f5c042d49484cf.md	reports/forgot-password/firefox/data/a15899b9b93244b16adcf73385429cc0f3a188e5.md
+R099	reports/forgot-password/chromium/data/b519454f8dc70e53a7a0e0e30817fb9ad8121f7d.md	reports/forgot-password/firefox/data/a3192d157a39aafdff0ff0efcebed33eb0b54eb2.md
+R098	reports/forgot-password/chromium/data/c3a712e8cfc9fe0588e20e848093f8db024e838f.md	reports/forgot-password/firefox/data/a3e0eb0cda9e27105136881f965acb41a0997ec1.md
+R099	reports/forgot-password/firefox/data/a94258753648455e39d11fdb3aa8e9b58a03aa6d.md	reports/forgot-password/firefox/data/a7191b8cbe30ecd9f4f05e78978afca4bfa8ea04.md
+R099	reports/forgot-password/chromium/data/0484458a6912df8370a9b5c819004a1635562e3e.md	reports/forgot-password/firefox/data/a7d14ddc4375785ca6a3ed307c7333ec20fbb584.md
+D	reports/forgot-password/firefox/data/a87c87d94fce74077bfad0f47e35175d0e3a0bd6.zip
+D	reports/forgot-password/firefox/data/a949e2fda2572aceab082be2e0a3d793337256e1.zip
+D	reports/forgot-password/firefox/data/ab65851457080490e21132afdfb8378c1a7b62ca.png
+D	reports/forgot-password/firefox/data/ad6c36f0ab149e93d7f749cc5badf9542d29207f.png
+R099	reports/forgot-password/firefox/data/49136f263bd2ea4ffd8dafc3c46dfdcd76c88912.md	reports/forgot-password/firefox/data/b0fd3fada314714df9cf3ac4fbd22084de80250e.md
+D	reports/forgot-password/firefox/data/b25eef22437471e65642578e56b45504427faa31.png
+A	reports/forgot-password/firefox/data/b9d9361473075454732341a184c640603e90e4fd.png
+R099	reports/forgot-password/webkit/data/b45f30169f760e45c024264205ad73be24c736e9.md	reports/forgot-password/firefox/data/bd73916cac1cc5a6d34bcb789cec85497aa308c1.md
+R099	reports/forgot-password/webkit/data/991ee9b2ebb359a5d5a3300841e1a86b3c604207.md	reports/forgot-password/firefox/data/beb3d1009027df5dbeaf005321aa9a82f5af2a72.md
+D	reports/forgot-password/firefox/data/c0256bad0b4d3bbf8b39a66fa89e75e97c227eb4.png
+D	reports/forgot-password/firefox/data/c22b9d1a1caacf9d9f25f9aebdef7974bacf87bf.png
+D	reports/forgot-password/firefox/data/c22c01184c711d57b619790ab13cf5c10efe8415.zip
+A	reports/forgot-password/firefox/data/c3e3b4584607e576b75ba70c89343263ea2218db.png
+R099	reports/forgot-password/firefox/data/39b579f3535275282ad2f1ccf6514f20cf91f501.md	reports/forgot-password/firefox/data/c83daa805cec9c3899f680fa8eb54ab03d7925f3.md
+R099	reports/forgot-password/firefox/data/764b6055a182d7116af10ba642ccf1a057d1debf.md	reports/forgot-password/firefox/data/cba9c500b82da31ed69cd5574a69a3ff95c5078d.md
+D	reports/forgot-password/firefox/data/cd6877fc43cccef9e796f7ea4c336f50d7ff0eae.zip
+R099	reports/forgot-password/firefox/data/474ac26fda47dec5a256f048948a0838bc1b82d0.md	reports/forgot-password/firefox/data/ceb108ac4722e3f11e84fbd30a26a0cf6339d65c.md
+A	reports/forgot-password/firefox/data/cec41edb22a9426b75e857fd2bfe58a2367601a1.png
+D	reports/forgot-password/firefox/data/d2364b4cdb7622120c82802a20530568babd944a.png
+D	reports/forgot-password/firefox/data/d2fab8e1d2b8db594062a54cfafdf211b019a5bc.png
+D	reports/forgot-password/firefox/data/d98113d127bc9566f138da84a378c2212ba5ae19.png
+D	reports/forgot-password/firefox/data/da4abc1a4d9cbcf591671543beaa92449554f8cf.zip
+R099	reports/forgot-password/webkit/data/651c7a90ecfc4b8633148f27424c0314b3fbc7f2.md	reports/forgot-password/firefox/data/dba1226d1e19c948ff67df53a87ff1b55f60065d.md
+D	reports/forgot-password/firefox/data/de6a5afb79f73537845e3e0fe3d8886308e710b3.zip
+D	reports/forgot-password/firefox/data/dea973b8142d86b86b89225ffe88bcccfdaf6369.zip
+R098	reports/forgot-password/firefox/data/7d9a3e6cc3e2d4908577c93fb7e4e14c7a371338.md	reports/forgot-password/firefox/data/e12c781b49f6f9f52a1a16cd1174125fe9c19c03.md
+A	reports/forgot-password/firefox/data/e7c941d518dc2657d3b08e99b7c78f0f409a4533.png
+D	reports/forgot-password/firefox/data/eaa0ab0f4d8b36eb0f0de53729e4a995aa89ada8.png
+A	reports/forgot-password/firefox/data/f304598afbf474f60d2ae0dcd7b53b35ad262125.png
+A	reports/forgot-password/firefox/data/f30b6854ec50f2e83e3a810a2927c9c304c38a40.png
+D	reports/forgot-password/firefox/data/f71e151f40ee55e66d2f20ead483acff2c3d2e5b.zip
+D	reports/forgot-password/firefox/data/f9206490ef95dcea429dff6981b4768b8eb1a0be.png
+R099	reports/forgot-password/firefox/data/d140978e6dafa7c3292df9736944aee3f6a2c8ec.md	reports/forgot-password/firefox/data/fc93fe9e0548e13a956b71bc5b5a87d6a62914e8.md
+D	reports/forgot-password/firefox/data/fdbf6a8cc60ead12a787afa20cb70eaa67d81c28.md
+D	reports/forgot-password/firefox/data/fe155747c5de9bd1149ac1189675b6aa3d42a86b.zip
+D	reports/forgot-password/firefox/data/fe77ef4b5d319418c17f42deeae75263c44cc054.zip
+M	reports/forgot-password/firefox/index.html
+M	reports/forgot-password/firefox/results.json
+A	reports/forgot-password/firefox/screenshots/BVA-01.png
+A	reports/forgot-password/firefox/screenshots/BVA-02.png
+A	reports/forgot-password/firefox/screenshots/BVA-03.png
+A	reports/forgot-password/firefox/screenshots/BVA-04.png
+A	reports/forgot-password/firefox/screenshots/BVA-05.png
+A	reports/forgot-password/firefox/screenshots/DT-01.png
+A	reports/forgot-password/firefox/screenshots/DT-02.png
+A	reports/forgot-password/firefox/screenshots/DT-03.png
+A	reports/forgot-password/firefox/screenshots/DT-04.png
+A	reports/forgot-password/firefox/screenshots/DT-05.png
+A	reports/forgot-password/firefox/screenshots/DT-06.png
+A	reports/forgot-password/firefox/screenshots/DT-11.png
+A	reports/forgot-password/firefox/screenshots/DT-12.png
+A	reports/forgot-password/firefox/screenshots/DT-13.png
+A	reports/forgot-password/firefox/screenshots/DT-14.png
+A	reports/forgot-password/firefox/screenshots/DT-15.png
+A	reports/forgot-password/firefox/screenshots/DT-20.png
+A	reports/forgot-password/firefox/screenshots/DT-21.png
+A	reports/forgot-password/firefox/screenshots/DT-22.png
+A	reports/forgot-password/firefox/screenshots/DT-23.png
+A	reports/forgot-password/firefox/screenshots/DT-24.png
+A	reports/forgot-password/firefox/screenshots/DT-25.png
+A	reports/forgot-password/firefox/screenshots/DT-26.png
+A	reports/forgot-password/firefox/screenshots/DT-28.png
+A	reports/forgot-password/firefox/screenshots/DT-29.png
+A	reports/forgot-password/firefox/screenshots/DT-30.png
+A	reports/forgot-password/firefox/screenshots/DT-35.png
+D	reports/forgot-password/firefox/trace/assets/codeMirrorModule-BEB2e8M3.js
+D	reports/forgot-password/firefox/trace/assets/defaultSettingsView-D-g2vrvf.js
+D	reports/forgot-password/firefox/trace/assets/urlMatch-L3liM589.js
+D	reports/forgot-password/firefox/trace/codeMirrorModule.-QdMvsKi.css
+D	reports/forgot-password/firefox/trace/codicon.DCmgc-ay.ttf
+D	reports/forgot-password/firefox/trace/defaultSettingsView.C8BeHuxd.css
+D	reports/forgot-password/firefox/trace/index.B_TqY17P.css
+D	reports/forgot-password/firefox/trace/index.html
+D	reports/forgot-password/firefox/trace/index.oNry3Hjv.js
+D	reports/forgot-password/firefox/trace/manifest.webmanifest
+D	reports/forgot-password/firefox/trace/playwright-logo.svg
+D	reports/forgot-password/firefox/trace/snapshot.B_Jk1wbt.js
+D	reports/forgot-password/firefox/trace/snapshot.html
+D	reports/forgot-password/firefox/trace/sw.bundle.js
+D	reports/forgot-password/firefox/trace/uiMode.CYwC_gH1.js
+D	reports/forgot-password/firefox/trace/uiMode.CyMfwkXJ.css
+D	reports/forgot-password/firefox/trace/uiMode.html
+D	reports/forgot-password/firefox/trace/xtermModule.kHJ-D0s7.css
+D	reports/forgot-password/webkit/data/016d42eccb699fe5ac6a842b2ec89ba477648747.zip
+A	reports/forgot-password/webkit/data/017b78383bdf2cbc90501377ae9a1e729c986958.png
+A	reports/forgot-password/webkit/data/0409a6a069132502d9b43e0e6a90bcf076bc4a54.png
+D	reports/forgot-password/webkit/data/05f603ac633a04674ea7df5113c2c2717f260fd5.zip
+A	reports/forgot-password/webkit/data/09cee03c3c2d5dbbd4e668096355d1cf8e668a3b.png
+D	reports/forgot-password/webkit/data/0a8817bbfeaddea02cc4ef1f8dd517f3ddb4af69.zip
+D	reports/forgot-password/webkit/data/0e926b50dae89e166098ac70f6e48f1bce98577f.zip
+D	reports/forgot-password/webkit/data/13c6b78b0a45180102728e32d8459e6226b4d284.png
+A	reports/forgot-password/webkit/data/19a6a6a40b14c7e1d9f1e78e9d948d3fe08620c4.png
+D	reports/forgot-password/webkit/data/1a7487a5eed710ca1319b6b80eddee89a8404fbc.png
+D	reports/forgot-password/webkit/data/1a809e71d612fe9a5bb53eefe27ab915968e8412.zip
+D	reports/forgot-password/webkit/data/1aa4f668b33d7ea8d999982191d4298b29e371dc.zip
+R099	reports/forgot-password/chromium/data/62e47b4b0b614e78f621793de8f4e6b6f8827827.md	reports/forgot-password/webkit/data/1c14d0d2efde6a0f2d8d78378ee46b33d7ad3b99.md
+R099	reports/forgot-password/webkit/data/fda54d04577f1349fd38d4a61434963e4321d224.md	reports/forgot-password/webkit/data/1d19f2d3b2855bb0e77236691045e25018d8ec84.md
+D	reports/forgot-password/webkit/data/21a0fc7f64f9d96895793001f9915c4b090fcfc3.zip
+D	reports/forgot-password/webkit/data/26f2d1e3577c97b24625ccbf6a0524c7923db270.png
+D	reports/forgot-password/webkit/data/2879570d3979645b164d65a5392e9b73a5470926.zip
+A	reports/forgot-password/webkit/data/2b73d40f47ccebc9b545b2e4c1b6bd479d9e4427.png
+R099	reports/forgot-password/webkit/data/780b6a5bd25c36da2830268c5f79f55fc0be0401.md	reports/forgot-password/webkit/data/2b7c9b62c73482762ab4012ffa89642c671509b4.md
+D	reports/forgot-password/webkit/data/31428120bf450b4e0c7569e7c49f3566a0796095.zip
+D	reports/forgot-password/webkit/data/38f430c1a53ee469803152f680b72a8cf9d3b69d.zip
+D	reports/forgot-password/webkit/data/4757a28fef9c4916add66694c795030825ef929d.png
+A	reports/forgot-password/webkit/data/49c14cdf59b3e81aff4844f8597b961e27e77baa.png
+R099	reports/forgot-password/chromium/data/0699915c4f03d1b3b2f9eff1bb2d4c6749b595ee.md	reports/forgot-password/webkit/data/4b1950b7f8705726ad5841aff2c212472f3f8c68.md
+A	reports/forgot-password/webkit/data/4d4cc9755f7bd2275890e261a01c69252dbd469a.png
+R099	reports/forgot-password/chromium/data/5c275b1bf3f6ff6eddee0736ef7f22fa8a25dc1a.md	reports/forgot-password/webkit/data/4dd63c3b6ff79b04427a439511577b8aac1c9ef9.md
+D	reports/forgot-password/webkit/data/4e2553879a7be7cfc1963f40b45a64f587b0d60e.png
+D	reports/forgot-password/webkit/data/505d9789fe8057a3e5fbfa58036ae0d8b87997a7.zip
+D	reports/forgot-password/webkit/data/50c4060f1ed8cb44abdcb94eaf30f69f0665e112.zip
+D	reports/forgot-password/webkit/data/53d9d29c1331392d24589bc44ba784fd75b13a3b.png
+D	reports/forgot-password/webkit/data/55af79cf78d160de2cfa304e751c2625e42904f7.png
+D	reports/forgot-password/webkit/data/560dae58f1ebcdd1c2aff2c468c98af642f0f4c8.zip
+A	reports/forgot-password/webkit/data/5d4067d7f0164b7e2c4aec4ea814794d487293f9.png
+R050	reports/forgot-password/webkit/data/40e7df4871556da43ada2c3299481f67684e0678.png	reports/forgot-password/webkit/data/5f200bee39788fdc502572e3861293442dbd86f4.png
+A	reports/forgot-password/webkit/data/63617bac82c40c59957d6765b93301400f3fec21.png
+A	reports/forgot-password/webkit/data/65dc76c8b47ea3d82e74496035c5b61d204a042e.png
+D	reports/forgot-password/webkit/data/6814a7039066226b79d14fdcaaa836723911a959.png
+D	reports/forgot-password/webkit/data/69b8822093e57f6164bc588599624d4a33ef329f.png
+D	reports/forgot-password/webkit/data/6d5d98742254513ba496148a3c324589ac698347.zip
+D	reports/forgot-password/webkit/data/6e41ccefebfebb682feaf8cfe0dd409ea9d2d8de.zip
+A	reports/forgot-password/webkit/data/6ec2ed8187c5f8ec9ce6e1a5e3df3015fdbbcf77.png
+R099	reports/forgot-password/webkit/data/4e8caa8b0ee94fb8b22fe9df1a138aeffe0ee426.md	reports/forgot-password/webkit/data/70e52f0cbbcfed5e92b59575f74fb39c8e4d8502.md
+D	reports/forgot-password/webkit/data/71dd30f760c37307c62b6f05d320497edd96eb07.png
+A	reports/forgot-password/webkit/data/723654a31b6335c0886401f0cbfe0446954ae2ef.png
+R098	reports/forgot-password/webkit/data/3b8f4ddff597ad2e5bfb5aeb34cadf7ebcdfe94e.md	reports/forgot-password/webkit/data/802644e2955209afe19f6e2dc4eb664166faa050.md
+R099	reports/forgot-password/webkit/data/dca3dd9b9bc4fdcc1fd527732093f98c42aec428.md	reports/forgot-password/webkit/data/84348348e9fd8bb59a9243ad9df134d44e478e1f.md
+D	reports/forgot-password/webkit/data/8472ba458c994dffad53d2abb80640b3b8235375.png
+D	reports/forgot-password/webkit/data/889e4fdb0c713b08559606cf9c2c61eb86bc5774.zip
+D	reports/forgot-password/webkit/data/899a8a15e520fddaaa03b8c45c55d3c5daa2a204.zip
+D	reports/forgot-password/webkit/data/89c37a0c2b58604bbcb415d28f0bd134a6788b50.zip
+A	reports/forgot-password/webkit/data/8d1dcb01be8f24e18df94bfd8757a23b785d7603.png
+D	reports/forgot-password/webkit/data/8e2c90b6f2c6efb008246b7b3c6b96ff46583ced.zip
+R098	reports/forgot-password/webkit/data/d2a783a033626870ae626b5fc03d5761243ea43d.md	reports/forgot-password/webkit/data/8f3c27b1f9b4d0be47c62208ea853769c76147fb.md
+D	reports/forgot-password/webkit/data/8fddc2fd24d56b687ff0794a0fee5ec910939ffb.zip
+D	reports/forgot-password/webkit/data/919f455a33c8d19462715b27685ac6fb5a0d74c8.png
+D	reports/forgot-password/webkit/data/935e366a9d35fef200290ecb6634b2770cca2666.png
+R099	reports/forgot-password/firefox/data/a81179ea70fde7487a0bd9bb5bb592a9cacfd07c.md	reports/forgot-password/webkit/data/94d00037777a9ae3d542a03b6eae6bc06ad21bbd.md
+R099	reports/forgot-password/chromium/data/ed311f95acae9a51367afd877a008ba0be2196a9.md	reports/forgot-password/webkit/data/990dc14e121c35012b54ef5ce76bd6904cad80a6.md
+R099	reports/forgot-password/webkit/data/aed749197e55c3b7d50324bcc883900c2e3eefad.md	reports/forgot-password/webkit/data/9941836b098dfc82521924e50281e59bd26e4305.md
+A	reports/forgot-password/webkit/data/996cd61988aa6a75dde55d64fb42f669e777a258.png
+D	reports/forgot-password/webkit/data/99c9901ac40a97f94ab702044957b361966b41bd.zip
+R099	reports/forgot-password/webkit/data/e78980acfd71063fa364a49d3141025bf42354ba.md	reports/forgot-password/webkit/data/9b6fd94dc44d640e74da94e2c5a9217a262e8e14.md
+A	reports/forgot-password/webkit/data/9cc562f6d99acbfb1d089c25f8cbbb0e31970d64.png
+R099	reports/forgot-password/webkit/data/f408d7f445d2524daaa2e5cba11be8c83785ff6f.md	reports/forgot-password/webkit/data/9df9fe0fb8d458f31a02fd27d13af112a1c678e1.md
+A	reports/forgot-password/webkit/data/a17f9277b1fcf9ede1ee7b5b881a06095f390126.png
+D	reports/forgot-password/webkit/data/a29b5c91af23c64e5e9103337895af716feac45e.png
+R099	reports/forgot-password/webkit/data/3528b31c1e95c2851b7b0d923df11c55e237e718.md	reports/forgot-password/webkit/data/a83e476cd0748a5f18a9221a44f5bd713ae8f944.md
+D	reports/forgot-password/webkit/data/b365c2a36dada0bf12e739d66af07e39f504c52d.zip
+R099	reports/forgot-password/chromium/data/2e30f6ec75d5a6051e58c94e7fb91b17f239fa7e.md	reports/forgot-password/webkit/data/b3976caf583c1ea1d8baa1699081239262912765.md
+D	reports/forgot-password/webkit/data/b9caa02e44bfc4cde2c4615fa828ea55cf30af20.png
+R099	reports/forgot-password/webkit/data/597c5500b95c144c68e7565192a80da9fed58837.md	reports/forgot-password/webkit/data/c1558be6ffd183fb5427e37477b6c259165b1013.md
+D	reports/forgot-password/webkit/data/c277049c588b41999d41c29c81c12306891203a1.png
+D	reports/forgot-password/webkit/data/c4375b7f7002f8e3d984fd4cf4bf1e8d9e56e4b1.zip
+R099	reports/forgot-password/firefox/data/343a646dae17852b3585b530de00252ceff4822d.md	reports/forgot-password/webkit/data/c7e479a32fa04b18b8bbdd5e40d10a83023b7743.md
+R099	reports/forgot-password/chromium/data/99d6568236ff1c13eb9b2ff00ff9efdea1d61ef9.md	reports/forgot-password/webkit/data/c801afa2b1a37cb2190bbcc1542f380672ed6dae.md
+D	reports/forgot-password/webkit/data/c86f13fcd8984af6dbdf0a555756ba362a8358fc.png
+D	reports/forgot-password/webkit/data/c881294e87b5893e22c96a31e8be8d3504a4d3fb.zip
+D	reports/forgot-password/webkit/data/cc41cec6440ac78ab9f0cdd580fa91e0f593d236.zip
+D	reports/forgot-password/webkit/data/ce8d0741d62699563300964fd8ea9a15df3bf1bd.zip
+D	reports/forgot-password/webkit/data/d1cb7c0f396e3c93bc930c782de353278e6354ec.png
+A	reports/forgot-password/webkit/data/d2ea42f5c256ae96e98fecf8d29a2fcbba6fcaad.png
+A	reports/forgot-password/webkit/data/d64760d009b235c4ef5d36155dd399c2106106f4.md
+D	reports/forgot-password/webkit/data/da0369d30c9b167f48cbda956025205d57c77aa5.png
+D	reports/forgot-password/webkit/data/ded34bc71af6670f6b037ce0c52393a518ba682e.png
+A	reports/forgot-password/webkit/data/e280fe4207f98b976315984db0a2aff8def889dd.png
+D	reports/forgot-password/webkit/data/e3f0d2dc54b65474901ad0343a2dabf392ecea12.zip
+R099	reports/forgot-password/webkit/data/e8f04d5092563bce487c9ea1e43b9ce34ca375b8.md	reports/forgot-password/webkit/data/e5242e9621dc307b9198419acd60b98ba8b9526d.md
+R051	reports/forgot-password/webkit/data/860e4963bda337c896b84b90d07c205cabd608bb.png	reports/forgot-password/webkit/data/e6b0c2611d08496d2ba22def0f73c7d544649a41.png
+D	reports/forgot-password/webkit/data/e6e2b7b99f35c22f8b638f287ed7e00081583aa9.zip
+R099	reports/forgot-password/webkit/data/fdd1ef9f27d59ea26bff186ec5e37008d17b24c0.md	reports/forgot-password/webkit/data/e9079ff23a80ab421a12979cfb8e653b3e01a6e3.md
+A	reports/forgot-password/webkit/data/e9802946bff8e83d4310298e499efeaf6e657aa4.png
+D	reports/forgot-password/webkit/data/e98918a5ffb65216ca39312c8359f4c96bb83ce3.png
+R099	reports/forgot-password/chromium/data/6868871b269f592a60ba26ca6eca472449cc0e3b.md	reports/forgot-password/webkit/data/ebb60f5e683443a9c8fe4aed776d88c20a6a4241.md
+D	reports/forgot-password/webkit/data/ec23d57404167c1cafb421d2bc51e1b27d569e62.png
+A	reports/forgot-password/webkit/data/ece283b248cc46a983ff50ee7dbe0c0c45eb631b.png
+A	reports/forgot-password/webkit/data/ee4f088ab5774b275b733eae3d32eb0a00ea06dd.png
+R099	reports/forgot-password/webkit/data/699492be253167531231f4487b97bfe68cfb31cb.md	reports/forgot-password/webkit/data/f51245f2eeb03528b871b61ca81d52185d8a97bd.md
+R098	reports/forgot-password/webkit/data/335b6fb9855bf46b4d94a50533987c05d7751cc7.md	reports/forgot-password/webkit/data/f56e67614bd107f8e364a07eff51e5a3b816aa22.md
+A	reports/forgot-password/webkit/data/f7b4f92cf91c1af0db68c5a5aa700685bd1efa63.png
+A	reports/forgot-password/webkit/data/f7bd3b490c179163442a16271ff9fa8824e3d191.png
+D	reports/forgot-password/webkit/data/fa6b965ddb7bc0b4faa0690423fca9d451cdf5b5.png
+M	reports/forgot-password/webkit/index.html
+M	reports/forgot-password/webkit/results.json
+A	reports/forgot-password/webkit/screenshots/BVA-01.png
+A	reports/forgot-password/webkit/screenshots/BVA-02.png
+A	reports/forgot-password/webkit/screenshots/BVA-03.png
+A	reports/forgot-password/webkit/screenshots/BVA-04.png
+A	reports/forgot-password/webkit/screenshots/BVA-05.png
+A	reports/forgot-password/webkit/screenshots/DT-01.png
+A	reports/forgot-password/webkit/screenshots/DT-02.png
+A	reports/forgot-password/webkit/screenshots/DT-03.png
+A	reports/forgot-password/webkit/screenshots/DT-04.png
+A	reports/forgot-password/webkit/screenshots/DT-05.png
+A	reports/forgot-password/webkit/screenshots/DT-06.png
+A	reports/forgot-password/webkit/screenshots/DT-11.png
+A	reports/forgot-password/webkit/screenshots/DT-12.png
+A	reports/forgot-password/webkit/screenshots/DT-13.png
+A	reports/forgot-password/webkit/screenshots/DT-14.png
+A	reports/forgot-password/webkit/screenshots/DT-15.png
+A	reports/forgot-password/webkit/screenshots/DT-20.png
+A	reports/forgot-password/webkit/screenshots/DT-21.png
+A	reports/forgot-password/webkit/screenshots/DT-22.png
+A	reports/forgot-password/webkit/screenshots/DT-23.png
+A	reports/forgot-password/webkit/screenshots/DT-24.png
+A	reports/forgot-password/webkit/screenshots/DT-25.png
+A	reports/forgot-password/webkit/screenshots/DT-26.png
+A	reports/forgot-password/webkit/screenshots/DT-28.png
+A	reports/forgot-password/webkit/screenshots/DT-29.png
+A	reports/forgot-password/webkit/screenshots/DT-30.png
+A	reports/forgot-password/webkit/screenshots/DT-35.png
+D	reports/forgot-password/webkit/trace/assets/codeMirrorModule-BEB2e8M3.js
+D	reports/forgot-password/webkit/trace/assets/defaultSettingsView-D-g2vrvf.js
+D	reports/forgot-password/webkit/trace/assets/urlMatch-L3liM589.js
+D	reports/forgot-password/webkit/trace/codeMirrorModule.-QdMvsKi.css
+D	reports/forgot-password/webkit/trace/codicon.DCmgc-ay.ttf
+D	reports/forgot-password/webkit/trace/defaultSettingsView.C8BeHuxd.css
+D	reports/forgot-password/webkit/trace/index.B_TqY17P.css
+D	reports/forgot-password/webkit/trace/index.html
+D	reports/forgot-password/webkit/trace/index.oNry3Hjv.js
+D	reports/forgot-password/webkit/trace/manifest.webmanifest
+D	reports/forgot-password/webkit/trace/playwright-logo.svg
+D	reports/forgot-password/webkit/trace/snapshot.B_Jk1wbt.js
+D	reports/forgot-password/webkit/trace/snapshot.html
+D	reports/forgot-password/webkit/trace/sw.bundle.js
+D	reports/forgot-password/webkit/trace/uiMode.CYwC_gH1.js
+D	reports/forgot-password/webkit/trace/uiMode.CyMfwkXJ.css
+D	reports/forgot-password/webkit/trace/uiMode.html
+D	reports/forgot-password/webkit/trace/xtermModule.kHJ-D0s7.css
+
+45800c0  2026-11-17 20:08:40 +0700  thhuon
+    chore (skills): keep failure screenshots and no traces in official runs
+
+M	.gitignore
+M	playwright.config.ts
+M	skills/test-automation/SKILL.md
+M	skills/test-automation/SKILL.vi.md
+M	skills/test-automation/scripts/run-browsers.mjs
+M	skills/test-automation/templates/playwright.config.ts
+
+6562188  2026-11-17 20:04:22 +0700  thhuon
+    docs (ai): add AI-02 row for the FR-08 Web spec
+
+M	AI-02_AI_Audit_Report.md
+
+264592b  2026-11-17 20:04:07 +0700  thhuon
+    docs (checkout): record the Web spec patterns and its first Chromium run
+
+M	features/checkout/automation_design.md
+
+e32f37b  2026-11-17 20:02:17 +0700  thhuon
+    test (checkout): generate the data-driven Web spec
+
+A	tests/checkout/web.spec.ts
+
+730e323  2026-11-17 20:01:58 +0700  thhuon
+    docs (ai): add AI-02 rows for the FR-03 fixes, official runs and run output folders
+
+M	AI-02_AI_Audit_Report.md
+
+569a507  2026-11-17 20:01:35 +0700  thhuon
+    test (checkout): add the empty-cart illustration to CartPage
+
+M	features/checkout/automation_design.md
+M	page-objects/CartPage.ts
+
+90a1e6c  2026-11-17 20:01:28 +0700  thhuon
+    test (checkout): keep the API part of DT-07 in api.json only
+
+M	data/checkout/web.json
+M	features/checkout/automation_design.md
+
+2f85373  2026-11-17 20:01:21 +0700  thhuon
+    docs: record FR-03 steps T4–T6 in the plan, report and README
+
+M	HW04_Report.md
+M	PLAN.md
+M	README.md
+
+4ec4bf5  2026-11-17 20:00:41 +0700  thhuon
+    test (forgot-password): record the official runs on Chromium, Firefox and WebKit
+
+M	features/forgot-password/automation_design.md
+A	reports/forgot-password/chromium/data/0172f32d7ac643684bbf135f3df4ab646552c773.zip
+A	reports/forgot-password/chromium/data/0484458a6912df8370a9b5c819004a1635562e3e.md
+A	reports/forgot-password/chromium/data/0699915c4f03d1b3b2f9eff1bb2d4c6749b595ee.md
+A	reports/forgot-password/chromium/data/14f3a1510056178636eaba8a0a496c8e896a8529.zip
+A	reports/forgot-password/chromium/data/16d9aee0f2b06a567543ef1d42e2db6b6e0d4d89.md
+A	reports/forgot-password/chromium/data/16daeb23a7f7d642d4e25a9fea22331d1eaa364b.png
+A	reports/forgot-password/chromium/data/1a4b3b332acd963a4f4b436ae0d098d4344d296f.zip
+A	reports/forgot-password/chromium/data/1e7587ef231fcb277cfc8ad8ae4bdeafa317a95a.zip
+A	reports/forgot-password/chromium/data/239821a1fc292a408a5e8c3bb563e043fb1fc770.png
+A	reports/forgot-password/chromium/data/2aee59aa20811db5c685fd388ec55900aab277b7.zip
+A	reports/forgot-password/chromium/data/2e30f6ec75d5a6051e58c94e7fb91b17f239fa7e.md
+A	reports/forgot-password/chromium/data/2f64a7e69e3c11344a090d732c7c0fc96d985bd8.zip
+A	reports/forgot-password/chromium/data/314db1e91dbaeb0b01668f513175bc6a5900d4c0.png
+A	reports/forgot-password/chromium/data/3195324a0f3614bb656ab8e63e249f1e66ae509b.png
+A	reports/forgot-password/chromium/data/39a1d275a15145d68f84da115953eed8d65b0197.png
+A	reports/forgot-password/chromium/data/39af849288d04d001f96abb6bcba8a23ce8d0e97.zip
+A	reports/forgot-password/chromium/data/3a8d0e848badf281423c31fc2d4874171a269b2d.md
+A	reports/forgot-password/chromium/data/42e7429d1126e9944ad1cd7d2826b6a01aa8ad52.png
+A	reports/forgot-password/chromium/data/439f277da5593556a95a7a8f6ff47d8d0e313016.md
+A	reports/forgot-password/chromium/data/45ae69bc04a0f731e3ee954df869f82004f11b97.png
+A	reports/forgot-password/chromium/data/45b291668dd683bd17dc15d4217b814b9acb4687.md
+A	reports/forgot-password/chromium/data/47a649fcf1ce5f06345cefbaf2d9feeba014fee1.png
+A	reports/forgot-password/chromium/data/4e6c329ca3477ca9611f0379baa924f08689ac60.zip
+A	reports/forgot-password/chromium/data/4f98306a6721f824fd6fd2e936e5a19fbe9a1c2a.md
+A	reports/forgot-password/chromium/data/52a69a5e4afb40c345d7e33ab706f7f12249962c.md
+A	reports/forgot-password/chromium/data/597bd03eee93ece7099b8b0437c7a701d29cb5c5.png
+A	reports/forgot-password/chromium/data/5b79a082da8ae4cb187f3f14ccf9375da76bcf40.zip
+A	reports/forgot-password/chromium/data/5c275b1bf3f6ff6eddee0736ef7f22fa8a25dc1a.md
+A	reports/forgot-password/chromium/data/5ce118b317c051e21e2f81d9256dc3efbb4de2c4.png
+A	reports/forgot-password/chromium/data/5d79689f6da2d847a5998cc4f84977d0848a19b2.png
+A	reports/forgot-password/chromium/data/5f49881f5ebdf662c9332e84b48434021e8bc905.zip
+A	reports/forgot-password/chromium/data/625555cfcdbdc5f43e62b35caa525b2f21b0deb3.zip
+A	reports/forgot-password/chromium/data/62e47b4b0b614e78f621793de8f4e6b6f8827827.md
+A	reports/forgot-password/chromium/data/661b5e24d46930ab8d68def36d56c0c4cf38e39c.md
+A	reports/forgot-password/chromium/data/6868871b269f592a60ba26ca6eca472449cc0e3b.md
+A	reports/forgot-password/chromium/data/6aed65921a2fd6f4c7bb129b94e1e1ccccb15adc.png
+A	reports/forgot-password/chromium/data/6dc33a7956ba8155f63d65b945cc260a8a5664b8.zip
+A	reports/forgot-password/chromium/data/70d8900284b9025802a54eaf8f8728b6200dbf60.png
+A	reports/forgot-password/chromium/data/74b2b143a439a96e185745e992d3bf21b9e84180.png
+A	reports/forgot-password/chromium/data/7804a38419cfa0b5f73988e0b6c496b3bed5e440.png
+A	reports/forgot-password/chromium/data/79ada4ceaddf43b4617d5bdf6b4fbcc9a4ea3ea4.png
+A	reports/forgot-password/chromium/data/7ac02c42fec71fac2462e881cf4716db031bdbe4.zip
+A	reports/forgot-password/chromium/data/8abeb76d0c8cfb0d6f525f5bd42ffa007e8b2f21.md
+A	reports/forgot-password/chromium/data/8df5b170a2f92739ddb90e5ea01b8819217d1946.md
+A	reports/forgot-password/chromium/data/98f0b0cbb629a3ac0baa3237bf04c3c1b4a3d688.zip
+A	reports/forgot-password/chromium/data/99d6568236ff1c13eb9b2ff00ff9efdea1d61ef9.md
+A	reports/forgot-password/chromium/data/9add7ec5d91449c28921b641f07b240ceb83337e.md
+A	reports/forgot-password/chromium/data/9b3511534229ed78ac8a8a9c7473d42d1dac3cdc.png
+A	reports/forgot-password/chromium/data/a133fc53b26e71a260190006c429105269c6da2a.zip
+A	reports/forgot-password/chromium/data/a1d5609ba50ddd1d5a39c2c51c6aa14f9b014b3a.zip
+A	reports/forgot-password/chromium/data/a1ffac09a4907d8a7dcee71296e2fc58a2e690e0.png
+A	reports/forgot-password/chromium/data/a24ba45279406435768a045309b3047c739fca1a.zip
+A	reports/forgot-password/chromium/data/a4319535ff86394219ba27818e59a6a04d76e14a.md
+A	reports/forgot-password/chromium/data/a4aaf14cb338a69320843206fe9cbd7d0379c3b8.md
+A	reports/forgot-password/chromium/data/a807470422a71484f93895cdefe37a684427dc64.png
+A	reports/forgot-password/chromium/data/afa2c464dda3471388eba8cd85d276e509096ee0.zip
+A	reports/forgot-password/chromium/data/b333e5cd9916048071c364c1cfd6dcfa8e7914c2.md
+A	reports/forgot-password/chromium/data/b519454f8dc70e53a7a0e0e30817fb9ad8121f7d.md
+A	reports/forgot-password/chromium/data/b63585170079fa68b472bfbfcc7a5c6154ede040.md
+A	reports/forgot-password/chromium/data/ba96e563850d1998e777d9c690f0a418493a8465.zip
+A	reports/forgot-password/chromium/data/bfce9b46f4b9f5b9d9365ffa83fc68bcddc45310.png
+A	reports/forgot-password/chromium/data/bfd41de613b6365e0fcb864b540b041354b4b959.png
+A	reports/forgot-password/chromium/data/c0e75e317efcb9ed696f0b2881f8eb14fff77bab.zip
+A	reports/forgot-password/chromium/data/c3a712e8cfc9fe0588e20e848093f8db024e838f.md
+A	reports/forgot-password/chromium/data/c8372f647bc4d8714cca26748bbcc8143812d966.png
+A	reports/forgot-password/chromium/data/c96cb6f7262ef49fd1dfb03df3869e07945ede0c.md
+A	reports/forgot-password/chromium/data/d1976325a439be285218d636cbb8bf6c7e64b60f.zip
+A	reports/forgot-password/chromium/data/d797fc66233b45e1abafd950d752417dad5f93e7.zip
+A	reports/forgot-password/chromium/data/da4d608b5ae12bfa394fe1e2889db63faadef9a3.md
+A	reports/forgot-password/chromium/data/dba3b9f4911dcbd5ca412e46776cc7f9cbb9edb5.png
+A	reports/forgot-password/chromium/data/de9f1d21aba731c60c7ebb8cd25ad40ebfa45730.zip
+A	reports/forgot-password/chromium/data/e225c66b9b85d775456e97a928d01986a7c8cf69.zip
+A	reports/forgot-password/chromium/data/e246b1a5b61762c002c8445b9cd909d0389531e2.zip
+A	reports/forgot-password/chromium/data/e43707fd4e6d8c6e56c9e56ad7034895a8d29df9.zip
+A	reports/forgot-password/chromium/data/e96194d3c12861f404f7897f05e54930465635fa.zip
+A	reports/forgot-password/chromium/data/e9f24b8181e40215bfe355d00990906cfad7120d.png
+A	reports/forgot-password/chromium/data/ed311f95acae9a51367afd877a008ba0be2196a9.md
+A	reports/forgot-password/chromium/data/f39ba147de43cbef087b67b9bd44a1d796c779df.md
+A	reports/forgot-password/chromium/data/f713fdd67d96d5878c83a510e330c3435c5a898d.zip
+A	reports/forgot-password/chromium/data/f7c50dd6440615e5b438ef64f96f47658e488a30.png
+A	reports/forgot-password/chromium/data/f92db19ef8a601fefbb5ff54c611378b0dcbc600.png
+A	reports/forgot-password/chromium/data/fcb8c7c2ba01c99acc1bb94ef9d0845d21f84191.md
+A	reports/forgot-password/chromium/data/fda3de91d951cb90aa36dc79e5e91b6c08ccc540.png
+A	reports/forgot-password/chromium/index.html
+A	reports/forgot-password/chromium/results.json
+A	reports/forgot-password/chromium/trace/assets/codeMirrorModule-BEB2e8M3.js
+A	reports/forgot-password/chromium/trace/assets/defaultSettingsView-D-g2vrvf.js
+A	reports/forgot-password/chromium/trace/assets/urlMatch-L3liM589.js
+A	reports/forgot-password/chromium/trace/codeMirrorModule.-QdMvsKi.css
+A	reports/forgot-password/chromium/trace/codicon.DCmgc-ay.ttf
+A	reports/forgot-password/chromium/trace/defaultSettingsView.C8BeHuxd.css
+A	reports/forgot-password/chromium/trace/index.B_TqY17P.css
+A	reports/forgot-password/chromium/trace/index.html
+A	reports/forgot-password/chromium/trace/index.oNry3Hjv.js
+A	reports/forgot-password/chromium/trace/manifest.webmanifest
+A	reports/forgot-password/chromium/trace/playwright-logo.svg
+A	reports/forgot-password/chromium/trace/snapshot.B_Jk1wbt.js
+A	reports/forgot-password/chromium/trace/snapshot.html
+A	reports/forgot-password/chromium/trace/sw.bundle.js
+A	reports/forgot-password/chromium/trace/uiMode.CYwC_gH1.js
+A	reports/forgot-password/chromium/trace/uiMode.CyMfwkXJ.css
+A	reports/forgot-password/chromium/trace/uiMode.html
+A	reports/forgot-password/chromium/trace/xtermModule.kHJ-D0s7.css
+A	reports/forgot-password/firefox/data/007e0eb9f40cb15a9aa0dedbb5220cf4d5ad0b11.png
+A	reports/forgot-password/firefox/data/030ec3268b6af9065ef827c0b9464129dd6708a5.png
+A	reports/forgot-password/firefox/data/0486ea8782ac04820f98a3c20f1274fa4809fbbd.zip
+A	reports/forgot-password/firefox/data/116bfa0686db3701fa9abffe75b1ddc1fc96401a.zip
+A	reports/forgot-password/firefox/data/11a72391d569019781ec3756acef1a3163bc6120.png
+A	reports/forgot-password/firefox/data/11c8d92a8e89b493a0ff1e8b1660ec8152b58ea9.md
+A	reports/forgot-password/firefox/data/16821066d6e9bb02f2c5e9fe69f0a50aaf50e261.zip
+A	reports/forgot-password/firefox/data/169b83a20c6240acaab3e5f0abb90861593b522e.png
+A	reports/forgot-password/firefox/data/1add4e0d82ce11e662f637763ac74e625b44cfda.png
+A	reports/forgot-password/firefox/data/1efe4fca58dcd7deed92877cd019a09b4e149c9f.png
+A	reports/forgot-password/firefox/data/20b560e8c296dadf5d8656263d1b061dcca76edc.zip
+A	reports/forgot-password/firefox/data/21868b3a1bdab829dc60d057fd03f46d67d92804.md
+A	reports/forgot-password/firefox/data/21f0f5b30dd3ac4a69dc3fad8344f63fda75309d.md
+A	reports/forgot-password/firefox/data/302f1e17cb8b2229e590c43bd5f5c042d49484cf.md
+A	reports/forgot-password/firefox/data/309dc4961250b0e80e8ad9da979d0cf0e0c7c6e5.png
+A	reports/forgot-password/firefox/data/343a646dae17852b3585b530de00252ceff4822d.md
+A	reports/forgot-password/firefox/data/37475f22986c00229f97aff4fe686947a850cc23.zip
+A	reports/forgot-password/firefox/data/39b579f3535275282ad2f1ccf6514f20cf91f501.md
+A	reports/forgot-password/firefox/data/3b8b67ae4dab072992a00f2f31b0ae0199ebddcb.png
+A	reports/forgot-password/firefox/data/3c263e26095e026c7ce6ef4050b576b08b402d23.zip
+A	reports/forgot-password/firefox/data/3ec7f32d37049184d35de64cd1c2d70c66b0da42.zip
+A	reports/forgot-password/firefox/data/40ea4eee3ea13bbc026dd460491a0e90b82d3f68.zip
+A	reports/forgot-password/firefox/data/439f277da5593556a95a7a8f6ff47d8d0e313016.md
+A	reports/forgot-password/firefox/data/4721db65b09330ff9e08de374aa0a9709e2cad63.zip
+A	reports/forgot-password/firefox/data/474ac26fda47dec5a256f048948a0838bc1b82d0.md
+A	reports/forgot-password/firefox/data/47e3a1886294f43db8e1e21568cf27a9c77fe681.md
+A	reports/forgot-password/firefox/data/49136f263bd2ea4ffd8dafc3c46dfdcd76c88912.md
+A	reports/forgot-password/firefox/data/4b4b1cd25634236024b43b6d10c53ed0206a379f.png
+A	reports/forgot-password/firefox/data/5152b758f100c6d787962802c8c5e43cf9f2476b.png
+A	reports/forgot-password/firefox/data/53a6d0f3ea289f576b72586f99a8c73c61f8f85d.zip
+A	reports/forgot-password/firefox/data/59280b4fbca009b088073f37165f207b6f02f093.zip
+A	reports/forgot-password/firefox/data/5a8e3dce95b444370f00dc9c2e57982964929107.md
+A	reports/forgot-password/firefox/data/5cff9e6af98c795cdc81d5bdee3bce7b63cb1ecf.md
+A	reports/forgot-password/firefox/data/5d89e6d54e010350a6e80e099881eb21759a08f2.md
+A	reports/forgot-password/firefox/data/5eeb483fd9249206e5f640dcfe7a2a705d954237.zip
+A	reports/forgot-password/firefox/data/6012427d2719876925ff7b03b1c283ff449d2211.png
+A	reports/forgot-password/firefox/data/707c882900658ba2dac4bd20d7bd4e1ce67a08ac.md
+A	reports/forgot-password/firefox/data/73c55ab37af681452896d9b017a1700c13d70ad4.md
+A	reports/forgot-password/firefox/data/764b6055a182d7116af10ba642ccf1a057d1debf.md
+A	reports/forgot-password/firefox/data/7a8e78a46ecf667e4515c0be0df6c0b1488ef9a0.zip
+A	reports/forgot-password/firefox/data/7afda5ad64c25df40deb36ff1bfbc3474dccad2c.zip
+A	reports/forgot-password/firefox/data/7d9a3e6cc3e2d4908577c93fb7e4e14c7a371338.md
+A	reports/forgot-password/firefox/data/7dac6ad00ac6ae280f37b0830a59fb0fb43ed7e4.zip
+A	reports/forgot-password/firefox/data/82182c46add882c9a8ba2e4859827a9d65dfc846.png
+A	reports/forgot-password/firefox/data/851ecacb825a05377dec1925479c40c64c5d8a5f.zip
+A	reports/forgot-password/firefox/data/89cd373e6806b1b91551be1dd342bbe74c9356f6.png
+A	reports/forgot-password/firefox/data/8abeb76d0c8cfb0d6f525f5bd42ffa007e8b2f21.md
+A	reports/forgot-password/firefox/data/8add7a3858c399b1a97bf172835c5e2f15eb01ed.png
+A	reports/forgot-password/firefox/data/921a97580884beb32764ba5fd5a4138cdb9f6493.png
+A	reports/forgot-password/firefox/data/968fd9f24407b62c98792ef7679cdc686e95e312.png
+A	reports/forgot-password/firefox/data/9a926e05ac374400f555bc31dbfa68a41e1b598a.png
+A	reports/forgot-password/firefox/data/9e8b2cf720214dff18c55dcfab07fe7be023a1ff.zip
+A	reports/forgot-password/firefox/data/9fc769b662844aea96984c921b4958a3d32c12c7.zip
+A	reports/forgot-password/firefox/data/a3657acbb7ae6973cc223a53c2014c38917e0642.md
+A	reports/forgot-password/firefox/data/a5eb4698023de543e174806e23e3c6bd8b6e6c0c.md
+A	reports/forgot-password/firefox/data/a81179ea70fde7487a0bd9bb5bb592a9cacfd07c.md
+A	reports/forgot-password/firefox/data/a87c87d94fce74077bfad0f47e35175d0e3a0bd6.zip
+A	reports/forgot-password/firefox/data/a94258753648455e39d11fdb3aa8e9b58a03aa6d.md
+A	reports/forgot-password/firefox/data/a949e2fda2572aceab082be2e0a3d793337256e1.zip
+A	reports/forgot-password/firefox/data/ab65851457080490e21132afdfb8378c1a7b62ca.png
+A	reports/forgot-password/firefox/data/ad6c36f0ab149e93d7f749cc5badf9542d29207f.png
+A	reports/forgot-password/firefox/data/b25eef22437471e65642578e56b45504427faa31.png
+A	reports/forgot-password/firefox/data/c0256bad0b4d3bbf8b39a66fa89e75e97c227eb4.png
+A	reports/forgot-password/firefox/data/c22b9d1a1caacf9d9f25f9aebdef7974bacf87bf.png
+A	reports/forgot-password/firefox/data/c22c01184c711d57b619790ab13cf5c10efe8415.zip
+A	reports/forgot-password/firefox/data/c55ed8fa09038e5c3ece078b94ec898a6fb8df2d.md
+A	reports/forgot-password/firefox/data/c954ab7f761d633fcf608833a2a13a7e0e95de55.md
+A	reports/forgot-password/firefox/data/cd6877fc43cccef9e796f7ea4c336f50d7ff0eae.zip
+A	reports/forgot-password/firefox/data/d140978e6dafa7c3292df9736944aee3f6a2c8ec.md
+A	reports/forgot-password/firefox/data/d2364b4cdb7622120c82802a20530568babd944a.png
+A	reports/forgot-password/firefox/data/d2fab8e1d2b8db594062a54cfafdf211b019a5bc.png
+A	reports/forgot-password/firefox/data/d98113d127bc9566f138da84a378c2212ba5ae19.png
+A	reports/forgot-password/firefox/data/da4abc1a4d9cbcf591671543beaa92449554f8cf.zip
+A	reports/forgot-password/firefox/data/da4d608b5ae12bfa394fe1e2889db63faadef9a3.md
+A	reports/forgot-password/firefox/data/de6a5afb79f73537845e3e0fe3d8886308e710b3.zip
+A	reports/forgot-password/firefox/data/dea973b8142d86b86b89225ffe88bcccfdaf6369.zip
+A	reports/forgot-password/firefox/data/e5a2f34bd33e20b38958f710c5b5d75a90b27d2a.md
+A	reports/forgot-password/firefox/data/eaa0ab0f4d8b36eb0f0de53729e4a995aa89ada8.png
+A	reports/forgot-password/firefox/data/f71e151f40ee55e66d2f20ead483acff2c3d2e5b.zip
+A	reports/forgot-password/firefox/data/f9206490ef95dcea429dff6981b4768b8eb1a0be.png
+A	reports/forgot-password/firefox/data/fdbf6a8cc60ead12a787afa20cb70eaa67d81c28.md
+A	reports/forgot-password/firefox/data/fe155747c5de9bd1149ac1189675b6aa3d42a86b.zip
+A	reports/forgot-password/firefox/data/fe77ef4b5d319418c17f42deeae75263c44cc054.zip
+A	reports/forgot-password/firefox/index.html
+A	reports/forgot-password/firefox/results.json
+A	reports/forgot-password/firefox/trace/assets/codeMirrorModule-BEB2e8M3.js
+A	reports/forgot-password/firefox/trace/assets/defaultSettingsView-D-g2vrvf.js
+A	reports/forgot-password/firefox/trace/assets/urlMatch-L3liM589.js
+A	reports/forgot-password/firefox/trace/codeMirrorModule.-QdMvsKi.css
+A	reports/forgot-password/firefox/trace/codicon.DCmgc-ay.ttf
+A	reports/forgot-password/firefox/trace/defaultSettingsView.C8BeHuxd.css
+A	reports/forgot-password/firefox/trace/index.B_TqY17P.css
+A	reports/forgot-password/firefox/trace/index.html
+A	reports/forgot-password/firefox/trace/index.oNry3Hjv.js
+A	reports/forgot-password/firefox/trace/manifest.webmanifest
+A	reports/forgot-password/firefox/trace/playwright-logo.svg
+A	reports/forgot-password/firefox/trace/snapshot.B_Jk1wbt.js
+A	reports/forgot-password/firefox/trace/snapshot.html
+A	reports/forgot-password/firefox/trace/sw.bundle.js
+A	reports/forgot-password/firefox/trace/uiMode.CYwC_gH1.js
+A	reports/forgot-password/firefox/trace/uiMode.CyMfwkXJ.css
+A	reports/forgot-password/firefox/trace/uiMode.html
+A	reports/forgot-password/firefox/trace/xtermModule.kHJ-D0s7.css
+A	reports/forgot-password/webkit/data/016d42eccb699fe5ac6a842b2ec89ba477648747.zip
+A	reports/forgot-password/webkit/data/05f603ac633a04674ea7df5113c2c2717f260fd5.zip
+A	reports/forgot-password/webkit/data/085b2fa4be71200150e512ae2e2097b83f05b31d.md
+A	reports/forgot-password/webkit/data/0a8817bbfeaddea02cc4ef1f8dd517f3ddb4af69.zip
+A	reports/forgot-password/webkit/data/0e926b50dae89e166098ac70f6e48f1bce98577f.zip
+A	reports/forgot-password/webkit/data/13c6b78b0a45180102728e32d8459e6226b4d284.png
+A	reports/forgot-password/webkit/data/1a7487a5eed710ca1319b6b80eddee89a8404fbc.png
+A	reports/forgot-password/webkit/data/1a809e71d612fe9a5bb53eefe27ab915968e8412.zip
+A	reports/forgot-password/webkit/data/1aa4f668b33d7ea8d999982191d4298b29e371dc.zip
+A	reports/forgot-password/webkit/data/1bc13315ad1ca65ed1df3ef271d7a37a552799fe.md
+A	reports/forgot-password/webkit/data/21a0fc7f64f9d96895793001f9915c4b090fcfc3.zip
+A	reports/forgot-password/webkit/data/221925eab440fbfb454b368f174a6af031f526fb.png
+A	reports/forgot-password/webkit/data/26f2d1e3577c97b24625ccbf6a0524c7923db270.png
+A	reports/forgot-password/webkit/data/2879570d3979645b164d65a5392e9b73a5470926.zip
+A	reports/forgot-password/webkit/data/31428120bf450b4e0c7569e7c49f3566a0796095.zip
+A	reports/forgot-password/webkit/data/335b6fb9855bf46b4d94a50533987c05d7751cc7.md
+A	reports/forgot-password/webkit/data/3528b31c1e95c2851b7b0d923df11c55e237e718.md
+A	reports/forgot-password/webkit/data/38f430c1a53ee469803152f680b72a8cf9d3b69d.zip
+A	reports/forgot-password/webkit/data/3b8f4ddff597ad2e5bfb5aeb34cadf7ebcdfe94e.md
+A	reports/forgot-password/webkit/data/40e7df4871556da43ada2c3299481f67684e0678.png
+A	reports/forgot-password/webkit/data/439f277da5593556a95a7a8f6ff47d8d0e313016.md
+A	reports/forgot-password/webkit/data/4757a28fef9c4916add66694c795030825ef929d.png
+A	reports/forgot-password/webkit/data/4e2553879a7be7cfc1963f40b45a64f587b0d60e.png
+A	reports/forgot-password/webkit/data/4e8caa8b0ee94fb8b22fe9df1a138aeffe0ee426.md
+A	reports/forgot-password/webkit/data/505d9789fe8057a3e5fbfa58036ae0d8b87997a7.zip
+A	reports/forgot-password/webkit/data/50c4060f1ed8cb44abdcb94eaf30f69f0665e112.zip
+A	reports/forgot-password/webkit/data/53d9d29c1331392d24589bc44ba784fd75b13a3b.png
+A	reports/forgot-password/webkit/data/55af79cf78d160de2cfa304e751c2625e42904f7.png
+A	reports/forgot-password/webkit/data/560dae58f1ebcdd1c2aff2c468c98af642f0f4c8.zip
+A	reports/forgot-password/webkit/data/597c5500b95c144c68e7565192a80da9fed58837.md
+A	reports/forgot-password/webkit/data/651c7a90ecfc4b8633148f27424c0314b3fbc7f2.md
+A	reports/forgot-password/webkit/data/67f7a9ef7910ca378aac9aaf266df908ed04720b.md
+A	reports/forgot-password/webkit/data/6814a7039066226b79d14fdcaaa836723911a959.png
+A	reports/forgot-password/webkit/data/699492be253167531231f4487b97bfe68cfb31cb.md
+A	reports/forgot-password/webkit/data/69b8822093e57f6164bc588599624d4a33ef329f.png
+A	reports/forgot-password/webkit/data/6d5d98742254513ba496148a3c324589ac698347.zip
+A	reports/forgot-password/webkit/data/6e41ccefebfebb682feaf8cfe0dd409ea9d2d8de.zip
+A	reports/forgot-password/webkit/data/71dd30f760c37307c62b6f05d320497edd96eb07.png
+A	reports/forgot-password/webkit/data/780b6a5bd25c36da2830268c5f79f55fc0be0401.md
+A	reports/forgot-password/webkit/data/82e06d4da13335cead8412762033dc2eb7b3b7a0.md
+A	reports/forgot-password/webkit/data/8472ba458c994dffad53d2abb80640b3b8235375.png
+A	reports/forgot-password/webkit/data/860e4963bda337c896b84b90d07c205cabd608bb.png
+A	reports/forgot-password/webkit/data/889e4fdb0c713b08559606cf9c2c61eb86bc5774.zip
+A	reports/forgot-password/webkit/data/899a8a15e520fddaaa03b8c45c55d3c5daa2a204.zip
+A	reports/forgot-password/webkit/data/89c37a0c2b58604bbcb415d28f0bd134a6788b50.zip
+A	reports/forgot-password/webkit/data/8abeb76d0c8cfb0d6f525f5bd42ffa007e8b2f21.md
+A	reports/forgot-password/webkit/data/8e2c90b6f2c6efb008246b7b3c6b96ff46583ced.zip
+A	reports/forgot-password/webkit/data/8fddc2fd24d56b687ff0794a0fee5ec910939ffb.zip
+A	reports/forgot-password/webkit/data/919f455a33c8d19462715b27685ac6fb5a0d74c8.png
+A	reports/forgot-password/webkit/data/935e366a9d35fef200290ecb6634b2770cca2666.png
+A	reports/forgot-password/webkit/data/991ee9b2ebb359a5d5a3300841e1a86b3c604207.md
+A	reports/forgot-password/webkit/data/99c9901ac40a97f94ab702044957b361966b41bd.zip
+A	reports/forgot-password/webkit/data/a29b5c91af23c64e5e9103337895af716feac45e.png
+A	reports/forgot-password/webkit/data/aed749197e55c3b7d50324bcc883900c2e3eefad.md
+A	reports/forgot-password/webkit/data/b365c2a36dada0bf12e739d66af07e39f504c52d.zip
+A	reports/forgot-password/webkit/data/b45f30169f760e45c024264205ad73be24c736e9.md
+A	reports/forgot-password/webkit/data/b9caa02e44bfc4cde2c4615fa828ea55cf30af20.png
+A	reports/forgot-password/webkit/data/c277049c588b41999d41c29c81c12306891203a1.png
+A	reports/forgot-password/webkit/data/c4375b7f7002f8e3d984fd4cf4bf1e8d9e56e4b1.zip
+A	reports/forgot-password/webkit/data/c86f13fcd8984af6dbdf0a555756ba362a8358fc.png
+A	reports/forgot-password/webkit/data/c881294e87b5893e22c96a31e8be8d3504a4d3fb.zip
+A	reports/forgot-password/webkit/data/ca4b7963da8d02321cf189b627d925e8a9b06484.md
+A	reports/forgot-password/webkit/data/cc41cec6440ac78ab9f0cdd580fa91e0f593d236.zip
+A	reports/forgot-password/webkit/data/ce8d0741d62699563300964fd8ea9a15df3bf1bd.zip
+A	reports/forgot-password/webkit/data/d1cb7c0f396e3c93bc930c782de353278e6354ec.png
+A	reports/forgot-password/webkit/data/d2a783a033626870ae626b5fc03d5761243ea43d.md
+A	reports/forgot-password/webkit/data/da0369d30c9b167f48cbda956025205d57c77aa5.png
+A	reports/forgot-password/webkit/data/da4d608b5ae12bfa394fe1e2889db63faadef9a3.md
+A	reports/forgot-password/webkit/data/dca3dd9b9bc4fdcc1fd527732093f98c42aec428.md
+A	reports/forgot-password/webkit/data/dcaa1a6ff452306a9a8ef0ac883ae3ce1bf6b651.png
+A	reports/forgot-password/webkit/data/ded34bc71af6670f6b037ce0c52393a518ba682e.png
+A	reports/forgot-password/webkit/data/e3f0d2dc54b65474901ad0343a2dabf392ecea12.zip
+A	reports/forgot-password/webkit/data/e6e2b7b99f35c22f8b638f287ed7e00081583aa9.zip
+A	reports/forgot-password/webkit/data/e78980acfd71063fa364a49d3141025bf42354ba.md
+A	reports/forgot-password/webkit/data/e7cb4fb20127785e1e88962ab4435b7988eddfb3.md
+A	reports/forgot-password/webkit/data/e8f04d5092563bce487c9ea1e43b9ce34ca375b8.md
+A	reports/forgot-password/webkit/data/e98918a5ffb65216ca39312c8359f4c96bb83ce3.png
+A	reports/forgot-password/webkit/data/ec23d57404167c1cafb421d2bc51e1b27d569e62.png
+A	reports/forgot-password/webkit/data/f27705a6a270e355816129f9e33b80e10b5fd77c.md
+A	reports/forgot-password/webkit/data/f408d7f445d2524daaa2e5cba11be8c83785ff6f.md
+A	reports/forgot-password/webkit/data/fa6b965ddb7bc0b4faa0690423fca9d451cdf5b5.png
+A	reports/forgot-password/webkit/data/fda54d04577f1349fd38d4a61434963e4321d224.md
+A	reports/forgot-password/webkit/data/fdd1ef9f27d59ea26bff186ec5e37008d17b24c0.md
+A	reports/forgot-password/webkit/index.html
+A	reports/forgot-password/webkit/results.json
+A	reports/forgot-password/webkit/trace/assets/codeMirrorModule-BEB2e8M3.js
+A	reports/forgot-password/webkit/trace/assets/defaultSettingsView-D-g2vrvf.js
+A	reports/forgot-password/webkit/trace/assets/urlMatch-L3liM589.js
+A	reports/forgot-password/webkit/trace/codeMirrorModule.-QdMvsKi.css
+A	reports/forgot-password/webkit/trace/codicon.DCmgc-ay.ttf
+A	reports/forgot-password/webkit/trace/defaultSettingsView.C8BeHuxd.css
+A	reports/forgot-password/webkit/trace/index.B_TqY17P.css
+A	reports/forgot-password/webkit/trace/index.html
+A	reports/forgot-password/webkit/trace/index.oNry3Hjv.js
+A	reports/forgot-password/webkit/trace/manifest.webmanifest
+A	reports/forgot-password/webkit/trace/playwright-logo.svg
+A	reports/forgot-password/webkit/trace/snapshot.B_Jk1wbt.js
+A	reports/forgot-password/webkit/trace/snapshot.html
+A	reports/forgot-password/webkit/trace/sw.bundle.js
+A	reports/forgot-password/webkit/trace/uiMode.CYwC_gH1.js
+A	reports/forgot-password/webkit/trace/uiMode.CyMfwkXJ.css
+A	reports/forgot-password/webkit/trace/uiMode.html
+A	reports/forgot-password/webkit/trace/xtermModule.kHJ-D0s7.css
+
+878527b  2026-11-17 20:00:29 +0700  thhuon
+    test (checkout): keep the empty-cart image check of DT-07
+
+M	features/checkout/automation_design.md
+
+3be7fe9  2026-11-17 20:00:18 +0700  thhuon
+    docs (ai): renumber this session's AI-02 rows and link them to Prompt016–Prompt019
+
+M	AI-02_AI_Audit_Report.md
+M	features/checkout/automation_design.md
+M	prompt_log.md
+
+eed1682  2026-11-17 19:59:44 +0700  thhuon
+    docs (ai): log Prompt016–Prompt019
+
+M	prompt_log.md
+
+eeaaff1  2026-11-17 19:56:47 +0700  thhuon
+    docs (ai): add AI-02 rows for issue #116 and the FR-08 test data
+
+M	AI-02_AI_Audit_Report.md
+
+65d47f5  2026-11-17 19:56:17 +0700  thhuon
+    test (checkout): move test data to data/checkout/
+
+A	data/checkout/api.json
+A	data/checkout/web.json
+M	features/checkout/automation_design.md
+
+7583307  2026-11-17 19:54:26 +0700  thhuon
+    docs (bugs): link BUG-01 to issue #116
+
+M	bugs/BUG_REPORT.md
+M	features/checkout/automation_design.md
+
+70f6e82  2026-11-17 19:53:58 +0700  thhuon
+    docs (checkout): use the student's own codegen conclusion
+
+M	features/checkout/automation_design.md
+
+0982d8f  2026-11-17 19:49:48 +0700  thhuon
+    docs (ai): add AI-02 rows for the FR-08 page objects and BUG-01
+
+M	AI-02_AI_Audit_Report.md
+
+4393e8d  2026-11-17 19:49:32 +0700  thhuon
+    docs (bugs): report BUG-01 for DT-07 (new)
+
+M	bugs/BUG_REPORT.md
+A	bugs/screenshots/DT-07_empty-checkout-success_chromium.png
+A	bugs/screenshots/DT-07_empty-checkout_chromium.png
+M	features/checkout/automation_design.md
+
+69b2dcc  2026-11-17 19:48:48 +0700  thhuon
+    test (checkout): add page objects for the home, product, cart and checkout screens
+
+M	api/EshopApi.ts
+M	features/checkout/automation_design.md
+A	page-objects/CartPage.ts
+A	page-objects/CheckoutPage.ts
+A	page-objects/Dialogs.ts
+A	page-objects/HomePage.ts
+M	page-objects/LoginPage.ts
+A	page-objects/ProductPage.ts
+A	page-objects/SiteHeader.ts
+
+d5bd0e0  2026-11-17 19:47:05 +0700  thhuon
+    chore (skills): give every multi-browser run its own output folder
+
+M	.gitignore
+M	automation.config.json
+M	skills/test-automation/SKILL.md
+M	skills/test-automation/SKILL.vi.md
+M	skills/test-automation/scripts/run-browsers.mjs
+M	skills/test-automation/templates/automation.config.json
+
+581a82b  2026-11-17 19:46:16 +0700  thhuon
+    docs (checkout): record the codegen run and the add-to-cart decision
+
+M	features/checkout/automation_design.md
+
+e74aab0  2026-11-17 19:46:11 +0700  thhuon
+    test (forgot-password): record the review fixes and the Chromium rerun
+
+M	features/forgot-password/automation_design.md
+
+7a73bee  2026-11-17 19:46:09 +0700  thhuon
+    test (checkout): automate DT-07 in full and run BVA-01 to BVA-04 on the Web
+
+M	features/checkout/automation_design.md
+
+63f8508  2026-11-17 19:42:11 +0700  thhuon
+    test (forgot-password): name the missing FR-03 element before acting on it
+
+M	tests/forgot-password/web.spec.ts
+
+e2a210a  2026-11-17 19:41:38 +0700  thhuon
+    test (forgot-password): accept any error text above the submit button (FR-22)
+
+M	page-objects/ForgotPasswordPage.ts
+M	tests/forgot-password/web.spec.ts
+
+eb9d9d8  2026-11-17 19:41:06 +0700  thhuon
+    test (forgot-password): check that an accepted reset uses up the OTP
+
+M	data/forgot-password/web.json
+M	tests/forgot-password/web.spec.ts
+
+dde7e39  2026-11-17 19:37:17 +0700  thhuon
+    docs (ai): add AI-02 rows for the FR-08 T1 decisions and locators
+
+M	AI-02_AI_Audit_Report.md
+
+16da9ad  2026-11-17 19:37:02 +0700  thhuon
+    test (checkout): record the FR-08 locators and the codegen check
+
+M	features/checkout/automation_design.md
+
+7493067  2026-11-17 19:36:48 +0700  thhuon
+    docs (ai): log Prompt013–Prompt015
+
+M	AI-02_AI_Audit_Report.md
+M	features/forgot-password/automation_design.md
+M	prompt_log.md
+
+6e5d64e  2026-11-17 19:36:27 +0700  thhuon
+    docs (ai): add AI-02 row for the FR-03 API spec and first Chromium run
+
+M	AI-02_AI_Audit_Report.md
+
+63e6e8c  2026-11-17 19:35:57 +0700  thhuon
+    test (checkout): try both guest paths in DT-03
+
+M	features/checkout/automation_design.md
+
+522ec78  2026-11-17 19:35:54 +0700  thhuon
+    test (forgot-password): record the first Chromium run and the review findings
+
+M	features/forgot-password/automation_design.md
+
+b67ada7  2026-11-17 19:22:26 +0700  thhuon
+    test (forgot-password): generate the data-driven API spec
+
+M	features/forgot-password/automation_design.md
+A	tests/forgot-password/api.spec.ts
+
+d575517  2026-11-17 19:17:16 +0700  thhuon
+    docs (ai): add AI-02 row for the FR-03 Web spec
+
+M	AI-02_AI_Audit_Report.md
+
+d438b99  2026-11-17 19:16:45 +0700  thhuon
+    test (forgot-password): generate the data-driven Web spec
+
+M	features/forgot-password/automation_design.md
+M	page-objects/ForgotPasswordPage.ts
+A	tests/forgot-password/web.spec.ts
+
+d6cb5c8  2026-11-17 19:16:39 +0700  thhuon
+    docs (ai): add AI-02 row for the FR-08 test case selection
+
+M	AI-02_AI_Audit_Report.md
+
+77671ac  2026-11-17 19:16:32 +0700  thhuon
+    test (checkout): select FR-08 test cases to automate
+
+M	features/checkout/automation_design.md
+
+4433532  2026-11-17 19:14:40 +0700  thhuon
+    test (forgot-password): fill the confirm field only where the test case checks it
+
+M	data/forgot-password/web.json
+M	features/forgot-password/automation_design.md
+
+9f0b60e  2026-11-17 19:05:00 +0700  thhuon
+    docs (ai): log Prompt011–Prompt013 and add AI-02 rows for the T2 decision and T3 confirmations
+
+M	AI-02_AI_Audit_Report.md
+M	features/forgot-password/automation_design.md
+M	prompt_log.md
+
+0528003  2026-11-17 19:04:24 +0700  thhuon
+    docs: record FR-03 steps T1–T3 in the plan and report
+
+M	HW04_Report.md
+M	PLAN.md
+
+72f9719  2026-11-17 19:04:02 +0700  thhuon
+    test (forgot-password): confirm the login page and API status expectations
+
+M	data/forgot-password/api.json
+M	data/forgot-password/web.json
+M	features/forgot-password/automation_design.md
+
+11a7b90  2026-11-17 19:03:32 +0700  thhuon
+    test (forgot-password): find unnamed fields by label prefix only
+
+M	features/forgot-password/automation_design.md
+M	page-objects/ForgotPasswordPage.ts
+
+b24d870  2026-11-17 18:56:37 +0700  thhuon
+    docs (ai): add AI-02 row for the FR-03 test data
+
+M	AI-02_AI_Audit_Report.md
+
+97243ab  2026-11-17 18:56:16 +0700  thhuon
+    docs (forgot-password): mark the account change of the test data as proposed
+
+M	features/forgot-password/automation_design.md
+
+9d9e21c  2026-11-17 18:56:07 +0700  thhuon
+    test (forgot-password): move test data to data/forgot-password/
+
+A	data/forgot-password/api.json
+A	data/forgot-password/web.json
+M	features/forgot-password/automation_design.md
+
+2bd1e44  2026-11-17 18:46:38 +0700  thhuon
+    docs (ai): log Prompt010–Prompt011 and record the AI-02 review
+
+M	AI-02_AI_Audit_Report.md
+M	features/forgot-password/automation_design.md
+M	prompt_log.md
+
+7ab081f  2026-11-17 18:45:37 +0700  thhuon
+    docs (forgot-password): record the decision on the unnamed fields
+
+M	features/forgot-password/automation_design.md
+
+2ce80ad  2026-11-17 18:45:18 +0700  thhuon
+    docs (forgot-password): record the codegen check of the locators
+
+M	features/forgot-password/automation_design.md
+
+a3b60d7  2026-11-17 18:17:24 +0700  thhuon
+    docs (ai): add AI-02 rows for the folder renames and locator options
+
+M	AI-02_AI_Audit_Report.md
+
+1f80bce  2026-11-17 18:17:16 +0700  thhuon
+    docs (ai): complete Prompt009 in the prompt log
+
+M	prompt_log.md
+
+171aa2e  2026-11-17 18:16:28 +0700  thhuon
+    test (forgot-password): find unnamed fields by role or by label block
+
+M	features/forgot-password/automation_design.md
+M	page-objects/ForgotPasswordPage.ts
+
+a55ef08  2026-11-17 18:14:50 +0700  thhuon
+    refactor: name the feature folders after the features
+
+M	AI-02_AI_Audit_Report.md
+M	CLAUDE.md
+M	HW04_Report.md
+M	PLAN.md
+M	README.md
+M	automation.config.json
+R091	features/fB-fr08/automation_design.md	features/checkout/automation_design.md
+R098	features/fA-fr03/automation_design.md	features/forgot-password/automation_design.md
+R090	features/fC-fr15/automation_design.md	features/product-crud/automation_design.md
+M	prompt_log.md
+M	skills/test-automation/SKILL.md
+M	skills/test-automation/SKILL.vi.md
+M	skills/test-automation/templates/automation.config.json
+
+f40922d  2026-11-17 18:14:16 +0700  thhuon
+    refactor (fA): split pages/ into page-objects/ and api/
+
+M	AI-02_AI_Audit_Report.md
+M	PLAN.md
+M	README.md
+R100	pages/EshopApi.ts	api/EshopApi.ts
+M	features/fA-fr03/automation_design.md
+M	features/fB-fr08/automation_design.md
+M	features/fC-fr15/automation_design.md
+R100	pages/ForgotPasswordPage.ts	page-objects/ForgotPasswordPage.ts
+R100	pages/LoginPage.ts	page-objects/LoginPage.ts
+M	prompt_log.md
+M	skills/test-automation/SKILL.md
+M	skills/test-automation/SKILL.vi.md
+M	skills/test-automation/review-rubric.md
+M	skills/test-automation/review-rubric.vi.md
+M	skills/test-automation/templates/automation-design.md
+
+2cedf6a  2026-11-17 17:00:32 +0700  thhuon
+    docs (fA): list the prompt log entries of the FR-03 design
+
+M	features/fA-fr03/automation_design.md
+
+50cb038  2026-11-17 17:00:23 +0700  thhuon
+    docs (ai): log Prompt001–Prompt009
+
+M	AI-02_AI_Audit_Report.md
+M	prompt_log.md
+
+8519295  2026-11-17 16:59:26 +0700  thhuon
+    docs (ai): add AI-02 row for the FR-03 page objects
+
+M	AI-02_AI_Audit_Report.md
+
+d2ba1fc  2026-11-17 16:59:12 +0700  thhuon
+    test (fA): add page objects for the login and forgot-password screens
+
+M	features/fA-fr03/automation_design.md
+A	pages/EshopApi.ts
+A	pages/ForgotPasswordPage.ts
+A	pages/LoginPage.ts
+
+216f87f  2026-11-17 16:56:53 +0700  thhuon
+    docs: record that no optional automation approach is added
+
+M	CLAUDE.md
+M	PLAN.md
+
+7499b8c  2026-11-17 16:42:08 +0700  thhuon
+    docs (ai): add AI-02 rows for the student's changes to the skill and plan
+
+M	AI-02_AI_Audit_Report.md
+
+42312dc  2026-11-17 16:41:23 +0700  thhuon
+    docs: plan when the student uses each Playwright tool
+
+M	CLAUDE.md
+M	PLAN.md
+
+d82e8a9  2026-11-17 16:41:06 +0700  thhuon
+    chore: add npm scripts for the SUT servers and the Playwright tools
+
+M	package.json
+
+6c49ab7  2026-11-17 16:40:12 +0700  thhuon
+    feat (skills): add the Playwright tool and automation approach of each step
+
+M	skills/README.md
+M	skills/SOURCES.md
+M	skills/test-automation/SKILL.md
+M	skills/test-automation/SKILL.vi.md
+M	skills/test-automation/review-rubric.md
+M	skills/test-automation/review-rubric.vi.md
+
+aacecef  2026-11-17 16:38:43 +0700  thhuon
+    docs: remove the Vietnamese copies and course materials before submission
+
+M	CLAUDE.md
+M	PLAN.md
+
+c65989e  2026-11-17 16:38:20 +0700  thhuon
+    test (fA): apply the student's selection decisions and add DT-35
+
+M	features/fA-fr03/automation_design.md
+
+916a351  2026-11-17 16:37:59 +0700  thhuon
+    docs (skills): list the four defects of one-prompt suites as bullets
+
+M	skills/test-automation/SKILL.md
+M	skills/test-automation/SKILL.vi.md
+
+0b20c86  2026-11-17 12:31:20 +0700  thhuon
+    test (fA): state what the selection table leaves out of the expected results
+
+M	features/fA-fr03/automation_design.md
+
+f614f37  2026-11-17 12:30:53 +0700  thhuon
+    docs (ai): add AI-02 row for the FR-03 test case selection
+
+M	AI-02_AI_Audit_Report.md
+
+91322c9  2026-11-17 12:30:38 +0700  thhuon
+    test (fA): select FR-03 test cases to automate
+
+M	features/fA-fr03/automation_design.md
+
+98c437d  2026-11-17 01:08:12 +0700  thhuon
+    docs (ai): add AI-02 rows for the WebKit check and the skill changes
+
+M	AI-02_AI_Audit_Report.md
+
+aeb2f58  2026-11-17 01:07:49 +0700  thhuon
+    docs: list git-commit-conventions and the Vietnamese skill copies in the README
+
+M	README.md
+
+18f3633  2026-11-17 01:07:37 +0700  thhuon
+    docs (skills): list git-commit-conventions and the Vietnamese copies in the index
+
+M	skills/README.md
+
+8033609  2026-11-17 01:07:34 +0700  thhuon
+    docs (skills): use the same Vietnamese terms in the integrity tables
+
+M	skills/automation-bug-reporting/SKILL.vi.md
+M	skills/recording-test-demo-videos/SKILL.vi.md
+
+a5e3abf  2026-11-17 01:07:19 +0700  thhuon
+    docs (skills): add the Vietnamese copy of test-automation
+
+A	skills/test-automation/SKILL.vi.md
+A	skills/test-automation/review-rubric.vi.md
+
+7c0c0c8  2026-11-17 01:07:15 +0700  thhuon
+    fix (skills): show the data-driven loop example as one code span
+
+M	skills/test-automation/SKILL.md
+
+971ae57  2026-11-17 01:06:16 +0700  thhuon
+    docs (skills): add the Vietnamese copy of automation-bug-reporting
+
+A	skills/automation-bug-reporting/SKILL.vi.md
+A	skills/automation-bug-reporting/review-rubric.vi.md
+
+39887b5  2026-11-17 01:05:44 +0700  thhuon
+    docs (skills): add the Vietnamese copy of recording-test-demo-videos
+
+A	skills/recording-test-demo-videos/SKILL.vi.md
+A	skills/recording-test-demo-videos/review-rubric.vi.md
+
+b26f675  2026-11-17 01:05:35 +0700  thhuon
+    docs (skills): add the Vietnamese copy of git-commit-conventions
+
+A	skills/git-commit-conventions/SKILL.vi.md
+
+60f3ee7  2026-11-17 01:03:56 +0700  thhuon
+    docs (skills): add the Vietnamese copy of the shared review rules
+
+A	skills/review-rubric-shared.vi.md
+
+882e719  2026-11-17 01:03:40 +0700  thhuon
+    feat (skills): follow a shared repository's own commit convention
+
+M	CLAUDE.md
+M	skills/git-commit-conventions/SKILL.md
+M	skills/git-commit-conventions/review-rubric.md
+M	skills/git-commit-conventions/review-rubric.vi.md
+
+9067c89  2026-11-17 01:03:29 +0700  thhuon
+    feat (skills): copy the git-commit-conventions skill from HW03
+
+A	skills/git-commit-conventions/SKILL.md
+A	skills/git-commit-conventions/review-rubric.md
+A	skills/git-commit-conventions/review-rubric.vi.md
+
+4e26cf6  2026-11-17 01:03:13 +0700  thhuon
+    docs (ai): update the AI-02 setup row with the WebKit smoke run
+
+M	AI-02_AI_Audit_Report.md
+
+d540136  2026-11-17 01:03:10 +0700  thhuon
+    docs: record the WebKit setup and the browser versions
+
+M	HW04_Report.md
+M	PLAN.md
+M	README.md
+
+c32e545  2026-11-17 00:38:00 +0700  thhuon
+    docs: note the drafted skills and the submission skeleton in the plan
+
+M	PLAN.md
+
+742c1a9  2026-11-17 00:37:41 +0700  thhuon
+    docs (ai): add AI-02 rows for the skills, bug tracker switch and submission skeleton
+
+M	AI-02_AI_Audit_Report.md
+
+daa23a8  2026-11-17 00:37:04 +0700  thhuon
+    docs (video): add the shot list for the two demo videos
+
+A	demo/shot_list.md
+
+1a2684c  2026-11-17 00:37:00 +0700  thhuon
+    docs (ai): add the AI-03 disclosure form with the HW04 header
+
+A	AI-03_AI_Disclosure_Form.md
+
+29353c9  2026-11-17 00:36:57 +0700  thhuon
+    docs: add the README, main report and AI critique skeletons
+
+A	AI_Critique.md
+A	HW04_Report.md
+A	README.md
+
+a65d1a2  2026-11-17 00:36:53 +0700  thhuon
+    docs (bugs): add the bug report for the automated tests
+
+A	bugs/BUG_REPORT.md
+
+badb3e5  2026-11-17 00:36:50 +0700  thhuon
+    docs (features): add the automation design files of the three features
+
+A	features/fA-fr03/automation_design.md
+A	features/fB-fr08/automation_design.md
+A	features/fC-fr15/automation_design.md
+
+223c368  2026-11-17 00:35:21 +0700  thhuon
+    docs (skills): add the index of the automation skills
+
+A	skills/README.md
+
+57e39b9  2026-11-17 00:35:02 +0700  thhuon
+    feat (skills): add the recording-test-demo-videos skill
+
+A	skills/recording-test-demo-videos/SKILL.md
+A	skills/recording-test-demo-videos/review-rubric.md
+A	skills/recording-test-demo-videos/templates/shot-list.md
+
+8fdfcc3  2026-11-17 00:34:18 +0700  thhuon
+    feat (skills): add the automation-bug-reporting skill
+
+A	skills/automation-bug-reporting/SKILL.md
+A	skills/automation-bug-reporting/review-rubric.md
+A	skills/automation-bug-reporting/scripts/upload_attachments.js
+A	skills/automation-bug-reporting/templates/bug-report.md
+
+746c95b  2026-11-17 00:33:20 +0700  thhuon
+    refactor (setup): run browsers through the skill scripts and keep JSON results
+
+M	CLAUDE.md
+M	PLAN.md
+A	automation.config.json
+M	package.json
+M	playwright.config.ts
+D	scripts/run-feature.mjs
+
+cd177b4  2026-11-17 00:33:01 +0700  thhuon
+    feat (skills): add the test-automation skill with run and summary scripts
+
+A	skills/test-automation/SKILL.md
+A	skills/test-automation/review-rubric.md
+A	skills/test-automation/scripts/run-browsers.mjs
+A	skills/test-automation/scripts/summarize-results.mjs
+A	skills/test-automation/templates/automation-design.md
+A	skills/test-automation/templates/automation.config.json
+A	skills/test-automation/templates/playwright.config.ts
+
+89a21e1  2026-11-17 00:32:58 +0700  thhuon
+    feat (skills): add the shared review rules and knowledge sources
+
+A	skills/SOURCES.md
+A	skills/review-rubric-shared.md
+
+b58082e  2026-11-17 00:30:21 +0700  thhuon
+    docs: file HW04 bugs on the HW02 group repo as its README asks
+
+M	CLAUDE.md
+M	PLAN.md
+
+1c2081f  2026-11-16 23:49:27 +0700  thhuon
+    docs: mark the finished setup steps in the plan
+
+M	PLAN.md
+
+371e22f  2026-11-16 23:49:19 +0700  thhuon
+    docs (ai): add the AI-02 audit report with rows for the setup artifacts
+
+A	AI-02_AI_Audit_Report.md
+
+e625f1e  2026-11-16 23:49:16 +0700  thhuon
+    docs (ai): add the AI-05 privacy checklist and the prompt log skeleton
+
+A	AI-05_AI_Privacy_Checklist.md
+A	prompt_log.md
+
+3a4f869  2026-11-16 23:48:19 +0700  thhuon
+    docs: add the project profile for the automation skills
+
+A	CLAUDE.md
+
+b81f38e  2026-11-16 23:47:49 +0700  thhuon
+    test (setup): add a smoke test for the backend, web and admin
+
+M	package.json
+A	tests/smoke.spec.ts
+
+2276eb1  2026-11-16 23:47:45 +0700  thhuon
+    chore (setup): add a script that runs a feature on each browser with its own report
+
+M	package.json
+A	scripts/run-feature.mjs
+
+a737bfd  2026-11-16 23:47:13 +0700  thhuon
+    chore (setup): configure three browsers, SUT servers and the Run by report title
+
+A	playwright.config.ts
+
+5da7237  2026-11-16 23:45:33 +0700  thhuon
+    chore (setup): add Playwright 1.64.1 as a pinned dev dependency
+
+A	package-lock.json
+A	package.json
+
+4271c85  2026-11-16 23:45:23 +0700  thhuon
+    docs: add the work plan ordered by execution
+
+A	PLAN.md
+
+22327fd  2026-11-16 13:44:49 +0700  thhuon
+    docs (features): reuse the three HW02 web features for automation
+
+A	features/selected-features.md
+
+b86e28d  2026-11-16 13:44:45 +0700  thhuon
+    docs: add the HW04 automation testing brief
+
+A	HW04_Automation_Testing_Original.md
+A	HW04_Automation_Testing_Vietnamese.md
+
+9389919  2026-11-16 13:44:42 +0700  thhuon
+    chore: add ignore rules for archives, videos, SUT and Playwright output
+
+A	.gitignore
