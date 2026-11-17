@@ -279,8 +279,7 @@ Official runs: see the top of this section.
 
 ## 7. Not automated (T8)
 
-| TC ID | Reason | Tested instead |
-| --- | --- | --- |
+None: all 36 HW02 test cases are automated (§1, selection confirmed by the student 18/11). Recorded but not judged: the HTTP status and the `alert` texts (HW02 Q1, Q8), the browser validation messages (they differ per browser, §2), and "in Vietnamese" in the FR-22 oracle of DT-09, 12, 14, 17 … 19 (refused through the API or blocked by the browser, §3).
 
 ## 8. Failures and bugs (T7)
 
