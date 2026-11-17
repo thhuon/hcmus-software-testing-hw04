@@ -1,9 +1,10 @@
 import type { APIRequestContext, APIResponse } from '@playwright/test';
 
 /**
- * EShop REST API (`eshop-sut/api_specification.md` §1.1–1.4) for test setup,
- * the `Yes (API)` test cases and checks of the stored result (did the
- * password change?). Returns the raw responses; assertions stay in the specs.
+ * EShop REST API (`eshop-sut/api_specification.md` §1.1–1.4 accounts and
+ * passwords, §4 cart and orders) for test setup, the `Yes (API)` test cases and
+ * checks of the stored result (did the password change? was an order stored?).
+ * Returns the raw responses; assertions stay in the specs.
  */
 export class EshopApi {
   constructor(
@@ -27,4 +28,41 @@ export class EshopApi {
   resetPassword(body: Record<string, unknown>): Promise<APIResponse> {
     return this.request.post(`${this.baseUrl}/api/reset-password`, { data: body });
   }
+
+  // ---- Cart and orders (API spec §4, FR-08). `token` = the JWT of `login`.
+
+  /** The server cart of the token's user (not the Web cart, which lives in the page). */
+  getCart(token: string): Promise<APIResponse> {
+    return this.request.get(`${this.baseUrl}/api/cart`, { headers: bearer(token) });
+  }
+
+  /** One cart line as given (`id`, `name`, `price`, `quantity`), so a test can send a client price. */
+  addToCart(token: string, line: Record<string, unknown>): Promise<APIResponse> {
+    return this.request.post(`${this.baseUrl}/api/cart`, { headers: bearer(token), data: line });
+  }
+
+  /**
+   * `POST /api/checkout` with the body as given. `authorization` is the whole
+   * header value (`Bearer <jwt>`, a forged or malformed one), or `undefined` to
+   * send no `Authorization` header at all (DT-04 … DT-06).
+   */
+  checkout(body: Record<string, unknown>, authorization: string | undefined): Promise<APIResponse> {
+    return this.request.post(`${this.baseUrl}/api/checkout`, {
+      headers: authorization === undefined ? {} : { Authorization: authorization },
+      data: body,
+    });
+  }
+
+  myOrders(token: string): Promise<APIResponse> {
+    return this.request.get(`${this.baseUrl}/api/orders/my-orders`, { headers: bearer(token) });
+  }
+
+  /** Every user's orders (FR-18); needs an admin token. */
+  adminOrders(adminToken: string): Promise<APIResponse> {
+    return this.request.get(`${this.baseUrl}/api/admin/orders`, { headers: bearer(adminToken) });
+  }
+}
+
+function bearer(token: string): Record<string, string> {
+  return { Authorization: `Bearer ${token}` };
 }

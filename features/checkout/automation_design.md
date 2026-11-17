@@ -49,7 +49,9 @@ DT = domain testing (`02_domain_testing.md` §2.2), BVA = boundary value analysi
 
 **How the locators were found:** codegen by the student (Đăng nhập → home → Giỏ hàng → Thanh toán → success; see "Codegen check" at the end of this section), then an ARIA snapshot (`page.locator('body').ariaSnapshot()`) of every FR-08 screen of the running Web app and every locator counted on the live page on Chromium 156.0.8078.4, Firefox 157.0 and WebKit 27.2 (exploration script in the agent's scratchpad, 17/11; each test account new, `fr08.t2.<browser>.<time>@test.local`). Counts were the same on the three browsers.
 
-Page objects (to write, see "Still to do in T2"): `page-objects/LoginPage.ts` (extend), `HomePage.ts`, `ProductPage.ts`, `CartPage.ts`, `CheckoutPage.ts`, `SiteHeader.ts`; API client `api/EshopApi.ts` (extend). No `expect` in `page-objects/` or `api/`.
+Page objects: `page-objects/SiteHeader.ts`, `LoginPage.ts` (extended: fields and `login()`), `HomePage.ts`, `ProductPage.ts`, `CartPage.ts`, `CheckoutPage.ts`, `Dialogs.ts` (records every `alert`); API client `api/EshopApi.ts` (extended: `getCart`, `addToCart`, `checkout` with any or no `Authorization` header, `myOrders`, `adminOrders`). No `expect` in `page-objects/` or `api/`.
+
+**Check through the page objects** (temporary spec, not kept; 17/11, Chromium, Firefox, WebKit, 3 passed): login form → three product pages (Keychron × 3, AirPods × 4, iPhone × 3; `addToCart` needed 2 clicks every time on every browser) → cart (3 lines) → checkout (3 items, total field `126000000`, text `Tổng thanh toán: 126,000,000 ₫`; address 0, breadcrumb 0) → `confirm()` 200 → success heading → order `total_amount` 126000000 through `myOrders`; cart page by URL (empty heading, no checkout button) → checkout by URL → `confirm()` 200, order 0 ₫; logout → guest: home `addOne` → cart → "Tiến hành thanh toán" → login page → checkout by URL → `confirm()` 401; `Dialogs` recorded "Bạn cần đăng nhập để thanh toán!", "Lỗi khi thanh toán: Unauthorized". Every locator matched 1 element (0 for address and breadcrumb).
 
 | Screen | Element | Locator | Why this locator |
 | --- | --- | --- | --- |
@@ -116,11 +118,7 @@ Conclusion (one sentence, student; the FR-03 sentence reused, student 17/11): Th
 
 The comparisons in the last column were proposed by the agent and accepted by the student (17/11).
 
-**Still to do in T2:**
-
-1. The student: date / browser of the codegen run, check the "(proposed)" comparisons and write the conclusion sentence above.
-2. The decisions below (product-page add, product card locator).
-3. The agent: write the page objects and extend the API client (`addToCart`, `getCart`, `checkout` with or without a token, `myOrders`, `adminOrders`), check each locator once more through the page objects on the three browsers, then commit (`test (checkout): add page objects for the home, product, cart and checkout screens`).
+**T2 status (17/11):** codegen check done by the student; decisions applied; page objects and API client written and checked on the three browsers.
 
 ## 3. Test data (T3)
 
