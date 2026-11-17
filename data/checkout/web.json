@@ -104,14 +104,11 @@
     {
       "id": "DT-07",
       "technique": "DT",
-      "title": "empty cart: no order on the Web (cart page, typed /checkout) or through the API",
+      "title": "empty cart: no order on the Web (cart page, typed /checkout); API part in api.json",
       "partition": "EC-V2-2, O1-2, O2-2, O3-2",
       "flow": "emptyCart",
       "loggedIn": true,
       "cart": [],
-      "apiBody": {
-        "shipping_address": "123 Le Loi, TP.HCM"
-      },
       "expected": {
         "kind": "refused",
         "emptyState": {
@@ -119,8 +116,7 @@
           "image": true
         },
         "checkoutButton": false,
-        "newOrders": 0,
-        "serverCartLinesAfter": 0
+        "newOrders": 0
       },
       "source": "FR-07 README:100 \"Giỏ hàng trống phải có hình minh họa và thông báo rõ ràng.\"; A6 (Q4), A9; student 17/11: an accepted empty-cart checkout is a bug (BUG-01, #116)"
     },
