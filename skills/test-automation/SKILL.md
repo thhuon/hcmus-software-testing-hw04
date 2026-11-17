@@ -62,7 +62,7 @@ If a value is missing, ask once and propose adding it to CLAUDE.md.
 
 Scripts (Node ≥ 18, run from the project root):
 
-- `node <skill>/scripts/run-browsers.mjs --config automation.config.json <feature|all> [--browsers chromium,firefox] [--reuse]` — one run per feature × browser, each with its own HTML report and `results.json` in `<reportsDir>/<feature>/<browser>/`. Fresh SUT servers per run unless `--reuse`.
+- `node <skill>/scripts/run-browsers.mjs --config automation.config.json <feature|all> [--browsers chromium,firefox] [--reuse]` — one run per feature × browser, each with its own HTML report and `results.json` in `<reportsDir>/<feature>/<browser>/`, and its own screenshots / traces in `<outputDir>/<feature>/<browser>/` (another run that starts meanwhile empties Playwright's shared `test-results/`). Fresh SUT servers per run unless `--reuse`.
 - `node <skill>/scripts/summarize-results.mjs --config automation.config.json [--markdown]` — counts per run and per test case from the `results.json` files.
 
 Before T1, check the environment: a smoke spec that opens every frontend passes on every browser (`npx playwright install` + system dependencies for WebKit on Linux).
