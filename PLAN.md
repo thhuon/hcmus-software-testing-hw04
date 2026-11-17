@@ -5,7 +5,7 @@
 
 | Sinh viên | MSSV | Bài tập | Tên file nộp |
 | --- | --- | --- | --- |
-| HỒ THÙY HƯƠNG | 23120046 | HW04-AI (cá nhân) | `23120046_HW04_AI_Automation_<XXX>.zip` |
+| HỒ THÙY HƯƠNG | 23120046 | HW04-AI (cá nhân) | `23120046_HW04_AI_Automation_100.zip` |
 
 **Feature (dùng lại từ HW02, đề §5):** A – FR-03 Quên & đặt lại mật khẩu · B – FR-08 Thanh toán · C – FR-15 Quản lý sản phẩm (Admin).
 
@@ -86,7 +86,7 @@ Như A1–A7 nhưng **dùng skill**. Chỗ nào skill vướng thì sửa skill 
   - các bản tiếng Việt của skill: `skills/**/SKILL.vi.md`, `skills/**/review-rubric.vi.md`, `skills/review-rubric-shared.vi.md`;
   - tài liệu học: đề bài `HW04_Automation_Testing_Original.md`, `HW04_Automation_Testing_Vietnamese.md`, `HW04_Automation_Testing_Vietnamese.pdf`;
   - sửa các chỗ còn nhắc tới chúng: `README.md` §3, `skills/README.md` ("Vietnamese reading copies"), `CLAUDE.md` mục Assignment; kiểm tra lại bằng `git ls-files | grep -i -E "\.vi\.md|HW04_Automation_Testing"` (không còn dòng nào).
-- [ ] **D6. Nộp** – `git_log.txt`, PDF (report, AI Critique, AI-02), zip `23120046_HW04_AI_Automation_<XXX>.zip` → Moodle.
+- [ ] **D6. Nộp** – `git_log.txt`, PDF (report, AI Critique, AI-02), zip `23120046_HW04_AI_Automation_100.zip` → Moodle.
 
 ## 2. Bố cục thư mục
 

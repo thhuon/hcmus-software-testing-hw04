@@ -2,7 +2,7 @@
 
 | Student name | Student ID | Class | Exercise | Submission file |
 | --- | --- | --- | --- | --- |
-| HỒ THÙY HƯƠNG | 23120046 | CQ2023/3 | HW04-AI | `23120046_HW04_AI_Automation_<XXX>.zip` |
+| HỒ THÙY HƯƠNG | 23120046 | CQ2023/3 | HW04-AI | `23120046_HW04_AI_Automation_100.zip` |
 
 **AI declaration:** I use AI tools for the following tasks, as recorded in [AI-02_AI_Audit_Report.md](AI-02_AI_Audit_Report.md) and [prompt_log.md](prompt_log.md).
 
@@ -53,12 +53,12 @@ The skills are generic (one per testing topic, sources in [skills/SOURCES.md](sk
 
 | No. | Criteria | Grade | Self-Assessed Grade |
 | ---: | --- | ---: | ---: |
-| 1 | Task 1 - Feature A | 25 | |
-| 1 | Task 1 - Feature B | 25 | |
-| 1 | Task 1 - Feature C | 25 | |
-| 2 | Task 2 — Demo video | 15 | |
-| 3 | Agent Skills | 10 | |
-| | **Total** | **100** | |
+| 1 | Task 1 - Feature A | 25 | 25 |
+| 1 | Task 1 - Feature B | 25 | 25 |
+| 1 | Task 1 - Feature C | 25 | 25 |
+| 2 | Task 2 — Demo video | 15 | 15 |
+| 3 | Agent Skills | 10 | 10 |
+| | **Total** | **100** | **100** |
 
 ## 5. Contents of this submission
 
