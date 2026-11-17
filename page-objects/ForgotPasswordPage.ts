@@ -4,8 +4,12 @@ import type { Locator, Page } from '@playwright/test';
  * Web – Quên mật khẩu (`/forgot-password`), Bước 1 (email → OTP) and
  * Bước 2 (OTP + new password). Locators and actions only; assertions stay in
  * the specs. No input has an accessible name (labels are not linked to their
- * inputs), so the fields are found by role / type inside the form of the
- * current step (design §2, testability findings).
+ * inputs), so each field combines two locators with `.or()`: (a) role / type
+ * inside the form of the current step and (b) the input in the same block as
+ * its label text. Today both find the same element on every browser; if one
+ * breaks the other still finds it, and if they ever find different elements
+ * the locator fails in strict mode instead of typing into the wrong field
+ * (design §2, locator options tried).
  */
 export class ForgotPasswordPage {
   // Both steps
@@ -38,12 +42,14 @@ export class ForgotPasswordPage {
       .getByRole('button', { name: 'Quay lại đăng nhập' })
       .or(page.getByRole('link', { name: 'Quay lại đăng nhập' }));
 
-    this.emailInput = this.form.getByRole('textbox');
+    this.emailInput = this.form.getByRole('textbox').or(this.fieldUnderLabel('Nhập Email của bạn'));
     this.requestOtpButton = page.getByRole('button', { name: 'Lấy mã OTP' });
 
     this.otpMessage = page.getByText(/^Mã OTP của bạn là:/);
-    this.otpInput = this.form.locator('input[type="text"]');
-    this.newPasswordInput = this.form.locator('input[type="password"]');
+    this.otpInput = this.form.locator('input[type="text"]').or(this.fieldUnderLabel('Mã OTP (4 số)'));
+    this.newPasswordInput = this.form
+      .locator('input[type="password"]')
+      .or(this.fieldUnderLabel('Mật khẩu mới'));
     this.confirmPasswordInput = page.getByLabel('Xác nhận mật khẩu mới');
     this.resetPasswordButton = page.getByRole('button', { name: 'Đặt lại mật khẩu' });
     this.backButton = page.getByRole('button', { name: '← Quay lại' });
@@ -52,6 +58,17 @@ export class ForgotPasswordPage {
       this.dialogMessages.push(dialog.message());
       await dialog.accept();
     });
+  }
+
+  /**
+   * Option (b): the textbox inside the block that holds the exact label text.
+   * Playwright counts password inputs as textboxes too.
+   */
+  private fieldUnderLabel(labelText: string): Locator {
+    return this.form
+      .locator('div')
+      .filter({ has: this.page.getByText(labelText, { exact: true }) })
+      .getByRole('textbox');
   }
 
   async goto() {

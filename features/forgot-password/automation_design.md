@@ -73,7 +73,7 @@ DT = domain testing (`02_domain_testing.md` §2.2), BVA = boundary value analysi
 
 ## 2. Locators and page objects (T2)
 
-**How the locators were found:** ARIA snapshot (`page.locator('body').ariaSnapshot()`) of each screen of the running Web app (`npm run sut`), then every locator counted on the live page on Chromium, Firefox and WebKit (1 match each; 0 for the elements FR-03 names but the app lacks). Codegen / Pick locator by the student: see the note below the table.
+**How the locators were found:** ARIA snapshot (`page.locator('body').ariaSnapshot()`) of each screen of the running Web app (`npm run sut`), then every locator counted on the live page on Chromium, Firefox and WebKit (1 match each; 0 for the elements FR-03 names but the app lacks). Codegen by the student: see "Codegen check" at the end of this section.
 
 Page objects: `page-objects/LoginPage.ts`, `page-objects/ForgotPasswordPage.ts`; API client (setup, `Yes (API)` rows, "password unchanged" checks): `api/EshopApi.ts`. No `expect` in `page-objects/` or `api/`.
 
@@ -85,11 +85,11 @@ Page objects: `page-objects/LoginPage.ts`, `page-objects/ForgotPasswordPage.ts`;
 | Quên mật khẩu | Form of the current step | `getByRole('main').locator('form')` | The form has no accessible name, so it has no `form` role; one form per step. Fallback: CSS tag inside the `main` landmark |
 | Quên mật khẩu | Step indicator "Bước 1 / 2", "Bước 2 / 2" | `getByText(/Bước\s*[12]\s*\/\s*2/)` | Text named by FR-03 ("Bước 1 / 2"). 0 matches today (HW02 BUG-06) |
 | Quên mật khẩu | "Quay lại đăng nhập" | `getByRole('button', { name: 'Quay lại đăng nhập' }).or(getByRole('link', …))` | Name from FR-03; button or link, both accepted. 0 matches today (HW02 BUG-11) |
-| Bước 1 | Email field | `form.getByRole('textbox')` | No accessible name (label "Nhập Email của bạn" not linked to the input), so it is found by role inside the step's form (one textbox). The field is `type="text"`, not `type="email"` (HW02 BUG-10) |
+| Bước 1 | Email field | (a) `form.getByRole('textbox')` `.or(` (b) `form.locator('div').filter({ has: getByText('Nhập Email của bạn', { exact: true }) }).getByRole('textbox')` `)` | No accessible name (label not linked to the input). Both options tried below find this field (1 match, 3 browsers); combined with `.or()` (student decision 17/11). The field is `type="text"`, not `type="email"` (HW02 BUG-10) |
 | Bước 1 | "Lấy mã OTP" button | `getByRole('button', { name: 'Lấy mã OTP' })` | Role + name |
 | Bước 2 | OTP message "Mã OTP của bạn là: …" | `getByText(/^Mã OTP của bạn là:/)` | Fixed prefix of the message; the code itself changes per request. `readOtp()` returns the text after the colon without assuming a length |
-| Bước 2 | OTP field | `form.locator('input[type="text"]')` | No accessible name (label "Mã OTP (4 số)" not linked); the label text also states the wrong length (HW02 BUG-03), so it is not used. Fallback: CSS on the stable `type` attribute (the only text input of the form) |
-| Bước 2 | "Mật khẩu mới" field | `form.locator('input[type="password"]')` | No accessible name; the only password input of the form. Must change when a confirmation field is added (two password inputs) |
+| Bước 2 | OTP field | (a) `form.locator('input[type="text"]')` `.or(` (b) block of label "Mã OTP (4 số)" → textbox `)` | No accessible name. (a) is CSS on the stable `type` attribute (the only text input of the form); (b) depends on a label that states the wrong length (HW02 BUG-03), so it breaks when the label is fixed and (a) then still finds the field |
+| Bước 2 | "Mật khẩu mới" field | (a) `form.locator('input[type="password"]')` `.or(` (b) block of label "Mật khẩu mới" → textbox `)` | No accessible name; (a) the only password input of the form. When a confirmation field is added, (a) finds two inputs and the locator fails in strict mode: review it then |
 | Bước 2 | "Xác nhận mật khẩu mới" field | `getByLabel('Xác nhận mật khẩu mới')` | Label text from FR-03 ("**Xác nhận mật khẩu mới**"). 0 matches today (HW02 BUG-04): `resetPassword(otp, pw, confirm)` then fails on this field |
 | Bước 2 | "Đặt lại mật khẩu" button | `getByRole('button', { name: 'Đặt lại mật khẩu' })` | Role + name |
 | Bước 2 | "← Quay lại" button | `getByRole('button', { name: '← Quay lại' })` | Role + name; goes back to Bước 1 (used by DT-02 to ask for several OTPs) |
@@ -97,11 +97,38 @@ Page objects: `page-objects/LoginPage.ts`, `page-objects/ForgotPasswordPage.ts`;
 
 Testability findings (elements without an accessible name, unstable text):
 
-- **No input has an accessible name** on Đăng nhập, Bước 1 and Bước 2: the `<label>` elements have no `for` and do not wrap the input, so `getByLabel` finds nothing and screen readers read "edit text" only. The fields are found by role or `type` inside the form; the locators break if a second text or password input is added. Accessibility / testability finding (WCAG 2.2 SC 1.3.1, 4.1.2), not filed as an FR-03 defect.
+- **No input has an accessible name** on Đăng nhập, Bước 1 and Bước 2: the `<label>` elements have no `for` and do not wrap the input, so `getByRole(…, { name })` and `getByLabel` find nothing and screen readers read "edit text" only (WCAG 2.2 SC 1.3.1, 4.1.2). FR-22 has no sentence about linked labels. Every field is still found by another option (table below), so no field is unreachable; whether to report the missing names is the student's decision (open).
 - **Messages in `alert` dialogs** (HW02 BUG-09): they cannot be located or read by assistive technology inside the page; the tests read them through the `dialog` event.
-- **Wrong heading on Đăng nhập**: "Đăng Ký" (register) on the login page. Outside FR-03 (login page belongs to FR-02); noted only.
+- **Wrong heading on Đăng nhập**: "Đăng Ký" (register) on the login page. Outside FR-03 (login page, FR-02); already filed by the group as #95.
 - **Timing seen in the check:** on Firefox and WebKit the forgot-password page was not rendered yet right after the link click (counts 0); after waiting for the heading every locator matched. The specs must start each step with a web-first assertion (e.g. the heading is visible) before acting.
-- Codegen / Pick locator (student, by hand): `npm run sut`, then `npm run codegen`; record the flow Đăng nhập → Quên mật khẩu → Bước 1 → Bước 2 and compare the locators codegen picks with the table above. Result: `<student fills in>`.
+
+**Locator options tried for the fields without an accessible name** (student 17/11: try every option, keep the ones that work). Live UI, match counts identical on Chromium, Firefox and WebKit; a count of 1 was checked to be the input next to the label. The Đăng nhập fields are not used by FR-03; they show where option (a) fails.
+
+| Option | Đăng nhập "Username" | Đăng nhập "Mật khẩu" | Bước 1 Email | Bước 2 OTP | Bước 2 "Mật khẩu mới" |
+| --- | --- | --- | --- | --- | --- |
+| `getByRole('textbox', { name: <label> })` | 0 | 0 | 0 | 0 | 0 |
+| `getByLabel(<label>)` | 0 | 0 | 0 | 0 | 0 |
+| `getByPlaceholder` / `getByTestId` / `id` / `name` | 0 (no such attribute in the DOM) | 0 | 0 | 0 | 0 |
+| (b) block of the label: `label:text-is(<label>) + input`, or `div` filtered by the label text → textbox | 1 | 1 | 1 | 1 | 1 |
+| (a) role / type inside the form | 2 (both inputs are `type="text"`) | 2 | 1 | 1 with `input[type="text"]`; 2 with `getByRole('textbox')` (Playwright counts the password input as a textbox) | 1 |
+| Layout `input:below(label:text-is(<label>))` | 2 | 1 | 1 | 2 | 1 |
+| XPath `following-sibling` | not tried: XPath is not allowed (skill T2) | | | | |
+
+Result: (a) and (b) both find every FR-03 field, so `page-objects/ForgotPasswordPage.ts` combines them with `.or()` (checked: 1 match, fill works, on 3 browsers). Login defects seen on the way are already filed by the group: #92 (password `type="text"`), #93 (email `type="text"`), #95 (heading "Đăng Ký", label "Username", no `*`).
+
+**Codegen check (student, by hand).** `npm run sut`, then `npm run codegen`; record Đăng nhập → "Quên mật khẩu?" → Bước 1 (type an email, "Lấy mã OTP") → Bước 2 (type OTP and password, "Đặt lại mật khẩu", "← Quay lại"). Date / browser: `<fill in>`.
+
+| Element | Locator codegen picked (copied from the codegen window) | Same as the table above? | If not: which is better, and why (one line) |
+| --- | --- | --- | --- |
+| "Quên mật khẩu?" link | `<fill in>` | `<Yes/No>` | |
+| Bước 1 Email field | `<fill in>` | `<Yes/No>` | |
+| "Lấy mã OTP" button | `<fill in>` | `<Yes/No>` | |
+| Bước 2 OTP field | `<fill in>` | `<Yes/No>` | |
+| Bước 2 "Mật khẩu mới" field | `<fill in>` | `<Yes/No>` | |
+| "Đặt lại mật khẩu" button | `<fill in>` | `<Yes/No>` | |
+| "← Quay lại" button | `<fill in>` | `<Yes/No>` | |
+
+Conclusion (one sentence, student): `<fill in>`
 
 ## 3. Test data (T3)
 
