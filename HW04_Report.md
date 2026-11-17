@@ -199,7 +199,7 @@ Full report: [bugs/BUG_REPORT.md](bugs/BUG_REPORT.md) – **39 bugs: 33 Confirme
 
 | Bug | Issue | Outcome | Tests | Severity / Priority |
 | --- | --- | --- | --- | --- |
-| [BUG-02](bugs/BUG_REPORT.md#bug-02) – Bước 2 accepts a new password whose only special character is a space (`NewPass 2026`) and changes the password | [#117](https://github.com/angquoc/software-testing-2026-HW02-group/issues/117) | New | `web.spec.ts` › "DT-35 – special character only outside the set (space)" | High / High (proposed – to be confirmed) |
+| [BUG-02](bugs/BUG_REPORT.md#bug-02) – Bước 2 accepts a new password whose only special character is a space (`NewPass 2026`) and changes the password | [#117](https://github.com/angquoc/software-testing-2026-HW02-group/issues/117) | New | `web.spec.ts` › "DT-35 – special character only outside the set (space)" | High / High |
 | [BUG-03](bugs/BUG_REPORT.md#bug-03) – Bước 2 on the Web refuses every new password, also a valid one | [comment on #1](https://github.com/angquoc/software-testing-2026-HW02-group/issues/1#issuecomment-6950008056) | Changed #1 | `web.spec.ts` › DT-04, DT-05, DT-06, BVA-04, BVA-05 | Critical / High (from #1) |
 | [BUG-04](bugs/BUG_REPORT.md#bug-04) – OTP has 4 digits instead of 6 | [comment on #3](https://github.com/angquoc/software-testing-2026-HW02-group/issues/3#issuecomment-6950009329) | Confirmed #3 | `web.spec.ts` › DT-01, DT-02 | High / High (from #3) |
 | [BUG-05](bugs/BUG_REPORT.md#bug-05) – Bước 2 has no "Xác nhận mật khẩu mới" field | [comment on #4](https://github.com/angquoc/software-testing-2026-HW02-group/issues/4#issuecomment-6950010734) | Confirmed #4 | `web.spec.ts` › DT-01, DT-28, DT-29, DT-30 | Medium / Medium (from #4) |
