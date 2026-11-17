@@ -7,7 +7,7 @@
 | Screens / URLs | Web – Giỏ hàng `http://localhost:5173/cart` → Thanh toán `http://localhost:5173/checkout` |
 | Specs · page objects · API client · data | `tests/checkout/` · `page-objects/` · `api/` · `data/checkout/` |
 | Count | Designed: 17 · Automated: 17 (proposed) · Not automated: 0 · Assertion patterns: 0 |
-| Prompt log entries | prompt 17/11 (T1, logged later) |
+| Prompt log entries | prompt 17/11 (T1, logged later) · prompt 17/11 (T1 decisions, T2 locators, logged later) |
 
 ## 1. Test cases selected (T1)
 
@@ -45,10 +45,78 @@ DT = domain testing (`02_domain_testing.md` §2.2), BVA = boundary value analysi
 
 ## 2. Locators and page objects (T2)
 
+**How the locators were found:** codegen by the student (Đăng nhập → home → Giỏ hàng → Thanh toán → success; see "Codegen check" at the end of this section), then an ARIA snapshot (`page.locator('body').ariaSnapshot()`) of every FR-08 screen of the running Web app and every locator counted on the live page on Chromium 156.0.8078.4, Firefox 157.0 and WebKit 27.2 (exploration script in the agent's scratchpad, 17/11; each test account new, `fr08.t2.<browser>.<time>@test.local`). Counts were the same on the three browsers.
+
+Page objects (to write, see "Still to do in T2"): `page-objects/LoginPage.ts` (extend), `HomePage.ts`, `ProductPage.ts`, `CartPage.ts`, `CheckoutPage.ts`, `SiteHeader.ts`; API client `api/EshopApi.ts` (extend). No `expect` in `page-objects/` or `api/`.
+
 | Screen | Element | Locator | Why this locator |
 | --- | --- | --- | --- |
+| Header (every page) | "Giỏ hàng" link | `getByRole('link', { name: 'Giỏ hàng' })` | Role + name; 1 match. The only way to reach the cart without a reload (see findings) |
+| Header | "Thoát" button (logged in) / "Đăng nhập" link (guest) | `getByRole('button', { name: 'Thoát' })` / `getByRole('link', { name: 'Đăng nhập' })` | Role + name; shows whether the Web treats the user as logged in (DT-03) |
+| Header | "EShop" link (home) | `getByRole('link', { name: 'EShop' })` | Role + name; back to the home page without a reload |
+| Header | Cart badge | – | Does not exist (0 elements; group issue #79). DT-01 step 6 checks the cart page instead |
+| Đăng nhập `/login` | "Username" field | `form.locator('div').filter({ has: locator('label').filter({ hasText: /^Username/ }) }).getByRole('textbox')` | No accessible name (label not linked). Same pattern as FR-03 (option (b), label prefix, student decision 17/11); 1 match. Codegen: `getByRole('textbox').first()` |
+| Đăng nhập | "Mật khẩu" field | same pattern with `/^Mật khẩu/` | As above; 1 match. Codegen: `getByRole('textbox').nth(1)` |
+| Đăng nhập | "Sign In" button | `getByRole('button', { name: 'Sign In' })` | Role + name (already in `LoginPage.ts`). Codegen pressed Enter instead |
+| Trang chủ `/` | Page heading | `getByRole('heading', { name: 'Danh sách sản phẩm', level: 1 })` | Role + name; the page is ready when it and the first product heading are visible |
+| Trang chủ | Product card of a product | `locator('div:has(> h2)').filter({ has: getByRole('heading', { name: <product>, exact: true }) })` | The card has no role and no name; fallback: the `div` whose own child is a product heading, filtered by the product name (1 match per product). Codegen: `getByRole('button', { name: 'Thêm vào giỏ' }).nth(1)` / `.first()` = by position, changes when the product order changes (5 products today) |
+| Trang chủ | "Xem chi tiết" link of a card | `card.getByRole('link', { name: 'Xem chi tiết' })` | Role + name inside the card; 1 match. Opens the product page without a reload |
+| Trang chủ | "Thêm vào giỏ" button of a card | `card.getByRole('button', { name: 'Thêm vào giỏ' })` | Role + name inside the card; adds 1 piece (DT-03 guest cart) |
+| Chi tiết sản phẩm `/product/:id` | Product heading | `getByRole('heading', { name: <product>, level: 1 })` | Role + name; the page is ready |
+| Chi tiết sản phẩm | "Số lượng" field | `locator('div').filter({ has: locator('label').filter({ hasText: /^Số lượng/ }) }).getByRole('spinbutton')` | No accessible name (`getByLabel('Số lượng')` = 0); label prefix as on Đăng nhập; 1 match. `getByRole('spinbutton')` alone also gives 1 today |
+| Chi tiết sản phẩm | "Thêm vào giỏ hàng" button | `getByRole('button', { name: 'Thêm vào giỏ hàng' })` | Role + name; 1 match. The first click adds nothing (group issue #73); the second adds and the button reads "Đã thêm" for 2 s |
+| Chi tiết sản phẩm | "Đã thêm" feedback | `getByRole('button', { name: 'Đã thêm' })` | The button's own text after a successful add; the action waits for it before moving on |
+| Giỏ hàng `/cart` | Page heading | `getByRole('heading', { name: 'Giỏ Hàng', level: 2 })` | Role + name |
+| Giỏ hàng | Line of a product | `getByRole('row').filter({ has: getByRole('cell', { name: <product>, exact: true }) })` | Table row with the product cell; 1 match per line. Cells in column order: Sản phẩm, Giá, Số lượng, Thành tiền, Thao tác |
+| Giỏ hàng | All product lines | `getByRole('row').filter({ has: getByRole('cell') })` | Rows that have data cells; the header row has only column headers, so it is left out without a position. Count = number of lines |
+| Giỏ hàng | "Tiến hành thanh toán" button | `getByRole('button', { name: 'Tiến hành thanh toán' })` | Role + name; same as codegen |
+| Giỏ hàng (empty) | Empty-cart message | `getByRole('heading', { name: 'Giỏ hàng của bạn đang trống' })` | Role + name; the FR-07 "thông báo rõ ràng". No image (0 `img`, group issue #80) |
+| Giỏ hàng (empty) | "Tiếp tục mua sắm" link | `getByRole('link', { name: 'Tiếp tục mua sắm' })` | Role + name |
+| Thanh toán `/checkout` | Page heading | `getByRole('heading', { name: 'Xác Nhận Đơn Hàng', level: 2 })` | Role + name |
+| Thanh toán | Product list items | `getByRole('main').getByRole('listitem')` | One item per line, text `<name> x <qty> — <amount> ₫`; count = lines (FR-08 "danh sách sản phẩm đặt mua") |
+| Thanh toán | Total field "Tổng tiền thanh toán (VND)" | `locator('div').filter({ has: locator('label').filter({ hasText: /^Tổng tiền thanh toán/ }) }).getByRole('spinbutton')` | No accessible name; label prefix; 1 match. An editable number input (HW02 BUG-15): DT-01 checks that it cannot be typed into |
+| Thanh toán | Total text "Tổng thanh toán: …" | `getByText(/^Tổng thanh toán:/)` | Fixed prefix; the amount changes with the cart. Shown as `12,000,000 ₫` on all three browsers (default locale en-US) |
+| Thanh toán | Address field | `getByRole('textbox', { name: /địa chỉ/i })` | Does not exist (0): the page sends no `shipping_address`; kept only to show the absence in DT-01 |
+| Thanh toán | Breadcrumb | `getByRole('navigation', { name: /breadcrumb/i })` | FR-23 "Breadcrumb bắt buộc có ở các trang con (Giỏ hàng, Thanh toán, Chi tiết sản phẩm)"; the usual pattern is a `nav` named "Breadcrumb". 0 today (HW02 BUG-16) |
+| Thanh toán | "Xác Nhận Thanh Toán" button | `getByRole('button', { name: 'Xác Nhận Thanh Toán' })` | Role + name; same as codegen |
+| Thanh toán | Coupon field | `getByRole('textbox', { name: 'Nhập mã giảm giá...' })` | Name from the placeholder; FR-09, not used by FR-08 tests |
+| Thanh toán thành công | Heading "Thanh toán thành công!" | `getByRole('heading', { name: 'Thanh toán thành công!' })` | Role + name; the Web's "accepted" |
+| Thanh toán thành công | "Quay lại trang chủ" button | `getByRole('button', { name: 'Quay lại trang chủ' })` | Role + name; same as codegen |
+| Every page | `alert` messages | `page.on('dialog')` → `dialogMessages[]` | Guest: "Bạn cần đăng nhập để thanh toán!" (cart button) and "Lỗi khi thanh toán: Unauthorized" (typed `/checkout`); a failed checkout also uses `alert`. The page object records the text and accepts the dialog |
+| – (response) | `POST /api/checkout` | `page.waitForResponse(r => r.url().endsWith('/api/checkout'))` | Request body and status the Web sent: logged in `{"items": […], "total_amount": 12000000, "coupon_id": null}` → 200 |
 
-Testability findings (elements without an accessible name, unstable text):
+Testability findings (elements without an accessible name, unstable text, behaviour that changes how the tests are built):
+
+- **No input has an accessible name** (Đăng nhập, "Số lượng", "Tổng tiền thanh toán"): labels without `for`; every field is still found by its label prefix. Product cards have no role or name, so the card is found by its heading (CSS structure fallback).
+- **The Web cart lives in the page's memory:** a reload (`page.goto`) empties it (group issue #74). After adding products, a test reaches the cart and the checkout only through links and buttons, never by URL. `page.goto('/checkout')` is used only where an empty cart is wanted (DT-03 path (b), DT-07).
+- **The URL changes before the page is drawn:** on Chromium, right after clicking "Giỏ hàng" on the success page the URL was `/cart` while the success heading was still shown. Wait for the page heading, not for the URL.
+- **"Thêm vào giỏ hàng" needs two clicks** (group issue #73, FR-07, not FR-08). The Web tests need quantities above 1 (DT-01, BVA), which only the product page offers; the home button adds a new line of 1 per click (group issue #70). Decision 1 below.
+- **No cart badge** (group issue #79): DT-01 step 6 "the badge no longer shows the old count" cannot be checked; the cart page is checked instead.
+- **Seen on the way, for T7 (not judged here):** after a Web checkout the cart page still shows the line (3 browsers; HW02 BUG-14). A guest is refused on both DT-03 paths and no order is created (3 browsers), also after "Thoát" from a logged-in session; HW02 BUG-17 reported that a guest could check out. A logged-in user with an empty cart who types `/checkout` sees an empty list, total 0 and an enabled "Xác Nhận Thanh Toán"; the click sends `{"items": [], "total_amount": 0, "coupon_id": null}` → 200, the success heading shows and an order with `total_amount` 0 is stored (3 browsers; relevant to the open T1 decision on DT-07).
+
+**Codegen check (student, by hand).** `npm run sut`, then `npm run codegen`; recorded: home → "Thêm vào giỏ" × 2 → "Giỏ hàng" → "Tiến hành thanh toán" (guest `alert`, login page) → Đăng nhập → "Giỏ hàng" → "Tiến hành thanh toán" → coupon field → "Xác Nhận Thanh Toán" → "Quay lại trang chủ". Date / browser: 17/11/26 – [SV điền].
+
+| Element | Locator codegen picked (copied from the codegen window) | Same as the table above? | If not: which is better, and why (one line) |
+| --- | --- | --- | --- |
+| Home "Thêm vào giỏ" (two products) | `page.getByRole('button', { name: 'Thêm vào giỏ' }).nth(1)`, `.first()` | No | (proposed) The card's button filtered by the product heading: `.nth(1)` picks whatever product is second, and the order of the 5 products is data |
+| "Giỏ hàng" link | `page.getByRole('link', { name: 'Giỏ hàng' })` | Yes | |
+| Guest `alert` | `page.once('dialog', dialog => { … dialog.dismiss() })` | Same mechanism | (proposed) `page.on('dialog')` that keeps every message: the guest path (b) raises a second dialog that `once` does not catch, and the test needs the text |
+| "Tiến hành thanh toán" button | `page.getByRole('button', { name: 'Tiến hành thanh toán' })` | Yes | |
+| Đăng nhập "Username" field | `page.getByRole('textbox').first()` | No | (proposed) The label-prefix locator: `.first()` breaks when another textbox is added above it, and it does not say which field it is |
+| Đăng nhập "Mật khẩu" field | `page.getByRole('textbox').nth(1)` | No | (proposed) As above |
+| "Sign In" button | Not captured (Enter pressed in the password field) | No | (proposed) `getByRole('button', { name: 'Sign In' })`: the test clicks what the user sees |
+| Coupon field | `page.getByRole('textbox', { name: 'Nhập mã giảm giá' })` | Yes (substring of the name "Nhập mã giảm giá...") | Not used by FR-08 |
+| "Xác Nhận Thanh Toán" button | `page.getByRole('button', { name: 'Xác Nhận Thanh Toán' })` | Yes | |
+| "Quay lại trang chủ" button | `page.getByRole('button', { name: 'Quay lại trang chủ' })` | Yes | |
+| Product page, cart lines, checkout list and total, success heading | Not captured (codegen records actions, not the elements a test reads) | – | From the ARIA snapshot (table above) |
+
+Conclusion (one sentence, student): [SV điền]
+
+**Still to do in T2:**
+
+1. The student: date / browser of the codegen run, check the "(proposed)" comparisons and write the conclusion sentence above.
+2. The decisions below (product-page add, product card locator).
+3. The agent: write the page objects and extend the API client (`addToCart`, `getCart`, `checkout` with or without a token, `myOrders`, `adminOrders`), check each locator once more through the page objects on the three browsers, then commit (`test (checkout): add page objects for the home, product, cart and checkout screens`).
 
 ## 3. Test data (T3)
 
