@@ -161,6 +161,9 @@ test.describe('FR-03 forgot & reset password – Web', () => {
       }
       if (e.passwordMasked) await expect.soft(fp.newPasswordInput).toHaveAttribute('type', 'password');
 
+      if (row.fillConfirm) {
+        await expect(fp.confirmPasswordInput, 'confirm field "Xác nhận mật khẩu mới" (FR-03)').toBeVisible();
+      }
       await fp.resetPassword(otp, row.newPassword!, row.fillConfirm ? row.confirm : undefined);
 
       if (e.kind === 'error') {
@@ -200,6 +203,7 @@ test.describe('FR-03 forgot & reset password – Web', () => {
       await fp.goto();
       await expect(fp.heading).toBeVisible();
       await expect.soft(fp.stepIndicator).toHaveText(e.stepIndicator!.step1!);
+      await expect(fp.backToLoginButton, 'button "Quay lại đăng nhập" (FR-03)').toBeVisible();
       await fp.backToLogin();
       await expect(page).toHaveURL(new RegExp(`${e.loginPath}$`));
       await expect(new LoginPage(page).signInButton).toBeVisible();
