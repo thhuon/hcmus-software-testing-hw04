@@ -154,7 +154,7 @@ No `<CONFIRM>` left.
 
 ## 4. Specs and assertion patterns (T4)
 
-Prompt used for generation: see the AI-use log entry of this step (prompt 19:12 17/11/2026, Web spec; the API spec follows in the next prompt, one prompt per spec file).
+Prompt used for generation: see the AI-use log entry of this step (Web spec: prompt 19:12 17/11/2026; API spec: next prompt; one prompt per spec file).
 
 The spec reads `data/forgot-password/web.json` and makes one test per row, title `<TC ID> – <title>`, grouped by the row's `flow`. Generated as is, not run yet (T5 runs and reviews it); checked only with `npx playwright test tests/forgot-password --list`: 30 tests per browser, 90 in all.
 
@@ -166,17 +166,18 @@ The spec reads `data/forgot-password/web.json` and makes one test per row, title
 | › flow `retryAfterError` | DT-06 | Soft (error above submit); Persisted outcome (rejected password refused, then the new one logs in, the old one refused) |
 | › flow `requestOnly` | DT-07, 08, 09 | Negative (no OTP message, no Bước 2 button); Element state ("Lấy mã OTP" still visible) |
 | › flow `otpWebThenApi` | DT-11 … 15, BVA-01, 02 | Soft (error above submit); Response (API reset `4xx`); Persisted outcome (old password logs in, new one refused) |
+| `tests/forgot-password/api.spec.ts` (prompt 19:21 17/11/2026) | DT-17, DT-27, DT-32 | Response (status class `200` / `4xx` of forgot-password and reset; `resetToken` present); Persisted outcome (logins of owner / other account, new and second password) |
 
 | Assertion pattern | Used by |
 | --- | --- |
-| Persisted outcome: login through the API with old / new password (`expect.poll`, `200` / `4xx`; A5, A6) | every row with an account except DT-02: 25 tests |
+| Persisted outcome: login through the API with old / new password (`expect.poll`, `200` / `4xx`; A5, A6) | every row with an account except DT-02: 25 Web tests; DT-17, DT-27, DT-32 |
 | Soft assertions (`expect.soft`): several checks of one result, the test goes on to the stored-password check | DT-01, 02, 03, 06, every `error` row (FR-22 `[role="alert"]` above `button[type="submit"]`) |
 | Visible text (`toHaveText`, `toContainText`) | DT-01, DT-03 |
 | Element state (`toBeVisible`, `toHaveAttribute`) | DT-01, DT-03, DT-07 … 09 |
 | Value format (`toMatch` a pattern from the data, distinct values) | DT-01, DT-02 |
 | URL / navigation (`toHaveURL`) | DT-03 |
 | Negative (`not.toBeVisible`) | DT-07 … 09 |
-| Response (status of the API reset) | DT-11 … 15, BVA-01, 02 |
+| Response (status of the API reset) | DT-11 … 15, BVA-01, 02, DT-17, DT-27, DT-32 |
 
 Page object additions made with the spec: `emailLabel` (for the `*` check) and `backToLogin()` in `page-objects/ForgotPasswordPage.ts`.
 
