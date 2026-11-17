@@ -40,7 +40,7 @@ The same three web features as HW02 (brief §5; group allocation: [HW02 group re
 
 **Skill demo video:** [https://youtu.be/Y7RpOnSWS8I](https://youtu.be/Y7RpOnSWS8I) – skill `test-automation` used on FR-15 Product CRUD, T1 → T7 and the bug comments (6:38, unlisted)
 
-The skills are generic (one per testing topic, sources in [skills/SOURCES.md](skills/SOURCES.md)), each with a Vietnamese reading copy (`SKILL.vi.md`, `review-rubric.vi.md`); the HW04 values they use are in [CLAUDE.md](CLAUDE.md) and [automation.config.json](automation.config.json).
+The skills are generic (one per testing topic, sources in [skills/SOURCES.md](skills/SOURCES.md)): the HW04 values they use are in [CLAUDE.md](CLAUDE.md) and [automation.config.json](automation.config.json).
 
 | Skill | Topic | Used for in HW04 |
 | --- | --- | --- |

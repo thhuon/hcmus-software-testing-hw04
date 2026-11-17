@@ -1,7 +1,7 @@
 # HW04-AI – Kế hoạch làm bài & ghi chú
 
 > File nội bộ để theo dõi tiến độ — **không bắt buộc nộp** (có thể để trong zip như "supporting material").
-> Đề gốc: `HW04_Automation_Testing_Original.md` (bản dịch: `HW04_Automation_Testing_Vietnamese.md`) · Quy định: `../___2026.Homework.Policies.md` · Feature: `features/selected-features.md`
+> Đề bài: tài liệu của môn, không để trong repo (đã xóa trước khi nộp, D5) · Quy định: `../___2026.Homework.Policies.md` · Feature: `features/selected-features.md`
 
 | Sinh viên | MSSV | Bài tập | Tên file nộp |
 | --- | --- | --- | --- |
@@ -82,7 +82,7 @@ Như A1–A7 nhưng **dùng skill**. Chỗ nào skill vướng thì sửa skill 
 - [ ] **D2. `AI_Critique.md`** – 200–300 từ (đề §10).
 - [ ] **D3. Biểu mẫu AI** – `prompt_log.md` (skill logging-ai-prompts), tổng AI-02 §4–§6, AI-03, AI-05.
 - [ ] **D4. `README.md`** – bảng tự đánh giá + test summary: số feature; số TC tự động hóa / đã chạy / passed / failed; số lần chạy trình duyệt; số bug; link 2 video.
-- [ ] **D5. Dọn trước khi nộp** (SV yêu cầu 17/11) – xóa khỏi repo và khỏi bản nộp:
+- [x] **D5. Dọn trước khi nộp** (SV yêu cầu 17/11; đã xóa 18/11) – xóa khỏi repo và khỏi bản nộp:
   - các bản tiếng Việt của skill: `skills/**/SKILL.vi.md`, `skills/**/review-rubric.vi.md`, `skills/review-rubric-shared.vi.md`;
   - tài liệu học: đề bài `HW04_Automation_Testing_Original.md`, `HW04_Automation_Testing_Vietnamese.md`, `HW04_Automation_Testing_Vietnamese.pdf`;
   - sửa các chỗ còn nhắc tới chúng: `README.md` §3, `skills/README.md` ("Vietnamese reading copies"), `CLAUDE.md` mục Assignment; kiểm tra lại bằng `git ls-files | grep -i -E "\.vi\.md|HW04_Automation_Testing"` (không còn dòng nào).

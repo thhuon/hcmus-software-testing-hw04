@@ -4,7 +4,7 @@ Skills are generic (one per testing topic). Every value that belongs to this hom
 
 ## Assignment and policies
 
-- Brief: `HW04_Automation_Testing_Original.md` (original) · Vietnamese reading copy `HW04_Automation_Testing_Vietnamese.md` · task list and execution order `PLAN.md`.
+- Brief: the course's HW04 brief (course material, not kept in the repository) · task list and execution order `PLAN.md`.
 - Policies: `../___2026.Homework.Policies.md`. Integrity: brief §11 (HTML reports and the demo video are verified by the TAs; never edit a report by hand, never fabricate a run).
 - Tester: **HỒ THÙY HƯƠNG – 23120046** (CQ2023/3).
 
@@ -60,4 +60,4 @@ HW02 bugs to compare against: `../week02/bugs/BUG_REPORT.md` (group issues `angq
 - **Review notes at fix time**: every correction of an AI-generated script goes into `features/<key>/` review table (what was wrong, why the AI missed it: prompt quality, model limitation, feature characteristic) in the same step.
 - **AI-02 row in the same turn as every artifact** (`AI-02_AI_Audit_Report.md` §3, Vietnamese as the course form), committed on its own (`docs (ai): add AI-02 row for <artifact>`). Columns and wording as in HW03 (`../week03/CLAUDE.md`). Skill changes are `Artifact #Sn`.
 - Prompt log: `prompt_log.md`, filled with the `logging-ai-prompts` skill at the end of each work session. The feature design files have no header table (student, 17/11): skip the skill's step that updates a `Prompt log entries` field.
-- **Before submission** (student, 17/11): delete the Vietnamese copies (`*.vi.md` of the skills) and the course materials (the brief `HW04_Automation_Testing_*.md` / `.pdf`) from the repository and the zip, and remove the references to them (PLAN.md D5). Until then they stay as reading copies.
+- **Before submission** (student, 17/11; done 18/11): delete the Vietnamese copies (`*.vi.md` of the skills) and the course materials (the brief `HW04_Automation_Testing_*.md` / `.pdf`) from the repository and the zip, and remove the references to them (PLAN.md D5). Until then they stay as reading copies.

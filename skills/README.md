@@ -11,8 +11,6 @@ Claude Code skills (Agent Skills format: one folder per skill, `SKILL.md` with `
 
 Typical chain: test-automation → automation-bug-reporting (every confirmed product defect) → recording-test-demo-videos; git-commit-conventions after every step. Reused from earlier work: logging-ai-prompts (prompt log from the session transcript).
 
-**Vietnamese reading copies:** every skill has `SKILL.vi.md` and `review-rubric.vi.md` (shared rules: [review-rubric-shared.vi.md](review-rubric-shared.vi.md)). The English files are the ones the agent uses; if the two differ, the English file wins.
-
 ## Using the skills in a project
 
 Install by symlink, either per project in `<project>/.claude/skills/<name>` or for every project in `~/.claude/skills/<name>`, pointing to the skill folder.
