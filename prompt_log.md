@@ -3876,6 +3876,6 @@ Bash Preview this session's pending prompts
 Bash Write the pending prompts to the log
 ```
 
-- **Used in:** `features/forgot-password/automation_design.md` §8 (trace viewer line), `bugs/BUG_REPORT.md` BUG-02 notes, `HW04_Report.md` §3.3; `prompt_log.md` (AI-02 Artifact #34)
+- **Used in:** `features/forgot-password/automation_design.md` §8 (trace viewer line), `bugs/BUG_REPORT.md` BUG-02 notes, `HW04_Report.md` §3.3; `prompt_log.md` (AI-02 Artifact #35)
 
 ---
