@@ -132,10 +132,19 @@ Conclusion (one sentence, student): The Codegen-generated locators can identify 
 
 ## 3. Test data (T3)
 
+Inputs are the HW02 test-case values (§1); expected values come from FR-03, FR-01, FR-22, SEC-07, the API spec and the HW02 assumptions A1–A17 (`../week02/features/fA-pool-A/01_test_basis.md`), never from the running app. Message wording is not asserted: the requirement gives none, and A1 / A5 / A6 say it is recorded, not judged.
+
 | File | Rows | Columns | Data reset / uniqueness |
 | --- | --- | --- | --- |
+| `data/forgot-password/web.json` | 30 (`web/<ID>` of §1) | `id`, `technique`, `title`, `partition`, `flow` (which spec flow runs the row: `reset`, `otpFormat`, `backToLogin`, `retryAfterError`, `requestOnly`, `otpWebThenApi`), inputs `account` (password of the account created for the test), `email` (`null` = that account), `otp` (`"issued"` = the OTP shown on Bước 2, or a fixed value), `newPassword`, `confirm`; `expected` (`kind`: `success` / `error` / `blocked`, plus the checks of the TC: `errorAboveSubmit`, `oldPasswordLogsIn`, `newPasswordLogsIn`, `apiRejected`, `stepIndicator`, `otpPattern`, …); `source` | Every row with an `account` registers its own account through the API before the test: e-mail `fr03.{id}.{run}@example.com` (`{run}` = start time of the run), so no two tests and no two runs share an account. The seed account `test@eshop.com` is not used, so no test has to restore its password (HW02 fixture F8 no longer needed). Official runs also start fresh servers (database re-seeded) |
+| `data/forgot-password/api.json` | 3 (`api/<ID>`: DT-17, DT-27, DT-32) | `id`, `technique`, `title`, `partition`, `flow`, `accounts` (`owner`, `other` with their passwords), `request` (whose OTP, for which e-mail, new passwords, omitted field), `expected` (`reset` / `firstReset` / `secondReset`: `accepted` / `rejected`; which logins succeed), `source`; file-level `statusMeaning` | Same rule: `fr03.{id}.{role}.{run}@example.com` per account |
+
+Changes against the HW02 inputs: the registered e-mail is a new account per test instead of `test@eshop.com` (same partition EC-V1-1 "registered email"; keeps the tests independent), and DT-05's account is created with `Current@2026` (HW02 fixture F3). DT-17's second account uses the F2 password `Other@2026x`.
 
 Open expected values (`<CONFIRM>`):
+
+1. **DT-03 `loginUrl`**: FR-03 says only that "Quay lại đăng nhập" goes back to login; no URL is given. Proposed: recognise the login page by its "Sign In" button (as T2) and the path `/login` (the path of the "Đăng nhập" link of the app; not in the SRS).
+2. **API `statusMeaning`** (`accepted` / `rejected`): the API spec gives `200` for login and forgot-password only, nothing for `/api/reset-password`. Proposed: accepted = `200`, rejected = any `4xx`; the login checks (A5 / A6) stay the main oracle, so a wrong status alone is not reported as a defect.
 
 ## 4. Specs and assertion patterns (T4)
 

@@ -1,0 +1,84 @@
+{
+  "about": "FR-03 API test data (design §3): TCs the Web cannot reach. Accounts registered through the API before the test (accountEmail, {role} = owner / other).",
+  "accountEmail": "fr03.{id}.{role}.{run}@example.com",
+  "rows": [
+    {
+      "id": "DT-17",
+      "technique": "DT",
+      "title": "OTP of one email cannot reset another email",
+      "partition": "EC-V3-2",
+      "flow": "otpOtherEmail",
+      "accounts": {
+        "owner": {
+          "password": "Test1234!"
+        },
+        "other": {
+          "password": "Other@2026x"
+        }
+      },
+      "request": {
+        "otpFor": "owner",
+        "resetFor": "other",
+        "newPassword": "NewPass@2026"
+      },
+      "expected": {
+        "reset": "rejected",
+        "otherOwnPasswordLogsIn": true,
+        "ownerOwnPasswordLogsIn": true
+      },
+      "source": "FR-03 \"OTP chỉ hợp lệ cho email đã yêu cầu, không thể dùng cho email khác.\"; R2; A6"
+    },
+    {
+      "id": "DT-27",
+      "technique": "DT",
+      "title": "reset without newPassword is rejected",
+      "partition": "EC-V4-11",
+      "flow": "missingNewPassword",
+      "accounts": {
+        "owner": {
+          "password": "Test1234!"
+        }
+      },
+      "request": {
+        "otpFor": "owner",
+        "resetFor": "owner",
+        "omit": "newPassword"
+      },
+      "expected": {
+        "reset": "rejected",
+        "ownerOwnPasswordLogsIn": true
+      },
+      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\"; A4 (FR-01 rules also hold for the API); A6"
+    },
+    {
+      "id": "DT-32",
+      "technique": "DT",
+      "title": "OTP cannot be used twice",
+      "partition": "EC-V7-4",
+      "flow": "otpReuse",
+      "accounts": {
+        "owner": {
+          "password": "Test1234!"
+        }
+      },
+      "request": {
+        "otpFor": "owner",
+        "resetFor": "owner",
+        "newPassword": "NewPass@2026",
+        "secondNewPassword": "Again@2026x"
+      },
+      "expected": {
+        "firstReset": "accepted",
+        "secondReset": "rejected",
+        "newPasswordLogsIn": true,
+        "secondPasswordLogsIn": false
+      },
+      "source": "SEC-07 \"vô hiệu hóa sau khi dùng\"; A5"
+    }
+  ],
+  "statusMeaning": {
+    "accepted": "<CONFIRM>",
+    "rejected": "<CONFIRM>",
+    "loginToken": "200 with `token` (API spec §1.2)"
+  }
+}

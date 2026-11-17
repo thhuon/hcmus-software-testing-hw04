@@ -1,0 +1,614 @@
+{
+  "about": "FR-03 Web test data (design §3). account = a new account registered through the API before the test, e-mail from accountEmail with {id} and {run} filled in by the spec; email null = that account's e-mail. otp \"issued\" = the OTP shown on Bước 2.",
+  "accountEmail": "fr03.{id}.{run}@example.com",
+  "rows": [
+    {
+      "id": "DT-01",
+      "technique": "DT",
+      "title": "all valid: reset and log in with the new password",
+      "partition": "EC-V1-1, V2-1 … V8-1, O1-1 … O5-2",
+      "flow": "reset",
+      "account": {
+        "password": "Test1234!"
+      },
+      "email": null,
+      "otp": "issued",
+      "newPassword": "NewPass@2026",
+      "confirm": "NewPass@2026",
+      "expected": {
+        "kind": "success",
+        "newPasswordLogsIn": true,
+        "oldPasswordLogsIn": false,
+        "stepIndicator": {
+          "step1": "Bước 1 / 2",
+          "step2": "Bước 2 / 2"
+        },
+        "requiredMarked": true,
+        "otpPattern": "^\\d{6}$",
+        "step2Fields": [
+          "otp",
+          "newPassword",
+          "confirm"
+        ],
+        "passwordMasked": true
+      },
+      "source": "FR-03 \"Bước 1 / 2\", \"6 chữ số\", \"Xác nhận mật khẩu mới\"; A16 \"Bước 2 / 2\"; FR-22 `*` and type=\"password\"; A5: after a successful reset the new password logs in, the old one fails"
+    },
+    {
+      "id": "DT-02",
+      "technique": "DT",
+      "title": "three OTPs: 6 digits each, not all equal",
+      "partition": "EC-O1-2, O1-1",
+      "flow": "otpFormat",
+      "account": {
+        "password": "Test1234!"
+      },
+      "email": null,
+      "expected": {
+        "kind": "success",
+        "otpRequests": 3,
+        "otpPattern": "^\\d{6}$",
+        "otpsNotAllEqual": true
+      },
+      "source": "FR-03 \"Hệ thống sinh mã OTP **6 chữ số ngẫu nhiên**\"; A17"
+    },
+    {
+      "id": "DT-03",
+      "technique": "DT",
+      "title": "\"Quay lại đăng nhập\" opens the login page",
+      "partition": "EC-V6-2, O6-1",
+      "flow": "backToLogin",
+      "expected": {
+        "kind": "success",
+        "stepIndicator": {
+          "step1": "Bước 1 / 2"
+        },
+        "navigatesTo": "login",
+        "loginUrl": "<CONFIRM>"
+      },
+      "source": "FR-03 \"Bước 1 / 2\", \"Có nút **Quay lại đăng nhập**.\""
+    },
+    {
+      "id": "DT-04",
+      "technique": "DT",
+      "title": "valid password with an extra character outside the set",
+      "partition": "EC-V4-2",
+      "flow": "reset",
+      "account": {
+        "password": "Test1234!"
+      },
+      "email": null,
+      "otp": "issued",
+      "newPassword": "NewPass@2026#",
+      "confirm": "NewPass@2026#",
+      "expected": {
+        "kind": "success",
+        "newPasswordLogsIn": true,
+        "oldPasswordLogsIn": false
+      },
+      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\"; A10 (a valid password may also contain other characters); A5: after a successful reset the new password logs in, the old one fails"
+    },
+    {
+      "id": "DT-05",
+      "technique": "DT",
+      "title": "new password equal to the current one",
+      "partition": "EC-V4-3",
+      "flow": "reset",
+      "account": {
+        "password": "Current@2026"
+      },
+      "email": null,
+      "otp": "issued",
+      "newPassword": "Current@2026",
+      "confirm": "Current@2026",
+      "expected": {
+        "kind": "success",
+        "newPasswordLogsIn": true
+      },
+      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\"; A11 (no rule forbids the current password); A5: after a successful reset the new password logs in, the old one fails"
+    },
+    {
+      "id": "DT-06",
+      "technique": "DT",
+      "title": "OTP still valid after a rejected attempt",
+      "partition": "EC-V7-2",
+      "flow": "retryAfterError",
+      "account": {
+        "password": "Test1234!"
+      },
+      "email": null,
+      "otp": "issued",
+      "expected": {
+        "kind": "success",
+        "attempts": [
+          {
+            "newPassword": "NewPass2026",
+            "confirm": "NewPass2026",
+            "expected": "error",
+            "errorAboveSubmit": true
+          },
+          {
+            "newPassword": "NewPass@2026",
+            "confirm": "NewPass@2026",
+            "expected": "success"
+          }
+        ],
+        "newPasswordLogsIn": true,
+        "oldPasswordLogsIn": false
+      },
+      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\" + FR-01 \"1 ký tự đặc biệt\"; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6 (a rejected attempt does not use up the OTP); A5: after a successful reset the new password logs in, the old one fails"
+    },
+    {
+      "id": "DT-07",
+      "technique": "DT",
+      "title": "empty email gets no OTP",
+      "partition": "EC-V1-2",
+      "flow": "requestOnly",
+      "email": "",
+      "expected": {
+        "kind": "blocked",
+        "otpShown": false,
+        "staysOnStep": 1
+      },
+      "source": "FR-03 \"Người dùng nhập địa chỉ Email đã đăng ký.\"; A2"
+    },
+    {
+      "id": "DT-08",
+      "technique": "DT",
+      "title": "malformed email gets no OTP",
+      "partition": "EC-V1-3",
+      "flow": "requestOnly",
+      "email": "test.eshop.com",
+      "expected": {
+        "kind": "blocked",
+        "otpShown": false,
+        "staysOnStep": 1
+      },
+      "source": "FR-03 \"Người dùng nhập địa chỉ Email đã đăng ký.\"; FR-01 `user@domain.com`; A2"
+    },
+    {
+      "id": "DT-09",
+      "technique": "DT",
+      "title": "unregistered email gets no OTP",
+      "partition": "EC-V1-4",
+      "flow": "requestOnly",
+      "email": "noaccount.fr03@example.com",
+      "expected": {
+        "kind": "blocked",
+        "otpShown": false,
+        "staysOnStep": 1
+      },
+      "source": "FR-03 \"Người dùng nhập địa chỉ Email đã đăng ký.\"; A1"
+    },
+    {
+      "id": "DT-11",
+      "technique": "DT",
+      "title": "OTP of 3 digits is rejected",
+      "partition": "EC-V2-2",
+      "flow": "otpWebThenApi",
+      "account": {
+        "password": "Test1234!"
+      },
+      "otp": "482",
+      "newPassword": "NewPass@2026",
+      "confirm": "NewPass@2026",
+      "expected": {
+        "kind": "error",
+        "errorAboveSubmit": true,
+        "oldPasswordLogsIn": true,
+        "newPasswordLogsIn": false,
+        "apiRejected": true
+      },
+      "source": "FR-03 \"Hệ thống sinh mã OTP **6 chữ số ngẫu nhiên**\"; A3: an OTP that is not exactly the issued 6 digits is rejected; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6: Bước 2 condition broken → error above the submit button, password unchanged, OTP not used up"
+    },
+    {
+      "id": "DT-12",
+      "technique": "DT",
+      "title": "OTP of 9 digits is rejected",
+      "partition": "EC-V2-3",
+      "flow": "otpWebThenApi",
+      "account": {
+        "password": "Test1234!"
+      },
+      "otp": "482913123",
+      "newPassword": "NewPass@2026",
+      "confirm": "NewPass@2026",
+      "expected": {
+        "kind": "error",
+        "errorAboveSubmit": true,
+        "oldPasswordLogsIn": true,
+        "newPasswordLogsIn": false,
+        "apiRejected": true
+      },
+      "source": "FR-03 \"Hệ thống sinh mã OTP **6 chữ số ngẫu nhiên**\"; A3: an OTP that is not exactly the issued 6 digits is rejected; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6: Bước 2 condition broken → error above the submit button, password unchanged, OTP not used up"
+    },
+    {
+      "id": "DT-13",
+      "technique": "DT",
+      "title": "empty OTP is rejected",
+      "partition": "EC-V2-4",
+      "flow": "otpWebThenApi",
+      "account": {
+        "password": "Test1234!"
+      },
+      "otp": "",
+      "newPassword": "NewPass@2026",
+      "confirm": "NewPass@2026",
+      "expected": {
+        "kind": "error",
+        "errorAboveSubmit": true,
+        "oldPasswordLogsIn": true,
+        "newPasswordLogsIn": false,
+        "apiRejected": true
+      },
+      "source": "FR-03 \"Hệ thống sinh mã OTP **6 chữ số ngẫu nhiên**\"; A3: an OTP that is not exactly the issued 6 digits is rejected; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6: Bước 2 condition broken → error above the submit button, password unchanged, OTP not used up"
+    },
+    {
+      "id": "DT-14",
+      "technique": "DT",
+      "title": "OTP with a letter is rejected",
+      "partition": "EC-V2-5",
+      "flow": "otpWebThenApi",
+      "account": {
+        "password": "Test1234!"
+      },
+      "otp": "48291A",
+      "newPassword": "NewPass@2026",
+      "confirm": "NewPass@2026",
+      "expected": {
+        "kind": "error",
+        "errorAboveSubmit": true,
+        "oldPasswordLogsIn": true,
+        "newPasswordLogsIn": false,
+        "apiRejected": true
+      },
+      "source": "FR-03 \"Hệ thống sinh mã OTP **6 chữ số ngẫu nhiên**\"; A3: an OTP that is not exactly the issued 6 digits is rejected; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6: Bước 2 condition broken → error above the submit button, password unchanged, OTP not used up"
+    },
+    {
+      "id": "DT-15",
+      "technique": "DT",
+      "title": "6-digit OTP that was not issued is rejected",
+      "partition": "EC-V2-6",
+      "flow": "otpWebThenApi",
+      "account": {
+        "password": "Test1234!"
+      },
+      "otp": "482914",
+      "newPassword": "NewPass@2026",
+      "confirm": "NewPass@2026",
+      "expected": {
+        "kind": "error",
+        "errorAboveSubmit": true,
+        "oldPasswordLogsIn": true,
+        "newPasswordLogsIn": false,
+        "apiRejected": true
+      },
+      "source": "FR-03 \"Hệ thống sinh mã OTP **6 chữ số ngẫu nhiên**\"; A3: an OTP that is not exactly the issued 6 digits is rejected; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6: Bước 2 condition broken → error above the submit button, password unchanged, OTP not used up"
+    },
+    {
+      "id": "DT-20",
+      "technique": "DT",
+      "title": "password shorter than 8 characters",
+      "partition": "EC-V4-4",
+      "flow": "reset",
+      "account": {
+        "password": "Test1234!"
+      },
+      "otp": "issued",
+      "newPassword": "Ab1@x",
+      "confirm": "Ab1@x",
+      "expected": {
+        "kind": "error",
+        "errorAboveSubmit": true,
+        "oldPasswordLogsIn": true,
+        "newPasswordLogsIn": false
+      },
+      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\" + FR-01 \"Tối thiểu 8 ký tự\"; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6: Bước 2 condition broken → error above the submit button, password unchanged, OTP not used up"
+    },
+    {
+      "id": "DT-21",
+      "technique": "DT",
+      "title": "empty password",
+      "partition": "EC-V4-5",
+      "flow": "reset",
+      "account": {
+        "password": "Test1234!"
+      },
+      "otp": "issued",
+      "newPassword": "",
+      "confirm": "",
+      "expected": {
+        "kind": "error",
+        "errorAboveSubmit": true,
+        "oldPasswordLogsIn": true,
+        "newPasswordLogsIn": false
+      },
+      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\" + FR-01 \"Tối thiểu 8 ký tự\"; A14; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6: Bước 2 condition broken → error above the submit button, password unchanged, OTP not used up"
+    },
+    {
+      "id": "DT-22",
+      "technique": "DT",
+      "title": "password without an upper-case letter",
+      "partition": "EC-V4-6",
+      "flow": "reset",
+      "account": {
+        "password": "Test1234!"
+      },
+      "otp": "issued",
+      "newPassword": "newpass@2026",
+      "confirm": "newpass@2026",
+      "expected": {
+        "kind": "error",
+        "errorAboveSubmit": true,
+        "oldPasswordLogsIn": true,
+        "newPasswordLogsIn": false
+      },
+      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\" + FR-01 \"1 chữ hoa\"; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6: Bước 2 condition broken → error above the submit button, password unchanged, OTP not used up"
+    },
+    {
+      "id": "DT-23",
+      "technique": "DT",
+      "title": "password without a lower-case letter",
+      "partition": "EC-V4-7",
+      "flow": "reset",
+      "account": {
+        "password": "Test1234!"
+      },
+      "otp": "issued",
+      "newPassword": "NEWPASS@2026",
+      "confirm": "NEWPASS@2026",
+      "expected": {
+        "kind": "error",
+        "errorAboveSubmit": true,
+        "oldPasswordLogsIn": true,
+        "newPasswordLogsIn": false
+      },
+      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\" + FR-01 \"1 chữ thường\"; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6: Bước 2 condition broken → error above the submit button, password unchanged, OTP not used up"
+    },
+    {
+      "id": "DT-24",
+      "technique": "DT",
+      "title": "password without a digit",
+      "partition": "EC-V4-8",
+      "flow": "reset",
+      "account": {
+        "password": "Test1234!"
+      },
+      "otp": "issued",
+      "newPassword": "NewPass@word",
+      "confirm": "NewPass@word",
+      "expected": {
+        "kind": "error",
+        "errorAboveSubmit": true,
+        "oldPasswordLogsIn": true,
+        "newPasswordLogsIn": false
+      },
+      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\" + FR-01 \"1 chữ số\"; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6: Bước 2 condition broken → error above the submit button, password unchanged, OTP not used up"
+    },
+    {
+      "id": "DT-25",
+      "technique": "DT",
+      "title": "password without a special character",
+      "partition": "EC-V4-9",
+      "flow": "reset",
+      "account": {
+        "password": "Test1234!"
+      },
+      "otp": "issued",
+      "newPassword": "NewPass2026",
+      "confirm": "NewPass2026",
+      "expected": {
+        "kind": "error",
+        "errorAboveSubmit": true,
+        "oldPasswordLogsIn": true,
+        "newPasswordLogsIn": false
+      },
+      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\" + FR-01 \"1 ký tự đặc biệt\"; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6: Bước 2 condition broken → error above the submit button, password unchanged, OTP not used up"
+    },
+    {
+      "id": "DT-26",
+      "technique": "DT",
+      "title": "special character only outside the set (#)",
+      "partition": "EC-V4-10",
+      "flow": "reset",
+      "account": {
+        "password": "Test1234!"
+      },
+      "otp": "issued",
+      "newPassword": "NewPass#2026",
+      "confirm": "NewPass#2026",
+      "expected": {
+        "kind": "error",
+        "errorAboveSubmit": true,
+        "oldPasswordLogsIn": true,
+        "newPasswordLogsIn": false
+      },
+      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\" + FR-01 \"1 ký tự đặc biệt (`@`, `$`, `!`, `%`, `*`, `?`, `&`)\"; A10; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6: Bước 2 condition broken → error above the submit button, password unchanged, OTP not used up"
+    },
+    {
+      "id": "DT-28",
+      "technique": "DT",
+      "title": "confirm differs from the new password",
+      "partition": "EC-V5-2",
+      "flow": "reset",
+      "account": {
+        "password": "Test1234!"
+      },
+      "email": null,
+      "otp": "issued",
+      "newPassword": "NewPass@2026",
+      "confirm": "NewPass@2025",
+      "expected": {
+        "kind": "error",
+        "errorAboveSubmit": true,
+        "oldPasswordLogsIn": true,
+        "newPasswordLogsIn": false
+      },
+      "source": "FR-03 \"Hai trường mật khẩu phải khớp nhau.\"; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6: Bước 2 condition broken → error above the submit button, password unchanged, OTP not used up"
+    },
+    {
+      "id": "DT-29",
+      "technique": "DT",
+      "title": "confirm empty",
+      "partition": "EC-V5-3",
+      "flow": "reset",
+      "account": {
+        "password": "Test1234!"
+      },
+      "email": null,
+      "otp": "issued",
+      "newPassword": "NewPass@2026",
+      "confirm": "",
+      "expected": {
+        "kind": "error",
+        "errorAboveSubmit": true,
+        "oldPasswordLogsIn": true,
+        "newPasswordLogsIn": false
+      },
+      "source": "FR-03 \"Hai trường mật khẩu phải khớp nhau.\"; A14; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6: Bước 2 condition broken → error above the submit button, password unchanged, OTP not used up"
+    },
+    {
+      "id": "DT-30",
+      "technique": "DT",
+      "title": "confirm differs in letter case",
+      "partition": "EC-V5-4",
+      "flow": "reset",
+      "account": {
+        "password": "Test1234!"
+      },
+      "email": null,
+      "otp": "issued",
+      "newPassword": "NewPass@2026",
+      "confirm": "newPass@2026",
+      "expected": {
+        "kind": "error",
+        "errorAboveSubmit": true,
+        "oldPasswordLogsIn": true,
+        "newPasswordLogsIn": false
+      },
+      "source": "FR-03 \"Hai trường mật khẩu phải khớp nhau.\"; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6: Bước 2 condition broken → error above the submit button, password unchanged, OTP not used up"
+    },
+    {
+      "id": "DT-35",
+      "technique": "DT",
+      "title": "special character only outside the set (space)",
+      "partition": "EC-V4-10",
+      "flow": "reset",
+      "account": {
+        "password": "Test1234!"
+      },
+      "otp": "issued",
+      "newPassword": "NewPass 2026",
+      "confirm": "NewPass 2026",
+      "expected": {
+        "kind": "error",
+        "errorAboveSubmit": true,
+        "oldPasswordLogsIn": true,
+        "newPasswordLogsIn": false
+      },
+      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\" + FR-01 \"1 ký tự đặc biệt (`@`, `$`, `!`, `%`, `*`, `?`, `&`)\"; A10 (names the space); FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6: Bước 2 condition broken → error above the submit button, password unchanged, OTP not used up"
+    },
+    {
+      "id": "BVA-01",
+      "technique": "BVA",
+      "title": "OTP of 5 digits (6 − 1) is rejected",
+      "partition": "B1 LB−1",
+      "flow": "otpWebThenApi",
+      "account": {
+        "password": "Test1234!"
+      },
+      "otp": "48291",
+      "newPassword": "NewPass@2026",
+      "confirm": "NewPass@2026",
+      "expected": {
+        "kind": "error",
+        "errorAboveSubmit": true,
+        "oldPasswordLogsIn": true,
+        "newPasswordLogsIn": false,
+        "apiRejected": true
+      },
+      "source": "FR-03 \"Hệ thống sinh mã OTP **6 chữ số ngẫu nhiên**\"; A3: an OTP that is not exactly the issued 6 digits is rejected; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6: Bước 2 condition broken → error above the submit button, password unchanged, OTP not used up"
+    },
+    {
+      "id": "BVA-02",
+      "technique": "BVA",
+      "title": "OTP of 7 digits (6 + 1) is rejected",
+      "partition": "B1 UB+1",
+      "flow": "otpWebThenApi",
+      "account": {
+        "password": "Test1234!"
+      },
+      "otp": "4829131",
+      "newPassword": "NewPass@2026",
+      "confirm": "NewPass@2026",
+      "expected": {
+        "kind": "error",
+        "errorAboveSubmit": true,
+        "oldPasswordLogsIn": true,
+        "newPasswordLogsIn": false,
+        "apiRejected": true
+      },
+      "source": "FR-03 \"Hệ thống sinh mã OTP **6 chữ số ngẫu nhiên**\"; A3: an OTP that is not exactly the issued 6 digits is rejected; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6: Bước 2 condition broken → error above the submit button, password unchanged, OTP not used up"
+    },
+    {
+      "id": "BVA-03",
+      "technique": "BVA",
+      "title": "password of 7 characters (8 − 1)",
+      "partition": "B2 LB−1",
+      "flow": "reset",
+      "account": {
+        "password": "Test1234!"
+      },
+      "otp": "issued",
+      "newPassword": "NewP@26",
+      "confirm": "NewP@26",
+      "expected": {
+        "kind": "error",
+        "errorAboveSubmit": true,
+        "oldPasswordLogsIn": true,
+        "newPasswordLogsIn": false
+      },
+      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\" + FR-01 \"Tối thiểu 8 ký tự\"; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6: Bước 2 condition broken → error above the submit button, password unchanged, OTP not used up"
+    },
+    {
+      "id": "BVA-04",
+      "technique": "BVA",
+      "title": "password of 8 characters (lower bound)",
+      "partition": "B2 LB",
+      "flow": "reset",
+      "account": {
+        "password": "Test1234!"
+      },
+      "email": null,
+      "otp": "issued",
+      "newPassword": "NewP@202",
+      "confirm": "NewP@202",
+      "expected": {
+        "kind": "success",
+        "newPasswordLogsIn": true,
+        "oldPasswordLogsIn": false
+      },
+      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\" + FR-01 \"Tối thiểu 8 ký tự\"; A5: after a successful reset the new password logs in, the old one fails"
+    },
+    {
+      "id": "BVA-05",
+      "technique": "BVA",
+      "title": "password of 9 characters (8 + 1)",
+      "partition": "B2 LB+1",
+      "flow": "reset",
+      "account": {
+        "password": "Test1234!"
+      },
+      "email": null,
+      "otp": "issued",
+      "newPassword": "NewP@2026",
+      "confirm": "NewP@2026",
+      "expected": {
+        "kind": "success",
+        "newPasswordLogsIn": true,
+        "oldPasswordLogsIn": false
+      },
+      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\" + FR-01 \"Tối thiểu 8 ký tự\"; A5: after a successful reset the new password logs in, the old one fails"
+    }
+  ]
+}
