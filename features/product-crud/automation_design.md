@@ -150,7 +150,7 @@ Open expected values (`<CONFIRM>`): none. Every expected value is a TC value, a 
 
 ## 4. Specs and assertion patterns (T4)
 
-Prompt used for generation: see the AI-use log entries of this step (the T4 prompts of 18/11/2026, logged later: one for `web.spec.ts`, the next for `api.spec.ts`). One prompt per spec file; the generated code is committed as it came (`8be9fac`, `bd0006d`) and is reviewed in T5.
+Prompt used for generation: see the AI-use log entries of this step (Prompt049 for `web.spec.ts`, Prompt050 for `api.spec.ts`). One prompt per spec file; the generated code is committed as it came (`8be9fac`, `bd0006d`) and is reviewed in T5.
 
 | Spec | TC IDs | Assertion patterns |
 | --- | --- | --- |
