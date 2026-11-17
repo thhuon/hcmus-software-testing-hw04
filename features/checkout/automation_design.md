@@ -145,21 +145,25 @@ Open expected values (`<CONFIRM>`): none. DT-07 keeps the TC as it is (student 1
 
 ## 4. Specs and assertion patterns (T4)
 
-Prompt used for generation: see the AI-use log entry of this step (prompt 17/11 19:59 for `web.spec.ts`; `api.spec.ts` in the next prompt). One prompt per spec file; the generated code is committed as it came (`e32f37b`) and is reviewed in T5.
+Prompt used for generation: see the AI-use log entries of this step (prompt 17/11 19:59 for `web.spec.ts`, prompt 17/11 20:1x for `api.spec.ts`). One prompt per spec file; the generated code is committed as it came (`e32f37b`, `500f111`) and is reviewed in T5.
 
 | Spec | TC IDs | Assertion patterns |
 | --- | --- | --- |
 | `tests/checkout/web.spec.ts` (7 tests: one loop per `flow` of `web.json`) | DT-01, BVA-01 … 04 (`checkout`) | Visible text (`toHaveText` on each list item: name + quantity; `toContainText` on the total, pattern from the data), element state (`toHaveCount` of the list items, of the cart lines), negative (`toHaveCount(0)` of an editable total field), persisted outcome (`expect.poll` on the account's orders, `toMatchObject` status + `total_amount` through the API), soft assertions for the page checks |
 | | DT-03 (`guest`) | Persisted outcome (all orders through the admin API, after each path); the dialog text, URL and response status are recorded as annotations, not asserted (A2, Q1) |
 | | DT-07 (`emptyCart`, Web part) | Visible state (`toBeVisible` of the empty message and illustration), negative (`toHaveCount(0)` of "Tiến hành thanh toán"), persisted outcome (`toHaveLength(0)` of the account's orders); soft for the page checks |
+| `tests/checkout/api.spec.ts` (11 tests: one loop over `api.json`) | DT-02, DT-08 (`accepted`) | Persisted outcome (`toHaveLength(1)` of the new orders, `toMatchObject` status + `total_amount`), server cart (`toHaveLength(0)` of `GET /api/cart`), soft assertions |
+| | DT-04 … 06, DT-07 API part (`refused`) | Persisted outcome (`toHaveLength(0)` of the new orders: all orders through the admin API for DT-04 … 06, own orders for DT-07), server cart unchanged; soft. The status is an annotation only (Q1) |
+| | DT-09 … 13 (`serverTotalOrRefused`) | `toBeLessThanOrEqual(1)` new order, `toEqual` of the new orders' totals against the server total, cart lines expected from the outcome (0 if stored, 3 if refused); soft |
 
 | Assertion pattern | Used by |
 | --- | --- |
 | Visible message / text | DT-01 (items, total text), DT-07 (empty-cart message) |
 | Element state | DT-01, BVA-01 … 04 (item count, cart lines after the checkout), DT-07 (illustration) |
 | Negative assertion | DT-01 (no editable total), DT-07 (no checkout button) |
-| Persisted outcome (API) | DT-01, BVA-01 … 04 (new order, status, total), DT-03 (all orders unchanged), DT-07 (no order) |
-| Soft assertions | DT-01 page checks, DT-07 page checks |
+| Persisted outcome (API) | DT-01, BVA-01 … 04 (new order, status, total), DT-03 (all orders unchanged), DT-07 (no order); API spec: every row (orders and server cart) |
+| Soft assertions | DT-01 page checks, DT-07 page checks; API spec: the order fields and the cart |
+| Value comparison of a list | DT-09 … 13 (`toEqual` of the new orders' totals) |
 
 **First run of the generated Web spec** (agent, 17/11 20:02, Chromium only, `REPORT_DIR` and `--output` in a temporary folder outside the repository so that a parallel session's `playwright-report/` is not overwritten; not an official run, nothing fixed): 1 passed, 6 failed.
 
@@ -170,7 +174,23 @@ Prompt used for generation: see the AI-use log entry of this step (prompt 17/11 
 | DT-03 | passed | path (a): dialog "Bạn cần đăng nhập để thanh toán!", URL `/login`; path (b): response 401, dialog "Lỗi khi thanh toán: Unauthorized"; all orders unchanged after each path |
 | DT-07 | failed | empty-cart illustration: not found (group issue #80) · orders after "Xác Nhận Thanh Toán" on the typed `/checkout`: expected 0, received 1 (order 0 ₫, BUG-01 #116). Empty message and "no checkout button" passed. [Screenshot](screenshots/first-run/DT-07-chromium.png) (success view after the empty checkout) |
 
+Report: [screenshot of the HTML report](screenshots/first-run/web-report-chromium.png).
+
 Every test that built a cart recorded the second click of "Thêm vào giỏ hàng" (#73). Failure screenshots copied from the run's output to `features/checkout/screenshots/first-run/<TC ID>-chromium.png`; the HTML report of this run is kept locally in `playwright-report/checkout/web-chromium-20261117T2002/` (git-ignored, development run). Triage (product vs script defect) is T7; the review of the generated code is T5.
+
+**First run of the generated API spec** (agent, 17/11 20:24, Chromium project, same temporary-folder rule; HTML report kept locally in `playwright-report/checkout/api-chromium-20261117T2024/`; nothing fixed): 3 passed, 8 failed. [Screenshot of the HTML report](screenshots/first-run/api-report-chromium.png); an API test has no page, so the report entry and the annotation `checkout response` are its evidence.
+
+| Test | Result | Response (recorded) | Failed assertions (expected vs received) |
+| --- | --- | --- | --- |
+| DT-02 | failed | 200 `orderId` 24 | order `total_amount`: expected 126000000, received `null` (HW02 BUG-13) · server cart: expected 0 lines, received 3 (BUG-14) |
+| DT-04 | passed | 401 `{"error":"Unauthorized"}` | – (no new order, cart 3 lines) |
+| DT-05 | passed | 403 `{"error":"Forbidden"}` | – |
+| DT-06 | passed | 403 `{"error":"Forbidden"}` | – |
+| DT-07 (API part) | failed | 200 `orderId` 25 | new orders of the account: expected 0, received 1 (`total_amount` `null`; BUG-01 #116) |
+| DT-08 | failed | 200 `orderId` 26 | order `total_amount`: expected 12000000, received `null` (BUG-13) · server cart: expected 0, received 1 line at `price` 1000 (BUG-14) |
+| DT-09 … 13 | failed | 200 `orderId` 27 … 31 | new order's total: expected 126000000, received `1000` / `200000000` / `0` / `-1000` / `"abc"` (BUG-12) · cart: expected 0 (order stored), received 3 (BUG-14) |
+
+The results match the HW02 runs of the same TCs (DT-04 … 06 Pass; DT-02, 08 … 13 Fail on BUG-12 / 13 / 14); DT-07's API part now fails as the student decided (17/11).
 
 ## 5. Review of the AI-generated scripts (T5)
 
