@@ -29,7 +29,7 @@ Copied from the group README §4.3 (first "yes" wins).
 
 | Bug ID | Requirement | Title | Found by (spec › test, data row) | Browsers failing | Outcome | Tracker | Severity / Priority |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [BUG-01](#bug-01) | FR-08 (HW02 fB A6, decision Q4) | Checkout with an empty cart (typed URL `/checkout`) is accepted and stores an order of 0 ₫ | checkout DT-07 (T2 check through the page objects; spec in T4) | Chromium, Firefox, WebKit | New | not filed yet | Medium / Medium (proposed – to be confirmed) |
+| [BUG-01](#bug-01) | FR-08 (HW02 fB A6, decision Q4) | Checkout with an empty cart (typed URL `/checkout`) is accepted and stores an order of 0 ₫ | checkout DT-07 (T2 check through the page objects; spec in T4) | Chromium, Firefox, WebKit | New | [#116](https://github.com/angquoc/software-testing-2026-HW02-group/issues/116) | Medium / Medium (SV xác nhận 17/11) |
 
 Outcome: `Confirmed #n` (same behaviour as the existing issue) · `Changed #n` (behaviour differs; say how) · `New #n`.
 
@@ -50,5 +50,5 @@ Outcome: `Confirmed #n` (same behaviour as the existing issue) · `Changed #n` (
 | Actual | Step 3: "Xác Nhận Đơn Hàng" with an empty "Sản phẩm:" list, total `0`, "Tổng thanh toán: 0 ₫", "Xác Nhận Thanh Toán" enabled. Step 4: the Web sends `{"items": [], "total_amount": 0, "coupon_id": null}` → 200 `{"message": "Checkout successful", "orderId": 13}`; "Thanh toán thành công!" is shown. Step 5: a new order `{"total_amount": 0, "status": "pending", "shipping_address": null}`. Same on the three browsers (orders 13, 15, 17) |
 | Evidence | [empty checkout page](screenshots/DT-07_empty-checkout_chromium.png) · [after the click](screenshots/DT-07_empty-checkout-success_chromium.png) (Chromium); the automated DT-07 run adds its report and failure screenshot in T6 / T7 |
 | Outcome | New – no HW02 issue covers it (rejected candidates: #14 cart not cleared after checkout, #13 checkout without `total_amount`, #12 client `total_amount` stored: other requirement sentences / behaviours; #74 Web cart vs `GET /api/cart`: FR-07) |
-| Tracker | not filed yet (waits for the student's OK on the text) |
-| Severity / Priority | Medium / Medium (proposed – to be confirmed): the rule "an order needs products" is broken, the user can avoid it by not typing the URL; no data of others is touched |
+| Tracker | [#116](https://github.com/angquoc/software-testing-2026-HW02-group/issues/116) – filed 17/11/2026 by thhuon, labels `severity: medium`, `platform: web`, `technique: EP`, `pool: B`, `hw: HW04` |
+| Severity / Priority | Medium / Medium (SV xác nhận 17/11): the rule "an order needs products" is broken, the user can avoid it by not typing the URL; no data of others is touched |
