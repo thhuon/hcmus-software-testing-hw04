@@ -79,7 +79,19 @@ The same tests pass (DT-07, 08, 09, 17, 32) and fail on every browser ([design �
 
 ### 4.1 Test cases automated
 
+<!-- From features/checkout/automation_design.md §1–§4: count, data file, assertion patterns. -->
+
+- **Selection** ([design §1](features/checkout/automation_design.md#1-test-cases-selected-t1)): all **17** HW02 test cases are automated (13 DT + 4 BVA), none left out: 7 through the Web UI (DT-01, DT-03, DT-07, BVA-01 … 04) and 10 through the API only (DT-02, 04, 05, 06, 08, 09 … 13); DT-07 has a Web and an API part. Student decisions: DT-03 tries both guest paths (cart button, typed `/checkout`) in one test; BVA-01 … 04 run on the Web, because the backend stores the `total_amount` it receives and ignores the cart, so through the API the boundary values would change nothing; the checkout of an empty cart counts as a bug (DT-07), replacing the HW02 Pass.
+- **Locators and page objects** ([design §2](features/checkout/automation_design.md#2-locators-and-page-objects-t2)): from the student's codegen run and an ARIA snapshot of every screen, each locator counted on Chromium, Firefox and WebKit. Page objects `SiteHeader`, `LoginPage`, `HomePage`, `ProductPage`, `CartPage`, `CheckoutPage`, `Dialogs`; API client `api/EshopApi.ts`. Testability findings: no input has an accessible name, the Web cart is lost on a reload (tests move only through links), "Thêm vào giỏ hàng" needs two clicks (#73), no cart badge (#79). [Checkout page](features/checkout/screenshots/DT-01-checkout-page-chromium.png) · [total edited by the user](features/checkout/screenshots/DT-01-total-edited-chromium.png).
+- **Test data** ([design §3](features/checkout/automation_design.md#3-test-data-t3)): `data/checkout/web.json` (7 rows) and `api.json` (11 rows); inputs from the HW02 test cases, expected values from FR-08, FR-07, FR-23, SEC-02 and the HW02 assumptions A1–A15 / decisions Q1–Q10; catalog prices from the seed; each test registers its own account, so tests and runs share no cart or order.
+- **Specs and assertion patterns** ([design §4](features/checkout/automation_design.md#4-specs-and-assertion-patterns-t4)): `tests/checkout/web.spec.ts` (7 tests) and `api.spec.ts` (11 tests), one test per data row, title starting with the TC ID; 6 assertion patterns: stored outcome through the API, visible text, element state, negative, soft assertions, comparison of a list of values.
+- **Bug found while building the tests:** BUG-01 – a logged-in user with an empty cart who types `/checkout` places an order of 0 ₫ ([bugs/BUG_REPORT.md](bugs/BUG_REPORT.md#bug-01), new issue [#116](https://github.com/angquoc/software-testing-2026-HW02-group/issues/116), [screenshot](bugs/screenshots/DT-07_empty-checkout-success_chromium.png)).
+
 ### 4.2 Review of the AI-generated scripts
+
+<!-- From design §5: what the AI got wrong or missed, the fix, why (Prompt / Model / Feature). -->
+
+First run of the generated specs on Chromium (17/11, development runs): Web 1 passed, 6 failed ([report](features/checkout/screenshots/first-run/web-report-chromium.png)); API 3 passed, 8 failed ([report](features/checkout/screenshots/first-run/api-report-chromium.png)). Every failed assertion has an oracle quoted from the requirement or the HW02 decisions (HW02 BUG-12, 13, 14, 15, 16, group issue #80, BUG-01 #116); the stored order totals of the Web tests were right. The review of the code (T5) is still to do.
 
 ### 4.3 Results
 
