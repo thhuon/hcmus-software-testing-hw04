@@ -85,7 +85,7 @@ The same tests pass (DT-07, 08, 09, 17, 32) and fail on every browser ([design �
 
 <!-- From design §5: what the AI got wrong or missed, the fix, why (Prompt / Model / Feature). -->
 
-First run of the generated specs on Chromium (17/11, development runs): Web 1 passed, 6 failed ([report](features/checkout/screenshots/first-run/web-report-chromium.png)); API 3 passed, 8 failed ([report](features/checkout/screenshots/first-run/api-report-chromium.png)). Every failed assertion has an oracle quoted from the requirement or the HW02 decisions. The review ([design §5](features/checkout/automation_design.md#5-review-of-the-ai-generated-scripts-t5)) found five problems; cause types confirmed by the student (17/11): #1 and #5 **Feature** (seen only when the app runs: a taken e-mail registered again, a click lost on a busy browser), #2 and #4 **Model**, #3 **Prompt**:
+First run of the generated specs on Chromium (17/11, development runs): Web 1 passed, 6 failed ([report](features/checkout/screenshots/first-run/web-report-chromium.png)); API 3 passed, 8 failed ([report](features/checkout/screenshots/first-run/api-report-chromium.png)). Every failed assertion has an oracle quoted from the requirement or the HW02 decisions. The review ([design §5](features/checkout/automation_design.md#5-review-of-the-ai-generated-scripts-t5)) found six problems; cause types confirmed by the student (17/11) for #1–#5: #1 and #5 **Feature** (seen only when the app runs: a taken e-mail registered again, a click lost on a busy browser), #2 and #4 **Model**, #3 **Prompt**; #6 (found in T7) proposed **Model**:
 
 | # | What the AI got wrong | Category | Fix |
 | --- | --- | --- | --- |
@@ -94,6 +94,7 @@ First run of the generated specs on Chromium (17/11, development runs): Web 1 pa
 | 3 | DT-03 path (b): typing `/checkout` reloads the page, so the guest's cart is empty – two invalid classes in one test | missing edge case | path (b) = log out on the checkout page with the cart, then confirm (b32d917); 9 of 9 passed on 3 browsers |
 | 4 | DT-03 path (a): an `if` on page state | weak assertion | branch removed; path (a) records the page reached (b32d917) |
 | 5 | `ProductPage.addToCart`: two clicks with a fixed probe; on a busy Firefox the second click was once counted as the first again (DT-03 flaky in the first official set) | flaky wait | click until "Đã thêm", up to 4 clicks, each extra click recorded (35b0c42); Firefox `--repeat-each=3` stable |
+| 6 | DT-07 Web and DT-07 API registered the same account e-mail, so the Web test read the API test's order (2 orders instead of 1) | hidden dependency | account e-mail prefix per spec (bc0de04) |
 
 No issue found in fragile selectors, wrong oracles or hard-coded data; no assertion was weakened.
 
@@ -107,7 +108,7 @@ No issue found in fragile selectors, wrong oracles or hard-coded data; no assert
 | Firefox | [reports/checkout/firefox](reports/checkout/firefox/index.html) ([screenshot](features/checkout/screenshots/t6/report-firefox.png)) | 18 | 4 | 14 | 0 |
 | WebKit | [reports/checkout/webkit](reports/checkout/webkit/index.html) ([screenshot](features/checkout/screenshots/t6/report-webkit.png)) | 18 | 4 | 14 | 0 |
 
-Official runs: third set, 17/11 22:39–22:44 ([design §6](features/checkout/automation_design.md#6-runs-t6)), reusing the running SUT so the parallel FR-03 session was not disturbed (each test uses its own account). The same tests pass (DT-03, DT-04 … 06) and fail on every browser: 17 test cases, 4 passed, 13 failed. Earlier sets: the first had DT-03 fail on Firefox only – flaky (1 of 5 on rerun), fixed (review #5); the second (same results as the third) ran before DT-03 path (b) was changed (review #3, #4). Bugs behind the failures: after T7.
+Official runs: fourth set, 17/11 22:52–22:56 ([design §6](features/checkout/automation_design.md#6-runs-t6)), reusing the running SUT so the parallel FR-03 session was not disturbed (each test uses its own account). The same tests pass (DT-03, DT-04 … 06) and fail on every browser: 17 test cases, 4 passed, 13 failed. Earlier sets were replaced after script fixes: DT-03 flaky on Firefox (review #5), DT-03 path (b) changed (#3, #4), DT-07 Web reading the API test's order (#6). Triage ([design §8](features/checkout/automation_design.md#8-failures-and-bugs-t7)): every failure is a product defect (proposed) already filed in HW02 – #12, #13, #14, #15, #16 – or HW04 BUG-01 #116; HW02 #17 (guest checkout) no longer reproduces.
 
 ## 5. Feature C – FR-15 Quản lý sản phẩm
 
