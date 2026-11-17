@@ -77,7 +77,7 @@
     {
       "id": "DT-03",
       "technique": "DT",
-      "title": "guest: no order on either path (cart button, typed /checkout)",
+      "title": "guest: no order on either path (cart button, logout on the checkout page)",
       "partition": "EC-V1-2, O1-2, O2-2",
       "flow": "guest",
       "loggedIn": false,
@@ -89,17 +89,17 @@
       ],
       "paths": [
         "cartButton",
-        "typedCheckoutUrl"
+        "logoutOnCheckout"
       ],
       "expected": {
         "kind": "refused",
         "newOrdersAll": 0,
         "recordOnly": [
           "dialog messages",
-          "URL after each path"
+          "page reached by the cart button"
         ]
       },
-      "source": "FR-08 README:104 \"Chỉ người dùng **đã đăng nhập** mới tiến hành thanh toán được.\"; A2 (what the Web shows is recorded, not judged), A9; Q1; student 17/11: both paths in one test"
+      "source": "FR-08 README:104 \"Chỉ người dùng **đã đăng nhập** mới tiến hành thanh toán được.\"; A2 (what the Web shows is recorded, not judged), A9; Q1; student 17/11: both paths in one test; path (b) = a logged-in user logs out on the checkout page and confirms, so the guest still has the cart (T5 review #3)"
     },
     {
       "id": "DT-07",

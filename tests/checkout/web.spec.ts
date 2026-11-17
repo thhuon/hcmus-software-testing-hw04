@@ -43,7 +43,7 @@ type Row = {
   flow: 'checkout' | 'guest' | 'emptyCart';
   loggedIn: boolean;
   cart: Line[];
-  paths?: ('cartButton' | 'typedCheckoutUrl')[];
+  paths?: ('cartButton' | 'logoutOnCheckout')[];
   address?: string;
   expected: Expected;
   source: string;
@@ -221,6 +221,9 @@ test.describe('FR-08 checkout – Web', () => {
   }
 
   // ---- Guest: DT-03, both paths in one test (student 17/11) ----
+  // (a) a guest builds a cart and clicks the cart's "Tiến hành thanh toán";
+  // (b) a logged-in user opens the checkout page with a cart, clicks "Thoát" there and,
+  //     now a guest who still has the cart, clicks "Xác Nhận Thanh Toán" (T5 review #3, #4).
   for (const row of rowsOf('guest')) {
     test(`${row.id} – ${row.title}`, async ({ page }, testInfo) => {
       testInfo.annotations.push({ type: 'source', description: row.source });
@@ -229,27 +232,31 @@ test.describe('FR-08 checkout – Web', () => {
       const adminToken: string = (await adminLogin.json()).token;
       const ordersBefore = await allOrdersCount(adminToken);
 
-      await home.goto();
-      await expect(header.loginLink, 'guest header (no one logged in)').toBeVisible();
-      await buildCart(row.cart, testInfo);
-
       for (const guestPath of row.paths ?? []) {
         if (guestPath === 'cartButton') {
-          // (a) the cart's "Tiến hành thanh toán"; if the Web opens the checkout page, try to place the order.
+          await home.goto();
+          await expect(header.loginLink, 'guest header (no one logged in)').toBeVisible();
+          await buildCart(row.cart, testInfo);
           await header.goToCart();
           await cart.waitReady();
           await cart.proceedToCheckout();
+          // What the Web shows a guest is recorded, not judged (A2): the page the button led to.
           await login.signInButton.or(checkout.heading).waitFor();
-          if (await checkout.heading.isVisible()) {
-            await checkout.confirm();
-          }
+          testInfo.annotations.push({ type: 'page after the cart button (a)', description: page.url() });
         } else {
-          // (b) the typed URL /checkout (a reload: the guest cart is empty) and "Xác Nhận Thanh Toán".
-          await checkout.goto();
+          const account = await createAccount(row, testInfo);
+          await loginOnWeb(account.email);
+          await buildCart(row.cart, testInfo);
+          await header.goToCart();
+          await cart.waitReady();
+          await cart.proceedToCheckout();
+          await checkout.waitReady();
+          await header.logout();
+          await expect(header.loginLink, 'guest header after "Thoát" on the checkout page').toBeVisible();
+          await expect(checkout.items, 'the guest still has the cart on the checkout page').toHaveCount(row.cart.length);
           const response = await checkout.confirm();
           testInfo.annotations.push({ type: 'checkout response (b)', description: `${response.status()} ${await response.text()}` });
         }
-        testInfo.annotations.push({ type: `URL after path ${guestPath}`, description: page.url() });
 
         // Only "no order" is judged (A2, Q1).
         expect(await allOrdersCount(adminToken), `no new order after the guest path ${guestPath} (FR-08 "đã đăng nhập")`).toBe(
