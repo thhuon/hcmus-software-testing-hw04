@@ -44,6 +44,11 @@
 
 <!-- From features/forgot-password/automation_design.md §1, §3, §4: count, data file, assertion patterns. -->
 
+- **Selection** ([design §1](features/forgot-password/automation_design.md#1-test-cases-selected-t1)): 45 test cases (44 from HW02 + DT-35 added in HW04), **33 automated** (30 through the Web UI, 7 of them also send the same OTP to the API; 3 API only: DT-17, DT-27, DT-32) and 12 not automated (API-only request shapes already covered, an assumption-only oracle, real-time OTP expiry, duplicates), each with its reason.
+- **Locators and page objects** ([design §2](features/forgot-password/automation_design.md#2-locators-and-page-objects-t2)): `page-objects/LoginPage.ts`, `page-objects/ForgotPasswordPage.ts`, API client `api/EshopApi.ts`. No input of the page has an accessible name; seven locator options were counted on Chromium, Firefox and WebKit, and the fields are found by the textbox under a label that starts with the field name (student decision). Codegen check by the student: codegen picks generic `getByRole('textbox')` / `input[type=…]` for these fields.
+- **Test data** ([design §3](features/forgot-password/automation_design.md#3-test-data-t3)): `data/forgot-password/web.json` (30 rows) and `api.json` (3 rows); inputs from the HW02 test cases, expected values from FR-03, FR-01, FR-22, SEC-07 and the HW02 assumptions; every test registers its own account through the API, so tests and runs do not share data.
+- **Assertion patterns**: after T4.
+
 ### 3.2 Review of the AI-generated scripts
 
 <!-- From design §5: what the AI got wrong or missed, the fix, why (Prompt / Model / Feature). -->
