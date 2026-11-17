@@ -236,7 +236,25 @@ Categories: fragile selector · weak assertion · wrong oracle · missing edge c
 
 ## 6. Runs (T6)
 
-Official runs (`summarize-results.mjs --markdown`):
+**T6 multi-browser run** (18/11/2026 02:15–02:20 local, 19:15–19:20 UTC, agent, `npm run feature -- product-crud --reuse`: `run-browsers.mjs` runs Chromium, Firefox and WebKit one after the other; PLAN C1–C7, video 1 scene 1.9). **Not the official set:** the official FR-15 run is the one recorded in video 2 (PLAN C8, `demo/shot_list.md` scene 2.4), committed right after that recording so that the report in the video and the submitted report are the same. The reports of this run stay uncommitted in `reports/product-crud/` and are overwritten by the official run.
+
+- **Specs:** `tests/product-crud/`, `data/product-crud/`, `page-objects/` at commit `a278a51` (last change: T5 review #2).
+- **SUT and data:** the servers already running (`--reuse`): the student's `npm run sut` still held ports 3000 / 5173 / 5174, and stopping it was not allowed to the agent. Before the run: products = the seed ids 1–5 with the seed values, categories 1–3, no other Playwright run (a Playwright UI mode was open, idle). Each test keeps its data apart (ids before / after, `{tag}`, own P, `afterEach` clean-up, design §3); afterwards: products ids 1–5. The official run (C8) starts fresh servers (`npm run feature -- product-crud`, after `npm run sut` is stopped with Ctrl+C), so the database is re-seeded.
+- **Settings:** `retries: 0`, `workers: 1`; screenshot on failure; no traces (`REPORT_DIR` set; for the trace viewer in T7 a development run is needed).
+- **Reports:** `reports/product-crud/<browser>/index.html` + `results.json`. Title checked on all three (rendered header read with a headless browser): "HW04 · FR-15 Product CRUD (admin) · <browser> · Run by: 23120046 · <ISO start time>", e.g. `HW04 · FR-15 Product CRUD (admin) · chromium · Run by: 23120046 · 2026-11-17T19:15:21.038Z`.
+- **Screenshots:** `reports/product-crud/<browser>/screenshots/<TC ID>.png`, one per failed Web test (13 per browser), copied by the run script. The 11 failed API tests have no page; their evidence is the report entry (request, response annotation, assertion).
+
+| Feature | Browser | Report | Started (ISO) | Tests | Passed | Failed | Flaky |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| product-crud | chromium | `reports/product-crud/chromium/index.html` | 2026-11-17T19:15:21.038Z | 41 | 17 | 24 | 0 |
+| product-crud | firefox | `reports/product-crud/firefox/index.html` | 2026-11-17T19:16:40.213Z | 41 | 17 | 24 | 0 |
+| product-crud | webkit | `reports/product-crud/webkit/index.html` | 2026-11-17T19:18:38.884Z | 41 | 17 | 24 | 0 |
+
+41 tests = 36 TCs (DT-09, 14 … 17 have a Web and an API test). Per test case (`summarize-results.mjs --markdown`): 17 TCs passed and 19 failed on every browser; a TC with a Web and an API test counts as failed when either fails.
+
+**Browser differences:** none. Every test has the same result on Chromium, Firefox and WebKit (compared test by test from the three `results.json`), so no test needs a rerun on one browser. What the browsers do differently is only recorded: the validation message of the empty name and of the price field (design §2), and Firefox keeping `abc` in the price field as an invalid value where Chromium and WebKit drop it (DT-14 passes on all three).
+
+Official runs (`summarize-results.mjs --markdown`): after the C8 recording.
 
 ## 7. Not automated (T8)
 
