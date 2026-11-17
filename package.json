@@ -7,7 +7,14 @@
     "smoke": "playwright test tests/smoke.spec.ts",
     "feature": "node skills/test-automation/scripts/run-browsers.mjs --config automation.config.json",
     "all": "node skills/test-automation/scripts/run-browsers.mjs --config automation.config.json all",
-    "summary": "node skills/test-automation/scripts/summarize-results.mjs --config automation.config.json --markdown"
+    "summary": "node skills/test-automation/scripts/summarize-results.mjs --config automation.config.json --markdown",
+    "sut": "bash -c '(cd eshop-sut/backend && node server.js) & (cd eshop-sut/frontend-web && npm run dev -- --port 5173 --strictPort) & (cd eshop-sut/frontend-admin && npm run dev -- --port 5174 --strictPort) & wait'",
+    "codegen": "playwright codegen http://localhost:5173",
+    "codegen:admin": "playwright codegen http://localhost:5174",
+    "ui": "playwright test --ui",
+    "report": "playwright show-report",
+    "trace": "playwright show-trace",
+    "init-agents": "playwright init-agents --loop=claude"
   },
   "repository": {
     "type": "git",
