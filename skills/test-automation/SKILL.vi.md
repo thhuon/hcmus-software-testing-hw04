@@ -4,7 +4,7 @@
 
 **Khi nào dùng:** Khi các test case đã thiết kế của một feature web cần được chuyển thành script test UI tự động bằng Playwright (hoặc Selenium), từng bước với AI và có người dùng review — chọn test case nào để tự động hóa, xây dựng locator / page object, chuyển dữ liệu test sang file JSON hoặc CSV, sinh spec data-driven (hướng dữ liệu) với nhiều assertion pattern, review và sửa script do AI sinh (selector dễ vỡ, assertion yếu, lệnh chờ flaky, thiếu edge case), chạy trên nhiều browser với mỗi lần chạy một HTML report, phân loại lỗi (triage), hoặc đếm số test case được tự động hóa / pass / fail.
 
-**Chủ đề:** Tự động hóa kiểm thử giao diện web. **Nguồn:** [ISTQB] §6.2, [PW] Best Practices / Locators / Assertions / Parameterize tests / Reporters / Retries, [POM]. Mã của các nguồn tham khảo có trong `../SOURCES.md`.
+**Chủ đề:** Tự động hóa kiểm thử giao diện web. **Nguồn:** [ISTQB] §6.2, [TAE], [PW] Best Practices / Locators / Assertions / Parameterize tests / Reporters / Retries, [POM]. Mã của các nguồn tham khảo có trong `../SOURCES.md`.
 
 ## Tổng quan
 
@@ -63,6 +63,44 @@ Script (Node ≥ 18, chạy từ thư mục gốc của dự án):
 - `node <skill>/scripts/summarize-results.mjs --config automation.config.json [--markdown]` — số liệu theo từng lần chạy và từng test case, lấy từ các file `results.json`.
 
 Trước T1, kiểm tra môi trường: một smoke spec mở mọi frontend phải pass trên mọi browser (`npx playwright install` + các system dependency cho WebKit trên Linux).
+
+## Công cụ và phương pháp
+
+Viết spec chỉ là một phần của kiểm thử tự động. Mỗi bước còn có một công cụ người kiểm thử tự tay dùng, và bộ test được dựng theo các phương pháp tự động hóa có tên gọi [TAE], [PW].
+
+### Công cụ theo từng bước (Playwright)
+
+| Bước | Công cụ | Lệnh | Người kiểm thử dùng nó để |
+| --- | --- | --- | --- |
+| T2 | Codegen (ghi và phát lại) | `npx playwright codegen <url>` | Ghi lại một luồng của feature và xem Playwright chọn locator nào. Bản ghi chỉ là bản nháp để so sánh, không bao giờ commit thành spec. |
+| T2 | Inspector "Pick locator", ARIA snapshot | thanh công cụ codegen → Pick locator; `await page.locator('body').ariaSnapshot()` | Lấy locator của một phần tử; đọc cây vai trò / tên của một màn hình để thấy phần tử nào không có tên truy cập được. |
+| T4 | AI agent: trợ lý AI được prompt từng bước, hoặc Playwright Test Agents | `npx playwright init-agents --loop=claude` (planner, generator, healer) | Sinh spec. Output của các agent được review ở T5 như mọi output AI khác; một test được "healed" mà đổi giá trị mong đợi là oracle sai. |
+| T5 | UI mode | `npx playwright test <dir> --ui` | Chạy từng test, tua lại từng thao tác (time travel), theo dõi file và chạy lại khi lưu. |
+| T5 | Debug bằng Inspector | `npx playwright test <dir> --debug -g "<TC ID>"` | Chạy từng dòng của một test, kiểm tra locator dưới con trỏ. |
+| T5, T6 | Lặp lại và chạy lại | `--repeat-each=3`, `--last-failed` | Phát hiện test chập chờn; chỉ chạy lại các test fail. |
+| T6 | Project và HTML report | `--project=<browser>`, `npx playwright show-report <dir>` | Mỗi browser một lần chạy; mở report và kiểm tra tiêu đề. |
+| T7 | Trace viewer | `npx playwright show-trace <test-results>/…/trace.zip`, hoặc link trace trong HTML report | Xem DOM snapshot, request mạng và console tại bước fail; quyết định lỗi sản phẩm hay lỗi script. |
+| T7 | Ảnh chụp / video khi fail | config `screenshot`, `video`, `trace: 'retain-on-failure'` | Bằng chứng cho bug report. |
+| mọi bước | Kiểm thử API | fixture `request`, `page.waitForResponse()` | Các dòng `Yes (API)`, chuẩn bị dữ liệu test, kiểm tra kết quả đã lưu mà không qua UI. |
+
+Ghi vào file design công cụ đã dùng (§2 cách tìm locator, §5 cách debug một lỗi, §8 trace hoặc ảnh chụp của từng lỗi).
+
+### Các phương pháp tự động hóa
+
+| Phương pháp | Ý tưởng | Dùng trong skill này |
+| --- | --- | --- |
+| Ghi và phát lại (capture / playback) | Ghi thao tác của người dùng thành script | Chỉ ở T2: nguồn locator và bản nháp để so sánh, không bao giờ là bộ test |
+| Script tuyến tính (linear) | Mỗi test một script, dữ liệu và các bước nằm trong đó | Tránh: dữ liệu test nằm trong file dữ liệu (T3) |
+| Có cấu trúc / module (Page Object Model) | Page object dùng lại được, chứa locator và thao tác [POM] | T2 |
+| Hướng dữ liệu (data-driven) | Một script đọc nhiều dòng từ file dữ liệu | T3, T4 |
+| Hướng từ khóa / hướng hành vi (keyword-driven / BDD) | Các bước viết bằng từ khóa hoặc Given / When / Then (Cucumber, playwright-bdd) | Tùy chọn: khi người không lập trình viết hoặc đọc test |
+| Kiểm thử mức API | Gửi request không qua browser | Các dòng `Yes (API)`, chuẩn bị dữ liệu, kiểm tra kết quả đã lưu |
+| Hồi quy giao diện (visual regression) | So ảnh chụp với một ảnh chuẩn đã duyệt (`toHaveScreenshot()`) | Tùy chọn: yêu cầu về bố cục hoặc hình thức |
+| Quét khả năng truy cập | Kiểm tra WCAG tự động (`@axe-core/playwright`) | Tùy chọn: yêu cầu về khả năng truy cập |
+| AI sinh test và tự sửa (self-healing) | AI viết hoặc sửa test | Sinh test ở T4; mọi lần sửa đều được review như T5 |
+| Tích hợp liên tục (CI) | Bộ test chạy ở mỗi lần push (GitHub Actions) | Tùy chọn: sau các lần chạy chính thức |
+
+Dự án ghi rõ những phương pháp tùy chọn nào được dùng; mỗi phương pháp là một bước riêng với commit riêng.
 
 ## Các bước
 

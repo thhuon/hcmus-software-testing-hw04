@@ -1,11 +1,11 @@
 ---
 name: test-automation
-description: Use when designed test cases of a web feature must be turned into automated UI test scripts with Playwright (or Selenium) step by step with an AI and a human review — choosing which test cases to automate, building locators / page objects, moving test data to a JSON or CSV file, generating data-driven specs with several assertion patterns, reviewing and fixing the AI-generated scripts (fragile selectors, weak assertions, flaky waits, missing edge cases), running them on several browsers with one HTML report per run, triaging failures, or counting automated / passed / failed test cases.
+description: Use when designed test cases of a web feature must be turned into automated UI test scripts with Playwright (or Selenium) step by step with an AI and a human review — choosing which test cases to automate, building locators / page objects, moving test data to a JSON or CSV file, generating data-driven specs with several assertion patterns, reviewing and fixing the AI-generated scripts (fragile selectors, weak assertions, flaky waits, missing edge cases), running them on several browsers with one HTML report per run, triaging failures (trace viewer, UI mode, Inspector), choosing an automation approach (record and playback, page objects, data-driven, BDD, API, visual, CI) or the Playwright tool for a step (codegen, Test Agents), or counting automated / passed / failed test cases.
 ---
 
 # Test Automation (data-driven, multi-browser web UI)
 
-**Topic:** Test automation of a web UI. **Sources:** [ISTQB] §6.2, [PW] Best Practices / Locators / Assertions / Parameterize tests / Reporters / Retries, [POM]. Codes are in `../SOURCES.md`.
+**Topic:** Test automation of a web UI. **Sources:** [ISTQB] §6.2, [TAE], [PW] Best Practices / Locators / Assertions / Parameterize tests / Reporters / Retries, [POM]. Codes are in `../SOURCES.md`.
 
 ## Overview
 
@@ -64,6 +64,44 @@ Scripts (Node ≥ 18, run from the project root):
 - `node <skill>/scripts/summarize-results.mjs --config automation.config.json [--markdown]` — counts per run and per test case from the `results.json` files.
 
 Before T1, check the environment: a smoke spec that opens every frontend passes on every browser (`npx playwright install` + system dependencies for WebKit on Linux).
+
+## Tools and approaches
+
+Writing specs is one part of test automation. Each step also has a tool the tester uses with their own hands, and the suite is built from named automation approaches [TAE], [PW].
+
+### Tool per step (Playwright)
+
+| Step | Tool | Command | What the tester does with it |
+| --- | --- | --- | --- |
+| T2 | Codegen (record and playback) | `npx playwright codegen <url>` | Records one flow of the feature and reads the locators Playwright chooses. The recording is a draft for comparison, never a committed spec. |
+| T2 | Inspector "Pick locator", ARIA snapshot | codegen toolbar → Pick locator; `await page.locator('body').ariaSnapshot()` | Gets the locator of one element; reads the role / name tree of a screen to see which elements have no accessible name. |
+| T4 | AI agent: an AI assistant prompted step by step, or Playwright Test Agents | `npx playwright init-agents --loop=claude` (planner, generator, healer) | Generates specs. The agents' output is reviewed in T5 like any AI output; a "healed" test that changes an expected value is a wrong oracle. |
+| T5 | UI mode | `npx playwright test <dir> --ui` | Runs one test at a time, steps back through its actions (time travel), watches files and reruns on save. |
+| T5 | Debug with the Inspector | `npx playwright test <dir> --debug -g "<TC ID>"` | Steps through one test line by line, checks the locator under the cursor. |
+| T5, T6 | Repeat and rerun | `--repeat-each=3`, `--last-failed` | Shows flakiness; reruns only the failures. |
+| T6 | Projects and HTML report | `--project=<browser>`, `npx playwright show-report <dir>` | One run per browser; opens the report and checks its title. |
+| T7 | Trace viewer | `npx playwright show-trace <test-results>/…/trace.zip`, or the trace link in the HTML report | Sees the DOM snapshot, network calls and console at the failing step; decides product vs script defect. |
+| T7 | Screenshot / video on failure | config `screenshot`, `video`, `trace: 'retain-on-failure'` | Evidence for the bug report. |
+| all | API testing | `request` fixture, `page.waitForResponse()` | `Yes (API)` rows, test setup and checks of the stored result without the UI. |
+
+Record in the design file which tool was used (§2 how the locators were found, §5 how a failure was debugged, §8 the trace or screenshot of each failure).
+
+### Automation approaches
+
+| Approach | Idea | Use in this skill |
+| --- | --- | --- |
+| Capture / playback | Record the user's actions into a script | T2 only: a source of locators and a draft to compare with, never the suite |
+| Linear scripting | One script per test, data and steps inside it | Avoided: test data goes to a data file (T3) |
+| Structured / modular (Page Object Model) | Reusable page objects with locators and actions [POM] | T2 |
+| Data-driven | One script reads many rows from a data file | T3, T4 |
+| Keyword-driven / behaviour-driven (BDD) | Steps written as keywords or Given / When / Then (Cucumber, playwright-bdd) | Optional: when non-programmers write or read the tests |
+| API-level testing | Requests without a browser | `Yes (API)` rows, setup, persisted-outcome checks |
+| Visual regression | Compare a screenshot with an approved baseline (`toHaveScreenshot()`) | Optional: requirements about layout or appearance |
+| Accessibility scan | Automated WCAG checks (`@axe-core/playwright`) | Optional: accessibility requirements |
+| AI-assisted generation and self-healing | An AI writes or repairs tests | T4 generation; every repair is reviewed as in T5 |
+| Continuous integration | The suite runs on every push (GitHub Actions) | Optional: after the official runs |
+
+The project names the optional approaches it uses; each is added as its own step with its own commit.
 
 ## Steps
 

@@ -75,3 +75,9 @@ Nguồn: [ISTQB] §6.2 · [PW] Best Practices, Locators, Assertions, Parameteriz
 | 29 | M | Số liệu lấy từ script tổng kết | Các bảng §6 bằng output của `summarize-results.mjs --markdown` |
 | 30 | M | Mọi TC không tự động hóa đều được liệt kê kèm lý do | Số dòng §7 = số dòng T1 có `No` |
 | 31 | S | Dòng `Count:` khớp với §1, §4, §7 | Số đã thiết kế, đã tự động hóa, không tự động hóa, số assertion pattern |
+
+## Công cụ (T2, T4, T5, T7)
+
+| # | M/S | Tiêu chí | Cách kiểm |
+| --- | --- | --- | --- |
+| 32 | S | Người kiểm thử đã tự dùng công cụ của bước và có ghi lại | Design §2 ghi cách tìm locator (codegen, Pick locator, ARIA snapshot); §5 ghi cách debug một lỗi (UI mode, Inspector); §8 ghi trace hoặc ảnh chụp của từng lỗi |

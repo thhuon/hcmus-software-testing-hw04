@@ -73,3 +73,9 @@ Sources: [ISTQB] §6.2 · [PW] Best Practices, Locators, Assertions, Parameteriz
 | 29 | M | Counts come from the summary script | §6 tables equal `summarize-results.mjs --markdown` output |
 | 30 | M | Every non-automated TC is listed with its reason | §7 rows = T1 rows with `No` |
 | 31 | S | The `Count:` line matches §1, §4, §7 | Designed, automated, not automated, assertion patterns |
+
+## Tools (T2, T4, T5, T7)
+
+| # | M/S | Criterion | How to check |
+| --- | --- | --- | --- |
+| 32 | S | The step's tool was used by the tester and is recorded | Design §2 names how the locators were found (codegen, Pick locator, ARIA snapshot); §5 how a failure was debugged (UI mode, Inspector); §8 the trace or screenshot of each failure |
