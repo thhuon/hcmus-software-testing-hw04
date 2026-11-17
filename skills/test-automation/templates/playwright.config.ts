@@ -35,7 +35,10 @@ export default defineConfig({
   use: {
     baseURL: 'http://localhost:5173',
     screenshot: 'only-on-failure',
-    trace: 'retain-on-failure',
+    // Official runs (REPORT_DIR set by run-browsers.mjs) keep screenshots only: the brief asks for the
+    // HTML report and a screenshot per bug, and traces make every committed report several MB larger.
+    // Development runs keep traces for the trace viewer.
+    trace: process.env.REPORT_DIR ? 'off' : 'retain-on-failure',
   },
 
   projects: [

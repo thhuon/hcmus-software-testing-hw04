@@ -61,7 +61,7 @@ Nếu thiếu giá trị nào, hỏi một lần và đề xuất thêm nó vào
 
 Script (Node ≥ 18, chạy từ thư mục gốc của dự án):
 
-- `node <skill>/scripts/run-browsers.mjs --config automation.config.json <feature|all> [--browsers chromium,firefox] [--reuse]` — mỗi cặp feature × browser một lần chạy, mỗi lần có HTML report và `results.json` riêng trong `<reportsDir>/<feature>/<browser>/`, và ảnh chụp / trace riêng trong `<outputDir>/<feature>/<browser>/` (một lần chạy khác bắt đầu giữa chừng sẽ xóa thư mục `test-results/` dùng chung của Playwright). Mỗi lần chạy khởi động server SUT mới, trừ khi có `--reuse`.
+- `node <skill>/scripts/run-browsers.mjs --config automation.config.json <feature|all> [--browsers chromium,firefox] [--reuse]` — mỗi cặp feature × browser một lần chạy, mỗi lần có HTML report và `results.json` riêng trong `<reportsDir>/<feature>/<browser>/`, và ảnh chụp riêng trong `<outputDir>/<feature>/<browser>/` (một lần chạy khác bắt đầu giữa chừng sẽ xóa thư mục `test-results/` dùng chung của Playwright); ảnh chụp lúc fail của mỗi test được copy thêm vào `<reportsDir>/<feature>/<browser>/screenshots/<TC ID>.png`. Lần chạy chính thức không giữ trace (config mẫu tắt trace khi có `REPORT_DIR`); lần chạy khi phát triển vẫn giữ trace để mở trace viewer. Mỗi lần chạy khởi động server SUT mới, trừ khi có `--reuse`.
 - `node <skill>/scripts/summarize-results.mjs --config automation.config.json [--markdown]` — số liệu theo từng lần chạy và từng test case, lấy từ các file `results.json`.
 
 Trước T1, kiểm tra môi trường: một smoke spec mở mọi frontend phải pass trên mọi browser (`npx playwright install` + các system dependency cho WebKit trên Linux).

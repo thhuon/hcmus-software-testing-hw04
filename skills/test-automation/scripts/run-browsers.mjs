@@ -7,9 +7,10 @@
 // The Playwright config reads FEATURE, BROWSER, REPORT_DIR, FRESH_SUT (see templates/playwright.config.ts).
 // Screenshots and traces of each run go to <outputDir>/<feature>/<browser> (config "outputDir", default
 // "test-output"), not to Playwright's shared test-results/, which every other run (another terminal or
-// session) empties when it starts.
+// session) empties when it starts. After each run, the failure screenshot of every test is copied to
+// <reportDir>/screenshots/<TC ID>.png (ID from config "tcIdPattern"), so a bug report can link it by name.
 import { spawnSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync } from 'node:fs';
 
 const args = process.argv.slice(2);
 const opt = (name) => {
@@ -32,6 +33,30 @@ if (!key || badKey || badBrowser) {
   process.exit(2);
 }
 
+/** Copies the screenshot attachments listed in <reportDir>/results.json to <reportDir>/screenshots/<ID>.png. */
+function copyScreenshots(reportDir) {
+  const resultsFile = `${reportDir}/results.json`;
+  if (!existsSync(resultsFile)) return 0;
+  const idPattern = new RegExp(config.tcIdPattern ?? '^\\S+');
+  let copied = 0;
+  const walk = (suite) => {
+    for (const spec of suite.specs ?? []) {
+      const id = spec.title.match(idPattern)?.[0];
+      for (const t of spec.tests) {
+        const shots = (t.results.at(-1)?.attachments ?? []).filter((a) => a.name === 'screenshot' && a.path && existsSync(a.path));
+        shots.forEach((a, i) => {
+          mkdirSync(`${reportDir}/screenshots`, { recursive: true });
+          copyFileSync(a.path, `${reportDir}/screenshots/${id ?? spec.title}${i ? `-${i + 1}` : ''}.png`);
+          copied++;
+        });
+      }
+    }
+    (suite.suites ?? []).forEach(walk);
+  };
+  JSON.parse(readFileSync(resultsFile, 'utf8')).suites.forEach(walk);
+  return copied;
+}
+
 const summary = [];
 for (const k of keys) {
   for (const browser of browsers) {
@@ -41,7 +66,8 @@ for (const k of keys) {
     console.log(`\n=== ${k} (${config.features[k].label}) on ${browser} → ${reportDir}`);
     const outputDir = `${outputRoot}/${k}/${browser}`;
     const run = spawnSync('npx', ['playwright', 'test', config.features[k].dir, `--project=${browser}`, `--output=${outputDir}`], { env, stdio: 'inherit' });
-    summary.push({ feature: k, browser, exit: run.status, report: `${reportDir}/index.html` });
+    const screenshots = copyScreenshots(reportDir);
+    summary.push({ feature: k, browser, exit: run.status, report: `${reportDir}/index.html`, screenshots });
   }
 }
 
