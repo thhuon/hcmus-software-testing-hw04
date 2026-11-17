@@ -27,7 +27,7 @@ Sources: [ISTQB] §6.2 · [PW] Best Practices, Locators, Assertions, Parameteriz
 | --- | --- | --- | --- |
 | 9 | M | Test data lives only in the data file | No inline array / object of cases in any spec; `grep` the specs |
 | 10 | M | Every expected value is traced | `source` column names the requirement; values match the TC; unknown values are `<CONFIRM>` |
-| 11 | M | Runs do not collide on stored data | Unique values per row and run, or a database reset before each run, stated in §3 |
+| 11 | M | Runs do not collide on stored data | Unique values per spec, row, run and attempt (repeat / retry), or a database reset before each run, stated in §3 |
 
 ## T4 – Generate specs
 
@@ -55,7 +55,7 @@ Sources: [ISTQB] §6.2 · [PW] Best Practices, Locators, Assertions, Parameteriz
 | --- | --- | --- | --- |
 | 22 | M | One run and one report per feature × browser | `reports/<feature>/<browser>/index.html` and `results.json` exist for every pair |
 | 23 | M | Every report shows the identity text and an ISO timestamp | Report title / header checked in the browser |
-| 24 | M | Official runs used frozen specs and clean data | Spec commit before the run; reset / fresh servers stated; reports committed unchanged |
+| 24 | M | Official runs used frozen specs and clean data | Spec commit before the run; reset / fresh servers, or `--reuse` of shared servers with per-test data, stated; replaced sets named; reports committed unchanged |
 | 25 | M | No retries hide failures | `retries: 0`, or flaky tests reported as flaky |
 
 ## T7 – Failure triage

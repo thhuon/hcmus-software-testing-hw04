@@ -66,6 +66,14 @@ Script (Node ≥ 18, chạy từ thư mục gốc của dự án):
 
 Trước T1, kiểm tra môi trường: một smoke spec mở mọi frontend phải pass trên mọi browser (`npx playwright install` + các system dependency cho WebKit trên Linux).
 
+### Server dùng chung và các phiên chạy song song
+
+Khi một terminal hoặc một phiên agent khác cùng lúc dùng chung server SUT, database hoặc thư mục dự án:
+
+- **Lần chạy phát triển** ghi vào thư mục riêng: `REPORT_DIR=<tmp>/report npx playwright test … --output=<tmp>/test-results`. Ngay sau khi chạy, khi không còn lần chạy nào khác (`pgrep -af "playwright test"`), bổ sung kết quả vào file chính: số liệu và assertion fail vào file design, ảnh cần giữ vào `features/<feature>/screenshots/`, HTML report vào một thư mục con của thư mục report bị git bỏ qua. Để gộp sau thì dễ mất, vì phiên kia có thể xóa thư mục dùng chung.
+- **Lần chạy chính thức** giữ server đang chạy (`run-browsers.mjs --reuse`) khi khởi động mới sẽ seed lại database mà phiên kia đang dùng; khi đó dữ liệu test phải tự tách các lần chạy (T3). Trước khi chạy: không có lần chạy nào khác, và dữ liệu seed mà giá trị mong đợi dựa vào (ví dụ giá catalog) không đổi.
+- **Commit** chỉ lấy đường dẫn của mình, trong một lệnh: `git add <paths> && git commit -m "…" -- <paths>`. `git commit` không kèm đường dẫn sẽ lấy luôn những gì phiên kia đã stage. Không đụng vào file chưa commit của phiên kia, và chờ phiên kia commit xong file dùng chung (log, báo cáo) rồi mới ghi vào.
+
 ## Công cụ và phương pháp
 
 Viết spec chỉ là một phần của kiểm thử tự động. Mỗi bước còn có một công cụ người kiểm thử tự tay dùng, và bộ test được dựng theo các phương pháp tự động hóa có tên gọi [TAE], [PW].
@@ -128,7 +136,7 @@ Mỗi test case đã thiết kế của feature là một dòng: `TC ID | Techni
 
 - Mỗi TC được tự động hóa là một dòng: `id`, `technique`, `title`, các input, kết quả mong đợi (`kind`: `success | error | blocked`, message / URL / giá trị mong đợi trích từ test basis) và `source` (ID yêu cầu).
 - **Không có dữ liệu test trong spec** (không có mảng hay object chứa case viết inline): spec chỉ đọc file.
-- Dữ liệu mà app lưu lại (tài khoản, đơn hàng, sản phẩm) không được trùng giữa các lần chạy: sinh giá trị duy nhất từ dòng dữ liệu (`reset+{id}+{runStamp}@test.local`) hoặc dựa vào việc reset database trước mỗi lần chạy, và ghi rõ dùng cách nào.
+- Dữ liệu mà app lưu lại (tài khoản, đơn hàng, sản phẩm) không được trùng: mỗi test có giá trị riêng, hoặc dựa vào việc reset database trước mỗi lần chạy, và ghi rõ dùng cách nào. Khóa duy nhất gồm spec (hoặc file dữ liệu), ID dòng, lần chạy và lần thử, ví dụ `{spec}.{id}.{runStart}.{browser}.r{repeatEachIndex}t{retry}@test.local`: cùng một TC ID có thể có test Web và test API, và `--repeat-each` hay retry chạy lại cùng dòng trong một lần chạy. Không dựa vào việc app từ chối dữ liệu trùng: backend có thể cho đăng ký lại e-mail đã có và đăng nhập vào tài khoản đầu tiên, khiến hai test âm thầm dùng chung một giỏ hàng hay một danh sách đơn.
 - Giá trị mong đợi mà test basis không nêu là mục `<CONFIRM>`, không bao giờ là giá trị chép từ app hiện tại.
 
 ### T4 Sinh spec → `tests/<feature>/*.spec.ts`, design §4
@@ -156,7 +164,7 @@ Không sửa gì ở T4: code thô do AI sinh ra là bằng chứng để T5 rev
 
 ### T5 Review và sửa → spec, design §5
 
-1. Chạy trên một browser: `npx playwright test tests/<feature> --project=chromium`, rồi `--repeat-each=3` cho các test pass (test flaky lộ ra qua kết quả khác nhau giữa các lần).
+1. Chạy trên một browser: `npx playwright test tests/<feature> --project=chromium`, rồi `--repeat-each=3` cho các test pass (dữ liệu bị hai lần thử của một test dùng chung cũng lộ ra như vậy, T3; test flaky lộ ra qua kết quả khác nhau giữa các lần).
 2. Cùng tester review từng spec theo checklist sau:
 
 | Nhóm | Cần tìm |
@@ -166,7 +174,7 @@ Không sửa gì ở T4: code thô do AI sinh ra là bằng chứng để T5 rev
 | Wrong oracle | giá trị mong đợi chép từ app hiện tại thay vì từ test basis; assertion bị đảo ngược để pass |
 | Missing edge case | một dòng T1 chưa được tự động hóa, một giá trị biên bị thiếu trong file dữ liệu |
 | Flaky wait | `waitForTimeout`, `networkidle` trên trang có polling, thao tác trước khi trang sẵn sàng |
-| Hidden dependency | dùng chung tài khoản / dữ liệu giữa các test, phụ thuộc thứ tự, dữ liệu còn sót từ lần chạy trước |
+| Hidden dependency | dùng chung tài khoản / dữ liệu giữa các test (kể cả hai spec cùng TC ID, hoặc hai lần thử của một test), phụ thuộc thứ tự, dữ liệu còn sót từ lần chạy trước |
 | Hard-coded data | input nằm trong spec thay vì trong file dữ liệu |
 
 3. Sửa, chạy lại, commit. Phần sửa của chính tester là các commit riêng.
@@ -180,7 +188,7 @@ Không sửa gì ở T4: code thô do AI sinh ra là bằng chứng để T5 rev
 
 1. Mỗi browser là một lần chạy riêng với HTML report riêng (`run-browsers.mjs`). Kiểm tra tiêu đề report có dòng danh tính của dự án và timestamp ISO.
 2. Test chỉ fail trên một browser: rerun (chạy lại) test đó trên browser đó. Cùng kết quả → khác biệt giữa các browser, cần phân loại ở T7 (timing của script, hành vi của engine, hoặc lỗi cross-browser thật). Kết quả khác → flaky: sửa lệnh chờ (các nhóm ở T5), không bao giờ thêm retry để che nó.
-3. Lần chạy chính thức: khi spec đã đóng băng (đã commit), reset dữ liệu, chạy mọi browser bằng một lệnh, commit report nguyên trạng. Ghi bảng các lần chạy: `Feature | Browser | Report | Started (ISO) | Tests | Passed | Failed | Flaky`.
+3. Lần chạy chính thức: khi spec đã đóng băng (đã commit), reset dữ liệu (server mới) – hoặc, khi server dùng chung với phiên khác, giữ server (`--reuse`) và ghi rõ dữ liệu test tự tách các lần chạy ("Server dùng chung và các phiên chạy song song") – chạy mọi browser bằng một lệnh, commit report nguyên trạng. Sửa script sau một lần chạy chính thức nghĩa là phải chạy một bộ chính thức mới; ghi ở §6 bộ nào bị thay và vì sao. Ghi bảng các lần chạy: `Feature | Browser | Report | Started (ISO) | Tests | Passed | Failed | Flaky`.
 
 ### T7 Phân loại lỗi → design §6, §8
 

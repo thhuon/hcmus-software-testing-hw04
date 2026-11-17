@@ -67,6 +67,15 @@ Scripts (Node ≥ 18, run from the project root):
 
 Before T1, check the environment: a smoke spec that opens every frontend passes on every browser (`npx playwright install` + system dependencies for WebKit on Linux).
 
+### Shared servers and parallel sessions
+
+When another terminal or agent session uses the same SUT servers, database or project folders at the same time:
+
+- **Development runs** write to private folders: `REPORT_DIR=<tmp>/report npx playwright test … --output=<tmp>/test-results`. Right after the run, as soon as no other run is going (`pgrep -af "playwright test"`), add the result to the main files: numbers and failed assertions into the design file, the screenshots worth keeping into `features/<feature>/screenshots/`, the HTML report into a subfolder of the git-ignored report folder. A merge left for later gets lost when the other session empties the shared folders.
+- **Official runs** keep the running servers (`run-browsers.mjs --reuse`) when a fresh start would re-seed a database the other session is using; the test data must then keep the runs apart on its own (T3). Before the run: no other run is going, and the seed data the expected values depend on (e.g. catalog prices) is unchanged.
+- **Commits** take your own paths only, in one command: `git add <paths> && git commit -m "…" -- <paths>`. A plain `git commit` also takes what the other session has staged. Leave its uncommitted files alone, and wait until it has committed a shared file (a log, a report) before writing to it.
+
+
 ## Tools and approaches
 
 Writing specs is one part of test automation. Each step also has a tool the tester uses with their own hands, and the suite is built from named automation approaches [TAE], [PW].
@@ -129,7 +138,7 @@ One row per designed test case of the feature: `TC ID | Technique | Partition / 
 
 - One row per automated TC: `id`, `technique`, `title`, the inputs, the expected outcome (`kind`: `success | error | blocked`, the expected message / URL / value quoted from the test basis) and `source` (requirement ID).
 - **No test data inside the spec** (no inline arrays or objects of cases): the spec only reads the file.
-- Data that the app keeps (accounts, orders, products) must not collide between runs: generate unique values from the row (`reset+{id}+{runStamp}@test.local`) or rely on a database reset before each run, and say which.
+- Data that the app keeps (accounts, orders, products) must not collide: give every test its own values, or rely on a database reset before each run, and say which. A unique key holds the spec (or data file), the row ID, the run and the attempt, e.g. `{spec}.{id}.{runStart}.{browser}.r{repeatEachIndex}t{retry}@test.local`: the same TC ID can have a Web and an API test, and `--repeat-each` or a retry runs the same row again inside one run. Do not rely on the app refusing a duplicate: a backend may register a taken e-mail again and log in the first account, so two tests silently share one cart or one order list.
 - Expected values that the test basis does not state are `<CONFIRM>` items, never values copied from the current app.
 
 ### T4 Generate specs → `tests/<feature>/*.spec.ts`, design §4
@@ -157,7 +166,7 @@ Do not fix anything in T4: the raw generated code is the evidence that T5 review
 
 ### T5 Review and fix → specs, design §5
 
-1. Run on one browser: `npx playwright test tests/<feature> --project=chromium`, then `--repeat-each=3` for the passing tests (flakiness shows up as different results).
+1. Run on one browser: `npx playwright test tests/<feature> --project=chromium`, then `--repeat-each=3` for the passing tests (flakiness shows up as different results; so does data that two attempts of one test share, T3).
 2. Review every spec against this checklist, with the tester:
 
 | Category | Look for |
@@ -167,7 +176,7 @@ Do not fix anything in T4: the raw generated code is the evidence that T5 review
 | Wrong oracle | expected value copied from the current app instead of the test basis; an assertion inverted to pass |
 | Missing edge case | a T1 row not automated, a boundary value missing from the data file |
 | Flaky wait | `waitForTimeout`, `networkidle` on a polling page, actions before the page is ready |
-| Hidden dependency | shared account / data between tests, order dependency, data left by a previous run |
+| Hidden dependency | shared account / data between tests (also two specs with the same TC ID, or two attempts of one test), order dependency, data left by a previous run |
 | Hard-coded data | inputs in the spec instead of the data file |
 
 3. Fix, rerun, commit. The tester's own corrections are separate commits.
@@ -181,7 +190,7 @@ Do not fix anything in T4: the raw generated code is the evidence that T5 review
 
 1. Each browser is a separate run with its own HTML report (`run-browsers.mjs`). Check the report title shows the project's identity text and an ISO timestamp.
 2. A test that fails on one browser only: rerun it on that browser. Same result → a browser difference to triage in T7 (script timing, engine behaviour, or a real cross-browser defect). Different result → flaky: fix the wait (T5 categories), never add retries to hide it.
-3. Official runs: once the specs are frozen (committed), reset the data, run all browsers in one command, commit the reports unchanged. Write the run table: `Feature | Browser | Report | Started (ISO) | Tests | Passed | Failed | Flaky`.
+3. Official runs: once the specs are frozen (committed), reset the data (fresh servers) – or, when the servers are shared with another session, keep them (`--reuse`) and state that the test data keeps the runs apart ("Shared servers and parallel sessions") – run all browsers in one command, commit the reports unchanged. A script fix after an official run means a new official set; say in §6 which sets were replaced and why. Write the run table: `Feature | Browser | Report | Started (ISO) | Tests | Passed | Failed | Flaky`.
 
 ### T7 Failure triage → design §6, §8
 

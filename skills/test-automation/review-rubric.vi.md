@@ -29,7 +29,7 @@ Nguồn: [ISTQB] §6.2 · [PW] Best Practices, Locators, Assertions, Parameteriz
 | --- | --- | --- | --- |
 | 9 | M | Dữ liệu test chỉ nằm trong file dữ liệu | Không spec nào có mảng / object chứa case viết inline; `grep` các spec |
 | 10 | M | Mọi giá trị mong đợi đều truy được nguồn | Cột `source` nêu yêu cầu; giá trị khớp với TC; giá trị chưa biết là `<CONFIRM>` |
-| 11 | M | Các lần chạy không đụng nhau ở dữ liệu được lưu | Giá trị duy nhất cho mỗi dòng và mỗi lần chạy, hoặc reset database trước mỗi lần chạy, có ghi ở §3 |
+| 11 | M | Các lần chạy không đụng nhau ở dữ liệu được lưu | Giá trị duy nhất cho mỗi spec, dòng, lần chạy và lần thử (lặp / retry), hoặc reset database trước mỗi lần chạy, có ghi ở §3 |
 
 ## T4 – Sinh spec
 
@@ -57,7 +57,7 @@ Nguồn: [ISTQB] §6.2 · [PW] Best Practices, Locators, Assertions, Parameteriz
 | --- | --- | --- | --- |
 | 22 | M | Mỗi cặp feature × browser có một lần chạy và một report | `reports/<feature>/<browser>/index.html` và `results.json` có đủ cho mọi cặp |
 | 23 | M | Mọi report hiển thị dòng danh tính và timestamp ISO | Tiêu đề / header của report được kiểm trên browser |
-| 24 | M | Lần chạy chính thức dùng spec đã đóng băng và dữ liệu sạch | Commit spec có trước lần chạy; có ghi việc reset / khởi động server mới; report được commit nguyên trạng |
+| 24 | M | Lần chạy chính thức dùng spec đã đóng băng và dữ liệu sạch | Commit spec có trước lần chạy; có ghi việc reset / khởi động server mới, hoặc `--reuse` server dùng chung với dữ liệu riêng cho từng test; có ghi các bộ bị thay; report được commit nguyên trạng |
 | 25 | M | Không có retry che giấu test fail | `retries: 0`, hoặc test flaky được báo là flaky |
 
 ## T7 – Phân loại lỗi
