@@ -10,7 +10,7 @@
 
 ## 1. Test cases selected (T1)
 
-DT = domain testing (`02_domain_testing.md` §2.2), BVA = boundary value analysis (`03_boundary_value_analysis.md` §2.2). Data row: `web/<ID>` = row of the Web data file, `api/<ID>` = row of the API data file (both created in T3).
+DT = domain testing (`02_domain_testing.md` §2.2), BVA = boundary value analysis (`03_boundary_value_analysis.md` §2.2). Data row: `web/<ID>` = row of the Web data file, `api/<ID>` = row of the API data file (both created in T3). Expected: the TC's own words and step numbers; left out are the API-fallback steps (2b, 3b, 4b), the source codes (A#, Q#, R#, FR-22) and DT-01's "screen recorded (Q8)". Full text in the HW02 files.
 
 | TC ID | Technique | Partition / boundary | Input | Expected (quoted from the TC) | Automate? | Reason if not | Data row |
 | --- | --- | --- | --- | --- | --- | --- | --- |
