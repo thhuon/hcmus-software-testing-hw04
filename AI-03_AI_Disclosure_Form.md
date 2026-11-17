@@ -18,7 +18,7 @@ Biểu mẫu Khai báo Sử dụng AI
 | Mã bài tập: | HW04-AI |
 | Tên bài tập: | HW04 – Automation Testing on EShop |
 | Cấp độ AI (1–5): | Cấp 4 – AI hỗ trợ sản xuất |
-| Ngày: |  |
+| Ngày: | 16/11/2026 - 18/11/2026 |
 | Họ tên sinh viên: | HỒ THÙY HƯƠNG |
 | MSSV: | 23120046 |
 
@@ -129,8 +129,8 @@ Chữ ký
 | Lớp / Khoá: | CQ2023/3 |
 | Môn học: | CS423 / CSC13003 – Kiểm chứng Phần mềm |
 | Giảng viên: | ThS. Lâm Quang Vũ |
-| Ngày: |  |
-| Chữ ký: |  |
+| Ngày: | 18/11/2026 |
+| Chữ ký: | Hồ Thùy Hương |
 
 Tham khảo
 

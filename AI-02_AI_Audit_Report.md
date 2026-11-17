@@ -18,7 +18,7 @@ AI Audit Report — Mẫu 5 mục cho mỗi Artifact
 | MSSV: | 23120046 |
 | Lớp / Khoá: | CQ2023/3 |
 | Mã bài tập (ví dụ HW#00, HW#02): | HW04-AI |
-| Ngày làm bài: | 16/11/2026 – … (theo prompt_log.md) |
+| Ngày làm bài: | 16/11/2026 - 18/11/2026 |
 | Công cụ AI đã dùng: | Claude Code (claude-opus-5-5) |
 | Công cụ AI đã dùng: | [x] Có  [ ] Không |
 
@@ -155,8 +155,8 @@ Chữ ký
 | Lớp / Khoá: | CQ2023/3 |
 | Môn học: | CS423 / CSC13003 – Kiểm chứng Phần mềm |
 | Giảng viên: | ThS. Lâm Quang Vũ |
-| Ngày: |  |
-| Chữ ký: |  |
+| Ngày: | 18/11/2026 |
+| Chữ ký: | Hồ Thùy Hương |
 
 Tham khảo
 
