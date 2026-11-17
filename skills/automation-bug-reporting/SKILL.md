@@ -71,7 +71,7 @@ Follow the tracker's template field by field (`### <label>` headings when filing
 
 ## Step 2 – send (only after the human says yes)
 
-1. **Screenshot visible in the tracker.** `gh` cannot upload images. Either the human drags the image into the issue / comment in the browser, or run `node scripts/upload_attachments.js <owner/repo> <map.json> <out.json>` (header of the script: a Chrome window opens, the human logs in, the image is dropped into the comment box of the issue and the returned `<img … user-attachments …>` markup is read back; nothing is posted) and paste the markup into the body. Delete the browser profile afterwards.
+1. **Screenshot visible in the tracker.** `gh` cannot upload images. Either the human drags the image into the issue / comment in the browser, or run `node scripts/upload_attachments.js <owner/repo> <map.json> <out.json>` (header of the script: a Chrome window opens, the human logs in, the image is dropped into the comment box of the issue and the returned `<img … user-attachments …>` markup is read back; nothing is posted) and paste the markup into the body. Map keys `<issue>#<label>` upload several images through one issue; an image for a new issue is uploaded through any existing issue of the repository. Delete the browser profile afterwards.
 2. Send:
    ```bash
    gh issue comment <n> --repo <owner/repo> --body-file <tmp file>            # Confirmed / Changed

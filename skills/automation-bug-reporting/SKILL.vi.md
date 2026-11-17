@@ -70,7 +70,7 @@ Làm theo template của tracker từng trường một (heading `### <label>` k
 
 ## Bước 2 – gửi (chỉ sau khi người dùng đồng ý)
 
-1. **Screenshot hiển thị được trên tracker.** `gh` không upload được ảnh. Hoặc người dùng kéo ảnh vào issue / comment trên trình duyệt, hoặc chạy `node scripts/upload_attachments.js <owner/repo> <map.json> <out.json>` (xem phần đầu script: một cửa sổ Chrome mở ra, người dùng đăng nhập, ảnh được thả vào ô comment của issue và đoạn markup `<img … user-attachments …>` trả về được đọc lại; không đăng gì cả) rồi dán markup đó vào nội dung. Sau đó xóa browser profile.
+1. **Screenshot hiển thị được trên tracker.** `gh` không upload được ảnh. Hoặc người dùng kéo ảnh vào issue / comment trên trình duyệt, hoặc chạy `node scripts/upload_attachments.js <owner/repo> <map.json> <out.json>` (xem phần đầu script: một cửa sổ Chrome mở ra, người dùng đăng nhập, ảnh được thả vào ô comment của issue và đoạn markup `<img … user-attachments …>` trả về được đọc lại; không đăng gì cả) rồi dán markup đó vào nội dung. Key dạng `<issue>#<nhãn>` cho phép upload nhiều ảnh qua cùng một issue; ảnh cho issue mới được upload qua một issue bất kỳ đã có trong repo. Sau đó xóa browser profile.
 2. Gửi:
    ```bash
    gh issue comment <n> --repo <owner/repo> --body-file <tmp file>            # Confirmed / Changed

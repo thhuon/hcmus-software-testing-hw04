@@ -1,6 +1,7 @@
 // Upload local images as GitHub attachments (for an issue body or a comment), without posting anything.
 // Usage: NODE_PATH=<dir containing playwright-core> node upload_attachments.js <owner/repo> <map.json> <out.json> [profile dir]
-//   map.json: {"<issue number>": "<absolute image path>", ...}
+//   map.json: {"<issue number>": "<absolute image path>", ...}; a key "<issue number>#<label>" (e.g. "1#DT-04")
+//   uploads several images through the same issue, and any existing issue can host the image for a new one
 //   out.json: {"<issue number>": "<img … src=\"https://github.com/user-attachments/assets/…\" />", ...} (resumable)
 // A Chrome window opens on the login page; the human logs in. Each image is dropped into the issue's
 // comment box through the file chooser, the generated markup is read back and the box is cleared (no comment is sent).
@@ -17,7 +18,8 @@ const out = fs.existsSync(outFile) ? JSON.parse(fs.readFileSync(outFile, 'utf8')
   await page.waitForFunction(() => !!document.querySelector('meta[name=user-login]')?.content, null, { timeout: 15 * 60e3, polling: 2000 });
   for (const [n, file] of Object.entries(map)) {
     if (out[n]) continue;
-    await page.goto(`https://github.com/${repo}/issues/${n}`, { waitUntil: 'load' }); // not 'networkidle': GitHub never goes idle
+    const issue = n.split('#')[0];
+    await page.goto(`https://github.com/${repo}/issues/${issue}`, { waitUntil: 'load' }); // not 'networkidle': GitHub never goes idle
     await page.waitForTimeout(4000); // the React issue view re-renders after load
     const ta = page.locator('textarea[placeholder="Use Markdown to format your comment"]').last();
     await ta.scrollIntoViewIfNeeded();
