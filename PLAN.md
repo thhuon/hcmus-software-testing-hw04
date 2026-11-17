@@ -75,6 +75,7 @@ Như A1–A7 nhưng **dùng skill**. Chỗ nào skill vướng thì sửa skill 
 
 - [ ] **R1. Chạy chính thức** – reset DB (khởi động lại backend), chạy 9 lần (3 feature × 3 trình duyệt), báo cáo vào `reports/`, commit.
 - [ ] **R2. Bug** – repo nhóm HW02 `angquoc/software-testing-2026-HW02-group` (README §4, §6). Bug đã có issue ở HW02 → **bình luận** vào issue cũ (script, trình duyệt, kết quả assertion, ảnh, ghi "HW04"; nếu hành vi khác HW02 thì nói rõ khác gì). Bug mới → **issue mới** có thêm label `hw: HW04`. Hoàn thiện `bugs/BUG_REPORT.md`; chụp trang Issues lọc theo `hw: HW04` và các issue đã bình luận.
+- [ ] **R3. Chụp lại ảnh Issues (nhắc SV, khi đã xong cả 3 feature)** – trang Issues lọc `is:issue author:thhuon label:"hw: HW04"` (ghi đè `bugs/screenshots/issues-label-hw04.png`) và ảnh từng issue HW02 đã được comment HW04; ảnh hiện tại (17/11) mới có #117 (FR-03) và #116 (FR-08).
 
 ### Giai đoạn 5 – Tài liệu & nộp (≈ 1,5 giờ)
 
