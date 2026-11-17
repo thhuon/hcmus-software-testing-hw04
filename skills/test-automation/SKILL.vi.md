@@ -8,7 +8,14 @@
 
 ## Tổng quan
 
-Một bộ test sinh ra từ một prompt trông có vẻ đầy đủ nhưng thực ra không: selector hỏng ngay lần đổi layout tiếp theo, assertion chỉ kiểm tra rằng *có gì đó* hiện ra, giá trị mong đợi được chép từ những gì app đang làm hôm nay, và các lệnh chờ chỉ pass trên máy nhanh. Skill này biến test case đã thiết kế thành một bộ test, mỗi prompt một bước, có người dùng review và ghi lại AI đã sai gì, vì sao.
+Một bộ test do AI sinh ra từ một prompt duy nhất trông có vẻ đầy đủ nhưng thường mắc bốn loại lỗi. Bước T5 kiểm tra từng loại:
+
+- **Selector dễ vỡ:** phần tử được tìm bằng class CSS hoặc vị trí (`.bg-green-100`, `nth-child(2)`) thay vì vai trò và tên của nó, nên lần đổi layout tiếp theo là test hỏng.
+- **Assertion yếu:** test chỉ kiểm tra rằng *có gì đó* hiện ra (`toBeVisible()`), không kiểm tra nội dung, nên thông báo hoặc giá trị sai vẫn pass.
+- **Oracle sai:** giá trị mong đợi được chép từ những gì app đang làm hôm nay thay vì từ đặc tả, nên test pass ngay trên lỗi (ví dụ: app hiện mã 4 chữ số, đặc tả yêu cầu 6 chữ số, test lại mong đợi 4).
+- **Chờ không ổn định (flaky wait):** chờ cứng một khoảng thời gian (`waitForTimeout(1000)`) thay vì chờ đúng trạng thái mà thao tác tiếp theo cần, nên test pass trên máy nhanh và fail trên máy chậm hoặc trên trình duyệt khác.
+
+Skill này biến test case đã thiết kế thành một bộ test, mỗi prompt một bước, có người dùng review và ghi lại AI đã sai gì, vì sao.
 
 | Bước | Ghi vào | Ai quyết định |
 | --- | --- | --- |

@@ -9,7 +9,14 @@ description: Use when designed test cases of a web feature must be turned into a
 
 ## Overview
 
-A suite generated from one prompt looks complete and is not: its selectors break on the next layout change, its assertions check that *something* appeared, its expected values are copied from what the app does today, and its waits pass on a fast machine only. This skill turns designed test cases into a suite one step per prompt, with a human review that records what the AI got wrong and why.
+A suite generated from one prompt looks complete but usually has four kinds of defect. Step T5 checks for each of them:
+
+- **Fragile selector:** the element is found by a CSS class or by its position (`.bg-green-100`, `nth-child(2)`) instead of its role and name, so the next layout change breaks the test.
+- **Weak assertion:** the test checks only that *something* appeared (`toBeVisible()`), not what it says, so a wrong message or value still passes.
+- **Wrong oracle:** the expected value is copied from what the app does today instead of from the requirement, so the test passes on the bug (e.g. the app shows a 4-digit code, the requirement asks for 6 digits, and the test expects 4).
+- **Flaky wait:** a fixed sleep (`waitForTimeout(1000)`) instead of waiting for the state the next action needs, so the test passes on a fast machine and fails on a slow one or on another browser.
+
+This skill turns designed test cases into a suite one step per prompt, with a human review that records what the AI got wrong and why.
 
 | Step | Writes | Who decides |
 | --- | --- | --- |
