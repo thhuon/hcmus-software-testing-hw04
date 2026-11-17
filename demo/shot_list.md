@@ -1,91 +1,119 @@
-# HW04 – Demo videos: shot list
+# HW04 – Kịch bản quay video demo (feature C: FR-15 Quản lý sản phẩm)
 
-| Field | Value |
-| --- | --- |
-| Videos | (1) **Demo** – Task 2: one automation script end to end, multi-browser run, HTML report, one fix narrated (≥ 5 min) · (2) **Skill** – brief §7: the skills used end to end on one complete feature |
-| Recording plan | One recording session while automating FR-15 Product CRUD (PLAN.md phase 3, C1–C7), cut into two videos (proposed, student confirms) |
-| Narration | Vietnamese, **student's own voice** (brief §11 – no TTS). Recorded silently, voice-over added afterwards from [narration_script.md](narration_script.md) (student 18/11) |
-| Identity proof | Terminal running `whoami` and `hostname` at the start of both videos and again right before the 3-browser run |
-| Hosting | YouTube Unlisted → links in `README.md` §2–§3 and `HW04_Report.md` §9–§10 |
+Lời thoại đầy đủ của từng cảnh: [narration_script.md](narration_script.md) (cùng số cảnh với file này).
 
-## 1. Requirements (V1)
+## 0. Tổng quan
 
-| # | Requirement | Source | Video |
-| --- | --- | --- | --- |
-| R1 | At least 5 minutes long | Task 2, bullet 1 | Demo |
-| R2 | Narrated in Vietnamese | Task 2, bullet 1 | Demo, Skill |
-| R3 | The student's own voice narration (not AI-generated) | §11, bullet 2 | Demo, Skill |
-| R4 | One automation script running end to end | Task 2, bullet 1 | Demo |
-| R5 | The multi-browser run (Chromium, Firefox, WebKit) | Task 2, bullet 1; §6 Task 1 | Demo |
-| R6 | The generated HTML report shown | Task 2, bullet 1 | Demo |
-| R7 | The report shows `Run by: 23120046` and an ISO timestamp, from the run just shown | §11, bullet 1 | Demo |
-| R8 | At least one fix made to the AI-generated script during the review, narrated | Task 2, bullet 2 | Demo |
-| R9 | Face-cam or a terminal running `whoami` and `hostname` | Task 2, bullet 3; §11 | Demo, Skill |
-| R10 | Uploaded to YouTube as **Unlisted** | Task 2, bullet 1; §7 | Demo, Skill |
-| R11 | Shows end to end how the skill was used on one complete feature | §7 | Skill |
-| R12 | The skill's workflow: data-driven, multi-browser script generation **and maintenance** | §7 | Skill |
-| R13 | Video links in the README and the report | §13 | Demo, Skill |
+Đề yêu cầu **hai video**. Mỗi video có danh sách cảnh riêng và quay ở một buổi riêng:
 
-## 2. Scenes (V2)
-
-Scenes are numbered in **recording order** (one session). Durations are the length **in the final cut** (waits removed or sped up). `⟨…⟩` = fill in from the session. Full voice-over text per scene: [narration_script.md](narration_script.md).
-
-| # | Scene | On screen | Narration points | Requirement covered | Video | Approx. duration |
-| --- | --- | --- | --- | --- | --- | --- |
-| S0 | Title | Title card: "HW04 – Automation Testing · FR-15 Quản lý sản phẩm · Hồ Thùy Hương – 23120046" (added in the editor) | Chào; video này cho thấy gì | – | Demo, Skill (own text each) | 0:15 |
-| S1 | Identity | Terminal, font ≥ 16 px: `whoami && hostname && date -Iseconds && pwd` then `git log --oneline -1` | Tài khoản máy, tên máy, thời điểm quay, thư mục bài làm | R9 | Demo, Skill | 0:20 |
-| S2 | The skill and the project profile | `skills/test-automation/SKILL.md` (step table T1–T8) → `review-rubric.md` → `scripts/` → `CLAUDE.md` feature row C → `automation.config.json` entry `product-crud` | Skill viết chung, rút ra từ A và B; giá trị riêng của bài nằm trong CLAUDE.md / config; mỗi bước AI làm → tự chấm rubric → dừng cho SV duyệt → 1 commit | R11, R12 | Skill | 0:50 |
-| S3 | T1 Select test cases | Claude Code: prompt "Dùng skill test-automation, bước T1 cho feature product-crud" → `features/product-crud/automation_design.md` §1 fills in → AI self-review table → student's answer to "Decisions needed" → `git commit` | 36 TC HW02 (27 DT + 9 BVA); TC nào tự động hóa, TC nào không và vì sao; SV quyết định | R11 | Skill | 1:00 |
-| S4 | T2 Locators and page objects | `npm run sut` (2nd terminal) → `npm run codegen:admin`: log in `admin@eshop.com`, open the product list and the add form, **Pick locator** on 2–3 elements → close codegen, **stop `npm run sut`** → Claude writes the page object(s) in `page-objects/` and design §2 | Codegen chỉ là bản nháp để đọc locator; ưu tiên role + tên hiển thị; phần tử nào không có tên → ghi vào testability findings | R11, R12 | Skill | 1:15 |
-| S5 | T3 Test data | `data/product-crud/⟨file⟩.json` side by side with the HW02 TC row (`../week02/features/fC-pool-C/02_domain_testing.md`) | Dữ liệu tách khỏi code; kết quả mong đợi lấy từ TC HW02, không lấy từ app; dữ liệu duy nhất mỗi lần chạy | R11, R12 | Skill | 0:45 |
-| S6 | T4 Generate specs + first run | Prompt T4 → `tests/product-crud/*.spec.ts` appear → `npx playwright test tests/product-crud --project=chromium` → result line | AI sinh script data-driven, ≥ 3 kiểu assertion; lần chạy đầu chỉ Chromium; chưa sửa gì | R11, R12 | Skill | 1:00 |
-| S7 | T5 Review and **one fix** | (a) the test / line the AI got wrong (UI mode `npm run ui -- tests/product-crud` or the failing output) → (b) explain why it is wrong → (c) the fix in the editor → (d) rerun `npx playwright test tests/product-crud --project=chromium -g "⟨TC ID⟩"` → (e) design §5 row → `git show --stat ⟨hash⟩`. **Fallback** if the AI made no mistake in FR-15: `git show f0b2152` (checkout review row 2, weak assertion on refused API rows) | Dòng sai → vì sao sai → loại lỗi → AI sai vì đâu (SV quyết) → cách sửa → chạy lại → commit | R8, R12 | Demo, Skill | 1:40 |
-| S8 | The script, walked through | (recorded after S7, so the fixed script is shown) spec file → the `for (const row of rows)` loop → data file → page object → the ⟨3⟩ assertion patterns (highlight each) | Script nào sẽ chạy; data-driven; page object; locator; ⟨3⟩ kiểu assertion | R4 | Demo | 1:30 |
-| S9 | T6 The 3-browser run | Same terminal: `whoami && hostname` then `npm run feature -- product-crud`, **one continuous shot** to the last browser's result line; waits sped up ×4–×8 with an on-screen "×8" label, not cut | Lệnh khởi động lại SUT (DB sạch) rồi chạy Chromium → Firefox → WebKit; mỗi trình duyệt 1 báo cáo; đọc kết quả từng trình duyệt | R4, R5, R9 | Demo, Skill | 1:15 (Demo) · 0:45 (Skill) |
-| S10 | The HTML reports | `npm run report -- reports/product-crud/chromium` → zoom on the title (`HW04 · product-crud · chromium · Run by: 23120046 · <ISO>`) → open one passed test (steps) → open one failed test (expected vs received, screenshot) → Firefox and WebKit reports, title only | Tiêu đề có Run by + giờ ISO khớp lần chạy vừa rồi; test pass; test fail đọc expected / received | R6, R7 | Demo, Skill | 1:30 (Demo) · 0:45 (Skill) |
-| S11 | T7 Failure triage and bug | `npm run trace -- ⟨trace.zip⟩` on one failing test (DOM snapshot, network) → verdict product vs script (student) → `automation-bug-reporting`: the HW02 issue with the new "HW04" comment, or the new issue with label `hw: HW04`, in the browser | Trace viewer cho thấy gì; SV kết luận lỗi sản phẩm hay lỗi script; bug cũ → bình luận, bug mới → issue mới | R11, R12 | Skill (Demo: 0:20 summary) | 1:15 |
-| S12 | T8 Summary | `npm run summary` → design §6–§8 → `git log --oneline -- tests/product-crud` | Số TC tự động hóa / pass / fail / không tự động hóa; các commit theo từng bước | R11 | Skill (Demo: 0:20) | 0:45 |
-| S13 | Closing | Editor or title card | Tóm tắt, cảm ơn | – | Demo, Skill | 0:15 |
-
-### Planned cuts
-
-| Video | Scenes in order | Planned length |
+| | Video 1 – Demo Agent Skill | Video 2 – Demo automation script |
 | --- | --- | --- |
-| Demo (Task 2) | S0 → S1 → S8 → S7 → S9 → S10 → S11 (short) → S12 (short) → S13 | ≈ 7:15 (≥ 5:00, R1) |
-| Skill (§7) | S0 → S1 → S2 → S3 → S4 → S5 → S6 → S7 → S9 → S10 → S11 → S12 → S13 | ≈ 10:30 |
+| Đề | §7: cho thấy từ đầu đến cuối cách dùng skill trên trọn một feature | Task 2: một script chạy từ đầu đến cuối trên nhiều trình duyệt, báo cáo HTML, kể một lỗi đã sửa |
+| Nội dung | Dùng skill `test-automation` (T1 → T8) và `automation-bug-reporting` để làm FR-15 | Script FR-15 đã làm xong: giới thiệu script → lỗi đã sửa → chạy 3 trình duyệt → báo cáo HTML |
+| Quay khi nào | **Buổi quay 1** – trong lúc làm FR-15 (PLAN C1–C7) | **Buổi quay 2** – sau khi FR-15 xong, đúng lúc chạy chính thức FR-15 (PLAN R1) |
+| Độ dài dự kiến | ≈ 11 phút | ≈ 7 phút (đề: **ít nhất 5 phút**) |
 
-In the Demo cut, S8 (the script) comes before S7 (the fix) so the viewer knows the script before hearing what was wrong in it.
+Quy định chung cho cả hai video:
 
-## 3. Preparation (V3)
+- Thuyết minh **tiếng Việt, giọng thật của bạn** (đề §11 – không dùng TTS / giọng AI). Quay im, lồng tiếng sau theo [narration_script.md](narration_script.md).
+- Cảnh đầu tiên luôn là terminal chạy `whoami` và `hostname` (đề Task 2, §11).
+- Mọi lần chạy trong video là lần chạy thật; không mở lại báo cáo cũ, không sửa báo cáo bằng tay.
+- Đăng YouTube chế độ **Unlisted**; dán link vào `README.md` §2–§3 và `HW04_Report.md` §9–§10.
 
-- [ ] Private apps closed: Zalo / Messenger / mail / password manager; notifications off (Do Not Disturb)
-- [ ] Clean browser profile for GitHub and the reports; personal bookmarks hidden; `gh auth status` shows `thhuon`
-- [ ] No server left running on ports 3000 / 5173 / 5174 before S9 (`npm run feature` starts a fresh SUT, so the database is re-seeded = test data reset)
-- [ ] VS Code zoom and terminal font ≥ 16 px; one window layout at 1920×1080; theme readable
-- [ ] OBS (or SimpleScreenRecorder): display capture 1920×1080, 30 fps, `.mkv`; microphone **off** (voice-over later), desktop audio off
-- [ ] A notepad (outside the capture area) to write the wall-clock time at the start of each scene S1 … S13 – makes cutting fast
-- [ ] Dry run: `npx playwright test tests/smoke.spec.ts --project=chromium` passes; note how long one browser of `npm run feature` takes
-- [ ] Voice-over: Audacity (or the editor's recorder), quiet room, test 10 s of audio; editor Kdenlive / Shotcut
+## 1. Đề yêu cầu gì (đánh dấu khi dựng xong)
 
-## 4. Check of the final cut (V5)
+| # | Yêu cầu | Nguồn trong đề | Video | Cảnh |
+| --- | --- | --- | --- | --- |
+| R1 | Dài ít nhất 5 phút | Task 2 | 2 | cả video |
+| R2 | Thuyết minh tiếng Việt | Task 2 | 1, 2 | cả video |
+| R3 | Giọng thật của SV, không do AI tạo | §11 | 1, 2 | cả video |
+| R4 | Một script tự động chạy từ đầu đến cuối | Task 2 | 2 | 2.2, 2.4 |
+| R5 | Chạy trên nhiều trình duyệt (Chromium, Firefox, WebKit) | Task 2, §6 | 2 | 2.4 |
+| R6 | Mở báo cáo HTML vừa sinh ra | Task 2 | 2 | 2.5 |
+| R7 | Báo cáo có `Run by: 23120046` và giờ ISO của lần chạy vừa chiếu | §11 | 2 | 2.5 |
+| R8 | Kể ít nhất một lỗi đã sửa trong script AI sinh ra | Task 2 | 2 (và 1) | 2.3, 1.8 |
+| R9 | Face-cam hoặc terminal chạy `whoami` và `hostname` | Task 2, §11 | 1, 2 | 1.1, 2.1, 2.4 |
+| R10 | Đăng YouTube chế độ Unlisted | Task 2, §7 | 1, 2 | khi đăng |
+| R11 | Cho thấy cách dùng skill trên trọn một feature | §7 | 1 | 1.2 – 1.11 |
+| R12 | Skill bao cả sinh script (data-driven, nhiều trình duyệt) **và bảo trì** script (review, sửa, phân tích lỗi) | §7 | 1 | 1.6, 1.7, 1.8, 1.9, 1.10 |
+| R13 | Link video có trong README và báo cáo | §13 | 1, 2 | khi nộp |
 
-Timestamps come from the student after the cut.
+## 2. Video 1 – Demo Agent Skill (Buổi quay 1, ≈ 11 phút)
 
-| Requirement | Video | Timestamp | OK? |
+Cách làm mỗi bước của skill (cảnh 1.3 – 1.11), giống nhau cho mọi bước:
+
+1. Gõ prompt ở cột "Bạn làm gì" vào Claude Code.
+2. Chờ AI trả lời (khi dựng: tua nhanh phần chờ).
+3. Cuộn qua 3 phần của câu trả lời: **kết quả bước** → **bảng tự chấm theo rubric** → **Decisions needed** (AI hỏi bạn).
+4. Mở file AI vừa điền, đọc lướt; trả lời các câu hỏi / sửa nếu cần.
+5. Cho thấy commit của bước: `git log --oneline -1`.
+
+| Cảnh | Bạn làm gì | Màn hình cần thấy | Ý chính khi nói | Thời lượng |
+| --- | --- | --- | --- | --- |
+| 1.1 Mở đầu + xác thực | Mở terminal (chữ ≥ 16 px), gõ `whoami && hostname && date -Iseconds && pwd` | Tên tài khoản, tên máy, giờ quay, thư mục `week04` | Tên, MSSV; video này demo skill trên FR-15 | 0:30 |
+| 1.2 Giới thiệu skill | Mở lần lượt: `skills/test-automation/SKILL.md` (bảng T1–T8) → `review-rubric.md` → thư mục `templates/` và `scripts/` → `CLAUDE.md` (bảng Features, dòng `product-crud`) → `automation.config.json` | Bảng 8 bước; tiêu chí rubric; 2 script `run-browsers.mjs`, `summarize-results.mjs`; dòng cấu hình của FR-15 | Skill gồm những gì; skill viết chung, giá trị riêng của bài nằm trong `CLAUDE.md` + config → dùng lại cho feature khác chỉ cần thêm 1 dòng config; rút ra khi làm feature A, B | 1:00 |
+| 1.3 T1 – Chọn test case | Prompt: `/test-automation thực hiện bước T1 cho feature product-crud (FR-15)` | `features/product-crud/automation_design.md` §1 được điền; bảng tự chấm; câu hỏi của AI; bạn trả lời | AI đọc 36 TC của HW02, đề xuất TC nào tự động hóa, TC nào không và vì sao; **bạn quyết định** | 1:00 |
+| 1.4 T2 – Locator, page object | Terminal 2: `npm run sut`. Terminal 1: `npm run codegen:admin` → đăng nhập `admin@eshop.com` → mở danh sách sản phẩm, form thêm sản phẩm → **Pick locator** 2–3 phần tử → đóng codegen → **tắt `npm run sut` (Ctrl+C)**. Prompt: `tiếp tục bước T2` | Locator Playwright gợi ý; file page object mới trong `page-objects/`; design §2 | Codegen chỉ để xem locator, không dùng làm script; ưu tiên vai trò + tên hiển thị | 1:15 |
+| 1.5 T3 – Dữ liệu test | Prompt: `tiếp tục bước T3`. Mở `data/product-crud/<file>.json` bên cạnh `../week02/features/fC-pool-C/02_domain_testing.md` | 1 dòng dữ liệu và đúng TC đó ở HW02 | Dữ liệu tách khỏi code; kết quả mong đợi lấy từ TC HW02, không lấy từ app | 0:45 |
+| 1.6 T4 – Sinh script, chạy lần đầu | Prompt: `tiếp tục bước T4`. Sau đó: `npx playwright test tests/product-crud --project=chromium` | File `tests/product-crud/*.spec.ts`; vòng lặp đọc dữ liệu; dòng kết quả lần chạy đầu | AI sinh script data-driven, ≥ 3 kiểu assertion; chạy thử chỉ Chromium; chưa sửa gì | 1:00 |
+| 1.7 T5 – Review script | Prompt: `tiếp tục bước T5`. Mở `npm run ui -- tests/product-crud` để xem từng test | Bảng review design §5 do AI đề xuất; UI mode | Đọc script theo checklist của skill: locator dễ gãy, assertion yếu, oracle sai, thiếu biên, chờ không ổn định… | 1:00 |
+| 1.8 T5 – Sửa một lỗi (bảo trì) | Chọn 1 dòng ở §5: mở đúng dòng code sai → sửa (hoặc duyệt bản sửa của AI) → chạy lại `npx playwright test tests/product-crud --project=chromium -g "<mã TC>"` → `git show --stat` | Dòng sai → bản sửa → test chạy lại → commit | Sai ở đâu, vì sao AI sai (**bạn kết luận**), sửa thế nào | 1:15 |
+| 1.9 T6 – Chạy 3 trình duyệt | Prompt: `tiếp tục bước T6` (AI chạy `npm run feature -- product-crud`) → mở 1 báo cáo | Lệnh chạy Chromium → Firefox → WebKit; tiêu đề báo cáo có `Run by: 23120046` | Script của skill khởi động lại EShop (dữ liệu sạch), chạy 3 trình duyệt, mỗi trình duyệt 1 báo cáo | 0:45 |
+| 1.10 T7 – Phân tích test fail, báo bug | Prompt: `tiếp tục bước T7` → `npm run trace -- <đường dẫn trace.zip>` của 1 test fail → bạn kết luận lỗi sản phẩm hay lỗi script → prompt: `/automation-bug-reporting báo các lỗi sản phẩm của FR-15` → mở issue trên GitHub | Trace viewer (ảnh trang, request API); design §8; issue có bình luận "HW04" hoặc issue mới nhãn `hw: HW04` | Trace cho thấy gì; **bạn quyết định** lỗi sản phẩm / lỗi script; bug đã có ở HW02 → bình luận, bug mới → issue mới | 1:30 |
+| 1.11 T8 – Tổng kết | Prompt: `tiếp tục bước T8` → `git log --oneline -- tests/product-crud data/product-crud features/product-crud` | Kết quả `npm run summary` trong design §6; danh sách commit theo từng bước | Số liệu do script đếm, không đếm tay; mỗi bước một commit | 0:45 |
+| 1.12 Kết thúc | Màn hình editor hoặc thẻ tiêu đề | – | Skill giúp gì, lần sau dùng cho feature khác thế nào | 0:20 |
+
+## 3. Video 2 – Demo automation script (Buổi quay 2, ≈ 7 phút)
+
+Quay sau khi FR-15 đã xong (có bảng review §5). Lần chạy trong cảnh 2.4 chính là **lần chạy chính thức** của FR-15: commit `reports/product-crud/` ngay sau buổi quay để báo cáo trong video và báo cáo nộp là một.
+
+| Cảnh | Bạn làm gì | Màn hình cần thấy | Ý chính khi nói | Thời lượng |
+| --- | --- | --- | --- | --- |
+| 2.1 Mở đầu + xác thực | Terminal: `whoami && hostname && date -Iseconds && pwd` | Tên tài khoản, tên máy, giờ quay | Tên, MSSV; video demo Task 2: script FR-15 | 0:30 |
+| 2.2 Giới thiệu script | Mở `tests/product-crud/<spec>.spec.ts` → bôi đen vòng lặp đọc dữ liệu → mở `data/product-crud/<file>.json` → mở page object → bôi đen từng kiểu assertion | Script, file dữ liệu, page object, ≥ 3 kiểu assertion | Script chạy gì; data-driven (mỗi dòng JSON = 1 test); page object; 3 kiểu assertion | 1:30 |
+| 2.3 Một lỗi đã sửa | **Cách A** (nếu review FR-15 có lỗi): mở dòng ở design §5 → `git show <hash>`. **Cách B** (nếu không): `git show f0b2152` → `features/checkout/automation_design.md` §5 dòng 2 | Diff của commit sửa lỗi; dòng bảng review | AI sai ở đâu → vì sao test cũ không đáng tin → vì sao AI sai → sửa thế nào | 1:30 |
+| 2.4 Chạy 3 trình duyệt | Cùng terminal: `whoami && hostname` rồi `npm run feature -- product-crud`. **Quay liền một đoạn** đến dòng kết quả của WebKit; khi dựng chỉ tua nhanh (gắn nhãn "×8"), không cắt | Lệnh, Chromium → Firefox → WebKit, số pass / fail từng trình duyệt | EShop khởi động lại (dữ liệu sạch); chạy lần lượt 3 trình duyệt; đọc kết quả | 1:15 |
+| 2.5 Báo cáo HTML | `npm run report -- reports/product-crud/chromium` → phóng to tiêu đề → mở 1 test pass → mở 1 test fail (expected / received, ảnh chụp) → mở báo cáo `firefox`, `webkit` (chỉ tiêu đề) | Tiêu đề `HW04 · product-crud · <trình duyệt> · Run by: 23120046 · <giờ ISO>` khớp giờ chạy | Báo cáo vừa sinh ra; đọc một test pass, một test fail | 1:30 |
+| 2.6 Test fail và bug | Mở design §8 hoặc trang GitHub Issues | Bảng phân loại; issue tương ứng | Test fail nào là lỗi sản phẩm (đã báo), test nào do script (đã sửa) | 0:20 |
+| 2.7 Tổng kết + kết thúc | Mở design §6 (kết quả `npm run summary`) | Số TC tự động hóa / pass / fail | Tóm tắt; cảm ơn | 0:30 |
+
+## 4. Chuẩn bị trước mỗi buổi quay
+
+- [ ] Tắt Zalo / Messenger / mail / trình quản lý mật khẩu; bật Không làm phiền
+- [ ] Trình duyệt dùng profile sạch, ẩn bookmark cá nhân; `gh auth status` là tài khoản `thhuon`
+- [ ] Không còn server chạy ở cổng 3000 / 5173 / 5174 trước khi chạy `npm run feature` (lệnh tự khởi động EShop với dữ liệu sạch)
+- [ ] Chữ trong VS Code và terminal ≥ 16 px; cửa sổ 1920×1080
+- [ ] OBS (hoặc SimpleScreenRecorder): quay toàn màn hình 1920×1080, 30 fps, file `.mkv`; **tắt micro** (lồng tiếng sau)
+- [ ] Giấy ghi chú (ngoài vùng quay): ghi giờ bắt đầu từng cảnh để dựng nhanh
+- [ ] Chạy thử: `npx playwright test tests/smoke.spec.ts --project=chromium` pass; ghi lại 1 trình duyệt chạy mất bao lâu
+- [ ] Phần mềm thu âm (Audacity) và dựng (Kdenlive / Shotcut); thu thử 10 giây
+
+## 5. Lồng tiếng và dựng
+
+1. Cắt bản quay theo cảnh (dựa vào giờ đã ghi), bỏ đoạn chờ AI trả lời và đoạn gõ sai. Đoạn chạy 3 trình duyệt chỉ tua nhanh, không cắt.
+2. Điền các chỗ `⟨…⟩` trong [narration_script.md](narration_script.md) bằng số liệu thật của buổi quay.
+3. Thu giọng từng cảnh thành một file riêng (đọc vấp thì thu lại cảnh đó).
+4. Ghép giọng vào hình: giọng ngắn hơn hình → để im hoặc tua hình; giọng dài hơn → dừng hình.
+5. Xuất video, đăng YouTube **Unlisted**, mở link bằng cửa sổ ẩn danh để kiểm tra, ghi mốc thời gian vào bảng dưới.
+
+## 6. Bảng kiểm sau khi dựng
+
+| Yêu cầu | Video | Mốc thời gian | Đạt? |
 | --- | --- | --- | --- |
-| R1 length ≥ 5:00 | Demo | | |
-| R2, R3 Vietnamese, own voice | Demo | | |
-| R9 `whoami` + `hostname` | Demo | | |
-| R4 script shown | Demo | | |
-| R8 fix narrated | Demo | | |
-| R5 3-browser run (continuous) | Demo | | |
-| R6, R7 report title with `Run by: 23120046` + ISO time | Demo | | |
-| R10 Unlisted, link opens in a private window | Demo | | |
-| R2, R3 Vietnamese, own voice | Skill | | |
-| R9 `whoami` + `hostname` | Skill | | |
-| R11 T1 … T8 shown on FR-15 | Skill | | |
-| R12 data-driven, multi-browser, maintenance (fix) | Skill | | |
-| R10 Unlisted, link opens in a private window | Skill | | |
-| R13 links in README and report | Demo, Skill | | |
+| R9 `whoami` + `hostname` | 1 | | |
+| R11 Cho thấy skill (SKILL.md, config) | 1 | | |
+| R11 T1 → T8 trên FR-15 | 1 | | |
+| R12 Bảo trì: review, sửa lỗi, phân tích test fail | 1 | | |
+| R2, R3 Tiếng Việt, giọng thật | 1 | | |
+| R10 Unlisted, mở được bằng cửa sổ ẩn danh | 1 | | |
+| R1 Dài ≥ 5:00 | 2 | | |
+| R9 `whoami` + `hostname` (đầu video và trước lần chạy) | 2 | | |
+| R4 Giới thiệu script | 2 | | |
+| R8 Kể lỗi đã sửa | 2 | | |
+| R5 Chạy 3 trình duyệt liền mạch | 2 | | |
+| R6, R7 Báo cáo có `Run by: 23120046` + giờ ISO | 2 | | |
+| R2, R3 Tiếng Việt, giọng thật | 2 | | |
+| R10 Unlisted, mở được bằng cửa sổ ẩn danh | 2 | | |
+| R13 Link trong README và báo cáo | 1, 2 | | |
 
-Links: <video 1 URL> · <video 2 URL>
+Link: <link video 1> · <link video 2>

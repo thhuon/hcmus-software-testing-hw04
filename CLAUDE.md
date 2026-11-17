@@ -12,6 +12,7 @@ Skills are generic (one per testing topic). Every value that belongs to this hom
 
 - Skills, `CLAUDE.md`, scripts, test code and commit messages: English.
 - `PLAN.md`: Vietnamese (as HW02/HW03). The course AI forms (AI-02, AI-03, AI-05) stay in Vietnamese.
+- Demo video files `demo/shot_list.md` and `demo/narration_script.md`: Vietnamese, plain step-by-step wording (student 18/11: the student reads them while recording).
 - Verbatim records stay as they are: prompts, requirement quotes, UI labels of the app.
 
 ## System under test

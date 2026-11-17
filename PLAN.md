@@ -13,7 +13,7 @@
 
 Thứ tự dưới đây là thứ tự **làm**, không theo thứ tự mục của đề:
 
-1. Làm A và B trước, vừa làm vừa rút ra skill. Đến C thì dùng skill đó và **quay màn hình đúng lúc làm C**. Một lần quay cho ra cả video skill (đề §7) lẫn video demo Task 2, nên không phải làm lại feature nào để quay.
+1. Làm A và B trước, vừa làm vừa rút ra skill. Đến C thì dùng skill đó và **quay màn hình đúng lúc làm C** (video skill, đề §7). Khi C xong, quay riêng video demo Task 2 đúng lúc chạy chính thức C, nên không phải làm lại feature nào để quay.
 2. Không thiết kế lại test case: lấy TC và bug từ HW02, chỉ ghi lý do chọn / loại.
 3. Ghi bảng "AI sai gì / vì sao" **ngay lúc sửa script**. Report và AI Critique ở cuối chỉ ghép lại từ các bảng này.
 4. Dòng AI-02 ghi cùng lượt với mỗi artifact. Chạy `prompt_log` cuối mỗi buổi làm, không dồn đến cuối.
@@ -66,15 +66,13 @@ Như A1–A7 nhưng **dùng skill**. Chỗ nào skill vướng thì sửa skill 
 ### Giai đoạn 3 – Feature C: FR-15 + quay video (≈ 2 giờ)
 
 - [ ] **C0. Chuẩn bị quay** – đóng app riêng tư; bật OBS; terminal sẵn `whoami` và `hostname` (đề Task 2, §11).
-- [ ] **C1–C7.** Làm FR-15 bằng skill, **quay toàn bộ**: chọn TC → sinh script → review / sửa → chạy 3 trình duyệt → mở báo cáo HTML. Cắt bỏ các khoảng chờ khi dựng.
-- [ ] **C8. Lời thoại** – giọng thật của SV, tiếng Việt (đề §11 không cho dùng TTS). Có thể nói trực tiếp khi quay, hoặc quay im rồi thu giọng đè lên sau (nhanh hơn, không phải quay lại khi nói vấp).
-- [ ] **C9. Dựng 2 video từ cùng bản quay** → YouTube (Unlisted):
-  - **Video skill** (đề §7): toàn bộ quy trình dùng skill trên FR-15.
-  - **Video demo Task 2** (≥ 5 phút): `whoami` / `hostname`, chạy 3 trình duyệt, báo cáo HTML, kể **một lỗi đã sửa** trong script AI sinh. Nếu buổi quay AI không sai chỗ nào thì kể lỗi đã sửa ở A hoặc B và chiếu diff commit.
+- [ ] **C1–C7. Buổi quay 1 – Video Agent Skill** (đề §7): làm FR-15 bằng skill và **quay toàn bộ** theo `demo/shot_list.md` §2 (cảnh 1.1–1.12): chọn TC → locator → dữ liệu → sinh script → review / sửa → chạy 3 trình duyệt → phân tích test fail, báo bug → tổng kết.
+- [ ] **C8. Buổi quay 2 – Video demo script** (đề Task 2, ≥ 5 phút): sau khi FR-15 xong, quay theo `demo/shot_list.md` §3 (cảnh 2.1–2.7): `whoami` / `hostname`, giới thiệu script, kể **một lỗi đã sửa** (lỗi của FR-15; nếu FR-15 không có thì lỗi `f0b2152` của FR-08), chạy 3 trình duyệt – đây là lần chạy chính thức của FR-15, commit `reports/product-crud/` ngay sau đó – mở báo cáo HTML.
+- [ ] **C9. Lồng tiếng, dựng, đăng** – giọng thật của SV, tiếng Việt (đề §11 không cho dùng TTS), đọc theo `demo/narration_script.md`; dựng 2 video → YouTube (Unlisted); điền bảng kiểm `demo/shot_list.md` §6.
 
 ### Giai đoạn 4 – Chạy chính thức & bug (≈ 1 giờ)
 
-- [ ] **R1. Chạy chính thức** – reset DB (khởi động lại backend), chạy 9 lần (3 feature × 3 trình duyệt), báo cáo vào `reports/`, commit.
+- [ ] **R1. Chạy chính thức** – reset DB (khởi động lại backend), chạy 9 lần (3 feature × 3 trình duyệt), báo cáo vào `reports/`, commit. FR-15 đã chạy chính thức trong video demo (C8): không chạy lại `product-crud`, nếu không báo cáo nộp sẽ khác báo cáo trong video.
 - [ ] **R2. Bug** – repo nhóm HW02 `angquoc/software-testing-2026-HW02-group` (README §4, §6). Bug đã có issue ở HW02 → **bình luận** vào issue cũ (script, trình duyệt, kết quả assertion, ảnh, ghi "HW04"; nếu hành vi khác HW02 thì nói rõ khác gì). Bug mới → **issue mới** có thêm label `hw: HW04`. Hoàn thiện `bugs/BUG_REPORT.md`; chụp trang Issues lọc theo `hw: HW04` và các issue đã bình luận.
 - [ ] **R3. Chụp lại ảnh Issues (nhắc SV, khi đã xong cả 3 feature)** – trang Issues lọc `is:issue author:thhuon label:"hw: HW04"` (ghi đè `bugs/screenshots/issues-label-hw04.png`) và ảnh từng issue HW02 đã được comment HW04; ảnh hiện tại (17/11) mới có #117 (FR-03) và #116 (FR-08).
 
