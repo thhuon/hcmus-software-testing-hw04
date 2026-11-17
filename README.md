@@ -26,8 +26,8 @@ The same three web features as HW02 (brief §5; group allocation: [HW02 group re
 | --- | --- | --- | --- | --- | --- | --- |
 | A – FR-03 | 33 | 33 | 5 | 28 | 3 | 7 / 1 / 1 |
 | B – FR-08 | 17 | 17 | 4 | 13 | 3 | 6 / 1 / 1 |
-| C – FR-15 | | | | | | |
-| **Total** | | | | | | |
+| C – FR-15 | 36 | 36 | 14 | 22 | 3 | 20 / 2 / 0 |
+| **Total** | **86** | **86** | **23** | **63** | **9** | **33 / 4 / 2 (39 bugs)** |
 
 - Number of features: **3**
 - Browsers: Chromium 156.0.8078.4 · Firefox 157.0 · WebKit 27.2 (Playwright 1.64.1, Ubuntu 26.04)
