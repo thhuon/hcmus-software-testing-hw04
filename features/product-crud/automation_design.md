@@ -236,7 +236,7 @@ Categories: fragile selector · weak assertion · wrong oracle · missing edge c
 
 ## 6. Runs (T6)
 
-**Official runs** (18/11/2026 04:59:59–05:04 local, 21:59:59–22:04 UTC, the student, `npm run feature -- product-crud`, recorded in the Task 2 demo video, scene 2.4; reports committed unchanged in `c3630b6`).
+**Official runs** (18/11/2026 04:59:59–05:04 local, 21:59:59–22:04 UTC, the student, `npm run feature -- product-crud`, recorded in the Task 2 demo video at 5:41; reports committed unchanged in `c3630b6`).
 
 - **Frozen specs:** `tests/product-crud/`, `data/product-crud/`, `page-objects/` at commit `a278a51` (no change since T5).
 - **SUT and data:** fresh servers (`FRESH_SUT=1`, the student stopped `npm run sut` first), so the backend re-created and re-seeded the database before each browser; `whoami && hostname && date` (04:59:14) in the same terminal right before the command.
@@ -257,7 +257,7 @@ Script output (`summarize-results.mjs --markdown`, FR-15 rows; not counted by ha
 
 **Earlier set, replaced:** the T6 run below (reports overwritten by the official run, never committed); its screenshots and report entries remain the evidence of the HW04 comments on #18 … #39 (`bugs/screenshots/product-crud_*`).
 
-**T6 multi-browser run** (18/11/2026 02:15–02:20 local, 19:15–19:20 UTC, agent, `npm run feature -- product-crud --reuse`: `run-browsers.mjs` runs Chromium, Firefox and WebKit one after the other; PLAN C1–C7, video 1 scene 1.9). **Not the official set:** the official FR-15 run is the one recorded in video 2 (PLAN C8, `demo/shot_list.md` scene 2.4), committed right after that recording so that the report in the video and the submitted report are the same. The reports of this run were not committed and were overwritten by the official run.
+**T6 multi-browser run** (18/11/2026 02:15–02:20 local, 19:15–19:20 UTC, agent, `npm run feature -- product-crud --reuse`: `run-browsers.mjs` runs Chromium, Firefox and WebKit one after the other; PLAN C1–C7, video 1 scene 1.9). **Not the official set:** the official FR-15 run is the one recorded in video 2 (PLAN C8, Task 2 video at 5:41), committed right after that recording so that the report in the video and the submitted report are the same. The reports of this run were not committed and were overwritten by the official run.
 
 - **Specs:** `tests/product-crud/`, `data/product-crud/`, `page-objects/` at commit `a278a51` (last change: T5 review #2).
 - **SUT and data:** the servers already running (`--reuse`): the student's `npm run sut` still held ports 3000 / 5173 / 5174, and stopping it was not allowed to the agent. Before the run: products = the seed ids 1–5 with the seed values, categories 1–3, no other Playwright run (a Playwright UI mode was open, idle). Each test keeps its data apart (ids before / after, `{tag}`, own P, `afterEach` clean-up, design §3); afterwards: products ids 1–5. The official run (C8) starts fresh servers (`npm run feature -- product-crud`, after `npm run sut` is stopped with Ctrl+C), so the database is re-seeded.

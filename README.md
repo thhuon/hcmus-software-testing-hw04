@@ -73,6 +73,5 @@ The skills are generic (one per testing topic, sources in [skills/SOURCES.md](sk
 | `AI-03_AI_Disclosure_Form.md`, `AI-05_AI_Privacy_Checklist.md` | AI templates |
 | `prompt_log.md` | Full AI interaction log |
 | `skills/` + `CLAUDE.md` + `automation.config.json` | Agent Skills + the HW04 project profile they read |
-| `demo/shot_list.md` | Shot list and requirement check of the two videos |
 | `playwright.config.ts`, `package.json` | Automation setup (`npm run smoke`, `npm run feature -- forgot-password`, `npm run all`, `npm run summary`) |
 | `git_log.txt` | Git commit log |
