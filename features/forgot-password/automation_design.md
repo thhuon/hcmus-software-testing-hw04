@@ -300,6 +300,20 @@ Script output (`summarize-results.mjs --markdown`, FR-03 rows):
 
 | TC ID | Reason | Tested instead |
 | --- | --- | --- |
+| DT-10 | API-only request shape: the Web always sends `email`, and an empty one is blocked by the browser (DT-07); passed in HW02 | HW02, through the API (`run_step.py`, 20/10/2026): Pass. The Web side of the same rule is automated by DT-07 (empty e-mail) |
+| DT-16 | API-only request shape: the Web always sends `resetToken`, and an empty one is blocked by the browser (DT-13); passed in HW02 | HW02, through the API (`run_step.py`, 20/10/2026): Pass. The Web side is automated by DT-13 (empty OTP) |
+| DT-18 | API-only, and the same requirement sentence and oracle as DT-17 (automated); passed in HW02 | HW02, through the API (`run_step.py`, 20/10/2026): Pass. Same oracle automated by DT-17 (API) |
+| DT-19 | API-only request shape: the Web always sends the email of Bước 1; passed in HW02 | HW02, through the API (`run_step.py`, 20/10/2026): Pass |
+| DT-31 | API-only: the Web always requests an OTP before Bước 2; passed in HW02 | HW02, through the API (`run_step.py`, 20/10/2026): Pass |
+| DT-33 | the oracle is assumption A8, not a requirement sentence; on the Web the password check runs before the OTP is sent; passed in HW02 | HW02, through the API (`run_step.py`, 20/10/2026): Pass (A8 holds) |
+| DT-34 | waits 11 minutes of real server time; the test cannot set the server clock; the limit is assumption A7 | HW02, through the API (`run_step.py`, 20/10/2026), waiting 660 s: **Fail** – HW02 BUG-05 (#5), OTP still accepted |
+| BVA-06 | duplicate of DT-01 / DT-04: every Web test uses its OTP within seconds of the request (same partition EC-V8-1, same oracle) | HW02, through the API (`run_step.py`, 20/10/2026): Pass. The same partition is used by every automated reset row (OTP used within seconds), e.g. DT-04, BVA-04 |
+| BVA-07 | duplicate of DT-01 / DT-04 (same partition and oracle); an exact 1 s gap needs a fixed sleep | HW02, through the API (`run_step.py`, 20/10/2026): Pass. Same as BVA-06 |
+| BVA-08 | waits 10 minutes of real server time; the test cannot set the server clock | HW02, through the API (`run_step.py`, 20/10/2026), waiting 599 s: Pass |
+| BVA-09 | waits 10 minutes of real server time; the test cannot set the server clock | HW02, through the API (`run_step.py`, 20/10/2026), waiting 600 s: Pass |
+| BVA-10 | waits 10 minutes of real server time; the test cannot set the server clock; the limit is assumption A7 | HW02, through the API (`run_step.py`, 20/10/2026), waiting 601 s: **Fail** – HW02 BUG-05 (#5), OTP still accepted |
+
+12 rows = the 12 `No` rows of §1 (reasons confirmed by the student, 17/11). Not automated for three reasons: request shapes only the API can send, already passed in HW02 (DT-10, 16, 18, 19, 31); an oracle that is an assumption, not a requirement (DT-33); real server time the test cannot control (DT-34, BVA-08 … 10) or a duplicate of an automated partition (BVA-06, 07). The two failing ones (DT-34, BVA-10) stay reported in HW02 BUG-05 (#5); HW04 did not re-test them.
 
 ## 8. Failures and bugs (T7)
 
