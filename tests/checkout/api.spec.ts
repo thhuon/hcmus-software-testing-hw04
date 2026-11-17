@@ -139,7 +139,12 @@ test.describe('FR-08 checkout – API', () => {
           e.serverCartLinesAfter ?? 0,
         );
       } else if (e.kind === 'refused') {
-        // A1, A6, A9: no new order, the cart unchanged.
+        // A1, A6, A9: no new order, the cart unchanged. A refused row must name how the
+        // orders are counted, otherwise no order check would run and the test would pass.
+        expect(
+          e.newOrdersAll !== undefined || e.newOrders !== undefined,
+          `${row.id}: expected.newOrdersAll or expected.newOrders is set in api.json`,
+        ).toBe(true);
         if (e.newOrdersAll !== undefined) {
           expect.soft(allNew, 'no new order at all (A1, A9)').toHaveLength(e.newOrdersAll);
         }
