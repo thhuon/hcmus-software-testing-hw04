@@ -1,0 +1,1855 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/hg/source/software-testing/week04/node_modules/.bin/playwright",
+      "test",
+      "tests/checkout",
+      "--project=webkit",
+      "--output=test-output/checkout/webkit"
+    ],
+    "configFile": "/home/hg/source/software-testing/week04/playwright.config.ts",
+    "rootDir": "/home/hg/source/software-testing/week04/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "Run by": "23120046",
+      "Started at": "2026-11-17T14:17:18.382Z",
+      "Feature": "FR-08 Checkout",
+      "Browser": "webkit",
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/hg/source/software-testing/week04/test-output/checkout/webkit",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "Run by": "23120046",
+          "Started at": "2026-11-17T14:17:18.382Z",
+          "Feature": "FR-08 Checkout",
+          "Browser": "webkit",
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/hg/source/software-testing/week04/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/home/hg/source/software-testing/week04/test-output/checkout/webkit",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "Run by": "23120046",
+          "Started at": "2026-11-17T14:17:18.382Z",
+          "Feature": "FR-08 Checkout",
+          "Browser": "webkit",
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/home/hg/source/software-testing/week04/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/home/hg/source/software-testing/week04/test-output/checkout/webkit",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "Run by": "23120046",
+          "Started at": "2026-11-17T14:17:18.382Z",
+          "Feature": "FR-08 Checkout",
+          "Browser": "webkit",
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/home/hg/source/software-testing/week04/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/hg/source/software-testing/week04/test-output/checkout/webkit",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "Run by": "23120046",
+          "Started at": "2026-11-17T14:17:18.382Z",
+          "Feature": "FR-08 Checkout",
+          "Browser": "webkit",
+          "actualWorkers": 1
+        },
+        "name": "webkit",
+        "testDir": "/home/hg/source/software-testing/week04/tests",
+        "snapshotDir": "/home/hg/source/software-testing/week04/tests",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://localhost:5173",
+          "screenshot": "only-on-failure",
+          "trace": "off",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Safari/605.1.15",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1792,
+            "height": 1120
+          },
+          "deviceScaleFactor": 2,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "webkit"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "webkit"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "title": "HW04 · FR-08 Checkout · webkit · Run by: 23120046 · 2026-11-17T14:17:18.382Z",
+          "outputFolder": "reports/checkout/webkit",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "reports/checkout/webkit/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "checkout/api.spec.ts",
+      "file": "checkout/api.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "FR-08 checkout – API",
+          "file": "checkout/api.spec.ts",
+          "line": 69,
+          "column": 6,
+          "specs": [
+            {
+              "title": "DT-02 – total_amount missing: order with the server total",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "source",
+                      "description": "FR-08 README:105, :107, :108; A3, A5 (a missing total_amount is a valid input, Q2), A7, A8"
+                    },
+                    {
+                      "type": "checkout response",
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":148}"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 220,
+                      "error": {
+                        "message": "Error: the new order (A3, A7)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"status\": \"pending\",\u001b[22m\n\u001b[32m-   \"total_amount\": 126000000,\u001b[39m\n\u001b[31m+   \"total_amount\": null,\u001b[39m\n\u001b[2m  }\u001b[22m",
+                        "stack": "Error: the new order (A3, A7)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"status\": \"pending\",\u001b[22m\n\u001b[32m-   \"total_amount\": 126000000,\u001b[39m\n\u001b[31m+   \"total_amount\": null,\u001b[39m\n\u001b[2m  }\u001b[22m\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:137:58",
+                        "location": {
+                          "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                          "column": 58,
+                          "line": 137
+                        },
+                        "snippet": "  135 |         // A7: exactly one new order of the account, pending, with the server total; A8: cart emptied.\n  136 |         expect(ownNew, 'exactly one new order of the account (A7)').toHaveLength(e.newOrders ?? 1);\n> 137 |         expect.soft(ownNew[0], 'the new order (A3, A7)').toMatchObject({ status: e.orderStatus, total_amount: e.orderTotal });\n      |                                                          ^\n  138 |         expect.soft(linesAfter, 'server cart emptied after the checkout (FR-08 \"giỏ hàng được xóa\", A8)').toHaveLength(\n  139 |           e.serverCartLinesAfter ?? 0,\n  140 |         );"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                            "column": 58,
+                            "line": 137
+                          },
+                          "message": "Error: the new order (A3, A7)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"status\": \"pending\",\u001b[22m\n\u001b[32m-   \"total_amount\": 126000000,\u001b[39m\n\u001b[31m+   \"total_amount\": null,\u001b[39m\n\u001b[2m  }\u001b[22m\n\n  135 |         // A7: exactly one new order of the account, pending, with the server total; A8: cart emptied.\n  136 |         expect(ownNew, 'exactly one new order of the account (A7)').toHaveLength(e.newOrders ?? 1);\n> 137 |         expect.soft(ownNew[0], 'the new order (A3, A7)').toMatchObject({ status: e.orderStatus, total_amount: e.orderTotal });\n      |                                                          ^\n  138 |         expect.soft(linesAfter, 'server cart emptied after the checkout (FR-08 \"giỏ hàng được xóa\", A8)').toHaveLength(\n  139 |           e.serverCartLinesAfter ?? 0,\n  140 |         );\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:137:58"
+                        },
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                            "column": 107,
+                            "line": 138
+                          },
+                          "message": "Error: server cart emptied after the checkout (FR-08 \"giỏ hàng được xóa\", A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m3\u001b[39m\nReceived array:  \u001b[31m[{\"id\": 5, \"name\": \"Bàn phím cơ Keychron Q1\", \"price\": 4000000, \"quantity\": 3}, {\"id\": 4, \"name\": \"Tai nghe AirPods Pro 2\", \"price\": 6000000, \"quantity\": 4}, {\"id\": 1, \"name\": \"iPhone 15 Pro Max\", \"price\": 30000000, \"quantity\": 3}]\u001b[39m\n\n  136 |         expect(ownNew, 'exactly one new order of the account (A7)').toHaveLength(e.newOrders ?? 1);\n  137 |         expect.soft(ownNew[0], 'the new order (A3, A7)').toMatchObject({ status: e.orderStatus, total_amount: e.orderTotal });\n> 138 |         expect.soft(linesAfter, 'server cart emptied after the checkout (FR-08 \"giỏ hàng được xóa\", A8)').toHaveLength(\n      |                                                                                                           ^\n  139 |           e.serverCartLinesAfter ?? 0,\n  140 |         );\n  141 |       } else if (e.kind === 'refused') {\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:138:107"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T14:17:19.688Z",
+                      "annotations": [
+                        {
+                          "type": "source",
+                          "description": "FR-08 README:105, :107, :108; A3, A5 (a missing total_amount is a valid input, Q2), A7, A8"
+                        },
+                        {
+                          "type": "checkout response",
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":148}"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/hg/source/software-testing/week04/test-output/checkout/webkit/checkout-api-FR-08-checkou-7e14c-order-with-the-server-total-webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                        "column": 58,
+                        "line": 137
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "2ad3bd26c14ae54d32ba-b5f13287781afd0df752",
+              "file": "checkout/api.spec.ts",
+              "line": 101,
+              "column": 9
+            },
+            {
+              "title": "DT-04 – no Authorization header: refused",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "source",
+                      "description": "SEC-02 README:279 \"Các API có tính bảo mật phải yêu cầu JWT Token hợp lệ.\"; FR-08 README:104; A1, A9; Q1 (status recorded, not judged)"
+                    },
+                    {
+                      "type": "checkout response",
+                      "description": "401 {\"error\":\"Unauthorized\"}"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 131,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T14:17:20.943Z",
+                      "annotations": [
+                        {
+                          "type": "source",
+                          "description": "SEC-02 README:279 \"Các API có tính bảo mật phải yêu cầu JWT Token hợp lệ.\"; FR-08 README:104; A1, A9; Q1 (status recorded, not judged)"
+                        },
+                        {
+                          "type": "checkout response",
+                          "description": "401 {\"error\":\"Unauthorized\"}"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2ad3bd26c14ae54d32ba-359ddef6746eb60202a7",
+              "file": "checkout/api.spec.ts",
+              "line": 101,
+              "column": 9
+            },
+            {
+              "title": "DT-05 – forged token (wrong signature): refused",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "source",
+                      "description": "SEC-02 README:279 \"Các API có tính bảo mật phải yêu cầu JWT Token hợp lệ.\"; FR-08 README:104; A1, A9; Q1 (status recorded, not judged)"
+                    },
+                    {
+                      "type": "checkout response",
+                      "description": "403 {\"error\":\"Forbidden\"}"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 59,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T14:17:21.124Z",
+                      "annotations": [
+                        {
+                          "type": "source",
+                          "description": "SEC-02 README:279 \"Các API có tính bảo mật phải yêu cầu JWT Token hợp lệ.\"; FR-08 README:104; A1, A9; Q1 (status recorded, not judged)"
+                        },
+                        {
+                          "type": "checkout response",
+                          "description": "403 {\"error\":\"Forbidden\"}"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2ad3bd26c14ae54d32ba-94ea16d6902f0d4fefd4",
+              "file": "checkout/api.spec.ts",
+              "line": 101,
+              "column": 9
+            },
+            {
+              "title": "DT-06 – not a JWT: refused",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "source",
+                      "description": "SEC-02 README:279 \"Các API có tính bảo mật phải yêu cầu JWT Token hợp lệ.\"; FR-08 README:104; A1, A9; Q1 (status recorded, not judged)"
+                    },
+                    {
+                      "type": "checkout response",
+                      "description": "403 {\"error\":\"Forbidden\"}"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 65,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T14:17:21.197Z",
+                      "annotations": [
+                        {
+                          "type": "source",
+                          "description": "SEC-02 README:279 \"Các API có tính bảo mật phải yêu cầu JWT Token hợp lệ.\"; FR-08 README:104; A1, A9; Q1 (status recorded, not judged)"
+                        },
+                        {
+                          "type": "checkout response",
+                          "description": "403 {\"error\":\"Forbidden\"}"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2ad3bd26c14ae54d32ba-3d5486676fcd1075fb11",
+              "file": "checkout/api.spec.ts",
+              "line": 101,
+              "column": 9
+            },
+            {
+              "title": "DT-07 – empty cart: refused (API part)",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "source",
+                      "description": "A6 (Q4), A9; student 17/11: bug BUG-01 (#116)"
+                    },
+                    {
+                      "type": "checkout response",
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":149}"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 50,
+                      "error": {
+                        "message": "Error: no new order of the account (A6, A9)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m1\u001b[39m\nReceived array:  \u001b[31m[{\"created_at\": \"2026-11-17 14:17:21\", \"id\": 149, \"shipping_address\": \"123 Le Loi, TP.HCM\", \"status\": \"pending\", \"total_amount\": null, \"user_id\": 496}]\u001b[39m",
+                        "stack": "Error: no new order of the account (A6, A9)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m1\u001b[39m\nReceived array:  \u001b[31m[{\"created_at\": \"2026-11-17 14:17:21\", \"id\": 149, \"shipping_address\": \"123 Le Loi, TP.HCM\", \"status\": \"pending\", \"total_amount\": null, \"user_id\": 496}]\u001b[39m\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:152:71",
+                        "location": {
+                          "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                          "column": 71,
+                          "line": 152
+                        },
+                        "snippet": "  150 |         }\n  151 |         if (e.newOrders !== undefined) {\n> 152 |           expect.soft(ownNew, 'no new order of the account (A6, A9)').toHaveLength(e.newOrders);\n      |                                                                       ^\n  153 |         }\n  154 |         expect.soft(linesAfter, 'server cart unchanged (A9)').toHaveLength(e.serverCartLinesAfter ?? row.cart.length);\n  155 |       } else {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                            "column": 71,
+                            "line": 152
+                          },
+                          "message": "Error: no new order of the account (A6, A9)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m1\u001b[39m\nReceived array:  \u001b[31m[{\"created_at\": \"2026-11-17 14:17:21\", \"id\": 149, \"shipping_address\": \"123 Le Loi, TP.HCM\", \"status\": \"pending\", \"total_amount\": null, \"user_id\": 496}]\u001b[39m\n\n  150 |         }\n  151 |         if (e.newOrders !== undefined) {\n> 152 |           expect.soft(ownNew, 'no new order of the account (A6, A9)').toHaveLength(e.newOrders);\n      |                                                                       ^\n  153 |         }\n  154 |         expect.soft(linesAfter, 'server cart unchanged (A9)').toHaveLength(e.serverCartLinesAfter ?? row.cart.length);\n  155 |       } else {\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:152:71"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T14:17:21.279Z",
+                      "annotations": [
+                        {
+                          "type": "source",
+                          "description": "A6 (Q4), A9; student 17/11: bug BUG-01 (#116)"
+                        },
+                        {
+                          "type": "checkout response",
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":149}"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/hg/source/software-testing/week04/test-output/checkout/webkit/checkout-api-FR-08-checkou-fd42d-mpty-cart-refused-API-part--webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                        "column": 71,
+                        "line": 152
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "2ad3bd26c14ae54d32ba-4d2cb11a1fc5421ba622",
+              "file": "checkout/api.spec.ts",
+              "line": 101,
+              "column": 9
+            },
+            {
+              "title": "DT-08 – cart line with a client price: order at the catalog price",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "source",
+                      "description": "FR-08 README:107; A3, A4 (Q3: the catalog price counts, 3000 = Fail), A7, A8"
+                    },
+                    {
+                      "type": "checkout response",
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":150}"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 130,
+                      "error": {
+                        "message": "Error: the new order (A3, A7)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"status\": \"pending\",\u001b[22m\n\u001b[32m-   \"total_amount\": 12000000,\u001b[39m\n\u001b[31m+   \"total_amount\": null,\u001b[39m\n\u001b[2m  }\u001b[22m",
+                        "stack": "Error: the new order (A3, A7)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"status\": \"pending\",\u001b[22m\n\u001b[32m-   \"total_amount\": 12000000,\u001b[39m\n\u001b[31m+   \"total_amount\": null,\u001b[39m\n\u001b[2m  }\u001b[22m\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:137:58",
+                        "location": {
+                          "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                          "column": 58,
+                          "line": 137
+                        },
+                        "snippet": "  135 |         // A7: exactly one new order of the account, pending, with the server total; A8: cart emptied.\n  136 |         expect(ownNew, 'exactly one new order of the account (A7)').toHaveLength(e.newOrders ?? 1);\n> 137 |         expect.soft(ownNew[0], 'the new order (A3, A7)').toMatchObject({ status: e.orderStatus, total_amount: e.orderTotal });\n      |                                                          ^\n  138 |         expect.soft(linesAfter, 'server cart emptied after the checkout (FR-08 \"giỏ hàng được xóa\", A8)').toHaveLength(\n  139 |           e.serverCartLinesAfter ?? 0,\n  140 |         );"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                            "column": 58,
+                            "line": 137
+                          },
+                          "message": "Error: the new order (A3, A7)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"status\": \"pending\",\u001b[22m\n\u001b[32m-   \"total_amount\": 12000000,\u001b[39m\n\u001b[31m+   \"total_amount\": null,\u001b[39m\n\u001b[2m  }\u001b[22m\n\n  135 |         // A7: exactly one new order of the account, pending, with the server total; A8: cart emptied.\n  136 |         expect(ownNew, 'exactly one new order of the account (A7)').toHaveLength(e.newOrders ?? 1);\n> 137 |         expect.soft(ownNew[0], 'the new order (A3, A7)').toMatchObject({ status: e.orderStatus, total_amount: e.orderTotal });\n      |                                                          ^\n  138 |         expect.soft(linesAfter, 'server cart emptied after the checkout (FR-08 \"giỏ hàng được xóa\", A8)').toHaveLength(\n  139 |           e.serverCartLinesAfter ?? 0,\n  140 |         );\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:137:58"
+                        },
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                            "column": 107,
+                            "line": 138
+                          },
+                          "message": "Error: server cart emptied after the checkout (FR-08 \"giỏ hàng được xóa\", A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m1\u001b[39m\nReceived array:  \u001b[31m[{\"id\": 5, \"name\": \"Bàn phím cơ Keychron Q1\", \"price\": 1000, \"quantity\": 3}]\u001b[39m\n\n  136 |         expect(ownNew, 'exactly one new order of the account (A7)').toHaveLength(e.newOrders ?? 1);\n  137 |         expect.soft(ownNew[0], 'the new order (A3, A7)').toMatchObject({ status: e.orderStatus, total_amount: e.orderTotal });\n> 138 |         expect.soft(linesAfter, 'server cart emptied after the checkout (FR-08 \"giỏ hàng được xóa\", A8)').toHaveLength(\n      |                                                                                                           ^\n  139 |           e.serverCartLinesAfter ?? 0,\n  140 |         );\n  141 |       } else if (e.kind === 'refused') {\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:138:107"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T14:17:22.037Z",
+                      "annotations": [
+                        {
+                          "type": "source",
+                          "description": "FR-08 README:107; A3, A4 (Q3: the catalog price counts, 3000 = Fail), A7, A8"
+                        },
+                        {
+                          "type": "checkout response",
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":150}"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/hg/source/software-testing/week04/test-output/checkout/webkit/checkout-api-FR-08-checkou-94c4f--order-at-the-catalog-price-webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                        "column": 58,
+                        "line": 137
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "2ad3bd26c14ae54d32ba-d942494952002186c86b",
+              "file": "checkout/api.spec.ts",
+              "line": 101,
+              "column": 9
+            },
+            {
+              "title": "DT-09 – total_amount lower than the server total",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "source",
+                      "description": "FR-08 README:107 \"Backend phải tự tính lại tổng tiền; không chấp nhận giá trị `total_amount` do client gửi lên.\"; A3, A5, A8, A9; Q2 (accepted with the server total or refused both pass)"
+                    },
+                    {
+                      "type": "checkout response",
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":151}"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 141,
+                      "error": {
+                        "message": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   1000,\u001b[39m\n\u001b[2m  ]\u001b[22m",
+                        "stack": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   1000,\u001b[39m\n\u001b[2m  ]\u001b[22m\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:160:12",
+                        "location": {
+                          "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                          "column": 12,
+                          "line": 160
+                        },
+                        "snippet": "  158 |         expect\n  159 |           .soft(ownNew.map((o) => o.total_amount), `a new order carries the server total ${e.serverTotal}, never the client value (FR-08 README:107)`)\n> 160 |           .toEqual(ownNew.map(() => e.serverTotal));\n      |            ^\n  161 |         expect\n  162 |           .soft(linesAfter, 'cart emptied if the order was stored, unchanged if refused (A8, A9)')\n  163 |           .toHaveLength(ownNew.length === 1 ? 0 : e.cartLinesBefore ?? row.cart.length);"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                            "column": 12,
+                            "line": 160
+                          },
+                          "message": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   1000,\u001b[39m\n\u001b[2m  ]\u001b[22m\n\n  158 |         expect\n  159 |           .soft(ownNew.map((o) => o.total_amount), `a new order carries the server total ${e.serverTotal}, never the client value (FR-08 README:107)`)\n> 160 |           .toEqual(ownNew.map(() => e.serverTotal));\n      |            ^\n  161 |         expect\n  162 |           .soft(linesAfter, 'cart emptied if the order was stored, unchanged if refused (A8, A9)')\n  163 |           .toHaveLength(ownNew.length === 1 ? 0 : e.cartLinesBefore ?? row.cart.length);\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:160:12"
+                        },
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                            "column": 12,
+                            "line": 163
+                          },
+                          "message": "Error: cart emptied if the order was stored, unchanged if refused (A8, A9)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m3\u001b[39m\nReceived array:  \u001b[31m[{\"id\": 5, \"name\": \"Bàn phím cơ Keychron Q1\", \"price\": 4000000, \"quantity\": 3}, {\"id\": 4, \"name\": \"Tai nghe AirPods Pro 2\", \"price\": 6000000, \"quantity\": 4}, {\"id\": 1, \"name\": \"iPhone 15 Pro Max\", \"price\": 30000000, \"quantity\": 3}]\u001b[39m\n\n  161 |         expect\n  162 |           .soft(linesAfter, 'cart emptied if the order was stored, unchanged if refused (A8, A9)')\n> 163 |           .toHaveLength(ownNew.length === 1 ? 0 : e.cartLinesBefore ?? row.cart.length);\n      |            ^\n  164 |       }\n  165 |     });\n  166 |   }\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:163:12"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T14:17:22.952Z",
+                      "annotations": [
+                        {
+                          "type": "source",
+                          "description": "FR-08 README:107 \"Backend phải tự tính lại tổng tiền; không chấp nhận giá trị `total_amount` do client gửi lên.\"; A3, A5, A8, A9; Q2 (accepted with the server total or refused both pass)"
+                        },
+                        {
+                          "type": "checkout response",
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":151}"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/hg/source/software-testing/week04/test-output/checkout/webkit/checkout-api-FR-08-checkou-dddac-lower-than-the-server-total-webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                        "column": 12,
+                        "line": 160
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "2ad3bd26c14ae54d32ba-93a5ecd016b84317fde2",
+              "file": "checkout/api.spec.ts",
+              "line": 101,
+              "column": 9
+            },
+            {
+              "title": "DT-10 – total_amount higher than the server total",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "source",
+                      "description": "FR-08 README:107 \"Backend phải tự tính lại tổng tiền; không chấp nhận giá trị `total_amount` do client gửi lên.\"; A3, A5, A8, A9; Q2 (accepted with the server total or refused both pass)"
+                    },
+                    {
+                      "type": "checkout response",
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":152}"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 131,
+                      "error": {
+                        "message": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   200000000,\u001b[39m\n\u001b[2m  ]\u001b[22m",
+                        "stack": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   200000000,\u001b[39m\n\u001b[2m  ]\u001b[22m\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:160:12",
+                        "location": {
+                          "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                          "column": 12,
+                          "line": 160
+                        },
+                        "snippet": "  158 |         expect\n  159 |           .soft(ownNew.map((o) => o.total_amount), `a new order carries the server total ${e.serverTotal}, never the client value (FR-08 README:107)`)\n> 160 |           .toEqual(ownNew.map(() => e.serverTotal));\n      |            ^\n  161 |         expect\n  162 |           .soft(linesAfter, 'cart emptied if the order was stored, unchanged if refused (A8, A9)')\n  163 |           .toHaveLength(ownNew.length === 1 ? 0 : e.cartLinesBefore ?? row.cart.length);"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                            "column": 12,
+                            "line": 160
+                          },
+                          "message": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   200000000,\u001b[39m\n\u001b[2m  ]\u001b[22m\n\n  158 |         expect\n  159 |           .soft(ownNew.map((o) => o.total_amount), `a new order carries the server total ${e.serverTotal}, never the client value (FR-08 README:107)`)\n> 160 |           .toEqual(ownNew.map(() => e.serverTotal));\n      |            ^\n  161 |         expect\n  162 |           .soft(linesAfter, 'cart emptied if the order was stored, unchanged if refused (A8, A9)')\n  163 |           .toHaveLength(ownNew.length === 1 ? 0 : e.cartLinesBefore ?? row.cart.length);\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:160:12"
+                        },
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                            "column": 12,
+                            "line": 163
+                          },
+                          "message": "Error: cart emptied if the order was stored, unchanged if refused (A8, A9)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m3\u001b[39m\nReceived array:  \u001b[31m[{\"id\": 5, \"name\": \"Bàn phím cơ Keychron Q1\", \"price\": 4000000, \"quantity\": 3}, {\"id\": 4, \"name\": \"Tai nghe AirPods Pro 2\", \"price\": 6000000, \"quantity\": 4}, {\"id\": 1, \"name\": \"iPhone 15 Pro Max\", \"price\": 30000000, \"quantity\": 3}]\u001b[39m\n\n  161 |         expect\n  162 |           .soft(linesAfter, 'cart emptied if the order was stored, unchanged if refused (A8, A9)')\n> 163 |           .toHaveLength(ownNew.length === 1 ? 0 : e.cartLinesBefore ?? row.cart.length);\n      |            ^\n  164 |       }\n  165 |     });\n  166 |   }\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:163:12"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T14:17:23.846Z",
+                      "annotations": [
+                        {
+                          "type": "source",
+                          "description": "FR-08 README:107 \"Backend phải tự tính lại tổng tiền; không chấp nhận giá trị `total_amount` do client gửi lên.\"; A3, A5, A8, A9; Q2 (accepted with the server total or refused both pass)"
+                        },
+                        {
+                          "type": "checkout response",
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":152}"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/hg/source/software-testing/week04/test-output/checkout/webkit/checkout-api-FR-08-checkou-3589b-igher-than-the-server-total-webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                        "column": 12,
+                        "line": 160
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "2ad3bd26c14ae54d32ba-b563ec22fa1d8b697aa8",
+              "file": "checkout/api.spec.ts",
+              "line": 101,
+              "column": 9
+            },
+            {
+              "title": "DT-11 – total_amount zero",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "source",
+                      "description": "FR-08 README:107 \"Backend phải tự tính lại tổng tiền; không chấp nhận giá trị `total_amount` do client gửi lên.\"; A3, A5, A8, A9; Q2 (accepted with the server total or refused both pass)"
+                    },
+                    {
+                      "type": "checkout response",
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":153}"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 134,
+                      "error": {
+                        "message": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   0,\u001b[39m\n\u001b[2m  ]\u001b[22m",
+                        "stack": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   0,\u001b[39m\n\u001b[2m  ]\u001b[22m\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:160:12",
+                        "location": {
+                          "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                          "column": 12,
+                          "line": 160
+                        },
+                        "snippet": "  158 |         expect\n  159 |           .soft(ownNew.map((o) => o.total_amount), `a new order carries the server total ${e.serverTotal}, never the client value (FR-08 README:107)`)\n> 160 |           .toEqual(ownNew.map(() => e.serverTotal));\n      |            ^\n  161 |         expect\n  162 |           .soft(linesAfter, 'cart emptied if the order was stored, unchanged if refused (A8, A9)')\n  163 |           .toHaveLength(ownNew.length === 1 ? 0 : e.cartLinesBefore ?? row.cart.length);"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                            "column": 12,
+                            "line": 160
+                          },
+                          "message": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   0,\u001b[39m\n\u001b[2m  ]\u001b[22m\n\n  158 |         expect\n  159 |           .soft(ownNew.map((o) => o.total_amount), `a new order carries the server total ${e.serverTotal}, never the client value (FR-08 README:107)`)\n> 160 |           .toEqual(ownNew.map(() => e.serverTotal));\n      |            ^\n  161 |         expect\n  162 |           .soft(linesAfter, 'cart emptied if the order was stored, unchanged if refused (A8, A9)')\n  163 |           .toHaveLength(ownNew.length === 1 ? 0 : e.cartLinesBefore ?? row.cart.length);\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:160:12"
+                        },
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                            "column": 12,
+                            "line": 163
+                          },
+                          "message": "Error: cart emptied if the order was stored, unchanged if refused (A8, A9)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m3\u001b[39m\nReceived array:  \u001b[31m[{\"id\": 5, \"name\": \"Bàn phím cơ Keychron Q1\", \"price\": 4000000, \"quantity\": 3}, {\"id\": 4, \"name\": \"Tai nghe AirPods Pro 2\", \"price\": 6000000, \"quantity\": 4}, {\"id\": 1, \"name\": \"iPhone 15 Pro Max\", \"price\": 30000000, \"quantity\": 3}]\u001b[39m\n\n  161 |         expect\n  162 |           .soft(linesAfter, 'cart emptied if the order was stored, unchanged if refused (A8, A9)')\n> 163 |           .toHaveLength(ownNew.length === 1 ? 0 : e.cartLinesBefore ?? row.cart.length);\n      |            ^\n  164 |       }\n  165 |     });\n  166 |   }\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:163:12"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T14:17:24.693Z",
+                      "annotations": [
+                        {
+                          "type": "source",
+                          "description": "FR-08 README:107 \"Backend phải tự tính lại tổng tiền; không chấp nhận giá trị `total_amount` do client gửi lên.\"; A3, A5, A8, A9; Q2 (accepted with the server total or refused both pass)"
+                        },
+                        {
+                          "type": "checkout response",
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":153}"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/hg/source/software-testing/week04/test-output/checkout/webkit/checkout-api-FR-08-checkout-–-API-DT-11-–-total-amount-zero-webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                        "column": 12,
+                        "line": 160
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "2ad3bd26c14ae54d32ba-6759780fe64a1016db22",
+              "file": "checkout/api.spec.ts",
+              "line": 101,
+              "column": 9
+            },
+            {
+              "title": "DT-12 – total_amount negative",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "source",
+                      "description": "FR-08 README:107 \"Backend phải tự tính lại tổng tiền; không chấp nhận giá trị `total_amount` do client gửi lên.\"; A3, A5, A8, A9; Q2 (accepted with the server total or refused both pass)"
+                    },
+                    {
+                      "type": "checkout response",
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":154}"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 133,
+                      "error": {
+                        "message": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   -1000,\u001b[39m\n\u001b[2m  ]\u001b[22m",
+                        "stack": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   -1000,\u001b[39m\n\u001b[2m  ]\u001b[22m\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:160:12",
+                        "location": {
+                          "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                          "column": 12,
+                          "line": 160
+                        },
+                        "snippet": "  158 |         expect\n  159 |           .soft(ownNew.map((o) => o.total_amount), `a new order carries the server total ${e.serverTotal}, never the client value (FR-08 README:107)`)\n> 160 |           .toEqual(ownNew.map(() => e.serverTotal));\n      |            ^\n  161 |         expect\n  162 |           .soft(linesAfter, 'cart emptied if the order was stored, unchanged if refused (A8, A9)')\n  163 |           .toHaveLength(ownNew.length === 1 ? 0 : e.cartLinesBefore ?? row.cart.length);"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                            "column": 12,
+                            "line": 160
+                          },
+                          "message": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   -1000,\u001b[39m\n\u001b[2m  ]\u001b[22m\n\n  158 |         expect\n  159 |           .soft(ownNew.map((o) => o.total_amount), `a new order carries the server total ${e.serverTotal}, never the client value (FR-08 README:107)`)\n> 160 |           .toEqual(ownNew.map(() => e.serverTotal));\n      |            ^\n  161 |         expect\n  162 |           .soft(linesAfter, 'cart emptied if the order was stored, unchanged if refused (A8, A9)')\n  163 |           .toHaveLength(ownNew.length === 1 ? 0 : e.cartLinesBefore ?? row.cart.length);\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:160:12"
+                        },
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                            "column": 12,
+                            "line": 163
+                          },
+                          "message": "Error: cart emptied if the order was stored, unchanged if refused (A8, A9)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m3\u001b[39m\nReceived array:  \u001b[31m[{\"id\": 5, \"name\": \"Bàn phím cơ Keychron Q1\", \"price\": 4000000, \"quantity\": 3}, {\"id\": 4, \"name\": \"Tai nghe AirPods Pro 2\", \"price\": 6000000, \"quantity\": 4}, {\"id\": 1, \"name\": \"iPhone 15 Pro Max\", \"price\": 30000000, \"quantity\": 3}]\u001b[39m\n\n  161 |         expect\n  162 |           .soft(linesAfter, 'cart emptied if the order was stored, unchanged if refused (A8, A9)')\n> 163 |           .toHaveLength(ownNew.length === 1 ? 0 : e.cartLinesBefore ?? row.cart.length);\n      |            ^\n  164 |       }\n  165 |     });\n  166 |   }\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:163:12"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T14:17:25.547Z",
+                      "annotations": [
+                        {
+                          "type": "source",
+                          "description": "FR-08 README:107 \"Backend phải tự tính lại tổng tiền; không chấp nhận giá trị `total_amount` do client gửi lên.\"; A3, A5, A8, A9; Q2 (accepted with the server total or refused both pass)"
+                        },
+                        {
+                          "type": "checkout response",
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":154}"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/hg/source/software-testing/week04/test-output/checkout/webkit/checkout-api-FR-08-checkou-6d569--12-–-total-amount-negative-webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                        "column": 12,
+                        "line": 160
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "2ad3bd26c14ae54d32ba-80661ffd385c110b2d10",
+              "file": "checkout/api.spec.ts",
+              "line": 101,
+              "column": 9
+            },
+            {
+              "title": "DT-13 – total_amount not a number",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "source",
+                      "description": "FR-08 README:107 \"Backend phải tự tính lại tổng tiền; không chấp nhận giá trị `total_amount` do client gửi lên.\"; A3, A5, A8, A9; Q2 (accepted with the server total or refused both pass)"
+                    },
+                    {
+                      "type": "checkout response",
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":155}"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 127,
+                      "error": {
+                        "message": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   \"abc\",\u001b[39m\n\u001b[2m  ]\u001b[22m",
+                        "stack": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   \"abc\",\u001b[39m\n\u001b[2m  ]\u001b[22m\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:160:12",
+                        "location": {
+                          "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                          "column": 12,
+                          "line": 160
+                        },
+                        "snippet": "  158 |         expect\n  159 |           .soft(ownNew.map((o) => o.total_amount), `a new order carries the server total ${e.serverTotal}, never the client value (FR-08 README:107)`)\n> 160 |           .toEqual(ownNew.map(() => e.serverTotal));\n      |            ^\n  161 |         expect\n  162 |           .soft(linesAfter, 'cart emptied if the order was stored, unchanged if refused (A8, A9)')\n  163 |           .toHaveLength(ownNew.length === 1 ? 0 : e.cartLinesBefore ?? row.cart.length);"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                            "column": 12,
+                            "line": 160
+                          },
+                          "message": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   \"abc\",\u001b[39m\n\u001b[2m  ]\u001b[22m\n\n  158 |         expect\n  159 |           .soft(ownNew.map((o) => o.total_amount), `a new order carries the server total ${e.serverTotal}, never the client value (FR-08 README:107)`)\n> 160 |           .toEqual(ownNew.map(() => e.serverTotal));\n      |            ^\n  161 |         expect\n  162 |           .soft(linesAfter, 'cart emptied if the order was stored, unchanged if refused (A8, A9)')\n  163 |           .toHaveLength(ownNew.length === 1 ? 0 : e.cartLinesBefore ?? row.cart.length);\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:160:12"
+                        },
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                            "column": 12,
+                            "line": 163
+                          },
+                          "message": "Error: cart emptied if the order was stored, unchanged if refused (A8, A9)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m3\u001b[39m\nReceived array:  \u001b[31m[{\"id\": 5, \"name\": \"Bàn phím cơ Keychron Q1\", \"price\": 4000000, \"quantity\": 3}, {\"id\": 4, \"name\": \"Tai nghe AirPods Pro 2\", \"price\": 6000000, \"quantity\": 4}, {\"id\": 1, \"name\": \"iPhone 15 Pro Max\", \"price\": 30000000, \"quantity\": 3}]\u001b[39m\n\n  161 |         expect\n  162 |           .soft(linesAfter, 'cart emptied if the order was stored, unchanged if refused (A8, A9)')\n> 163 |           .toHaveLength(ownNew.length === 1 ? 0 : e.cartLinesBefore ?? row.cart.length);\n      |            ^\n  164 |       }\n  165 |     });\n  166 |   }\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:163:12"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T14:17:26.402Z",
+                      "annotations": [
+                        {
+                          "type": "source",
+                          "description": "FR-08 README:107 \"Backend phải tự tính lại tổng tiền; không chấp nhận giá trị `total_amount` do client gửi lên.\"; A3, A5, A8, A9; Q2 (accepted with the server total or refused both pass)"
+                        },
+                        {
+                          "type": "checkout response",
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":155}"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/hg/source/software-testing/week04/test-output/checkout/webkit/checkout-api-FR-08-checkou-b5765-–-total-amount-not-a-number-webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
+                        "column": 12,
+                        "line": 160
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "2ad3bd26c14ae54d32ba-316d0dc68dd1f61505db",
+              "file": "checkout/api.spec.ts",
+              "line": 101,
+              "column": 9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "checkout/web.spec.ts",
+      "file": "checkout/web.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "FR-08 checkout – Web",
+          "file": "checkout/web.spec.ts",
+          "line": 85,
+          "column": 6,
+          "specs": [
+            {
+              "title": "DT-01 – all valid: Web checkout of cart 3 / 4 / 3",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "source",
+                      "description": "FR-08 README:105 \"không cho phép người dùng chỉnh sửa trực tiếp\", :106 \"đầy đủ danh sách sản phẩm đặt mua\", :108 \"Sau thanh toán thành công, giỏ hàng được xóa.\"; FR-23 README:263 breadcrumb on Thanh toán; A3, A7, A8, A10, A11"
+                    },
+                    {
+                      "type": "issue",
+                      "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for Bàn phím cơ Keychron Q1 (group issue #73, FR-07)"
+                    },
+                    {
+                      "type": "issue",
+                      "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for Tai nghe AirPods Pro 2 (group issue #73, FR-07)"
+                    },
+                    {
+                      "type": "issue",
+                      "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for iPhone 15 Pro Max (group issue #73, FR-07)"
+                    },
+                    {
+                      "type": "address",
+                      "description": "address fields on the page: 0 (HW02 value \"123 Le Loi, TP.HCM\", not judged: A12, Q7)"
+                    },
+                    {
+                      "type": "checkout response",
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":156}"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 23268,
+                      "error": {
+                        "message": "Error: the total cannot be typed into (FR-08 \"không cho phép người dùng chỉnh sửa trực tiếp\")\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div').filter({ has: locator('label').filter({ hasText: /^Tổng tiền thanh toán/ }) }).getByRole('spinbutton').and(locator('input:not([readonly]):not([disabled])'))\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - the total cannot be typed into (FR-08 \"không cho phép người dùng chỉnh sửa trực tiếp\") locator('div').filter({ has: locator('label').filter({ hasText: /^Tổng tiền thanh toán/ }) }).getByRole('spinbutton').and(locator('input:not([readonly]):not([disabled])')) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div').filter({ has: locator('label').filter({ hasText: /^Tổng tiền thanh toán/ }) }).getByRole('spinbutton').and(locator('input:not([readonly]):not([disabled])'))\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                        "stack": "Error: the total cannot be typed into (FR-08 \"không cho phép người dùng chỉnh sửa trực tiếp\")\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div').filter({ has: locator('label').filter({ hasText: /^Tổng tiền thanh toán/ }) }).getByRole('spinbutton').and(locator('input:not([readonly]):not([disabled])'))\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - the total cannot be typed into (FR-08 \"không cho phép người dùng chỉnh sửa trực tiếp\") locator('div').filter({ has: locator('label').filter({ hasText: /^Tổng tiền thanh toán/ }) }).getByRole('spinbutton').and(locator('input:not([readonly]):not([disabled])')) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div').filter({ has: locator('label').filter({ hasText: /^Tổng tiền thanh toán/ }) }).getByRole('spinbutton').and(locator('input:not([readonly]):not([disabled])'))\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:195:12",
+                        "location": {
+                          "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                          "column": 12,
+                          "line": 195
+                        },
+                        "snippet": "  193 |         await expect\n  194 |           .soft(editableTotal, 'the total cannot be typed into (FR-08 \"không cho phép người dùng chỉnh sửa trực tiếp\")')\n> 195 |           .toHaveCount(0);\n      |            ^\n  196 |       }\n  197 |       if (e.breadcrumb) {\n  198 |         await expect.soft(checkout.breadcrumb, 'breadcrumb on Thanh toán (FR-23)').toBeVisible();"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                            "column": 12,
+                            "line": 195
+                          },
+                          "message": "Error: the total cannot be typed into (FR-08 \"không cho phép người dùng chỉnh sửa trực tiếp\")\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div').filter({ has: locator('label').filter({ hasText: /^Tổng tiền thanh toán/ }) }).getByRole('spinbutton').and(locator('input:not([readonly]):not([disabled])'))\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - the total cannot be typed into (FR-08 \"không cho phép người dùng chỉnh sửa trực tiếp\") locator('div').filter({ has: locator('label').filter({ hasText: /^Tổng tiền thanh toán/ }) }).getByRole('spinbutton').and(locator('input:not([readonly]):not([disabled])')) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div').filter({ has: locator('label').filter({ hasText: /^Tổng tiền thanh toán/ }) }).getByRole('spinbutton').and(locator('input:not([readonly]):not([disabled])'))\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  193 |         await expect\n  194 |           .soft(editableTotal, 'the total cannot be typed into (FR-08 \"không cho phép người dùng chỉnh sửa trực tiếp\")')\n> 195 |           .toHaveCount(0);\n      |            ^\n  196 |       }\n  197 |       if (e.breadcrumb) {\n  198 |         await expect.soft(checkout.breadcrumb, 'breadcrumb on Thanh toán (FR-23)').toBeVisible();\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:195:12"
+                        },
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                            "column": 84,
+                            "line": 198
+                          },
+                          "message": "Error: breadcrumb on Thanh toán (FR-23)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('navigation', { name: /breadcrumb/i })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - breadcrumb on Thanh toán (FR-23) getByRole('navigation', { name: /breadcrumb/i }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('navigation', { name: /breadcrumb/i })\u001b[22m\n\n\n  196 |       }\n  197 |       if (e.breadcrumb) {\n> 198 |         await expect.soft(checkout.breadcrumb, 'breadcrumb on Thanh toán (FR-23)').toBeVisible();\n      |                                                                                    ^\n  199 |       }\n  200 |       testInfo.annotations.push({\n  201 |         type: 'address',\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:198:84"
+                        },
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                            "column": 74,
+                            "line": 217
+                          },
+                          "message": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n\n\n  215 |         await header.goToCart();\n  216 |         await cart.waitReady();\n> 217 |         await expect(cart.lines, 'no cart line after the checkout (A8)').toHaveCount(0);\n      |                                                                          ^\n  218 |         await expect(cart.emptyHeading, 'empty-cart state after the checkout (A8)').toBeVisible();\n  219 |       }\n  220 |     });\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:217:74"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T14:17:27.251Z",
+                      "annotations": [
+                        {
+                          "type": "source",
+                          "description": "FR-08 README:105 \"không cho phép người dùng chỉnh sửa trực tiếp\", :106 \"đầy đủ danh sách sản phẩm đặt mua\", :108 \"Sau thanh toán thành công, giỏ hàng được xóa.\"; FR-23 README:263 breadcrumb on Thanh toán; A3, A7, A8, A10, A11"
+                        },
+                        {
+                          "type": "issue",
+                          "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for Bàn phím cơ Keychron Q1 (group issue #73, FR-07)"
+                        },
+                        {
+                          "type": "issue",
+                          "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for Tai nghe AirPods Pro 2 (group issue #73, FR-07)"
+                        },
+                        {
+                          "type": "issue",
+                          "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for iPhone 15 Pro Max (group issue #73, FR-07)"
+                        },
+                        {
+                          "type": "address",
+                          "description": "address fields on the page: 0 (HW02 value \"123 Le Loi, TP.HCM\", not judged: A12, Q7)"
+                        },
+                        {
+                          "type": "checkout response",
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":156}"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/hg/source/software-testing/week04/test-output/checkout/webkit/checkout-web-FR-08-checkou-d7783--Web-checkout-of-cart-3-4-3-webkit/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/hg/source/software-testing/week04/test-output/checkout/webkit/checkout-web-FR-08-checkou-d7783--Web-checkout-of-cart-3-4-3-webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                        "column": 12,
+                        "line": 195
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "0c19124b348df4e5e454-c3bb5f382220855bfd14",
+              "file": "checkout/web.spec.ts",
+              "line": 165,
+              "column": 9
+            },
+            {
+              "title": "BVA-01 – B1 LB: 1 cart line",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "source",
+                      "description": "FR-08 README:105, :108; A3, A7, A8"
+                    },
+                    {
+                      "type": "issue",
+                      "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for Bàn phím cơ Keychron Q1 (group issue #73, FR-07)"
+                    },
+                    {
+                      "type": "address",
+                      "description": "address fields on the page: 0 (HW02 value \"-\", not judged: A12, Q7)"
+                    },
+                    {
+                      "type": "checkout response",
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":157}"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 7918,
+                      "error": {
+                        "message": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                        "stack": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:217:74",
+                        "location": {
+                          "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                          "column": 74,
+                          "line": 217
+                        },
+                        "snippet": "  215 |         await header.goToCart();\n  216 |         await cart.waitReady();\n> 217 |         await expect(cart.lines, 'no cart line after the checkout (A8)').toHaveCount(0);\n      |                                                                          ^\n  218 |         await expect(cart.emptyHeading, 'empty-cart state after the checkout (A8)').toBeVisible();\n  219 |       }\n  220 |     });"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                            "column": 74,
+                            "line": 217
+                          },
+                          "message": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  215 |         await header.goToCart();\n  216 |         await cart.waitReady();\n> 217 |         await expect(cart.lines, 'no cart line after the checkout (A8)').toHaveCount(0);\n      |                                                                          ^\n  218 |         await expect(cart.emptyHeading, 'empty-cart state after the checkout (A8)').toBeVisible();\n  219 |       }\n  220 |     });\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:217:74"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T14:17:51.380Z",
+                      "annotations": [
+                        {
+                          "type": "source",
+                          "description": "FR-08 README:105, :108; A3, A7, A8"
+                        },
+                        {
+                          "type": "issue",
+                          "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for Bàn phím cơ Keychron Q1 (group issue #73, FR-07)"
+                        },
+                        {
+                          "type": "address",
+                          "description": "address fields on the page: 0 (HW02 value \"-\", not judged: A12, Q7)"
+                        },
+                        {
+                          "type": "checkout response",
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":157}"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/hg/source/software-testing/week04/test-output/checkout/webkit/checkout-web-FR-08-checkout-–-Web-BVA-01-–-B1-LB-1-cart-line-webkit/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/hg/source/software-testing/week04/test-output/checkout/webkit/checkout-web-FR-08-checkout-–-Web-BVA-01-–-B1-LB-1-cart-line-webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                        "column": 74,
+                        "line": 217
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "0c19124b348df4e5e454-e5ad486fb12b3608ad2d",
+              "file": "checkout/web.spec.ts",
+              "line": 165,
+              "column": 9
+            },
+            {
+              "title": "BVA-02 – B1 LB+1: 2 cart lines",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "source",
+                      "description": "FR-08 README:105, :108; A3, A7, A8"
+                    },
+                    {
+                      "type": "issue",
+                      "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for Bàn phím cơ Keychron Q1 (group issue #73, FR-07)"
+                    },
+                    {
+                      "type": "issue",
+                      "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for Tai nghe AirPods Pro 2 (group issue #73, FR-07)"
+                    },
+                    {
+                      "type": "address",
+                      "description": "address fields on the page: 0 (HW02 value \"-\", not judged: A12, Q7)"
+                    },
+                    {
+                      "type": "checkout response",
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":158}"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 9703,
+                      "error": {
+                        "message": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n",
+                        "stack": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:217:74",
+                        "location": {
+                          "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                          "column": 74,
+                          "line": 217
+                        },
+                        "snippet": "  215 |         await header.goToCart();\n  216 |         await cart.waitReady();\n> 217 |         await expect(cart.lines, 'no cart line after the checkout (A8)').toHaveCount(0);\n      |                                                                          ^\n  218 |         await expect(cart.emptyHeading, 'empty-cart state after the checkout (A8)').toBeVisible();\n  219 |       }\n  220 |     });"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                            "column": 74,
+                            "line": 217
+                          },
+                          "message": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n\n\n  215 |         await header.goToCart();\n  216 |         await cart.waitReady();\n> 217 |         await expect(cart.lines, 'no cart line after the checkout (A8)').toHaveCount(0);\n      |                                                                          ^\n  218 |         await expect(cart.emptyHeading, 'empty-cart state after the checkout (A8)').toBeVisible();\n  219 |       }\n  220 |     });\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:217:74"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T14:18:00.275Z",
+                      "annotations": [
+                        {
+                          "type": "source",
+                          "description": "FR-08 README:105, :108; A3, A7, A8"
+                        },
+                        {
+                          "type": "issue",
+                          "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for Bàn phím cơ Keychron Q1 (group issue #73, FR-07)"
+                        },
+                        {
+                          "type": "issue",
+                          "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for Tai nghe AirPods Pro 2 (group issue #73, FR-07)"
+                        },
+                        {
+                          "type": "address",
+                          "description": "address fields on the page: 0 (HW02 value \"-\", not judged: A12, Q7)"
+                        },
+                        {
+                          "type": "checkout response",
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":158}"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/hg/source/software-testing/week04/test-output/checkout/webkit/checkout-web-FR-08-checkou-61573-A-02-–-B1-LB-1-2-cart-lines-webkit/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/hg/source/software-testing/week04/test-output/checkout/webkit/checkout-web-FR-08-checkou-61573-A-02-–-B1-LB-1-2-cart-lines-webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                        "column": 74,
+                        "line": 217
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "0c19124b348df4e5e454-2137a7e92fa955cc8f9c",
+              "file": "checkout/web.spec.ts",
+              "line": 165,
+              "column": 9
+            },
+            {
+              "title": "BVA-03 – B2 LB: quantity 1 on one line",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "source",
+                      "description": "FR-08 README:105, :108; A3, A7, A8"
+                    },
+                    {
+                      "type": "issue",
+                      "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for Bàn phím cơ Keychron Q1 (group issue #73, FR-07)"
+                    },
+                    {
+                      "type": "issue",
+                      "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for Tai nghe AirPods Pro 2 (group issue #73, FR-07)"
+                    },
+                    {
+                      "type": "issue",
+                      "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for iPhone 15 Pro Max (group issue #73, FR-07)"
+                    },
+                    {
+                      "type": "address",
+                      "description": "address fields on the page: 0 (HW02 value \"-\", not judged: A12, Q7)"
+                    },
+                    {
+                      "type": "checkout response",
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":159}"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 11402,
+                      "error": {
+                        "message": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n",
+                        "stack": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:217:74",
+                        "location": {
+                          "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                          "column": 74,
+                          "line": 217
+                        },
+                        "snippet": "  215 |         await header.goToCart();\n  216 |         await cart.waitReady();\n> 217 |         await expect(cart.lines, 'no cart line after the checkout (A8)').toHaveCount(0);\n      |                                                                          ^\n  218 |         await expect(cart.emptyHeading, 'empty-cart state after the checkout (A8)').toBeVisible();\n  219 |       }\n  220 |     });"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                            "column": 74,
+                            "line": 217
+                          },
+                          "message": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n\n\n  215 |         await header.goToCart();\n  216 |         await cart.waitReady();\n> 217 |         await expect(cart.lines, 'no cart line after the checkout (A8)').toHaveCount(0);\n      |                                                                          ^\n  218 |         await expect(cart.emptyHeading, 'empty-cart state after the checkout (A8)').toBeVisible();\n  219 |       }\n  220 |     });\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:217:74"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T14:18:10.985Z",
+                      "annotations": [
+                        {
+                          "type": "source",
+                          "description": "FR-08 README:105, :108; A3, A7, A8"
+                        },
+                        {
+                          "type": "issue",
+                          "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for Bàn phím cơ Keychron Q1 (group issue #73, FR-07)"
+                        },
+                        {
+                          "type": "issue",
+                          "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for Tai nghe AirPods Pro 2 (group issue #73, FR-07)"
+                        },
+                        {
+                          "type": "issue",
+                          "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for iPhone 15 Pro Max (group issue #73, FR-07)"
+                        },
+                        {
+                          "type": "address",
+                          "description": "address fields on the page: 0 (HW02 value \"-\", not judged: A12, Q7)"
+                        },
+                        {
+                          "type": "checkout response",
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":159}"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/hg/source/software-testing/week04/test-output/checkout/webkit/checkout-web-FR-08-checkou-444e3-2-LB-quantity-1-on-one-line-webkit/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/hg/source/software-testing/week04/test-output/checkout/webkit/checkout-web-FR-08-checkou-444e3-2-LB-quantity-1-on-one-line-webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                        "column": 74,
+                        "line": 217
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "0c19124b348df4e5e454-87a5edbcb309ac5c7d67",
+              "file": "checkout/web.spec.ts",
+              "line": 165,
+              "column": 9
+            },
+            {
+              "title": "BVA-04 – B2 LB+1: quantity 2 on one line",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "source",
+                      "description": "FR-08 README:105, :108; A3, A7, A8"
+                    },
+                    {
+                      "type": "issue",
+                      "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for Bàn phím cơ Keychron Q1 (group issue #73, FR-07)"
+                    },
+                    {
+                      "type": "issue",
+                      "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for Tai nghe AirPods Pro 2 (group issue #73, FR-07)"
+                    },
+                    {
+                      "type": "issue",
+                      "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for iPhone 15 Pro Max (group issue #73, FR-07)"
+                    },
+                    {
+                      "type": "address",
+                      "description": "address fields on the page: 0 (HW02 value \"-\", not judged: A12, Q7)"
+                    },
+                    {
+                      "type": "checkout response",
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":160}"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 12,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 11418,
+                      "error": {
+                        "message": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n",
+                        "stack": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:217:74",
+                        "location": {
+                          "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                          "column": 74,
+                          "line": 217
+                        },
+                        "snippet": "  215 |         await header.goToCart();\n  216 |         await cart.waitReady();\n> 217 |         await expect(cart.lines, 'no cart line after the checkout (A8)').toHaveCount(0);\n      |                                                                          ^\n  218 |         await expect(cart.emptyHeading, 'empty-cart state after the checkout (A8)').toBeVisible();\n  219 |       }\n  220 |     });"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                            "column": 74,
+                            "line": 217
+                          },
+                          "message": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n\n\n  215 |         await header.goToCart();\n  216 |         await cart.waitReady();\n> 217 |         await expect(cart.lines, 'no cart line after the checkout (A8)').toHaveCount(0);\n      |                                                                          ^\n  218 |         await expect(cart.emptyHeading, 'empty-cart state after the checkout (A8)').toBeVisible();\n  219 |       }\n  220 |     });\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:217:74"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T14:18:23.264Z",
+                      "annotations": [
+                        {
+                          "type": "source",
+                          "description": "FR-08 README:105, :108; A3, A7, A8"
+                        },
+                        {
+                          "type": "issue",
+                          "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for Bàn phím cơ Keychron Q1 (group issue #73, FR-07)"
+                        },
+                        {
+                          "type": "issue",
+                          "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for Tai nghe AirPods Pro 2 (group issue #73, FR-07)"
+                        },
+                        {
+                          "type": "issue",
+                          "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for iPhone 15 Pro Max (group issue #73, FR-07)"
+                        },
+                        {
+                          "type": "address",
+                          "description": "address fields on the page: 0 (HW02 value \"-\", not judged: A12, Q7)"
+                        },
+                        {
+                          "type": "checkout response",
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":160}"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/hg/source/software-testing/week04/test-output/checkout/webkit/checkout-web-FR-08-checkou-7424d-LB-1-quantity-2-on-one-line-webkit/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/hg/source/software-testing/week04/test-output/checkout/webkit/checkout-web-FR-08-checkou-7424d-LB-1-quantity-2-on-one-line-webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                        "column": 74,
+                        "line": 217
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "0c19124b348df4e5e454-104f871c2bab3077d531",
+              "file": "checkout/web.spec.ts",
+              "line": 165,
+              "column": 9
+            },
+            {
+              "title": "DT-03 – guest: no order on either path (cart button, typed /checkout)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "source",
+                      "description": "FR-08 README:104 \"Chỉ người dùng **đã đăng nhập** mới tiến hành thanh toán được.\"; A2 (what the Web shows is recorded, not judged), A9; Q1; student 17/11: both paths in one test"
+                    },
+                    {
+                      "type": "issue",
+                      "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for Bàn phím cơ Keychron Q1 (group issue #73, FR-07)"
+                    },
+                    {
+                      "type": "URL after path cartButton",
+                      "description": "http://localhost:5173/login"
+                    },
+                    {
+                      "type": "checkout response (b)",
+                      "description": "401 {\"error\":\"Unauthorized\"}"
+                    },
+                    {
+                      "type": "URL after path typedCheckoutUrl",
+                      "description": "http://localhost:5173/checkout"
+                    },
+                    {
+                      "type": "dialog",
+                      "description": "Bạn cần đăng nhập để thanh toán! | Lỗi khi thanh toán: Unauthorized"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 13,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2952,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T14:18:35.724Z",
+                      "annotations": [
+                        {
+                          "type": "source",
+                          "description": "FR-08 README:104 \"Chỉ người dùng **đã đăng nhập** mới tiến hành thanh toán được.\"; A2 (what the Web shows is recorded, not judged), A9; Q1; student 17/11: both paths in one test"
+                        },
+                        {
+                          "type": "issue",
+                          "description": "\"Thêm vào giỏ hàng\" needed 2 clicks for Bàn phím cơ Keychron Q1 (group issue #73, FR-07)"
+                        },
+                        {
+                          "type": "URL after path cartButton",
+                          "description": "http://localhost:5173/login"
+                        },
+                        {
+                          "type": "checkout response (b)",
+                          "description": "401 {\"error\":\"Unauthorized\"}"
+                        },
+                        {
+                          "type": "URL after path typedCheckoutUrl",
+                          "description": "http://localhost:5173/checkout"
+                        },
+                        {
+                          "type": "dialog",
+                          "description": "Bạn cần đăng nhập để thanh toán! | Lỗi khi thanh toán: Unauthorized"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0c19124b348df4e5e454-50acd6536e1e5f6832f6",
+              "file": "checkout/web.spec.ts",
+              "line": 225,
+              "column": 9
+            },
+            {
+              "title": "DT-07 – empty cart: no order on the Web (cart page, typed /checkout); API part in api.json",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "source",
+                      "description": "FR-07 README:100 \"Giỏ hàng trống phải có hình minh họa và thông báo rõ ràng.\"; A6 (Q4), A9; student 17/11: an accepted empty-cart checkout is a bug (BUG-01, #116)"
+                    },
+                    {
+                      "type": "checkout response",
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":161}"
+                    },
+                    {
+                      "type": "issue",
+                      "description": "BUG-01 https://github.com/angquoc/software-testing-2026-HW02-group/issues/116"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 13,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 6124,
+                      "error": {
+                        "message": "Error: empty-cart illustration (FR-07)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('img, svg').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - empty-cart illustration (FR-07) getByRole('main').locator('img, svg').first() with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('img, svg').first()\u001b[22m\n",
+                        "stack": "Error: empty-cart illustration (FR-07)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('img, svg').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - empty-cart illustration (FR-07) getByRole('main').locator('img, svg').first() with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('img, svg').first()\u001b[22m\n\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:277:87",
+                        "location": {
+                          "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                          "column": 87,
+                          "line": 277
+                        },
+                        "snippet": "  275 |       }\n  276 |       if (e.emptyState?.image) {\n> 277 |         await expect.soft(cart.emptyImage.first(), 'empty-cart illustration (FR-07)').toBeVisible();\n      |                                                                                       ^\n  278 |       }\n  279 |       if (e.checkoutButton === false) {\n  280 |         await expect.soft(cart.checkoutButton, 'no \"Tiến hành thanh toán\" for an empty cart (A6)').toHaveCount(0);"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                            "column": 87,
+                            "line": 277
+                          },
+                          "message": "Error: empty-cart illustration (FR-07)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('img, svg').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - empty-cart illustration (FR-07) getByRole('main').locator('img, svg').first() with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('img, svg').first()\u001b[22m\n\n\n  275 |       }\n  276 |       if (e.emptyState?.image) {\n> 277 |         await expect.soft(cart.emptyImage.first(), 'empty-cart illustration (FR-07)').toBeVisible();\n      |                                                                                       ^\n  278 |       }\n  279 |       if (e.checkoutButton === false) {\n  280 |         await expect.soft(cart.checkoutButton, 'no \"Tiến hành thanh toán\" for an empty cart (A6)').toHaveCount(0);\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:277:87"
+                        },
+                        {
+                          "location": {
+                            "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                            "column": 84,
+                            "line": 288
+                          },
+                          "message": "Error: no order for an empty cart (A6, A9)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m2\u001b[39m\nReceived array:  \u001b[31m[{\"created_at\": \"2026-11-17 14:18:44\", \"id\": 161, \"shipping_address\": null, \"status\": \"pending\", \"total_amount\": 0, \"user_id\": 496}, {\"created_at\": \"2026-11-17 14:17:21\", \"id\": 149, \"shipping_address\": \"123 Le Loi, TP.HCM\", \"status\": \"pending\", \"total_amount\": null, \"user_id\": 496}]\u001b[39m\n\n  286 |       testInfo.annotations.push({ type: 'checkout response', description: `${response.status()} ${await response.text()}` });\n  287 |       testInfo.annotations.push({ type: 'issue', description: 'BUG-01 https://github.com/angquoc/software-testing-2026-HW02-group/issues/116' });\n> 288 |       expect(await myOrders(account.token), 'no order for an empty cart (A6, A9)').toHaveLength(e.newOrders ?? 0);\n      |                                                                                    ^\n  289 |     });\n  290 |   }\n  291 | });\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:288:84"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T14:18:38.844Z",
+                      "annotations": [
+                        {
+                          "type": "source",
+                          "description": "FR-07 README:100 \"Giỏ hàng trống phải có hình minh họa và thông báo rõ ràng.\"; A6 (Q4), A9; student 17/11: an accepted empty-cart checkout is a bug (BUG-01, #116)"
+                        },
+                        {
+                          "type": "checkout response",
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":161}"
+                        },
+                        {
+                          "type": "issue",
+                          "description": "BUG-01 https://github.com/angquoc/software-testing-2026-HW02-group/issues/116"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/hg/source/software-testing/week04/test-output/checkout/webkit/checkout-web-FR-08-checkou-86154-eckout-API-part-in-api-json-webkit/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/hg/source/software-testing/week04/test-output/checkout/webkit/checkout-web-FR-08-checkou-86154-eckout-API-part-in-api-json-webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/hg/source/software-testing/week04/tests/checkout/web.spec.ts",
+                        "column": 87,
+                        "line": 277
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "0c19124b348df4e5e454-7706efb351c09f2c89d6",
+              "file": "checkout/web.spec.ts",
+              "line": 264,
+              "column": 9
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-17T14:17:18.393Z",
+    "duration": 86779.54699999999,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 14,
+    "flaky": 0
+  }
+}

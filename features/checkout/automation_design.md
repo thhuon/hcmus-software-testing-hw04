@@ -202,6 +202,7 @@ The results match the HW02 runs of the same TCs (DT-04 … 06 Pass; DT-02, 08 �
 | 2 | `api.spec.ts` › `refused` rows (DT-04 … 07) | Both order checks of a refused row were behind `if (expected.… !== undefined)`: a row that named neither `newOrdersAll` nor `newOrders` would check no order at all and pass | weak assertion | Hard check that a refused row names one of them, then the soft checks as before (`f0b2152`) | (proposed) The model made both fields optional so one branch serves the admin-count rows and the own-orders row, and did not close the case where both are missing | (proposed) Model |
 | 3 | `web.spec.ts` › DT-03 path (b) | The typed URL `/checkout` reloads the page, so the guest's Keychron × 3 is gone: path (b) tests a guest **with an empty cart**, two invalid classes at once (EC-V1-2 guest, EC-V2-2 empty cart). Today the 401 comes from the missing token; once BUG-01 (#116) is fixed the request could be refused for the empty cart and the test would pass for the wrong reason | missing edge case | open – student decision 1 in the reply (a guest with a non-empty cart reaches the page by "Thoát" on the checkout page; checked on 3 browsers: still on the page with 1 item, "Xác Nhận Thanh Toán" → 401 without a token) | (proposed) The prompt carried the student's path (b) "typed URL" from §1; the model did not connect it with the T2 finding that a reload empties the Web cart | (proposed) Prompt |
 | 4 | `web.spec.ts` › DT-03 path (a) | `if (await checkout.heading.isVisible()) await checkout.confirm()`: an `if` on page state; the report does not show which page the guest reached, so a run where the Web opened the checkout page and one where it did not look the same | weak assertion | open – depends on decision 1 (with the new path (b) the branch can go: path (a) records where the cart button leads, path (b) always tries to place the order) | (proposed) The model kept "try to place the order" of the TC for a page the guest may not reach and solved it with a branch | (proposed) Model |
+| 5 | `ProductPage.addToCart` (DT-03 on Firefox, first official set) | Two clicks with a fixed 1.5 s probe in between: on a busy Firefox the second click was once counted as the first again, "Đã thêm" never came and the test timed out in the setup (1 of 5 on rerun) | flaky wait | Click until "Đã thêm", up to 4 clicks, each extra click recorded as an annotation (#73); a click that adds always shows "Đã thêm", so no double add (`35b0c42`). Firefox `--repeat-each=3`: stable | (proposed) The app gives no visible state after the first click; the model chose a fixed two-click sequence from the T2 observation (always 2 clicks) and the student's "at most twice"; the race shows only under load | (proposed) Feature |
 
 Checked, nothing to fix: **fragile selector** – no XPath, `nth` or generated class; the two CSS parts (`div:has(> h2)` for the product card, `input:not([readonly]):not([disabled])` for "the total cannot be typed into") use stable structure / attributes and have their reason in §2 / the spec; **wrong oracle** – every expected value is read from the data files (A3–A12, Q1–Q7), no value copied from the app; **flaky wait** – no `waitForTimeout` or `networkidle` in the specs; the only time-bounded wait is the 1.5 s probe of `ProductPage.addToCart` (student decision on #73), stable in all runs; **hard-coded data** – no test values in the specs; **missing edge case** – every §1 row is automated (DT-07 on the Web and through the API).
 
@@ -209,7 +210,58 @@ Categories: fragile selector · weak assertion · wrong oracle · missing edge c
 
 ## 6. Runs (T6)
 
-Official runs (`summarize-results.mjs --markdown`):
+**Official runs** (second set, 17/11/2026 21:14–21:19, `npm run feature -- checkout --reuse`: `run-browsers.mjs` runs Chromium, Firefox and WebKit one after the other). They replace a first set (21:00–21:05) in which DT-03 failed on Firefox only (setup, see below).
+
+- **Frozen specs:** `tests/checkout/` and `page-objects/` at commit `35b0c42` (last change: `ProductPage.addToCart`, §5 #5). Spec files last changed at `f0b2152`.
+- **SUT and data, without touching the parallel session:** the servers already running (`--reuse`), because the student's servers (`npm run sut`) were also in use by the parallel FR-03 session; a fresh SUT (`FRESH_SUT=1`) would have needed their ports and re-seeded the shared database. The database was not re-seeded: every test registers its own account (`fr08.{id}.{run}…@example.com`, design §3) and checks only its own cart and orders, except DT-03 … 06, which compare all orders before / after (no other running session creates orders). Before the run: no Playwright process of another session (`pgrep`), and the catalog prices of products 1, 4, 5 checked equal to the seed (`GET /api/products`).
+- **Output folders:** reports in `reports/checkout/<browser>/`, screenshots in `test-output/checkout/<browser>/` (git-ignored); the FR-03 folders are not touched.
+- **Settings:** `retries: 0`, `workers: 1`; screenshot on failure; no traces in official runs (config, as FR-03).
+- **Reports:** `reports/checkout/<browser>/index.html` + `results.json`, committed as the tool wrote them. Title checked on all three ([Chromium](screenshots/t6/report-chromium.png), [Firefox](screenshots/t6/report-firefox.png), [WebKit](screenshots/t6/report-webkit.png)): "HW04 · FR-08 Checkout · <browser> · Run by: 23120046 · <ISO start time>".
+- **Screenshots:** `reports/checkout/<browser>/screenshots/<TC ID>.png`, one per failed Web test (6 per browser: DT-01, BVA-01 … 04, DT-07), copied by the run script. The 8 failed API tests have no page; their evidence is the report entry.
+
+Script output (`summarize-results.mjs --markdown`, FR-08 rows):
+
+**Runs**
+
+| feature | browser | started | tests | passed | failed | flaky | skipped |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| checkout | chromium | 2026-11-17T14:14:00.279Z | 18 | 4 | 14 | 0 | 0 |
+| checkout | firefox | 2026-11-17T14:15:28.006Z | 18 | 4 | 14 | 0 | 0 |
+| checkout | webkit | 2026-11-17T14:17:18.393Z | 18 | 4 | 14 | 0 | 0 |
+
+**Test cases (across browsers)**
+
+| feature | id | chromium | firefox | webkit | result |
+| --- | --- | --- | --- | --- | --- |
+| checkout | DT-02 | failed | failed | failed | failed |
+| checkout | DT-04 | passed | passed | passed | passed |
+| checkout | DT-05 | passed | passed | passed | passed |
+| checkout | DT-06 | passed | passed | passed | passed |
+| checkout | DT-07 | failed | failed | failed | failed |
+| checkout | DT-08 | failed | failed | failed | failed |
+| checkout | DT-09 | failed | failed | failed | failed |
+| checkout | DT-10 | failed | failed | failed | failed |
+| checkout | DT-11 | failed | failed | failed | failed |
+| checkout | DT-12 | failed | failed | failed | failed |
+| checkout | DT-13 | failed | failed | failed | failed |
+| checkout | DT-01 | failed | failed | failed | failed |
+| checkout | BVA-01 | failed | failed | failed | failed |
+| checkout | BVA-02 | failed | failed | failed | failed |
+| checkout | BVA-03 | failed | failed | failed | failed |
+| checkout | BVA-04 | failed | failed | failed | failed |
+| checkout | DT-03 | passed | passed | passed | passed |
+
+**Totals** (per test case, across browsers)
+
+| feature | automated | executed | passed | failed | flaky | runs |
+| --- | --- | --- | --- | --- | --- | --- |
+| checkout | 17 | 17 | 4 | 13 | 0 | 3 |
+
+17 test cases in 18 tests: DT-07 has a Web and an API test, and counts as failed.
+
+The same 4 tests pass (DT-03, DT-04 … 06) and the same 14 fail on every browser: no browser-specific result.
+
+**Browser difference in the first set (T6.2):** DT-03 failed on Firefox only, in the setup: after the second click "Thêm vào giỏ hàng" did not turn into "Đã thêm" and the test timed out (30 s). Rerun on Firefox with `--repeat-each=5`: 4 passed, 1 failed with the same error → **flaky**, not a browser defect. Not reproduced afterwards (8 more repeats with traces, and a 20-load loop of the product page: always exactly 2 clicks). Probable cause: the page counts the first click in a state value that is not shown, so there is nothing to wait for; when Firefox is busy, the second click can be counted against the old state. Fixed in `ProductPage.addToCart` (click until "Đã thêm", up to 4 clicks, every extra click recorded; §5 #5), no retries added; Firefox `--repeat-each=3` of the Web spec afterwards: same results 3 times, 39 adds all with 2 clicks. Then the whole set was run again. [Screenshot of the flaky failure](screenshots/t6/DT-03-firefox-set1-flaky.png) (product page, button still "Thêm vào giỏ hàng"); the first set's reports are kept locally in `playwright-report/checkout/t6-official-set1-<browser>/` (git-ignored).
 
 ## 7. Not automated (T8)
 
