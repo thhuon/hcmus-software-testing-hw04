@@ -100,20 +100,20 @@ Quay sau khi FR-15 đã xong (có bảng review §5). Lần chạy trong cảnh 
 
 | Yêu cầu | Video | Mốc thời gian | Đạt? |
 | --- | --- | --- | --- |
-| R9 `whoami` + `hostname` | 1 | | |
+| R9 `whoami` + `hostname` | 1 | 0:00 | |
 | R11 Cho thấy skill (SKILL.md, config) | 1 | | |
 | R11 T1 → T8 trên FR-15 | 1 | | |
 | R12 Bảo trì: review, sửa lỗi, phân tích test fail | 1 | | |
 | R2, R3 Tiếng Việt, giọng thật | 1 | | |
 | R10 Unlisted, mở được bằng cửa sổ ẩn danh | 1 | | |
-| R1 Dài ≥ 5:00 | 2 | | |
-| R9 `whoami` + `hostname` (đầu video và trước lần chạy) | 2 | | |
-| R4 Giới thiệu script | 2 | | |
-| R8 Kể lỗi đã sửa | 2 | | |
-| R5 Chạy 3 trình duyệt liền mạch | 2 | | |
-| R6, R7 Báo cáo có `Run by: 23120046` + giờ ISO | 2 | | |
+| R1 Dài ≥ 5:00 | 2 | 8:04 | |
+| R9 `whoami` + `hostname` (đầu video và trước lần chạy) | 2 | 0:00, 5:41 | |
+| R4 Giới thiệu script | 2 | 0:57 | |
+| R8 Kể lỗi đã sửa | 2 | 3:00 (DT-17, commit a278a51) | |
+| R5 Chạy 3 trình duyệt liền mạch | 2 | 5:41 | |
+| R6, R7 Báo cáo có `Run by: 23120046` + giờ ISO | 2 | 6:46 | |
 | R2, R3 Tiếng Việt, giọng thật | 2 | | |
 | R10 Unlisted, mở được bằng cửa sổ ẩn danh | 2 | | |
-| R13 Link trong README và báo cáo | 1, 2 | | |
+| R13 Link trong README và báo cáo | 1, 2 | README §2, §3; báo cáo §9, §10 | |
 
-Link: <link video 1> · <link video 2>
+Link: video 1 <https://youtu.be/Y7RpOnSWS8I> (6:38) · video 2 <https://www.youtube.com/watch?v=6ro7cYrT5Ew> (8:04)
