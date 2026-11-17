@@ -5103,7 +5103,7 @@ Bước tiếp theo: gõ prompt `tiếp tục bước T3` để tạo dữ liệ
 ## Prompt048 – Claude Code (claude-opus-5-5)
 
 - **Prompt sent:** 01:45 18/11/2026
-- **Output received:** 01:49 18/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Output received:** 01:51 18/11/2026
 - **Feature / step:** product-crud (fC) FR-15 – T2 codegen conclusion, T3 test data, prompt log
 - **Purpose:** Thêm câu kết luận codegen của SV, tạo dữ liệu test (T3), log các prompt chưa log của phiên
 - **Prompt (verbatim):**
@@ -5139,8 +5139,699 @@ Bash Find current transcript and preview prompts to log
 Có xung đột số thứ tự: AI-02 (#41, #S10, phiên khác) đã dùng sẵn Prompt043/044 cho kịch bản video nhưng log mới tới Prompt042. Kiểm tra phiên trước:
 Bash Preview unlogged prompts of previous sessions
 Bash Write log entries for video session and this session
+Đã ghi 6 entry (Prompt043–048). Xem định dạng một entry đã điền để điền các trường TODO cho giống:
+Bash Show filled example and new entry headers
+Bash Fill log TODOs and link AI-02 rows to prompt numbers
+Bash Show remaining logged-later AI-02 rows
+Chỉ còn #S11 ghi "logged later". Dòng đó là của một phiên khác (bài học từ feature B), nên giữ nguyên. Commit log và AI-02 chung một commit theo skill:
+Bash Commit prompt log and AI-02 links, push
+Bash Read logging rubric criteria
+Đã làm xong cả ba việc: thêm câu kết luận codegen, làm bước T3 (dữ liệu test) cho FR-15, và ghi log prompt. T3 còn chờ bạn xác nhận 3 quyết định ở dưới.
+
+## 1. Kết luận codegen
+
+Câu của bạn đã vào §2 của [automation_design.md](features/product-crud/automation_design.md), dịch sang tiếng Anh vì file này viết bằng tiếng Anh (commit 65743c4). AI-02 #43 có ghi lại câu này.
+
+## 2. T3 – Dữ liệu test
+
+Điều kiện để bắt đầu (T2 đã commit) đã đạt.
+
+| File | Số dòng | Nội dung |
+| --- | --- | --- |
+| [data/product-crud/web.json](data/product-crud/web.json) | 28 | 19 DT + 9 BVA, chạy trên Admin web |
+| [data/product-crud/api.json](data/product-crud/api.json) | 13 | DT-06…09, 12, 14…21 |
+
+Tổng cộng 41 test cho 36 TC, vì DT-09 và DT-14…17 có cả phần Web lẫn phần API.
+
+- **Nguồn kết quả mong đợi:** mỗi dòng có cột `source` trích câu SRS kèm số dòng README. Không giá trị nào lấy từ app, không còn `<CONFIRM>` nào.
+- **Tên dài cho BVA:** tên `Ố` (U+1ED0, dạng NFC) lặp n lần được ghi gọn là `{repeat, times}`, không chép chuỗi dài vào file.
+- **Test không đụng nhau:**
+  - Sản phẩm mới được nhận ra bằng cách so danh sách id trước và sau khi chạy, không dựa vào số lượng.
+  - Tên nào cần tìm trong danh sách thì được thêm `{tag}` (gồm mã TC, trình duyệt, lần chạy, lần thử).
+  - Mỗi test tự tạo sản phẩm P qua API và tự xóa sản phẩm của mình khi xong.
+- **Ghi lại, không chấm:** status code và nội dung `alert` chỉ ghi vào báo cáo, không assert (theo HW02 Q1, Q8).
+- **Form bị trình duyệt chặn:** theo A2 (ô nào chặn được giá trị sai thì phần Web đạt), DT-09 và DT-16 kiểm tra ô không hợp lệ và không có request nào gửi đi. DT-14 kiểm tra ô giá không giữ được `abc`.
+
+Commit: 74d4203 (dữ liệu và §3), a1a475d (AI-02 #45).
+
+### Tự review T3
+
+| # | Điểm | Bằng chứng |
+| --- | --- | --- |
+| P1, P2, P6 | 2 | Chỉ thay đổi §3 và `data/`; trước khi làm git sạch; mọi commit đã push |
+| P4 | 2 | 3 điểm mới đều ghi "(proposed)" |
+| 9 | 2 | Dữ liệu chỉ nằm trong file JSON, chưa có spec |
+| 10 | 2 | Có `source` cho từng dòng, 0 `<CONFIRM>` |
+| 11 | 2 | So id trước/sau, `{tag}` cho từng test/lần chạy/lần thử, tự dọn, server mới cho lần chạy chính thức |
+
+Gate: passed (3 quyết định dưới đây chỉ đổi cách đọc dữ liệu, không đổi kết quả mong đợi).
+
+### Cần bạn quyết định
+
+1. **Đọc giá trị đã lưu bằng API nào?**
+   - `GET /api/products/:id` trả giá dạng chuỗi khi id chẵn, nên cùng một TC sẽ pass hay fail tùy id database cấp ra.
+   - Phương án: (a) đọc từ `GET /api/products`; chỉ DT-03 dùng `/:id`, đúng như TC viết. (b) Dùng `/:id` cho mọi TC.
+   - **Đề xuất: (a).** Lỗi trả giá dạng chuỗi có thể báo riêng ở T7 nếu bạn muốn.
+2. **Thêm `{tag}` vào tên sản phẩm của HW02**
+   - Ví dụ `Ốp lưng iPhone 15 silicon {tag}`. Tên vẫn thuộc lớp EC-V3-1.
+   - Tên của BVA, DT-05, DT-10, DT-11 giữ nguyên vì các test này tìm sản phẩm theo id, và thêm tag sẽ làm đổi độ dài đang được kiểm tra.
+   - **Đề xuất: đồng ý.** Cách này giống việc FR-03/FR-08 dùng tài khoản mới cho mỗi test.
+3. **Phần Web của DT-17**
+   - Trên Admin web không thể chọn "không có danh mục".
+   - Đề xuất kiểm tra danh sách danh mục trong form đúng bằng `GET /api/categories`, dựa trên câu "phải chọn từ danh sách có sẵn" và A2. Phương án còn lại là chỉ ghi lại, không assert.
+   - **Đề xuất: kiểm tra.** Nếu chỉ ghi lại thì test không có assertion nào, và sẽ bị bắt lỗi "assertion yếu" ở T5.
+
+## 3. Log prompt
+
+Đã ghi **Prompt043 – Prompt048** và điền đủ Feature/step, Purpose, Used in (commit 7e8e739).
+- **Prompt043–044 là của phiên viết kịch bản video, không phải phiên này.** Tôi ghi chúng trước vì AI-02 #41 và #S10 đã dùng sẵn hai số này. Giờ của #41 cũng đã sửa theo transcript: gửi 00:25, nhận 00:29.
+- **Prompt045–048 là của phiên này.** Prompt048 (lượt hiện tại) được đánh dấu UNFINISHED, lần ghi log sau sẽ tự cập nhật.
+- AI-02 #42 đến #45 giờ đã trỏ đúng số Prompt.
+
+**Chưa ghi log:**
+- Phiên `5ca4a35d` có 2 prompt: "tại sao tôi ko thể đăng nhập Admin web" (01:14) và "reset lại db" (01:23). Phiên này chạy song song, ngoài phạm vi bạn yêu cầu, nên tôi chưa ghi.
+- Prompt042 (T8 của checkout, phiên khác) vẫn đang đánh dấu UNFINISHED.
+- Dòng AI-02 #S11 vẫn ghi "logged later" vì không thuộc phiên nào trong ba phiên vừa ghi log.
+
+Bạn có muốn ghi log luôn phiên `5ca4a35d` không?
+
+| Tiêu chí log | Điểm | Bằng chứng |
+| --- | --- | --- |
+| LOG-1, 2, 5 | 2 | Số thứ tự 043–048 liên tục, không trùng; đúng HW04, ngày 18/11 |
+| LOG-3, 4, 10 | 2 | Nội dung lấy nguyên văn qua script, giờ UTC+7, không đọc trực tiếp file `.jsonl` |
+| LOG-6 | 2 | Prompt048 có đánh dấu UNFINISHED |
+| LOG-7, 8, 11 | 2 | Không còn TODO, không cần ảnh chụp, đã commit |
+
+Gate: passed.
+
+**Commit (đã push):** 65743c4, 74d4203, a1a475d, 7e8e739.
+
+**Bước tiếp theo:** sau khi bạn trả lời 3 quyết định, gõ prompt `tiếp tục bước T4` để sinh spec data-driven cho `tests/product-crud/`.
 ```
 
 - **Used in:** `features/product-crud/automation_design.md` §2 (commit 65743c4), §3 + `data/product-crud/web.json`, `api.json` (commit 74d4203); `prompt_log.md`; AI-02 #45
+
+---
+
+## Prompt049 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 01:54 18/11/2026
+- **Output received:** 01:59 18/11/2026
+- **Feature / step:** product-crud (fC) FR-15 – T3 decisions, T4 Admin web spec
+- **Purpose:** Áp dụng 3 quyết định T3 và sinh spec Admin web data-driven (T4), chạy lần đầu trên Chromium
+- **Prompt (verbatim):**
+
+```text
+thực hiện theo các đề xuất của bạn
+tiếp tục bước T4
+```
+
+- **AI output (verbatim):**
+
+```text
+Áp dụng 3 quyết định vào §3 trước, sau đó sang T4. Xem cách FR-08 viết spec để giữ cùng khuôn:
+Bash Read checkout API spec and its §4
+Bash Confirm T3 decisions in §3, commit, check servers
+Write /home/hg/source/software-testing/week04/tests/product-crud/web.spec.ts
+Commit code sinh ra nguyên trạng, trước khi chạy lần nào:
+Bash Commit generated spec, run first time on Chromium
+Bash Show failed assertion details from results
+Lần chạy trước dùng `--reporter=list` nên không ra JSON. Chạy lại với reporter mặc định của config (list + html + json vào thư mục tạm):
+Bash Rerun on Chromium with JSON results, show failures
+Bash Probe whether fractional price is submitted
+Bash Copy first-run failure screenshots into feature folder
+Bash Get time and current §4 template
+Bash Write §4 with first run, commit and push
+Sửa tham chiếu prompt trong §4: lượt này không phải 01:45 (01:45 là lượt trước).
+Bash Fix prompt reference, add AI-02 row, commit and push
+**T4 (phần Web) cho `product-crud` (FR-15):** đã sinh `web.spec.ts` và chạy lần đầu trên Chromium: 15 passed, 13 failed. Code được commit đúng như lúc sinh ra, chưa sửa gì. 3 quyết định T3 đã ghi vào §3 trước đó (1bea8f6).
+
+## Spec Web
+
+[tests/product-crud/web.spec.ts](tests/product-crud/web.spec.ts) có 28 test, commit nguyên trạng ở 8be9fac:
+- **Đọc dữ liệu:** một vòng lặp đọc `web.json`, tên mỗi test bắt đầu bằng mã TC.
+- **Chuẩn bị:** trước mỗi test, đăng nhập Admin web, mở tab "Sản phẩm", và qua API ghi lại danh sách id cùng sản phẩm 1–5.
+- **Dọn dẹp:** sau mỗi test, xóa các sản phẩm test đó đã tạo. Sau lần chạy, DB vẫn là id 1–5.
+- **6 kiểu assertion** (đề yêu cầu ≥ 3): dữ liệu đã lưu đọc qua API, text hiển thị, trạng thái phần tử, assertion phủ định, so sánh danh sách, soft assertion. Status code và nội dung `alert` chỉ ghi vào báo cáo, không chấm.
+
+## Lần chạy đầu (Chromium, không phải lần chạy chính thức)
+
+Kết quả và ảnh chụp 13 test fail nằm ở §4 ([screenshots/first-run/](features/product-crud/screenshots/first-run/)).
+
+| Nhóm | Test |
+| --- | --- |
+| Passed (15) | DT-01…05, 09, 14, 17, BVA-01…04, 07…09 |
+| Fail, cùng lớp lỗi với HW02 (12) | DT-10, 11, 13, 15, 22, 23, 24 (chỉ phần sau khi sửa), 25, 26, 27, BVA-05, 06 |
+| Fail, cần xem lại (1) | DT-16 |
+
+Ở 12 test fail cùng lớp lỗi HW02, assertion giữ nguyên và việc phân loại để ở T7.
+
+**DT-16: phát hiện T2 của tôi bị sai.** Tôi đã chạy thêm một script kiểm tra trên cả 3 trình duyệt:
+- Ngay sau khi điền, `250000.5` bị đánh dấu không hợp lệ.
+- Khi điền sang ô khác, React ghi lại thuộc tính `value` của ô giá, nên ô giá thành hợp lệ.
+- Bấm "Lưu sản phẩm" thì form **gửi** `"price": "250000.5"`.
+
+Đây là lỗi oracle bắt nguồn từ quan sát ở T2, sẽ xử lý ở T5.
+
+## AI tự review
+
+| # | Điểm | Bằng chứng |
+| --- | --- | --- |
+| P1, P2, P3 | 2 | Quyết định T3 ở commit riêng 1bea8f6; T4 chỉ có spec và §4 |
+| P4 | 2 | Chưa đưa ra kết luận lỗi sản phẩm hay lỗi script |
+| P6 | 2 | 8be9fac (spec), 2461ea2 (§4 và ảnh chụp), 0bb2fb7 (AI-02 #46 và sửa tham chiếu prompt trong §4), đều đã push |
+| 12 | 2 | Một vòng lặp, tiêu đề test bắt đầu bằng mã TC |
+| 13 | 2 | 6 kiểu assertion, liệt kê trong bảng §4 |
+| 14 | 1 | Assertion web-first, không có `waitForTimeout`. Có `if` theo trường của dữ liệu và `switch` theo `flow`, không có `if` theo trạng thái trang |
+| 15 | 2 | Mỗi test tự tạo P và tự dọn, không phụ thuộc thứ tự chạy |
+| 16 | 2 | Commit 8be9fac là code nguyên bản, chưa sửa |
+
+Gate: passed (tiêu chí 14 có 1 điểm vì các `if` theo dữ liệu; để T5 xem lại).
+
+## Bước tiếp theo
+
+Gõ prompt `tiếp tục T4: sinh api.spec.ts`. Prompt đó sẽ sinh 13 test API, chạy lần đầu trên Chromium và bổ sung vào §4. Sau đó mới sang T5 để review cả hai spec, trong đó có DT-16.
+```
+
+- **Used in:** `features/product-crud/automation_design.md` §3 (commit 1bea8f6), `tests/product-crud/web.spec.ts` (commit 8be9fac), §4 + `screenshots/first-run/` (commit 2461ea2); AI-02 #45, #46
+
+---
+
+## Prompt050 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 02:00 18/11/2026
+- **Output received:** 02:01 18/11/2026
+- **Feature / step:** product-crud (fC) FR-15 – T4 API spec
+- **Purpose:** Sinh spec API data-driven (T4), chạy lần đầu trên Chromium
+- **Prompt (verbatim):**
+
+```text
+tiếp tục hòan thiện T4
+```
+
+- **AI output (verbatim):**
+
+```text
+Sinh `tests/product-crud/api.spec.ts` từ §1–§3 (`api.json`, 13 dòng), cùng khuôn với `web.spec.ts`:
+Write /home/hg/source/software-testing/week04/tests/product-crud/api.spec.ts
+Bash Commit API spec, run first time on Chromium
+Bash Add API spec to §4, commit and push
+Bash Get the API first-run start time
+Bash Fix run time, add AI-02 row #47, commit and push
+T4 cho `product-crud` (FR-15) đã xong: đã sinh và chạy thử spec API, kết hợp với spec Web ở prompt trước. Spec API chạy lần đầu trên Chromium được 2 passed, 11 failed; 11 test fail đều đúng các lớp lỗi đã báo ở HW02.
+
+## Spec API
+
+[tests/product-crud/api.spec.ts](tests/product-crud/api.spec.ts) có 13 test, đọc từ `api.json`. Code được commit đúng như lúc sinh ra (bd0006d).
+- **Trước mỗi test:** lấy token của admin và user, rồi ghi lại danh sách id cùng sản phẩm 1–5.
+- **Dữ liệu riêng:** test tự tạo sản phẩm P (DT-07, 08, 20, 21) và danh mục đã xóa C (DT-19).
+- **Dọn dẹp:** sau mỗi test, xóa các sản phẩm test đó đã tạo.
+- **Cách chấm:** dựa trên dữ liệu đã lưu, không dựa vào status code (theo HW02 Q1, status chỉ được ghi lại).
+
+## Lần chạy đầu (project Chromium, 02:00)
+
+| Kết quả | Test |
+| --- | --- |
+| Passed (2) | DT-20, DT-21: id không tồn tại, không có gì thay đổi (giống HW02) |
+| Failed (11) | DT-06 (không token), 07 (token giả), 08 (token user), 09, 12 (tên rỗng / thiếu), 14, 15, 16 (giá `abc` / thiếu / lẻ), 17, 18, 19 (danh mục thiếu / 9999 / đã xóa) |
+
+Mọi request đều trả 200, và mỗi test fail khớp một lỗi HW02: BUG-18 … 25 và BUG-29 … 31. Sau lần chạy, DB về lại sản phẩm id 1–5 và danh mục 1–3.
+
+## Tổng T4
+
+| Spec | Test | Passed | Failed |
+| --- | --- | --- | --- |
+| `web.spec.ts` | 28 | 15 | 13 |
+| `api.spec.ts` | 13 | 2 | 11 |
+| **Tổng** | **41 test (36 TC)** | **17** | **24** |
+
+Spec Web dùng 6 kiểu assertion: dữ liệu đã lưu đọc qua API, text hiển thị, trạng thái phần tử, assertion phủ định, so sánh danh sách, soft assertion. Spec API dùng 3 kiểu: dữ liệu đã lưu, so sánh danh sách, soft. Bảng chi tiết từng test nằm trong §4 của [automation_design.md](features/product-crud/automation_design.md).
+
+## AI tự review
+
+| # | Điểm | Bằng chứng |
+| --- | --- | --- |
+| P1, P2 | 2 | Chỉ có `api.spec.ts` và §4; trước khi làm git sạch |
+| P4 | 2 | Chưa đưa ra kết luận lỗi sản phẩm hay lỗi script (để T7) |
+| P6 | 2 | bd0006d (spec), 1b8de50 (§4), 4e1fd5b (AI-02 #47 và sửa giờ chạy), đều đã push |
+| 12 | 2 | Một vòng lặp, tiêu đề test bắt đầu bằng mã TC |
+| 13 | 2 | 6 kiểu assertion |
+| 14 | 1 | Không có `waitForTimeout`. Có `if` theo trường của dữ liệu, không có `if` theo trạng thái trang |
+| 15 | 2 | Mỗi test tự chuẩn bị và tự dọn |
+| 16 | 2 | Commit 8be9fac và bd0006d là code nguyên bản, chưa sửa |
+
+Gate: passed. Tiêu chí 14 bị 1 điểm do các `if` theo trường dữ liệu, sẽ xem lại ở T5.
+
+## Bước tiếp theo
+
+Gõ prompt `tiếp tục bước T5` (review và sửa). Tôi đã thấy trước 4 điểm cho T5:
+- **DT-16, Web:** oracle sai. Phát hiện ở T2 rằng trình duyệt chặn `250000.5` là sai, vì form thực ra có gửi giá trị này.
+- **DT-26:** chạy mất 25 giây, do 5 soft assertion mỗi cái chờ 5 giây.
+- **Các `if` theo dữ liệu:** chính là lý do tiêu chí 14 chỉ được 1 điểm.
+- **Kiểm tra độ ổn định:** chưa chạy `--repeat-each=3`.
+```
+
+- **Used in:** `tests/product-crud/api.spec.ts` (commit bd0006d), `features/product-crud/automation_design.md` §4 (commit 1b8de50); AI-02 #47
+
+---
+
+## Prompt051 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 02:03 18/11/2026
+- **Output received:** 02:12 18/11/2026
+- **Feature / step:** product-crud (fC) FR-15 – T5 review and fix
+- **Purpose:** Review script AI sinh theo 7 nhóm lỗi, sửa oracle DT-16 và cách chờ DT-17, chạy lại
+- **Prompt (verbatim):**
+
+```text
+tiếp tục thực hiện bước T5
+```
+
+- **AI output (verbatim):**
+
+```text
+Bắt đầu T5. Trước khi review, chạy cả hai spec trên Chromium với `--repeat-each=3` để xem test nào cho kết quả không ổn định:
+Bash Run both specs three times each on Chromium
+Bash Probe DT-17 option read with slow categories request
+Bash Fix DT-16 oracle in data and design, rerun DT-16
+DT-16 giờ fail đúng ở assertion sản phẩm: `250000.5` được lưu, cùng lớp lỗi BUG-30. Assertion này giữ nguyên, không sửa. Commit sửa #1:
+Bash Commit DT-16 oracle fix and push
+Sửa #2, DT-17: dùng assertion web-first, tự chờ cho tới khi các option khớp danh mục từ API.
+Edit /home/hg/source/software-testing/week04/tests/product-crud/web.spec.ts
+Bash Rerun DT-17 three times, commit fix and push
+Chạy lại toàn bộ hai spec trên Chromium sau khi sửa:
+Bash Rerun all product-crud specs on Chromium
+Kết quả sau khi sửa: 17 passed, 24 failed. Cả 24 test fail đều có oracle trích từ TC, sẽ phân loại ở T7. Viết §5:
+Bash Show current §5 template
+Bash Write §5 review table, commit and push
+Kiểm tra lại câu "không có dữ liệu viết cứng" vừa ghi trong §5:
+Bash Grep specs for hard-coded test data
+Không có dữ liệu viết cứng trong spec. Thêm dòng AI-02 cho T5:
+Bash Add AI-02 row #48, commit and push
+T5 cho `product-crud` (FR-15) đã xong: phát hiện và sửa 2 lỗi trong code AI sinh. Phần "vì sao AI bỏ sót" và loại nguyên nhân đang chờ bạn xác nhận.
+
+## Độ ổn định
+
+Chạy cả hai spec 3 lần trên Chromium (123 lượt test). Test nào cũng cho cùng kết quả ở cả 3 lần: 17 luôn pass, 24 luôn fail, không có test chập chờn. Sau mỗi lần chạy, DB về lại id 1–5.
+
+## Review theo 7 nhóm lỗi
+
+Toàn bộ nằm ở §5 của [automation_design.md](features/product-crud/automation_design.md).
+
+| # | Test | AI sai gì | Nhóm | Sửa (commit) | Loại nguyên nhân (đề xuất) |
+| --- | --- | --- | --- | --- | --- |
+| 1 | web › DT-16 | Phần Web mong trình duyệt chặn `250000.5`, nhưng Admin web gửi đi | Oracle sai | Dòng dữ liệu đổi thành "refused" đúng như TC; sửa luôn phát hiện T2 ở §2, §3 (2626e15) | Feature |
+| 2 | web › DT-17 | Đọc option danh mục một lần, không chờ | Chờ không ổn định | Đổi sang `toHaveText` web-first (a278a51) | Model |
+
+**Chi tiết #1:** ngay sau khi gõ, ô giá bị đánh dấu không hợp lệ. Nhưng khi điền sang ô khác, React ghi lại thuộc tính `value`, ô giá thành hợp lệ, và form được gửi. Sau khi sửa, DT-16 vẫn fail, nhưng fail đúng ở oracle của TC: sản phẩm giá lẻ được lưu (cùng lớp lỗi BUG-30).
+
+**Chi tiết #2:** khi tôi làm chậm `/api/categories` 1,5 giây, cách đọc cũ ra danh sách rỗng `[]`, còn cách mới chờ được và pass sau 1,8 giây. Sau khi sửa, DT-17 chạy 3 lần đều pass.
+
+5 nhóm còn lại không có lỗi, ghi riêng cho từng spec. Có một điểm ghi chú nhưng không sửa: DT-23 chỉ đếm số nhãn có dấu `*`, vì form không có nhãn nào để gắn với từng ô.
+
+**Sau khi sửa:** chạy lại được 17 passed, 24 failed. Không assertion nào bị nới lỏng; cả 24 test fail đều có oracle trích từ TC, sẽ phân loại ở T7.
+
+## AI tự review
+
+| # | Điểm | Bằng chứng |
+| --- | --- | --- |
+| P1, P2, P6 | 2 | Chỉ có sửa và §5; mỗi sửa một commit; AI-02 #48 (2bc86a5); đều đã push |
+| P4 | 1 | "Vì sao AI bỏ sót" và loại nguyên nhân mới là đề xuất |
+| 17 | 2 | §5 có 2 dòng sửa, cộng bảng "không có lỗi" theo từng spec, từng nhóm |
+| 18 | 2 | Mỗi dòng sửa đủ: test, sai gì, nhóm, commit, lý do, loại nguyên nhân |
+| 19 | 1 | Lý do ghi "(proposed)", chờ bạn |
+| 20 | 2 | Không assertion nào bị nới lỏng; DT-16 đổi oracle có trích TC ("refused … no new product") |
+| 21 | 2 | `--repeat-each=3`: cùng kết quả cả 3 lần; DT-17 sau khi sửa: 3/3 pass |
+
+Gate: blocked by P4/19 (chờ bạn xác nhận lý do AI bỏ sót).
+
+## Cần bạn quyết định
+
+1. **Lý do AI bỏ sót ở #1 (DT-16)**
+   - Đề xuất: khi khảo sát ở T2, tôi đọc trạng thái ô giá ngay sau khi gõ, chưa điền ô khác, nên chưa thấy React vẽ lại. T3 và T4 sau đó dựng oracle theo phát hiện này, thay vì theo TC.
+   - Phần "vì sao AI bỏ sót" là của bạn: bạn xác nhận, sửa câu chữ, hoặc đổi loại nguyên nhân.
+   - Các loại: Feature (chỉ thấy khi app chạy), Model, hoặc Prompt.
+   - Đề xuất: **Feature**.
+2. **Lý do AI bỏ sót ở #2 (DT-17)**
+   - Đề xuất: model hay đọc giá trị rồi mới so sánh, thay vì dùng assertion web-first. Prompt cũng không nói danh sách danh mục được nạp lúc nào.
+   - Cũng do bạn xác nhận.
+   - Phương án: Model, hoặc Prompt nếu bạn cho rằng prompt lẽ ra phải nêu thứ tự nạp.
+   - Đề xuất: **Model**.
+
+**Commit (đã push):** 2626e15, a278a51 (sửa spec), a5ee3cd (§5), 2bc86a5 (AI-02). Đến giờ có 3 commit đổi `.spec.ts` cho FR-15 (8be9fac, bd0006d, a278a51).
+
+**Bước tiếp theo:** trả lời 2 quyết định trên, rồi gõ prompt `tiếp tục bước T6`. Theo PLAN, lần chạy 3 trình duyệt của FR-15 cũng là lần chạy chính thức quay trong video 2 (C8). Bạn cho tôi biết muốn chạy ngay hay để tới lúc quay.
+```
+
+- **Used in:** `data/product-crud/web.json` + §2, §3 (commit 2626e15), `tests/product-crud/web.spec.ts` (commit a278a51), §5 (commit a5ee3cd); AI-02 #48
+
+---
+
+## Prompt052 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 02:14 18/11/2026
+- **Output received:** 02:21 18/11/2026
+- **Feature / step:** product-crud (fC) FR-15 – T5 confirmation, T6 multi-browser run
+- **Purpose:** Ghi xác nhận lý do AI bỏ sót và chạy 3 trình duyệt (T6, không phải bộ chính thức)
+- **Prompt (verbatim):**
+
+```text
+thực hiện bổ sung theo các đề xuất của bạn, tôi ko có ý kiến
+tiếp tục bước T6
+```
+
+- **AI output (verbatim):**
+
+```text
+Ghi lý do AI bỏ sót và loại nguyên nhân bạn đã đồng ý vào §5 trước. Sau đó xem lại PLAN và kịch bản quay để biết lần chạy T6 này có phải lần chạy chính thức không:
+Bash Confirm §5 causes; read video plan for T6 run
+Bash Check run-browsers port handling and gitignore
+Bash Stop the running SUT server group, check ports
+Bash Verify seed data is clean before the run
+Bash Run product-crud on three browsers with reuse
+Bash Summarize runs, compare browsers, check report titles
+Bash Read rendered report titles of three reports
+Tiêu đề cả 3 báo cáo đều có `Run by: 23120046` và timestamp ISO. Ghi §6, chỉ commit file design. Báo cáo để chưa commit vì lần chạy chính thức (C8) sẽ ghi đè:
+Bash Show §6 template and checkout §6 example
+Bash Write §6 run record, commit and push
+Cập nhật AI-02: ghi xác nhận của bạn vào dòng #48 và thêm dòng #49 cho T6.
+Bash Update AI-02 rows #48, #49, commit and push
+T6 đã xong: FR-15 chạy trên 3 trình duyệt, mỗi trình duyệt 17 passed, 24 failed, 0 flaky, và không test nào cho kết quả khác nhau giữa các trình duyệt. Lần chạy này **không phải bộ chính thức**: theo PLAN C8, lần chạy chính thức của FR-15 là lần quay trong video 2, nên báo cáo lần này chưa commit.
+
+Lý do và loại nguyên nhân ở §5 đã ghi theo đề xuất bạn đồng ý: #1 Feature, #2 Model (a33e6bb).
+
+## Kết quả chạy
+
+Lệnh: `npm run feature -- product-crud --reuse`, lúc 02:15–02:20.
+
+| Trình duyệt | Bắt đầu (ISO) | Số test | Passed | Failed | Flaky |
+| --- | --- | --- | --- | --- | --- |
+| Chromium | 2026-11-17T19:15:21Z | 41 | 17 | 24 | 0 |
+| Firefox | 2026-11-17T19:16:40Z | 41 | 17 | 24 | 0 |
+| WebKit | 2026-11-17T19:18:38Z | 41 | 17 | 24 | 0 |
+
+- **Theo TC** (36 TC, đếm bằng script tổng hợp): 17 TC pass và 19 TC fail trên cả 3 trình duyệt.
+- **Tiêu đề báo cáo:** tôi đọc phần đầu trang của cả 3 báo cáo bằng trình duyệt headless, đều có dạng `HW04 · FR-15 Product CRUD (admin) · <browser> · Run by: 23120046 · <ISO>`.
+- **Ảnh chụp:** mỗi trình duyệt 13 ảnh, nằm ở `reports/product-crud/<browser>/screenshots/<TC>.png`. 11 test API không mở trang nên không có ảnh.
+
+**Vì sao chạy với `--reuse`:** `npm run sut` của bạn vẫn đang giữ các cổng, và tôi không được phép dừng nó. Vì vậy lần chạy dùng luôn server đang chạy thay vì khởi động EShop mới. Trước khi chạy, dữ liệu khớp seed (sản phẩm id 1–5, danh mục 1–3); sau khi chạy vẫn là id 1–5. Lúc đó có một Playwright UI mode đang mở nhưng đang rảnh, không chạy test nào.
+
+Chi tiết nằm ở §6 của [automation_design.md](features/product-crud/automation_design.md) (adf7d2f). Dòng AI-02 #49 ở commit 20f7ccb.
+
+## AI tự review
+
+| # | Điểm | Bằng chứng |
+| --- | --- | --- |
+| P1, P2, P3, P6 | 2 | Xác nhận §5 ở commit riêng a33e6bb; T6 chỉ thay đổi §6; AI-02 #48, #49; tất cả đã push |
+| 22 | 2 | Mỗi trình duyệt có 1 `index.html` và 1 `results.json` |
+| 23 | 2 | Cả 3 tiêu đề có `Run by: 23120046` và thời gian ISO |
+| 24 | 1 | Spec đã cố định ở a278a51 và `--reuse` có ghi lý do; nhưng chưa có bộ chính thức (để C8) và báo cáo chưa commit |
+| 25 | 2 | `retries: 0`, 0 flaky |
+
+Gate: passed cho lần chạy T6. Tiêu chí 24 chỉ đạt 2 khi có lần chạy chính thức C8.
+
+## Cần bạn quyết định
+
+1. **Có chuyển lần chạy chính thức của FR-15 sang bây giờ không?**
+   - PLAN C8 và kịch bản cảnh 2.4 quy định lần chạy chính thức diễn ra trong video 2, để báo cáo trong video và báo cáo nộp là một.
+   - Đây là kế hoạch quay của bạn, nên bạn quyết.
+   - (a) Giữ như PLAN. Ở buổi quay 2, Ctrl+C `npm run sut`, rồi chạy `npm run feature -- product-crud` với server mới, và commit `reports/product-crud/` ngay sau đó.
+   - (b) Commit luôn bộ vừa chạy làm bộ chính thức. Khi đó video 2 sẽ chiếu một lần chạy khác với báo cáo nộp.
+   - **Đề xuất: (a).**
+
+## Bước tiếp theo
+
+Gõ prompt `tiếp tục bước T7`. Cảnh 1.10 cần mở trace viewer, mà lần chạy T6 không giữ trace. Vì vậy ở T7 tôi sẽ chạy một lần phát triển (có trace) cho một test fail, để bạn mở bằng `npm run trace`.
+```
+
+- **Used in:** `features/product-crud/automation_design.md` §5 (commit a33e6bb), §6 (commit adf7d2f); AI-02 #48, #49
+
+---
+
+## Prompt053 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 02:23 18/11/2026
+- **Output received:** 02:26 18/11/2026
+- **Feature / step:** product-crud (fC) FR-15 – T7 failure triage
+- **Purpose:** Phân loại 24 test fail, lấy trace DT-24 cho video, sửa cách đếm theo TC của summarize-results.mjs
+- **Prompt (verbatim):**
+
+```text
+tiếp tục thực hiện bước T7
+```
+
+- **AI output (verbatim):**
+
+````text
+Bắt đầu T7. Đối chiếu từng test fail với bug report HW02: mỗi BUG thuộc TC nào và issue nhóm số mấy.
+Bash Map HW02 BUG-18–39 to titles and issues
+Số BUG khớp số issue nhóm (#18–#39). Đọc chi tiết BUG-34 và BUG-35 vì lần này hành vi khác với HW02:
+Bash Read HW02 BUG-34 and BUG-35 details
+Bash Development run of DT-24 with trace on Chromium
+Trace đã có. Viết §8, bảng phân loại 24 test fail. Mọi kết luận đều ghi "(proposed)" để bạn xác nhận:
+Bash Show §8 template
+Bash Write §8 triage table, commit and push
+Bash Inspect per-TC counting in summarize script
+Bash Read per-TC aggregation code
+Bash Save summary before fix; locate skill script
+Edit /home/hg/source/software-testing/week04/skills/test-automation/scripts/summarize-results.mjs
+Edit /home/hg/source/software-testing/week04/skills/test-automation/scripts/summarize-results.mjs
+Bash Compare summary before and after the fix
+Sau khi sửa, FR-03 và FR-08 giữ nguyên số đếm. Chỉ FR-15 thay đổi: 14 TC passed, 22 failed, khớp §8. Commit sửa skill riêng, rồi sửa câu sai ở §6:
+Bash Commit skill fix, correct §6 counts, commit
+Thêm 2 dòng AI-02: #S12 cho phần sửa skill, #50 cho T7.
+Bash Add AI-02 rows #S12 and #50, commit and push
+Bash Fix count in AI-02 row #50, commit and push
+T7 cho FR-15 đã xong: 24 test fail tương ứng 22 TC, và tôi đề xuất cả 22 là lỗi sản phẩm, đều đã có issue từ HW02. Trong lúc đếm, tôi phát hiện và sửa một lỗi trong script tổng hợp của skill.
+
+## Phân loại test fail
+
+Bảng đầy đủ nằm ở §8 của [automation_design.md](features/product-crud/automation_design.md) (4caf096). Mỗi TC đều có đủ 3 bằng chứng cho kết luận "lỗi sản phẩm":
+- **Oracle lấy từ TC/SRS** (cột `source`), không lấy từ app.
+- **Lặp lại được:** cùng kết quả 3/3 lần ở T5 và trên cả 3 trình duyệt ở T6.
+- **Thấy được hành vi sai:** dữ liệu đã lưu đọc qua `GET /api/products`, hoặc ảnh chụp của test Web.
+
+Không test nào fail do lỗi script hay lỗi môi trường.
+
+| Nhóm | TC | Issue HW02 |
+| --- | --- | --- |
+| Quyền truy cập (API) | DT-06, 07, 08 | #18, #19, #20 |
+| Kiểm tra đầu vào khi thêm | DT-09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, BVA-05, 06 | #21–#31, #38, #39 |
+| Sửa với giá âm | DT-22 | #32 |
+| Form và danh sách | DT-23, 24, 25, 26, 27 | #33–#37 |
+
+Tất cả đều là lỗi đã báo ở HW02 (#18–#39), nên **không tạo issue mới**, chỉ bình luận thêm bằng chứng HW04 vào issue cũ. Có những chỗ khác HW02 cần nói rõ trong bình luận:
+- **#34 khác HW02:** lần này danh sách chỉ sai sau khi **sửa**; sau khi thêm thì đúng. Nhờ vậy DT-04, trước đây Not run vì #34, nay chạy được và pass.
+- **#35 khác HW02:** dòng mới nay có hiện giá (`250000 ₫`), chỉ thiếu dấu phân cách hàng nghìn, tức là cùng lỗi với #36.
+- **8 TC nay chạy trên Admin web thay vì API:** #26, 27, 28, 29, 30, 32, 38, 39. Riêng #29 có thêm phần Web mới (để trống ô giá thì lưu giá `""`).
+
+**Trace cho cảnh 1.10:** tôi đã chạy riêng DT-24 trên Chromium có giữ trace. Mở bằng lệnh:
+```
+npm run trace -- test-results/product-crud-t7/product-crud-web-FR-15-pro-450de-er-an-add-and-after-an-edit-chromium/trace.zip
+```
+
+## Lỗi trong script tổng hợp của skill
+
+Khi một TC có cả test Web và test API, script chỉ giữ kết quả của test chạy sau cùng. Vì vậy DT-09, 14, 17 (API fail, Web pass) bị đếm là passed. Đã sửa để script giữ kết quả xấu nhất (f74f237):
+- FR-15 đổi từ 17 passed / 19 failed thành **14 passed / 22 failed**, khớp với §8.
+- FR-03 và FR-08 không đổi.
+
+Câu ghi số liệu ở §6 đã sửa theo (dcc1ca2). AI-02 có thêm dòng #S12 (sửa skill) và #50 (T7). Commit c618e82 thêm hai dòng này; 3315c02 sửa con số "7 TC chạy trên Admin web" trong dòng #50 thành 8.
+
+## AI tự review
+
+| # | Điểm | Bằng chứng |
+| --- | --- | --- |
+| P1 | 1 | Ngoài §8 còn sửa script của skill và §6. Hai việc này nằm ở commit riêng, có dòng AI-02 riêng |
+| P4 | 2 | Mọi kết luận ghi "(proposed)" |
+| P6 | 2 | 4caf096, f74f237, dcc1ca2, c618e82, 3315c02, đều đã push |
+| T7: bằng chứng | 2 | Oracle trích TC, lặp lại được, có ảnh hoặc dữ liệu lưu |
+| T7: giữ assertion | 2 | Không assertion nào bị sửa để pass |
+
+Gate: blocked by P4 (chờ bạn xác nhận kết luận).
+
+## Cần bạn quyết định
+
+1. **Xác nhận kết luận "lỗi sản phẩm" cho 22 TC**
+   - Kết luận lỗi là việc của bạn, không phải của agent.
+   - Phương án: đồng ý cả 22, hoặc chỉ ra TC nào bạn cho là lỗi script hay lỗi môi trường.
+   - **Đề xuất: đồng ý cả 22.** Mọi TC đều có đủ 3 bằng chứng nêu trên.
+2. **Có báo lỗi `GET /api/products/:id` trả giá dạng chuỗi khi id chẵn không?**
+   - Lỗi này nằm ở [server.js:162](eshop-sut/backend/server.js#L162). Không TC nào trong HW02 kiểm tra kiểu dữ liệu của giá, và chưa có issue nào báo lỗi này.
+   - Báo lỗi ngoài TC là quyết định của bạn.
+   - Phương án: (a) tạo issue mới có nhãn `hw: HW04` theo CLAUDE.md; (b) chỉ ghi lại trong report.
+   - **Đề xuất: (b).** Lỗi không đến từ test fail nào, và issue HW04 nên gắn với script đã chạy.
+
+## Bước tiếp theo
+
+Sau khi bạn trả lời, gõ prompt `/automation-bug-reporting báo các lỗi sản phẩm của FR-15` để bình luận bằng chứng HW04 vào 22 issue. Ảnh chụp sẽ lấy từ lần chạy chính thức C8, hoặc từ lần chạy T6 nếu bạn muốn bình luận ngay bây giờ.
+````
+
+- **Used in:** `features/product-crud/automation_design.md` §8 (commit 4caf096), §6 (commit dcc1ca2); `skills/test-automation/scripts/summarize-results.mjs` (commit f74f237); AI-02 #50, #S12
+
+---
+
+## Prompt054 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 02:29 18/11/2026
+- **Output received:** 02:34 18/11/2026
+- **Feature / step:** product-crud (fC) FR-15 – bug reports (automation-bug-reporting)
+- **Purpose:** Viết BUG-18 … BUG-39 và soạn bình luận cho các issue HW02 #18 … #39 (chưa gửi)
+- **Prompt (verbatim):**
+
+```text
+dùng skill /automation-bug-reporting báo cáo các bug của feature C
+```
+
+- **AI output (verbatim):**
+
+````text
+Skill
+Bash Read week04 bug report structure and screenshots
+Xem một mục chi tiết của FR-08 (BUG dạng Confirmed) và nội dung bình luận đã gửi, để làm theo đúng khuôn:
+Bash Read FR-08 confirmed bug block and posted comment
+Lấy nguyên văn một bình luận HW04 đã gửi (#13) để làm theo đúng khuôn:
+Bash Check gh account and read an existing HW04 comment
+Bash Find test ids in the Chromium report
+Bash Capture one report-entry screenshot as a test
+Read /home/hg/source/software-testing/week04/bugs/screenshots/product-crud_DT-06-api_report_chromium.png
+Ảnh mục báo cáo đọc rõ. Tạo ảnh cho cả 24 test fail, và chép 13 ảnh chụp lúc fail của test Web từ lần chạy T6:
+Bash Capture all report entries and copy failure screenshots
+Kiểm tra ảnh lúc fail của DT-24 (#34, hành vi khác HW02) có thật sự cho thấy lỗi không:
+Read /home/hg/source/software-testing/week04/bugs/screenshots/product-crud_DT-24_chromium.png
+Ảnh cho thấy rõ lỗi: cả 5 dòng seed đều mang tên vừa sửa. Lấy severity/priority của 22 issue HW02 (với issue đã có, skill lấy nguyên giá trị cũ):
+Bash Extract HW02 FR-15 bug severities and titles
+Theo skill, phải đối chiếu với tracker thật trước khi viết. Liệt kê các issue FR-15 trên repo nhóm và kiểm tra #18–#39 còn mở, chưa có bình luận HW04 nào:
+Bash List FR-15 issues and check HW04 comments
+Bash Search tracker for other candidate issues
+Bash Locate insertion points in the bug report
+Bash Write BUG-18–39 entries and draft comments
+Bản nháp bình luận có hai chỗ diễn đạt chưa gọn: "– –" khi TC không có dữ liệu test riêng, và "expected Every…". Sửa trong các bản nháp:
+Bash Tidy the drafted comment wording
+Bash Fix comment wording; link §8 to the bug report
+Bash Commit bug entries and screenshots, push
+Gộp 22 bản nháp vào một file để bạn đọc trước khi gửi, rồi thêm dòng AI-02:
+Bash Merge drafts for review, add AI-02 row #51
+Bash Read bug-reporting rubric criteria
+Đã viết xong 22 mục BUG-18 … BUG-39 vào bug report HW04 và soạn 22 bình luận cho các issue #18 … #39 trên repo nhóm. **Chưa gửi bình luận nào**: cần bạn đọc và đồng ý trước.
+
+Vì bạn yêu cầu báo bug, tôi coi như bạn đã xác nhận cả 22 kết luận "lỗi sản phẩm" ở §8. Lỗi `GET /api/products/:id` trả giá dạng chuỗi theo phương án (b): không tạo issue.
+
+## Các mục bug
+
+Tất cả nằm trong [bugs/BUG_REPORT.md](bugs/BUG_REPORT.md) (commit e6f5d34). Số BUG trùng số issue nhóm.
+
+| Bug | TC | Kết quả đối chiếu |
+| --- | --- | --- |
+| BUG-18, 19, 20 | DT-06, 07, 08 (API: không token, token giả, token user) | Confirmed #18, #19, #20 |
+| BUG-21, 22, 23, 24, 25 | DT-12, 14, 17, 18, 09 (API) | Confirmed #21 … #25 |
+| BUG-26, 27, 28 | DT-10, 11, 13 (Admin web) | Confirmed #26, #27, #28; HW02 làm qua API, HW04 làm trên Admin web |
+| BUG-29, 30 | DT-15, 16 (Web và API) | Confirmed #29, #30; HW04 thấy thêm lỗi ở phần Web |
+| BUG-31, 32, 33 | DT-19, 22, 23 | Confirmed #31, #32, #33 |
+| **BUG-34** | DT-24 | **Changed #34**: danh sách chỉ sai sau khi **sửa**, sau khi thêm thì đúng; DT-04 nay chạy được |
+| **BUG-35** | DT-25 | **Changed #35**: nay có hiện giá, chỉ thiếu dấu phân cách hàng nghìn |
+| BUG-36, 37, 38, 39 | DT-26, 27, BVA-05, 06 | Confirmed #36 … #39 |
+
+Mỗi mục gồm:
+- Câu SRS trích nguyên văn kèm số dòng.
+- Các bước tái hiện viết bằng lời, không cần đọc code Playwright.
+- Giá trị thật mà assertion nhận được.
+- Severity/priority lấy từ issue HW02.
+
+**Ảnh:** 37 ảnh Chromium trong `bugs/screenshots/product-crud_*`, gồm 13 ảnh chụp lúc fail và 24 ảnh mục test trong báo cáo HTML. Tôi đã xem ảnh DT-24: cả 5 dòng sản phẩm gốc đều mang tên vừa sửa.
+
+**Liên kết ngược:** cột Bug/issue ở §8 đã trỏ tới từng BUG-NN.
+
+## Bản nháp bình luận
+
+Cả 22 bản nằm trong một file để bạn đọc:
+`/tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/comments/ALL_drafts.md`
+
+Mẫu bản Changed (#34):
+
+```markdown
+**HW04 – automated re-test** (Changed)
+
+- **Script:** `web.spec.ts` › DT-24
+- **Browsers:** Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1)
+- **Expected:** Every row shows the name of its own product, as `GET /api/products` (HW02 A12, Q8)
+- **Received:** After the add: the list equals `GET /api/products` (passed). After the edit: … all 6 rows show `Ốp lưng iPhone 15 silicon xanh <tag>` with their own prices, while `GET /api/products` has the real names. A reload shows the right names again
+- **Report:** `reports/product-crud/<browser>/index.html` – runs 2026-11-17T19:15:21.038Z (Chromium), …; specs at `a278a51`
+- **Difference from this issue:** HW02 reported it after an add; HW04 sees the list right after an add and wrong only after an edit. HW02 DT-04 (`Not run`, …) now runs and passes
+- **Screenshot:** <2 ảnh>
+
+Reporter: HỒ THÙY HƯƠNG – 23120046
+```
+
+## Cần bạn xác nhận
+
+1. **Kết quả đối chiếu với tracker**
+   - Tôi đã tìm trên repo nhóm bằng `gh issue list --search "FR-15 in:title"` và `"FR-22 in:title"`, cùng `"FR-21 in:title"` (không ra kết quả). Đã nhận 22 issue #18 … #39 của bạn: đều đang mở và chưa có bình luận HW04 nào.
+   - Đã loại #7 và #9: tuy cùng FR-22, chúng thuộc FR-03 (ô email và cách hiện lỗi ở Bước 1), khác màn hình và khác câu SRS.
+   - **Đề xuất:** 20 Confirmed, 2 Changed như bảng trên, không tạo issue mới.
+2. **Bằng chứng lấy từ lần chạy T6, không phải lần chạy chính thức**
+   - Kịch bản quay cảnh 1.10 bình luận ngay trong video 1, nên bình luận đang trỏ tới lần chạy T6 (19:15Z), mà báo cáo của lần này sẽ bị C8 ghi đè.
+   - Phương án: (a) gửi ngay; sau C8, cập nhật mục "Report" trong bug report thành lần chạy chính thức, bình luận không cần sửa vì đã đính kèm ảnh. (b) Chờ C8 rồi mới gửi, kèm ảnh của lần chạy chính thức.
+   - **Đề xuất: (a)**, đúng theo kịch bản quay.
+3. **Gửi bình luận?**
+   - Bình luận công khai và mang tên tài khoản của bạn, nên bạn phải đồng ý trước.
+   - Cách gửi: chạy `upload_attachments.js` để đưa 37 ảnh lên. Script mở một cửa sổ Chrome, bạn đăng nhập GitHub một lần, script thả ảnh vào ô bình luận để lấy link ảnh nhưng **không đăng gì**. Sau đó tôi gửi 22 bình luận bằng `gh issue comment` (tài khoản `thhuon`), rồi xóa profile trình duyệt và file tạm.
+   - **Đề xuất:** đồng ý gửi, sau khi bạn đọc file bản nháp.
+
+## AI tự review
+
+| # | Điểm | Bằng chứng |
+| --- | --- | --- |
+| P1 | 2 | Chỉ thay đổi bug report, ảnh và cột liên kết ở §8 |
+| P2 | 2 | Trước khi làm, git sạch |
+| P4 | 2 | Chưa gửi gì; kết luận lấy từ yêu cầu của bạn |
+| P6 | 2 | e6f5d34, c3b04a3 (AI-02 #51), đều đã push |
+| 1 | 2 | Oracle trích TC, lặp lại 3 × 3 và trên 3 trình duyệt |
+| 2 | 2 | Câu lệnh `gh` và ứng viên bị loại (#7, #9) nêu ở mục 1 phía trên |
+| 3 | 2 | Cùng câu SRS và cùng hành vi sai → Confirmed; hành vi khác (#34, #35) → Changed |
+| 4, 5, 6 | 2 | Câu SRS kèm `file:line`; Actual là giá trị nhận được và ảnh; các bước viết bằng lời |
+| 7, 8 | 2 | Ảnh `product-crud_<TC>_chromium.png`; có liên kết ở §8 và bảng tổng quan |
+| 9 | 2 | Severity/priority lấy từ issue cũ |
+| 10, 12, 13 | 0 | Chưa gửi, đang chờ bạn đồng ý |
+| 11 | N/A | Không tạo issue mới |
+| 14 | 1 | Bản nháp đang ở scratchpad, sẽ xóa sau khi gửi |
+
+Gate: blocked by 10 (chờ bạn đồng ý gửi).
+
+## Commit và bước tiếp theo
+
+Đã commit và push: e6f5d34 (bug report, ảnh, §8) và c3b04a3 (AI-02).
+
+**Bước tiếp theo:** đọc file bản nháp, rồi trả lời "gửi" (có thể kèm chỗ cần sửa). Tôi sẽ đưa ảnh lên, gửi 22 bình luận, ghi link từng bình luận vào bug report và §8, rồi commit `docs (bugs): link BUG-18 … BUG-39 to the comments on #18 … #39`.
+````
+
+- **Used in:** `bugs/BUG_REPORT.md`, `bugs/screenshots/product-crud_*`, §8 (commit e6f5d34); AI-02 #51
+
+---
+
+## Prompt055 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 02:43 18/11/2026
+- **Output received:** 02:43 18/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Feature / step:** product-crud (fC) FR-15 – push, prompt log
+- **Purpose:** Kiểm tra commit đã push lên remote và log các prompt chưa log của phiên
+- **Prompt (verbatim):**
+
+```text
+push các commit lên remote
+/logging-ai-prompts
+```
+
+- **AI output (verbatim):**
+
+```text
+Kiểm tra trạng thái so với remote trước, rồi ghi log prompt:
+Bash Check unpushed commits against remote
+Mọi commit đã có trên remote: `master` khớp `origin/master`, không có commit nào chưa push. Giờ ghi log prompt:
+Skill
+Bash Preview unlogged prompts of this session
+```
+
+- **Used in:** `prompt_log.md`; AI-02 #46 … #51, #S12 (thời gian)
 
 ---
