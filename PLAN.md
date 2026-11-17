@@ -72,7 +72,11 @@ Mỗi bước 1 prompt + 1 commit, SV review trước khi qua bước sau:
 - [ ] **D2. `AI_Critique.md`** – 200–300 từ (đề §10).
 - [ ] **D3. Biểu mẫu AI** – `prompt_log.md` (skill logging-ai-prompts), tổng AI-02 §4–§6, AI-03, AI-05.
 - [ ] **D4. `README.md`** – bảng tự đánh giá + test summary: số feature; số TC tự động hóa / đã chạy / passed / failed; số lần chạy trình duyệt; số bug; link 2 video.
-- [ ] **D5. Nộp** – `git_log.txt`, PDF (report, AI Critique, AI-02), zip `23120046_HW04_AI_Automation_<XXX>.zip` → Moodle.
+- [ ] **D5. Dọn trước khi nộp** (SV yêu cầu 17/11) – xóa khỏi repo và khỏi bản nộp:
+  - các bản tiếng Việt của skill: `skills/**/SKILL.vi.md`, `skills/**/review-rubric.vi.md`, `skills/review-rubric-shared.vi.md`;
+  - tài liệu học: đề bài `HW04_Automation_Testing_Original.md`, `HW04_Automation_Testing_Vietnamese.md`, `HW04_Automation_Testing_Vietnamese.pdf`;
+  - sửa các chỗ còn nhắc tới chúng: `README.md` §3, `skills/README.md` ("Vietnamese reading copies"), `CLAUDE.md` mục Assignment; kiểm tra lại bằng `git ls-files | grep -i -E "\.vi\.md|HW04_Automation_Testing"` (không còn dòng nào).
+- [ ] **D6. Nộp** – `git_log.txt`, PDF (report, AI Critique, AI-02), zip `23120046_HW04_AI_Automation_<XXX>.zip` → Moodle.
 
 ## 2. Bố cục thư mục
 
