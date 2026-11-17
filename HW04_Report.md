@@ -73,7 +73,7 @@ After the fixes: 5 passed, 28 failed (DT-05 now fails on BUG-01), run time 5.4 �
 | Firefox | [reports/forgot-password/firefox](reports/forgot-password/firefox/index.html) | 33 | 5 | 28 | 0 |
 | WebKit | [reports/forgot-password/webkit](reports/forgot-password/webkit/index.html) | 33 | 5 | 28 | 0 |
 
-The same tests pass (DT-07, 08, 09, 17, 32) and fail on every browser ([design §6](features/forgot-password/automation_design.md#6-runs-t6)). Bugs behind the failures: after T7.
+The same tests pass (DT-07, 08, 09, 17, 32) and fail on every browser ([design §6](features/forgot-password/automation_design.md#6-runs-t6)). These are the second official runs (17/11 20:08–20:20); the first set showed one environment error, `ECONNRESET` on an API call in DT-12 on Firefox (1 of 3 on rerun, never on Chromium or WebKit, likely a keep-alive connection closed by the server after the 5 s soft wait). It does not change any verdict; the student accepted it as a risk and the runs were repeated without it. The official runs keep a screenshot of every failed Web test (`reports/forgot-password/<browser>/screenshots/<TC ID>.png`) and no traces (not asked by the brief; the reports went from 10–25 MB to 3–6 MB per browser). Bugs behind the failures: after T7.
 
 ## 4. Feature B – FR-08 Thanh toán
 
