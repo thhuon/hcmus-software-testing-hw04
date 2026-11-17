@@ -183,8 +183,38 @@ Page object additions made with the spec: `emailLabel` (for the `*` check) and `
 
 ## 5. Review of the AI-generated scripts (T5)
 
+**First run on Chromium** (development run, 17/11 ≈ 19:30, servers already running, report in a private folder because another session shares `playwright-report/`): `npx playwright test tests/forgot-password --project=chromium` → 33 tests, **6 passed, 27 failed** (5.4 min). The 6 passing tests (DT-05, 07, 08, 09, 17, 32) passed 18/18 with `--repeat-each=3`.
+
+Why each test failed (proposed verdicts for T7; the dialog text is recorded as an annotation, not judged):
+
+| Failing check | Tests | Seen | Proposed verdict |
+| --- | --- | --- | --- |
+| FR-22 error above the submit button | DT-06, 11 … 15, 20 … 26, 35, BVA-01 … 03 (17) | no element in the page; the message comes in a dialog, e.g. "Mật khẩu quá yếu! …" | product defect, HW02 BUG-09 (#9) |
+| New password does not log in (A5) | DT-04, 06, BVA-04, 05 | dialog "Mật khẩu quá yếu! …" for a valid password | product defect, HW02 BUG-01 (#1) |
+| Old password no longer logs in (A6) | DT-35 | dialog "Đổi mật khẩu thành công!": the Web accepts `NewPass 2026` (space, no allowed special character) and changes the password | product defect, **new** (DT-35, HW04) |
+| Confirm field: fill waits for the 30 s test timeout | DT-01 (soft check too), 28, 29, 30 | field missing | product defect, HW02 BUG-04 (#4) |
+| OTP `^\d{6}$` | DT-01, DT-02 | `6022`, `3693` (4 digits) | product defect, HW02 BUG-03 (#3) |
+| Step indicator "Bước 1 / 2", "Bước 2 / 2" | DT-01, DT-03 | element not found | product defect, HW02 BUG-06 (#6) |
+| `*` on the email label | DT-01 | "Nhập Email của bạn" | product defect, HW02 BUG-07 (#7) |
+| "Quay lại đăng nhập": click waits for the test timeout | DT-03 | button missing | product defect, HW02 BUG-11 (#11) |
+| API reset without `newPassword` rejected | DT-27 | `200` "Password reset successfully" | product defect, HW02 BUG-08 (#8) |
+
+Review of the generated specs (all seven categories, both specs). Findings 1–3 are not fixed yet: the fixes wait for the student's decision.
+
 | # | Spec › test | What the AI got wrong or missed | Category | Fix (commit) | Why the AI missed it | Cause type |
 | --- | --- | --- | --- | --- | --- | --- |
+| 1 | `web.spec.ts` › DT-05 | **False pass.** The Web refused the reset (dialog "Mật khẩu quá yếu! …", BUG-01), but the test passed: with new = current password, "the new password logs in" is true whether or not the reset happened | weak assertion | (proposed) after a `success` row, send the same OTP to the API: if the Web reset was accepted the OTP is used up (SEC-07 "vô hiệu hóa sau khi dùng") → `4xx`; waiting for the student | (proposed) the same A5 login check was applied to every success row without asking whether it can tell the two outcomes apart for this row | Model (proposed) |
+| 2 | `web.spec.ts` › every `error` row (`expectErrorAboveSubmit`) | `[role="alert"]` is stricter than FR-22, which asks only that the message appears above the submit button; an inline message without `role="alert"` would fail although it meets FR-22 | wrong oracle | (proposed) any visible text in the form above the submit button that is not a label or the OTP message; or keep `role="alert"` and say so; waiting for the student | (proposed) the model added the accessible-error convention to the requirement | Model (proposed) |
+| 3 | `web.spec.ts` › DT-01, 28, 29, 30, DT-03 | No assertion before acting on an element the app may lack: `fill` / `click` waits for the 30 s test timeout and the report says "Test timeout", not which FR-03 element is missing | weak assertion | (proposed) `await expect(field, 'confirm field (FR-03)').toBeVisible()` before the fill (only when `fillConfirm`) and before the "Quay lại đăng nhập" click: fails in 5 s with the FR-03 name; waiting for the student | (proposed) the page object's action was trusted to fail clearly | Model (proposed) |
+
+No issue found:
+
+- **Flaky wait**: no `waitForTimeout`; logins use `expect.poll`. The `requestOnly` negatives (DT-07 … 09) right after the click were suspected of passing before the server answers; checked by running the same steps with a registered e-mail: the assertions failed 3/3 (the OTP was caught), so they do detect the wrong outcome. `--repeat-each=3` stable.
+- **Fragile selector**: role + name, label prefix, `[role="alert"]` (see 2); no XPath, `nth`, generated classes.
+- **Missing edge case**: all 33 automated rows of §1 run (30 Web + 3 API).
+- **Hidden dependency**: every test registers its own account; order does not matter.
+- **Hard-coded data**: inputs and expected values come from the data files; the spec holds only the account display name `FR03 <id>`.
+- `api.spec.ts`: no issue in any category; DT-17 and DT-32 pass, DT-27 fails on BUG-08.
 
 Categories: fragile selector · weak assertion · wrong oracle · missing edge case · flaky wait · hidden dependency · hard-coded data. Cause types: Prompt · Model · Feature.
 
