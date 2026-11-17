@@ -2683,3 +2683,161 @@ Sau đó là T5: review cả 2 spec với bạn. Ngoài lỗi `if` ở DT-03, c�
 - **Used in:** design §3 (commit 878527b), `page-objects/CartPage.ts` (commit 569a507), `tests/checkout/web.spec.ts` (commit e32f37b), design §4 (commit 264592b), `prompt_log.md` Prompt016–019 (commit eed1682); AI-02 Artifact #24
 
 ---
+
+## Prompt023 – Claude Code
+
+- **Prompt sent:** 20:09 17/11/2026
+- **Output received:** NO OUTPUT (interrupted?) (UNFINISHED – run the skill again after this turn to complete)
+- **Feature / step:** checkout (fB) FR-08 – T4 API spec, screenshots
+- **Purpose:** Gộp kết quả chạy tạm vào file chính ngay khi hết xung đột, bổ sung ảnh minh họa cho tài liệu feature B, hoàn tất T4 (SV ngắt lượt này, công việc làm tiếp ở prompt 20:22)
+- **Prompt (verbatim):**
+
+```text
+- sau khi ghi kết quả vào file tạm thì hãy bổ sung vào file chính ngay khi ko còn xung đột để tránh thiếu sót thông tin
+- bổ sung các ảnh minh họa vẫn còn thiếu cho tất cả các tài liệu liên quan đến mục feature B nếu cần có ảnh minh họa
+- tiếp tục hoàn thiện bước T4
+```
+
+- **AI output (verbatim):**
+
+```text
+
+```
+
+- **Used in:** công việc làm ở prompt 20:22 17/11/2026 (Prompt024)
+
+---
+
+## Prompt024 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 20:22 17/11/2026
+- **Output received:** 20:26 17/11/2026
+- **Feature / step:** checkout (fB) FR-08 – T4 API spec, screenshots
+- **Purpose:** Tiếp tục lượt bị ngắt 20:09: ảnh minh họa, spec API, lần chạy đầu, cập nhật báo cáo
+- **Prompt (verbatim):**
+
+```text
+tiếp tục
+```
+
+- **AI output (verbatim):**
+
+```text
+Đang kiểm tra phiên song song có đang chạy Playwright không, và các tài liệu của feature B đang thiếu ảnh ở đâu.
+Bash Check running test processes, report folder and the report's Feature B section
+Bash Read the report's Feature A section and screenshot conventions
+Bash Check FR-03 screenshot conventions and the temp run's failure images
+Bash Copy the first-run failure screenshots per TC into the feature folder
+Read /home/hg/source/software-testing/week04/features/checkout/screenshots/first-run/DT-01-chromium.png
+Read /home/hg/source/software-testing/week04/features/checkout/screenshots/first-run/BVA-02-chromium.png
+Bash Capture the DT-01 checkout page before and after typing into the total
+Read /home/hg/source/software-testing/week04/features/checkout/screenshots/DT-01-total-edited-chromium.png
+Ảnh rõ. Giờ gắn ảnh vào §2, §4 và chép report HTML của lần chạy tạm vào `playwright-report/` (không có phiên nào đang chạy nên không xung đột).
+Bash Merge the temp report locally, link screenshots in §2 and §4, commit
+Bash Read the existing parallel-sessions memory
+Edit /home/hg/.claude/projects/-home-hg-source-software-testing/memory/parallel-sessions-shared-logs.md
+Giờ sinh `tests/checkout/api.spec.ts` từ `api.json`.
+Write /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts
+Bash Commit the API spec and run it once on Chromium in a temp folder
+Bash Summarise API run, merge its report, screenshot both HTML reports
+Read /home/hg/source/software-testing/week04/features/checkout/screenshots/first-run/api-report-chromium.png
+Ghi kết quả API vào §4, gắn ảnh report.
+Bash Record the API spec in §4 with screenshots and commit
+Cập nhật báo cáo chính (HW04_Report §4) và PLAN cho feature B.
+Bash Fill HW04_Report §4.1–4.2 for Feature B
+Bash Mark B1–B4 in the plan and commit the report and plan
+Thêm dòng AI-02 cho lượt này, và log luôn prompt 19:59 (lượt đó đã xong).
+Bash Log the finished 19:59 prompt and show the new entry
+Bash Show the new Prompt022 header and its TODO lines
+Bash Fill Prompt022 fields, add AI-02 row, commit and push
+Bước T4 của checkout đã xong: có đủ 2 spec, cả hai đã chạy thử trên Chromium. Mình cũng đã bổ sung ảnh minh họa cho các tài liệu của feature B. Mọi thứ đã commit và push.
+
+## 1. Gộp kết quả từ thư mục tạm
+- Từ giờ, mỗi lần chạy thử đều ghi vào thư mục tạm. Chạy xong, nếu không còn phiên nào đang chạy Playwright, mình gộp ngay trong cùng lượt:
+  - kết quả vào file thiết kế (§4);
+  - ảnh lỗi vào `features/checkout/screenshots/`;
+  - report HTML vào một thư mục con của `playwright-report/checkout/`.
+- Lần này không có phiên nào đang chạy, nên cả 2 report (Web 20:02, API 20:24) đã nằm trong `playwright-report/checkout/`. Thư mục này git bỏ qua, vì chỉ là lần chạy thử.
+- Quy tắc này mình đã lưu vào bộ nhớ để các phiên sau làm giống vậy.
+
+## 2. Ảnh minh họa đã bổ sung
+
+| Tài liệu | Ảnh |
+| --- | --- |
+| Design §2 | Trang Thanh toán của giỏ DT-01, chụp trước và sau khi gõ `1000` vào ô tổng (dòng tổng đổi thành "1,000 ₫"). Ảnh cho BUG-15, BUG-16 và việc trang không có ô địa chỉ. Kèm link 2 ảnh của BUG-01 |
+| Design §4 | Ảnh lúc test kết thúc cho từng test Web bị fail (DT-01, BVA-01 … 04, DT-07), cùng ảnh trang tổng hợp report Web và API. Test API không có trang web nên dùng ảnh report thay |
+| `HW04_Report.md` §4.1–4.2 | Đã điền tóm tắt T1–T4 và link tới các ảnh trên |
+| `bugs/BUG_REPORT.md`, issue #116 | Đã có ảnh từ trước |
+
+Các ảnh này lấy từ lần chạy thử. Ảnh của lần chạy chính thức sẽ có ở T6, giống feature A.
+
+## 3. T4: [tests/checkout/api.spec.ts](tests/checkout/api.spec.ts)
+- 11 test, chạy bằng một vòng lặp qua `api.json`. Bản AI sinh được commit nguyên trạng (`500f111`).
+- Mã HTTP status chỉ ghi lại, không chấm (theo Q1). Oracle là đơn hàng đã lưu và giỏ hàng trên server.
+- Kết quả chạy trên Chromium: **3 passed, 8 failed**, khớp với HW02.
+
+| Test | Kết quả |
+| --- | --- |
+| DT-04, 05, 06 | ✓ bị từ chối (401 / 403), không có đơn mới |
+| DT-02, DT-08 | ✘ đơn lưu với `total_amount` = `null` (BUG-13); giỏ trên server không bị xóa (BUG-14) |
+| DT-09 … 13 | ✘ đơn lưu đúng giá trị client gửi: 1000 / 200000000 / 0 / -1000 / "abc" (BUG-12); giỏ không bị xóa (BUG-14) |
+| DT-07 (phần API) | ✘ giỏ rỗng vẫn tạo đơn (BUG-01, #116) |
+
+**Tổng T4 của feature B:** 18 test (Web 7, API 11), 6 kiểu assertion; lần chạy đầu được 4 passed, 14 failed.
+
+## 4. Log và AI-02
+- Đã log Prompt022 (19:59). 2 prompt của lượt này (20:09, 20:22) sẽ log khi lượt kết thúc.
+- AI-02 thêm dòng #27; phiên song song đã dùng #25 và #26.
+
+## AI tự đánh giá (T4)
+
+| # | Điểm | Bằng chứng | Việc cần làm |
+| --- | --- | --- | --- |
+| P1 | 2 | Spec API, §4, ảnh, báo cáo và PLAN; mỗi phần một commit | – |
+| P2 | 2 | Spec Web đã commit (`e32f37b`) trước khi sinh spec API | – |
+| P3 | 2 | Cả 2 yêu cầu của bạn (gộp kết quả ngay, bổ sung ảnh) đã làm | – |
+| P4 | 2 | Chưa kết luận lỗi sản phẩm hay lỗi script; việc đó để T7 | – |
+| P5 | N/A | Không có câu hỏi | – |
+| P6 | 2 | Prompt022 đã log, AI-02 #27, đã push | – |
+| 12 | 2 | Mỗi spec một vòng lặp qua file dữ liệu; tiêu đề test bắt đầu bằng mã TC | – |
+| 13 | 2 | 6 kiểu assertion (bảng §4) | – |
+| 14 | 1 | Spec API chỉ rẽ nhánh theo `kind` trong dữ liệu, không theo trạng thái trang. Spec Web vẫn còn `if (isVisible())` ở DT-03 | Sửa ở T5 |
+| 15 | 2 | Mỗi test dùng tài khoản riêng | – |
+| 16 | 2 | Bản AI sinh commit nguyên trạng | – |
+
+**Gate: passed.** Mục 14 để T5 sửa, vì T4 không được sửa code.
+
+## Bước tiếp theo
+> "bắt đầu bước T5 cho checkout: review 2 spec"
+
+Ở T5, ngoài 3 điểm đã ghi trong PLAN B5, cần xem thêm 2 chỗ ở spec API:
+- Nhánh `serverTotalOrRefused` của DT-09 … 13 đang tự suy ra kết quả mong đợi cho giỏ hàng từ chính kết quả thực tế: có đơn mới thì kỳ vọng giỏ 0 dòng, không có thì kỳ vọng 3 dòng.
+- `toMatchObject` với `ownNew[0]` sẽ báo lỗi khó hiểu khi không có đơn nào được tạo.
+```
+
+- **Used in:** `features/checkout/screenshots/`, design §2, §4 (commits 9001a58, d24e186), `tests/checkout/api.spec.ts` (commit 500f111), `HW04_Report.md` §4.1–4.2 + `PLAN.md` B1–B4 (commit fdce2ee), `prompt_log.md` Prompt022; AI-02 Artifact #27
+
+---
+
+## Prompt025 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 20:27 17/11/2026
+- **Output received:** 20:28 17/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Feature / step:** checkout (fB) FR-08 – prompt log
+- **Purpose:** Log các prompt chưa được log của phiên này (Prompt023–025)
+- **Prompt (verbatim):**
+
+```text
+/logging-ai-prompts tiếp tục
+```
+
+- **AI output (verbatim):**
+
+```text
+Bash Preview this session's unlogged prompts
+Bash Preview with interrupted turns included
+```
+
+- **Used in:** `prompt_log.md` Prompt023–025, AI-02 Artifact #27 (thời gian), design header
+
+---

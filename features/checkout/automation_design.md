@@ -7,7 +7,7 @@
 | Screens / URLs | Web – Giỏ hàng `http://localhost:5173/cart` → Thanh toán `http://localhost:5173/checkout` |
 | Specs · page objects · API client · data | `tests/checkout/` · `page-objects/` · `api/` · `data/checkout/` |
 | Count | Designed: 17 · Automated: 17 · Not automated: 0 · Assertion patterns: 0 |
-| Prompt log entries | Prompt016 (T1) · Prompt017 (T1 decisions, T2 locators) · Prompt018 (T2 page objects, BUG-01) · Prompt019 (BUG-01 filing, T3) |
+| Prompt log entries | Prompt016 (T1) · Prompt017 (T1 decisions, T2 locators) · Prompt018 (T2 page objects, BUG-01) · Prompt019 (BUG-01 filing, T3) · Prompt022 (T4 Web spec) · Prompt023, Prompt024 (T4 API spec, screenshots) |
 
 ## 1. Test cases selected (T1)
 
@@ -145,7 +145,7 @@ Open expected values (`<CONFIRM>`): none. DT-07 keeps the TC as it is (student 1
 
 ## 4. Specs and assertion patterns (T4)
 
-Prompt used for generation: see the AI-use log entries of this step (prompt 17/11 19:59 for `web.spec.ts`, prompt 17/11 20:1x for `api.spec.ts`). One prompt per spec file; the generated code is committed as it came (`e32f37b`, `500f111`) and is reviewed in T5.
+Prompt used for generation: see the AI-use log entries of this step (Prompt022 for `web.spec.ts`, Prompt023 / Prompt024 for `api.spec.ts`). One prompt per spec file; the generated code is committed as it came (`e32f37b`, `500f111`) and is reviewed in T5.
 
 | Spec | TC IDs | Assertion patterns |
 | --- | --- | --- |
