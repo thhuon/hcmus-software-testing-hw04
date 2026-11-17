@@ -4238,7 +4238,7 @@ Prompt này (22:49) sẽ vào log ở lần chạy `/logging-ai-prompts` tới.
 ## Prompt038 – Claude Code (claude-opus-5-5)
 
 - **Prompt sent:** 22:58 17/11/2026
-- **Output received:** 22:59 17/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Output received:** 22:59 17/11/2026
 - **Feature / step:** Tracker – `hw: HW04` label check; prompt log
 - **Purpose:** The `hw` label still looks Vietnamese; log the prompts
 - **Prompt (verbatim):**
@@ -4255,6 +4255,33 @@ Skill
 Bạn nói nhãn `hw` vẫn chưa sang tiếng Anh. Mình kiểm tra lại trực tiếp trên GitHub: tên, mô tả nhãn, và cả README nhóm (README cũng có mô tả nhãn này).
 Bash Read the hw label from the API and its mentions in the group README
 Bash Write this session's pending prompts to the log
+Bash Fill the log fields, replace the AI-02 placeholder, commit together
+Nhãn `hw: HW04` đã có mô tả tiếng Anh từ lượt trước. Mình vừa đọc lại trực tiếp từ GitHub API:
+
+| Thuộc tính | Giá trị trên GitHub |
+| --- | --- |
+| Tên | `hw: HW04` |
+| Mô tả | **Bug found in HW04 Automation Testing** (trước: "Bug tìm được ở HW04 Automation Testing") |
+| Màu | `#0E8A16` (giữ nguyên) |
+
+Nếu trang của bạn vẫn hiện chữ tiếng Việt, có hai khả năng:
+1. **Trình duyệt hiển thị bản cũ.** Mở https://github.com/angquoc/software-testing-2026-HW02-group/labels rồi tải lại hẳn trang (Ctrl+Shift+R).
+2. **Bạn đang xem README nhóm.** Dòng 161 (§6) mô tả nhãn này bằng tiếng Việt: "Gắn thêm cho mọi issue mới của HW04, để lọc trang Issues khi chụp ảnh nộp bài." README là tài liệu chung của nhóm, viết toàn bộ bằng tiếng Việt, nên mình chưa sửa. Nếu bạn muốn đổi dòng này (và bảng nhãn ở §4.3) sang tiếng Anh, báo mình. Commit vào repo nhóm sẽ theo quy ước của README §3 ở đó.
+
+## Log prompt
+
+- **Prompt034:** đã cập nhật giờ nhận.
+- **Prompt037** (22:49 → 22:52): dọn tài liệu, đổi mô tả nhãn. Dòng AI-02 #36 đã có số prompt.
+- **Prompt038** (22:58): lượt này, ghi `UNFINISHED`. Lượt này không tạo artifact mới nên không thêm dòng AI-02.
+- Prompt035–036 là của session FR-08.
+
+| ID | Điểm | Bằng chứng |
+| --- | --- | --- |
+| LOG-1, 2, 3, 5, 10 | 2 | Dùng đúng transcript của session này; nội dung nguyên văn do script trích; số nối tiếp sau các mục của session FR-08 |
+| LOG-4, 6, 7, 8, 11 | 2 | Giờ UTC+7; Prompt038 có đánh dấu UNFINISHED; không còn TODO trong các mục của mình; đã commit (`f5fd6cd`) |
+| LOG-9, 12 | N/A | Không dùng tool AI khác; không có prompt nào bạn dặn không ghi log |
+
+**Gate: passed**
 ```
 
 - **Used in:** not used (the label was already in English); `prompt_log.md`
@@ -4536,7 +4563,7 @@ Nhắc thêm: các prompt từ 22:36 hôm qua tới giờ chưa được log; kh
 ## Prompt042 – Claude Code (claude-opus-5-5)
 
 - **Prompt sent:** 00:19 18/11/2026
-- **Output received:** 00:25 18/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Output received:** 00:25 18/11/2026
 - **Feature / step:** checkout (fB) FR-08 – T8 summary, docs, prompt log
 - **Purpose:** Tổng kết (bước T8), rà và bổ sung README / báo cáo / PLAN / bug report, log prompt
 - **Prompt (verbatim):**
@@ -4549,7 +4576,7 @@ check các docs, báo cáo liên quan và bổ sung thông tin
 
 - **AI output (verbatim):**
 
-```text
+````text
 Làm T8 trước, sau đó rà các tài liệu liên quan, và log prompt ở cuối để log được nhiều lượt nhất. Xem cách feature A làm T8 và phần chung của README / báo cáo.
 Bash Read FR-03 §7, report sections 6–8 and the README
 Bash Check repo visibility, proof screenshots and the feature selection file
@@ -4578,7 +4605,68 @@ Bash Add the AI-02 row for T8, commit and push
 Skill
 Bash Preview unlogged prompts including the current turn
 Bash Write the entries and list their TODO lines
+Bash Fill the TODO fields, link AI-02 rows, commit and push
+T8 của feature B (checkout) đã xong, các tài liệu liên quan đã được bổ sung và log prompt đã cập nhật; tất cả đã commit và push.
+
+## T8 – Tổng kết (design §6–§8, commit `e0656a9`)
+- **§6:** bảng số liệu chép thẳng từ `npm run summary` của bộ chạy chính thức thứ 4, không đếm tay.
+  - 17 TC tự động hóa, 17 đã chạy, 4 passed, 13 failed, 0 flaky, chạy trên 3 trình duyệt.
+  - 17 TC tương ứng 18 test vì DT-07 có một test Web và một test API.
+- **§7:** không có TC nào bị bỏ, cả 17 TC đều tự động hóa. Có thêm một bảng các phần kết quả mong đợi mà test chỉ ghi lại chứ không chấm, kèm lý do:
+  - màn hình xác nhận (A7);
+  - địa chỉ (A12, Q7), vì trang không có ô địa chỉ;
+  - badge giỏ hàng, vì app không có (#79);
+  - thông báo hiện cho khách (A2);
+  - mã HTTP status (Q1).
+- **§8:** thêm ảnh chụp 8 bình luận đã gửi lên repo nhóm (`bugs/screenshots/checkout_comment_*.png`) để làm bằng chứng nộp bài. Repo nhóm là public nên chụp được mà không cần đăng nhập. Mình đã ẩn thanh tiêu đề dính ở đầu trang để thấy được dòng "HW04 – automated re-test".
+
+## Tài liệu đã bổ sung (commit `9c3be47`, `e0d0310`)
+| Tài liệu | Nội dung thêm |
+| --- | --- |
+| `README.md` §2 | Dòng B – FR-08: 17 / 17 / 4 / 13, 3 lần chạy, bug 6 confirmed / 1 changed / 1 new |
+| `HW04_Report.md` §6 | Bảng 3 lần chạy của FR-08, có link tới report từng trình duyệt |
+| `HW04_Report.md` §7 | Bảng 8 bug của FR-08 (BUG-01, BUG-11 … 17): issue, kết quả đối chiếu, test, severity |
+| `HW04_Report.md` §8 | FR-08 không có TC nào không tự động hóa |
+| `bugs/BUG_REPORT.md` | Thêm link ảnh của 8 bình luận vào dòng bằng chứng |
+| `PLAN.md` | Thêm dòng B8 Tổng kết |
+| Design §2 và báo cáo §4.2 | Sửa các câu còn tả cách cũ của DT-03 (gõ URL); ghi nguyên nhân dòng 6 là Model, như bạn đã xác nhận |
+
+Phần FR-03 và FR-15 trong các mục chung của báo cáo mình không đụng tới, để các phiên của 2 feature đó tự điền.
+
+## Log prompt (commit `95dc7d9`)
+| Entry | Gửi lúc | Nội dung |
+| --- | --- | --- |
+| Prompt039 | 22:50 17/11 | T7 – phân loại test fail |
+| Prompt040 | 23:11 17/11 | Bạn xác nhận phân loại; ghi các mục bug |
+| Prompt041 | 00:12 18/11 | Gửi 8 bình luận |
+| Prompt042 | 00:19 18/11 | Prompt hiện tại; tạm đánh dấu UNFINISHED vì lượt này chưa kết thúc |
+
+- Prompt023 và Prompt036 trước đó còn dở, nay đã được hoàn tất.
+- Các trường Feature / step, Purpose, Used in đã điền đủ, và số prompt đã được gắn vào AI-02 #37 … #40.
+
+| ID | Score | Evidence | Action |
+| --- | --- | --- | --- |
+| LOG-1 – 5 | 2 | 4 entry mới và 2 entry được hoàn tất, nguyên văn, giờ UTC+7, số tiếp nối | – |
+| LOG-6 | 2 | Prompt042 có nhãn UNFINISHED | Hoàn tất ở lần log sau |
+| LOG-7, 8, 10, 12 | 2 | Không còn TODO; transcript chỉ đọc qua script | – |
+| LOG-11 | 2 | Commit 1 đã chạy | – |
+
+**Gate: passed**
+
+## Gợi ý trước khi làm feature C
+Trong lúc làm feature B có 3 bài học nên đưa vào skill test-automation, vì feature C sẽ quay video lúc dùng skill:
+- E-mail tài khoản test phải khác nhau theo spec, lần lặp và lần retry, vì backend cho đăng ký trùng e-mail.
+- Khi có phiên chạy song song: chạy với `--reuse` và ghi kết quả vào thư mục riêng.
+- Gộp kết quả từ thư mục tạm vào file chính ngay sau khi chạy.
+
+Bạn có muốn mình cập nhật skill không? Mỗi thay đổi skill sẽ ghi một dòng AI-02 riêng (`#Sn`).
+
+**Commit gợi ý:** commit của mình đã chạy. Nếu bạn sửa gì trong log thì commit riêng:
+```bash
+git -C /home/hg/source/software-testing/week04 add prompt_log.md
+git -C /home/hg/source/software-testing/week04 commit -m "docs (ai): <điều bạn đã sửa trong log>"
 ```
+````
 
 - **Used in:** design §6–§8 + `bugs/screenshots/checkout_comment_*` (commit e0656a9), README §2 + `HW04_Report.md` §6–§8 + `PLAN.md` (commit 9c3be47, e0d0310); AI-02 Artifact #40
 
@@ -5812,7 +5900,7 @@ Gate: blocked by 10 (chờ bạn đồng ý gửi).
 ## Prompt055 – Claude Code (claude-opus-5-5)
 
 - **Prompt sent:** 02:43 18/11/2026
-- **Output received:** 02:43 18/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Output received:** 02:44 18/11/2026
 - **Feature / step:** product-crud (fC) FR-15 – push, prompt log
 - **Purpose:** Kiểm tra commit đã push lên remote và log các prompt chưa log của phiên
 - **Prompt (verbatim):**
@@ -5830,8 +5918,1126 @@ Bash Check unpushed commits against remote
 Mọi commit đã có trên remote: `master` khớp `origin/master`, không có commit nào chưa push. Giờ ghi log prompt:
 Skill
 Bash Preview unlogged prompts of this session
+Ghi Prompt049–055 và hoàn tất Prompt048 (đang đánh dấu UNFINISHED). Lượt hiện tại cũng được ghi, có đánh dấu UNFINISHED:
+Bash Write log entries and show their header fields
+Điền các trường TODO, rồi thay "(logged later)" trong AI-02 bằng số Prompt thật:
+Bash Fill log TODOs, link AI-02 rows, commit and push
+Bash Name the T4 prompts in §4, commit and push
+Các commit trước đó đều đã có trên remote. Hai commit mới của lượt này cũng đã push, nên `master` giờ khớp `origin/master`.
+
+**Log prompt:** đã ghi Prompt049–Prompt055 và cập nhật Prompt048, vốn đang đánh dấu UNFINISHED (commit 01cbb96):
+
+| Prompt | Gửi → nhận | Bước |
+| --- | --- | --- |
+| 048 | 01:45 → 01:51 | Kết luận codegen, T3 dữ liệu test, log prompt |
+| 049 | 01:54 → 01:59 | Quyết định T3, T4 spec Web |
+| 050 | 02:00 → 02:01 | T4 spec API |
+| 051 | 02:03 → 02:12 | T5 review và sửa (DT-16, DT-17) |
+| 052 | 02:14 → 02:21 | Xác nhận T5, T6 chạy 3 trình duyệt |
+| 053 | 02:23 → 02:26 | T7 phân loại lỗi, sửa script đếm |
+| 054 | 02:29 → 02:34 | Báo bug BUG-18 … 39 (bình luận chưa gửi) |
+| 055 | 02:43 → … | Push và log prompt (lượt này, đánh dấu UNFINISHED) |
+
+- Mỗi entry đã điền đủ Feature/step, Purpose và Used in.
+- Các dòng AI-02 #46 … #51 và #S12 giờ ghi số Prompt và giờ thật thay cho "(logged later)".
+- §4 trong file design nay ghi rõ Prompt049 (spec Web) và Prompt050 (spec API) (commit d724720).
+
+**Còn để lại, ngoài phạm vi phiên này:**
+- Dòng AI-02 #S11 vẫn ghi "logged later" vì thuộc một phiên khác.
+- Hai prompt của phiên song song `5ca4a35d` (01:14 và 01:23) chưa được ghi log.
+
+**Bình luận lên GitHub vẫn chưa gửi.** Bạn đọc 22 bản nháp trong `/tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/comments/ALL_drafts.md`, rồi trả lời "gửi" (có thể kèm chỗ cần sửa). Khi đó tôi sẽ đưa ảnh lên và gửi bình luận vào #18 … #39.
 ```
 
 - **Used in:** `prompt_log.md`; AI-02 #46 … #51, #S12 (thời gian)
+
+---
+
+## Prompt056 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 02:46 18/11/2026
+- **Output received:** 02:55 18/11/2026
+- **Feature / step:** product-crud (fC) FR-15 – bug comments; video 1 (Agent Skill)
+- **Purpose:** Gửi 22 bình luận HW04 lên #18 … #39 và dựng video 1 từ 8 clip (cắt, tăng tốc, phụ đề, không lồng tiếng)
+- **Prompt (verbatim):**
+
+```text
+post các comment lên github
+các video cho shot 1 đã xong, hãy chỉnh sửa video và ghép thành video hoàn chỉnh, bỏ những khúc thừa, và speed up nếu cần thiết, thêm subtitle ngắn gọn bên dưới chú thích từng bước đang làm gì, video cho agent skill thì ko cần lồng giọng mói
+```
+
+- **AI output (verbatim):**
+
+```text
+Hai việc: đăng bình luận lên GitHub, và dựng video 1. Bắt đầu với bình luận: xem phần đầu script upload ảnh để biết cách dùng.
+Bash Read upload_attachments.js usage header
+Bash Prepare absolute upload map and check Chrome
+Bash Upload 37 screenshots to GitHub via Chrome login
+Skill
+Bash Find recorded video clips for video 1
+Bash Probe clip durations, resolution and audio
+Có 8 clip, tổng khoảng 76 phút, độ phân giải 1280×720, đều có âm thanh. Đo mức âm lượng để biết bạn có nói khi quay hay không:
+Bash Measure audio volume of each clip
+Bash Build timestamped contact sheets for each clip
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c1_01.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c1_02.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c2_01.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c2_02.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c3_01.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c4_01.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c5_01.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c5_02.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c6_01.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c6_02.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c7_01.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c7_02.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c7_03.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c8_01.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c8_03.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c8_04.jpg
+Bash Crop the terminal area of clip 1
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/c1_term.png
+Bash Crop the purple terminal in clip 1
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/c1_term2.png
+Bash Define segments and build the first two as a test
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/check01.png
+Phụ đề hiển thị tốt. Script có lỗi: `ffmpeg` đọc mất stdin của vòng lặp nên bỏ sót dòng. Thêm `-nostdin`, rồi dựng toàn bộ 34 đoạn (chạy nền):
+Bash Build all 34 video segments with subtitles
+Trong lúc dựng video, kiểm tra script upload ảnh có đang chờ bạn đăng nhập GitHub không:
+Bash Check upload script progress
+Bạn đã đăng nhập, script đã đưa lên 25/37 ảnh. Trong lúc chờ, chuẩn bị script thay chỗ giữ ảnh `{{img:…}}` trong bản nháp bằng link ảnh trên GitHub:
+Bash Prepare script to fill image markup into comments
+Đã chuẩn bị xong. Đang chờ việc upload ảnh và việc dựng video chạy xong.
+Đã đưa lên đủ ảnh. Bạn đã yêu cầu đăng bình luận ở tin nhắn trước ("post các comment lên github"). Điền link ảnh vào 22 bình luận, kiểm tra không còn chỗ trống:
+Bash Fill image markup into the 22 comments
+Bash Post the 22 HW04 comments on issues 18–39
+Đã đăng đủ 22 bình luận. Ghi link từng bình luận vào bug report và §8, rồi xóa profile trình duyệt (chứa phiên đăng nhập GitHub) cùng các file bình luận tạm:
+Bash Write comment links back, clean temp files, commit
+Đã ghi link vào bug report và §8 (3094567). Giờ ghép video: xem kết quả dựng từng đoạn.
+Bash Check built segments and total duration
+Tổng 13,2 phút. Kiểm tra phụ đề có khớp nội dung ở các ranh giới đoán theo giờ: lấy khung hình giữa các đoạn 18–34 ghép thành một ảnh:
+Bash Contact sheet of mid frames of segments
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/mid_sheet.png
+Phụ đề ở mỗi đoạn khớp màn hình. Ghép 34 đoạn thành video hoàn chỉnh, lưu trong `~/Videos` (video thô không commit vào git):
+Bash Concatenate segments into the final video
+Video đã ghép xong: 13 phút 12 giây, 31 MB. Đối chiếu với các yêu cầu của video 1 trong kịch bản quay:
+Bash Read video 1 requirements from shot list and brief
+Đề (dòng 146) yêu cầu giọng thật của bạn cho video demo. Kiểm tra §7 xem video Agent Skill có bắt buộc thuyết minh không:
+Bash Read brief §7 and §11 video rules
+Bash Update AI-02 for comments and video, commit and push
+Đã đăng 22 bình luận lên GitHub và dựng xong video 1. Video thiếu 3 cảnh so với kịch bản vì các đoạn đó không có trong clip, xem mục 2.
+
+## 1. Bình luận GitHub
+
+- **Ảnh:** 37 ảnh đã tải lên qua cửa sổ Chrome mà bạn đăng nhập.
+- **Bình luận:** 22 bình luận HW04 đã đăng lên #18 … #39 bằng tài khoản `thhuon`, mỗi bình luận kèm ảnh. Trước mỗi lần đăng, tôi kiểm tra issue chưa có bình luận HW04 nào, nên không có bình luận trùng. Ví dụ: [bình luận trên #34](https://github.com/angquoc/software-testing-2026-HW02-group/issues/34#issuecomment-6959198557).
+- **Liên kết:** link từng bình luận đã ghi vào [bugs/BUG_REPORT.md](bugs/BUG_REPORT.md) và §8 (3094567).
+- **Dọn dẹp:** đã xóa profile trình duyệt (chứa phiên đăng nhập GitHub) và các file bản nháp.
+
+Tôi chưa mở bình luận trên trình duyệt để xem ảnh có hiện không. Mã ảnh cùng dạng với các bình luận FR-08 trước đây, vốn hiện bình thường. Bạn xem lại một bình luận cho chắc.
+
+## 2. Video 1 – Agent Skill
+
+File: `/home/hg/Videos/HW04_video1_agent_skill_FR-15.mp4` (13 phút 12 giây, 1280×720, 31 MB, không có tiếng).
+
+- **Nguồn:** 8 clip, tổng khoảng 76 phút. Cả 8 clip đều không có tiếng (−91 dB), nên video không có tiếng và không lồng giọng, như bạn muốn.
+- **Đã cắt:**
+  - clip 3: các lần đăng nhập Admin web bị lỗi;
+  - cuối clip 4: cửa sổ quản lý file;
+  - khoảng 8 phút cuối clip 8: màn hình đứng yên.
+- **Tốc độ:**
+  - đoạn `whoami && hostname` và `date` ở đầu giữ tốc độ thường, để làm bằng chứng danh tính;
+  - thao tác của bạn, bảng kết quả và quyết định: tua ×2 đến ×4;
+  - lúc AI đang sinh nội dung: tua ×8 đến ×14, có ghi "(tua nhanh ×N)" trong phụ đề.
+- **Phụ đề:** 34 dòng tiếng Việt ngắn ở cuối màn hình, mỗi dòng ghi bước đang làm, ví dụ "T5 – 2 lỗi của AI: DT-16 oracle sai, DT-17 chờ không ổn định". Ranh giới các đoạn tôi chia theo giờ gửi prompt trong prompt log; tôi đã xem khung hình giữa của 16 đoạn và phụ đề khớp với màn hình.
+
+**Video còn thiếu so với kịch bản (shot list):**
+
+| Cảnh | Lý do |
+| --- | --- |
+| 1.9 T6 chạy 3 trình duyệt | Clip 7 kết thúc lúc 02:15, clip 8 bắt đầu lúc 02:23, nên lần chạy 02:15–02:20 không được quay |
+| 1.10 trace viewer, mở issue trên GitHub | Không có trong clip; bình luận vừa được đăng sau khi quay |
+| 1.11 T8, 1.12 kết thúc | Chưa làm T8 |
+
+Danh sách đoạn (clip, giây, tốc độ, phụ đề) nằm ở `/tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/segments.tsv`. Nếu bạn quay thêm clip, tôi thêm dòng vào đó rồi dựng lại.
+
+**Về thuyết minh:** đề §7 không yêu cầu thuyết minh cho video skill. Yêu cầu giọng thật ở §11 chỉ áp dụng cho video demo của Task 2 (video 2). Vì vậy video 1 có phụ đề và không có tiếng là đúng đề. Bảng R2/R3 trong `demo/shot_list.md` đang ghi áp dụng cho cả video 1, rộng hơn đề.
+
+AI-02 đã có dòng #51 (bình luận đã gửi) và #52 (dựng video) (f80392f). Các commit đều đã push.
+
+## Cần bạn quyết định
+
+1. **Bổ sung 3 cảnh còn thiếu**
+   - Thiếu các cảnh này thì video chưa cho thấy trọn quy trình từ T6 đến T8.
+   - Cách làm: quay 3 clip ngắn rồi gửi tôi ghép vào cuối video.
+     - Mở `npm run trace -- test-results/product-crud-t7/…/trace.zip` (DT-24), rồi mở một issue đã có bình luận trên GitHub.
+     - Làm bước T8 khi đang quay.
+     - Mở một báo cáo HTML của lần chạy T6 (`reports/product-crud/chromium/index.html`) để thay cho cảnh 1.9.
+   - Phương án khác: để như hiện tại, vì lần chạy 3 trình duyệt sẽ có trong video 2.
+   - **Đề xuất:** quay thêm, vì yêu cầu R12 (bảo trì script) cần có cảnh trace và cảnh báo bug.
+2. **Sửa R2/R3 trong shot list chỉ áp dụng cho video 2?**
+   - Đây là việc đổi kế hoạch quay của bạn, nên bạn quyết.
+   - **Đề xuất:** đồng ý sửa, vì đúng với đề §7 và §11.
+
+**Bước tiếp theo:** xem video. Nếu đoạn nào phụ đề lệch hoặc tua quá nhanh, cho tôi biết số thứ tự đoạn (01–34) để tôi chỉnh rồi dựng lại.
+```
+
+- **Used in:** `bugs/BUG_REPORT.md` BUG-18 … BUG-39 (links), `features/product-crud/automation_design.md` §8; video 1 (AI-02 Artifact #51, #52)
+
+---
+
+## Prompt057 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 02:57 18/11/2026
+- **Output received:** 03:00 18/11/2026
+- **Feature / step:** Video 1 (Agent Skill)
+- **Purpose:** Rút video 1 còn khoảng 7 phút, bỏ cảnh chờ AI, thêm cảnh trace viewer
+- **Prompt (verbatim):**
+
+```text
+cắt bớt video để còn chỉ dài trong vòng 7p, cắt bớt các cảnh chờ chat trả ra kết quả và speeed up
+tôi cũng đã mở trace rồi, tìm lại trong các scene
+```
+
+- **AI output (verbatim):**
+
+```text
+Tìm cảnh trace viewer trong các clip trước. Ở clip 8, khoảng 19:40, tôi thấy một cửa sổ có trang "Quên Mật Khẩu". Xem các ảnh ghép chưa xem (c8 5:20–10:20, cuối c7) và soi kỹ đoạn cuối c8:
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c8_02.jpg
+Bash Contact sheet of the last 30 s of clip 8
+Tìm thấy: ở clip 8, khoảng 5:20–5:40, có một cửa sổ Playwright Trace Viewer. Xem từng giây quanh đoạn này để lấy đúng mốc đầu và cuối:
+Bash Sheet of clip 8 between 285 and 360 s
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/trace_sheet.jpg
+Bash Rebuild a shorter video with the trace scene
+Tổng 6:49. Kiểm tra đoạn trace viewer có đúng cảnh và phụ đề không:
+Bash Grab a frame from the trace segment
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/check24.png
+Đoạn trace đúng cảnh: Trace Viewer của DT-24, lỗi `list names after the edit`, danh sách hiện cùng một tên. Ghép lại và ghi đè file cũ:
+Bash Concatenate the shorter video
+Bash Update AI-02 row #52 for the shortened video
+Video 1 đã rút còn **6 phút 50 giây**, đã có cảnh trace viewer. Tôi ghi đè lên file cũ: `/home/hg/Videos/HW04_video1_agent_skill_FR-15.mp4` (1280×720, 17 MB, không có tiếng).
+
+**Những gì đã đổi so với bản 13 phút:**
+- **Bỏ hết cảnh chờ AI trả kết quả:** 9 đoạn, gồm lúc AI đọc test case, khảo sát locator, viết page object, sinh dữ liệu, sinh spec, chạy review T5, phân loại lỗi T7 và viết bug report.
+- **Tăng tốc:** đoạn thao tác của bạn ×4, đoạn đọc kết quả và bảng ×5–×6. Đoạn `whoami && hostname` ở đầu vẫn giữ tốc độ thường.
+- **Thêm cảnh trace viewer:** tìm thấy ở clip `2026-11-18 02-23-06.mp4`, từ 5:16 đến 6:00. Cảnh gồm lúc bạn gõ `npm run trace -- …DT-24…/trace.zip` và Trace Viewer hiện lỗi `list names after the edit`, với danh sách sản phẩm mang cùng một tên. Cảnh chạy ×2 cho dễ đọc, nằm giữa kết quả T7 và prompt báo bug. Phụ đề: "T7 – Trace viewer DT-24: sau khi sửa, mọi dòng hiện cùng một tên (lỗi sản phẩm)".
+- **Phụ đề:** tổng 26 đoạn, mỗi đoạn một dòng phụ đề tiếng Việt ở cuối màn hình.
+
+**Vẫn thiếu so với kịch bản quay:** cảnh 1.9 (T6 chạy 3 trình duyệt, không có trong clip nào), mở issue trên GitHub, và T8. Nếu bạn quay thêm, gửi tôi tên file. Mỗi cảnh chỉ cần 10–20 giây sau khi tua, nên video vẫn dưới 7 phút nếu chỉ thêm cảnh ngắn.
+
+AI-02 #52 đã ghi bản rút gọn (134156a), đã push.
+
+Bạn xem video. Nếu đoạn nào tua quá nhanh hoặc phụ đề lệch, cho tôi biết mốc thời gian (phút:giây) để tôi chỉnh.
+```
+
+- **Used in:** video 1 (AI-02 Artifact #52)
+
+---
+
+## Prompt058 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 03:03 18/11/2026
+- **Output received:** 03:05 18/11/2026
+- **Feature / step:** Video 1 (Agent Skill)
+- **Purpose:** Hỏi cần quay thêm phân đoạn nào và quay gì cho từng phân đoạn
+- **Prompt (verbatim):**
+
+```text
+tôi cần quay thêm các phân đoạn nào, từng phân đoạn tôi cần quay gì
+```
+
+- **AI output (verbatim):**
+
+````text
+Xem lại nội dung các cảnh 1.7 – 1.12 trong kịch bản để so với những gì đã có trong clip:
+Bash Read video 1 scene table from shot list
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c7_05.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c7_06.jpg
+Bash Split UI mode scene and rebuild the video
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/check_ui.png
+Bạn cần quay thêm **4 phân đoạn ngắn**, tổng khoảng 5–6 phút quay thô; sau khi cắt và tua, mỗi đoạn còn 10–25 giây trong video.
+
+Video hiện dài 6:57, đã có từ đầu đến bước báo bug, gồm cả trace viewer và UI mode (cảnh UI mode tôi vừa tách thành đoạn riêng, có phụ đề "T5 – Xem từng test trong Playwright UI mode"). Khi ghép 4 phân đoạn mới, tôi sẽ tua thêm các đoạn hiện có để tổng vẫn khoảng 7 phút.
+
+**Trước khi quay:** đóng các tab trình duyệt cá nhân. Clip c7 lúc 25:00 có trang ảnh cá nhân trên Firefox; bản dựng hiện tại đã cắt bỏ đoạn đó.
+
+## Phân đoạn A – Sửa một lỗi script (cảnh 1.8, bảo trì)
+
+**Chèn vào:** sau đoạn UI mode của T5. **Quay thô:** 1,5–2 phút.
+
+1. Mở `features/product-crud/automation_design.md` §5 và chỉ vào dòng #2 (DT-17, chờ không ổn định).
+2. Gõ `git show a278a51` để thấy dòng code cũ đọc option bằng `allInnerTexts()`, và dòng mới dùng `await expect(...).toHaveText(apiNames)`.
+3. Chạy lại test đã sửa:
+   ```
+   npx playwright test tests/product-crud/web.spec.ts --project=chromium -g "DT-17" --repeat-each=3
+   ```
+   Màn hình cần thấy dòng `3 passed`.
+4. Gõ `git show --stat a278a51` để thấy commit chỉ đổi `web.spec.ts`.
+
+Video không có tiếng, nên ý chính sẽ nằm trong phụ đề: lỗi DT-17 do AI đọc danh sách danh mục khi trang chưa tải xong; sửa bằng assertion tự chờ.
+
+## Phân đoạn B – Kết quả chạy 3 trình duyệt (cảnh 1.9)
+
+**Chèn vào:** sau đoạn "T6 – Prompt". **Quay thô:** khoảng 1 phút.
+
+1. Mở §6 của file design để thấy bảng 3 dòng Chromium / Firefox / WebKit, mỗi dòng 41 test, 17 passed / 24 failed.
+2. Gõ `npm run report -- reports/product-crud/chromium` và chỉ vào tiêu đề báo cáo `HW04 · FR-15 Product CRUD (admin) · chromium · Run by: 23120046 · 2026-11-17T19:15:21…`.
+3. Đóng báo cáo, làm lại với `reports/product-crud/firefox` và `reports/product-crud/webkit`. Mỗi báo cáo chỉ cần vài giây để thấy tiêu đề.
+
+**Khuyên không chạy lại `npm run feature`**, mà chỉ mở báo cáo của lần chạy T6 lúc 02:15:
+- Đây là báo cáo thật do chính bước T6 trong buổi quay sinh ra.
+- Bug report và 22 bình luận trên GitHub đang trỏ tới lần chạy này.
+- Lần chạy đầy đủ 3 trình duyệt sẽ có trong video 2.
+
+Nếu bạn muốn thấy cả lệnh chạy, thì chạy `npm run feature -- product-crud --reuse` (khoảng 5 phút, tôi sẽ tua). Đổi lại, báo cáo T6 sẽ bị ghi đè sớm hơn và bug report phải cập nhật lại giờ chạy.
+
+## Phân đoạn C – Bình luận trên GitHub (phần cuối cảnh 1.10)
+
+**Chèn vào:** sau đoạn "Báo bug". **Quay thô:** khoảng 1 phút.
+
+1. Mở https://github.com/angquoc/software-testing-2026-HW02-group/issues/34, cuộn xuống bình luận **"HW04 – automated re-test (Changed)"** để thấy dòng Difference và 2 ảnh.
+2. Mở thêm #18 (Confirmed, lỗi API không cần token) và cuộn tới bình luận HW04.
+3. Tùy chọn: mở `bugs/BUG_REPORT.md`, cuộn tới bảng tổng quan BUG-18 … BUG-39 có cột link bình luận.
+
+## Phân đoạn D – T8 tổng kết (cảnh 1.11)
+
+**Chèn vào:** cuối video. **Quay thô:** 2–3 phút, phần chờ AI sẽ cắt.
+
+1. Trong Claude Code, gõ prompt `tiếp tục bước T8`. Bước này cũng là bước còn lại của FR-15 nên cần làm dù có quay hay không.
+2. Khi AI trả lời xong, cuộn qua bảng số liệu do `npm run summary` đếm (14 TC passed / 22 failed trên mỗi trình duyệt) và §7 (TC không tự động hóa: 0).
+3. Trong terminal, gõ:
+   ```
+   git log --oneline -- tests/product-crud data/product-crud features/product-crud
+   ```
+   để thấy mỗi bước T1–T8 là một commit.
+
+**Cảnh 1.12 (kết thúc) không cần quay:** tôi có thể làm một thẻ chữ khoảng 5 giây, ví dụ "Skill test-automation · FR-15 · 36 TC · 3 trình duyệt · 22 bug HW02 đã cập nhật", nếu bạn đồng ý.
+
+## Sau khi quay
+
+Gửi tôi tên các file mới trong `~/Videos`. Tôi sẽ cắt, tua, thêm phụ đề, chèn đúng chỗ như trên và ghép lại thành bản dưới khoảng 7 phút.
+````
+
+- **Used in:** `demo/shot_list.md`; video 1 (AI-02 Artifact #52)
+
+---
+
+## Prompt059 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 03:20 18/11/2026
+- **Output received:** 03:20 18/11/2026
+- **Feature / step:** Video 1 (Agent Skill)
+- **Purpose:** Hỏi dòng nào trong docs ở phân đoạn A; không ghi số commit chính xác
+- **Prompt (verbatim):**
+
+```text
+ở phầnA, dòng nào trong docs? và tôi ko thấy hợp lý khi có thể chỉ ra chính xác số commit
+```
+
+- **AI output (verbatim):**
+
+````text
+Bash Locate §5 row lines and web.spec commits
+Bạn nói đúng: gõ thẳng `git show a278a51` trong video trông như đã chuẩn bị sẵn. Mã commit nên được tìm ra ngay trên màn hình.
+
+**Dòng trong tài liệu:** [features/product-crud/automation_design.md:221](features/product-crud/automation_design.md#L221). §5 bắt đầu ở dòng 214. Dòng 221 là hàng `| 2 | web.spec.ts › DT-17 | …`, và ô "Fix (commit)" của hàng này có sẵn `a278a51`. Code đã sửa nằm ở [tests/product-crud/web.spec.ts:314-322](tests/product-crud/web.spec.ts#L314-L322) (`case 'categoryChoice'`).
+
+**Phần A, quay lại theo cách tự nhiên:**
+
+1. **Mở bảng review:** mở `automation_design.md`, cuộn tới §5 (dòng 214) và chỉ vào hàng #2 (dòng 221). Hàng này ghi: DT-17 đọc danh sách danh mục một lần mà không chờ, nhóm lỗi "flaky wait", loại nguyên nhân "Model".
+2. **Tìm commit sửa bằng lịch sử file, không gõ mã:**
+   ```
+   git log --oneline -- tests/product-crud/web.spec.ts
+   ```
+   Kết quả chỉ có 2 dòng:
+   - `8be9fac … generate the data-driven Admin web spec`: bản AI sinh ra.
+   - `a278a51 … wait for the category options in DT-17`: bản sửa.
+
+   Mã commit hiện ra ngay trên màn hình, đồng thời khớp với ô "Fix (commit)" ở dòng 221.
+3. **Xem bản sửa:** chép mã từ kết quả vừa hiện rồi gõ `git show a278a51`. Màn hình sẽ thấy dòng cũ `allInnerTexts()` + `toEqual` bị xóa, dòng mới `await expect(...).toHaveText(apiNames)` được thêm.
+   Cách khác không cần gõ gì: mở `tests/product-crud/web.spec.ts` tới dòng 314. Ở thanh bên trái của VS Code, mở **Timeline**, bấm vào mục "wait for the category options in DT-17" để xem diff.
+4. **Chạy lại test đã sửa:**
+   ```
+   npx playwright test tests/product-crud/web.spec.ts --project=chromium -g "DT-17" --repeat-each=3
+   ```
+   Màn hình cần thấy `3 passed`.
+
+Không cần thêm bước `git show --stat`: bước 3 đã cho thấy commit chỉ đổi `web.spec.ts`.
+````
+
+- **Used in:** `demo/shot_list.md`
+
+---
+
+## Prompt060 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 03:32 18/11/2026
+- **Output received:** 03:39 18/11/2026
+- **Feature / step:** Video 1 (Agent Skill)
+- **Purpose:** Ghép video 1 hoàn chỉnh từ các clip mới quay (bỏ cảnh D)
+- **Prompt (verbatim):**
+
+```text
+tôi đã quay xong, ko cần cảnh D, ghép thành video hoàn chỉnh
+```
+
+- **AI output (verbatim):**
+
+```text
+Tìm các clip mới trong `~/Videos`:
+Bash List new clips with duration and audio level
+Có 3 clip mới (03:22, 03:26, 03:30), dài 3,5 phút, 3,4 phút và 1,2 phút, đều không có tiếng. Tạo ảnh ghép khung hình (5 giây một khung) để xem nội dung:
+Bash Contact sheets of the three new clips
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c9_01.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c9_02.jpg
+Bash Zoom terminal at end and at git step of clip 9
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/c9_end.png
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/c9_git.png
+Bash Zoom terminal during the test run in clip 9
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/c9_run.png
+Bash Locate the git author line across clip 9
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/au_sheet.png
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c10_01.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c10_02.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/sheets/c11_01.jpg
+Bash Build v3 segments with new clips and blur
+Lỗi do bán kính làm mờ quá lớn so với vùng cao 24 px. Thay bằng một ô đặc cùng màu nền terminal phủ lên dòng Author (che kín email hơn làm mờ), rồi dựng lại:
+Bash Rebuild v3 segments with a solid box over the email
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/check23.png
+Ở khung này terminal đặt khác vị trí so với ảnh ghép trước đó, và phía trên ô che vẫn còn một dòng chữ mờ. Phóng to để chắc email đã bị che:
+Bash Compare raw and processed author area
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/cmp52.png
+Bash Narrow the cover box and recheck the email area
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/bcheck.png
+Khung thứ ba (lúc gõ lệnh chạy lại) xếp dòng khác hai khung đầu. Kiểm tra lại khung gốc ở thời điểm đó để chắc email không lọt ra ngoài ô che:
+Bash Zoom raw terminal rows at three times
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/rcheck.png
+Ở cả 3 thời điểm, dòng Author đều nằm đúng hàng bị che. Kiểm tra thêm đầu đoạn 26 (giây 170–178), lúc kết quả test bắt đầu đẩy các dòng lên:
+Bash Check author line while test output scrolls
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/scheck.png
+Bash Shift segment boundary past the author line
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/s26.png
+Đầu đoạn 26 đã không còn dòng Author. Ghép bản hoàn chỉnh:
+Bash Concatenate the final video and make an overview sheet
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/vid/final_sheet.jpg
+Video hoàn chỉnh đã ra, đúng thứ tự cảnh. Cập nhật AI-02:
+Bash Update AI-02 row #52 for the final cut, commit
+Video 1 hoàn chỉnh đã xong: **6 phút 38 giây**, 38 đoạn có phụ đề, không có tiếng. File nằm ở `/home/hg/Videos/HW04_video1_agent_skill_FR-15.mp4` (21 MB, đã ghi đè bản trước).
+
+**3 clip mới được chèn vào đúng chỗ:**
+- **Bảo trì (A), sau đoạn UI mode của T5:** bảng review §5 hàng #2 → `git log` / `git show` tìm commit sửa DT-17 → code đã sửa → gõ lệnh chạy lại → **DT-17 passed ✓**.
+- **Báo cáo 3 trình duyệt (B), sau đoạn prompt T6:** bảng §6 → báo cáo Chromium (tiêu đề `Run by: 23120046` + giờ ISO) → Firefox → WebKit.
+- **GitHub (C), cuối video:** danh sách issue → issue #34 có bình luận HW04 (Changed) kèm ảnh.
+
+**Đã cắt hoặc che:**
+- **Email trong `git show`:** dòng `Author: thhuon <…@gmail.com>` được che bằng một ô đặc. Tôi đã kiểm tra từng khung cho tới lúc dòng này trôi khỏi màn hình; dòng `commit` và `Date` vẫn đọc được.
+- **Lệnh chạy lại thiếu `-g`:** do thiếu `-g`, lệnh chạy cả file và bị ngắt giữa chừng. Video dừng ngay sau khi DT-17 hiện ✓, nên không thấy dòng "interrupted". Phụ đề chỉ ghi "DT-17 passed ✓", không nói đã chạy riêng DT-17.
+- **5 giây đầu clip GitHub:** thanh địa chỉ hiện lịch sử duyệt web của bạn nên đã bỏ.
+- **Trang Firefox không tải được** (khoảng 1 giây): nằm trong đoạn tua ×8 nên chỉ lướt qua.
+
+**Tốc độ:** để tổng vẫn dưới 7 phút, các đoạn cũ được tua nhanh hơn trước (×6–×10). Đoạn trace viewer giữ ×2, UI mode ×3, kết quả chạy lại DT-17 và báo cáo WebKit ×3–×4.
+
+Không có cảnh T8, theo quyết định của bạn. AI-02 #52 đã ghi bản cuối (6b1e15b), đã push.
+
+**Bạn cần làm:**
+1. Xem lại video. Nếu đoạn nào tua quá nhanh, gửi tôi mốc phút:giây để chỉnh.
+2. Tải lên YouTube ở chế độ **Unlisted**, mở thử link bằng cửa sổ ẩn danh, rồi dán link vào `README.md` và `HW04_Report.md`.
+
+Bảng R2/R3 trong `demo/shot_list.md` vẫn ghi yêu cầu thuyết minh áp dụng cho cả video 1. Đề chỉ bắt buộc thuyết minh cho video 2. Bạn muốn tôi sửa bảng này không?
+```
+
+- **Used in:** video 1 (AI-02 Artifact #52)
+
+---
+
+## Prompt061 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 03:45 18/11/2026
+- **Output received:** 03:47 18/11/2026
+- **Feature / step:** Video 1 link; video 2 (Task 2) plan
+- **Purpose:** Dán link video 1 vào báo cáo; chọn một lỗi cụ thể cho video 2 và trình tự quay
+- **Prompt (verbatim):**
+
+```text
+dán link này vào báo cáo: https://youtu.be/Y7RpOnSWS8I
+với shot 2 hãy chỉ ra một lỗi cụ thể và trình bày dễ hiểu trình tự tôi sẽ quyay cho shot này
+```
+
+- **AI output (verbatim):**
+
+```text
+Xem chỗ cần dán link trong README và báo cáo, cùng phần kịch bản video 2 hiện có:
+Bash Find video link placeholders and video 2 plan
+Bash Read README/report video sections and prep notes
+Bash Read video 2 narration script
+Bash Add video 1 link to README and report, commit
+Bash Find line numbers to point at in video 2
+Cập nhật cảnh 2.2 và 2.3 trong `demo/shot_list.md` cùng lời thoại tương ứng trong `demo/narration_script.md` theo lỗi DT-17, thay cho hai phương án A/B trước đây:
+Bash Update video 2 shot list and narration for DT-17
+Kiểm tra `git show --oneline` thật sự không in email:
+Bash Confirm git show --oneline hides the author email
+Bash Check what line contains the @ character
+Đã dán link video 1, và cập nhật kịch bản cảnh 2.2 / 2.3 trong `demo/shot_list.md` cùng lời thoại trong `demo/narration_script.md` (commit bc7d2d1, đã push).
+
+## 1. Link video 1
+
+https://youtu.be/Y7RpOnSWS8I là video Agent Skill, nên tôi dán vào:
+- [README.md](README.md) §3 "Skill demo video";
+- [HW04_Report.md](HW04_Report.md) §10 Agent Skills, kèm mô tả ngắn những gì video có.
+
+Commit f7d8f8c, đã push. Chỗ "Demo video (Task 2)" trong README §2 và báo cáo §9 để trống cho video 2.
+
+## 2. Video 2 – lỗi chọn để kể: DT-17
+
+**DT-17 là gì:** test kiểm tra danh sách danh mục trong form thêm sản phẩm chỉ gồm các danh mục đang có.
+
+**AI sai ở đâu:** test đọc danh sách một lần, ngay lúc tab vừa hiện. Trang Admin lại tải danh mục bằng một request chạy sau đó. Nếu request chậm, test đọc ra danh sách rỗng và báo fail, dù ứng dụng không sai.
+
+**Vì sao trước giờ test vẫn pass:** server chạy trên máy nên trả lời rất nhanh. Khi tôi làm chậm request 1,5 giây, cách đọc cũ trả về danh sách rỗng.
+
+**Đã sửa thế nào:** commit `a278a51` thay bằng `toHaveText`, một assertion tự chờ đến khi danh sách đủ danh mục. Chạy lại 3 lần đều pass.
+
+Tôi chọn lỗi này vì nó nằm trong code `.spec.ts` (có diff trước/sau rõ ràng), chạy lại thấy ngay `3 passed`, và bạn đã quay thử ở video 1.
+
+## Trình tự quay video 2 (một lần quay liền)
+
+**Trước khi bấm quay:**
+- Ctrl+C để tắt `npm run sut`, và đóng Playwright UI mode nếu còn mở. Lần chạy chính thức cần các cổng 3000 / 5173 / 5174 trống để tự khởi động EShop với dữ liệu sạch.
+- Đóng các tab trình duyệt cá nhân.
+- Tắt micro trong OBS. Bạn sẽ đọc lời thoại sau, theo `demo/narration_script.md`.
+
+| Cảnh | Bạn làm | Màn hình cần thấy |
+| --- | --- | --- |
+| **2.1** Danh tính | Terminal: `whoami && hostname && date -Iseconds && pwd` | `hg`, `hg`, giờ quay, thư mục `week04` |
+| **2.2** Giới thiệu script | Mở `tests/product-crud/web.spec.ts`, bôi đen dòng 96–97 và 189 → mở `data/product-crud/web.json`, bôi đen khối DT-25 (dòng 442) → mở `page-objects/AdminProductsPage.ts` dòng 63 và 154 → quay lại `web.spec.ts`, bôi đen dòng 205, 232, 226 | Code đọc file dữ liệu, vòng lặp, một dòng dữ liệu, page object, 3 kiểu assertion |
+| **2.3** Lỗi DT-17 | ① Mở `features/product-crud/automation_design.md`, cuộn tới §5 dòng 221 (hàng #2)<br>② `git log --oneline -- tests/product-crud/web.spec.ts`<br>③ `git show --oneline a278a51`, rồi bấm `q` để thoát<br>④ `npx playwright test tests/product-crud/web.spec.ts --project=chromium -g "DT-17" --repeat-each=3` | Dòng review → 2 commit → diff (dòng xóa / dòng thêm) → `3 passed` |
+| **2.4** Chạy 3 trình duyệt | `whoami && hostname` rồi `npm run feature -- product-crud`. **Quay liền cho đến dòng kết quả của WebKit** (khoảng 5 phút), không dừng quay | Chromium → Firefox → WebKit, số passed / failed của từng trình duyệt |
+| **2.5** Báo cáo HTML | `npm run report -- reports/product-crud/chromium` → chỉ tiêu đề có `Run by: 23120046` + giờ ISO → mở 1 test pass (ví dụ DT-01) → mở 1 test fail (ví dụ DT-24: expected/received và ảnh) → Ctrl+C → làm lại với `firefox`, `webkit` (chỉ cần tiêu đề) | Giờ trên tiêu đề khớp lần chạy vừa xong |
+| **2.6** Bug | Mở §8 của file design (bảng 22 dòng) → mở issue #34 trên trình duyệt, cuộn tới bình luận HW04 | Bảng phân loại; bình luận trên GitHub |
+| **2.7** Kết thúc | Mở §6 của file design | Bảng kết quả |
+
+Có 2 điểm đã chuẩn bị sẵn để tránh lỗi gặp ở video 1:
+- **Lệnh `git show --oneline`** không in email; tôi đã kiểm tra, output không có địa chỉ gmail nào.
+- **Ở bước ④** phải có `-g "DT-17"`. Lần quay video 1 thiếu `-g` nên chạy cả file rồi bị ngắt.
+
+Ở bước ④, `npx playwright test` tự khởi động server khi không có server nào đang chạy, nên không cần bật `npm run sut`.
+
+**Sau buổi quay, gửi tôi tên file video.** Tôi sẽ:
+- commit `reports/product-crud/` ngay, vì đây là bộ báo cáo chính thức;
+- cập nhật §6, bug report và README bằng số liệu của lần chạy chính thức;
+- dựng video theo giọng bạn thu.
+
+Lời thoại 2.2 / 2.3 / 2.6 đã điền sẵn nội dung DT-17 và các số liệu đã biết. Chỉ còn để `⟨…⟩` cho các số và giờ mà buổi quay mới cho ra (cảnh 2.4, 2.5, 2.7).
+```
+
+- **Used in:** `README.md` §3, `HW04_Report.md` §10; `demo/shot_list.md` §3, `demo/narration_script.md` (lỗi DT-17)
+
+---
+
+## Prompt062 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 04:27 18/11/2026
+- **Output received:** 04:30 18/11/2026
+- **Feature / step:** Video 2 (Task 2)
+- **Purpose:** Ghép giọng thuyết minh của SV vào bản quay video 2, khớp với hình
+- **Prompt (verbatim):**
+
+```text
+đã quay xong và audio đã được bỏ vào trong folder week04. hãy chèn âm thanh vào và đảm bảo khớp với hình ảnh
+```
+
+- **AI output (verbatim):**
+
+```text
+Tìm video quay và các file âm thanh:
+Bash Find new audio files and the video 2 recording
+Bash Probe video/audio, check STT tools and run times
+Bash Contact sheets of the video 2 recording
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/v2/sheets/v_01.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/v2/sheets/v_02.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/v2/sheets/v_03.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/v2/sheets/v_04.jpg
+Bash Zoom terminal at key times in video 2
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/v2/tcheck.png
+Bash Detect silences in the narration audio
+Bash Silence detection at higher thresholds
+Bash Install faster-whisper in a scratch venv
+Bash Check for uv or pip availability
+Máy thiếu `venv`. Cài faster-whisper vào một thư mục riêng trong scratchpad bằng `pip --target`, để không đụng tới Python hệ thống:
+Bash Install faster-whisper into a scratch target dir
+Bash Estimate scene timings from narration word counts
+Tôi chưa ghép audio. Có hai việc cần bạn quyết định trước.
+
+## 1. Video thiếu cảnh chạy 3 trình duyệt (cảnh 2.4)
+
+Cảnh trong video gốc `~/Videos/2026-11-18 04-05-47.mp4` (8:58):
+
+| Thời điểm | Nội dung | Cảnh |
+| --- | --- | --- |
+| 0–12s | `whoami && hostname && date` (04:05:50) | 2.1 |
+| 12–186s | `web.spec.ts` → `web.json` (DT-25) → page object → assertion | 2.2 |
+| 186–345s | §5 → `git log` → `git show --oneline a278a51` → chạy lại DT-17 | 2.3 |
+| 345–352s | `whoami` lần 2 (04:11:24) | (đầu 2.4) |
+| 352–470s | Báo cáo Chromium (DT-10 fail), Firefox, WebKit | 2.5 |
+| 474–516s | Issue #34 và bình luận HW04 | 2.6 |
+| 516–538s | Bảng §6 | 2.7 |
+
+**Vấn đề:**
+- **Không có lệnh `npm run feature -- product-crud`.** Các báo cáo mở trong video là của lần chạy T6 (`2026-11-17T19:15:21Z`, tức 02:15 sáng nay); thư mục `reports/product-crud/` cũng chưa có báo cáo mới.
+  - Đề Task 2 yêu cầu video cho thấy script **chạy từ đầu đến cuối trên nhiều trình duyệt** (R4, R5).
+  - Video 1 cũng không có cảnh chạy này, nên hiện chưa video nào đáp ứng hai yêu cầu đó.
+- **Bước chạy lại DT-17 thiếu `--repeat-each=3`**, nên màn hình hiện `1 passed`. Lời thoại tôi soạn có câu "chạy lại ba lần, cả ba lần đều pass". Nếu bạn đọc đúng câu đó thì lời và hình không khớp.
+
+**Đề xuất:** quay lại một đoạn khoảng 6–7 phút, gồm cảnh 2.4 và 2.5:
+1. Ctrl+C để tắt `npm run sut`.
+2. Gõ `whoami && hostname && date -Iseconds`.
+3. Gõ `npm run feature -- product-crud` và quay liền cho tới dòng kết quả của WebKit.
+4. Mở 3 báo cáo vừa sinh ra: tiêu đề sẽ có giờ của lần chạy mới.
+
+Tôi sẽ thay đoạn 345–470s bằng đoạn mới, phần chờ chạy tua ×8. Bộ báo cáo mới này sẽ là bộ chính thức để commit. Nếu muốn khớp lời "ba lần" ở cảnh 2.3, quay thêm vài giây lệnh có `--repeat-each=3`; nếu không, tôi đổi phụ đề và bạn đọc lại câu đó.
+
+## 2. Tôi chưa biết câu nào nằm ở giây nào trong audio
+
+File `New Recording.m4a` dài 8:04, có giọng (mức trung bình −31,6 dB) và nhiều khoảng lặng ngắn. Để khớp với hình, tôi cần biết mỗi cảnh bắt đầu ở giây nào trong audio.
+
+Lệnh cài công cụ nhận dạng giọng nói chạy trên máy (faster-whisper) đã bị chặn quyền, nên tôi không cài.
+
+Ước lượng theo số chữ trong lời thoại và các khoảng lặng dài:
+
+| Cảnh | Ước lượng bắt đầu trong audio | Khoảng lặng gần nhất |
+| --- | --- | --- |
+| 2.2 | khoảng 44s | 44,2–45,5s |
+| 2.3 | khoảng 176s | 176,7–181,0s (4 giây) |
+| 2.4 | khoảng 291s | 289,0–293,5s |
+| 2.5 | khoảng 355s | 351–352,9s hoặc 357,5–359,4s |
+| 2.6 | khoảng 415s | 413,7–415,1s |
+| 2.7 | khoảng 445s | 442,7–448,1s (5,4 giây) |
+
+Nếu audio có đoạn lời cho cảnh 2.4 ("Bây giờ em chạy script trên cả ba trình duyệt…") mà video lại không có cảnh chạy, thì không cách ghép nào làm lời và hình khớp nhau được.
+
+**Bạn chọn một trong ba cách:**
+1. **Cho phép cài faster-whisper**, chỉ vào thư mục scratchpad và không gửi audio ra ngoài. Tôi tự tìm mốc từng câu và ghép chính xác. Cách này chính xác nhất.
+2. **Gửi tôi giây bắt đầu của 6 cảnh 2.2–2.7 trong file audio** (nghe bằng trình phát nhạc là thấy). Tôi ghép theo các mốc đó.
+3. **Để tôi ghép thử theo bảng ước lượng trên.** Bạn xem rồi báo đoạn nào lệch. Cách này nhanh nhưng có thể phải sửa nhiều lần.
+
+Tôi đề xuất **quay lại cảnh 2.4 và 2.5 trước**, rồi dùng cách 1 hoặc 2 để ghép một lần cho toàn bộ video. Audio hiện có vẫn dùng được nếu bạn đã đọc phần 2.4 khi thu.
+```
+
+- **Used in:** video 2 bản nháp (AI-02 Artifact #53)
+
+---
+
+## Prompt063 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 04:31 18/11/2026
+- **Output received:** 04:44 18/11/2026
+- **Feature / step:** Video 2 (Task 2)
+- **Purpose:** Cài faster-whisper để chép lời và canh thời gian giọng đọc
+- **Prompt (verbatim):**
+
+```text
+cài faster whisper
+```
+
+- **AI output (verbatim):**
+
+````text
+Bạn đã cho phép. Cài faster-whisper vào thư mục riêng trong scratchpad:
+Bash Install faster-whisper into scratch dir (user approved)
+Đã cài xong. Chép lời audio bằng mô hình `small` (tiếng Việt, có mốc thời gian từng câu). Mô hình được tải về thư mục scratchpad; phần chạy để nền:
+Bash Transcribe the narration with timestamps
+Đang chép lời audio. Khi xong, tôi sẽ đối chiếu từng câu với các cảnh trong video.
+Bash Read transcription error output
+Lỗi do phiên bản thư viện đọc audio (PyAV) không khớp. Dùng ffmpeg đổi audio sang WAV 16 kHz trước, rồi đưa thẳng mảng số vào mô hình:
+Bash Convert audio to wav and patch the script
+Bash Transcribe the narration wav with timestamps
+Đang chép lời lại sau khi sửa lỗi đọc audio. Xong tôi sẽ báo.
+Bash Show the timestamped transcript
+Bash Build video segments timed to the narration
+Độ dài từng đoạn hình đã khớp đúng độ dài đoạn lời. Ghép hình và đặt nguyên file audio lên:
+Bash Concatenate and mux narration audio into the draft
+Kiểm tra lại các mốc trong cảnh 2.3, vì bạn nói về diff và commit `a278a51` ở giây 292–331 của audio. Xem terminal trong video từ giây 240 đến 345:
+Bash Terminal sheet of video 2 from 236 to 346 s
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/v2/term_240_345.png
+Bash Remap scene 2.3 segments and rebuild the draft
+Bash Trim before the other repo URL and rebuild draft
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/v2/s3b_last.png
+Khung cuối của đoạn diff đã sạch. Ở video 1, lúc mở GitHub có hiện danh sách lịch sử duyệt web, nên kiểm tra thêm đầu đoạn GitHub (giây 470–478):
+Bash Frames of video 2 at 469–478 s
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/v2/gh.png
+Bash Add AI-02 row #53 for the video 2 draft
+Đã ghép giọng bạn vào video. Đây là **bản nháp, chưa nộp được**, vì bản quay chưa có cảnh script chạy trên 3 trình duyệt mà lời thoại có nói tới. Bản nháp nằm ở `/home/hg/Videos/HW04_video2_DRAFT_audio-sync.mp4` (8:04, đúng bằng độ dài audio).
+
+## Cách khớp lời và hình
+
+faster-whisper chép lời audio kèm mốc từng câu. Tôi chia lời thành các cảnh, rồi tua nhanh hoặc chậm từng đoạn hình cho dài đúng bằng đoạn lời tương ứng:
+
+| Lời bạn nói (giây trong audio) | Hình đặt lên |
+| --- | --- |
+| 0–57: chào, MSSV, whoami/hostname/timestamp | Terminal `whoami && hostname && date` |
+| 57–95: script, data-driven | `web.spec.ts`, `web.json` |
+| 95–135: ví dụ DT-25, mỗi dòng dữ liệu là một test | Khối DT-25 trong `web.json` |
+| 135–180: page object, locator ưu tiên vai trò | `AdminProductsPage.ts` |
+| 180–292: vì sao DT-17 không đáng tin, nguyên nhân do model | Bảng §5 |
+| 292–331: 2 commit, hash a278a51, diff | `git log` → `git show --oneline` |
+| 331–342: chạy lại DT-17 | Lệnh chạy lại → `1 passed` |
+| **342–396: "em chạy script trên cả 3 trình duyệt…"** | **Thẻ "CHỜ QUAY"** |
+| 396–446: kết quả 3 trình duyệt, test pass, test fail | 3 báo cáo HTML |
+| 446–480: trace, bug, bình luận vào issue cũ | Issue #34 |
+| 480–485: kết thúc | Bảng §6 |
+
+Đã cắt đoạn 316–333s của bản quay: lúc đó terminal cuộn lại lịch sử và hiện URL `git@github.com:xyberr01/CSC13114-AWAD-FinalProject.git` của một project khác.
+
+## Còn 2 chỗ lời nói khác với hình
+
+1. **Cảnh 2.4: lời nói đã chạy script nhưng hình không có lần chạy.** Bạn nói "em chạy script trên cả 3 trình duyệt… khởi động EShop… em xin tua nhanh", nhưng bản quay không có lệnh `npm run feature`. Các báo cáo mở ra là của lần chạy T6 lúc 02:15 (`19:15:21Z`), và thư mục `reports/product-crud/` chưa có báo cáo mới. Đặt lời này lên hình không có lần chạy sẽ thành bằng chứng sai, và đề Task 2 bắt buộc phải có lần chạy thật trên nhiều trình duyệt. Vì vậy tôi để thẻ "chờ quay" ở chỗ đó.
+2. **Cảnh 2.3: lời và kết quả chạy lại không khớp.** Lời nói "chạy lại 3 lần trên cả 3 trình duyệt, 3 lần đều pass", nhưng hình chỉ chạy Chromium một lần (`1 passed`).
+
+## Cần quay thêm (không phải thu âm lại)
+
+Trước khi quay: Ctrl+C để tắt `npm run sut`, đóng các tab cá nhân.
+
+**Clip 1, khoảng 1 phút:** chèn vào cuối cảnh 2.3, sửa chỗ lệch số 2.
+```
+npx playwright test tests/product-crud/web.spec.ts -g "DT-17" --repeat-each=3
+```
+Lệnh này không ghi `--project`, nên chạy cả 3 trình duyệt. Màn hình cần thấy **`9 passed`**, đúng như lời "3 lần trên cả 3 trình duyệt".
+
+**Clip 2, khoảng 7 phút:** cảnh 2.4 và 2.5, quay liền.
+1. `whoami && hostname && date -Iseconds`
+2. `npm run feature -- product-crud`, quay liền cho đến dòng kết quả của WebKit.
+3. `npm run report -- reports/product-crud/chromium`: chỉ vào tiêu đề có giờ mới, mở 1 test pass (DT-01) và 1 test fail (DT-10), rồi Ctrl+C.
+4. Làm lại với `firefox` và `webkit`, chỉ cần thấy tiêu đề.
+
+Quay xong, gửi tôi tên 2 file. Tôi sẽ:
+- đặt lời 342–396s lên phần chạy (tua nhanh), và lời 396–446s lên các báo cáo mới, để báo cáo trong video là báo cáo sẽ nộp;
+- commit `reports/product-crud/` làm bộ báo cáo chính thức, cập nhật §6 và bug report theo lần chạy mới;
+- ghép bản cuối.
+
+Lời bạn đã thu dùng được nguyên, không phải thu lại.
+
+AI-02 #53 ghi bản nháp này (fee4e2b), đã push.
+````
+
+- **Used in:** video 2 bản nháp (AI-02 Artifact #53)
+
+---
+
+## Prompt064 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 05:07 18/11/2026
+- **Output received:** 05:10 18/11/2026
+- **Feature / step:** Video 2 (Task 2); product-crud (fC) FR-15 – official run
+- **Purpose:** Ghép 2 clip quay bổ sung (DT-17 lặp 3 trình duyệt, lần chạy chính thức) vào video 2; commit báo cáo chính thức
+- **Prompt (verbatim):**
+
+```text
+đã quay xong là 2 video mới đây trong folder vidoe
+```
+
+- **AI output (verbatim):**
+
+```text
+Bash Find the two new clips and check new report runs
+Bash Sheets for the two new clips
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/v2/clip1.png
+Clip 1 đạt yêu cầu: lệnh có `--repeat-each=3`, 9 dòng chạy trên chromium/firefox/webkit, cuối cùng ra `9 passed (21.0s)` ở khoảng giây 27–32. Xem clip 2:
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/v2/clip2_01.jpg
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/v2/clip2_02.jpg
+Bash Zoom terminal at start and end of clip 2
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/v2/c2check.png
+Bash Check resolution of the three video 2 sources
+Bash Build new 2.3–2.5 segments from the new clips
+Kiểm tra chỗ nối giữa đoạn 08 và 09 để chắc dòng gõ nhầm "Unknown feature" không lọt vào:
+Bash Check the cut between segments 08 and 09
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/v2/join.png
+Bash Mux narration into the final video 2
+Read /tmp/claude-1000/-home-hg-source-software-testing/7ff13abc-1cc2-4f88-9b71-240a4daf7da5/scratchpad/v2/final2.jpg
+Bash Compare official run with T6 and summarize
+Lần chạy chính thức cho kết quả giống hệt T6 trên cả 3 trình duyệt: 41 test, cùng 17 test pass. Commit nguyên trạng bộ báo cáo do công cụ sinh ra:
+Bash Commit official reports and show §6 header
+Bash Get spec commit and summary rows for FR-15
+Bash Record the official run in design §6, commit
+§6 đã ghi lần chạy chính thức (a4d2db9). Cập nhật AI-02 #53 với bản video cuối:
+Bash Update AI-02 row #53 for the final video 2
+Video 2 đã ghép xong giọng của bạn, lời và hình khớp nhau ở mọi cảnh: `/home/hg/Videos/HW04_video2_demo_script_FR-15.mp4` (8:04, 1280×720, 28 MB). Bản nháp trước đó đã xóa.
+
+**Cách khớp lời và hình:** mỗi đoạn hình được tua nhanh hoặc chậm cho dài đúng bằng câu bạn nói, dựa trên mốc thời gian chép từ audio.
+
+| Lời bạn nói (giây trong audio) | Hình |
+| --- | --- |
+| 0–57: chào, whoami/hostname/timestamp | Terminal `whoami && hostname && date` |
+| 57–180: script, data-driven, DT-25, page object | `web.spec.ts` → `web.json` → `AdminProductsPage.ts` |
+| 180–292: vì sao DT-17 không đáng tin | Bảng review §5 |
+| 292–331: 2 commit, hash a278a51, diff | `git log` → `git show --oneline` |
+| 331–342: "chạy lại 3 lần trên cả 3 trình duyệt, đều pass" | **Clip mới:** `--repeat-each=3` → `9 passed` |
+| 342–373: "em chạy script trên 3 trình duyệt… khởi động EShop" | **Clip mới:** `whoami` (04:59:14) → `npm run feature -- product-crud` |
+| 373–395: "em xin tua nhanh" | Lần chạy Chromium → Firefox → WebKit, tua ×12, có nhãn đỏ "Tua nhanh ×12" |
+| 395–406: kết quả 3 trình duyệt giống nhau | Bảng tổng hợp cuối lần chạy |
+| 406–446: báo cáo HTML, 1 test pass, 1 test fail | Báo cáo mới: Chromium `21:59:59.473Z`, DT-01 pass, DT-10 fail, rồi Firefox, WebKit |
+| 446–480: trace, bug, bình luận vào issue cũ | Issue #34 |
+| 480–485: kết thúc | Bảng §6 |
+
+**Đã cắt:**
+- **Đoạn cuộn lịch sử terminal** trong bản quay chính: có hiện URL repo của một project khác.
+- **Lần gõ nhầm `npm run feature --product-crud`** (thiếu dấu cách, báo "Unknown feature"). Dòng báo lỗi vẫn thấy trên màn hình khoảng một giây trong lúc bạn sửa lệnh; đó là thao tác thật nên tôi để nguyên.
+
+**Lần chạy trong video là lần chạy chính thức:**
+- Kết quả giống hệt lần chạy T6 ở từng test: mỗi trình duyệt 41 test, 17 passed, 24 failed, 0 flaky. Tính theo TC: 14 passed, 22 failed.
+- Bộ báo cáo `reports/product-crud/` đã commit nguyên trạng (c3630b6).
+- §6 đã ghi lần chạy chính thức và bảng số liệu do script đếm (a4d2db9).
+- AI-02 #53 đã cập nhật (74bc4e7). Tất cả đã push.
+
+**Bạn cần làm:**
+1. Xem video. Nếu đoạn nào lệch, gửi tôi mốc phút:giây để chỉnh.
+2. Tải lên YouTube ở chế độ **Unlisted**, mở thử bằng cửa sổ ẩn danh, rồi gửi tôi link. Tôi sẽ dán vào README §2 ("Demo video (Task 2)") và HW04_Report §9.
+3. File `week04/New Recording.m4a` hiện chưa được track trong git. Audio gốc không cần nộp: bạn chuyển nó ra khỏi repo, hoặc tôi thêm `*.m4a` vào `.gitignore` nếu bạn muốn.
+
+Dòng C – FR-15 trong bảng tổng kết của README vẫn trống, sẽ điền khi làm bước T8.
+```
+
+- **Used in:** `reports/product-crud/`, `features/product-crud/automation_design.md` §6; video 2 (AI-02 Artifact #53)
+
+---
+
+## Prompt065 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 05:16 18/11/2026
+- **Output received:** 05:16 18/11/2026
+- **Feature / step:** Video 2 (Task 2)
+- **Purpose:** Ghi link YouTube video 2 và mốc thời gian vào README và báo cáo
+- **Prompt (verbatim):**
+
+```text
+đây là link youtube https://www.youtube.com/watch?v=6ro7cYrT5Ew
+```
+
+- **AI output (verbatim):**
+
+```text
+Bash Show report §9 and README video line
+Dán link video 2 vào README §2 và HW04_Report §9, kèm mốc thời gian từng cảnh lấy từ bản dựng:
+Bash Add video 2 link and timestamps, commit and push
+Đã dán link video 2 vào README và báo cáo (commit a9b0336, đã push):
+- **README §2:** dòng "Demo video (Task 2)", kèm mô tả ngắn: chạy chính thức trên 3 trình duyệt, báo cáo HTML, giọng thật, 8:04, unlisted.
+- **HW04_Report §9:** link, kèm bảng mốc thời gian từng cảnh:
+
+| Mốc | Nội dung |
+| --- | --- |
+| 0:00 | `whoami && hostname && date` |
+| 0:57 | Giới thiệu script, file dữ liệu, page object, 3 kiểu assertion |
+| 3:00 | Lỗi đã sửa: DT-17 (`8be9fac` → `a278a51`) |
+| 5:31 | Chạy lại DT-17 trên 3 trình duyệt: `9 passed` |
+| 5:41 | Lần chạy chính thức `npm run feature -- product-crud` |
+| 6:46 | 3 báo cáo HTML (`Run by: 23120046` + giờ ISO), một test pass, một test fail |
+| 7:26 | Bug: bình luận HW04 trên issue cũ |
+| 8:00 | Tổng kết |
+
+Báo cáo còn ghi rõ: các báo cáo hiện trong video chính là bộ trong `reports/product-crud/` sẽ nộp.
+
+Bạn mở link bằng cửa sổ ẩn danh để chắc video ở chế độ **Unlisted** và xem được khi không đăng nhập.
+```
+
+- **Used in:** `README.md` §2, `HW04_Report.md` §9
+
+---
+
+## Prompt066 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 01:14 18/11/2026
+- **Output received:** 01:15 18/11/2026
+- **Feature / step:** product-crud (fC) FR-15 – T2 environment
+- **Purpose:** Tìm lý do không đăng nhập được Admin web
+- **Prompt (verbatim):**
+
+```text
+tại sao tôi ko thể đăng nhập Admin web
+```
+
+- **AI output (verbatim):**
+
+```text
+Bash Show prompt log context and repo layout
+Bash Inspect SUT layout and admin seed data
+Bash Check login endpoint, DB admin row, admin frontend login
+Bash Show admin login handler, DB admin row, running ports
+Bash Try admin login with both passwords via API
+Bash Find which DB file the running backend uses
+Bash Check admin row in the DB the server actually uses
+Bash Retry admin login with correct password after lock expiry
+Bạn không đăng nhập được vì **tài khoản admin đang bị khóa tạm thời**. Nguyên nhân là đã gõ sai mật khẩu 2 lần, chứ server vẫn chạy bình thường. Tôi vừa đăng nhập lại bằng API với `admin@eshop.com` / `Admin123!` và nhận "Login successful", nên bạn đăng nhập lại ngay bây giờ được.
+
+**Chuyện gì đã xảy ra**
+
+1. **Mật khẩu `admin123` là sai.** Mật khẩu đúng trong dữ liệu mẫu là `Admin123!`, có chữ A hoa và dấu `!`. `setup_guide.md` ghi `admin123`, đó là một lỗi tài liệu cố ý của SUT.
+2. **Sai 2 lần là khóa luôn.** Trong [server.js:54-57](eshop-sut/backend/server.js#L54-L57), mỗi lần sai cộng `login_attempts + 2`, và khi đạt ≥ 3 thì khóa 3 phút. Lúc tôi kiểm tra, database ghi `login_attempts: 4` và khóa đến 18:15:12 UTC.
+3. **Đang khóa thì gõ đúng cũng bị từ chối.** Server kiểm tra trạng thái khóa trước khi so mật khẩu ([server.js:40-44](eshop-sut/backend/server.js#L40-L44)), nên lúc đó `Admin123!` cũng bị trả về 403.
+4. **Trang Admin che mất lý do.** Lỗi nào trang cũng chỉ báo "Đăng nhập thất bại" ([App.jsx:71-72](eshop-sut/frontend-admin/src/App.jsx#L71-L72)), nên bạn không thấy chữ "Tài khoản đã bị khóa".
+
+**Hai điều cần lưu ý**
+
+- Server đang chạy ở cổng 3000/5173/5174 là bản trong `week04/eshop-sut/`, **không phải** bản trong `seminar/eshop-security-t09-group05/eshop-sut/`. Hai bản dùng hai file `database.sqlite` khác nhau. Nếu bạn sửa hay reset bản seminar thì server đang chạy không bị ảnh hưởng.
+- Bộ đếm lần sai chỉ về 0 khi đăng nhập đúng. Hết 3 phút khóa mà gõ sai thêm 1 lần nữa là bị khóa lại ngay. Nếu bị khóa, hãy đợi 3 phút rồi gõ đúng `Admin123!`. Cách khác là chạy lại `node database.js` để reset dữ liệu mẫu, nhưng làm vậy sẽ xóa dữ liệu bạn đã tạo.
+
+Ba điểm 2–4 ở trên có thể dùng làm finding cho seminar bảo mật: logic khóa tài khoản lỗi, khóa rồi vẫn bị chặn dù đúng mật khẩu, và giao diện che lý do thất bại. Tôi có thể ghi chúng vào log nếu bạn muốn.
+```
+
+- **Used in:** not used (environment help)
+
+---
+
+## Prompt067 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 01:23 18/11/2026
+- **Output received:** 01:23 18/11/2026
+- **Feature / step:** product-crud (fC) FR-15 – T2 environment
+- **Purpose:** Reset cơ sở dữ liệu của SUT
+- **Prompt (verbatim):**
+
+```text
+reset lại db
+```
+
+- **AI output (verbatim):**
+
+```text
+Bash Read the DB reset script
+Tôi sẽ reset database mà server đang chạy dùng (bản `week04/eshop-sut`). Trước đó tôi sao lưu file cũ vào scratchpad.
+Bash Back up DB, reseed it, verify admin login
+Tôi đã reset database mà server đang chạy dùng (`week04/eshop-sut/backend/database.sqlite`) về dữ liệu mẫu ban đầu. Server không cần khởi động lại.
+
+**Dữ liệu sau khi reset:**
+- Còn đúng 2 tài khoản, cả hai không bị khóa (`login_attempts = 0`):
+  - Admin: `admin@eshop.com` / `Admin123!`
+  - User: `test@eshop.com` / `Test1234!`
+- Có 5 sản phẩm và 4 coupon mẫu. Không còn đơn hàng nào.
+
+Tôi đã thử đăng nhập admin qua API sau khi reset và nhận "Login successful".
+
+**Bản sao lưu:** database cũ (gồm cả đơn hàng và tài khoản bạn tạo trước đó) được lưu tại `/tmp/claude-1000/-home-hg-source-software-testing/5ca4a35d-6e44-4433-bc06-8e544ac2f37b/scratchpad/database.week04.backup.sqlite`. Thư mục này có thể bị xóa khi khởi động lại máy, nên nếu cần giữ thì hãy chép nó ra chỗ khác.
+
+Database của bản `seminar/eshop-security-t09-group05/eshop-sut` thì tôi không động vào, vì server không dùng bản đó.
+```
+
+- **Used in:** not used (environment help)
+
+---
+
+## Prompt068 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 05:17 18/11/2026
+- **Output received:** 05:19 18/11/2026
+- **Feature / step:** Submission check
+- **Purpose:** Rà các báo cáo và tài liệu trước khi nộp, liệt kê chỗ còn thiếu
+- **Prompt (verbatim):**
+
+```text
+check lại các báo cáo, docs để tôi có thể nộp bài
+```
+
+- **AI output (verbatim):**
+
+```text
+Bash List workspace top-level folders
+Bash Inspect week04 folder and git status
+Skill
+Bash Read submission-related memories
+Bash Read HW04 brief and project CLAUDE.md
+Bash Read the HW04 plan
+Bash Read README and main report
+Bash Read AI critique and AI forms
+Bash Run the summary script and list reports
+Đang rà các file nộp HW04 (README, báo cáo chính, AI-02/03/05, AI Critique, bug report, PLAN D5). Đã thấy vài chỗ còn trống, đang kiểm tra tiếp các phần còn lại.
+Bash Check commits, cleanup state, placeholders
+Bash Read AI-02 structure and sections 4-6
+Bash Inspect product-crud design, bug report, prompt log
+Bash Read rest of bug overview and product-crud design §5-§8
+Bash Check report titles, unlogged prompts, latest commits
+Bash Check Run by title in results.json
+Bash Check FR-15 selection and AI-02 verdict counts
+Bash Count FR-15 selected TCs and automation status
+Bash Check trailers, video checklist, ignored files
+Đã rà xong. Phần đã ổn thì không phải làm lại, nhưng **bài chưa nộp được**: báo cáo chính còn thiếu cả phần FR-15, AI Critique còn trống, repo vẫn đang private.
+
+## Phần đã ổn
+- **9 báo cáo HTML** (3 feature × 3 trình duyệt) đều có `Run by: 23120046` kèm giờ ISO.
+- **Commit:** 14 commit có sửa `.spec.ts` (đề cần ≥ 8). Không commit nào có trailer `Co-Authored-By`.
+- **Bug report:** BUG-01 … BUG-39 khớp với các issue và comment. Tổng là 33 Confirmed, 4 Changed, 2 New.
+- **Hai video** đã có link trong README và báo cáo.
+
+## Việc mình làm được (từ số liệu đã có)
+Bạn đồng ý thì mình làm luôn.
+
+1. **[README.md](week04/README.md) §2:** dòng C và dòng Total đang trống. Lấy từ `npm run summary`:
+   - C (FR-15): 36 / 36 / 14 / 22 / 3 lần chạy, bug 20 / 2 / 0.
+   - Total: 86 / 86 / 23 / 63 / 9 lần chạy, 39 bug.
+2. **[HW04_Report.md](week04/HW04_Report.md)** còn thiếu nhiều mục:
+   - §2 Approach còn trống.
+   - §5 FR-15 trống cả 5.1–5.3.
+   - §6, §7 và §8 mới có FR-08, còn thiếu FR-03 và FR-15.
+3. **[AI-02](week04/AI-02_AI_Audit_Report.md) §4** chưa cập nhật: đang ghi 46 artifact (41 VALID, 5 INCOMPLETE), thực tế có 66 dòng (61 VALID, 5 INCOMPLETE).
+4. **[prompt_log.md](week04/prompt_log.md):** Prompt055 còn đánh dấu UNFINISHED. Các prompt từ 02:44 đến 05:16 ngày 18/11 (dựng video, chạy chính thức, thêm link) chưa được log, nên dòng #52 và #53 của AI-02 vẫn ghi "logged later".
+5. **[product-crud design](week04/features/product-crud/automation_design.md) §7:** bảng đang trống, cần ghi "none, cả 36 TC đều tự động hóa".
+6. **Dọn trước khi nộp (PLAN D5):**
+   - Xóa 9 file `*.vi.md` và đề bài `HW04_Automation_Testing_*`.
+   - Sửa các chỗ còn nhắc tới chúng (README §3, `skills/README.md`, `CLAUDE.md`).
+7. **Tạo các file nộp còn thiếu:** `git_log.txt` và thư mục `pdf/` (README và báo cáo đã link tới nhưng chưa có).
+
+## Việc bạn phải tự làm
+- **AI Critique** (200–300 từ) trong [AI_Critique.md](week04/AI_Critique.md) đang trống. Mình có thể soạn bảng tổng hợp bằng chứng từ các bảng review §5 của 3 feature, còn đoạn văn bạn tự viết.
+- **AI-02:** §5 Kết luận và §6 Disclosure. Ngoài ra còn 32 ô `[SV điền]` ở cột 5, cột 3 cần bạn xác nhận verdict, và mục Ngày / Chữ ký.
+- **[AI-03](week04/AI-03_AI_Disclosure_Form.md)** gần như trống (mục 1–6 và phần cam đoan).
+- **[AI-05](week04/AI-05_AI_Privacy_Checklist.md):** phần 3 chưa tick, chưa điền Ngày.
+- **Điểm tự đánh giá** ở README §4 và số `<XXX>` trong tên file zip.
+- **Đổi repo sang public** (đề §12; hiện vẫn PRIVATE).
+- **Ảnh Issues (PLAN R3):** ảnh `issues-label-hw04.png` chụp ngày 17/11. Bạn đã comment lên #1–#11 (FR-03) và #18–#39 (FR-15), nhưng mới có ảnh chụp comment của FR-08. Đề cần ảnh chụp các bug trên trang GitHub Issues.
+- **Bảng kiểm video** ở [demo/shot_list.md](week04/demo/shot_list.md) §6 chưa điền.
+- **File chưa commit:** `New Recording.m4a` (bản ghi âm của bạn) đừng cho vào repo hay zip. Còn `demo/shot_list.pdf` thì bạn quyết định có nộp hay không.
+
+Bạn muốn mình làm luôn các mục 1–7 không? Mình sẽ commit từng bước và ghi thêm dòng AI-02. Mục 6 (xóa file) mình đề xuất để cuối cùng, sau khi bạn đã đọc lại hết.
+```
+
+- **Used in:** not used (checklist trả lời trong chat)
+
+---
+
+## Prompt069 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 05:21 18/11/2026
+- **Output received:** 05:26 18/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Feature / step:** Submission – documents
+- **Purpose:** Hoàn thiện các file làm được từ kết quả đã có, báo file cần SV sửa; log prompt
+- **Prompt (verbatim):**
+
+```text
+- hoàn thiện các file bạn có thể hoàn thiện từ các kết quả trước, còn lại file nào cần sự chỉnh sửa của tôi thì cho tôi biết
+/logging-ai-prompts
+```
+
+- **AI output (verbatim):**
+
+```text
+Bash Get the runs table from the summary script
+Bash Read FR-03 design not-automated and runs sections
+Bash Read FR-15 design §2-§4
+Bash Read AI-02 table header and last rows
+Bash Read HW03 AI-03 answers and video shot list §4
+Bash List prompt log entries with purpose
+Đã đọc xong các nguồn. Giờ bắt đầu điền: README §2 trước, rồi đến báo cáo chính.
+Bash Fill README test summary rows C and Total
+Bash Commit and push README summary
+README đã xong và đã push. Giờ đến [HW04_Report.md](week04/HW04_Report.md): §2, §5 (FR-15), rồi bổ sung FR-03 và FR-15 vào §6–§8.
+Bash Extract bug overview columns
+Bash Fill report sections 2, 5, 6, 7, 8
+Bash Check the 'in Vietnamese' note in FR-15 design
+Bash Correct the FR-15 not-judged note; view bug summary
+Bash Commit and push the main report
+Báo cáo chính đã đầy đủ. Tiếp theo: §7 của FR-15 design, bảng bằng chứng cho AI Critique và bản nháp AI-03.
+Bash Fill FR-15 design §7, commit, list review rows
+Bash Extract why-AI-missed columns and INCOMPLETE rows
+Bash Read INCOMPLETE AI-02 rows' reasons
+Bash Check verdicts of T4 spec rows
+Bash Find T5 rows in AI-02
+Bash List AI-02 rows still waiting for the student
+Bash Read the stale AI-02 rows in full
+Bash Read the student's prompts cited in the updates
+Bash Update stale AI-02 rows and recount verdicts
+Bash Write the AI Critique evidence sheet
+Bash Commit critique evidence and AI-02 updates
+Bash Read candidate key prompts verbatim
+Đang soạn bản nháp AI-03 (form khai báo AI), trích các prompt quan trọng nguyên văn từ prompt log.
+Bash Read Prompt004 and Prompt010 verbatim
+Bash Draft AI-03 disclosure form
+Bash Fix comment count in AI-03 and commit
+Bash Fill video checklist timestamps and links
+Bash Get current time and AI-02 table end
+Bash Add AI-02 rows and recount totals
+Đã điền xong các file. Giờ chạy skill ghi prompt log (`/logging-ai-prompts`).
+Skill
+Bash List recent session transcripts
+Bash Preview unlogged prompts of recent sessions
+Bash Append the unlogged prompts to the log
+```
+
+- **Used in:** `README.md` §2, `HW04_Report.md` §2, §5 – §8, `features/product-crud/automation_design.md` §7, `AI_Critique.md` Evidence, `AI-03_AI_Disclosure_Form.md`, `AI-02_AI_Audit_Report.md`, `demo/shot_list.md` §6, `prompt_log.md` (AI-02 Artifact #54 – #57)
+
+---
+
+## Prompt070 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 00:28 18/11/2026
+- **Output received:** 00:30 18/11/2026
+- **Feature / step:** checkout (fB) FR-08 – skill update
+- **Purpose:** Đưa các ghi chú rút ra khi làm FR-08 (dữ liệu duy nhất theo spec và lần thử, phiên chạy song song, `--reuse`) vào skill test-automation
+- **Prompt (verbatim):**
+
+```text
+bổ sung các ghi chú đó vào skill
+```
+
+- **AI output (verbatim):**
+
+```text
+Bash Check where the skill lives and its relevant sections
+Skill nằm ở `week04/skills/test-automation/` (`.claude/skills` chỉ là symlink trỏ tới đó). Đọc các đoạn cần sửa: T3, T5, T6 và rubric.
+Bash Read the skill sections on setup, T3, T5, T6 and rubric rows
+Bash Read the rubric numbering, skill headings and Vietnamese counterparts
+Bash Read the Vietnamese T3/T6 text and rubric rows
+Bash Add the three lessons to the skill, its Vietnamese copy and the rubrics
+Commit thay đổi skill (chỉ các file skill), sau đó thêm dòng AI-02 `#Sn`.
+Bash Commit the skill change, add the AI-02 #Sn row, push
+Mình đã bổ sung cả 3 ghi chú vào skill test-automation, cả bản tiếng Anh `SKILL.md` lẫn bản đọc tiếng Việt `SKILL.vi.md`, cùng 2 file rubric. Nội dung viết chung, không gắn với EShop, để skill dùng lại được cho dự án khác.
+
+| Chỗ sửa | Nội dung |
+| --- | --- |
+| **T3 Dữ liệu test** | Khóa định danh dữ liệu test phải khác nhau theo spec, ID dòng, lần chạy và lần thử (chạy lặp `--repeat-each` / retry), ví dụ `{spec}.{id}.{runStart}.{browser}.r{repeatEachIndex}t{retry}@test.local`. Không được dựa vào việc app từ chối dữ liệu trùng: backend có thể cho đăng ký lại e-mail đã có rồi đăng nhập vào tài khoản đầu tiên, khiến 2 test âm thầm dùng chung dữ liệu. |
+| **T5 Review** | Chạy `--repeat-each=3` cũng làm lộ dữ liệu bị dùng chung. Nhóm lỗi Hidden dependency thêm 2 trường hợp: 2 spec cùng mã TC, và 2 lần thử của một test. |
+| **Mục mới "Shared servers and parallel sessions"** | Lần chạy thử ghi vào thư mục riêng (`REPORT_DIR`, `--output`), rồi gộp ngay vào file chính khi không còn phiên nào khác đang chạy. Lần chạy chính thức dùng `--reuse` khi server đang dùng chung, và kiểm tra trước khi chạy. Commit chỉ lấy đường dẫn của mình (`git commit -m … -- <paths>`), và chờ phiên kia commit xong file dùng chung rồi mới ghi vào. |
+| **T6.3 Lần chạy chính thức** | Cho phép `--reuse` khi server dùng chung, nhưng phải ghi rõ là dữ liệu test tự tách các lần chạy. Nếu sửa script sau một lần chạy chính thức thì phải chạy lại cả bộ, và ghi ở §6 bộ nào bị thay và vì sao. |
+| **Rubric mục 11, 24** | Mục 11 kiểm thêm dữ liệu duy nhất theo spec và lần thử. Mục 24 chấp nhận `--reuse` có ghi chú, và yêu cầu nêu các bộ chạy chính thức bị thay. |
+
+- Đã commit (`e20e01c`) và push; AI-02 có thêm dòng **#S11** (`d736aae`).
+- Không chạy lại test nào, vì thay đổi chỉ nằm trong tài liệu skill.
+- Lúc này phiên khác đang sửa `demo/shot_list.md` và `demo/narration_script.md` mà chưa commit; mình không đụng vào 2 file đó.
+
+**Lưu ý cho feature C:** spec FR-03 cũng gặp lỗi e-mail trùng khi chạy lặp, vì mình chép cách đặt e-mail từ FR-03 sang. Skill đã có quy tắc này, nên khi làm FR-15 (đang quay video) agent sẽ làm theo ngay từ T3. Phiên FR-03 có thể sửa lại spec của họ nếu bạn muốn.
+```
+
+- **Used in:** `skills/test-automation/SKILL.md` (AI-02 Artifact #S11)
+
+---
+
+## Prompt071 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 00:33 18/11/2026
+- **Output received:** 00:34 18/11/2026
+- **Feature / step:** Official runs – timing
+- **Purpose:** Hỏi báo cáo HTML chính thức được tạo cuối mỗi feature hay sau khi xong cả 3 feature
+- **Prompt (verbatim):**
+
+```text
+các file báo cáo html được tạo ra vào cuỗi mỗi feature hay sau khi toàn bộ các feature hoàn thành?
+```
+
+- **AI output (verbatim):**
+
+```text
+Cả hai đều đang có, chỉ khác ở bước nào:
+
+- **Cuối mỗi feature (bước T6):** đây là cách FR-03 và FR-08 đã làm. Khi script của feature đó ổn định thì chạy `npm run feature -- <feature>` trên 3 trình duyệt và commit report vào `reports/<feature>/<browser>/`. Report của FR-08 hiện tại là bộ chạy chính thức thứ 4, chạy lúc 22:52–22:56 ngày 17/11.
+- **Sau khi xong cả 3 feature:** PLAN có bước R1 là chạy lại một lần bằng `npm run all` (9 lần chạy = 3 feature × 3 trình duyệt) với database vừa reset, rồi commit lại toàn bộ `reports/`. PLAN nguyên tắc 6 ghi: "Báo cáo HTML chính thức chạy một lần ở cuối, bằng một lệnh, khi script đã ổn định."
+
+Đề bài chỉ yêu cầu mỗi feature chạy trên 3 trình duyệt, mỗi lần chạy có một report HTML hiện "Run by: 23120046". Đề không quy định thời điểm chạy, nên report theo từng feature hiện có đã đạt yêu cầu.
+
+**Mình khuyên vẫn làm R1 ở cuối, vì 2 lý do:**
+1. **Report phải khớp với code nộp.** Các file dùng chung đã đổi sau khi FR-03 chạy chính thức: `LoginPage.ts` và `api/EshopApi.ts` được mở rộng cho checkout, và FR-15 cũng sẽ đổi tiếp. Chạy lại lần cuối thì cả 9 report được tạo từ đúng code trong bản nộp.
+2. **Dữ liệu sạch.** Lúc đó không còn phiên nào chạy song song, nên được bật server mới (`FRESH_SUT=1`). Database sẽ seed lại từ đầu, thay vì `--reuse` như các lần chạy hiện nay.
+
+**Cách làm:** sau khi FR-15 xong T6, tắt các phiên song song và server đang chạy, rồi chạy `npm run all` (khoảng 15 phút). Chạy xong cần cập nhật số liệu §6 của từng feature, README §2 và `HW04_Report.md` §6 theo report mới.
+- Kết quả phải giống các bộ trước. Nếu khác thì quay lại phân loại ở T7 cho feature đó.
+- Các bình luận đã gửi lên issue vẫn giữ nguyên, vì chúng ghi rõ thời gian và commit của lần chạy làm bằng chứng.
+```
+
+- **Used in:** not used (answer in chat)
 
 ---
