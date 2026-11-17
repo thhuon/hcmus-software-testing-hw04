@@ -7,7 +7,7 @@
 | Screens / URLs | Web – Giỏ hàng `http://localhost:5173/cart` → Thanh toán `http://localhost:5173/checkout` |
 | Specs · page objects · API client · data | `tests/checkout/` · `page-objects/` · `api/` · `data/checkout/` |
 | Count | Designed: 17 · Automated: 17 · Not automated: 0 · Assertion patterns: 0 |
-| Prompt log entries | prompt 17/11 (T1, logged later) · prompt 17/11 (T1 decisions, T2 locators, logged later) |
+| Prompt log entries | Prompt016 (T1) · Prompt017 (T1 decisions, T2 locators) · Prompt018 (T2 page objects, BUG-01) · Prompt019 (BUG-01 filing, T3) |
 
 ## 1. Test cases selected (T1)
 

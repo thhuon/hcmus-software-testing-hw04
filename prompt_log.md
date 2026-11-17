@@ -2037,7 +2037,7 @@ Sau khi bạn trả lời 3 câu trên và điền phần codegen:
 > "áp dụng các quyết định, viết page object và API client cho checkout (hoàn tất T2)"
 ```
 
-- **Used in:** `features/checkout/automation_design.md` §1 (commit 63e6e8c), §2 (commit 16da9ad); AI-02 Artifact #15, #16
+- **Used in:** `features/checkout/automation_design.md` §1 (commit 63e6e8c), §2 (commit 16da9ad); AI-02 Artifact #17, #18
 
 ---
 
@@ -2170,7 +2170,7 @@ Bạn trả lời 3 câu ở trên để mình gửi issue. Sau đó:
 > "bắt đầu bước T3 cho checkout: file dữ liệu test (web.json, api.json)"
 ```
 
-- **Used in:** design §1 (commit 7a73bee), §2 (commits 581a82b, 69b2dcc), `page-objects/`, `api/EshopApi.ts`, `bugs/BUG_REPORT.md` BUG-01 (commit 4393e8d); AI-02 Artifact #17, #18
+- **Used in:** design §1 (commit 7a73bee), §2 (commits 581a82b, 69b2dcc), `page-objects/`, `api/EshopApi.ts`, `bugs/BUG_REPORT.md` BUG-01 (commit 4393e8d); AI-02 Artifact #19, #20
 
 ---
 
@@ -2277,6 +2277,6 @@ Không cần lệnh sudo nào. `gh` không tải được ảnh vì GitHub khôn
 > "bắt đầu bước T4 cho checkout: sinh spec web.spec.ts và api.spec.ts từ §1–§3"
 ```
 
-- **Used in:** design §2 (commit 70f6e82), issue #116 + `bugs/BUG_REPORT.md` (commit 7583307), `data/checkout/` + design §3 (commit 65d47f5); AI-02 Artifact #19, #20
+- **Used in:** design §2 (commit 70f6e82), issue #116 + `bugs/BUG_REPORT.md` (commit 7583307), `data/checkout/` + design §3 (commit 65d47f5); AI-02 Artifact #21, #22
 
 ---
