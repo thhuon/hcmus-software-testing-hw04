@@ -157,3 +157,4 @@ Official runs (`summarize-results.mjs --markdown`):
 
 | TC ID | Browsers failing | Assertion (expected vs received) | Verdict | Bug / issue |
 | --- | --- | --- | --- | --- |
+| DT-07 (step 2, typed URL; T2 check, before the spec) | Chromium, Firefox, WebKit | no order can be placed (A6, Q4) vs `POST /api/checkout` `{"items": [], "total_amount": 0}` → 200, order 0 ₫ stored | Product defect (student 17/11) | [BUG-01](../../bugs/BUG_REPORT.md#bug-01) – issue not filed yet |
