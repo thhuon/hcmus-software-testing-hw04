@@ -40,13 +40,13 @@ Copied from the group README §4.3 (first "yes" wins).
 | [BUG-08](#bug-08) | FR-03, FR-01 | Reset API accepts a request with no `newPassword` and changes the password | `tests/forgot-password/api.spec.ts` › "DT-27 – reset without newPassword is rejected", data row `DT-27` in `data/forgot-password/api.json` | Chromium, Firefox, WebKit | Confirmed #8 | [comment on #8](https://github.com/angquoc/software-testing-2026-HW02-group/issues/8#issuecomment-6950014477) | High / High (from #8) |
 | [BUG-09](#bug-09) | FR-22 | Errors of the reset form appear in a browser dialog, not above the submit button | `web.spec.ts` › DT-06, DT-11 … 15, DT-20 … 26, DT-35, BVA-01 … 03 (17 tests) | Chromium, Firefox, WebKit | Confirmed #9 | [comment on #9](https://github.com/angquoc/software-testing-2026-HW02-group/issues/9#issuecomment-6950016053) | Low / Low (from #9) |
 | [BUG-10](#bug-10) | FR-03 | Forgot-password page has no "Quay lại đăng nhập" button | `web.spec.ts` › DT-03 | Chromium, Firefox, WebKit | Confirmed #11 | [comment on #11](https://github.com/angquoc/software-testing-2026-HW02-group/issues/11#issuecomment-6950017417) | Low / Low (from #11) |
-| [BUG-11](#bug-11) | FR-08 | Checkout saves the `total_amount` sent by the client as the order total | `api.spec.ts` › DT-09 … DT-13 (rows of `data/checkout/api.json`) | Chromium, Firefox, WebKit | Confirmed #12 | comment on [#12](https://github.com/angquoc/software-testing-2026-HW02-group/issues/12) – not sent yet | Critical / High (from #12) |
-| [BUG-12](#bug-12) | FR-08 | Checkout without `total_amount` saves the order with total `null` instead of computing it from the cart | `api.spec.ts` › DT-02, DT-08 | Chromium, Firefox, WebKit | Confirmed #13 | comment on [#13](https://github.com/angquoc/software-testing-2026-HW02-group/issues/13) – not sent yet | High / High (from #13) |
-| [BUG-13](#bug-13) | FR-08 | Cart is not cleared after a successful checkout (Web cart page and `GET /api/cart`) | `web.spec.ts` › DT-01, BVA-01 … 04; `api.spec.ts` › DT-02, DT-08 … 13 | Chromium, Firefox, WebKit | Confirmed #14 | comment on [#14](https://github.com/angquoc/software-testing-2026-HW02-group/issues/14) – not sent yet | Medium / Medium (from #14) |
-| [BUG-14](#bug-14) | FR-08 | Checkout total on the Web can be edited | `web.spec.ts` › DT-01 | Chromium, Firefox, WebKit | Confirmed #15 | comment on [#15](https://github.com/angquoc/software-testing-2026-HW02-group/issues/15) – not sent yet | Critical / High (from #15) |
-| [BUG-15](#bug-15) | FR-23 | Thanh toán page has no breadcrumb | `web.spec.ts` › DT-01 | Chromium, Firefox, WebKit | Confirmed #16 | comment on [#16](https://github.com/angquoc/software-testing-2026-HW02-group/issues/16) – not sent yet | Low / Low (from #16) |
-| [BUG-16](#bug-16) | FR-08 | A guest who is not logged in can check out on the Web – **not reproduced in HW04** | `web.spec.ts` › DT-03 (passes) | – (passes) | Changed #17 | comment on [#17](https://github.com/angquoc/software-testing-2026-HW02-group/issues/17) – not sent yet | High / High (from #17) |
-| [BUG-17](#bug-17) | FR-07 | Empty cart has no illustration (found again by FR-08 DT-07) | `web.spec.ts` › DT-07 | Chromium, Firefox, WebKit | Confirmed #80 (Related, FR-07, 23120061) | comment on [#80](https://github.com/angquoc/software-testing-2026-HW02-group/issues/80) – not sent yet | Low / – (from #80) |
+| [BUG-11](#bug-11) | FR-08 | Checkout saves the `total_amount` sent by the client as the order total | `api.spec.ts` › DT-09 … DT-13 (rows of `data/checkout/api.json`) | Chromium, Firefox, WebKit | Confirmed #12 | [comment on #12](https://github.com/angquoc/software-testing-2026-HW02-group/issues/12#issuecomment-6955368073) – sent 18/11/2026 by thhuon, with screenshots | Critical / High (from #12) |
+| [BUG-12](#bug-12) | FR-08 | Checkout without `total_amount` saves the order with total `null` instead of computing it from the cart | `api.spec.ts` › DT-02, DT-08 | Chromium, Firefox, WebKit | Confirmed #13 | [comment on #13](https://github.com/angquoc/software-testing-2026-HW02-group/issues/13#issuecomment-6955368743) – sent 18/11/2026 by thhuon, with screenshots | High / High (from #13) |
+| [BUG-13](#bug-13) | FR-08 | Cart is not cleared after a successful checkout (Web cart page and `GET /api/cart`) | `web.spec.ts` › DT-01, BVA-01 … 04; `api.spec.ts` › DT-02, DT-08 … 13 | Chromium, Firefox, WebKit | Confirmed #14 | [comment on #14](https://github.com/angquoc/software-testing-2026-HW02-group/issues/14#issuecomment-6955369373) – sent 18/11/2026 by thhuon, with screenshots | Medium / Medium (from #14) |
+| [BUG-14](#bug-14) | FR-08 | Checkout total on the Web can be edited | `web.spec.ts` › DT-01 | Chromium, Firefox, WebKit | Confirmed #15 | [comment on #15](https://github.com/angquoc/software-testing-2026-HW02-group/issues/15#issuecomment-6955370141) – sent 18/11/2026 by thhuon, with screenshots | Critical / High (from #15) |
+| [BUG-15](#bug-15) | FR-23 | Thanh toán page has no breadcrumb | `web.spec.ts` › DT-01 | Chromium, Firefox, WebKit | Confirmed #16 | [comment on #16](https://github.com/angquoc/software-testing-2026-HW02-group/issues/16#issuecomment-6955370947) – sent 18/11/2026 by thhuon, with screenshots | Low / Low (from #16) |
+| [BUG-16](#bug-16) | FR-08 | A guest who is not logged in can check out on the Web – **not reproduced in HW04** | `web.spec.ts` › DT-03 (passes) | – (passes) | Changed #17 | [comment on #17](https://github.com/angquoc/software-testing-2026-HW02-group/issues/17#issuecomment-6955371671) – sent 18/11/2026 by thhuon, with screenshots | High / High (from #17) |
+| [BUG-17](#bug-17) | FR-07 | Empty cart has no illustration (found again by FR-08 DT-07) | `web.spec.ts` › DT-07 | Chromium, Firefox, WebKit | Confirmed #80 (Related, FR-07, 23120061) | [comment on #80](https://github.com/angquoc/software-testing-2026-HW02-group/issues/80#issuecomment-6955373092) – sent 18/11/2026 by thhuon, with screenshots | Low / – (from #80) |
 
 Outcome: `Confirmed #n` (same behaviour as the existing issue) · `Changed #n` (behaviour differs; say how) · `New #n`.
 
@@ -67,7 +67,7 @@ Outcome: `Confirmed #n` (same behaviour as the existing issue) · `Changed #n` (
 | Actual | Step 3: "Xác Nhận Đơn Hàng" with an empty "Sản phẩm:" list, total `0`, "Tổng thanh toán: 0 ₫", "Xác Nhận Thanh Toán" enabled. Step 4: the Web sends `{"items": [], "total_amount": 0, "coupon_id": null}` → 200 `{"message": "Checkout successful", "orderId": 13}`; "Thanh toán thành công!" is shown. Step 5: a new order `{"total_amount": 0, "status": "pending", "shipping_address": null}`. Same on the three browsers (orders 13, 15, 17) |
 | Evidence | [empty checkout page](screenshots/DT-07_empty-checkout_chromium.png) · [after the click](screenshots/DT-07_empty-checkout-success_chromium.png) (Chromium); automated run: [DT-07 Web failure screenshot](screenshots/checkout_DT-07_chromium.png) (success view after the empty checkout) · [DT-07 Web report entry](screenshots/checkout_DT-07-web_report_chromium.png) (own orders: expected 0, received 1, `total_amount` 0) · [DT-07 API report entry](screenshots/checkout_DT-07-api_report_chromium.png) (expected 0, received 1, `total_amount` `null`) |
 | Outcome | New – no HW02 issue covers it (rejected candidates: #14 cart not cleared after checkout, #13 checkout without `total_amount`, #12 client `total_amount` stored: other requirement sentences / behaviours; #74 Web cart vs `GET /api/cart`: FR-07) |
-| Tracker | [#116](https://github.com/angquoc/software-testing-2026-HW02-group/issues/116) – filed 17/11/2026 by thhuon, labels `severity: medium`, `platform: web`, `technique: EP`, `pool: B`, `hw: HW04`; automated evidence (Web and API): comment on #116 – not sent yet |
+| Tracker | [#116](https://github.com/angquoc/software-testing-2026-HW02-group/issues/116) – filed 17/11/2026 by thhuon, labels `severity: medium`, `platform: web`, `technique: EP`, `pool: B`, `hw: HW04`; automated evidence (Web and API): [comment on #116](https://github.com/angquoc/software-testing-2026-HW02-group/issues/116#issuecomment-6955372327) – sent 18/11/2026 |
 | Severity / Priority | Medium / Medium (SV xác nhận 17/11): the rule "an order needs products" is broken, the user can avoid it by not typing the URL; no data of others is touched |
 
 ### BUG-02
@@ -248,7 +248,7 @@ Outcome: `Confirmed #n` (same behaviour as the existing issue) · `Changed #n` (
 | Actual | Step 1: `200 {"message":"Checkout successful","orderId":…}`. Assertion "a new order carries the server total 126000000, never the client value": received `1000` / `200000000` / `0` / `-1000` / `"abc"`. The cart still has 3 lines (BUG-13). Same on the three browsers |
 | Evidence | [DT-09 report entry](screenshots/checkout_DT-09_report_chromium.png) · [DT-13 report entry](screenshots/checkout_DT-13_report_chromium.png) (API tests have no page) |
 | Outcome | Same requirement sentence and same wrong behaviour as #12 (the same five values) |
-| Tracker | comment on [#12](https://github.com/angquoc/software-testing-2026-HW02-group/issues/12) – not sent yet |
+| Tracker | [comment on #12](https://github.com/angquoc/software-testing-2026-HW02-group/issues/12#issuecomment-6955368073) – sent 18/11/2026 by thhuon, with screenshots |
 | Severity / Priority | Critical / High (from #12) |
 
 ### BUG-12
@@ -266,7 +266,7 @@ Outcome: `Confirmed #n` (same behaviour as the existing issue) · `Changed #n` (
 | Actual | Step 1: `200 {"message":"Checkout successful",…}`. Assertion "the new order (A3, A7)": expected `total_amount` 126000000 / 12000000, received `null`. Same on the three browsers |
 | Evidence | [DT-02 report entry](screenshots/checkout_DT-02_report_chromium.png) · [DT-08 report entry](screenshots/checkout_DT-08_report_chromium.png) |
 | Outcome | Same requirement sentence and same wrong behaviour as #13 (also DT-08 there) |
-| Tracker | comment on [#13](https://github.com/angquoc/software-testing-2026-HW02-group/issues/13) – not sent yet |
+| Tracker | [comment on #13](https://github.com/angquoc/software-testing-2026-HW02-group/issues/13#issuecomment-6955368743) – sent 18/11/2026 by thhuon, with screenshots |
 | Severity / Priority | High / High (from #13) |
 
 ### BUG-13
@@ -284,7 +284,7 @@ Outcome: `Confirmed #n` (same behaviour as the existing issue) · `Changed #n` (
 | Actual | Web: assertion "no cart line after the checkout (A8)": expected 0 lines, received 3 (DT-01), 1 / 2 / 3 / 3 (BVA-01 … 04), while the order was stored with the right total. API: `GET /api/cart` still returns all lines. Same on the three browsers |
 | Evidence | [DT-01 failure screenshot](screenshots/checkout_DT-01_chromium.png) (cart page after the checkout) · [BVA-02 failure screenshot](screenshots/checkout_BVA-02_chromium.png) · [BVA-02 report entry](screenshots/checkout_BVA-02_report_chromium.png) · Firefox / WebKit: `reports/checkout/<browser>/screenshots/<TC ID>.png` |
 | Outcome | Same requirement sentence and same wrong behaviour as #14 (#14 has the server cart and the student's Web observation); HW04 adds four boundary carts on the Web (HW02 ran BVA through the API) |
-| Tracker | comment on [#14](https://github.com/angquoc/software-testing-2026-HW02-group/issues/14) – not sent yet |
+| Tracker | [comment on #14](https://github.com/angquoc/software-testing-2026-HW02-group/issues/14#issuecomment-6955369373) – sent 18/11/2026 by thhuon, with screenshots |
 | Severity / Priority | Medium / Medium (from #14) |
 
 ### BUG-14
@@ -302,7 +302,7 @@ Outcome: `Confirmed #n` (same behaviour as the existing issue) · `Changed #n` (
 | Actual | Assertion "the total cannot be typed into": expected 0 editable total fields, received 1 (`<input type="number">`). Typing `1000` changes "Tổng thanh toán" to "1,000 ₫", the amount the Web sends. Same on the three browsers |
 | Evidence | [checkout page](../features/checkout/screenshots/DT-01-checkout-page-chromium.png) · [after typing 1000](../features/checkout/screenshots/DT-01-total-edited-chromium.png) · [DT-01 report entry](screenshots/checkout_DT-01_report_chromium.png) |
 | Outcome | Same requirement sentence and same wrong behaviour as #15 |
-| Tracker | comment on [#15](https://github.com/angquoc/software-testing-2026-HW02-group/issues/15) – not sent yet |
+| Tracker | [comment on #15](https://github.com/angquoc/software-testing-2026-HW02-group/issues/15#issuecomment-6955370141) – sent 18/11/2026 by thhuon, with screenshots |
 | Severity / Priority | Critical / High (from #15) |
 
 ### BUG-15
@@ -320,7 +320,7 @@ Outcome: `Confirmed #n` (same behaviour as the existing issue) · `Changed #n` (
 | Actual | Assertion "breadcrumb on Thanh toán (FR-23)": expected visible, element not found (`getByRole('navigation', { name: /breadcrumb/i })`, no breadcrumb text either). Same on the three browsers |
 | Evidence | [checkout page](../features/checkout/screenshots/DT-01-checkout-page-chromium.png) · [DT-01 report entry](screenshots/checkout_DT-01_report_chromium.png) |
 | Outcome | Same requirement sentence and same wrong behaviour as #16 |
-| Tracker | comment on [#16](https://github.com/angquoc/software-testing-2026-HW02-group/issues/16) – not sent yet |
+| Tracker | [comment on #16](https://github.com/angquoc/software-testing-2026-HW02-group/issues/16#issuecomment-6955370947) – sent 18/11/2026 by thhuon, with screenshots |
 | Severity / Priority | Low / Low (from #16) |
 
 ### BUG-16
@@ -338,7 +338,7 @@ Outcome: `Confirmed #n` (same behaviour as the existing issue) · `Changed #n` (
 | Actual | Passed on the three browsers: (a) dialog "Bạn cần đăng nhập để thanh toán!" and the login page; (b) `POST /api/checkout` without a token → `401 {"error":"Unauthorized"}`, dialog "Lỗi khi thanh toán: Unauthorized"; the number of all orders unchanged after each path |
 | Evidence | [DT-03 report entry](screenshots/checkout_DT-03_report_chromium.png) |
 | Outcome | Changed: #17 (HW02) reported that a guest could add to the cart and check out "như bình thường"; HW04 finds no order on either path, also after "Thoát" from a logged-in session. The defect may be fixed, or HW02 saw a session that was still logged in |
-| Tracker | comment on [#17](https://github.com/angquoc/software-testing-2026-HW02-group/issues/17) – not sent yet |
+| Tracker | [comment on #17](https://github.com/angquoc/software-testing-2026-HW02-group/issues/17#issuecomment-6955371671) – sent 18/11/2026 by thhuon, with screenshots |
 | Severity / Priority | High / High (from #17) |
 
 ### BUG-17
@@ -356,5 +356,5 @@ Outcome: `Confirmed #n` (same behaviour as the existing issue) · `Changed #n` (
 | Actual | Assertion "empty-cart illustration (FR-07)": expected visible, no `img` / `svg` in the page content; the message "Giỏ hàng của bạn đang trống" is there. Same on the three browsers |
 | Evidence | [DT-07 report entry](screenshots/checkout_DT-07-web_report_chromium.png) |
 | Outcome | Same requirement sentence and same wrong behaviour as #80 (another member's FR-07 issue; group README §4.1: no duplicate, a comment marked Related) |
-| Tracker | comment on [#80](https://github.com/angquoc/software-testing-2026-HW02-group/issues/80) – not sent yet |
+| Tracker | [comment on #80](https://github.com/angquoc/software-testing-2026-HW02-group/issues/80#issuecomment-6955373092) – sent 18/11/2026 by thhuon, with screenshots |
 | Severity / Priority | Low / – (from #80) |
