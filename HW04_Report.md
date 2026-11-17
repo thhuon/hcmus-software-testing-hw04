@@ -42,7 +42,7 @@
 
 ### 3.1 Test cases automated
 
-<!-- From features/fA-fr03/automation_design.md §1, §3, §4: count, data file, assertion patterns. -->
+<!-- From features/forgot-password/automation_design.md §1, §3, §4: count, data file, assertion patterns. -->
 
 ### 3.2 Review of the AI-generated scripts
 

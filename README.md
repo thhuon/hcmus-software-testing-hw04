@@ -14,9 +14,9 @@ The same three web features as HW02 (brief §5; group allocation: [HW02 group re
 
 | Slot | Pool | Feature | Frontend | Specs | Data | Automation design |
 | --- | --- | --- | --- | --- | --- | --- |
-| A | Pool A | FR-03 – Quên & đặt lại mật khẩu (2 bước) | Web | `tests/fA-fr03/` | `data/fA-fr03/` | [features/fA-fr03](features/fA-fr03/automation_design.md) |
-| B | Pool B | FR-08 – Thanh toán (Checkout) | Web | `tests/fB-fr08/` | `data/fB-fr08/` | [features/fB-fr08](features/fB-fr08/automation_design.md) |
-| C | Pool C | FR-15 – Quản lý sản phẩm (Product CRUD) | Admin web | `tests/fC-fr15/` | `data/fC-fr15/` | [features/fC-fr15](features/fC-fr15/automation_design.md) |
+| A | Pool A | FR-03 – Quên & đặt lại mật khẩu (2 bước) | Web | `tests/forgot-password/` | `data/forgot-password/` | [features/forgot-password](features/forgot-password/automation_design.md) |
+| B | Pool B | FR-08 – Thanh toán (Checkout) | Web | `tests/checkout/` | `data/checkout/` | [features/checkout](features/checkout/automation_design.md) |
+| C | Pool C | FR-15 – Quản lý sản phẩm (Product CRUD) | Admin web | `tests/product-crud/` | `data/product-crud/` | [features/product-crud](features/product-crud/automation_design.md) |
 
 ## 2. Test summary report
 
@@ -74,5 +74,5 @@ The skills are generic (one per testing topic, sources in [skills/SOURCES.md](sk
 | `prompt_log.md` | Full AI interaction log |
 | `skills/` + `CLAUDE.md` + `automation.config.json` | Agent Skills + the HW04 project profile they read |
 | `demo/shot_list.md` | Shot list and requirement check of the two videos |
-| `playwright.config.ts`, `package.json` | Automation setup (`npm run smoke`, `npm run feature -- fA`, `npm run all`, `npm run summary`) |
+| `playwright.config.ts`, `package.json` | Automation setup (`npm run smoke`, `npm run feature -- forgot-password`, `npm run all`, `npm run summary`) |
 | `git_log.txt` | Git commit log |

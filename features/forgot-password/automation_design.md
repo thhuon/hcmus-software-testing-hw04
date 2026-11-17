@@ -1,11 +1,11 @@
-# fA – FR-03 Quên mật khẩu & Đặt lại mật khẩu (2 bước) – forgot & reset password: automation design
+# FR-03 Quên mật khẩu & Đặt lại mật khẩu (2 bước) – forgot & reset password: automation design
 
 | Field | Value |
 | --- | --- |
 | Requirement | FR-03 – `eshop-sut/README.md` lines 46–60 |
 | Designed test cases | `../week02/features/fA-pool-A/02_domain_testing.md` (34 TC), `03_boundary_value_analysis.md` (10 TC); DT-35 added in HW04 (§1) |
 | Screens / URLs | Web – Đăng nhập `http://localhost:5173/login` → Quên mật khẩu `http://localhost:5173/forgot-password` (Bước 1 email, Bước 2 OTP + mật khẩu mới) |
-| Specs · page objects · API client · data | `tests/fA-fr03/` · `page-objects/` · `api/` · `data/fA-fr03/` |
+| Specs · page objects · API client · data | `tests/forgot-password/` · `page-objects/` · `api/` · `data/forgot-password/` |
 | Count | Designed: 44 + 1 added in HW04 (DT-35) · Automated: 33 · Not automated: 12 · Assertion patterns: 0 |
 | Prompt log entries | Prompt006, Prompt008 (T1) · Prompt009 (T2) |
 

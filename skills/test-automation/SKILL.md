@@ -58,6 +58,8 @@ If a value is missing, ask once and propose adding it to CLAUDE.md.
 | [templates/automation.config.json](templates/automation.config.json) | `automation.config.json` | Feature keys, spec folders, labels, browsers, reports folder, test-case ID pattern |
 | [templates/automation-design.md](templates/automation-design.md) | `features/<feature>/automation_design.md` | The working file of one feature, sections §1–§8 |
 
+`<feature>` is one short, readable name per feature (e.g. `forgot-password`, `checkout`), the same in `features/`, `tests/`, `data/`, `reports/` and as the key in `automation.config.json`. Requirement IDs and group codes go into the design file header, not into folder names.
+
 Scripts (Node ≥ 18, run from the project root):
 
 - `node <skill>/scripts/run-browsers.mjs --config automation.config.json <feature|all> [--browsers chromium,firefox] [--reuse]` — one run per feature × browser, each with its own HTML report and `results.json` in `<reportsDir>/<feature>/<browser>/`. Fresh SUT servers per run unless `--reuse`.

@@ -724,7 +724,7 @@ Bảng đã ghi vào [automation_design.md](features/fA-fr03/automation_design.m
 **Bước tiếp theo:** khi đã chốt 4 quyết định trên, gửi prompt: "bước T2 cho fA: locator và page object cho trang Đăng nhập và Quên mật khẩu (Bước 1, Bước 2)".
 ```
 
-- **Used in:** `features/fA-fr03/automation_design.md` §1 (AI-02 Artifact #8)
+- **Used in:** `features/forgot-password/automation_design.md` §1 (AI-02 Artifact #8)
 
 ---
 
@@ -875,7 +875,7 @@ Trong AI-02, các chỗ sửa theo góp ý của bạn đều ghi **"Chỉnh s�
 **Bước tiếp theo:** gửi prompt "bước T2 cho fA: locator và page object cho trang Đăng nhập và Quên mật khẩu (Bước 1, Bước 2)". Trong bước này bạn sẽ tự chạy `npm run sut` và `npm run codegen` lần đầu.
 ```
 
-- **Used in:** `features/fA-fr03/automation_design.md` §1; `skills/test-automation/` (Overview, "Tools and approaches", rubric 32), `skills/SOURCES.md`; `PLAN.md` A2–A6, D5; `CLAUDE.md`; `package.json` (AI-02 Artifact #8, #9, #S1, #S6, #S7)
+- **Used in:** `features/forgot-password/automation_design.md` §1; `skills/test-automation/` (Overview, "Tools and approaches", rubric 32), `skills/SOURCES.md`; `PLAN.md` A2–A6, D5; `CLAUDE.md`; `package.json` (AI-02 Artifact #8, #9, #S1, #S6, #S7)
 
 ---
 
@@ -915,6 +915,6 @@ Skill
 Bash ls -t ~/.claude/projects/-home-hg-source-software-testing/*.jsonl | head -3; cd /home/hg/source/soft
 ```
 
-- **Used in:** `page-objects/LoginPage.ts`, `page-objects/ForgotPasswordPage.ts`, `api/EshopApi.ts`, `features/fA-fr03/automation_design.md` §2, `PLAN.md`, `CLAUDE.md`, `prompt_log.md` (AI-02 Artifact #10)
+- **Used in:** `page-objects/LoginPage.ts`, `page-objects/ForgotPasswordPage.ts`, `api/EshopApi.ts`, `features/forgot-password/automation_design.md` §2, `PLAN.md`, `CLAUDE.md`, `prompt_log.md` (AI-02 Artifact #10)
 
 ---

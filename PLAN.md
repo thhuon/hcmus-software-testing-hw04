@@ -28,7 +28,7 @@ Thứ tự dưới đây là thứ tự **làm**, không theo thứ tự mục c
 - [x] **S2. Playwright** – `@playwright/test` 1.64.1 (cố định version), cài Chromium, Firefox, WebKit.
 - [x] **S3. Thư viện hệ thống cho WebKit** – SV tự chạy (cần sudo): `sudo apt-get install -y libevent-2.1-7t64 libavif16 libmanette-0.2-0`.
 - [x] **S4. `playwright.config.ts`** – 3 project chromium / firefox / webkit; `webServer` tự bật backend `:3000`, web `:5173`, admin `:5174`; báo cáo HTML có tiêu đề `Run by: 23120046` + timestamp ISO (đề §6 Task 1, §11).
-- [x] **S5. Script chạy** – `npm run feature -- <fA|fB|fC>` chạy feature trên 3 trình duyệt, mỗi lần chạy ra một báo cáo `reports/<feature>/<browser>/`. Cả bài là 9 lần chạy.
+- [x] **S5. Script chạy** – `npm run feature -- <forgot-password|checkout|product-crud>` chạy feature trên 3 trình duyệt, mỗi lần chạy ra một báo cáo `reports/<feature>/<browser>/`. Cả bài là 9 lần chạy.
 - [x] **S6. Smoke test** – `npm run smoke`: API, web, admin. Đạt 9/9 trên Chromium 156.0.8078.4, Firefox 157.0, WebKit 27.2 (17/11).
 - [x] **S7. `CLAUDE.md`** – hồ sơ dự án cho agent: MSSV, URL, thư mục, quy tắc commit / AI-02, repo issue.
 - [x] **S8. Biểu mẫu AI** – khung AI-02, AI-05 (chép từ HW03), `prompt_log.md`, AI-03 (phần đầu). Nội dung AI-03 điền ở giai đoạn 5.
@@ -41,10 +41,10 @@ Mỗi bước 1 prompt + 1 commit, SV review trước khi qua bước sau:
 
 - [ ] **A1. Chọn TC** – ≥ 12 TC từ HW02 (`features/fA-pool-A/` của HW02, có 34 DT + 10 BVA); ghi TC không tự động hóa được và lý do (đề Task 1 ý cuối).
 - [ ] **A2. Khảo sát UI** – AI lấy selector (ưu tiên role / label / text), viết page object. **SV tự dùng:** `npm run sut` rồi `npm run codegen` (ghi lại luồng Quên mật khẩu, so locator của codegen với locator AI chọn), nút Pick locator, ARIA snapshot.
-- [ ] **A3. Dữ liệu** – file `.json` / `.csv` riêng trong `data/fA-fr03/`.
+- [ ] **A3. Dữ liệu** – file `.json` / `.csv` riêng trong `data/forgot-password/`.
 - [ ] **A4. Sinh script** – AI sinh `.spec.ts` data-driven, ≥ 3 kiểu assertion khác nhau (phương pháp: Page Object Model + data-driven + API cho các dòng `Yes (API)`).
-- [ ] **A5. Review & sửa** – chạy trên Chromium; SV sửa selector dễ gãy, assertion yếu, thiếu edge case, wait gây flaky. Ghi bảng "AI sai gì / vì sao" (prompt, giới hạn model, hay đặc điểm feature). **SV tự dùng:** `npm run ui -- tests/fA-fr03` (UI mode, tua từng bước), `npx playwright test tests/fA-fr03 --debug -g "DT-01"` (Inspector), `--repeat-each=3`.
-- [ ] **A6. Chạy 3 trình duyệt** – xử lý lỗi chỉ xảy ra trên Firefox / WebKit. **SV tự dùng:** `npm run report -- reports/fA/<browser>` (mở HTML report), `npm run trace -- <file trace.zip>` (trace viewer, xem DOM / network / console tại bước fail).
+- [ ] **A5. Review & sửa** – chạy trên Chromium; SV sửa selector dễ gãy, assertion yếu, thiếu edge case, wait gây flaky. Ghi bảng "AI sai gì / vì sao" (prompt, giới hạn model, hay đặc điểm feature). **SV tự dùng:** `npm run ui -- tests/forgot-password` (UI mode, tua từng bước), `npx playwright test tests/forgot-password --debug -g "DT-01"` (Inspector), `--repeat-each=3`.
+- [ ] **A6. Chạy 3 trình duyệt** – xử lý lỗi chỉ xảy ra trên Firefox / WebKit. **SV tự dùng:** `npm run report -- reports/forgot-password/<browser>` (mở HTML report), `npm run trace -- <file trace.zip>` (trace viewer, xem DOM / network / console tại bước fail).
 - [ ] **A7. Bug** – test fail do bug thật → đối chiếu các bug FR-03 đã có ở HW02 (`bugs/BUG_REPORT.md` của HW02), ghi vào `bugs/BUG_REPORT.md`.
 - [ ] **A8. Tinh chỉnh skill** – đã có bản nháp 3 skill (`skills/`: test-automation, automation-bug-reporting, recording-test-demo-videos; viết sẵn 17/11, SV review). Sửa skill ở chỗ vướng khi làm A1–A7.
 
@@ -84,7 +84,7 @@ Mỗi bước 1 prompt + 1 commit, SV review trước khi qua bước sau:
 
 | Thư mục / file | Nội dung |
 | --- | --- |
-| `tests/<feature>/*.spec.ts` | Script Playwright (`fA-fr03`, `fB-fr08`, `fC-fr15`), `tests/smoke.spec.ts` |
+| `tests/<feature>/*.spec.ts` | Script Playwright (`forgot-password`, `checkout`, `product-crud`), `tests/smoke.spec.ts` |
 | `page-objects/` | Page object dùng chung (mỗi màn hình một lớp: locator + thao tác) |
 | `api/` | Client gọi API của EShop (chuẩn bị dữ liệu, TC `Yes (API)`, kiểm tra kết quả đã lưu) |
 | `data/<feature>/` | Dữ liệu test `.json` / `.csv` |

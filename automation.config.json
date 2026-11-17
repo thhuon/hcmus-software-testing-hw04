@@ -3,8 +3,8 @@
   "browsers": ["chromium", "firefox", "webkit"],
   "tcIdPattern": "^[A-Z][A-Za-z]*-\\d+",
   "features": {
-    "fA": { "dir": "tests/fA-fr03", "label": "FR-03 Forgot & reset password" },
-    "fB": { "dir": "tests/fB-fr08", "label": "FR-08 Checkout" },
-    "fC": { "dir": "tests/fC-fr15", "label": "FR-15 Product CRUD (admin)" }
+    "forgot-password": { "dir": "tests/forgot-password", "label": "FR-03 Forgot & reset password" },
+    "checkout": { "dir": "tests/checkout", "label": "FR-08 Checkout" },
+    "product-crud": { "dir": "tests/product-crud", "label": "FR-15 Product CRUD (admin)" }
   }
 }

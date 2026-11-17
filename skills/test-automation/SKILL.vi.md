@@ -57,6 +57,8 @@ Nếu thiếu giá trị nào, hỏi một lần và đề xuất thêm nó vào
 | [templates/automation.config.json](templates/automation.config.json) | `automation.config.json` | Key feature, thư mục spec, nhãn, browser, thư mục report, mẫu ID test case |
 | [templates/automation-design.md](templates/automation-design.md) | `features/<feature>/automation_design.md` | File làm việc của một feature, gồm các mục §1–§8 |
 
+`<feature>` là một tên ngắn, dễ đọc cho mỗi feature (ví dụ `forgot-password`, `checkout`), dùng giống nhau ở `features/`, `tests/`, `data/`, `reports/` và làm key trong `automation.config.json`. Mã yêu cầu và mã nhóm ghi ở phần đầu file design, không đưa vào tên thư mục.
+
 Script (Node ≥ 18, chạy từ thư mục gốc của dự án):
 
 - `node <skill>/scripts/run-browsers.mjs --config automation.config.json <feature|all> [--browsers chromium,firefox] [--reuse]` — mỗi cặp feature × browser một lần chạy, mỗi lần có HTML report và `results.json` riêng trong `<reportsDir>/<feature>/<browser>/`. Mỗi lần chạy khởi động server SUT mới, trừ khi có `--reuse`.

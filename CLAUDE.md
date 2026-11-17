@@ -23,11 +23,11 @@ Skills are generic (one per testing topic). Every value that belongs to this hom
 
 ## Features (reused from HW02, brief §5)
 
-| Key | FR | Feature | Frontend | Tests | Data | HW02 test cases |
-| --- | --- | --- | --- | --- | --- | --- |
-| fA | FR-03 | Forgot & reset password (2 steps) | Web | `tests/fA-fr03/` | `data/fA-fr03/` | `../week02/features/fA-pool-A/02_domain_testing.md`, `03_boundary_value_analysis.md` |
-| fB | FR-08 | Checkout | Web | `tests/fB-fr08/` | `data/fB-fr08/` | `../week02/features/fB-pool-B/…` |
-| fC | FR-15 | Product CRUD | Admin web | `tests/fC-fr15/` | `data/fC-fr15/` | `../week02/features/fC-pool-C/…` |
+| Key (folder name) | HW02 pool | FR | Feature | Frontend | Tests | Data | HW02 test cases |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `forgot-password` | fA | FR-03 | Forgot & reset password (2 steps) | Web | `tests/forgot-password/` | `data/forgot-password/` | `../week02/features/fA-pool-A/02_domain_testing.md`, `03_boundary_value_analysis.md` |
+| `checkout` | fB | FR-08 | Checkout | Web | `tests/checkout/` | `data/checkout/` | `../week02/features/fB-pool-B/…` |
+| `product-crud` | fC | FR-15 | Product CRUD | Admin web | `tests/product-crud/` | `data/product-crud/` | `../week02/features/fC-pool-C/…` |
 
 HW02 bugs to compare against: `../week02/bugs/BUG_REPORT.md` (group issues `angquoc/software-testing-2026-HW02-group` #1–#41).
 
@@ -39,10 +39,10 @@ HW02 bugs to compare against: `../week02/bugs/BUG_REPORT.md` (group issues `angq
 - Minimums per feature (brief §6 Task 1): ≥ 12 automated test cases; test data in a separate `.json` / `.csv` file (no inline arrays); ≥ 3 distinct assertion patterns; all 3 browsers.
 - Feature keys and spec folders for the skill scripts: `automation.config.json`. Commands:
   - `npm run smoke` – environment check (add `-- --project=chromium` to limit).
-  - `npm run feature -- fA` – one feature on 3 browsers, HTML report + `results.json` in `reports/fA/<browser>/` (fresh SUT per run; `--reuse` keeps running servers; `--browsers chromium` limits).
+  - `npm run feature -- forgot-password` – one feature on 3 browsers, HTML report + `results.json` in `reports/forgot-password/<browser>/` (fresh SUT per run; `--reuse` keeps running servers; `--browsers chromium` limits).
   - `npm run all` – the 9 official runs (3 features × 3 browsers); `npm run summary` – counts for the README and report.
   - Tools (skill test-automation "Tools and approaches"): `npm run sut` (start the three servers for codegen), `npm run codegen` / `npm run codegen:admin`, `npm run ui -- tests/<dir>` (UI mode), `npm run report -- <report dir>`, `npm run trace -- <trace.zip>`, `npm run init-agents` (Playwright Test Agents; not used in HW04, student 17/11).
-- During development use `npx playwright test tests/fA-fr03 --project=chromium` (output in the ignored `playwright-report/`); only the official runs go to `reports/` and are committed.
+- During development use `npx playwright test tests/forgot-password --project=chromium` (output in the ignored `playwright-report/`); only the official runs go to `reports/` and are committed.
 
 ## Bug reports
 
@@ -54,7 +54,7 @@ HW02 bugs to compare against: `../week02/bugs/BUG_REPORT.md` (group issues `angq
 
 ## Rules for this homework
 
-- **One technique step per prompt, one commit per step**, pushed right away (git-commit-conventions, for this personal repo only). A commit to the HW02 group repo follows the group README §3 (`[<scope>][<step>] Verb …`, e.g. `[docs] Update feature allocation`), as in earlier homeworks. ≥ 8 commits must change `.spec.ts` files (brief §12). **No `Co-Authored-By` trailer**. Remote `git@github-home:thhuon/hcmus-software-testing-hw04.git`, branch `master`.
+- **One technique step per prompt, one commit per step**, pushed right away (git-commit-conventions, for this personal repo only). A commit to the HW02 group repo follows the group README §3 (`[<scope>][<step>] Verb …`, e.g. `[docs] Update feature allocation`), as in earlier homeworks. ≥ 8 commits must change `.spec.ts` files (brief §12). Commit scope = the feature key (`test (forgot-password): …`). **No `Co-Authored-By` trailer**. Remote `git@github-home:thhuon/hcmus-software-testing-hw04.git`, branch `master`.
 - **The student decides** every verdict, severity and "why the AI missed it"; agent proposals are marked `(proposed)` (`(đề xuất)` in AI-02).
 - **Review notes at fix time**: every correction of an AI-generated script goes into `features/<key>/` review table (what was wrong, why the AI missed it: prompt quality, model limitation, feature characteristic) in the same step.
 - **AI-02 row in the same turn as every artifact** (`AI-02_AI_Audit_Report.md` §3, Vietnamese as the course form), committed on its own (`docs (ai): add AI-02 row for <artifact>`). Columns and wording as in HW03 (`../week03/CLAUDE.md`). Skill changes are `Artifact #Sn`.

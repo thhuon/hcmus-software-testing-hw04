@@ -3,7 +3,7 @@
   "browsers": ["chromium", "firefox", "webkit"],
   "tcIdPattern": "^[A-Z][A-Za-z]*-\\d+",
   "features": {
-    "fA": { "dir": "tests/fA-login", "label": "FR-01 Login" },
-    "fB": { "dir": "tests/fB-checkout", "label": "FR-02 Checkout" }
+    "login": { "dir": "tests/login", "label": "FR-01 Login" },
+    "checkout": { "dir": "tests/checkout", "label": "FR-02 Checkout" }
   }
 }
