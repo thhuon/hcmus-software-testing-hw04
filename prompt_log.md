@@ -4049,7 +4049,7 @@ git -C /home/hg/source/software-testing/week04 commit -m "docs (ai): <điều b�
 ## Prompt036 – Claude Code (claude-opus-5-5)
 
 - **Prompt sent:** 22:36 17/11/2026
-- **Output received:** 22:45 17/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Output received:** 22:45 17/11/2026
 - **Feature / step:** checkout (fB) FR-08 – T5 decisions applied, T6 third official set, prompt log
 - **Purpose:** Thực hiện các khuyến nghị (DT-03 đường (b), loại nguyên nhân, tối đa 4 lần bấm), chạy lại bộ chính thức, log prompt
 - **Prompt (verbatim):**
@@ -4061,7 +4061,7 @@ thực hiện theo các khuyến nghị của bạn
 
 - **AI output (verbatim):**
 
-```text
+````text
 Áp dụng cả 3 khuyến nghị: (1) DT-03 dùng cách "Thoát trên trang Thanh toán" và bỏ nhánh `if`; (2) chốt loại nguyên nhân cho 5 dòng ở §5; (3) chốt giới hạn bấm tối đa 4 lần. Sau đó chạy lại bộ chính thức, rồi log prompt. Bắt đầu với (2) và (3) vì chỉ sửa tài liệu.
 Bash Confirm the cause types and the click limit in the design and report
 Giờ sửa DT-03 (dữ liệu + spec). Xem lại đoạn test khách hiện tại trong spec.
@@ -4087,7 +4087,50 @@ Mình đang chờ phiên song song commit file log; khi họ commit xong, mình 
 Bash Check the wait result, then write this session's unlogged prompts
 Bash Preview including the current running turn
 Bash Write Prompt036 as unfinished and list remaining TODO lines
+Bash Fill the TODO fields, link AI-02 #34 and the design header, commit and push
+Cả 3 khuyến nghị đã thực hiện xong, bộ chạy chính thức đã chạy lại, log prompt đã ghi. Mọi thứ đã push.
+
+## Áp dụng khuyến nghị
+1. **DT-03** (`b32d917`)
+   - Đường (b) đổi thành: người dùng đăng nhập, mở trang Thanh toán có giỏ hàng, bấm "Thoát", rồi bấm "Xác Nhận Thanh Toán". Lúc đó người dùng đã là khách nhưng vẫn còn giỏ hàng, đúng như TC yêu cầu.
+   - Đường (a) bỏ đoạn `if`, chỉ ghi lại nút giỏ hàng dẫn tới trang nào.
+   - Chạy lặp 3 lần trên cả 3 trình duyệt: 9/9 pass. Server trả 401 và không tạo đơn nào.
+2. **Loại nguyên nhân ở §5** (`1af2fc5`): #1 và #5 là Feature, #2 và #4 là Model, #3 là Prompt. Đã bỏ hết chữ "(proposed)" và cập nhật `HW04_Report.md` §4.2.
+3. **Nút thêm giỏ**: ghi vào §2 là bấm tối đa 4 lần (trước là 2), do bạn quyết định ngày 17/11.
+
+## Bộ chạy chính thức thứ 3 (22:39–22:44)
+- Vẫn dùng lại server đang chạy (`--reuse`) để không ảnh hưởng phiên FR-03. Trước khi chạy đã kiểm tra không có phiên nào khác đang chạy test và giá sản phẩm vẫn đúng như seed.
+- Kết quả: Chromium, Firefox, WebKit mỗi trình duyệt 18 test, **4 passed, 14 failed, 0 flaky**, giống bộ trước.
+- §6, ảnh header của 3 report, `HW04_Report.md` §4.3 và PLAN B5–B6 đã cập nhật (`1b1414f`). AI-02 thêm dòng #34.
+- Thư mục `playwright-report/` (chỉ dùng cho các lần chạy thử, không lưu trong git) đã bị một lần chạy của phiên khác xóa, nên bản sao report bộ 1 và 2 ở đó không còn. Bộ 2 vẫn nằm trong git (`cc8aee7`), và các ảnh minh họa đã commit vẫn đủ.
+
+## Log prompt (`347b0e9`)
+| Entry | Gửi lúc | Nội dung |
+| --- | --- | --- |
+| Prompt035 | 22:32 → 22:34 | Giải thích 3 câu hỏi cần bạn quyết định |
+| Prompt036 | 22:36 | Prompt hiện tại; tạm đánh dấu UNFINISHED, lần log sau sẽ tự hoàn tất với cùng số |
+
+- Lúc mình định ghi thì `prompt_log.md` đang có Prompt033–034 của phiên FR-03 chưa commit. Mình chờ phiên đó commit xong rồi mới ghi, để không gom nhầm phần của họ vào commit của mình.
+- Các trường của 2 entry mới đã điền đủ. Số prompt đã gắn vào AI-02 #34 và header file thiết kế.
+
+| ID | Score | Evidence | Action |
+| --- | --- | --- | --- |
+| LOG-1 – 5 | 2 | 2 entry mới, nguyên văn, giờ UTC+7, số tiếp sau 034 của phiên kia | – |
+| LOG-6 | 2 | Prompt036 ghi kèm nhãn UNFINISHED vì lượt này chưa kết thúc | Hoàn tất ở lần log sau |
+| LOG-7, 8, 10, 12 | 2 | Không còn TODO; không cần ảnh phiên; chỉ đọc transcript qua script | – |
+| LOG-11 | 2 | Commit của mình đã chạy | – |
+
+**Gate: passed**
+
+**Commit gợi ý:** commit của mình đã chạy. Nếu bạn sửa gì trong log thì commit riêng:
+```bash
+git -C /home/hg/source/software-testing/week04 add prompt_log.md
+git -C /home/hg/source/software-testing/week04 commit -m "docs (ai): <điều bạn đã sửa trong log>"
 ```
+
+## Bước tiếp theo
+> "bắt đầu bước T7 cho checkout: phân loại các test fail và đối chiếu bug HW02"
+````
 
 - **Used in:** design §2, §5 (commit 1af2fc5), `tests/checkout/web.spec.ts` + `data/checkout/web.json` (commit b32d917), `reports/checkout/` + design §6 + `HW04_Report.md` + `PLAN.md` (commit 1b1414f); AI-02 Artifact #34
 
@@ -4215,5 +4258,328 @@ Bash Write this session's pending prompts to the log
 ```
 
 - **Used in:** not used (the label was already in English); `prompt_log.md`
+
+---
+
+## Prompt039 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 22:50 17/11/2026
+- **Output received:** 22:58 17/11/2026
+- **Feature / step:** checkout (fB) FR-08 – T7 failure triage
+- **Purpose:** Phân loại test fail của checkout và đối chiếu với issue HW02 (bước T7)
+- **Prompt (verbatim):**
+
+```text
+tiếp tục thực hiện bước T7, phân loại các TC và đối chiều với các issue trong hw02
+```
+
+- **AI output (verbatim):**
+
+```text
+Bắt đầu T7. Trước hết xem cách feature A trình bày §8 và mục bug, cùng thay đổi mới trong CLAUDE.md về header của file thiết kế.
+Bash Check recent commits, checkout header, and FR-03 §8 format
+Feature A dùng BUG-02 … BUG-10, nên các mục mới của checkout sẽ bắt đầu từ BUG-11. Giờ trích từng assertion fail của bộ chính thức thứ 3 trên cả 3 trình duyệt.
+Bash Extract each failing assertion of the official runs per browser
+Có một điểm khác: DT-07 phần Web ở bộ chính thức nhận **2 đơn**, trong khi lần chạy thử trước chỉ có 1. Xem chi tiết.
+Bash Show the DT-07 Web and DT-09 order details per browser
+Bash Give the Web and API test accounts different e-mail prefixes
+Thêm dòng 6 vào §5, commit, rồi chạy thử 2 test DT-07 cùng lúc để kiểm tra.
+Bash Commit the fix and run both DT-07 tests together on Chromium
+Bash Commit the link, check no other runs and prices, clear the old report folders
+Bash Run the fourth official checkout set on 3 browsers in the background
+Bash Read the HW02 FR-08 issues and the related FR-07 issues
+Đã đọc đủ: các issue HW02 #12–#17 của bạn, các issue FR-07 #73, #79, #80 của bạn cùng nhóm, và #116. Đang chờ bộ chạy chính thức thứ 4 xong.
+Bash Read the fourth set's summary and the DT-07 received counts
+Bash Re-shoot report headers and update §6 for the fourth set
+Giờ viết §8: phân loại từng test fail và đối chiếu với các issue HW02.
+Bash Write §8 triage and commit the fourth official reports with the design
+Bash Update report and plan with the fourth set and the triage, commit
+Bash Add the AI-02 row for T7, commit and push
+Bash Read the T7 rubric criteria
+Bước T7 của checkout đã xong: mọi test fail đều đã được phân loại và đối chiếu với issue HW02. Trong lúc phân loại mình tìm thêm 1 lỗi script, đã sửa và chạy lại bộ chính thức. Chưa gửi gì lên repo nhóm.
+
+## Lỗi script tìm thấy và đã sửa
+- **Nguyên nhân:** test Web DT-07 và test API DT-07 cùng mã TC, nên dùng chung e-mail tài khoản. Backend cho đăng ký trùng e-mail và khi đăng nhập trả về tài khoản tạo trước, nên test Web đọc được cả đơn do test API tạo, báo 2 đơn thay vì 1.
+- Kết luận Fail không đổi, nhưng số liệu "received" bị lẫn dữ liệu của test khác.
+- **Đã sửa:** mỗi spec dùng tiền tố e-mail riêng, `fr08.web.` và `fr08.api.` (`bc0de04`). §5 thêm dòng 6.
+- **Chạy lại bộ chính thức lần 4** (22:52–22:56, vẫn dùng lại server để không ảnh hưởng phiên FR-03): mỗi trình duyệt **4 passed, 14 failed**, và DT-07 giờ nhận đúng 1 đơn (`4f6ee4f`).
+
+## Phân loại (design §8): tất cả là lỗi sản phẩm (đề xuất)
+Expected của mỗi assertion đều trích từ yêu cầu, lỗi lặp lại ở cả 4 bộ chạy và cả 3 trình duyệt, và có ảnh hoặc mục report làm bằng chứng.
+
+| Test | Lỗi thấy được | Issue tương ứng | Kết quả đối chiếu |
+| --- | --- | --- | --- |
+| DT-09 … 13 (API) | Đơn lưu đúng tổng do client gửi: 1000 / 200000000 / 0 / -1000 / "abc" | HW02 #12 | Giống HW02 |
+| DT-02, DT-08 (API) | Thiếu `total_amount` thì đơn lưu tổng `null` | HW02 #13 | Giống HW02 |
+| DT-01, BVA-01 … 04 (Web), DT-02, 08 … 13 (API) | Giỏ không bị xóa sau khi thanh toán | HW02 #14 | Giống HW02; HW04 có thêm bằng chứng trên Web cho 4 giỏ biên |
+| DT-01 | Ô tổng tiền sửa được | HW02 #15 | Giống HW02 |
+| DT-01 | Trang Thanh toán không có breadcrumb | HW02 #16 | Giống HW02 |
+| DT-07 (Web + API) | Giỏ rỗng vẫn tạo được đơn | HW04 #116 | Giống #116; qua API cũng bị (đơn tổng `null`) |
+| DT-07 (Web) | Giỏ rỗng không có ảnh minh họa | #80 (FR-07, của bạn cùng nhóm) | Giống, xem câu hỏi 2 |
+| DT-03 (**pass**) | Khách bị chặn ở cả 2 đường, không có đơn nào | HW02 #17 | **Khác HW02**: lỗi không còn tái hiện |
+
+Ngoài ra có 2 lỗi chỉ ghi lại, không có assertion kiểm: nút thêm giỏ phải bấm 2 lần (#73) và không có badge giỏ hàng (#79).
+
+Mình cũng đã cập nhật `HW04_Report.md` §4.2–4.3, PLAN và AI-02 #37, tất cả đã push.
+
+## AI tự đánh giá (T7)
+
+| # | Điểm | Bằng chứng | Việc cần làm |
+| --- | --- | --- | --- |
+| P1 | 2 | Sửa §5, §6, §8, dữ liệu, report, báo cáo; mỗi phần một commit | – |
+| P4 | 2 | Mọi kết luận ghi (proposed); chưa gửi gì lên repo nhóm | Chờ bạn |
+| P6 | 2 | AI-02 #37, đã push | – |
+| 26 | 2 | Mọi test fail đều có một dòng kết luận ở §8 | – |
+| 27 | 2 | Expected có trích yêu cầu, lỗi lặp lại ở 4 bộ chạy, có ảnh / mục report | – |
+| 28 | 2 | Không assertion nào bị nới để test pass | – |
+
+**Gate: blocked by P4.** Chờ bạn xác nhận phân loại và trả lời các câu hỏi dưới đây.
+
+## Cần bạn quyết định
+1. **Xác nhận phân loại và kết quả đối chiếu**
+   - Tất cả test fail là lỗi sản phẩm, không phải lỗi script.
+   - Với #12, #13, #14, #15, #16, #116: lỗi giống hệt issue đã có, nên chỉ bình luận bằng chứng HW04 vào issue cũ, không tạo issue mới (đúng quy định README nhóm §6).
+   - Với #17: lỗi không còn tái hiện. Skill yêu cầu báo lại cả trường hợp này để nhóm biết lỗi có thể đã được sửa, nên mình đề xuất bình luận "không còn tái hiện ở HW04".
+   - **Khuyến nghị:** đồng ý cả 7 issue như trên.
+2. **#80 (giỏ rỗng không có ảnh) là issue FR-07 của bạn cùng nhóm**
+   - DT-07 của bạn trích câu FR-07 này nên cũng fail ở đây. README nhóm §4.1 quy định mỗi người chỉ báo lỗi trong feature mình phụ trách; nếu gặp lỗi đã có ở feature người khác thì chỉ ghi "Related", không tạo issue trùng.
+   - Lựa chọn: (a) bình luận ngắn "Related" vào #80, kèm ảnh DT-07 và ghi "HW04"; (b) không bình luận, chỉ ghi chú trong bug report của bạn.
+   - **Khuyến nghị (a).**
+3. **Loại nguyên nhân của dòng 6 ở §5** (2 test DT-07 dùng chung e-mail)
+   - Mình đề xuất **Model**: ở lần sửa trước, AI chỉ làm e-mail khác nhau giữa các lần chạy lặp, mà không tính tới trường hợp một mã TC xuất hiện ở cả 2 spec.
+   - Bạn đồng ý hay chọn loại khác?
+
+## Bước tiếp theo
+Sau khi bạn trả lời, mình dùng skill automation-bug-reporting để:
+- ghi các mục BUG-11 … BUG-16 vào `bugs/BUG_REPORT.md` (BUG-02 … 10 là của FR-03);
+- chụp ảnh mục report của các test API;
+- soạn nội dung bình luận cho từng issue để bạn duyệt trước khi gửi.
+
+> "ghi bug report và soạn bình luận cho các issue checkout"
+```
+
+- **Used in:** `data/checkout/` (commit bc0de04, lỗi script DT-07), `reports/checkout/` + design §6, §8 (commit 4f6ee4f), `HW04_Report.md` + `PLAN.md` (commit 62dd349); AI-02 Artifact #37
+
+---
+
+## Prompt040 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 23:11 17/11/2026
+- **Output received:** 23:14 17/11/2026
+- **Feature / step:** checkout (fB) FR-08 – bug report entries (automation-bug-reporting step 1)
+- **Purpose:** SV xác nhận phân loại; ghi BUG-11 … BUG-17, soạn 8 bình luận (#12 … #17, #116, #80)
+- **Prompt (verbatim):**
+
+```text
+- tôi đã check các test fail đều là lỗi sản phẩm, ok với 7 issue nhưu bạn đã đề cập
+- comment vào issue của bạn cùng nhóm cho TC 80
+- còn lại đồng ý với các đề xuất của bạn
+- dùng skill /automation-bug-reporting cho các issue của feature này
+```
+
+- **AI output (verbatim):**
+
+````text
+Skill
+Bash Read an FR-03 HW04 comment, the screenshot names and a BUG entry
+Bash Read issue labels and the test ids in the Chromium report
+Bash Write a report-entry screenshot script and check the JSON test keys
+Bash Capture report entries and copy failure screenshots into bugs/screenshots
+Read /home/hg/source/software-testing/week04/bugs/screenshots/checkout_DT-09_report_chromium.png
+Ảnh mục report rõ ràng. Giờ ghi lại quyết định của bạn (phân loại ở §8, dòng 6 ở §5) và viết các mục BUG-11 … BUG-17 vào bug report.
+Bash Check the bug report structure and current last entries
+Bash Read the overview header and the BUG-01 entry
+Bash Read HW02 severities/priorities and the #80 expected/actual text
+Bash Write BUG-11 to BUG-17 into the bug report
+Thêm vào BUG-01 bằng chứng của lần chạy tự động. Ghi quyết định của bạn vào §8, §5 và gắn mã BUG vào §8.
+Bash Add automated evidence to BUG-01, confirm verdicts in the design, commit
+Soạn nội dung 8 bình luận theo mẫu skill (giống cách phiên FR-03 đã gửi). Ảnh sẽ chèn vào sau khi tải lên.
+Bash Draft the eight comment bodies in the scratchpad
+Commit dòng AI-02 rồi push.
+Bash Add the AI-02 row, commit and push
+Mục bug của checkout đã ghi xong: BUG-11 … BUG-17, cộng thêm bằng chứng tự động cho BUG-01. 8 bình luận đã soạn sẵn nhưng **chưa gửi** lên repo nhóm, chờ bạn duyệt.
+
+## Đã ghi vào `bugs/BUG_REPORT.md` (commit `69b972a`)
+
+| HW04 | Issue | Kết quả | Test | Severity / Priority (lấy từ issue cũ) |
+| --- | --- | --- | --- | --- |
+| BUG-11 | #12 Lưu `total_amount` do client gửi | Confirmed | DT-09 … 13 (API) | Critical / High |
+| BUG-12 | #13 Thiếu `total_amount` thì tổng đơn là `null` | Confirmed | DT-02, DT-08 (API) | High / High |
+| BUG-13 | #14 Giỏ không bị xóa sau khi thanh toán | Confirmed | DT-01, BVA-01 … 04 (Web), DT-02, 08 … 13 (API) | Medium / Medium |
+| BUG-14 | #15 Ô tổng tiền sửa được | Confirmed | DT-01 | Critical / High |
+| BUG-15 | #16 Không có breadcrumb | Confirmed | DT-01 | Low / Low |
+| BUG-16 | #17 Khách thanh toán được | **Changed**: lỗi không còn tái hiện | DT-03 (pass) | High / High |
+| BUG-17 | #80 Giỏ rỗng không có ảnh (FR-07, bạn cùng nhóm) | Confirmed, ghi "Related" | DT-07 (Web) | Low / – |
+| BUG-01 | #116 Giỏ rỗng vẫn đặt được đơn | Thêm bằng chứng tự động (Web + API) | DT-07 Web, DT-07 API | Medium / Medium |
+
+- **Ảnh:** 12 ảnh mới trong `bugs/screenshots/checkout_*`, gồm ảnh trang lúc test fail và ảnh mục trong report HTML. Test API không có trang web nên chỉ có ảnh mục report. Tên có tiền tố `checkout_` để không ghi đè ảnh `DT-01_chromium.png` … của FR-03.
+- **Quyết định của bạn đã ghi vào file thiết kế:** §8 bỏ chữ "(proposed)", gắn mã BUG cho từng issue; §5 dòng 6 ghi Model. AI-02 thêm dòng #38. Đã push.
+
+## Nội dung bình luận (chờ duyệt)
+
+Toàn bộ 8 bình luận nằm ở `/tmp/claude-1000/-home-hg-source-software-testing/d83bae80-f26f-4f2b-9278-13e75bf75654/scratchpad/comments/ALL.md`. Bình luận nào cũng theo cùng mẫu với các bình luận HW04 bạn đã gửi cho FR-03. Ví dụ bình luận cho #14:
+
+```markdown
+**HW04 – automated re-test** (Confirmed)
+
+- **Script:** `web.spec.ts` › DT-01, BVA-01 … BVA-04 (Web cart page after the checkout); `api.spec.ts` › DT-02, DT-08 … DT-13 (`GET /api/cart`)
+- **Browsers:** Chromium 156.0.8078.4 ✗ · Firefox 157.0 ✗ · WebKit 27.2 ✗ (Playwright 1.64.1)
+- **Assertion:** expected no cart line after a successful checkout — received 3 lines (DT-01), 1 / 2 / 3 / 3 lines (BVA-01 … 04) on the Web cart page while the order was stored with the right total; `GET /api/cart` still returns every line
+- **Report:** `reports/checkout/<browser>/index.html` – runs 2026-11-17T15:52:03.425Z (Chromium), 15:53:24.511Z (Firefox), 15:54:58.834Z (WebKit); commit `4f6ee4f`, specs at `bc0de04`
+- **Difference from this issue:** none – same behaviour; HW04 adds the Web cart page for four boundary carts (1 and 2 lines, quantity 1 and 2; HW02 ran the BVA cases through the API)
+- **Screenshot:** (3 ảnh: DT-01, BVA-02 lúc fail, BVA-02 mục report)
+
+Reporter: HỒ THÙY HƯƠNG – 23120046
+```
+
+Ý chính của 7 bình luận còn lại:
+- **#12:** client gửi 1000 / 200000000 / 0 / -1000 / "abc" thì đơn lưu đúng giá trị đó; 2 ảnh mục report.
+- **#13:** đơn lưu tổng `null` thay vì 126000000 (DT-02) hoặc 12000000 (DT-08); 2 ảnh.
+- **#15:** ô tổng tiền là ô số sửa được; gõ `1000` thì dòng "Tổng thanh toán" đổi thành "1,000 ₫"; 2 ảnh trang Thanh toán trước và sau khi gõ.
+- **#16:** không tìm thấy breadcrumb trên trang "Xác Nhận Đơn Hàng"; 2 ảnh.
+- **#17 (Changed):** lỗi không còn tái hiện.
+  - Đường (a): khách bấm thanh toán thì bị báo "Bạn cần đăng nhập" và chuyển sang trang đăng nhập.
+  - Đường (b): bấm "Thoát" trên trang Thanh toán rồi xác nhận thì server trả 401.
+  - Không có đơn nào được tạo. Bình luận ghi rằng lỗi có thể đã được sửa, hoặc lúc chạy HW02 phiên vẫn còn đăng nhập.
+- **#116:** bằng chứng tự động trên Web (đơn 0 ₫); thêm phát hiện **qua API cũng bị** (đơn tổng `null`); 3 ảnh.
+- **#80 (Related từ FR-08):** DT-07 trích câu FR-07 và không thấy ảnh minh họa, chỉ có dòng "Giỏ hàng của bạn đang trống". Bình luận ghi rõ là Related theo README nhóm §4.1, không tạo issue mới.
+
+## Cần bạn xác nhận
+1. **Gửi 8 bình luận này không?**
+   - Bình luận công khai và đứng tên bạn, nên bạn cần đồng ý với nội dung trước khi gửi.
+   - **Khuyến nghị:** gửi cả 8.
+2. **Cách đính kèm ảnh**
+   - Như lần #116: mình chạy script tải ảnh, Chrome mở ra và bạn đăng nhập GitHub. Script lấy link ảnh về, chèn vào từng bình luận, rồi gửi bằng `gh`.
+   - Có 12 ảnh khác nhau. Ảnh chỉ được tải lên, chưa đăng gì cho tới khi gửi bình luận.
+
+## AI tự đánh giá
+
+| # | Điểm | Bằng chứng | Việc cần làm |
+| --- | --- | --- | --- |
+| P1 | 2 | Chỉ sửa bug report, §5, §8, ảnh `checkout_*`, AI-02 | – |
+| P3 | 2 | Phân loại, 7 issue và #80 theo đúng quyết định của bạn | – |
+| P4 | 2 | Chưa gửi bình luận nào | Chờ bạn |
+| P6 | 2 | Có commit và dòng AI-02 #38, đã push | – |
+| Đối chiếu | 2 | Mỗi lỗi khớp đúng câu yêu cầu và đúng hành vi sai của issue cũ; #17 là Changed vì test pass | – |
+| Bằng chứng | 2 | Mỗi mục có expected và received, kèm ảnh lỗi hoặc ảnh mục report | – |
+| Một lỗi = một hành động | 2 | 8 mục ↔ 8 bình luận, không tạo issue mới | – |
+
+**Gate: blocked by P4.** Chờ bạn đồng ý gửi.
+
+## Bước tiếp theo
+> "gửi 8 bình luận"
+
+Sau khi gửi, mình sẽ ghi link từng bình luận vào bug report và §8, rồi làm T8 (tổng kết).
+````
+
+- **Used in:** `bugs/BUG_REPORT.md` + `bugs/screenshots/checkout_*` + design §5, §8 (commit 69b972a); AI-02 Artifact #38
+
+---
+
+## Prompt041 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 00:12 18/11/2026
+- **Output received:** 00:16 18/11/2026
+- **Feature / step:** checkout (fB) FR-08 – bug comments sent (automation-bug-reporting step 2)
+- **Purpose:** Gửi 8 bình luận "HW04 – automated re-test" có ảnh lên repo nhóm HW02
+- **Prompt (verbatim):**
+
+```text
+comment lên các issue
+```
+
+- **AI output (verbatim):**
+
+```text
+Bắt đầu gửi: trước hết tải 12 ảnh lên GitHub. Chrome sẽ mở ra, bạn đăng nhập GitHub trong cửa sổ đó. Kiểm tra script có hỗ trợ tải nhiều ảnh qua một issue không.
+Bash Check the upload script supports issue#label keys
+Bash Build the upload map of the 12 images through issue #116
+Bash Upload the 14 screenshots as GitHub attachments after the student logs in
+Chrome đã mở trang đăng nhập GitHub. Bạn đăng nhập bằng tài khoản **thhuon**; sau đó script tự tải 14 ảnh và mình sẽ được báo khi xong. Chưa có bình luận nào được đăng lên repo.
+Bash Check that all 14 images were uploaded
+Cả 14 ảnh đã tải lên. Chèn ảnh vào nội dung rồi đăng 8 bình luận.
+Bash Insert image markup into the bodies and check for earlier HW04 comments
+Bash Post the eight HW04 comments on the group issues
+Đã đăng cả 8 bình luận. Ghi link vào bug report và §8, rồi xóa profile trình duyệt cùng các file nội dung tạm.
+Bash Link the comment URLs, delete temp files and the browser profile, commit
+Bash Read the report's bug section
+Bash Update plan and report, add the AI-02 row, commit and push
+Đã đăng xong 8 bình luận lên repo nhóm HW02, mỗi bình luận đều có ảnh, và đã kiểm tra ảnh hiển thị được trong bình luận #14.
+
+| Issue | Loại | HW04 | Link |
+| --- | --- | --- | --- |
+| #12 | Confirmed | BUG-11 | [comment](https://github.com/angquoc/software-testing-2026-HW02-group/issues/12#issuecomment-6955368073) |
+| #13 | Confirmed | BUG-12 | [comment](https://github.com/angquoc/software-testing-2026-HW02-group/issues/13#issuecomment-6955368743) |
+| #14 | Confirmed | BUG-13 | [comment](https://github.com/angquoc/software-testing-2026-HW02-group/issues/14#issuecomment-6955369373) |
+| #15 | Confirmed | BUG-14 | [comment](https://github.com/angquoc/software-testing-2026-HW02-group/issues/15#issuecomment-6955370141) |
+| #16 | Confirmed | BUG-15 | [comment](https://github.com/angquoc/software-testing-2026-HW02-group/issues/16#issuecomment-6955370947) |
+| #17 | Changed (lỗi không còn tái hiện) | BUG-16 | [comment](https://github.com/angquoc/software-testing-2026-HW02-group/issues/17#issuecomment-6955371671) |
+| #116 | Confirmed, thêm bằng chứng tự động (Web + API) | BUG-01 | [comment](https://github.com/angquoc/software-testing-2026-HW02-group/issues/116#issuecomment-6955372327) |
+| #80 | Related (FR-07 của bạn cùng nhóm) | BUG-17 | [comment](https://github.com/angquoc/software-testing-2026-HW02-group/issues/80#issuecomment-6955373092) |
+
+- Trước khi gửi, mình kiểm tra thì chưa issue nào trong 8 issue này có bình luận HW04, nên không bị trùng.
+- Ảnh được tải lên qua cửa sổ Chrome bạn đã đăng nhập. Gửi xong, mình đã xóa profile trình duyệt (chứa phiên đăng nhập) và các file nội dung tạm.
+- Link từng bình luận đã ghi vào `bugs/BUG_REPORT.md` và §8 của file thiết kế. `HW04_Report.md` §4.3 và PLAN (B7 đã xong) cũng đã cập nhật, AI-02 thêm dòng #39. Mọi thứ đã commit và push.
+
+**Bước tiếp theo:**
+> "bắt đầu bước T8 cho checkout: tổng kết"
+
+T8 sẽ chép bảng số liệu từ script tổng hợp, liệt kê các TC không tự động hóa (feature B không có TC nào như vậy), và hoàn thiện §7.
+
+Nhắc thêm: các prompt từ 22:36 hôm qua tới giờ chưa được log; khi cần bạn gọi `/logging-ai-prompts`.
+```
+
+- **Used in:** 8 bình luận trên repo nhóm (#12, #13, #14, #15, #16, #17, #116, #80); `bugs/BUG_REPORT.md` + design §8 (commit 8771648), `HW04_Report.md` + `PLAN.md` (commit 01ff7c9); AI-02 Artifact #39
+
+---
+
+## Prompt042 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 00:19 18/11/2026
+- **Output received:** 00:25 18/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Feature / step:** checkout (fB) FR-08 – T8 summary, docs, prompt log
+- **Purpose:** Tổng kết (bước T8), rà và bổ sung README / báo cáo / PLAN / bug report, log prompt
+- **Prompt (verbatim):**
+
+```text
+tiếp tục thực hiện bước T8
+/logging-ai-prompts 
+check các docs, báo cáo liên quan và bổ sung thông tin
+```
+
+- **AI output (verbatim):**
+
+```text
+Làm T8 trước, sau đó rà các tài liệu liên quan, và log prompt ở cuối để log được nhiều lượt nhất. Xem cách feature A làm T8 và phần chung của README / báo cáo.
+Bash Read FR-03 §7, report sections 6–8 and the README
+Bash Check repo visibility, proof screenshots and the feature selection file
+Bash Read the proof line of the bug report
+Repo nhóm là public, nên mình chụp được 8 bình luận vừa gửi mà không cần đăng nhập, để làm bằng chứng nộp bài.
+Bash Screenshot each posted comment on the public group repo
+Read /home/hg/source/software-testing/week04/bugs/screenshots/checkout_comment_17.png
+Ảnh đầu chỉ chụp được tiêu đề issue (phần header dính ở đầu trang), chưa thấy bình luận. Xem lại cấu trúc trang để tìm đúng khung bình luận.
+Bash Inspect the DOM ancestors of the HW04 comment text
+Bash Inspect the ancestors of the rendered bold comment heading
+Bash Screenshot the comment boxes that contain the HW04 heading
+Read /home/hg/source/software-testing/week04/bugs/screenshots/checkout_comment_17.png
+Bash Hide the sticky header, re-shoot the comments and crop the top of one
+Read /tmp/claude-1000/-home-hg-source-software-testing/d83bae80-f26f-4f2b-9278-13e75bf75654/scratchpad/top17.png
+Ảnh bình luận đã đúng. Giờ làm T8: chép lại bảng số liệu từ script tổng hợp vào §6 và viết §7.
+Bash Paste the summary tables into §6 and write §7
+Bash Fix the trace note, add comment proof links, commit T8
+T8 xong. Giờ rà và bổ sung các tài liệu chung: README §2, `HW04_Report.md` §6–§8 và PLAN.
+Bash Fill README row B, report sections 6–8 for FR-08 and the plan
+Rà tiếp các câu đã cũ, vẫn nhắc cách làm trước khi đổi (DT-03 gõ URL, nguyên nhân dòng 6 còn ghi "proposed").
+Bash Find outdated mentions of the typed URL path and proposals
+Bash Show the dialog row, the goto note and the report's #6 cause text
+Bash Fix outdated notes in the design and report, commit
+Thêm dòng AI-02 cho T8 và phần rà tài liệu, push, rồi log prompt.
+Bash Add the AI-02 row for T8, commit and push
+Skill
+Bash Preview unlogged prompts including the current turn
+Bash Write the entries and list their TODO lines
+```
+
+- **Used in:** design §6–§8 + `bugs/screenshots/checkout_comment_*` (commit e0656a9), README §2 + `HW04_Report.md` §6–§8 + `PLAN.md` (commit 9c3be47, e0d0310); AI-02 Artifact #40
 
 ---
