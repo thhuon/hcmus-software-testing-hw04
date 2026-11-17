@@ -31,9 +31,10 @@
           "newPassword",
           "confirm"
         ],
-        "passwordMasked": true
+        "passwordMasked": true,
+        "otpUsedUp": true
       },
-      "source": "FR-03 \"Bước 1 / 2\", \"6 chữ số\", \"Xác nhận mật khẩu mới\"; A16 \"Bước 2 / 2\"; FR-22 `*` and type=\"password\"; A5: after a successful reset the new password logs in, the old one fails"
+      "source": "FR-03 \"Bước 1 / 2\", \"6 chữ số\", \"Xác nhận mật khẩu mới\"; A16 \"Bước 2 / 2\"; FR-22 `*` and type=\"password\"; A5: after a successful reset the new password logs in, the old one fails; SEC-07 \"vô hiệu hóa sau khi dùng\" (the OTP of an accepted reset is used up)"
     },
     {
       "id": "DT-02",
@@ -87,9 +88,10 @@
       "expected": {
         "kind": "success",
         "newPasswordLogsIn": true,
-        "oldPasswordLogsIn": false
+        "oldPasswordLogsIn": false,
+        "otpUsedUp": true
       },
-      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\"; A10 (a valid password may also contain other characters); A5: after a successful reset the new password logs in, the old one fails"
+      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\"; A10 (a valid password may also contain other characters); A5: after a successful reset the new password logs in, the old one fails; SEC-07 \"vô hiệu hóa sau khi dùng\" (the OTP of an accepted reset is used up)"
     },
     {
       "id": "DT-05",
@@ -107,9 +109,10 @@
       "fillConfirm": false,
       "expected": {
         "kind": "success",
-        "newPasswordLogsIn": true
+        "newPasswordLogsIn": true,
+        "otpUsedUp": true
       },
-      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\"; A11 (no rule forbids the current password); A5: after a successful reset the new password logs in, the old one fails"
+      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\"; A11 (no rule forbids the current password); A5: after a successful reset the new password logs in, the old one fails; SEC-07 \"vô hiệu hóa sau khi dùng\" (the OTP of an accepted reset is used up)"
     },
     {
       "id": "DT-06",
@@ -138,9 +141,10 @@
           }
         ],
         "newPasswordLogsIn": true,
-        "oldPasswordLogsIn": false
+        "oldPasswordLogsIn": false,
+        "otpUsedUp": true
       },
-      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\" + FR-01 \"1 ký tự đặc biệt\"; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6 (a rejected attempt does not use up the OTP); A5: after a successful reset the new password logs in, the old one fails"
+      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\" + FR-01 \"1 ký tự đặc biệt\"; FR-22 \"Thông báo lỗi phải xuất hiện **trên** nút submit\"; A6 (a rejected attempt does not use up the OTP); A5: after a successful reset the new password logs in, the old one fails; SEC-07 \"vô hiệu hóa sau khi dùng\" (the OTP of an accepted reset is used up)"
     },
     {
       "id": "DT-07",
@@ -610,9 +614,10 @@
       "expected": {
         "kind": "success",
         "newPasswordLogsIn": true,
-        "oldPasswordLogsIn": false
+        "oldPasswordLogsIn": false,
+        "otpUsedUp": true
       },
-      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\" + FR-01 \"Tối thiểu 8 ký tự\"; A5: after a successful reset the new password logs in, the old one fails"
+      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\" + FR-01 \"Tối thiểu 8 ký tự\"; A5: after a successful reset the new password logs in, the old one fails; SEC-07 \"vô hiệu hóa sau khi dùng\" (the OTP of an accepted reset is used up)"
     },
     {
       "id": "BVA-05",
@@ -631,9 +636,10 @@
       "expected": {
         "kind": "success",
         "newPasswordLogsIn": true,
-        "oldPasswordLogsIn": false
+        "oldPasswordLogsIn": false,
+        "otpUsedUp": true
       },
-      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\" + FR-01 \"Tối thiểu 8 ký tự\"; A5: after a successful reset the new password logs in, the old one fails"
+      "source": "FR-03 \"Mật khẩu mới phải tuân thủ điều kiện như FR-01.\" + FR-01 \"Tối thiểu 8 ký tự\"; A5: after a successful reset the new password logs in, the old one fails; SEC-07 \"vô hiệu hóa sau khi dùng\" (the OTP of an accepted reset is used up)"
     }
   ]
 }

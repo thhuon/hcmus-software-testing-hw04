@@ -22,6 +22,7 @@ type Expected = {
   otpPattern?: string;
   step2Fields?: string[];
   passwordMasked?: boolean;
+  otpUsedUp?: boolean;
   otpRequests?: number;
   otpsNotAllEqual?: boolean;
   navigatesTo?: string;
@@ -89,6 +90,16 @@ async function expectLogin(api: EshopApi, email: string, password: string, succe
       message: `login with "${password}" ${succeeds ? 'succeeds' : 'is refused'}`,
     })
     .toBe(succeeds ? '200' : '4xx');
+}
+
+/**
+ * SEC-07 "vô hiệu hóa sau khi dùng": after an accepted Web reset the same OTP is refused by the
+ * API (4xx). Tells an accepted reset from a refused one even when new = current password (DT-05).
+ * Runs after the login checks, because a still-valid OTP would change the password here.
+ */
+async function expectOtpUsedUp(api: EshopApi, email: string, otp: string, newPassword: string) {
+  const res = await api.resetPassword({ email, resetToken: otp, newPassword });
+  expect(res.status() >= 400 && res.status() < 500, `OTP ${otp} is used up after the reset (SEC-07): ${res.status()}`).toBe(true);
 }
 
 /** Wording of the browser dialogs is recorded, not judged (A1, A5, A6). */
@@ -160,6 +171,7 @@ test.describe('FR-03 forgot & reset password – Web', () => {
       } else {
         await expectLogin(api, email, row.newPassword!, true);
         if (e.oldPasswordLogsIn === false) await expectLogin(api, email, row.account!.password, false);
+        if (e.otpUsedUp) await expectOtpUsedUp(api, email, otp, row.newPassword!);
       }
     });
   }
@@ -211,6 +223,7 @@ test.describe('FR-03 forgot & reset password – Web', () => {
       await fp.resetPassword(otp, accepted.newPassword);
       await expectLogin(api, email, accepted.newPassword, true);
       await expectLogin(api, email, row.account!.password, false);
+      if (e.otpUsedUp) await expectOtpUsedUp(api, email, otp, accepted.newPassword);
     });
   }
 
