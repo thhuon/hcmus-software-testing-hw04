@@ -116,19 +116,19 @@ Testability findings (elements without an accessible name, unstable text):
 
 Result: (a) and (b) both find every FR-03 field, so `page-objects/ForgotPasswordPage.ts` combines them with `.or()` (checked: 1 match, fill works, on 3 browsers). Login defects seen on the way are already filed by the group: #92 (password `type="text"`), #93 (email `type="text"`), #95 (heading "Đăng Ký", label "Username", no `*`).
 
-**Codegen check (student, by hand).** `npm run sut`, then `npm run codegen`; record Đăng nhập → "Quên mật khẩu?" → Bước 1 (type an email, "Lấy mã OTP") → Bước 2 (type OTP and password, "Đặt lại mật khẩu", "← Quay lại"). Date / browser: `<fill in>`.
+**Codegen check (student, by hand).** `npm run sut`, then `npm run codegen`; record Đăng nhập → "Quên mật khẩu?" → Bước 1 (type an email, "Lấy mã OTP") → Bước 2 (type OTP and password, "Đặt lại mật khẩu", "← Quay lại"). Date / browser: 17/11/26 - Firefox.
 
 | Element | Locator codegen picked (copied from the codegen window) | Same as the table above? | If not: which is better, and why (one line) |
 | --- | --- | --- | --- |
-| "Quên mật khẩu?" link | `<fill in>` | `<Yes/No>` | |
-| Bước 1 Email field | `<fill in>` | `<Yes/No>` | |
-| "Lấy mã OTP" button | `<fill in>` | `<Yes/No>` | |
-| Bước 2 OTP field | `<fill in>` | `<Yes/No>` | |
-| Bước 2 "Mật khẩu mới" field | `<fill in>` | `<Yes/No>` | |
-| "Đặt lại mật khẩu" button | `<fill in>` | `<Yes/No>` | |
-| "← Quay lại" button | `<fill in>` | `<Yes/No>` | |
+| "Quên mật khẩu?" link | `page.getByRole('link', { name: 'Quên mật khẩu?' })` | Yes | |
+| Bước 1 Email field | `page.getByRole('textbox')` | No | A more specific locator using the email field's label or placeholder is better because it avoids ambiguity. |
+| "Lấy mã OTP" button | Not captured in codegen | No | A role-based locator with the button's accessible name would be preferable. |
+| Bước 2 OTP field | `page.locator('input[type="text"]')` | No | A locator using a specific label or placeholder is better because `input[type="text"]` may match multiple fields. |
+| Bước 2 "Mật khẩu mới" field | `page.locator('input[type="password"]')` | No | A locator using a specific label or placeholder is better because it identifies the intended password field more clearly. |
+| "Đặt lại mật khẩu" button | `page.getByRole('button', { name: 'Đặt lại mật khẩu' })` | Yes | |
+| "← Quay lại" button | `page.getByRole('button', { name: '← Quay lại' })` | Yes | |
 
-Conclusion (one sentence, student): `<fill in>`
+Conclusion (one sentence, student): The Codegen-generated locators can identify UI elements, but some generic locators should be replaced with more specific and reliable locators to improve test stability and maintainability.
 
 ## 3. Test data (T3)
 
