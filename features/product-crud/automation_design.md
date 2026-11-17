@@ -121,7 +121,7 @@ Testability findings (elements without an accessible name, unstable text, behavi
 | The new row | `page.getByRole('cell', { name: 'iphone' }).nth(2)` | No | The row filtered by the exact name: `iphone` (a case-insensitive part of the name) matches 4 cells – the image and name cells of iPhone 15 Pro Max and of `iphone 12` – and `.nth(2)` depends on the order of the products |
 | "Xóa" of the new row | `page.getByRole('button', { name: 'Xóa' }).nth(5)` | No | `row.getByRole('button', { name: 'Xóa' })`: `.nth(5)` deletes whatever product is 6th |
 
-Conclusion (one sentence, student): [student]
+Conclusion (one sentence, student): Prefer role + accessible name, use locators based on content or DOM structure only where they are needed, and avoid depending on the position of an element, so that the automated tests stay robust and stable on all three browsers.
 
 The comparisons in the last column were proposed by the agent (18/11).
 
