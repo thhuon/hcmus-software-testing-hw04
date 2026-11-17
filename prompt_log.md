@@ -1675,7 +1675,7 @@ Prompt này (19:12) chưa vào log. Dòng #15 đang ghi "logged later"; lần ch
 ## Prompt015 – Claude Code (claude-opus-5-5)
 
 - **Prompt sent:** 19:21 17/11/2026
-- **Output received:** 19:36 17/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Output received:** 19:37 17/11/2026
 - **Feature / step:** forgot-password (fA) – T4 generate the API spec; T5 first Chromium run and review; prompt log
 - **Purpose:** Log the prompts; generate the API spec; run FR-03 on Chromium
 - **Prompt (verbatim):**
@@ -1715,6 +1715,109 @@ Bash Check sync with the remote
 Commit `522ec78` của mình đã lên remote; ngay sau đó session kia commit `63e6e8c` (chưa push). Giờ mình thêm dòng AI-02, đọc lại bảng trước.
 Bash Re-read the last AI-02 rows
 Bash Add AI-02 row #16 with recounted totals and commit
+Phần việc chính đã xong. Giờ đến log prompt; mình dùng đúng file transcript của session này.
+Bash Write this session's pending prompts to the log
+Bash Fill log fields, replace logged-later notes, commit the log
+Mình đã sinh spec API, chạy cả 33 test FR-03 trên Chromium và ghi log prompt. Kết quả: **6 pass, 27 fail**.
+- 26 test fail khớp với bug đã có từ HW02, cộng một bug mới ở DT-35.
+- 1 test pass giả: DT-05. Đây là lỗi của script.
+
+## Bước T4 – spec API
+
+[tests/forgot-password/api.spec.ts](tests/forgot-password/api.spec.ts) đọc `api.json` và chạy DT-17, DT-27, DT-32. Mỗi test:
+1. đăng ký tài khoản riêng;
+2. lấy OTP;
+3. gửi reset, kiểm mã trạng thái (200 / 4xx);
+4. đăng nhập lại để xem mật khẩu có đổi không.
+
+Mình chưa sửa gì sau khi sinh.
+
+## Lần chạy đầu trên Chromium
+
+- Đây là lần chạy để phát triển, không phải lần chạy chính thức.
+- Report để trong thư mục riêng, vì session feature B ghi đè `playwright-report/`.
+- 6 test pass (DT-05, 07, 08, 09, 17, 32) chạy lại mỗi test 3 lần: 18/18 pass.
+
+| Phép kiểm fail | Test | App làm gì | Đề xuất |
+| --- | --- | --- | --- |
+| Lỗi hiện phía trên nút submit (FR-22) | 17 test (DT-06, 11–15, 20–26, 35, BVA-01–03) | báo lỗi bằng hộp thoại `alert` | BUG-09 (#9) |
+| Mật khẩu mới đăng nhập được | DT-04, 06, BVA-04, 05 | "Mật khẩu quá yếu!" với cả mật khẩu hợp lệ | BUG-01 (#1) |
+| **Mật khẩu cũ vẫn đăng nhập được** | **DT-35** | **"Đổi mật khẩu thành công!" với `NewPass 2026`, mật khẩu bị đổi** | **lỗi mới** |
+| Ô xác nhận | DT-01, 28, 29, 30 | không có ô này, chờ hết 30 giây | BUG-04 (#4) |
+| OTP 6 chữ số | DT-01, 02 | `6022`, `3693` | BUG-03 (#3) |
+| Chỉ báo bước | DT-01, 03 | không có | BUG-06 (#6) |
+| Dấu `*` ở label email | DT-01 | "Nhập Email của bạn" | BUG-07 (#7) |
+| Nút "Quay lại đăng nhập" | DT-03 | không có | BUG-11 (#11) |
+| API reset thiếu `newPassword` phải bị từ chối | DT-27 | `200` "Password reset successfully" | BUG-08 (#8) |
+
+## Review: 3 chỗ AI sinh sai (chưa sửa, chờ bạn quyết)
+
+Chi tiết ở §5 của [automation_design.md](features/forgot-password/automation_design.md).
+
+1. **DT-05 pass giả.** Web đã từ chối ("Mật khẩu quá yếu!", BUG-01). Nhưng mật khẩu mới trùng mật khẩu cũ, nên kiểm "đăng nhập bằng mật khẩu mới" vẫn đúng dù reset không xảy ra. Bug bị che mất.
+2. **`[role="alert"]` chặt hơn FR-22.** FR-22 chỉ yêu cầu lỗi hiện phía trên nút submit. Một dòng lỗi hiện đúng chỗ nhưng không có `role="alert"` vẫn đạt FR-22, mà test lại báo fail.
+3. **Không kiểm phần tử có tồn tại trước khi thao tác.** Ô xác nhận và nút "Quay lại đăng nhập" không có, nên test chờ đủ 30 giây rồi báo "Test timeout", không nói phần tử nào của FR-03 bị thiếu.
+
+**Các nhóm không có lỗi:**
+- **Chờ không ổn định:** mình nghi DT-07 … 09 pass trước khi server trả lời. Đã thử cùng các bước với email đã đăng ký: test bắt được OTP cả 3/3 lần, nên không phải lỗi.
+- **Selector dễ gãy, thiếu case, phụ thuộc ẩn, dữ liệu viết cứng:** không có.
+- **`api.spec.ts`:** không có lỗi ở nhóm nào.
+
+**AI tự review**
+
+| # | Điểm | Bằng chứng |
+| --- | --- | --- |
+| P1–P6 | 2 | Mỗi việc một commit, chỉ commit file của mình (session kia có thay đổi chưa commit ở `features/checkout/`); các đề xuất có ghi `(proposed)` |
+| 12–16 (T4, spec API) | 2 | Vòng lặp qua `api.json`, tiêu đề bắt đầu bằng TC ID; assertion về mã trạng thái và kết quả đã lưu; mỗi test tự đăng ký tài khoản; commit `b67ada7` đúng như lúc sinh |
+| 17 | 2 | §5 có 3 chỗ sai, các nhóm còn lại ghi "no issue" |
+| 18 | 1 | 3 dòng đã có, cột Fix còn là đề xuất |
+| 19 | 2 | "Vì sao AI bỏ sót" và cause type đều ghi `(proposed)` |
+| 20 | 2 | Không assertion nào bị nới lỏng; bug sản phẩm vẫn để test fail |
+| 21 (S) | 2 | `--repeat-each=3`: 18/18 |
+
+**Gate: blocked by 18**: cần bạn quyết cách sửa 3 chỗ trên.
+
+## Cần bạn quyết định
+
+1. **Cách sửa DT-05**
+   - Sau một reset thành công trên Web, OTP đã bị vô hiệu (SEC-07 "vô hiệu hóa sau khi dùng"). Vậy gửi lại chính OTP đó qua API phải nhận `4xx`.
+   - Phép này phân biệt được "Web đã reset" với "Web từ chối", kể cả khi mật khẩu mới = cũ.
+   - **Đề xuất:** thêm phép kiểm này cho mọi dòng `success`.
+2. **Cách kiểm "lỗi phía trên nút submit"**
+   - (a) Giữ `[role="alert"]` và ghi rõ đây là cách hiểu thêm.
+   - (b) Nhận mọi dòng chữ trong form nằm phía trên nút submit, trừ label và thông báo OTP. Đúng FR-22 hơn.
+   - **Đề xuất (b).**
+3. **Phần tử app không có**
+   - Thêm `expect(...).toBeVisible()` có tên FR-03 trước khi điền ô xác nhận và trước khi bấm "Quay lại đăng nhập".
+   - Test sẽ fail sau 5 giây với thông báo rõ phần tử nào thiếu, thay vì 30 giây.
+   - **Đề xuất: đồng ý.**
+4. **"Vì sao AI bỏ sót"** cho 3 chỗ trên: mình đề xuất cả 3 là **Model**. Bạn xác nhận hoặc đổi.
+
+## Log prompt
+
+- **Prompt013:** đã cập nhật giờ nhận (19:05).
+- **Prompt014** (19:12 → 19:17): spec Web.
+- **Prompt015** (19:21): lượt này, ghi `UNFINISHED`.
+- Dòng #15 và #16 của AI-02 đã có số prompt.
+
+| ID | Điểm | Bằng chứng |
+| --- | --- | --- |
+| LOG-1, 2, 3, 5, 10 | 2 | Dùng đúng transcript của session này (không lấy file mới nhất, vì session feature B ghi song song); nội dung nguyên văn do script trích; số tiếp theo là 014, 015 |
+| LOG-4, 6, 7, 8, 11 | 2 | Giờ UTC+7; Prompt015 có đánh dấu UNFINISHED; không còn TODO; đã commit |
+| LOG-9, 12 | N/A | Không dùng tool AI khác; không có prompt nào bạn dặn không ghi log |
+
+**Gate: passed**
+
+## Commit (đã push)
+
+- `b67ada7` test (forgot-password): generate the data-driven API spec
+- `522ec78` test (forgot-password): record the first Chromium run and the review findings
+- `6e5d64e` docs (ai): add AI-02 row for the FR-03 API spec and first Chromium run
+- `7493067` docs (ai): log Prompt013–Prompt015
+
+Lần push vừa rồi cũng đẩy lên luôn commit `63e6e8c` của session feature B.
+
+**Bước tiếp theo:** trả lời 4 quyết định trên. Mình sẽ sửa từng chỗ trong một commit riêng, chạy lại trên Chromium và điền §5. Sau đó là T6, chạy chính thức trên 3 trình duyệt.
 ```
 
 - **Used in:** `tests/forgot-password/api.spec.ts`; `features/forgot-password/automation_design.md` §4, §5 (AI-02 Artifact #16); `prompt_log.md`
@@ -2278,5 +2381,202 @@ Không cần lệnh sudo nào. `gh` không tải được ảnh vì GitHub khôn
 ```
 
 - **Used in:** design §2 (commit 70f6e82), issue #116 + `bugs/BUG_REPORT.md` (commit 7583307), `data/checkout/` + design §3 (commit 65d47f5); AI-02 Artifact #21, #22
+
+---
+
+## Prompt020 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 19:39 17/11/2026
+- **Output received:** 20:02 17/11/2026
+- **Feature / step:** forgot-password (fA) – T5 fixes and Chromium rerun; T6 official runs
+- **Purpose:** Apply the three proposed fixes; write to a private place while another session can overwrite; run T6
+- **Prompt (verbatim):**
+
+```text
+thực hiện theo các đề xuất của bạn 
+nếu có một session khác chạy song song và ghi đè lên playwright-report thì bạn có thể viết trong 1 file tạm và bổ sung vào file chính sau khi sesion đó chạy xong
+tiếp tục thực hiện bước T6
+```
+
+- **AI output (verbatim):**
+
+```text
+Mình làm theo thứ tự: sửa 3 chỗ (mỗi chỗ một commit), chạy lại trên Chromium, rồi chạy chính thức T6. Trước hết mình ghi lại cách làm bạn vừa dặn khi có session chạy song song, và xem script chạy chính thức xử lý thư mục kết quả thế nào.
+Bash Read the parallel-sessions memory and the run-browsers script
+Bash Add the shared-output rule to the parallel-sessions memory
+Bash Update the memory index line
+Bash Test the broadened error-above-submit locator on the live page
+Bash Add the SEC-07 OTP-used-up check and rerun DT-05
+Sau khi sửa, DT-05 fail đúng: OTP vẫn còn dùng được, tức là Web đã không reset (BUG-01). Mình commit chỗ sửa 1.
+Bash Commit and push fix 1
+Chỗ sửa 2: đưa locator "dòng lỗi phía trên nút submit" vào page object, theo đúng FR-22.
+Bash Move the FR-22 error locator to the page object and rerun two error rows
+Vẫn fail đúng vì BUG-09, nhưng giờ oracle khớp FR-22. Commit chỗ sửa 2.
+Bash Commit and push fix 2
+Chỗ sửa 3: thêm assertion có tên FR-03 trước khi điền ô xác nhận và trước khi bấm "Quay lại đăng nhập".
+Bash Assert missing FR-03 elements before acting and rerun DT-28, DT-03
+Bash Commit and push fix 3
+Đủ 3 chỗ sửa. Giờ chạy lại cả FR-03 trên Chromium, report để thư mục riêng.
+Bash Re-run FR-03 on Chromium after the three fixes
+Bash Repeat the five passing tests three times
+Lần chạy lại: **5 pass, 28 fail** trong 3,4 phút (trước là 5,4 phút). DT-05 giờ fail đúng vì BUG-01; 5 test pass chạy 3 lần đều pass (15/15). Mình cập nhật §5.
+Bash Record fixes and rerun result in §5 and commit
+Bash Check report size, running Playwright processes and gitignore
+Bash Give each run its own output folder and keep report traces in git
+Bash Update the Vietnamese skill copy, sanity-check the script, commit
+Bash Official FR-03 run on Chromium
+Bash Official FR-03 run on Firefox
+Bash Official FR-03 run on WebKit
+Cả 3 trình duyệt cho cùng kết quả: 5 pass, 28 fail. Mình lấy số liệu bằng script tổng kết, rồi so lỗi của từng test giữa các trình duyệt.
+Bash Summarise the official runs as Markdown
+Bash Compare failure messages across browsers and check report titles and sizes
+Bash Rerun DT-12 on Firefox and read the three report titles
+Bash Read the §6 section and check backend server setup
+Bash Write §6 with the script output and run notes
+Giờ commit 3 report chính thức cùng §6. Mình kiểm tra trước là các file trace `.zip` đã nằm trong danh sách sẽ commit.
+Bash Preview the report files to be committed
+Bash Commit and push the official reports and §6
+Report và §6 đã lên remote. Giờ cập nhật PLAN, README, báo cáo và AI-02. Mình lấy giờ gửi của prompt này trước.
+Bash Get prompt time and read PLAN A4–A6 and report §3.2–3.3
+Bash Update PLAN, report and README with T4–T6 results
+Giờ đến AI-02. Mình đọc lại bảng ngay trước khi sửa.
+Bash Re-read AI-02 row list
+Bash Show the newer AI-02 rows and skill rows
+Bash Update AI-02 rows #15, #16, add #23 and #S9, commit
+Mình đã sửa 3 chỗ theo đề xuất, chạy lại trên Chromium, rồi chạy chính thức T6 trên cả 3 trình duyệt. Kết quả chính thức giống nhau trên cả 3: **5 pass, 28 fail**, 28 test fail ở cùng các phép kiểm. Report đã commit đúng như tool tạo ra; mọi thứ đã push.
+
+## Cách làm khi có session song song
+
+Mình đã lưu cách bạn dặn vào memory: khi session khác có thể ghi đè, ghi ra thư mục tạm riêng, rồi mới đưa vào file chính.
+
+Trong lượt này:
+- Các lần chạy thử dùng thư mục report riêng trong scratchpad.
+- Script `run-browsers.mjs` của skill giờ cho mỗi lần chạy chính thức một thư mục `test-output/<feature>/<browser>`, riêng cho ảnh chụp và trace. Trước đây chúng nằm trong `test-results/` dùng chung, và một lần chạy khác bắt đầu sẽ xóa thư mục đó.
+- `.gitignore` giờ giữ lại file trace `.zip` bên trong `reports/`, để report chính thức không bị thiếu trace.
+
+## T5 – sửa theo đề xuất
+
+| # | Sửa | Kiểm lại |
+| --- | --- | --- |
+| 1 | Sau khi reset thành công, gửi lại cùng OTP qua API, phải nhận `4xx` (SEC-07) | DT-05 giờ **fail đúng**: OTP vẫn dùng được, tức Web đã từ chối (BUG-01) |
+| 2 | Lỗi FR-22: chấp nhận mọi dòng chữ trong form nằm phía trên nút submit | Trên trang hiện tại khớp 0; chèn thử dòng lỗi phía trên nút → bắt được; dòng phía dưới → bỏ qua |
+| 3 | `toBeVisible()` có tên FR-03 trước khi điền ô xác nhận và trước khi bấm "Quay lại đăng nhập" | DT-28 fail sau 5,5 giây, báo rõ "confirm field … (FR-03)" |
+
+- Chạy lại Chromium: 5 pass, 28 fail, mất 3,4 phút (trước là 5,4 phút).
+- 5 test pass chạy lại 3 lần đều pass (15/15).
+- §5 ghi các chỗ sửa kèm commit, cause type **Model**.
+
+## T6 – chạy chính thức trên 3 trình duyệt
+
+| Trình duyệt | Report | Pass | Fail | Flaky | Thời gian |
+| --- | --- | --- | --- | --- | --- |
+| Chromium | [reports/forgot-password/chromium](reports/forgot-password/chromium/index.html) | 5 | 28 | 0 | 3,4 phút |
+| Firefox | [reports/forgot-password/firefox](reports/forgot-password/firefox/index.html) | 5 | 28 | 0 | 4,3 phút |
+| WebKit | [reports/forgot-password/webkit](reports/forgot-password/webkit/index.html) | 5 | 28 | 0 | 3,7 phút |
+
+- **Spec dùng để chạy:** đóng băng ở commit `63f8508`.
+- **Tiêu đề report:** mình mở cả 3 trên trình duyệt để kiểm. Ví dụ: "HW04 · FR-03 Forgot & reset password · chromium · Run by: 23120046 · 2026-11-17T12:47:18.182Z".
+- **Server và dữ liệu:** chạy với `--reuse` trên server đang chạy, vì session FR-08 cũng đang dùng chúng.
+  - Database không được tạo lại.
+  - Dữ liệu vẫn sạch vì mỗi test tự đăng ký tài khoản riêng, đặt tên theo TC, thời điểm chạy và trình duyệt.
+  - Đã ghi rõ ở §6.
+- **Một điểm khác giữa các trình duyệt:**
+  - DT-12 trên Firefox có thêm lỗi `ECONNRESET` khi gọi API, sau lỗi FR-22.
+  - Chạy lại 3 lần thì gặp 1 lần; chưa thấy trên Chromium và WebKit.
+  - Nguyên nhân mình đề xuất: phép kiểm FR-22 chờ đủ 5 giây, đúng bằng thời gian server Express đóng kết nối keep-alive không dùng. Nên lần gọi API sau đó có thể rơi vào kết nối đang bị đóng.
+  - Lỗi này không đổi verdict của DT-12 (FR-22 fail trên mọi trình duyệt), nhưng phần kiểm API của DT-12 trên Firefox chưa được chứng minh.
+
+**AI tự review (T6)**
+
+| # | Điểm | Bằng chứng |
+| --- | --- | --- |
+| P1–P6 | 2 | Mỗi việc một commit, chỉ commit file của mình (session kia đang sửa `page-objects/CartPage.ts`) |
+| 22 | 2 | Có đủ `reports/forgot-password/{chromium,firefox,webkit}/index.html` và `results.json` |
+| 23 | 2 | Đã đọc tiêu đề trên trình duyệt: có "Run by: 23120046" và thời điểm ISO |
+| 24 | 1 | Spec đóng băng và report commit nguyên trạng. Nhưng server không khởi động lại; dữ liệu sạch nhờ tài khoản riêng (đã ghi ở §6) |
+| 25 | 2 | `retries: 0`; DT-12 Firefox được báo ra, không bị giấu |
+
+**Gate: passed** (24 đạt 1/2, xem quyết định 2).
+
+## Cần bạn quyết định (cho T7)
+
+1. **Lỗi `ECONNRESET` ở DT-12 Firefox**
+   - (a) Ghi là lỗi môi trường, giữ nguyên report.
+   - (b) Thêm header `Connection: close` vào `api/EshopApi.ts`, rồi chạy lại 3 lần chính thức (khoảng 12 phút).
+   - **Đề xuất (b)**: chỗ sửa nhỏ, và mọi test kiểu "Web rồi API" đều có cùng rủi ro này.
+2. **Server mới cho lần chạy chính thức**
+   - Nếu chọn (b), nên làm lúc session FR-08 không chạy, để khởi động server mới (database được tạo lại) và đạt tiêu chí 24 trọn vẹn.
+   - **Đề xuất:** gộp với (b).
+3. **Dung lượng report:** report FR-03 là 46 MB, riêng Firefox 25 MB vì trace lớn. Nếu 9 lần chạy đều cỡ đó, repo sẽ khoảng 140 MB.
+   - Bạn có muốn bỏ trace khỏi report chính thức, chỉ giữ ảnh chụp, không?
+   - Nên quyết trước khi chạy FR-08 / FR-15.
+
+## Commit (đã push)
+
+- `eb9d9d8`, `e2a210a`, `63f8508`: 3 chỗ sửa
+- `e74aab0` test (forgot-password): record the review fixes and the Chromium rerun
+- `d5bd0e0` chore (skills): give every multi-browser run its own output folder
+- `4ec4bf5` test (forgot-password): record the official runs on Chromium, Firefox and WebKit
+- `2f85373` docs: record FR-03 steps T4–T6 in the plan, report and README
+- `730e323` docs (ai): add AI-02 rows for the FR-03 fixes, official runs and run output folders
+
+Cập nhật trong AI-02:
+- #15 (spec Web) đổi sang **INCOMPLETE**, kèm 3 chỗ sửa;
+- #16 đổi sang VALID;
+- thêm #23 và #S9.
+
+Prompt này (19:39) chưa vào log. Session FR-08 đã dùng các số 016–019.
+
+**Bước tiếp theo:** trả lời 3 quyết định trên, rồi gửi "bước T7 cho forgot-password: phân loại lỗi". Ở T7, bạn mở trace để xem các test fail (`npm run trace -- <trace.zip>`).
+```
+
+- **Used in:** `tests/forgot-password/web.spec.ts`, `page-objects/ForgotPasswordPage.ts`, `data/forgot-password/web.json`; `skills/test-automation/scripts/run-browsers.mjs` (own output folder); `reports/forgot-password/` (first official set, later replaced); `features/forgot-password/automation_design.md` §5, §6; `PLAN.md`, `README.md`, `HW04_Report.md` §3 (AI-02 Artifact #23, #S9)
+
+---
+
+## Prompt021 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 20:07 17/11/2026
+- **Output received:** 20:21 17/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Feature / step:** forgot-password (fA) – T6 rerun, ENV-01, screenshots instead of traces; prompt log
+- **Purpose:** Record ECONNRESET as an environment error and rerun; drop traces if the brief does not need them, keep screenshots; log the prompts
+- **Prompt (verbatim):**
+
+```text
+1. bổ sung kết quả vào file báo cáo ngay khi ko còn xung đột nữa
+2. với lỗi econnreset thì hãy ghi lại báo cáo lỗi môi trường rồi chạy lại 3 lần 1 lần nữa, ghi lại lỗii đó và chấp nhận đó là 1 dạng rủi ro 
+3. bỏ trace nếu ko thực sự cần thiết (điểm này cần bạn check lại 1 lần nữa trong yêu cầu của bài tập), và nếu nhưu bỏ thì cần lưu lại ảnh chụp, bổ sung ảnh chụp cho phần này đầy đủ sau khi đưa ra được quyết định
+/logging-ai-prompts log các prompt chưa được log ở session này và đồng thời bổ sung dần vào các docs, báo cáo
+```
+
+- **AI output (verbatim):**
+
+```text
+Skill
+Mình kiểm tra trong đề bài xem có yêu cầu gì về trace, ảnh chụp và report.
+Bash Search the brief for trace, screenshot and report requirements
+Bash Read the full lines of brief §6 Task 1 and §12 deliverables
+Bash Check config trace settings and the end of the run script
+Bash Turn traces off for official runs and copy failure screenshots per TC
+Mình thử hàm copy ảnh trên kết quả của lần chạy trước, ghi ra thư mục tạm.
+Bash Test the screenshot copy function on the previous run's results
+Bash Commit the trace and screenshot change
+Giờ chạy lại 3 lần chạy chính thức, mỗi lần một trình duyệt.
+Bash Second official FR-03 run on Chromium
+Bash Second official FR-03 run on Firefox
+Bash Second official FR-03 run on WebKit and check sizes
+Bash Compare browsers, read report titles, capture DT-27 report screenshots
+Read /home/hg/source/software-testing/week04/features/forgot-password/screenshots/DT-27-chromium-report.png
+Read /home/hg/source/software-testing/week04/reports/forgot-password/chromium/screenshots/DT-35.png
+Bash Rewrite §6 for the second official run set
+Bash Check §6 was written and list non-report changes
+Bash Commit the second official run set, screenshots and §6
+Report và §6 đã lên remote. Giờ cập nhật PLAN và báo cáo, kiểm tra trước là không có thay đổi nào của session kia đang chờ trong các file này.
+Bash Update PLAN A6 and report §3.3, commit
+Giờ đến log prompt: dùng đúng file transcript của session này, rồi điền các trường còn thiếu và cập nhật AI-02 trong cùng một commit.
+Bash Write this session's pending prompts to the shared log
+```
+
+- **Used in:** `playwright.config.ts`, `skills/test-automation/` (no traces, screenshots per TC); `reports/forgot-password/` (second official set, screenshots); `features/forgot-password/screenshots/`; design §6 (ENV-01); `PLAN.md` A6, `HW04_Report.md` §3.3 (AI-02 Artifact #24, #S10)
 
 ---
