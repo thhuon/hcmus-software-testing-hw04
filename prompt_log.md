@@ -1442,7 +1442,7 @@ Prompt này (gửi 18:53) sẽ vào log ở lần chạy `/logging-ai-prompts` t
 ## Prompt013 – Claude Code (claude-opus-5-5)
 
 - **Prompt sent:** 19:02 17/11/2026
-- **Output received:** 19:04 17/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Output received:** 19:05 17/11/2026
 - **Feature / step:** forgot-password (fA) – T2 locator decision; T3 confirmations; prompt log; docs
 - **Purpose:** Apply locator option (2); confirm DT-03 login page and API status; explain how new accounts are made; log prompts; update docs
 - **Prompt (verbatim):**
@@ -1473,8 +1473,250 @@ Bash Read README summary table and report section 3
 Bash Tick A1–A3 in PLAN and fill report §3.1, then commit
 Đã xong các tài liệu. Giờ đến phần log prompt.
 Bash Write pending prompts to the log and show their fields
+Bash Fill log fields, update AI-02 and design header, commit
+Mình đã làm xong cả 5 việc. Còn mục 4 (mỗi test một tài khoản mới) chờ bạn xác nhận sau khi đọc giải thích bên dưới. Mọi thứ đã commit và push.
+
+## 1. Locator theo phương án (2)
+
+- Page object giờ tìm 4 ô nhập bằng **khối có label bắt đầu bằng tên ô**: `/^Nhập Email/`, `/^Mã OTP/`, `/^Mật khẩu mới/` và `/^Xác nhận mật khẩu mới/`.
+- Ô xác nhận cũng đổi sang cách này. Nếu sau này app thêm ô xác nhận mà label vẫn không gắn với ô (giống các ô khác), test vẫn tìm được, nên không báo nhầm BUG-04.
+- Đã bỏ `(a).or(b)`.
+- Mình chạy thử trên 3 trình duyệt: email, OTP và mật khẩu mới mỗi ô ra đúng 1 kết quả và gõ được; ô xác nhận ra 0 vì app chưa có (BUG-04).
+- §2 có thêm đoạn tóm tắt ưu nhược của (a)/(b) và ghi quyết định của bạn.
+
+## 2–3. Hai giá trị `<CONFIRM>` đã chốt theo đề xuất
+
+- **DT-03:** nhận ra trang đăng nhập bằng nút "Sign In" và đường dẫn `/login`.
+- **API:** chấp nhận = `200`, từ chối = mọi mã `4xx`. Phép kiểm chính vẫn là đăng nhập lại.
+
+§3 giờ không còn `<CONFIRM>` nào.
+
+## 4. Tạo tài khoản mới bằng cách nào?
+
+Tài khoản seed chỉ có `test@eshop.com`, nhưng app có API đăng ký `POST /api/register` (API spec §1.1). HW02 cũng đã dùng nó để tạo `fr03.other@…` và `fr03.same@…` (fixture F2, F3).
+
+Trước mỗi test, spec sẽ gọi `register(name, email, password)` trong [api/EshopApi.ts](api/EshopApi.ts):
+- Email ghép từ ID của test và thời điểm chạy, ví dụ `fr03.dt-20.20261117t1903@example.com`.
+- Mật khẩu lấy từ cột `account.password` trong file dữ liệu.
+
+Backend chỉ kiểm tra email chưa bị dùng, nên mỗi email mới đều đăng ký được.
+
+**Chạy thử trên SUT đang chạy (19:03):**
+
+| Bước | Kết quả |
+| --- | --- |
+| Đăng ký `fr03.demo.20261117t1903@example.com` | `200` "User registered successfully" |
+| Đăng nhập bằng `Test1234!` | `200`, có `token` |
+| Lấy OTP | `200`, `resetToken` "4326" |
+
+Các tài khoản này chỉ tồn tại đến lần khởi động server sau, vì database được tạo lại mỗi lần khởi động.
+
+Cách làm và kết quả chạy thử đã ghi ở §3 của [automation_design.md](features/forgot-password/automation_design.md). Mục này vẫn đánh dấu `(proposed)` cho tới khi bạn đồng ý.
+
+## Cập nhật tài liệu
+
+- [PLAN.md](PLAN.md): đánh dấu xong A1–A3, mỗi bước có một dòng tóm tắt.
+- [HW04_Report.md](HW04_Report.md) §3.1: đã điền phần chọn TC, locator/page object, dữ liệu test. Phần assertion pattern để sau T4.
+- `README.md`: bảng số liệu giữ trống tới lần chạy chính thức, vì phải lấy từ `npm run summary`.
+- **AI-02:**
+  - #12: thêm review của bạn (đồng ý 2 giá trị `<CONFIRM>`, câu hỏi về tài khoản);
+  - thêm #13, ghi là "Chỉnh sửa do SV quyết định";
+  - tổng: 21 dòng, VALID 17, INCOMPLETE 4.
+
+## Log prompt
+
+- **Prompt011:** đã cập nhật giờ nhận (18:47).
+- **Prompt012** (18:53 → 18:57): ưu nhược (a)/(b) và bước T3.
+- **Prompt013** (19:02): lượt này, ghi `UNFINISHED`. Lần chạy `/logging-ai-prompts` sau sẽ cập nhật.
+- Các trường Feature / step, Purpose, Used in đã điền đủ. Dòng #12 của AI-02 đã thay "logged later" bằng Prompt012.
+
+| ID | Điểm | Bằng chứng |
+| --- | --- | --- |
+| LOG-1, 2, 3, 5, 10 | 2 | Đúng session HW04; nội dung nguyên văn do script trích; số tiếp theo là 012, 013; chỉ đọc transcript qua script |
+| LOG-4 | 2 | Giờ UTC+7, chính xác đến phút |
+| LOG-6 | 2 | Prompt013 có đánh dấu UNFINISHED |
+| LOG-7, 8, 11 | 2 | Không còn TODO; không đòi ảnh chụp màn hình; đã commit |
+| LOG-9, 12 | N/A | Không dùng tool AI khác; không có prompt nào bạn dặn không ghi log |
+
+**Gate: passed**
+
+## Commit (đã push)
+
+- `11a7b90` test (forgot-password): find unnamed fields by label prefix only
+- `72f9719` test (forgot-password): confirm the login page and API status expectations
+- `0528003` docs: record FR-03 steps T1–T3 in the plan and report
+- `9f0b60e` docs (ai): log Prompt011–Prompt013 and add AI-02 rows for the T2 decision and T3 confirmations
+
+**Bước tiếp theo:**
+1. Xác nhận mục 4.
+2. Gửi "bước T4 cho forgot-password: sinh spec data-driven".
+
+Ở T4 mình sẽ đưa ra các lựa chọn cho vấn đề ô xác nhận không tồn tại (BUG-04). Vấn đề này làm mọi test Web có Bước 2 fail ở cùng một chỗ.
 ```
 
 - **Used in:** `page-objects/ForgotPasswordPage.ts`; `features/forgot-password/automation_design.md` §2, §3; `data/forgot-password/*.json`; `PLAN.md` A1–A3; `HW04_Report.md` §3.1; `AI-02_AI_Audit_Report.md` (Artifact #12, #13); `prompt_log.md`
+
+---
+
+## Prompt014 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 19:12 17/11/2026
+- **Output received:** 19:17 17/11/2026
+- **Feature / step:** forgot-password (fA) – T4 generate the Web spec
+- **Purpose:** Confirm one new account per test; confirm-field choice (BUG-04); generate the data-driven Web spec
+- **Prompt (verbatim):**
+
+```text
+tôi đồng ý với phương án của bạn ở mục 4
+tiếp tục bước T4
+```
+
+- **AI output (verbatim):**
+
+```text
+AskUserQuestion
+Bạn chọn: chỉ điền ô xác nhận ở các TC kiểm ô này. Mình xem lại API client và config trước khi sinh spec.
+Bash Read API client, Playwright config and smoke spec
+Đầu tiên mình ghi hai quyết định về dữ liệu (cờ `fillConfirm`, tài khoản riêng đã được xác nhận) vào file dữ liệu và §3.
+Bash Add fillConfirm flag and record data decisions in §3
+Giờ mình sinh spec Web. Theo skill, mỗi prompt sinh một file spec, nên spec API sẽ làm ở prompt sau.
+Bash Add the email label locator and back-to-login action to the page object
+Write /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts
+Trước khi commit, mình kiểm tra cú pháp layout selector `:above()` dùng cho phép kiểm "lỗi hiện phía trên nút submit".
+Bash Check the :above layout selector parses and matches
+Bash Use a layout-selector error check and 4xx for refused logins
+Bash Fix the login status check and list the generated tests
+Spec liệt kê đủ 30 test × 3 trình duyệt. Giờ mình ghi §4.
+Bash Read the §4 section and its template
+Bash Write design §4 and update the pattern count
+Bash Get the sent time of the current prompt
+Bash Check which transcript is this session and list its pending prompts
+Bash Commit the generated Web spec with design §4
+Giờ đến AI-02. Mình đọc lại bảng trước, phòng khi session kia đã thêm dòng.
+Bash Re-read AI-02 row list and totals before editing
+Bash Read the Artifact #14 row added by the other session
+Bash Add AI-02 row #15 and recount totals from the table
+Bash Commit and push the AI-02 row
+Mình đã sinh xong spec Web cho FR-03 (30 test × 3 trình duyệt) nhưng **chưa chạy thử**; mới chạy `--list` để kiểm tra tiêu đề. Spec API sẽ làm ở prompt sau, vì skill quy định mỗi prompt sinh một file spec. Mọi thứ đã commit và push.
+
+**Lưu ý: có một session khác đang chạy song song cho feature B** (đã commit `77671ac` và thêm dòng AI-02 #14), dùng chung thư mục `week04`. Vì vậy:
+- Mình chỉ commit file của mình, theo đúng đường dẫn.
+- Đọc lại AI-02 trước khi sửa, nên dòng của mình là **#15**.
+- Số liệu §4 của AI-02 giờ đếm lại từ bảng (23 dòng, VALID 19, INCOMPLETE 4), nên không bị cộng trùng khi hai session cùng cập nhật.
+
+## Quyết định đã ghi (trước khi sinh spec)
+
+- **Ô xác nhận (BUG-04):** chỉ DT-01 và DT-28 … 30 điền ô này. `web.json` có thêm cờ `fillConfirm`, và §3 ghi lý do khác với TC.
+- **Mỗi test một tài khoản mới:** bạn đã đồng ý, §3 bỏ `(proposed)`.
+  - Mình thêm tên trình duyệt vào `{run}`, ví dụ `20261117t191200.chromium`.
+  - Lý do: một lệnh có thể chạy cả 3 trình duyệt trên cùng một database, nên chỉ dùng thời điểm thì email sẽ trùng.
+
+## Bước T4 – spec Web
+
+[tests/forgot-password/web.spec.ts](tests/forgot-password/web.spec.ts) đọc `web.json`, sinh một test cho mỗi dòng, tiêu đề dạng `DT-20 – password shorter than 8 characters`, nhóm theo `flow`:
+
+| Flow | TC | Spec làm gì |
+| --- | --- | --- |
+| `reset` | DT-01, 04, 05, 20–26, 28–30, 35, BVA-03–05 | Bước 1 → Bước 2 → kiểm lỗi FR-22 (với case sai) → đăng nhập qua API bằng mật khẩu cũ / mới |
+| `otpFormat` | DT-02 | Xin 3 OTP qua "← Quay lại": mỗi mã 6 chữ số, không phải cả 3 giống nhau |
+| `backToLogin` | DT-03 | Chỉ báo bước → bấm "Quay lại đăng nhập" → URL `/login` và nút "Sign In" |
+| `retryAfterError` | DT-06 | Mật khẩu sai bị từ chối, sau đó dùng lại cùng OTP với mật khẩu đúng thì đổi được |
+| `requestOnly` | DT-07, 08, 09 | Không hiện OTP, vẫn ở Bước 1 |
+| `otpWebThenApi` | DT-11–15, BVA-01, 02 | Phần Web, rồi gửi cùng OTP qua API → `4xx`, mật khẩu cũ vẫn đăng nhập được |
+
+**8 kiểu assertion**, chi tiết từng test ở §4:
+1. kết quả đã lưu (đăng nhập qua API bằng `expect.poll`);
+2. soft assertion;
+3. chữ hiển thị;
+4. trạng thái phần tử;
+5. định dạng giá trị;
+6. URL;
+7. phủ định;
+8. mã trạng thái API.
+
+**Ghi chú về cách viết:**
+- Lỗi FR-22 được kiểm bằng `[role="alert"]` nằm phía trên nút submit. Phép này là soft, nên test vẫn chạy tiếp tới bước kiểm mật khẩu.
+- Câu chữ của hộp thoại `alert` được ghi vào annotation của report, không chấm (A1/A5/A6).
+- Page object có thêm `emailLabel` (dùng để kiểm dấu `*`) và `backToLogin()`.
+
+**AI tự review (T4)**
+
+| # | Điểm | Bằng chứng |
+| --- | --- | --- |
+| P1–P6 | 2 | Bước T3 đã commit trước; quyết định dữ liệu commit riêng (`4433532`), spec commit riêng (`d438b99`), AI-02 #15 commit riêng (`d575517`) |
+| 12 | 2 | Một vòng lặp qua dữ liệu cho mỗi flow; mọi tiêu đề bắt đầu bằng TC ID (`--list`: 30 test) |
+| 13 | 2 | Có 8 kiểu assertion, mức tối thiểu là 3 |
+| 14 | 2 | Assertion web-first, có `expect.poll`; không có `waitForTimeout`, `try/catch`; chỉ rẽ nhánh theo dữ liệu, không theo trạng thái trang |
+| 15 | 2 | Mỗi test tự tạo tài khoản, không phụ thuộc thứ tự |
+| 16 | 2 | Commit `d438b99` là code đúng như lúc sinh ra, chưa chạy, chưa sửa |
+
+**Gate: passed**
+
+**Mình đã thấy trước 3 chỗ có thể sai.** Theo skill, T4 không sửa gì, nên mình ghi lại để T5 kiểm khi chạy thật:
+1. DT-07 … 09 kiểm "không hiện OTP" ngay sau khi bấm nút. Phép kiểm có thể pass trước khi server kịp trả lời (lỗi chờ không ổn định).
+2. Các phần tử app không có (ô xác nhận, nút "Quay lại đăng nhập") sẽ chờ hết thời gian test là 30 giây mới fail. Chạy chậm nhưng vẫn đúng.
+3. `[role="alert"]` chặt hơn FR-22. FR-22 chỉ nói lỗi phải hiện phía trên nút submit, không nói phải có role `alert`. Có thể là oracle sai; bạn quyết ở T5.
+
+## Commit (đã push)
+
+- `4433532` test (forgot-password): fill the confirm field only where the test case checks it
+- `d438b99` test (forgot-password): generate the data-driven Web spec
+- `d575517` docs (ai): add AI-02 row for the FR-03 Web spec
+
+Prompt này (19:12) chưa vào log. Dòng #15 đang ghi "logged later"; lần chạy `/logging-ai-prompts` tới sẽ điền số prompt.
+
+**Bước tiếp theo:** gửi "bước T4 cho forgot-password: sinh spec API" (DT-17, DT-27, DT-32). Sau đó là T5: chạy trên Chromium, review và sửa.
+```
+
+- **Used in:** `data/forgot-password/web.json` (`fillConfirm`); `tests/forgot-password/web.spec.ts`; `page-objects/ForgotPasswordPage.ts` (`emailLabel`, `backToLogin()`); `features/forgot-password/automation_design.md` §3, §4 (AI-02 Artifact #15)
+
+---
+
+## Prompt015 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 19:21 17/11/2026
+- **Output received:** 19:36 17/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Feature / step:** forgot-password (fA) – T4 generate the API spec; T5 first Chromium run and review; prompt log
+- **Purpose:** Log the prompts; generate the API spec; run FR-03 on Chromium
+- **Prompt (verbatim):**
+
+```text
+/logging-ai-prompts log các prompt chưa được log trong session này
+thực hiện các bước tiếp theo, cả gửi bước T4 cho forgot-passwword sinh spec API và cả chạy trên chrominum
+```
+
+- **AI output (verbatim):**
+
+```text
+Mình làm theo thứ tự: sinh spec API (bước T4), chạy cả FR-03 trên Chromium, rồi ghi log prompt ở cuối. Trước hết kiểm tra trạng thái repo, vì session của feature B vẫn đang chạy song song.
+Bash Check repo state and read the API data file
+Write /home/hg/source/software-testing/week04/tests/forgot-password/api.spec.ts
+Bash List the API tests and add the API spec to design §4
+Bash Get sent times of this session's pending prompts
+Bash Commit the generated API spec
+Đã commit spec API. Giờ chạy cả FR-03 trên Chromium, dùng lại các server đang chạy.
+Bash Run the FR-03 specs on Chromium and list results
+6 test pass, 27 test fail. Mình đọc lỗi của từng test từ `results.json`.
+Bash Summarise each test's errors and dialog text from the JSON results
+Bash Summarise each test's errors and dialog text
+Bash Inspect the JSON results file
+Có vẻ session kia đã ghi đè `playwright-report/`, vì hai session dùng chung thư mục này. Mình chạy lại với thư mục report riêng trong scratchpad.
+Bash Re-run FR-03 on Chromium with a private report folder
+Bash Extract each failing test's error messages from the run output
+Đã có kết quả của từng test. Tiếp theo, theo bước T5, mình chạy 6 test pass mỗi test 3 lần (`--repeat-each=3`) để xem có ổn định không.
+Bash Repeat the six passing tests three times on Chromium
+Bash Check whether the negative assertions catch a shown OTP
+Bash Run DT-05, DT-09, DT-35 with a JSON report and show their dialogs
+Bash Check status and the §5 template
+Kết quả lần chạy đã rõ. Mình ghi vào §5: kết quả, nguyên nhân của từng test fail, và các chỗ cần sửa (đề xuất, chưa sửa).
+Bash Write §5 run results and review findings, then commit
+Bash Check whether my commit landed
+Bash Check sync with the remote
+Commit `522ec78` của mình đã lên remote; ngay sau đó session kia commit `63e6e8c` (chưa push). Giờ mình thêm dòng AI-02, đọc lại bảng trước.
+Bash Re-read the last AI-02 rows
+Bash Add AI-02 row #16 with recounted totals and commit
+```
+
+- **Used in:** `tests/forgot-password/api.spec.ts`; `features/forgot-password/automation_design.md` §4, §5 (AI-02 Artifact #16); `prompt_log.md`
 
 ---

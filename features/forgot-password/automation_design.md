@@ -7,7 +7,7 @@
 | Screens / URLs | Web – Đăng nhập `http://localhost:5173/login` → Quên mật khẩu `http://localhost:5173/forgot-password` (Bước 1 email, Bước 2 OTP + mật khẩu mới) |
 | Specs · page objects · API client · data | `tests/forgot-password/` · `page-objects/` · `api/` · `data/forgot-password/` |
 | Count | Designed: 44 + 1 added in HW04 (DT-35) · Automated: 33 · Not automated: 12 · Assertion patterns: 8 |
-| Prompt log entries | Prompt006, Prompt008 (T1) · Prompt009 – Prompt013 (T2) · Prompt012, Prompt013 (T3) |
+| Prompt log entries | Prompt006, Prompt008 (T1) · Prompt009 – Prompt013 (T2) · Prompt012, Prompt013 (T3) · Prompt014, Prompt015 (T4) · Prompt015 (T5) |
 
 ## 1. Test cases selected (T1)
 
@@ -154,7 +154,7 @@ No `<CONFIRM>` left.
 
 ## 4. Specs and assertion patterns (T4)
 
-Prompt used for generation: see the AI-use log entry of this step (Web spec: prompt 19:12 17/11/2026; API spec: next prompt; one prompt per spec file).
+Prompt used for generation: see the AI-use log entry of this step (Web spec: Prompt014; API spec: Prompt015; one prompt per spec file).
 
 The spec reads `data/forgot-password/web.json` and makes one test per row, title `<TC ID> – <title>`, grouped by the row's `flow`. Generated as is, not run yet (T5 runs and reviews it); checked only with `npx playwright test tests/forgot-password --list`: 30 tests per browser, 90 in all.
 
@@ -166,7 +166,7 @@ The spec reads `data/forgot-password/web.json` and makes one test per row, title
 | › flow `retryAfterError` | DT-06 | Soft (error above submit); Persisted outcome (rejected password refused, then the new one logs in, the old one refused) |
 | › flow `requestOnly` | DT-07, 08, 09 | Negative (no OTP message, no Bước 2 button); Element state ("Lấy mã OTP" still visible) |
 | › flow `otpWebThenApi` | DT-11 … 15, BVA-01, 02 | Soft (error above submit); Response (API reset `4xx`); Persisted outcome (old password logs in, new one refused) |
-| `tests/forgot-password/api.spec.ts` (prompt 19:21 17/11/2026) | DT-17, DT-27, DT-32 | Response (status class `200` / `4xx` of forgot-password and reset; `resetToken` present); Persisted outcome (logins of owner / other account, new and second password) |
+| `tests/forgot-password/api.spec.ts` (Prompt015) | DT-17, DT-27, DT-32 | Response (status class `200` / `4xx` of forgot-password and reset; `resetToken` present); Persisted outcome (logins of owner / other account, new and second password) |
 
 | Assertion pattern | Used by |
 | --- | --- |
