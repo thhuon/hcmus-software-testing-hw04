@@ -1189,7 +1189,7 @@ Prompt này (18:05) chưa vào log. Lần chạy `/logging-ai-prompts` tới s�
 ## Prompt011 – Claude Code (claude-opus-5-5)
 
 - **Prompt sent:** 18:44 17/11/2026
-- **Output received:** 18:46 17/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Output received:** 18:47 17/11/2026
 - **Feature / step:** forgot-password (fA) – T2 review: codegen check, decisions; prompt log
 - **Purpose:** No issue for the unnamed fields; AI-02 review done; codegen notes; log the prompts
 - **Prompt (verbatim):**
@@ -1221,8 +1221,260 @@ Bash See HW03 verdict cell wording
 Bash Print verdict and student columns of HW03 rows
 Bash Preview unlogged prompts of this session
 Bash Append Prompt010 and the running Prompt011 to the log
+Đã thêm Prompt010 và Prompt011 vào log. Giờ mình điền các trường TODO rồi cập nhật AI-02.
+Bash Fill the TODO fields of Prompt010 and Prompt011
+Bash Show the remaining TODO line
+Bash Read sent and received times of the new entries
+Bash Fill AI-02 prompt numbers and the student's review column
+Bash Adjust INCOMPLETE rows, commit log and AI-02 together
+Mình đã làm xong cả 4 việc bạn dặn; mọi thứ đã commit và push, repo đồng bộ với remote.
+
+## 1. Ô nhập không có accessible name: không báo bug
+
+Theo phương án (a), §2 giờ ghi: "Student decision 17/11: recorded here as a testability finding only; no issue and no comment (no requirement oracle)." Commit `7ab081f`.
+
+## 2. Review AI-02
+
+- Mình hiểu "đánh là complete" là bạn đã review xong và đồng ý mọi verdict đề xuất, kể cả **INCOMPLETE ở #10**. Nếu ý bạn là đổi #10 sang VALID thì báo mình.
+- Cột (5) của 16 dòng giờ ghi "Dùng nguyên, SV không yêu cầu sửa (SV review 17/11, Prompt011)". Các dòng INCOMPLETE thì ghi "Dùng bản đã sửa ở cột (4), SV không yêu cầu sửa thêm".
+- Dòng **#11** có thêm hai quyết định của bạn, ghi là **"Chỉnh sửa do SV quyết định"**:
+  - không báo bug ô không tên;
+  - kết quả codegen và nhận xét của bạn về 3 ô nhập.
+- §4 giờ ghi là số liệu theo verdict bạn đã xác nhận. Tổng không đổi: 19 dòng, VALID 15, INCOMPLETE 4.
+
+## 3. Nhận xét codegen của bạn
+
+Phần bạn điền mình commit riêng, giữ nguyên (`2ce80ad`). Mình đối chiếu với page object:
+
+1. **Ô email.** Codegen chọn `page.getByRole('textbox')` trên cả trang và thêm `.first()` khi click.
+   - Hôm nay trang này chỉ có 1 textbox (đã đếm trên Chromium và Firefox), nên `.first()` không cần. Đây lại là locator theo vị trí, skill cấm.
+   - Page object chỉ tìm trong form của bước đó và kết hợp với cách tìm theo label, nên không cần `.first()`.
+2. **Ô OTP và 3. ô mật khẩu.** Bạn đúng: `input[type=…]` sẽ khớp nhiều ô nếu form có thêm ô cùng loại. Ví dụ khi sửa BUG-04, form sẽ có thêm ô "Xác nhận mật khẩu mới".
+   - Với `(a).or(b)` hiện tại, test khi đó sẽ **báo lỗi** chứ không gõ nhầm ô, nhưng vẫn phải sửa locator.
+   - Vì vậy có quyết định 1 bên dưới.
+4. **Nút "Lấy mã OTP".** Có thể lúc ghi bạn bấm Enter thay vì click, nên codegen không ghi lại nút này.
+   - Locator ở bảng §2 lấy từ ARIA snapshot và đã đếm ra 1 trên 3 trình duyệt, nên không bị ảnh hưởng.
+   - Cột "Same as the table above?" của dòng này nên là **N/A** (không có gì để so) thay vì "No". Bạn tự sửa nếu đồng ý.
+
+## 4. Log prompt
+
+Đã thêm vào [prompt_log.md](prompt_log.md), đủ các trường Feature / step, Purpose, Used in:
+- **Prompt010** (gửi 18:05, nhận 18:18): đổi tên thư mục, thử các cách tìm ô nhập, khung ghi codegen.
+- **Prompt011** (gửi 18:44): lượt này, ghi `UNFINISHED`. Lần chạy `/logging-ai-prompts` sau sẽ cập nhật giờ nhận và output.
+
+Cũng trong commit log:
+- Dòng #11 và #S8 của AI-02 thay "logged later" bằng Prompt010.
+- Phần đầu file design ghi `Prompt009 – Prompt011 (T2)`.
+
+| ID | Điểm | Bằng chứng |
+| --- | --- | --- |
+| LOG-1, 2, 3, 5, 10 | 2 | Đúng session HW04; nội dung nguyên văn do script trích; số tiếp theo là 010, 011; chỉ đọc transcript qua script |
+| LOG-4 | 2 | Giờ UTC+7, chính xác đến phút |
+| LOG-6 | 2 | Prompt011 có đánh dấu UNFINISHED, cần chạy lại |
+| LOG-7, 8, 11 | 2 | Không còn TODO ở hai mục mới; không đòi ảnh chụp màn hình; đã commit |
+| LOG-9, 12 | N/A | Không dùng tool AI khác; không có prompt nào bạn dặn không ghi log |
+
+**Gate: passed**
+
+## Cần bạn quyết định
+
+1. **Locator của 3 ô nhập sau khi có nhận xét codegen**
+   - Kết luận của bạn: locator chung nên thay bằng locator cụ thể. Nhưng page object vẫn còn cách chung (a) trong `(a).or(b)`.
+   - Đây là quyết định của bạn vì nó thay quyết định trước ("thử mọi cách, dùng cả a và b").
+   - Các lựa chọn:
+     - (1) giữ `(a).or(b)`;
+     - (2) chỉ dùng (b), tìm theo label. Riêng ô OTP khớp label theo phần đầu "Mã OTP", nên phần sai "(4 số)" không ảnh hưởng;
+     - (3) `(a).and(b)`: ô phải đúng cả type lẫn label. Chặt nhất, nhưng hỏng khi một trong hai thay đổi.
+   - **Đề xuất (2)**, vì khớp kết luận của bạn.
+
+## Commit (đã push)
+
+- `2ce80ad` docs (forgot-password): record the codegen check of the locators (phần bạn điền)
+- `7ab081f` docs (forgot-password): record the decision on the unnamed fields
+- `2bd1e44` docs (ai): log Prompt010–Prompt011 and record the AI-02 review
+
+**Bước tiếp theo:** chọn quyết định 1. Nếu chọn (2), mình sửa page object trong một commit riêng và ghi vào AI-02. Sau đó gửi "bước T3 cho forgot-password: file dữ liệu test `data/forgot-password/`".
 ```
 
 - **Used in:** `features/forgot-password/automation_design.md` §2 (decision on the unnamed fields); `AI-02_AI_Audit_Report.md` §3 column (5), Artifact #11; `prompt_log.md`
+
+---
+
+## Prompt012 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 18:53 17/11/2026
+- **Output received:** 18:57 17/11/2026
+- **Feature / step:** forgot-password (fA) – T2 locator options (pros and cons); T3 test data
+- **Purpose:** Explain pros and cons of locator options (a) and (b); start T3 where the decision does not matter
+- **Prompt (verbatim):**
+
+```text
+tôi cần hiểu rõ pros cons của option a và b trước khi ra quyết định
+song song việc này bạn có thể bắt đầu thực hiện bước T3, những việc ko bị quyết định ảnh hưởng
+```
+
+- **AI output (verbatim):**
+
+```text
+Bash Check status and read design header and §1
+Bash Read design §3 template and FR-01/FR-03 requirement text
+Bash Read key HW02 test case rows for FR-03
+Bash Read HW02 fixtures and assumptions for FR-03
+Bash Find the HW02 assumption definitions A1–A17
+Mình đang soạn file dữ liệu T3 từ các TC của HW02. Trước hết cần kiểm tra backend chấp nhận định dạng email nào khi đăng ký tài khoản riêng cho từng test.
+Bash Check backend register validation and templates
+Bash Read API spec for login, forgot and reset password
+Đã đọc xong các TC và tài liệu yêu cầu. Giờ mình viết các file dữ liệu.
+Bash Write the Web and API test data files for FR-03
+Bash Cross-check data rows against the T1 selection table
+Bash Check HW02 BVA-01 and BVA-03 inputs
+Bash Write design §3 and commit the data files
+Bash Mark the per-test account change as proposed and commit
+Now the AI-02 row for T3.
+Bash Add AI-02 row #12 and check the prompt time
+Bash Fix prompt time in AI-02 row and commit
+Bạn cần hiểu rõ ưu nhược của (a) và (b) trước khi quyết. Phần đó ở mục 1, kèm các tình huống cụ thể của app này. Song song, mình đã làm xong bước T3, vì phần dữ liệu không phụ thuộc vào cách chọn locator. Mọi thứ đã commit và push.
+
+## 1. So sánh (a) và (b) cho 3 ô nhập không có tên
+
+**(a) Tìm theo role / type trong form**, ví dụ `form.getByRole('textbox')`, `input[type="password"]`. Đây cũng là kiểu locator mà codegen sinh ra.
+
+| Ưu | Nhược |
+| --- | --- |
+| Không phụ thuộc chữ của label, nên vẫn chạy khi label đổi chữ | Phụ thuộc vào **số ô cùng loại** trong form. Thêm một ô cùng type là ra 2 kết quả. Trang Đăng nhập đã bị như vậy |
+| Ngắn, đơn giản | Đọc code không biết đang nói tới ô nào ("ô text duy nhất" chứ không phải "ô OTP"); đây đúng là nhận xét codegen của bạn |
+| | Hỏng nếu đổi type, ví dụ ô OTP chuyển sang `type="number"` |
+
+**(b) Tìm theo khối chứa label**: tìm `div` có chữ label rồi lấy ô nhập bên trong.
+
+| Ưu | Nhược |
+| --- | --- |
+| Chỉ đúng ô người dùng nhìn thấy, đọc là hiểu, gần với `getByLabel` | Phụ thuộc **chữ của label**. Hiện mình khớp nguyên văn, nên đổi một ký tự là hỏng |
+| Thêm ô khác cùng type không ảnh hưởng, vì ô xác nhận có label khác | Phụ thuộc **cấu trúc HTML**: label và ô nhập phải nằm chung một `div` |
+| | Code dài hơn, cần thêm một hàm phụ |
+
+**Khi app thay đổi (nếu các bug HW02 được sửa):**
+
+| Thay đổi | (a) | (b) khớp nguyên văn | (b) khớp phần đầu label | `(a).or(b)` hiện tại |
+| --- | --- | --- | --- | --- |
+| Sửa BUG-03: label thành "Mã OTP (6 số)" | ✓ | ✗ | ✓ (`/^Mã OTP/`) | ✓ |
+| Sửa BUG-07: thêm `*` vào label email | ✓ | ✗ | ✓ | ✓ |
+| Sửa BUG-04: thêm ô "Xác nhận mật khẩu mới" | ✗ (ra 2 kết quả) | ✓ | ✓ | ✗ (báo lỗi, không gõ nhầm) |
+| Gắn label vào ô (`for`/`id`) | ✓ | ✓ | ✓ | ✓ |
+| Đổi bố cục, label ra ngoài `div` | ✓ | ✗ | ✗ | ✓ |
+
+**Tóm lại:**
+- (a) chịu được việc đổi chữ, nhưng không chịu được việc thêm ô cùng loại.
+- (b) thì ngược lại.
+- `.or()` gom các cách lại nhưng mang theo điểm yếu của (a): thêm ô cùng loại là báo lỗi.
+- (b) khớp **phần đầu** của label là lựa chọn chịu được nhiều thay đổi nhất trong bảng, và khớp kết luận codegen của bạn ("thay locator chung bằng locator cụ thể").
+
+Trong lúc làm bài, SUT không thay đổi nên lựa chọn nào cũng chạy được. Đây là quyết định về khả năng bảo trì và về điều bạn sẽ viết trong báo cáo.
+
+## 2. Bước T3 – forgot-password: dữ liệu test
+
+Lúc bắt đầu, bước T2 đã commit hết.
+
+| File | Số dòng | Nội dung |
+| --- | --- | --- |
+| [web.json](data/forgot-password/web.json) | 30 | Các TC Web, gồm cả 7 TC OTP chạy Web rồi gửi cùng OTP qua API |
+| [api.json](data/forgot-password/api.json) | 3 | DT-17, DT-27, DT-32 |
+
+- **Mỗi dòng gồm:**
+  - `flow`: luồng spec sẽ chạy, ví dụ `reset`, `requestOnly`, `otpWebThenApi`;
+  - giá trị nhập của TC HW02;
+  - `expected`: `success` / `error` / `blocked` cùng các kiểm tra của TC, ví dụ lỗi hiện trên nút submit, mật khẩu cũ còn đăng nhập được;
+  - `source`: trích FR-03, FR-01, FR-22, SEC-07, API spec và các giả định A1–A17.
+- **Không kiểm câu chữ thông báo**, vì tài liệu yêu cầu không có câu nào, và A1/A5/A6 nói chỉ ghi lại, không chấm.
+- **Đã kiểm bằng script:** ID của 33 dòng khớp đủ 33 TC "Yes" của §1, và giá trị nhập khớp cột Input.
+- **Dữ liệu không đụng nhau:** mỗi test tự đăng ký một tài khoản qua API, email dạng `fr03.{id}.{run}@example.com`.
+  - Vì vậy không test nào dùng chung tài khoản, cũng không dùng lại tài khoản của lần chạy trước.
+  - Tài khoản seed `test@eshop.com` không bị đổi mật khẩu, nên không cần khôi phục.
+
+Mô tả các cột và hai giá trị `<CONFIRM>` nằm ở §3 của [automation_design.md](features/forgot-password/automation_design.md).
+
+**AI tự review**
+
+| # | Điểm | Bằng chứng |
+| --- | --- | --- |
+| P1–P6 | 2 | Bước T2 đã commit trước khi làm; data một commit; AI-02 #12 commit riêng; mọi đề xuất có ghi `(proposed)` |
+| 9 | 2 | Dữ liệu chỉ nằm trong 2 file JSON; chưa có spec nào nên không có dữ liệu viết thẳng trong code |
+| 10 | 2 | Mọi dòng có `source`; giá trị nhập khớp §1; những gì tài liệu không ghi là `<CONFIRM>` |
+| 11 | 2 | Mỗi test một tài khoản, tên có thời điểm chạy; lần chạy chính thức dùng server mới (đã ghi ở §3) |
+
+**Gate: passed** (2 mục `<CONFIRM>` chờ bạn).
+
+## Cần bạn quyết định
+
+1. **Locator của 3 ô nhập** (mục 1)
+   - (1) Giữ `(a).or(b)`.
+   - (2) Chỉ dùng (b), khớp phần đầu label: `/^Nhập Email/`, `/^Mã OTP/`, `/^Mật khẩu mới/`.
+   - (3) `(a).and(b)`.
+   - **Đề xuất (2).**
+2. **`<CONFIRM>` URL trang đăng nhập (DT-03)**
+   - FR-03 chỉ nói nút đưa về trang đăng nhập, không ghi URL.
+   - **Đề xuất:** nhận ra trang đăng nhập bằng nút "Sign In" cộng đường dẫn `/login`. `/login` là đường dẫn của link "Đăng nhập" trong app, không có trong tài liệu yêu cầu.
+3. **`<CONFIRM>` mã trạng thái API**
+   - API spec không ghi kết quả trả về của `/api/reset-password`.
+   - **Đề xuất:** chấp nhận = `200`, từ chối = mọi mã `4xx`.
+   - Phép kiểm chính vẫn là đăng nhập lại (A5/A6). Vì vậy nếu chỉ sai mã trạng thái thì không báo là lỗi.
+4. **Mỗi test một tài khoản riêng thay vì `test@eshop.com`**
+   - Vẫn cùng phân hoạch "email đã đăng ký", và giữ các test độc lập với nhau.
+   - **Đề xuất: đồng ý.**
+
+**Báo trước cho T4:** dữ liệu điền ô xác nhận đúng như TC ("new = confirm"). Nhưng app không có ô này (BUG-04), nên mọi test Web có Bước 2 sẽ fail ở chỗ điền ô xác nhận. Mình sẽ đưa ra các lựa chọn xử lý ở T4.
+
+## Commit (đã push)
+
+- `9d9e21c` test (forgot-password): move test data to data/forgot-password/
+- `97243ab` docs (forgot-password): mark the account change of the test data as proposed
+- `b24d870` docs (ai): add AI-02 row for the FR-03 test data
+
+Prompt này (gửi 18:53) sẽ vào log ở lần chạy `/logging-ai-prompts` tới.
+
+**Bước tiếp theo:** trả lời 4 quyết định trên. Mình sẽ cập nhật page object và các mục `<CONFIRM>`. Sau đó gửi "bước T4 cho forgot-password: sinh spec data-driven".
+```
+
+- **Used in:** `data/forgot-password/web.json`, `api.json`; `features/forgot-password/automation_design.md` §2 (pros and cons), §3 (AI-02 Artifact #12)
+
+---
+
+## Prompt013 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 19:02 17/11/2026
+- **Output received:** 19:04 17/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Feature / step:** forgot-password (fA) – T2 locator decision; T3 confirmations; prompt log; docs
+- **Purpose:** Apply locator option (2); confirm DT-03 login page and API status; explain how new accounts are made; log prompts; update docs
+- **Prompt (verbatim):**
+
+```text
+1. thực hiện theo phương án 2 cho câu hỏi trước đó
+2,3. tôi đồng ý với các đề xuất của bạn
+4. vậy thì bạn tạo ra các tài khoản mới khác nhau bằng cách nào? vì hiện tại chỉ có 1 tài khoản test@eshop.com
+/logging-ai-prompts log các prompt chưa được cập nhật trong session này
+cập nhật các docs, báo cáo liên quan
+```
+
+- **AI output (verbatim):**
+
+```text
+Skill
+Đầu tiên mình đổi locator của 3 ô nhập sang phương án (2): chỉ tìm theo label, khớp phần đầu.
+Bash Switch the three unnamed fields to label-prefix locators
+Bash Verify the new locators on three browsers with a throw-away spec
+Kiểm tra trên 3 trình duyệt đều ra 1 kết quả cho mỗi ô. Giờ mình cập nhật bảng §2.
+Bash Update design §2 rows and result, commit locator change
+Tiếp theo là hai mục `<CONFIRM>` bạn đã đồng ý, và chạy thử cách tạo tài khoản mới để trả lời câu hỏi 4.
+Bash Resolve CONFIRM items and demo registering a fresh account
+Bash Document account creation and commit the confirmed expectations
+Giờ mình cập nhật các tài liệu liên quan: PLAN, README, báo cáo.
+Bash Read PLAN feature A tasks and progress mentions in README and report
+Bash Read README summary table and report section 3
+Bash Tick A1–A3 in PLAN and fill report §3.1, then commit
+Đã xong các tài liệu. Giờ đến phần log prompt.
+Bash Write pending prompts to the log and show their fields
+```
+
+- **Used in:** `page-objects/ForgotPasswordPage.ts`; `features/forgot-password/automation_design.md` §2, §3; `data/forgot-password/*.json`; `PLAN.md` A1–A3; `HW04_Report.md` §3.1; `AI-02_AI_Audit_Report.md` (Artifact #12, #13); `prompt_log.md`
 
 ---
