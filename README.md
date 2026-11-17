@@ -25,7 +25,7 @@ The same three web features as HW02 (brief §5; group allocation: [HW02 group re
 | Feature | TC automated | Executed | Passed | Failed | Browser runs | Bugs (confirmed / changed / new) |
 | --- | --- | --- | --- | --- | --- | --- |
 | A – FR-03 | 33 | 33 | 5 | 28 | 3 | 7 / 1 / 1 |
-| B – FR-08 | | | | | | |
+| B – FR-08 | 17 | 17 | 4 | 13 | 3 | 6 / 1 / 1 |
 | C – FR-15 | | | | | | |
 | **Total** | | | | | | |
 

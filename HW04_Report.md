@@ -122,13 +122,40 @@ Official runs: fourth set, 17/11 22:52–22:56 ([design §6](features/checkout/a
 
 <!-- `npm run summary` output: runs table (9 runs) and totals; links to reports/<feature>/<browser>/index.html. -->
 
+**FR-08 – checkout** (fourth official set, 17/11/2026, `npm run feature -- checkout --reuse`; [design §6](features/checkout/automation_design.md#6-runs-t6))
+
+| feature | browser | started | tests | passed | failed | flaky | report |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| checkout | chromium | 2026-11-17T15:52:03.425Z | 18 | 4 | 14 | 0 | [index.html](reports/checkout/chromium/index.html) |
+| checkout | firefox | 2026-11-17T15:53:24.511Z | 18 | 4 | 14 | 0 | [index.html](reports/checkout/firefox/index.html) |
+| checkout | webkit | 2026-11-17T15:54:58.834Z | 18 | 4 | 14 | 0 | [index.html](reports/checkout/webkit/index.html) |
+
+Totals per test case: 17 automated, 17 executed, 4 passed, 13 failed, 0 flaky, 3 runs.
+
 ## 7. Bug summary
 
 <!-- From bugs/BUG_REPORT.md §2: Confirmed / Changed comments on HW02 issues, new issues with label hw: HW04; screenshot of the Issues page. -->
 
+**FR-08 – checkout** ([bugs/BUG_REPORT.md](bugs/BUG_REPORT.md), [design §8](features/checkout/automation_design.md#8-failures-and-bugs-t7)): 8 bugs – 1 new, 6 confirmed, 1 changed.
+
+| Bug | Issue | Outcome | Tests | Severity / Priority |
+| --- | --- | --- | --- | --- |
+| BUG-01 – empty cart accepted (typed `/checkout`; also through the API) | [#116](https://github.com/angquoc/software-testing-2026-HW02-group/issues/116) (`hw: HW04`) | New (T2) + automated evidence | DT-07 Web, DT-07 API | Medium / Medium |
+| BUG-11 – client `total_amount` stored | [#12](https://github.com/angquoc/software-testing-2026-HW02-group/issues/12) | Confirmed | DT-09 … 13 | Critical / High |
+| BUG-12 – no `total_amount` → total `null` | [#13](https://github.com/angquoc/software-testing-2026-HW02-group/issues/13) | Confirmed | DT-02, DT-08 | High / High |
+| BUG-13 – cart not cleared after checkout | [#14](https://github.com/angquoc/software-testing-2026-HW02-group/issues/14) | Confirmed | DT-01, BVA-01 … 04, DT-02, 08 … 13 | Medium / Medium |
+| BUG-14 – Web total editable | [#15](https://github.com/angquoc/software-testing-2026-HW02-group/issues/15) | Confirmed | DT-01 | Critical / High |
+| BUG-15 – no breadcrumb on Thanh toán | [#16](https://github.com/angquoc/software-testing-2026-HW02-group/issues/16) | Confirmed | DT-01 | Low / Low |
+| BUG-16 – guest checkout | [#17](https://github.com/angquoc/software-testing-2026-HW02-group/issues/17) | Changed: not reproduced | DT-03 (passes) | High / High |
+| BUG-17 – empty cart without illustration (FR-07) | [#80](https://github.com/angquoc/software-testing-2026-HW02-group/issues/80) (another member) | Confirmed, Related | DT-07 Web | Low / – |
+
+Screenshots of the eight comments: `bugs/screenshots/checkout_comment_<issue>.png`.
+
 ## 8. Test cases not automated
 
 <!-- From design §7 of each feature: TC, reason. -->
+
+**FR-08 – checkout:** none – all 17 HW02 test cases are automated ([design §7](features/checkout/automation_design.md#7-not-automated-t8)); parts of expected results that are recorded but not judged (confirmation screen, address, badge, guest message, HTTP status) are listed there with their reason.
 
 ## 9. Demo video
 

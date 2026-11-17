@@ -61,6 +61,7 @@ Như A1–A7 nhưng **dùng skill**. Chỗ nào skill vướng thì sửa skill 
 - [x] **B5. Review & sửa** (17/11: 5 lỗi script đã sửa – e-mail trùng khi chạy lặp, nhánh `refused` không kiểm đơn, nút thêm giỏ flaky trên Firefox, DT-03 đường (b) "Thoát trên trang Thanh toán" và bỏ `if` ở đường (a); loại nguyên nhân SV xác nhận – design §5).
 - [x] **B6. Chạy 3 trình duyệt** (bộ 4, 17/11 22:52–22:56, `--reuse` để không ảnh hưởng phiên FR-03: mỗi trình duyệt 18 test, 4 passed, 14 failed – design §6, `reports/checkout/`).
 - [x] **B7. Bug** (17–18/11: phân loại ở design §8, SV xác nhận; `bugs/BUG_REPORT.md` BUG-11 … BUG-17; 8 bình luận "HW04" có ảnh: Confirmed #12 … #16, #116, Related #80, Changed #17; bug mới BUG-01 #116 tạo ở bước T2).
+- [x] **B8. Tổng kết** (18/11: số liệu từ `npm run summary` vào design §6; §7 không có TC nào không tự động hóa; README §2 dòng B, `HW04_Report.md` §6–§8 phần FR-08; ảnh 8 bình luận làm bằng chứng nộp bài).
 
 ### Giai đoạn 3 – Feature C: FR-15 + quay video (≈ 2 giờ)
 
