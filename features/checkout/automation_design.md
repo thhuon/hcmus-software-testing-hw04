@@ -92,27 +92,29 @@ Testability findings (elements without an accessible name, unstable text, behavi
 - **No input has an accessible name** (Đăng nhập, "Số lượng", "Tổng tiền thanh toán"): labels without `for`; every field is still found by its label prefix. Product cards have no role or name, so the card is found by its heading (CSS structure fallback).
 - **The Web cart lives in the page's memory:** a reload (`page.goto`) empties it (group issue #74). After adding products, a test reaches the cart and the checkout only through links and buttons, never by URL. `page.goto('/checkout')` is used only where an empty cart is wanted (DT-03 path (b), DT-07).
 - **The URL changes before the page is drawn:** on Chromium, right after clicking "Giỏ hàng" on the success page the URL was `/cart` while the success heading was still shown. Wait for the page heading, not for the URL.
-- **"Thêm vào giỏ hàng" needs two clicks** (group issue #73, FR-07, not FR-08). The Web tests need quantities above 1 (DT-01, BVA), which only the product page offers; the home button adds a new line of 1 per click (group issue #70). Decision 1 below.
+- **"Thêm vào giỏ hàng" needs two clicks** (group issue #73, FR-07, not FR-08). The Web tests need quantities above 1 (DT-01, BVA), which only the product page offers; the home button adds a new line of 1 per click (group issue #70). Student decision 17/11: `ProductPage.addToCart(qty)` clicks until the button reads "Đã thêm", at most twice, and returns the number of clicks; the spec records a second click as an annotation linking #73, so the defect stays visible in the report.
 - **No cart badge** (group issue #79): DT-01 step 6 "the badge no longer shows the old count" cannot be checked; the cart page is checked instead.
 - **Seen on the way, for T7 (not judged here):** after a Web checkout the cart page still shows the line (3 browsers; HW02 BUG-14). A guest is refused on both DT-03 paths and no order is created (3 browsers), also after "Thoát" from a logged-in session; HW02 BUG-17 reported that a guest could check out. A logged-in user with an empty cart who types `/checkout` sees an empty list, total 0 and an enabled "Xác Nhận Thanh Toán"; the click sends `{"items": [], "total_amount": 0, "coupon_id": null}` → 200, the success heading shows and an order with `total_amount` 0 is stored (3 browsers; relevant to the open T1 decision on DT-07).
 
-**Codegen check (student, by hand).** `npm run sut`, then `npm run codegen`; recorded: home → "Thêm vào giỏ" × 2 → "Giỏ hàng" → "Tiến hành thanh toán" (guest `alert`, login page) → Đăng nhập → "Giỏ hàng" → "Tiến hành thanh toán" → coupon field → "Xác Nhận Thanh Toán" → "Quay lại trang chủ". Date / browser: 17/11/26 – [SV điền].
+**Codegen check (student, by hand).** `npm run sut`, then `npm run codegen`; recorded: home → "Thêm vào giỏ" × 2 → "Giỏ hàng" → "Tiến hành thanh toán" (guest `alert`, login page) → Đăng nhập → "Giỏ hàng" → "Tiến hành thanh toán" → coupon field → "Xác Nhận Thanh Toán" → "Quay lại trang chủ". Date / browser: 17/11/26 - Firefox (as FR-03, student 17/11).
 
 | Element | Locator codegen picked (copied from the codegen window) | Same as the table above? | If not: which is better, and why (one line) |
 | --- | --- | --- | --- |
-| Home "Thêm vào giỏ" (two products) | `page.getByRole('button', { name: 'Thêm vào giỏ' }).nth(1)`, `.first()` | No | (proposed) The card's button filtered by the product heading: `.nth(1)` picks whatever product is second, and the order of the 5 products is data |
+| Home "Thêm vào giỏ" (two products) | `page.getByRole('button', { name: 'Thêm vào giỏ' }).nth(1)`, `.first()` | No | The card's button filtered by the product heading: `.nth(1)` picks whatever product is second, and the order of the 5 products is data |
 | "Giỏ hàng" link | `page.getByRole('link', { name: 'Giỏ hàng' })` | Yes | |
-| Guest `alert` | `page.once('dialog', dialog => { … dialog.dismiss() })` | Same mechanism | (proposed) `page.on('dialog')` that keeps every message: the guest path (b) raises a second dialog that `once` does not catch, and the test needs the text |
+| Guest `alert` | `page.once('dialog', dialog => { … dialog.dismiss() })` | Same mechanism | `page.on('dialog')` that keeps every message: the guest path (b) raises a second dialog that `once` does not catch, and the test needs the text |
 | "Tiến hành thanh toán" button | `page.getByRole('button', { name: 'Tiến hành thanh toán' })` | Yes | |
-| Đăng nhập "Username" field | `page.getByRole('textbox').first()` | No | (proposed) The label-prefix locator: `.first()` breaks when another textbox is added above it, and it does not say which field it is |
-| Đăng nhập "Mật khẩu" field | `page.getByRole('textbox').nth(1)` | No | (proposed) As above |
-| "Sign In" button | Not captured (Enter pressed in the password field) | No | (proposed) `getByRole('button', { name: 'Sign In' })`: the test clicks what the user sees |
+| Đăng nhập "Username" field | `page.getByRole('textbox').first()` | No | The label-prefix locator: `.first()` breaks when another textbox is added above it, and it does not say which field it is |
+| Đăng nhập "Mật khẩu" field | `page.getByRole('textbox').nth(1)` | No | As above |
+| "Sign In" button | Not captured (Enter pressed in the password field) | No | `getByRole('button', { name: 'Sign In' })`: the test clicks what the user sees |
 | Coupon field | `page.getByRole('textbox', { name: 'Nhập mã giảm giá' })` | Yes (substring of the name "Nhập mã giảm giá...") | Not used by FR-08 |
 | "Xác Nhận Thanh Toán" button | `page.getByRole('button', { name: 'Xác Nhận Thanh Toán' })` | Yes | |
 | "Quay lại trang chủ" button | `page.getByRole('button', { name: 'Quay lại trang chủ' })` | Yes | |
 | Product page, cart lines, checkout list and total, success heading | Not captured (codegen records actions, not the elements a test reads) | – | From the ARIA snapshot (table above) |
 
-Conclusion (one sentence, student): [SV điền]
+Conclusion (one sentence, student; the FR-03 sentence reused, student 17/11): The Codegen-generated locators can identify UI elements, but some generic locators should be replaced with more specific and reliable locators to improve test stability and maintainability.
+
+The comparisons in the last column were proposed by the agent and accepted by the student (17/11).
 
 **Still to do in T2:**
 
