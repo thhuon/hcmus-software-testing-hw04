@@ -114,7 +114,7 @@ Testability findings (elements without an accessible name, unstable text, behavi
 | "Quay lại trang chủ" button | `page.getByRole('button', { name: 'Quay lại trang chủ' })` | Yes | |
 | Product page, cart lines, checkout list and total, success heading | Not captured (codegen records actions, not the elements a test reads) | – | From the ARIA snapshot (table above) |
 
-Conclusion (one sentence, student; the FR-03 sentence reused, student 17/11): The Codegen-generated locators can identify UI elements, but some generic locators should be replaced with more specific and reliable locators to improve test stability and maintainability.
+Conclusion (one sentence, student): Playwright Codegen provides useful initial locators, but some generated locators rely on element positions and are not sufficiently stable, so I compared them with the ARIA snapshot and selected more specific role-based or label-based locators to improve test reliability and maintainability.
 
 The comparisons in the last column were proposed by the agent and accepted by the student (17/11).
 
