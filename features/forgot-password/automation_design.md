@@ -222,12 +222,13 @@ Categories: fragile selector · weak assertion · wrong oracle · missing edge c
 
 ## 6. Runs (T6)
 
-**Official runs** (17/11/2026, `node skills/test-automation/scripts/run-browsers.mjs --config automation.config.json forgot-password --browsers <browser> --reuse`, one browser after the other):
+**Official runs** (second set, 17/11/2026 20:08–20:20, `node skills/test-automation/scripts/run-browsers.mjs --config automation.config.json forgot-password --browsers <browser> --reuse`, one browser after the other). They replace the first set of 19:47–19:59 (commit 4ec4bf5, same results), which the student had rerun because of the environment error below.
 
-- **Frozen specs:** `tests/forgot-password/` at commit 63f8508 (last spec change, after the T5 fixes); run script with its own output folder per run at d5bd0e0. Reports committed as the tool wrote them.
-- **SUT and data:** the servers already running (`--reuse`) instead of fresh ones, because the student's servers were also in use by the parallel FR-08 session; the database was not re-seeded. Clean data comes from the test data instead: every test registers its own account named after the TC, the run's start time and the browser (§3), and no test reads data that an earlier test or run left.
-- **Settings:** `retries: 0`, `workers: 1`; screenshots on failure, traces kept on failure.
-- **Reports:** `reports/forgot-password/<browser>/index.html` + `results.json`. Title checked in a browser on all three: "HW04 · FR-03 Forgot & reset password · <browser> · Run by: 23120046 · <ISO start time>" (chromium `2026-11-17T12:47:18.182Z`, firefox `…12:50:46.628Z`, webkit `…12:55:17.175Z`).
+- **Frozen specs:** `tests/forgot-password/` at commit 63f8508 (last spec change, after the T5 fixes). Run settings at 45800c0: own output folder per run, failure screenshots copied per TC, no traces. Reports committed as the tool wrote them.
+- **SUT and data:** the servers already running (`--reuse`), because the student's servers were also in use by the parallel FR-08 session; the database was not re-seeded. Clean data comes from the test data: every test registers its own account named after the TC, the run's start time and the browser (§3), and no test reads data that an earlier test or run left.
+- **Settings:** `retries: 0`, `workers: 1`; screenshot on failure; **no traces** (student 17/11: the brief asks for the HTML report with "Run by" and an ISO timestamp, §6 Task 1 / §11, and a screenshot per bug, not for traces; traces made the reports 10–25 MB per browser, now 2.9–5.9 MB). Development runs still keep traces for the trace viewer.
+- **Reports:** `reports/forgot-password/<browser>/index.html` + `results.json`. Title checked in a browser on all three: "HW04 · FR-03 Forgot & reset password · <browser> · Run by: 23120046 · <ISO start time>" (chromium `2026-11-17T13:08:54.601Z`, firefox `…13:12:16.037Z`, webkit `…13:16:33.549Z`).
+- **Screenshots:** `reports/forgot-password/<browser>/screenshots/<TC ID>.png`, one per failed Web test (27 per browser), copied by the run script from the run's own output; they show the page when the test ended (the dialog texts are in the report's `dialog` annotations). DT-27 is an API test with no page: its evidence is the report entry, captured as `features/forgot-password/screenshots/DT-27-<browser>-report.png`.
 
 Script output (`summarize-results.mjs --markdown`, FR-03 rows):
 
@@ -235,9 +236,9 @@ Script output (`summarize-results.mjs --markdown`, FR-03 rows):
 
 | feature | browser | started | tests | passed | failed | flaky | skipped |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| forgot-password | chromium | 2026-11-17T12:47:18.187Z | 33 | 5 | 28 | 0 | 0 |
-| forgot-password | firefox | 2026-11-17T12:50:46.634Z | 33 | 5 | 28 | 0 | 0 |
-| forgot-password | webkit | 2026-11-17T12:55:17.180Z | 33 | 5 | 28 | 0 | 0 |
+| forgot-password | chromium | 2026-11-17T13:08:54.606Z | 33 | 5 | 28 | 0 | 0 |
+| forgot-password | firefox | 2026-11-17T13:12:16.041Z | 33 | 5 | 28 | 0 | 0 |
+| forgot-password | webkit | 2026-11-17T13:16:33.554Z | 33 | 5 | 28 | 0 | 0 |
 
 **Test cases (across browsers)**
 
@@ -283,9 +284,17 @@ Script output (`summarize-results.mjs --markdown`, FR-03 rows):
 | --- | --- | --- | --- | --- | --- | --- |
 | forgot-password | 33 | 33 | 5 | 28 | 0 | 3 |
 
-**Browser comparison:** the same 5 tests pass and the same 28 fail on all three browsers, each failing on the same check (compared from the first error of every test in the three `results.json`). Durations: chromium 3.4 min, firefox 4.3 min, webkit 3.7 min. No flaky test (no retries; the results agree across browsers).
+**Browser comparison:** the same 5 tests pass and the same 28 fail on all three browsers, each on the same check (first error of every test compared across the three `results.json`). Durations: chromium 3.2 min, firefox 4.2 min, webkit 3.6 min. No flaky test.
 
-One difference: **DT-12 on Firefox** has a second error after the FR-22 failure, `apiRequestContext.post: socket hang up (ECONNRESET)` on the API reset, so its API part did not run in that run. Rerun three times on Firefox (private folder): 1 of 3 shows it again; never seen on Chromium or WebKit. Proposed cause (environment / script timing, to triage in T7): the API call comes right after the soft FR-22 check has waited its full 5 s, and Node / Express closes an idle keep-alive connection after 5 s (`keepAliveTimeout` default), so the request may go out on a socket the server is closing. It does not change the verdict of DT-12 (FR-22 fails on every browser) but leaves its API check unproven in the Firefox run.
+**Environment error ENV-01 – `ECONNRESET` on an API call (accepted as a risk, student 17/11):**
+
+| Field | Value |
+| --- | --- |
+| Seen in | First official run, DT-12 on Firefox (19:51): after the FR-22 failure, `apiRequestContext.post: socket hang up (ECONNRESET)` on the API reset, so the API part of DT-12 did not run in that run |
+| Reproduced | DT-12 rerun 3 times on Firefox (private folder): 1 of 3. Not seen on Chromium or WebKit, and not in the second official set (0 of 99 tests) |
+| Proposed cause | The API call follows the soft FR-22 check, which waits its full 5 s; Node / Express closes an idle keep-alive connection after 5 s (`keepAliveTimeout` default), so the request can go out on a socket the server is closing. Environment / timing, not the product under test |
+| Effect | None on the verdicts: DT-12 fails on FR-22 on every browser; only its API check can be missing from a run |
+| Decision | Student 17/11: record it, rerun the three official runs once more (done: no `ECONNRESET`), accept it as a risk; no change to the specs |
 
 ## 7. Not automated (T8)
 

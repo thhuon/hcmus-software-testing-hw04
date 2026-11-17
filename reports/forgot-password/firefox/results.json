@@ -21,7 +21,7 @@
     "maxFailures": 0,
     "metadata": {
       "Run by": "23120046",
-      "Started at": "2026-11-17T12:50:46.628Z",
+      "Started at": "2026-11-17T13:12:16.037Z",
       "Feature": "FR-03 Forgot & reset password",
       "Browser": "firefox",
       "actualWorkers": 1
@@ -34,7 +34,7 @@
         "retries": 0,
         "metadata": {
           "Run by": "23120046",
-          "Started at": "2026-11-17T12:50:46.628Z",
+          "Started at": "2026-11-17T13:12:16.037Z",
           "Feature": "FR-03 Forgot & reset password",
           "Browser": "firefox",
           "actualWorkers": 1
@@ -54,7 +54,7 @@
         "retries": 0,
         "metadata": {
           "Run by": "23120046",
-          "Started at": "2026-11-17T12:50:46.628Z",
+          "Started at": "2026-11-17T13:12:16.037Z",
           "Feature": "FR-03 Forgot & reset password",
           "Browser": "firefox",
           "actualWorkers": 1
@@ -74,7 +74,7 @@
         "retries": 0,
         "metadata": {
           "Run by": "23120046",
-          "Started at": "2026-11-17T12:50:46.628Z",
+          "Started at": "2026-11-17T13:12:16.037Z",
           "Feature": "FR-03 Forgot & reset password",
           "Browser": "firefox",
           "actualWorkers": 1
@@ -98,7 +98,7 @@
         "retries": 0,
         "metadata": {
           "Run by": "23120046",
-          "Started at": "2026-11-17T12:50:46.628Z",
+          "Started at": "2026-11-17T13:12:16.037Z",
           "Feature": "FR-03 Forgot & reset password",
           "Browser": "firefox",
           "actualWorkers": 1
@@ -112,7 +112,7 @@
         "use": {
           "baseURL": "http://localhost:5173",
           "screenshot": "only-on-failure",
-          "trace": "retain-on-failure",
+          "trace": "off",
           "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:157.0) Gecko/20100101 Firefox/157.0",
           "viewport": {
             "width": 1280,
@@ -141,7 +141,7 @@
       [
         "html",
         {
-          "title": "HW04 · FR-03 Forgot & reset password · firefox · Run by: 23120046 · 2026-11-17T12:50:46.628Z",
+          "title": "HW04 · FR-03 Forgot & reset password · firefox · Run by: 23120046 · 2026-11-17T13:12:16.037Z",
           "outputFolder": "reports/forgot-password/firefox",
           "open": "never"
         }
@@ -195,12 +195,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 115,
+                      "duration": 73,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:50:47.383Z",
+                      "startTime": "2026-11-17T13:12:16.657Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -229,7 +229,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 61,
+                      "duration": 31,
                       "error": {
                         "message": "Error: reset is rejected: {\"message\":\"Password reset successfully\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"4xx\"\u001b[39m\nReceived: \u001b[31m\"200\"\u001b[39m",
                         "stack": "Error: reset is rejected: {\"message\":\"Password reset successfully\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"4xx\"\u001b[39m\nReceived: \u001b[31m\"200\"\u001b[39m\n    at expectOutcome (/home/hg/source/software-testing/week04/tests/forgot-password/api.spec.ts:68:83)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/api.spec.ts:105:7",
@@ -253,18 +253,13 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:50:47.540Z",
+                      "startTime": "2026-11-17T13:12:16.764Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-api-FR-03--d4a60-out-newPassword-is-rejected-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-api-FR-03--d4a60-out-newPassword-is-rejected-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -298,12 +293,12 @@
                       "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 105,
+                      "duration": 79,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:50:48.304Z",
+                      "startTime": "2026-11-17T13:12:17.375Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -349,7 +344,7 @@
                       "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 26719,
+                      "duration": 26297,
                       "error": {
                         "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/Bước\\s*[12]\\s*\\/\\s*2/)\nExpected: \u001b[32m\"Bước 1 / 2\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"soft toHaveText\" getByText(/Bước\\s*[12]\\s*\\/\\s*2/) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/Bước\\s*[12]\\s*\\/\\s*2/)\u001b[22m\n",
                         "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/Bước\\s*[12]\\s*\\/\\s*2/)\nExpected: \u001b[32m\"Bước 1 / 2\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"soft toHaveText\" getByText(/Bước\\s*[12]\\s*\\/\\s*2/) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/Bước\\s*[12]\\s*\\/\\s*2/)\u001b[22m\n\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:148:71",
@@ -383,7 +378,7 @@
                             "column": 75,
                             "line": 155
                           },
-                          "message": "Error: OTP format (FR-03 \"6 chữ số\")\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^\\d{6}$/\u001b[39m\nReceived string:  \u001b[31m\"6841\"\u001b[39m\n\n  153 |       const otp = row.otp === 'issued' ? await fp.readOtp() : row.otp!;\n  154 |\n> 155 |       if (e.otpPattern) expect.soft(otp, 'OTP format (FR-03 \"6 chữ số\")').toMatch(new RegExp(e.otpPattern));\n      |                                                                           ^\n  156 |       if (e.stepIndicator?.step2) await expect.soft(fp.stepIndicator).toHaveText(e.stepIndicator.step2);\n  157 |       if (e.step2Fields) {\n  158 |         await expect.soft(fp.otpInput).toBeVisible();\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:155:75"
+                          "message": "Error: OTP format (FR-03 \"6 chữ số\")\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^\\d{6}$/\u001b[39m\nReceived string:  \u001b[31m\"1360\"\u001b[39m\n\n  153 |       const otp = row.otp === 'issued' ? await fp.readOtp() : row.otp!;\n  154 |\n> 155 |       if (e.otpPattern) expect.soft(otp, 'OTP format (FR-03 \"6 chữ số\")').toMatch(new RegExp(e.otpPattern));\n      |                                                                           ^\n  156 |       if (e.stepIndicator?.step2) await expect.soft(fp.stepIndicator).toHaveText(e.stepIndicator.step2);\n  157 |       if (e.step2Fields) {\n  158 |         await expect.soft(fp.otpInput).toBeVisible();\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:155:75"
                         },
                         {
                           "location": {
@@ -413,7 +408,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:50:48.478Z",
+                      "startTime": "2026-11-17T13:12:17.509Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -425,11 +420,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--7c3bb-og-in-with-the-new-password-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--7c3bb-og-in-with-the-new-password-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -468,7 +458,7 @@
                       "workerIndex": 2,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 7027,
+                      "duration": 6549,
                       "error": {
                         "message": "Error: login with \"NewPass@2026#\" succeeds\n\nlogin with \"NewPass@2026#\" succeeds\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"200\"\u001b[39m\nReceived: \u001b[31m\"4xx\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
                         "stack": "Error: login with \"NewPass@2026#\" succeeds\n\nlogin with \"NewPass@2026#\" succeeds\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"200\"\u001b[39m\nReceived: \u001b[31m\"4xx\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at expectLogin (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:91:6)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:174:15",
@@ -492,7 +482,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:51:17.030Z",
+                      "startTime": "2026-11-17T13:12:45.161Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -509,11 +499,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--60d04-a-character-outside-the-set-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--60d04-a-character-outside-the-set-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -552,10 +537,10 @@
                       "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 1993,
+                      "duration": 1772,
                       "error": {
-                        "message": "Error: OTP 5568 is used up after the reset (SEC-07): 200\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
-                        "stack": "Error: OTP 5568 is used up after the reset (SEC-07): 200\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at expectOtpUsedUp (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:101:120)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:176:26",
+                        "message": "Error: OTP 3383 is used up after the reset (SEC-07): 200\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: OTP 3383 is used up after the reset (SEC-07): 200\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at expectOtpUsedUp (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:101:120)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:176:26",
                         "location": {
                           "file": "/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts",
                           "column": 120,
@@ -570,13 +555,13 @@
                             "column": 120,
                             "line": 101
                           },
-                          "message": "Error: OTP 5568 is used up after the reset (SEC-07): 200\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n   99 | async function expectOtpUsedUp(api: EshopApi, email: string, otp: string, newPassword: string) {\n  100 |   const res = await api.resetPassword({ email, resetToken: otp, newPassword });\n> 101 |   expect(res.status() >= 400 && res.status() < 500, `OTP ${otp} is used up after the reset (SEC-07): ${res.status()}`).toBe(true);\n      |                                                                                                                        ^\n  102 | }\n  103 |\n  104 | /** Wording of the browser dialogs is recorded, not judged (A1, A5, A6). */\n    at expectOtpUsedUp (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:101:120)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:176:26"
+                          "message": "Error: OTP 3383 is used up after the reset (SEC-07): 200\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n   99 | async function expectOtpUsedUp(api: EshopApi, email: string, otp: string, newPassword: string) {\n  100 |   const res = await api.resetPassword({ email, resetToken: otp, newPassword });\n> 101 |   expect(res.status() >= 400 && res.status() < 500, `OTP ${otp} is used up after the reset (SEC-07): ${res.status()}`).toBe(true);\n      |                                                                                                                        ^\n  102 | }\n  103 |\n  104 | /** Wording of the browser dialogs is recorded, not judged (A1, A5, A6). */\n    at expectOtpUsedUp (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:101:120)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:176:26"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:51:25.639Z",
+                      "startTime": "2026-11-17T13:12:53.253Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -593,11 +578,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--d8585-rd-equal-to-the-current-one-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--d8585-rd-equal-to-the-current-one-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -636,7 +616,7 @@
                       "workerIndex": 4,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 7143,
+                      "duration": 6630,
                       "error": {
                         "message": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n",
                         "stack": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n\n    at expectErrorAboveSubmit (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:81:104)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:170:39",
@@ -660,7 +640,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:51:29.265Z",
+                      "startTime": "2026-11-17T13:12:56.518Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -677,11 +657,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--e108e-d-shorter-than-8-characters-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--e108e-d-shorter-than-8-characters-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -715,7 +690,7 @@
                       "workerIndex": 5,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 6999,
+                      "duration": 6689,
                       "error": {
                         "message": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n",
                         "stack": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n\n    at expectErrorAboveSubmit (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:81:104)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:170:39",
@@ -739,7 +714,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:51:38.112Z",
+                      "startTime": "2026-11-17T13:13:04.698Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -751,11 +726,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--2a5eb--Web-DT-21-–-empty-password-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--2a5eb--Web-DT-21-–-empty-password-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -794,7 +764,7 @@
                       "workerIndex": 6,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 6749,
+                      "duration": 6629,
                       "error": {
                         "message": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n",
                         "stack": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n\n    at expectErrorAboveSubmit (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:81:104)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:170:39",
@@ -818,7 +788,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:51:46.871Z",
+                      "startTime": "2026-11-17T13:13:12.994Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -835,11 +805,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--37f05-ithout-an-upper-case-letter-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--37f05-ithout-an-upper-case-letter-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -878,7 +843,7 @@
                       "workerIndex": 7,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 7108,
+                      "duration": 6893,
                       "error": {
                         "message": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n",
                         "stack": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n\n    at expectErrorAboveSubmit (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:81:104)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:170:39",
@@ -902,7 +867,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:51:55.362Z",
+                      "startTime": "2026-11-17T13:13:21.259Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -919,11 +884,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--8d335-without-a-lower-case-letter-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--8d335-without-a-lower-case-letter-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -962,7 +922,7 @@
                       "workerIndex": 8,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 6998,
+                      "duration": 6872,
                       "error": {
                         "message": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n",
                         "stack": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n\n    at expectErrorAboveSubmit (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:81:104)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:170:39",
@@ -986,7 +946,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:52:04.222Z",
+                      "startTime": "2026-11-17T13:13:29.779Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -1003,11 +963,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--2e0fb--–-password-without-a-digit-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--2e0fb--–-password-without-a-digit-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -1046,7 +1001,7 @@
                       "workerIndex": 9,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 6801,
+                      "duration": 6588,
                       "error": {
                         "message": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n",
                         "stack": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n\n    at expectErrorAboveSubmit (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:81:104)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:170:39",
@@ -1070,7 +1025,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:52:12.974Z",
+                      "startTime": "2026-11-17T13:13:38.263Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -1087,11 +1042,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--42f6b-without-a-special-character-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--42f6b-without-a-special-character-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -1130,7 +1080,7 @@
                       "workerIndex": 10,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 7023,
+                      "duration": 6579,
                       "error": {
                         "message": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n",
                         "stack": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n\n    at expectErrorAboveSubmit (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:81:104)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:170:39",
@@ -1154,7 +1104,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:52:21.417Z",
+                      "startTime": "2026-11-17T13:13:46.485Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -1171,11 +1121,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--8ed50-acter-only-outside-the-set--firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--8ed50-acter-only-outside-the-set--firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -1209,7 +1154,7 @@
                       "workerIndex": 11,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 6733,
+                      "duration": 6486,
                       "error": {
                         "message": "Error: confirm field \"Xác nhận mật khẩu mới\" (FR-03)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator('div').filter({ has: locator('label').filter({ hasText: /^Xác nhận mật khẩu mới/ }) }).getByRole('textbox')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - confirm field \"Xác nhận mật khẩu mới\" (FR-03) getByRole('main').locator('form').locator('div').filter({ has: locator('label').filter({ hasText: /^Xác nhận mật khẩu mới/ }) }).getByRole('textbox') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator('div').filter({ has: locator('label').filter({ hasText: /^Xác nhận mật khẩu mới/ }) }).getByRole('textbox')\u001b[22m\n",
                         "stack": "Error: confirm field \"Xác nhận mật khẩu mới\" (FR-03)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator('div').filter({ has: locator('label').filter({ hasText: /^Xác nhận mật khẩu mới/ }) }).getByRole('textbox')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - confirm field \"Xác nhận mật khẩu mới\" (FR-03) getByRole('main').locator('form').locator('div').filter({ has: locator('label').filter({ hasText: /^Xác nhận mật khẩu mới/ }) }).getByRole('textbox') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator('div').filter({ has: locator('label').filter({ hasText: /^Xác nhận mật khẩu mới/ }) }).getByRole('textbox')\u001b[22m\n\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:165:96",
@@ -1233,7 +1178,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:52:30.176Z",
+                      "startTime": "2026-11-17T13:13:54.613Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -1245,11 +1190,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--83acb-ffers-from-the-new-password-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--83acb-ffers-from-the-new-password-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -1283,7 +1223,7 @@
                       "workerIndex": 12,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 6639,
+                      "duration": 6640,
                       "error": {
                         "message": "Error: confirm field \"Xác nhận mật khẩu mới\" (FR-03)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator('div').filter({ has: locator('label').filter({ hasText: /^Xác nhận mật khẩu mới/ }) }).getByRole('textbox')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - confirm field \"Xác nhận mật khẩu mới\" (FR-03) getByRole('main').locator('form').locator('div').filter({ has: locator('label').filter({ hasText: /^Xác nhận mật khẩu mới/ }) }).getByRole('textbox') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator('div').filter({ has: locator('label').filter({ hasText: /^Xác nhận mật khẩu mới/ }) }).getByRole('textbox')\u001b[22m\n",
                         "stack": "Error: confirm field \"Xác nhận mật khẩu mới\" (FR-03)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator('div').filter({ has: locator('label').filter({ hasText: /^Xác nhận mật khẩu mới/ }) }).getByRole('textbox')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - confirm field \"Xác nhận mật khẩu mới\" (FR-03) getByRole('main').locator('form').locator('div').filter({ has: locator('label').filter({ hasText: /^Xác nhận mật khẩu mới/ }) }).getByRole('textbox') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator('div').filter({ has: locator('label').filter({ hasText: /^Xác nhận mật khẩu mới/ }) }).getByRole('textbox')\u001b[22m\n\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:165:96",
@@ -1307,7 +1247,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:52:38.596Z",
+                      "startTime": "2026-11-17T13:14:02.722Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -1319,11 +1259,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--3dbe1-–-Web-DT-29-–-confirm-empty-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--3dbe1-–-Web-DT-29-–-confirm-empty-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -1357,7 +1292,7 @@
                       "workerIndex": 13,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 6818,
+                      "duration": 6522,
                       "error": {
                         "message": "Error: confirm field \"Xác nhận mật khẩu mới\" (FR-03)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator('div').filter({ has: locator('label').filter({ hasText: /^Xác nhận mật khẩu mới/ }) }).getByRole('textbox')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - confirm field \"Xác nhận mật khẩu mới\" (FR-03) getByRole('main').locator('form').locator('div').filter({ has: locator('label').filter({ hasText: /^Xác nhận mật khẩu mới/ }) }).getByRole('textbox') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator('div').filter({ has: locator('label').filter({ hasText: /^Xác nhận mật khẩu mới/ }) }).getByRole('textbox')\u001b[22m\n",
                         "stack": "Error: confirm field \"Xác nhận mật khẩu mới\" (FR-03)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator('div').filter({ has: locator('label').filter({ hasText: /^Xác nhận mật khẩu mới/ }) }).getByRole('textbox')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - confirm field \"Xác nhận mật khẩu mới\" (FR-03) getByRole('main').locator('form').locator('div').filter({ has: locator('label').filter({ hasText: /^Xác nhận mật khẩu mới/ }) }).getByRole('textbox') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator('div').filter({ has: locator('label').filter({ hasText: /^Xác nhận mật khẩu mới/ }) }).getByRole('textbox')\u001b[22m\n\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:165:96",
@@ -1381,7 +1316,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:52:46.873Z",
+                      "startTime": "2026-11-17T13:14:10.960Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -1393,11 +1328,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--44694-firm-differs-in-letter-case-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--44694-firm-differs-in-letter-case-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -1436,7 +1366,7 @@
                       "workerIndex": 14,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 11852,
+                      "duration": 11484,
                       "error": {
                         "message": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n",
                         "stack": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n\n    at expectErrorAboveSubmit (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:81:104)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:170:39",
@@ -1468,7 +1398,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:52:55.394Z",
+                      "startTime": "2026-11-17T13:14:19.127Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -1485,11 +1415,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--e6d4e-only-outside-the-set-space--firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--e6d4e-only-outside-the-set-space--firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -1528,7 +1453,7 @@
                       "workerIndex": 15,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 7079,
+                      "duration": 6672,
                       "error": {
                         "message": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n",
                         "stack": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n\n    at expectErrorAboveSubmit (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:81:104)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:170:39",
@@ -1552,7 +1477,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:53:09.004Z",
+                      "startTime": "2026-11-17T13:14:32.163Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -1569,11 +1494,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--c503b-word-of-7-characters-8-−-1--firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--c503b-word-of-7-characters-8-−-1--firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -1612,7 +1532,7 @@
                       "workerIndex": 16,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 6752,
+                      "duration": 6555,
                       "error": {
                         "message": "Error: login with \"NewP@202\" succeeds\n\nlogin with \"NewP@202\" succeeds\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"200\"\u001b[39m\nReceived: \u001b[31m\"4xx\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
                         "stack": "Error: login with \"NewP@202\" succeeds\n\nlogin with \"NewP@202\" succeeds\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"200\"\u001b[39m\nReceived: \u001b[31m\"4xx\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at expectLogin (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:91:6)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:174:15",
@@ -1636,7 +1556,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:53:17.801Z",
+                      "startTime": "2026-11-17T13:14:40.474Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -1653,11 +1573,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--f1d11-f-8-characters-lower-bound--firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--f1d11-f-8-characters-lower-bound--firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -1696,7 +1611,7 @@
                       "workerIndex": 17,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 6822,
+                      "duration": 6779,
                       "error": {
                         "message": "Error: login with \"NewP@2026\" succeeds\n\nlogin with \"NewP@2026\" succeeds\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"200\"\u001b[39m\nReceived: \u001b[31m\"4xx\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
                         "stack": "Error: login with \"NewP@2026\" succeeds\n\nlogin with \"NewP@2026\" succeeds\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"200\"\u001b[39m\nReceived: \u001b[31m\"4xx\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at expectLogin (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:91:6)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:174:15",
@@ -1720,7 +1635,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:53:26.193Z",
+                      "startTime": "2026-11-17T13:14:48.668Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -1737,11 +1652,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--c6924-ssword-of-9-characters-8-1--firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--c6924-ssword-of-9-characters-8-1--firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -1775,10 +1685,10 @@
                       "workerIndex": 18,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 2137,
+                      "duration": 2000,
                       "error": {
-                        "message": "Error: OTP format (FR-03 \"6 chữ số\")\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^\\d{6}$/\u001b[39m\nReceived string:  \u001b[31m\"7505\"\u001b[39m",
-                        "stack": "Error: OTP format (FR-03 \"6 chữ số\")\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^\\d{6}$/\u001b[39m\nReceived string:  \u001b[31m\"7505\"\u001b[39m\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:195:81",
+                        "message": "Error: OTP format (FR-03 \"6 chữ số\")\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^\\d{6}$/\u001b[39m\nReceived string:  \u001b[31m\"9551\"\u001b[39m",
+                        "stack": "Error: OTP format (FR-03 \"6 chữ số\")\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^\\d{6}$/\u001b[39m\nReceived string:  \u001b[31m\"9551\"\u001b[39m\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:195:81",
                         "location": {
                           "file": "/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts",
                           "column": 81,
@@ -1793,7 +1703,7 @@
                             "column": 81,
                             "line": 195
                           },
-                          "message": "Error: OTP format (FR-03 \"6 chữ số\")\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^\\d{6}$/\u001b[39m\nReceived string:  \u001b[31m\"7505\"\u001b[39m\n\n  193 |         otps.push(await fp.readOtp());\n  194 |       }\n> 195 |       for (const otp of otps) expect.soft(otp, 'OTP format (FR-03 \"6 chữ số\")').toMatch(new RegExp(e.otpPattern!));\n      |                                                                                 ^\n  196 |       expect(new Set(otps).size, `OTPs ${otps.join(', ')} are not all equal (A17)`).toBeGreaterThan(1);\n  197 |     });\n  198 |   }\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:195:81"
+                          "message": "Error: OTP format (FR-03 \"6 chữ số\")\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^\\d{6}$/\u001b[39m\nReceived string:  \u001b[31m\"9551\"\u001b[39m\n\n  193 |         otps.push(await fp.readOtp());\n  194 |       }\n> 195 |       for (const otp of otps) expect.soft(otp, 'OTP format (FR-03 \"6 chữ số\")').toMatch(new RegExp(e.otpPattern!));\n      |                                                                                 ^\n  196 |       expect(new Set(otps).size, `OTPs ${otps.join(', ')} are not all equal (A17)`).toBeGreaterThan(1);\n  197 |     });\n  198 |   }\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:195:81"
                         },
                         {
                           "location": {
@@ -1801,7 +1711,7 @@
                             "column": 81,
                             "line": 195
                           },
-                          "message": "Error: OTP format (FR-03 \"6 chữ số\")\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^\\d{6}$/\u001b[39m\nReceived string:  \u001b[31m\"9832\"\u001b[39m\n\n  193 |         otps.push(await fp.readOtp());\n  194 |       }\n> 195 |       for (const otp of otps) expect.soft(otp, 'OTP format (FR-03 \"6 chữ số\")').toMatch(new RegExp(e.otpPattern!));\n      |                                                                                 ^\n  196 |       expect(new Set(otps).size, `OTPs ${otps.join(', ')} are not all equal (A17)`).toBeGreaterThan(1);\n  197 |     });\n  198 |   }\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:195:81"
+                          "message": "Error: OTP format (FR-03 \"6 chữ số\")\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^\\d{6}$/\u001b[39m\nReceived string:  \u001b[31m\"2658\"\u001b[39m\n\n  193 |         otps.push(await fp.readOtp());\n  194 |       }\n> 195 |       for (const otp of otps) expect.soft(otp, 'OTP format (FR-03 \"6 chữ số\")').toMatch(new RegExp(e.otpPattern!));\n      |                                                                                 ^\n  196 |       expect(new Set(otps).size, `OTPs ${otps.join(', ')} are not all equal (A17)`).toBeGreaterThan(1);\n  197 |     });\n  198 |   }\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:195:81"
                         },
                         {
                           "location": {
@@ -1809,13 +1719,13 @@
                             "column": 81,
                             "line": 195
                           },
-                          "message": "Error: OTP format (FR-03 \"6 chữ số\")\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^\\d{6}$/\u001b[39m\nReceived string:  \u001b[31m\"3253\"\u001b[39m\n\n  193 |         otps.push(await fp.readOtp());\n  194 |       }\n> 195 |       for (const otp of otps) expect.soft(otp, 'OTP format (FR-03 \"6 chữ số\")').toMatch(new RegExp(e.otpPattern!));\n      |                                                                                 ^\n  196 |       expect(new Set(otps).size, `OTPs ${otps.join(', ')} are not all equal (A17)`).toBeGreaterThan(1);\n  197 |     });\n  198 |   }\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:195:81"
+                          "message": "Error: OTP format (FR-03 \"6 chữ số\")\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^\\d{6}$/\u001b[39m\nReceived string:  \u001b[31m\"8847\"\u001b[39m\n\n  193 |         otps.push(await fp.readOtp());\n  194 |       }\n> 195 |       for (const otp of otps) expect.soft(otp, 'OTP format (FR-03 \"6 chữ số\")').toMatch(new RegExp(e.otpPattern!));\n      |                                                                                 ^\n  196 |       expect(new Set(otps).size, `OTPs ${otps.join(', ')} are not all equal (A17)`).toBeGreaterThan(1);\n  197 |     });\n  198 |   }\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:195:81"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:53:34.677Z",
+                      "startTime": "2026-11-17T13:14:57.070Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -1827,11 +1737,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--3122c-6-digits-each-not-all-equal-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--3122c-6-digits-each-not-all-equal-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -1865,7 +1770,7 @@
                       "workerIndex": 19,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 11283,
+                      "duration": 11158,
                       "error": {
                         "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/Bước\\s*[12]\\s*\\/\\s*2/)\nExpected: \u001b[32m\"Bước 1 / 2\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"soft toHaveText\" getByText(/Bước\\s*[12]\\s*\\/\\s*2/) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/Bước\\s*[12]\\s*\\/\\s*2/)\u001b[22m\n",
                         "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/Bước\\s*[12]\\s*\\/\\s*2/)\nExpected: \u001b[32m\"Bước 1 / 2\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"soft toHaveText\" getByText(/Bước\\s*[12]\\s*\\/\\s*2/) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/Bước\\s*[12]\\s*\\/\\s*2/)\u001b[22m\n\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:205:43",
@@ -1897,7 +1802,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:53:38.363Z",
+                      "startTime": "2026-11-17T13:15:00.555Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -1909,11 +1814,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--55c6a-g-nhập-opens-the-login-page-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--55c6a-g-nhập-opens-the-login-page-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -1952,7 +1852,7 @@
                       "workerIndex": 20,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 11877,
+                      "duration": 11631,
                       "error": {
                         "message": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n",
                         "stack": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n\n    at expectErrorAboveSubmit (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:81:104)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:223:13",
@@ -1984,7 +1884,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:53:51.318Z",
+                      "startTime": "2026-11-17T13:15:13.237Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -2001,11 +1901,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--41f1a-id-after-a-rejected-attempt-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--41f1a-id-after-a-rejected-attempt-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -2039,12 +1934,12 @@
                       "workerIndex": 21,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1549,
+                      "duration": 1617,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:54:04.898Z",
+                      "startTime": "2026-11-17T13:15:26.504Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -2078,12 +1973,12 @@
                       "workerIndex": 21,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 622,
+                      "duration": 590,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:54:07.068Z",
+                      "startTime": "2026-11-17T13:15:28.727Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -2122,12 +2017,12 @@
                       "workerIndex": 21,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 610,
+                      "duration": 531,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:54:07.704Z",
+                      "startTime": "2026-11-17T13:15:29.332Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -2166,7 +2061,7 @@
                       "workerIndex": 21,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 5876,
+                      "duration": 5693,
                       "error": {
                         "message": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n",
                         "stack": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n\n    at expectErrorAboveSubmit (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:81:104)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:253:13",
@@ -2190,7 +2085,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:54:08.327Z",
+                      "startTime": "2026-11-17T13:15:29.877Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -2207,11 +2102,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--d62af-OTP-of-3-digits-is-rejected-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--d62af-OTP-of-3-digits-is-rejected-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -2250,7 +2140,7 @@
                       "workerIndex": 22,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 6969,
+                      "duration": 6860,
                       "error": {
                         "message": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n",
                         "stack": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n\n    at expectErrorAboveSubmit (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:81:104)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:253:13",
@@ -2269,20 +2159,12 @@
                             "line": 81
                           },
                           "message": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n\n\n  79 |  */\n  80 | async function expectErrorAboveSubmit(fp: ForgotPasswordPage) {\n> 81 |   await expect.soft(fp.errorAboveSubmit, 'error message in the page, above the submit button (FR-22)').toBeVisible();\n     |                                                                                                        ^\n  82 | }\n  83 |\n  84 | /** A5 / A6: the stored password, checked by logging in through the API (\"200\" = token, \"4xx\" = refused). */\n    at expectErrorAboveSubmit (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:81:104)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:253:13"
-                        },
-                        {
-                          "location": {
-                            "file": "/home/hg/source/software-testing/week04/api/EshopApi.ts",
-                            "column": 25,
-                            "line": 29
-                          },
-                          "message": "Error: apiRequestContext.post: socket hang up (ECONNRESET)\nCall log:\n\u001b[2m  - → POST http://localhost:3000/api/reset-password\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:157.0) Gecko/20100101 Firefox/157.0\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\u001b[2m    - content-type: application/json\u001b[22m\n\u001b[2m    - content-length: 112\u001b[22m\n\n\n   at ../api/EshopApi.ts:29\n\n  27 |   /** Body as given, so a test can leave out a field (`email`, `resetToken`, `newPassword`). */\n  28 |   resetPassword(body: Record<string, unknown>): Promise<APIResponse> {\n> 29 |     return this.request.post(`${this.baseUrl}/api/reset-password`, { data: body });\n     |                         ^\n  30 |   }\n  31 |\n  32 |   // ---- Cart and orders (API spec §4, FR-08). `token` = the JWT of `login`.\n    at EshopApi.resetPassword (/home/hg/source/software-testing/week04/api/EshopApi.ts:29:25)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:256:29"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:54:15.285Z",
+                      "startTime": "2026-11-17T13:15:36.590Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -2299,11 +2181,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--14dfc-OTP-of-9-digits-is-rejected-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--14dfc-OTP-of-9-digits-is-rejected-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -2337,7 +2214,7 @@
                       "workerIndex": 23,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 6857,
+                      "duration": 6645,
                       "error": {
                         "message": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n",
                         "stack": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n\n    at expectErrorAboveSubmit (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:81:104)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:253:13",
@@ -2361,7 +2238,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:54:24.053Z",
+                      "startTime": "2026-11-17T13:15:45.066Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -2373,11 +2250,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--a8a4d--13-–-empty-OTP-is-rejected-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--a8a4d--13-–-empty-OTP-is-rejected-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -2416,7 +2288,7 @@
                       "workerIndex": 24,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 7038,
+                      "duration": 6555,
                       "error": {
                         "message": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n",
                         "stack": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n\n    at expectErrorAboveSubmit (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:81:104)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:253:13",
@@ -2440,7 +2312,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:54:32.534Z",
+                      "startTime": "2026-11-17T13:15:53.355Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -2457,11 +2329,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--7884d-P-with-a-letter-is-rejected-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--7884d-P-with-a-letter-is-rejected-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -2500,7 +2367,7 @@
                       "workerIndex": 25,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 6838,
+                      "duration": 6622,
                       "error": {
                         "message": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n",
                         "stack": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n\n    at expectErrorAboveSubmit (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:81:104)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:253:13",
@@ -2524,7 +2391,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:54:41.255Z",
+                      "startTime": "2026-11-17T13:16:01.500Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -2541,11 +2408,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--d7a08--was-not-issued-is-rejected-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--d7a08--was-not-issued-is-rejected-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -2584,7 +2446,7 @@
                       "workerIndex": 26,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 7140,
+                      "duration": 6905,
                       "error": {
                         "message": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n",
                         "stack": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n\n    at expectErrorAboveSubmit (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:81:104)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:253:13",
@@ -2608,7 +2470,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:54:49.767Z",
+                      "startTime": "2026-11-17T13:16:09.663Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -2625,11 +2487,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--f34e9--5-digits-6-−-1-is-rejected-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--f34e9--5-digits-6-−-1-is-rejected-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -2668,7 +2525,7 @@
                       "workerIndex": 27,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 6953,
+                      "duration": 6669,
                       "error": {
                         "message": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n",
                         "stack": "Error: error message in the page, above the submit button (FR-22)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - error message in the page, above the submit button (FR-22) getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('form').locator(':is(p, span, div, [role=\"alert\"]):not(:has(*)):above(button[type=\"submit\"])').filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\\s*\\d\\s*\\/\\s*\\d/ }).filter({ hasText: /\\S/ })\u001b[22m\n\n    at expectErrorAboveSubmit (/home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:81:104)\n    at /home/hg/source/software-testing/week04/tests/forgot-password/web.spec.ts:253:13",
@@ -2692,7 +2549,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T12:54:58.663Z",
+                      "startTime": "2026-11-17T13:16:18.208Z",
                       "annotations": [
                         {
                           "type": "dialog",
@@ -2709,11 +2566,6 @@
                           "name": "error-context",
                           "contentType": "text/markdown",
                           "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--ee1d4-of-7-digits-6-1-is-rejected-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/hg/source/software-testing/week04/test-output/forgot-password/firefox/forgot-password-web-FR-03--ee1d4-of-7-digits-6-1-is-rejected-firefox/trace.zip"
                         }
                       ],
                       "errorLocation": {
@@ -2738,8 +2590,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-17T12:50:46.634Z",
-    "duration": 260033.446,
+    "startTime": "2026-11-17T13:12:16.041Z",
+    "duration": 249823.35,
     "expected": 5,
     "skipped": 0,
     "unexpected": 28,
