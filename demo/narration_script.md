@@ -118,45 +118,29 @@ Cách dùng:
 
 ### 2.2 Giới thiệu script (1:30)
 
-[Hình] Spec → vòng lặp dữ liệu → file JSON → page object → các assertion.
+[Hình] `web.spec.ts` dòng 96–97, 189 → `web.json` khối DT-25 → `AdminProductsPage.ts` dòng 63, 154 → `web.spec.ts` dòng 205, 232, 226.
 
-> Đây là script em sẽ chạy: file ⟨tên spec⟩ trong thư mục tests/product-crud, viết bằng Playwright và TypeScript.
+> Đây là script em sẽ chạy: thư mục tests/product-crud có hai file, web.spec.ts chạy trên trang Admin và api.spec.ts gửi thẳng request tới API, viết bằng Playwright và TypeScript.
 >
-> Script được viết theo hướng data-driven. Dữ liệu test không nằm trong code mà nằm trong file JSON riêng, data/product-crud/⟨tên file⟩. Mỗi phần tử của file là một test case đã thiết kế ở HW02: có mã test case, dữ liệu nhập và kết quả mong đợi. Kết quả mong đợi em lấy từ test case HW02, tức là từ yêu cầu FR-15, chứ không chép lại từ những gì ứng dụng đang hiển thị.
+> Script được viết theo hướng data-driven. Dữ liệu test không nằm trong code mà nằm trong file JSON riêng, data/product-crud/web.json. Ví dụ dòng DT-25: thêm một sản phẩm giá 250000, và kết quả mong đợi là ô giá hiện có dấu phân cách hàng nghìn và ký hiệu đồng. Kết quả mong đợi em lấy từ test case HW02, tức là từ yêu cầu của đề, chứ không chép lại từ những gì ứng dụng đang hiển thị.
 >
-> Script đọc file này, và với mỗi dòng dữ liệu thì tạo ra một test riêng. Tên test bắt đầu bằng mã test case, nên trong báo cáo em biết ngay test nào ứng với test case nào.
+> Script đọc file này và với mỗi dòng dữ liệu thì tạo ra một test riêng. Tên test bắt đầu bằng mã test case, nên trong báo cáo em biết ngay test nào ứng với test case nào.
 >
-> Các thao tác trên trang Admin được gom vào page object ⟨tên page object⟩: đăng nhập, mở danh sách sản phẩm, thêm, sửa, xóa. Locator ưu tiên vai trò và tên hiển thị của phần tử, ví dụ nút ⟨"Thêm sản phẩm"⟩, nên khi giao diện đổi class CSS thì script không bị gãy.
+> Các thao tác trên trang Admin được gom vào page object AdminProductsPage: mở tab Sản phẩm, thêm, sửa, xóa sản phẩm. Locator ưu tiên vai trò và tên hiển thị, ví dụ ô nhập có tên "Tên sản phẩm", nên khi giao diện đổi class CSS thì script không bị gãy.
 >
-> Về phần kiểm tra, script dùng ⟨ba⟩ kiểu assertion. Thứ nhất, ⟨kiểm tra thông báo hoặc dòng sản phẩm hiển thị trên giao diện⟩. Thứ hai, ⟨kiểm tra mã trạng thái và nội dung trả về của API⟩. Thứ ba, ⟨so sánh số sản phẩm trước và sau thao tác, để chắc rằng dữ liệu thật sự thay đổi – hoặc thật sự không thay đổi khi yêu cầu bị từ chối⟩.
+> Script dùng ba kiểu assertion chính. Thứ nhất, kiểm tra dữ liệu thật sự được lưu: so danh sách sản phẩm qua API trước và sau thao tác. Thứ hai, kiểm tra chữ hiển thị trên trang, ví dụ giá trong bảng. Thứ ba, kiểm tra phủ định, ví dụ tên có thẻ HTML không được hiển thị thành chữ in đậm.
 
-### 2.3 Một lỗi đã sửa (1:30)
+### 2.3 Một lỗi đã sửa: DT-17 (1:30)
 
-Chọn **một** cách: cách A nếu review FR-15 (design §5) có lỗi; cách B nếu không.
+[Hình] Design §5 hàng #2 → `git log --oneline -- tests/product-crud/web.spec.ts` → `git show --oneline a278a51` → chạy lại DT-17 ba lần.
 
-**Cách A – lỗi tìm thấy khi review FR-15** (giống cảnh 1.8, nói chi tiết hơn)
-
-[Hình] Dòng ở design §5 → `git show <hash>`.
-
-> Tiếp theo em kể một lỗi trong script do AI sinh ra mà em đã phát hiện khi review.
+> Tiếp theo em kể một lỗi trong script do AI sinh ra mà em phát hiện khi review: test DT-17. Test này kiểm tra danh sách danh mục trong form thêm sản phẩm chỉ gồm những danh mục đang có.
 >
-> Ở test ⟨mã TC⟩, AI viết ⟨mô tả dòng code sai⟩. Lần chạy đầu trên Chromium, test này ⟨pass / fail⟩, nhưng kết quả đó không đáng tin, vì ⟨lý do: ví dụ test vẫn pass dù hệ thống làm sai / test fail vì locator chứ không phải vì sản phẩm⟩.
+> AI viết test đọc danh sách lựa chọn một lần duy nhất, rồi mới so sánh. Nhưng trang Admin tải danh mục bằng một request chạy sau khi tab đã hiện ra. Nếu request đó chậm, test đọc được danh sách rỗng và báo fail, dù ứng dụng không sai. Ở máy em test vẫn pass, chỉ vì server chạy trên máy nên trả lời rất nhanh; khi em cố tình làm chậm request 1,5 giây thì cách đọc cũ trả về danh sách rỗng. Vậy kết quả pass đó không đáng tin.
 >
-> Lỗi này thuộc loại ⟨assertion yếu / locator dễ gãy / chờ không ổn định / kết quả mong đợi sai⟩. Theo em, AI sai vì ⟨do prompt chưa nói rõ … / do giới hạn của mô hình … / do đặc điểm của feature …⟩.
+> Lỗi này thuộc loại chờ không ổn định. Theo em, nguyên nhân là do giới hạn của mô hình: AI quen đọc giá trị ra trước rồi mới so sánh, thay vì dùng assertion biết tự chờ.
 >
-> Em sửa bằng cách ⟨cách sửa⟩. Đây là phần thay đổi trong commit ⟨hash⟩. Chạy lại, test này ⟨pass / fail đúng lý do là lỗi của sản phẩm⟩. Lỗi được ghi vào bảng review ở mục 5 của file automation design.
-
-**Cách B – lỗi đã sửa ở FR-08 Thanh toán** (commit `f0b2152`, `features/checkout/automation_design.md` §5 dòng 2)
-
-[Hình] `git show f0b2152` → `tests/checkout/api.spec.ts` quanh dòng 141 → bảng review checkout §5 dòng 2.
-
-> Khi tự động hóa FR-15, script AI sinh ra không có lỗi đáng kể, nên em kể một lỗi em đã sửa ở feature FR-08 Thanh toán, trong file tests/checkout/api.spec.ts.
->
-> Với những dòng dữ liệu mà đơn hàng phải bị từ chối, AI đặt cả hai bước kiểm tra số đơn hàng bên trong câu lệnh if: chỉ kiểm tra khi dòng dữ liệu có ghi trường newOrdersAll hoặc trường newOrders. Nếu một dòng dữ liệu thiếu cả hai trường, test không kiểm tra đơn hàng nào cả mà vẫn báo pass. Nghĩa là test có thể xanh ngay cả khi hệ thống đã tạo ra một đơn hàng lẽ ra phải bị từ chối.
->
-> Lỗi này thuộc loại assertion yếu. Em kết luận nguyên nhân là do giới hạn của mô hình: AI cho cả hai trường là tùy chọn để một nhánh code dùng được cho mọi dòng dữ liệu, nhưng không xử lý trường hợp thiếu cả hai.
->
-> Em sửa bằng cách thêm một expect bắt buộc trước hai bước kiểm tra đó: dòng bị từ chối phải ghi ít nhất một trong hai trường, nếu không test fail ngay và báo rõ mã test case bị thiếu. Đây là diff của commit f0b2152. Lỗi này em ghi ở dòng 2 bảng review, mục 5 trong file automation design của checkout.
+> Lịch sử của file chỉ có hai commit: bản AI sinh ra và bản sửa a278a51. Trong diff, dòng đọc một lần bị xóa, thay bằng assertion toHaveText, tự chờ đến khi danh sách có đủ danh mục. Em chạy lại DT-17 ba lần liên tiếp, cả ba lần đều pass. Lỗi này được ghi ở dòng 2 bảng review, mục 5 của file automation design.
 
 ### 2.4 Chạy ba trình duyệt (1:15)
 
@@ -184,7 +168,7 @@ Chọn **một** cách: cách A nếu review FR-15 (design §5) có lỗi; cách
 
 [Hình] Design §8 hoặc trang GitHub Issues.
 
-> Các test fail em đã phân tích bằng trace viewer. ⟨n⟩ test fail do lỗi của sản phẩm và đã được báo trên GitHub Issues của nhóm: bug đã có từ HW02 thì bình luận vào issue cũ, bug mới thì tạo issue mới có nhãn hw: HW04. ⟨m⟩ test fail do script và đã được sửa.
+> Các test fail em đã phân tích, có dùng trace viewer. Hai mươi hai test case fail do lỗi của sản phẩm. Các lỗi này đều đã có issue từ HW02, nên em không tạo issue mới mà bình luận thêm bằng chứng HW04 vào issue cũ, ví dụ issue 34 ở đây. Hai lỗi do script, DT-16 và DT-17, em đã sửa ở bước review.
 
 ### 2.7 Tổng kết + kết thúc (0:30)
 
