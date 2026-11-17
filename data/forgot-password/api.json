@@ -77,8 +77,9 @@
     }
   ],
   "statusMeaning": {
-    "accepted": "<CONFIRM>",
-    "rejected": "<CONFIRM>",
-    "loginToken": "200 with `token` (API spec §1.2)"
+    "accepted": "200",
+    "rejected": "4xx",
+    "loginToken": "200 with `token` (API spec §1.2)",
+    "note": "student 17/11 (<CONFIRM> 2): the login checks (A5 / A6) are the main oracle; a wrong status alone is not reported as a defect"
   }
 }

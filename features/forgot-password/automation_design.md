@@ -141,10 +141,14 @@ Inputs are the HW02 test-case values (§1); expected values come from FR-03, FR-
 
 Changes against the HW02 inputs (proposed): the registered e-mail is a new account per test instead of `test@eshop.com` (same partition EC-V1-1 "registered email"; keeps the tests independent), and DT-05's account is created with `Current@2026` (HW02 fixture F3). DT-17's second account uses the F2 password `Other@2026x`.
 
-Open expected values (`<CONFIRM>`):
+How a new account is made: before each test the spec calls `POST /api/register` (API spec §1.1; `api/EshopApi.ts` `register(name, email, password)`) with the row's e-mail pattern and `account.password`, the same call as HW02 fixtures F2 / F3. The backend checks only that the e-mail is not taken, so a new e-mail per test and run always registers. Tried on the running SUT (17/11 19:03): `fr03.demo.20261117t1903@example.com` → 200 "User registered successfully"; login with `Test1234!` → 200 with `token`; forgot-password → 200 with `resetToken` "4326". These accounts live only until the next server start (database re-seeded).
 
-1. **DT-03 `loginUrl`**: FR-03 says only that "Quay lại đăng nhập" goes back to login; no URL is given. Proposed: recognise the login page by its "Sign In" button (as T2) and the path `/login` (the path of the "Đăng nhập" link of the app; not in the SRS).
-2. **API `statusMeaning`** (`accepted` / `rejected`): the API spec gives `200` for login and forgot-password only, nothing for `/api/reset-password`. Proposed: accepted = `200`, rejected = any `4xx`; the login checks (A5 / A6) stay the main oracle, so a wrong status alone is not reported as a defect.
+Expected values confirmed by the student (17/11; were `<CONFIRM>`):
+
+1. **DT-03 login page**: FR-03 gives no URL; the login page is recognised by its "Sign In" button (as in T2) and the path `/login` (path of the app's "Đăng nhập" link, not in the SRS) → `web.json` DT-03 `loginPath`, `loginPageButton`.
+2. **API status** (`api.json` `statusMeaning`): the API spec gives `200` only for login and forgot-password; accepted = `200`, rejected = any `4xx`. The login checks (A5 / A6) stay the main oracle, so a wrong status alone is not reported as a defect.
+
+No `<CONFIRM>` left.
 
 ## 4. Specs and assertion patterns (T4)
 

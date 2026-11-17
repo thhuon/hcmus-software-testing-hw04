@@ -64,9 +64,10 @@
           "step1": "Bước 1 / 2"
         },
         "navigatesTo": "login",
-        "loginUrl": "<CONFIRM>"
+        "loginPath": "/login",
+        "loginPageButton": "Sign In"
       },
-      "source": "FR-03 \"Bước 1 / 2\", \"Có nút **Quay lại đăng nhập**.\""
+      "source": "FR-03 \"Bước 1 / 2\", \"Có nút **Quay lại đăng nhập**.\"; login page recognised by its \"Sign In\" button and the path /login (student 17/11, <CONFIRM> 1)"
     },
     {
       "id": "DT-04",
