@@ -96,7 +96,9 @@ Toàn bộ: Phụ lục A `prompt_log.md` và `AI-02_AI_Audit_Report.md`.
 | Agent Skills (4 skill) | Viết SKILL.md, rubric, template, script | Đưa ra quy tắc và review từng lần sửa (AI-02 #S1 … #S12) |
 | AI-03 (form này) | Soạn nháp | Kiểm tra từng ý, ký |
 
-**AI KHÔNG đóng góp vào:** AI Critique (AI chỉ soạn bảng bằng chứng, đoạn văn do tôi viết), AI-02 §5 Kết luận và §6 cam đoan, điểm tự đánh giá, giọng thuyết minh và các clip quay màn hình, lần chạy chính thức FR-15.
+- AI Critique (`AI_Critique.md`, bảng bằng chứng và đoạn văn), AI-02 §5 Kết luận và câu cam đoan AI-02 §6: bản nháp do Claude Code viết theo yêu cầu của tôi (18/11/2026); tôi rà soát và sửa trước khi nộp.
+
+**AI KHÔNG đóng góp vào:** điểm tự đánh giá, giọng thuyết minh và các clip quay màn hình, lần chạy chính thức FR-15.
 
 ## 5. Cách tôi rà soát / chỉnh sửa / xác minh đầu ra AI:
 
