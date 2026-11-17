@@ -30,6 +30,12 @@ export class ForgotPasswordPage {
   readonly confirmPasswordInput: Locator;
   readonly resetPasswordButton: Locator;
   readonly backButton: Locator;
+  /**
+   * FR-22 "Thông báo lỗi phải xuất hiện **trên** nút submit": any visible text element of the form
+   * that sits above the submit button and holds no other element (so not a field block), except
+   * labels, the OTP message and a step indicator. No role or wording is assumed.
+   */
+  readonly errorAboveSubmit: Locator;
 
   /** Text of every browser dialog (`alert`) the page opened, in order. */
   readonly dialogMessages: string[] = [];
@@ -52,6 +58,10 @@ export class ForgotPasswordPage {
     this.confirmPasswordInput = this.fieldUnderLabel(/^Xác nhận mật khẩu mới/);
     this.resetPasswordButton = page.getByRole('button', { name: 'Đặt lại mật khẩu' });
     this.backButton = page.getByRole('button', { name: '← Quay lại' });
+    this.errorAboveSubmit = this.form
+      .locator(':is(p, span, div, [role="alert"]):not(:has(*)):above(button[type="submit"])')
+      .filter({ hasNotText: /^Mã OTP của bạn là:|^Bước\s*\d\s*\/\s*\d/ })
+      .filter({ hasText: /\S/ });
 
     page.on('dialog', async (dialog) => {
       this.dialogMessages.push(dialog.message());

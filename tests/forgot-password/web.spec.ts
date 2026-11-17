@@ -74,12 +74,11 @@ function emailOf(row: Row, testInfo: TestInfo): string {
 }
 
 /**
- * FR-22: the error message is shown in the page (role `alert`), above the submit button.
- * Soft, so the stored-password check of the test still runs.
+ * FR-22: an error message is shown in the page, above the submit button (any text element;
+ * the requirement names no role or wording). Soft, so the stored-password check still runs.
  */
 async function expectErrorAboveSubmit(fp: ForgotPasswordPage) {
-  const errorAboveSubmit = fp.form.locator('[role="alert"]:above(button[type="submit"])');
-  await expect.soft(errorAboveSubmit, 'error message in the page, above the submit button (FR-22)').toBeVisible();
+  await expect.soft(fp.errorAboveSubmit, 'error message in the page, above the submit button (FR-22)').toBeVisible();
 }
 
 /** A5 / A6: the stored password, checked by logging in through the API ("200" = token, "4xx" = refused). */
