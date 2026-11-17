@@ -4,12 +4,11 @@ import type { Locator, Page } from '@playwright/test';
  * Web – Quên mật khẩu (`/forgot-password`), Bước 1 (email → OTP) and
  * Bước 2 (OTP + new password). Locators and actions only; assertions stay in
  * the specs. No input has an accessible name (labels are not linked to their
- * inputs), so each field combines two locators with `.or()`: (a) role / type
- * inside the form of the current step and (b) the input in the same block as
- * its label text. Today both find the same element on every browser; if one
- * breaks the other still finds it, and if they ever find different elements
- * the locator fails in strict mode instead of typing into the wrong field
- * (design §2, locator options tried).
+ * inputs), so each field is the textbox in the block whose label starts with
+ * the field's name (student decision 17/11, design §2): it names the intended
+ * field, does not depend on how many inputs share a type, and keeps working
+ * when the label text after the name changes (e.g. "Mã OTP (4 số)", BUG-03,
+ * or a `*` added to a label, BUG-07).
  */
 export class ForgotPasswordPage {
   // Both steps
@@ -42,15 +41,13 @@ export class ForgotPasswordPage {
       .getByRole('button', { name: 'Quay lại đăng nhập' })
       .or(page.getByRole('link', { name: 'Quay lại đăng nhập' }));
 
-    this.emailInput = this.form.getByRole('textbox').or(this.fieldUnderLabel('Nhập Email của bạn'));
+    this.emailInput = this.fieldUnderLabel(/^Nhập Email/);
     this.requestOtpButton = page.getByRole('button', { name: 'Lấy mã OTP' });
 
     this.otpMessage = page.getByText(/^Mã OTP của bạn là:/);
-    this.otpInput = this.form.locator('input[type="text"]').or(this.fieldUnderLabel('Mã OTP (4 số)'));
-    this.newPasswordInput = this.form
-      .locator('input[type="password"]')
-      .or(this.fieldUnderLabel('Mật khẩu mới'));
-    this.confirmPasswordInput = page.getByLabel('Xác nhận mật khẩu mới');
+    this.otpInput = this.fieldUnderLabel(/^Mã OTP/);
+    this.newPasswordInput = this.fieldUnderLabel(/^Mật khẩu mới/);
+    this.confirmPasswordInput = this.fieldUnderLabel(/^Xác nhận mật khẩu mới/);
     this.resetPasswordButton = page.getByRole('button', { name: 'Đặt lại mật khẩu' });
     this.backButton = page.getByRole('button', { name: '← Quay lại' });
 
@@ -61,13 +58,13 @@ export class ForgotPasswordPage {
   }
 
   /**
-   * Option (b): the textbox inside the block that holds the exact label text.
-   * Playwright counts password inputs as textboxes too.
+   * The textbox inside the block (`div`) that holds a label whose text starts
+   * with `labelStart`. Playwright counts password inputs as textboxes too.
    */
-  private fieldUnderLabel(labelText: string): Locator {
+  private fieldUnderLabel(labelStart: RegExp): Locator {
     return this.form
       .locator('div')
-      .filter({ has: this.page.getByText(labelText, { exact: true }) })
+      .filter({ has: this.page.locator('label').filter({ hasText: labelStart }) })
       .getByRole('textbox');
   }
 
