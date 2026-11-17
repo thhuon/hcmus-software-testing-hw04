@@ -3879,3 +3879,163 @@ Bash Write the pending prompts to the log
 - **Used in:** `features/forgot-password/automation_design.md` §8 (trace viewer line), `bugs/BUG_REPORT.md` BUG-02 notes, `HW04_Report.md` §3.3; `prompt_log.md` (AI-02 Artifact #35)
 
 ---
+
+## Prompt035 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 22:32 17/11/2026
+- **Output received:** 22:33 17/11/2026
+- **Feature / step:** checkout (fB) FR-08 – T5 / T6 decisions explained, prompt log
+- **Purpose:** Giải thích dễ hiểu 3 câu hỏi cần SV quyết định (DT-03, loại nguyên nhân, số lần bấm); log prompt
+- **Prompt (verbatim):**
+
+```text
+giải thích các câu hỏi bạn cần tôi đưa ra quyết định một cách dễ hiểu trước khi tôi đưa ra quyết định
+/logging-ai-prompts log các prompt trong session này
+```
+
+- **AI output (verbatim):**
+
+````text
+Skill
+Bash Check tree state and preview unlogged prompts of this session
+Bash Write the entries and list their TODO lines
+Bash Fill the TODO fields, link AI-02 and the design header, commit and push
+## Giải thích 3 quyết định
+
+### Câu 1 – DT-03: kiểm "khách chưa đăng nhập không đặt được hàng" bằng những cách nào?
+
+**DT-03 đang làm gì:** test thử 2 cách để một khách chưa đăng nhập cố đặt hàng, rồi kiểm tra là không có đơn nào được tạo.
+
+- **Cách (a):** khách thêm sản phẩm, mở Giỏ hàng, bấm "Tiến hành thanh toán". App báo "Bạn cần đăng nhập" và chuyển sang trang đăng nhập. Cách này ổn.
+- **Cách (b):** khách gõ thẳng `localhost:5173/checkout` lên thanh địa chỉ. **Vấn đề:** gõ địa chỉ làm trang tải lại, mà giỏ hàng của app chỉ nằm trong bộ nhớ của trang, nên giỏ bị xóa sạch. Cách (b) thực ra đang kiểm "khách + giỏ rỗng", tức sai 2 thứ cùng lúc.
+  - Hôm nay chưa sao: server từ chối vì không có token đăng nhập.
+  - Nhưng nếu sau này lỗi #116 (giỏ rỗng vẫn đặt được) được sửa, server sẽ từ chối vì giỏ rỗng. Khi đó test vẫn pass, kể cả khi phần chặn khách bị hỏng, nên ta tưởng an toàn mà không phải.
+
+**Cách thay thế mình đã thử trên cả 3 trình duyệt:** người dùng đăng nhập, thêm hàng, mở trang Thanh toán, rồi **bấm "Thoát" ngay trên trang đó**. Trang vẫn hiện sản phẩm, nhưng người dùng giờ là khách; bấm "Xác Nhận Thanh Toán" thì server từ chối (401), không tạo đơn. Đây đúng là "khách có hàng trong giỏ", và cũng là cách tái hiện BUG-17 ở HW02 (đăng xuất rồi thanh toán).
+
+**Thêm một chi tiết ở cách (a):** code đang viết "nếu trang Thanh toán hiện ra thì bấm xác nhận". Skill không cho test rẽ nhánh theo những gì màn hình hiển thị, vì nhìn report không biết test đã đi nhánh nào. Nếu có cách (b) mới thì bỏ được nhánh này: cách (a) chỉ cần ghi lại nút dẫn tới trang nào.
+
+**Lựa chọn:**
+- **A (khuyến nghị):** thay cách (b) bằng "Thoát trên trang Thanh toán", và bỏ nhánh "nếu…" ở cách (a).
+- **B:** thêm "Thoát trên trang Thanh toán" thành cách (c), giữ cả cách gõ URL. Test dài hơn, và cách gõ URL vẫn còn vấn đề giỏ rỗng.
+- **C:** giữ nguyên, chỉ ghi chú hạn chế vào tài liệu.
+
+Nếu chọn A hoặc B, mình sẽ phải chạy lại bộ chính thức 3 trình duyệt, mất khoảng 5 phút.
+
+### Câu 2 – Vì sao AI viết sai: bạn chọn "loại nguyên nhân" cho từng lỗi
+
+**Lý do bạn phải chọn:** đề HW04 yêu cầu, với mỗi lỗi trong script AI sinh ra, phải giải thích vì sao AI bỏ sót và xếp vào 1 trong 3 loại. Đây là nhận định của bạn và được chấm điểm, nên mình chỉ đề xuất.
+- **Prompt:** câu lệnh gửi cho AI thiếu thông tin cần thiết.
+- **Model:** thói quen hay điểm yếu của AI.
+- **Feature:** đặc điểm của app, chỉ lộ ra khi chạy thật.
+
+| # | Lỗi (nói đơn giản) | Mình đề xuất | Vì sao |
+| --- | --- | --- | --- |
+| 1 | Khi chạy lặp một test, mọi lần lặp dùng chung một e-mail. App cho đăng ký trùng e-mail nhưng khi đăng nhập lại lấy tài khoản đầu tiên, nên các lần lặp dùng chung giỏ hàng và test fail | **Feature** | Chỉ lộ ra khi chạy lặp trên app thật. Cũng có thể chọn Model: AI chép cách đặt e-mail của FR-03 mà không nghĩ tới việc chạy lặp |
+| 2 | Spec API: dòng dữ liệu "bị từ chối" mà quên ghi cách đếm đơn thì test không kiểm đơn nào nhưng vẫn pass | **Model** | AI quen để các trường dữ liệu là tùy chọn và không xử lý trường hợp thiếu cả hai |
+| 3 | DT-03 cách (b): gõ URL làm mất giỏ | **Prompt** | Prompt ghi "gõ URL" theo quyết định T1 nhưng không nhắc phát hiện ở T2 là tải lại trang sẽ mất giỏ |
+| 4 | DT-03 cách (a): rẽ nhánh theo màn hình | **Model** | AI chọn cách viết "nếu… thì…" cho tiện |
+| 5 | Nút thêm giỏ thỉnh thoảng không ăn trên Firefox | **Feature** | Chỉ xảy ra khi máy đang bận, không thấy được khi đọc code |
+
+**Lựa chọn:** đồng ý cả bảng, hoặc nói dòng nào bạn muốn đổi.
+
+### Câu 3 – Số lần bấm nút "Thêm vào giỏ hàng"
+
+**Bối cảnh:** app có lỗi (#73) là phải bấm nút 2 lần mới thêm được hàng. Ở T2 bạn quyết định code bấm tối đa 2 lần.
+
+**Chuyện xảy ra ở T6:**
+- Một lần trên Firefox, bấm 2 lần mà hàng vẫn chưa được thêm, có lẽ vì máy đang bận nên app "nuốt" một lần bấm.
+- Test fail ngay ở bước chuẩn bị giỏ, trước khi kịp kiểm việc thanh toán, nên kết quả đó vô nghĩa.
+
+**Mình đã sửa:** bấm cho tới khi nút đổi thành "Đã thêm", tối đa 4 lần.
+- **Không thêm trùng hàng:** lần bấm nào thêm được hàng thì nút luôn hiện "Đã thêm", và code dừng ngay lúc đó.
+- **Lỗi không bị giấu:** mỗi lần phải bấm hơn 1 lần đều được ghi vào report, kèm link #73.
+
+**Lựa chọn:**
+- **Đồng ý tối đa 4 (khuyến nghị).**
+- **Quay về tối đa 2:** test có thể lại fail ngẫu nhiên trên Firefox, khi đó phải báo là flaky.
+- **Một con số khác.**
+
+---
+
+## Log prompt
+
+Đã ghi vào `prompt_log.md` (commit `a444972`, đã push):
+
+| Entry | Gửi → nhận | Nội dung |
+| --- | --- | --- |
+| Prompt025 | 20:27 → 20:28 | Hoàn tất entry trước đó còn dở (lệnh log "tiếp tục") |
+| Prompt031 | 20:28 → 20:35 | "tiếp tục bước T5" |
+| Prompt032 | 20:59 → 21:20 | "tiếp tục thực hiện bước T6…" |
+
+- Prompt026–030 là của phiên FR-03, nên số của phiên này nhảy từ 025 lên 031.
+- Mình đã điền Feature / step, Purpose, Used in cho các entry mới, gắn số prompt vào AI-02 #29, #31, và cập nhật header file thiết kế.
+- **Chưa ghi được:** prompt hiện tại (22:32) đang chạy, sẽ ghi ở lần log sau. Prompt023 (20:09, lượt bạn ngắt) vẫn mang nhãn UNFINISHED vì lượt đó không có output.
+
+| ID | Score | Evidence | Action |
+| --- | --- | --- | --- |
+| LOG-1, 2, 3, 4, 5 | 2 | 3 entry đúng phiên, nguyên văn, giờ UTC+7, số tiếp nối | – |
+| LOG-6 | 2 | Lượt 22:32 bỏ qua vì đang chạy; Prompt023 giữ nhãn UNFINISHED | Log lại ở lần sau |
+| LOG-7, 8, 10, 12 | 2 | Không còn TODO; không cần ảnh chụp phiên; chỉ đọc transcript qua script | – |
+| LOG-9 | N/A | Chỉ dùng Claude Code | – |
+| LOG-11 | 2 | Commit 1 đã chạy | – |
+
+**Gate: passed**
+
+**Commit gợi ý:** commit của mình đã chạy (`docs (ai): log Prompt031–Prompt032 and update Prompt025`). Nếu bạn sửa log thì commit riêng:
+```bash
+git -C /home/hg/source/software-testing/week04 add prompt_log.md
+git -C /home/hg/source/software-testing/week04 commit -m "docs (ai): <điều bạn đã sửa trong log>"
+```
+````
+
+- **Used in:** câu trả lời cho SV (không ghi vào file); `prompt_log.md` Prompt025, Prompt031–032 (commit a444972)
+
+---
+
+## Prompt036 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 22:36 17/11/2026
+- **Output received:** 22:45 17/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Feature / step:** checkout (fB) FR-08 – T5 decisions applied, T6 third official set, prompt log
+- **Purpose:** Thực hiện các khuyến nghị (DT-03 đường (b), loại nguyên nhân, tối đa 4 lần bấm), chạy lại bộ chính thức, log prompt
+- **Prompt (verbatim):**
+
+```text
+thực hiện theo các khuyến nghị của bạn
+/logging-ai-prompts log các prompt chưa được log trong session này
+```
+
+- **AI output (verbatim):**
+
+```text
+Áp dụng cả 3 khuyến nghị: (1) DT-03 dùng cách "Thoát trên trang Thanh toán" và bỏ nhánh `if`; (2) chốt loại nguyên nhân cho 5 dòng ở §5; (3) chốt giới hạn bấm tối đa 4 lần. Sau đó chạy lại bộ chính thức, rồi log prompt. Bắt đầu với (2) và (3) vì chỉ sửa tài liệu.
+Bash Confirm the cause types and the click limit in the design and report
+Giờ sửa DT-03 (dữ liệu + spec). Xem lại đoạn test khách hiện tại trong spec.
+Bash Show the current guest test and its data row
+Bash Change DT-03 path (b) to logout on the checkout page and drop the branch
+Không còn `typedCheckoutUrl` và `isVisible`. Chạy DT-03 trên cả 3 trình duyệt, lặp 3 lần, ghi vào thư mục tạm.
+Bash Repeat the new DT-03 three times on all browsers
+Bash Update §1/§4/§5 for DT-03, commit the fix and link its hash
+Bash Keep set 2 locally and run the third official set on 3 browsers
+Bash Re-shoot the report headers and update §6 with the third set
+Bash Update report and plan for the third set and commit the official reports
+Bash Check that every report file change was committed
+Bash Confirm the report data files are in the commit
+Bash Compare tracked and on-disk report data files per browser
+Report đã commit đầy đủ. Thêm dòng AI-02, push, rồi log prompt.
+Bash Add the AI-02 row, commit only that file and push
+Đã push. Giờ log các prompt chưa được log.
+Bash Preview unlogged prompts of this session
+`prompt_log.md` đang có thay đổi chưa commit của phiên song song. Xem thử nội dung trước khi ghi.
+Bash See what the other session changed in the log
+Bash Wait until the other session commits its prompt_log.md changes
+Mình đang chờ phiên song song commit file log; khi họ commit xong, mình sẽ được báo và ghi tiếp.
+Bash Check the wait result, then write this session's unlogged prompts
+Bash Preview including the current running turn
+Bash Write Prompt036 as unfinished and list remaining TODO lines
+```
+
+- **Used in:** design §2, §5 (commit 1af2fc5), `tests/checkout/web.spec.ts` + `data/checkout/web.json` (commit b32d917), `reports/checkout/` + design §6 + `HW04_Report.md` + `PLAN.md` (commit 1b1414f); AI-02 Artifact #34
+
+---
