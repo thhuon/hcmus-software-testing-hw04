@@ -165,6 +165,8 @@ Screenshots of the eight comments: `bugs/screenshots/checkout_comment_<issue>.pn
 
 <!-- Skills, what each does, skill demo video link. -->
 
+**Skill demo video:** [https://youtu.be/Y7RpOnSWS8I](https://youtu.be/Y7RpOnSWS8I) (6:38, unlisted) – the skill `test-automation` used on FR-15 Product CRUD step by step: test case selection (T1), codegen and locators (T2), test data (T3), generated specs and first run (T4), review and one fix with its rerun (T5), the three browser reports (T6), failure triage with the trace viewer (T7), and the HW04 comments on the HW02 issues (`automation-bug-reporting`). Silent screen recording with Vietnamese subtitles; identity shown by `whoami && hostname` at the start.
+
 ## 11. AI Critique
 
 See [AI_Critique.md](AI_Critique.md).
