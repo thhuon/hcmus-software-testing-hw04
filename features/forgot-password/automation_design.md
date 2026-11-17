@@ -1,14 +1,5 @@
 # FR-03 Quên mật khẩu & Đặt lại mật khẩu (2 bước) – forgot & reset password: automation design
 
-| Field | Value |
-| --- | --- |
-| Requirement | FR-03 – `eshop-sut/README.md` lines 46–60 |
-| Designed test cases | `../week02/features/fA-pool-A/02_domain_testing.md` (34 TC), `03_boundary_value_analysis.md` (10 TC); DT-35 added in HW04 (§1) |
-| Screens / URLs | Web – Đăng nhập `http://localhost:5173/login` → Quên mật khẩu `http://localhost:5173/forgot-password` (Bước 1 email, Bước 2 OTP + mật khẩu mới) |
-| Specs · page objects · API client · data | `tests/forgot-password/` · `page-objects/` · `api/` · `data/forgot-password/` |
-| Count | Designed: 44 + 1 added in HW04 (DT-35) · Automated: 33 · Not automated: 12 · Assertion patterns: 8 |
-| Prompt log entries | Prompt006, Prompt008 (T1) · Prompt009 – Prompt013 (T2) · Prompt012, Prompt013 (T3) · Prompt014, Prompt015 (T4) · Prompt015, Prompt020 (T5) · Prompt020, Prompt021 (T6) · Prompt026 (T7) · Prompt027 – Prompt029 (bugs) · Prompt030 (T8) · Prompt033, Prompt034 (trace viewer) |
-
 ## 1. Test cases selected (T1)
 
 DT = domain testing (`02_domain_testing.md` §2.2), BVA = boundary value analysis (`03_boundary_value_analysis.md` §2.2). Data row: `web/<ID>` = row of the Web data file, `api/<ID>` = row of the API data file (both created in T3). Expected: the TC's own words and step numbers; left out are the API-fallback steps (2b, 3b, 4b), the source codes (A#, Q#, R#, FR-22) and DT-01's "screen recorded (Q8)". Full text in the HW02 files.

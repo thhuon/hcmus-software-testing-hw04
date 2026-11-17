@@ -74,7 +74,7 @@ Nguồn: [ISTQB] §6.2 · [PW] Best Practices, Locators, Assertions, Parameteriz
 | --- | --- | --- | --- |
 | 29 | M | Số liệu lấy từ script tổng kết | Các bảng §6 bằng output của `summarize-results.mjs --markdown` |
 | 30 | M | Mọi TC không tự động hóa đều được liệt kê kèm lý do | Số dòng §7 = số dòng T1 có `No` |
-| 31 | S | Dòng `Count:` khớp với §1, §4, §7 | Số đã thiết kế, đã tự động hóa, không tự động hóa, số assertion pattern |
+| 31 | S | Các con số khớp nhau | Số dòng §1 = số dòng `Yes` mà spec chạy (§4) + số dòng §7 |
 
 ## Công cụ (T2, T4, T5, T7)
 

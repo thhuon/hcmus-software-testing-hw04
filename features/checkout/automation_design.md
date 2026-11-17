@@ -1,14 +1,5 @@
 # FR-08 Thanh toán (Checkout): automation design
 
-| Field | Value |
-| --- | --- |
-| Requirement | FR-08 – `eshop-sut/README.md` lines 102–108 |
-| Designed test cases | `../week02/features/fB-pool-B/02_domain_testing.md` (13 TC), `03_boundary_value_analysis.md` (4 TC) |
-| Screens / URLs | Web – Giỏ hàng `http://localhost:5173/cart` → Thanh toán `http://localhost:5173/checkout` |
-| Specs · page objects · API client · data | `tests/checkout/` · `page-objects/` · `api/` · `data/checkout/` |
-| Count | Designed: 17 · Automated: 17 · Not automated: 0 · Assertion patterns: 0 |
-| Prompt log entries | Prompt016 (T1) · Prompt017 (T1 decisions, T2 locators) · Prompt018 (T2 page objects, BUG-01) · Prompt019 (BUG-01 filing, T3) · Prompt022 (T4 Web spec) · Prompt023, Prompt024 (T4 API spec, screenshots) · Prompt031 (T5) · Prompt032 (T6) · Prompt036 (T5 decisions, third official set) |
-
 ## 1. Test cases selected (T1)
 
 DT = domain testing (`02_domain_testing.md` §2.2), BVA = boundary value analysis (`03_boundary_value_analysis.md` §2.2). Data row: `web/<ID>` = row of the Web data file, `api/<ID>` = row of the API data file (both created in T3). Expected: the TC's own words and step numbers; left out are the source codes (A#, Q#, R#, D#), the fixture IDs and DT-01's "the screen is recorded (A7)". "Cart 3 / 4 / 3" = Bàn phím cơ Keychron Q1 × 3, Tai nghe AirPods Pro 2 × 4, iPhone 15 Pro Max × 3 at catalog prices = 126,000,000 ₫. Full text in the HW02 files.

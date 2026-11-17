@@ -58,5 +58,5 @@ HW02 bugs to compare against: `../week02/bugs/BUG_REPORT.md` (group issues `angq
 - **The student decides** every verdict, severity and "why the AI missed it"; agent proposals are marked `(proposed)` (`(đề xuất)` in AI-02).
 - **Review notes at fix time**: every correction of an AI-generated script goes into `features/<key>/` review table (what was wrong, why the AI missed it: prompt quality, model limitation, feature characteristic) in the same step.
 - **AI-02 row in the same turn as every artifact** (`AI-02_AI_Audit_Report.md` §3, Vietnamese as the course form), committed on its own (`docs (ai): add AI-02 row for <artifact>`). Columns and wording as in HW03 (`../week03/CLAUDE.md`). Skill changes are `Artifact #Sn`.
-- Prompt log: `prompt_log.md`, filled with the `logging-ai-prompts` skill at the end of each work session.
+- Prompt log: `prompt_log.md`, filled with the `logging-ai-prompts` skill at the end of each work session. The feature design files have no header table (student, 17/11): skip the skill's step that updates a `Prompt log entries` field.
 - **Before submission** (student, 17/11): delete the Vietnamese copies (`*.vi.md` of the skills) and the course materials (the brief `HW04_Automation_Testing_*.md` / `.pdf`) from the repository and the zip, and remove the references to them (PLAN.md D5). Until then they stay as reading copies.

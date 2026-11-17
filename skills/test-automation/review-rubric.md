@@ -72,7 +72,7 @@ Sources: [ISTQB] §6.2 · [PW] Best Practices, Locators, Assertions, Parameteriz
 | --- | --- | --- | --- |
 | 29 | M | Counts come from the summary script | §6 tables equal `summarize-results.mjs --markdown` output |
 | 30 | M | Every non-automated TC is listed with its reason | §7 rows = T1 rows with `No` |
-| 31 | S | The `Count:` line matches §1, §4, §7 | Designed, automated, not automated, assertion patterns |
+| 31 | S | The counts agree | Rows of §1 = `Yes` rows run by the specs (§4) + rows of §7 |
 
 ## Tools (T2, T4, T5, T7)
 
