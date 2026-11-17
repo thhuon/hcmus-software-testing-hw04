@@ -3,10 +3,10 @@
 | Field | Value |
 | --- | --- |
 | Requirement | FR-03 – `eshop-sut/README.md` lines 46–60 |
-| Designed test cases | `../week02/features/fA-pool-A/02_domain_testing.md` (34 TC), `03_boundary_value_analysis.md` (10 TC) |
+| Designed test cases | `../week02/features/fA-pool-A/02_domain_testing.md` (34 TC), `03_boundary_value_analysis.md` (10 TC); DT-35 added in HW04 (§1) |
 | Screens / URLs | Web – Đăng nhập `http://localhost:5173/login` → Quên mật khẩu `http://localhost:5173/forgot-password` (Bước 1 email, Bước 2 OTP + mật khẩu mới) |
 | Specs · page objects · data | `tests/fA-fr03/` · `pages/` · `data/fA-fr03/` |
-| Count | Designed: 44 · Automated: 32 (proposed) · Not automated: 12 (proposed) · Assertion patterns: 0 |
+| Count | Designed: 44 + 1 added in HW04 (DT-35) · Automated: 33 · Not automated: 12 · Assertion patterns: 0 |
 
 ## 1. Test cases selected (T1)
 
@@ -23,16 +23,16 @@ DT = domain testing (`02_domain_testing.md` §2.2), BVA = boundary value analysi
 | DT-07 | DT | EC-V1-2 (email empty) | email `""` | 1. no OTP, stays on Bước 1; browser block or message | Yes | – | web/DT-07 |
 | DT-08 | DT | EC-V1-3 (email format invalid) | email `test.eshop.com` | 1. no OTP, stays on Bước 1; browser block or message | Yes | – | web/DT-08 |
 | DT-09 | DT | EC-V1-4 (email not registered) | email `noaccount.fr03@example.com` | 1. no OTP, stays on Bước 1; browser block or message | Yes | – | web/DT-09 |
-| DT-10 | DT | EC-V1-5 (`email` missing) | body `{}` | error response, no `resetToken` | No | (proposed) API-only request shape: the Web always sends `email`, and an empty one is blocked by the browser (DT-07); passed in HW02 | – |
-| DT-11 | DT | EC-V2-2 (OTP 3 digits) | OTP `482`; new = confirm = `NewPass@2026` | 2/3. rejected, error above submit · 4. token: password unchanged | Yes | – | web/DT-11 |
-| DT-12 | DT | EC-V2-3 (OTP 9 digits) | OTP `482913123`; new = confirm = `NewPass@2026` | 2/3. rejected, error above submit · 4. token: password unchanged | Yes | – | web/DT-12 |
-| DT-13 | DT | EC-V2-4 (OTP empty) | OTP `""`; new = confirm = `NewPass@2026` | 2/3. rejected, error above submit · 4. token: password unchanged | Yes | – | web/DT-13 |
-| DT-14 | DT | EC-V2-5 (OTP 6 characters with a letter) | OTP `48291A`; new = confirm = `NewPass@2026` | 2/3. rejected, error above submit · 4. token: password unchanged | Yes | – | web/DT-14 |
-| DT-15 | DT | EC-V2-6 (OTP 6 digits, not the issued one) | OTP `482914`; new = confirm = `NewPass@2026` | 2/3. rejected, error above submit (R2: FR-03 "OTP chỉ hợp lệ cho email đã yêu cầu") · 4. token: password unchanged | Yes | – | web/DT-15 |
-| DT-16 | DT | EC-V2-7 (`resetToken` missing) | reset request without `resetToken` | 2. rejected · 3. token: password unchanged | No | (proposed) API-only request shape: the Web always sends `resetToken`, and an empty one is blocked by the browser (DT-13); passed in HW02 | – |
+| DT-10 | DT | EC-V1-5 (`email` missing) | body `{}` | error response, no `resetToken` | No | API-only request shape: the Web always sends `email`, and an empty one is blocked by the browser (DT-07); passed in HW02 | – |
+| DT-11 | DT | EC-V2-2 (OTP 3 digits) | OTP `482`; new = confirm = `NewPass@2026` | 2/3. rejected, error above submit · 4. token: password unchanged | Yes (Web + API: the Web part, then the same OTP is sent to `/api/reset-password`) | – | web/DT-11 |
+| DT-12 | DT | EC-V2-3 (OTP 9 digits) | OTP `482913123`; new = confirm = `NewPass@2026` | 2/3. rejected, error above submit · 4. token: password unchanged | Yes (Web + API: the Web part, then the same OTP is sent to `/api/reset-password`) | – | web/DT-12 |
+| DT-13 | DT | EC-V2-4 (OTP empty) | OTP `""`; new = confirm = `NewPass@2026` | 2/3. rejected, error above submit · 4. token: password unchanged | Yes (Web + API: the Web part, then the same OTP is sent to `/api/reset-password`) | – | web/DT-13 |
+| DT-14 | DT | EC-V2-5 (OTP 6 characters with a letter) | OTP `48291A`; new = confirm = `NewPass@2026` | 2/3. rejected, error above submit · 4. token: password unchanged | Yes (Web + API: the Web part, then the same OTP is sent to `/api/reset-password`) | – | web/DT-14 |
+| DT-15 | DT | EC-V2-6 (OTP 6 digits, not the issued one) | OTP `482914`; new = confirm = `NewPass@2026` | 2/3. rejected, error above submit (R2: FR-03 "OTP chỉ hợp lệ cho email đã yêu cầu") · 4. token: password unchanged | Yes (Web + API: the Web part, then the same OTP is sent to `/api/reset-password`) | – | web/DT-15 |
+| DT-16 | DT | EC-V2-7 (`resetToken` missing) | reset request without `resetToken` | 2. rejected · 3. token: password unchanged | No | API-only request shape: the Web always sends `resetToken`, and an empty one is blocked by the browser (DT-13); passed in HW02 | – |
 | DT-17 | DT | EC-V3-2 (OTP of another email) | OTP of `test@eshop.com` sent for `fr03.other@example.com` | 2. rejected (FR-03 "không thể dùng cho email khác.") · 3. token · 4. token: no password changed | Yes (API): the Web sends the email of Bước 1 and cannot pair an OTP with another email | – | api/DT-17 |
-| DT-18 | DT | EC-V3-3 (OTP sent for an unregistered email) | OTP of `test@eshop.com` sent for `noaccount.fr03@example.com` | 2. rejected (R2) · 3. token: password unchanged | No | (proposed) API-only, and the same requirement sentence and oracle as DT-17 (automated); passed in HW02 | – |
-| DT-19 | DT | EC-V3-4 (`email` missing at Bước 2) | reset request without `email` | 2. rejected (R2) · 3. token: password unchanged | No | (proposed) API-only request shape: the Web always sends the email of Bước 1; passed in HW02 | – |
+| DT-18 | DT | EC-V3-3 (OTP sent for an unregistered email) | OTP of `test@eshop.com` sent for `noaccount.fr03@example.com` | 2. rejected (R2) · 3. token: password unchanged | No | API-only, and the same requirement sentence and oracle as DT-17 (automated); passed in HW02 | – |
+| DT-19 | DT | EC-V3-4 (`email` missing at Bước 2) | reset request without `email` | 2. rejected (R2) · 3. token: password unchanged | No | API-only request shape: the Web always sends the email of Bước 1; passed in HW02 | – |
 | DT-20 | DT | EC-V4-4 (password too short) | new = confirm = `Ab1@x` | 2/3. rejected, error above submit (FR-01 "Tối thiểu 8 ký tự") · 4. token: password unchanged | Yes | – | web/DT-20 |
 | DT-21 | DT | EC-V4-5 (password empty) | new = confirm = `""` | 2/3. rejected, error above submit · 4. token: password unchanged | Yes | – | web/DT-21 |
 | DT-22 | DT | EC-V4-6 (no upper-case letter) | new = confirm = `newpass@2026` | 2/3. rejected, error above submit (FR-01 "1 chữ hoa") · 4. token: password unchanged | Yes | – | web/DT-22 |
@@ -44,27 +44,30 @@ DT = domain testing (`02_domain_testing.md` §2.2), BVA = boundary value analysi
 | DT-28 | DT | EC-V5-2 (confirm differs) | new `NewPass@2026`; confirm `NewPass@2025` | 2. rejected, error above submit (FR-03 "Hai trường mật khẩu phải khớp nhau.") · 3. token: password unchanged | Yes | – | web/DT-28 |
 | DT-29 | DT | EC-V5-3 (confirm empty) | new `NewPass@2026`; confirm `""` | 2. rejected, error above submit (FR-03 "Hai trường mật khẩu phải khớp nhau.") · 3. token: password unchanged | Yes | – | web/DT-29 |
 | DT-30 | DT | EC-V5-4 (confirm differs in letter case) | new `NewPass@2026`; confirm `newPass@2026` | 2. rejected, error above submit (FR-03 "Hai trường mật khẩu phải khớp nhau.") · 3. token: password unchanged | Yes | – | web/DT-30 |
-| DT-31 | DT | EC-V7-3 (OTP never requested) | `fr03.other@example.com` with OTP `123456` | 1. rejected (R3) · 2. token: password unchanged | No | (proposed) API-only: the Web always requests an OTP before Bước 2; passed in HW02 | – |
+| DT-31 | DT | EC-V7-3 (OTP never requested) | `fr03.other@example.com` with OTP `123456` | 1. rejected (R3) · 2. token: password unchanged | No | API-only: the Web always requests an OTP before Bước 2; passed in HW02 | – |
 | DT-32 | DT | EC-V7-4 (OTP used twice) | same OTP with `NewPass@2026`, then `Again@2026x` | 2. accepted · 3. rejected (SEC-07 "vô hiệu hóa sau khi dùng") · 4. token · 5. refused | Yes (API): after a reset the Web goes to the login page and cannot send the OTP again | – | api/DT-32 |
-| DT-33 | DT | EC-V7-5 (older OTP after a newer one) | OTP 1 after OTP 2 was issued | 3. rejected (A8: a Fail is reported as "differs from A8") · 4. token: password unchanged | No | (proposed) the oracle is assumption A8, not a requirement sentence; on the Web the password check runs before the OTP is sent; passed in HW02 | – |
-| DT-34 | DT | EC-V8-2 (OTP expired) | OTP used after 660 s | 3. rejected (A7) · 4. token: password unchanged | No | (proposed) waits 11 minutes of real server time; the test cannot set the server clock; the limit is assumption A7 | – |
-| BVA-01 | BVA | B1 LB−1 = UB−1 (OTP length) | OTP `48291` (5 digits) | 2/3. rejected, error above submit · 4. token: password unchanged | Yes | – | web/BVA-01 |
-| BVA-02 | BVA | B1 LB+1 = UB+1 (OTP length) | OTP `4829131` (7 digits) | 2/3. rejected, error above submit · 4. token: password unchanged | Yes | – | web/BVA-02 |
+| DT-33 | DT | EC-V7-5 (older OTP after a newer one) | OTP 1 after OTP 2 was issued | 3. rejected (A8: a Fail is reported as "differs from A8") · 4. token: password unchanged | No | the oracle is assumption A8, not a requirement sentence; on the Web the password check runs before the OTP is sent; passed in HW02 | – |
+| DT-34 | DT | EC-V8-2 (OTP expired) | OTP used after 660 s | 3. rejected (A7) · 4. token: password unchanged | No | waits 11 minutes of real server time; the test cannot set the server clock; the limit is assumption A7 | – |
+| DT-35 | DT | EC-V4-10 (special character only outside the set: a space) | new = confirm = `NewPass 2026` | 2/3. rejected, error above submit (A10, Q7) · 4. token: password unchanged | Yes (added in HW04, student 17/11: A10 names the space; the Web check refuses DT-26's `#` but lets a space through) | – | web/DT-35 |
+| BVA-01 | BVA | B1 LB−1 = UB−1 (OTP length) | OTP `48291` (5 digits) | 2/3. rejected, error above submit · 4. token: password unchanged | Yes (Web + API: the Web part, then the same OTP is sent to `/api/reset-password`) | – | web/BVA-01 |
+| BVA-02 | BVA | B1 LB+1 = UB+1 (OTP length) | OTP `4829131` (7 digits) | 2/3. rejected, error above submit · 4. token: password unchanged | Yes (Web + API: the Web part, then the same OTP is sent to `/api/reset-password`) | – | web/BVA-02 |
 | BVA-03 | BVA | B2 LB−1 (password length) | `NewP@26` (7 characters) | 2/3. rejected, error above submit (FR-01 "Tối thiểu 8 ký tự") · 4. token: password unchanged | Yes | – | web/BVA-03 |
 | BVA-04 | BVA | B2 LB | `NewP@202` (8 characters) | 2. accepted (FR-01 "Tối thiểu 8 ký tự") · 3. token | Yes | – | web/BVA-04 |
 | BVA-05 | BVA | B2 LB+1 | `NewP@2026` (9 characters) | 2. accepted (FR-01 "Tối thiểu 8 ký tự") · 3. token | Yes | – | web/BVA-05 |
-| BVA-06 | BVA | B3 LB (OTP age) | 0 s after issue | 3. accepted; a rejection is recorded, not judged · 4. token | No | (proposed) duplicate of DT-01 / DT-04: every Web test uses its OTP within seconds of the request (same partition EC-V8-1, same oracle) | – |
-| BVA-07 | BVA | B3 LB+1 | 1 s after issue | 3. accepted; a rejection is recorded, not judged · 4. token | No | (proposed) duplicate of DT-01 / DT-04 (same partition and oracle); an exact 1 s gap needs a fixed sleep | – |
-| BVA-08 | BVA | B3 UB−1 | 599 s after issue | 3. accepted; a rejection is recorded, not judged · 4. token | No | (proposed) waits 10 minutes of real server time; the test cannot set the server clock | – |
-| BVA-09 | BVA | B3 UB | 600 s after issue | 3. accepted; a rejection is recorded, not judged · 4. token | No | (proposed) waits 10 minutes of real server time; the test cannot set the server clock | – |
-| BVA-10 | BVA | B3 UB+1 | 601 s after issue | 3. rejected (A7, Q3) · 4. token: password unchanged | No | (proposed) waits 10 minutes of real server time; the test cannot set the server clock; the limit is assumption A7 | – |
+| BVA-06 | BVA | B3 LB (OTP age) | 0 s after issue | 3. accepted; a rejection is recorded, not judged · 4. token | No | duplicate of DT-01 / DT-04: every Web test uses its OTP within seconds of the request (same partition EC-V8-1, same oracle) | – |
+| BVA-07 | BVA | B3 LB+1 | 1 s after issue | 3. accepted; a rejection is recorded, not judged · 4. token | No | duplicate of DT-01 / DT-04 (same partition and oracle); an exact 1 s gap needs a fixed sleep | – |
+| BVA-08 | BVA | B3 UB−1 | 599 s after issue | 3. accepted; a rejection is recorded, not judged · 4. token | No | waits 10 minutes of real server time; the test cannot set the server clock | – |
+| BVA-09 | BVA | B3 UB | 600 s after issue | 3. accepted; a rejection is recorded, not judged · 4. token | No | waits 10 minutes of real server time; the test cannot set the server clock | – |
+| BVA-10 | BVA | B3 UB+1 | 601 s after issue | 3. rejected (A7, Q3) · 4. token: password unchanged | No | waits 10 minutes of real server time; the test cannot set the server clock; the limit is assumption A7 | – |
 
-**Selection count (proposed):** 44 designed · 32 automated (29 Web, 3 API: DT-17, DT-27, DT-32) · 12 not automated. Valid: DT-01, 04, 05, 06, BVA-04, 05 · invalid: 21 DT · boundary: BVA-01 … 05.
+**Selection count (confirmed by the student, 17/11):** 45 test cases (44 from HW02 + DT-35 added in HW04) · 33 automated (30 Web, 7 of them also through the API; 3 API only: DT-17, DT-27, DT-32) · 12 not automated. Valid: DT-01, 04, 05, 06, BVA-04, 05 · invalid: 22 DT · boundary: BVA-01 … 05.
+
+**Student decisions (17/11):** API-only TCs: only DT-17, DT-27, DT-32 · OTP TCs (DT-11 … 15, BVA-01, 02): Web part, then the same OTP through the API · DT-28 … 30 automated although the confirm field is missing (BUG-04) · DT-35 added. DT-35 is a new ID, not `DT-26b`: the test-case ID pattern of the summary script would count `DT-26b` as DT-26.
 
 **Notes for T2–T4** (from the Web page `frontend-web/src/pages/ForgotPassword.jsx`, read to judge what a Web test can observe):
 
 - Errors and the success message come in browser dialogs (`alert`), not on the page (HW02 BUG-09): the specs must read the dialog text.
-- Bước 2 checks the new password in the browser before it sends the OTP, with a pattern that needs a space and forbids every special character (HW02 BUG-01). With a valid password the OTP is never sent, so the Web alone cannot test the OTP rule (Decision 2).
+- Bước 2 checks the new password in the browser before it sends the OTP, with a pattern that needs a space and forbids every special character (HW02 BUG-01). With a valid password the OTP is never sent, so the Web alone cannot test the OTP rule; the OTP TCs also send the OTP through the API (student decision).
 - The email field is `type="text"` (HW02 BUG-10); there is no confirm field (BUG-04), no step indicator (BUG-06), no "Quay lại đăng nhập" button (BUG-11).
 
 ## 2. Locators and page objects (T2)
