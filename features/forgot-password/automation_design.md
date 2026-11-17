@@ -316,22 +316,22 @@ Script output (`summarize-results.mjs --markdown`, FR-03 rows):
 | DT-21 | all 3 | soft FR-22 → no element; no dialog: the browser blocks the empty `required` field. Password unchanged as expected | product defect: FR-22 "Thông báo lỗi phải xuất hiện **trên** nút submit" (proposed); HW02's DT-21 run noted a dialog, issue #9 already covers the empty-field case (DT-13) | BUG-09 (#9) |
 | DT-27 | all 3 (API) | reset without `newPassword` → `200` "Password reset successfully" (expected `4xx`) | product defect: FR-03 "Mật khẩu mới phải tuân thủ điều kiện như FR-01." + A4 (proposed) | BUG-08 (#8) |
 | DT-28, 29, 30 | all 3 | confirm field "Xác nhận mật khẩu mới" visible → not found (test stops) | product defect: FR-03 "**Xác nhận mật khẩu mới**", "Hai trường mật khẩu phải khớp nhau." (proposed) | BUG-05 (#4) |
-| DT-35 | all 3 | soft FR-22 → no element; login with the old password `Test1234!` → `4xx`: the Web accepted `NewPass 2026` (dialog "Đổi mật khẩu thành công!") and changed the password | product defect: FR-01 "1 ký tự đặc biệt (`@`, `$`, `!`, `%`, `*`, `?`, `&`)" + A10 (a space is not one) + A6 (proposed) | BUG-02, **new** (issue to file, `hw: HW04`) |
+| DT-35 | all 3 | soft FR-22 → no element; login with the old password `Test1234!` → `4xx`: the Web accepted `NewPass 2026` (dialog "Đổi mật khẩu thành công!") and changed the password | product defect: FR-01 "1 ký tự đặc biệt (`@`, `$`, `!`, `%`, `*`, `?`, `&`)" + A10 (a space is not one) + A6 (proposed) | BUG-02, **new** [#117](https://github.com/angquoc/software-testing-2026-HW02-group/issues/117) |
 
 **Evidence and reruns.** Every row failed the same way in both official sets (19:47–19:59 and 20:08–20:20) and in the development runs (§5), on Chromium, Firefox and WebKit. Screenshot of each Web test at its end: `reports/forgot-password/<browser>/screenshots/<TC ID>.png`; the dialog text is the report's `dialog` annotation. DT-27 (API) and DT-35 (the screenshot shows only the login page the app moved to): report entry captured as `features/forgot-password/screenshots/DT-27-<browser>-report.png`, `DT-35-<browser>-report.png`. Script defects: none left after T5. Environment: ENV-01 (§6), first official set only, no verdict changed.
 
-**Bugs behind the failures** (entries BUG-02 … BUG-10 in `bugs/BUG_REPORT.md`; tracker actions wait for the student's OK):
+**Bugs behind the failures** (entries BUG-02 … BUG-10 in `bugs/BUG_REPORT.md`; sent 17/11/2026 after the student's OK: issue #117 and eight comments, each with its screenshots):
 
 | Bug (HW04 report → HW02 issue) | Tests (HW04) | Same as HW02? | Proposed action |
 | --- | --- | --- | --- |
-| BUG-03 → HW02 BUG-01 #1 – Web Bước 2 refuses valid passwords | DT-04, 05, 06, BVA-04, 05 | Same; HW04 adds DT-05 (SEC-07 check) and BVA-04, 05. Differs in one point: not *every* password is refused, `NewPass 2026` is accepted (DT-35) | comment on #1 |
-| BUG-04 → HW02 BUG-03 #3 – OTP of 4 digits | DT-01, DT-02 | Same | comment on #3 |
-| BUG-05 → HW02 BUG-04 #4 – no confirm field | DT-01, 28, 29, 30 | Same | comment on #4 |
-| BUG-06 → HW02 BUG-06 #6 – no step indicator | DT-01, DT-03 | Same | comment on #6 |
-| BUG-07 → HW02 BUG-07 #7 – no `*` on the email label | DT-01 | Same | comment on #7 |
-| BUG-08 → HW02 BUG-08 #8 – API reset without `newPassword` | DT-27 | Same (`200` "Password reset successfully") | comment on #8 |
-| BUG-09 → HW02 BUG-09 #9 – errors in a dialog, not above submit | DT-06, 11 … 15, 20 … 26, 35, BVA-01 … 03 | Same (dialog, or the browser blocking an empty field as in #9's DT-13); found by 17 tests on 3 browsers (HW02: DT-11 … 13) | comment on #9 |
-| BUG-10 → HW02 BUG-11 #11 – no "Quay lại đăng nhập" | DT-03 | Same | comment on #11 |
-| BUG-02 **new** – Web Bước 2 accepts a new password whose only special character is a space (`NewPass 2026`) and changes the password | DT-35 | Not in HW02 (HW02 BUG-02 is the API accepting weak passwords, not the Web) | new issue, label `hw: HW04` |
+| BUG-03 → HW02 BUG-01 #1 – Web Bước 2 refuses valid passwords | DT-04, 05, 06, BVA-04, 05 | Same; HW04 adds DT-05 (SEC-07 check) and BVA-04, 05. Differs in one point: not *every* password is refused, `NewPass 2026` is accepted (DT-35) | [comment on #1](https://github.com/angquoc/software-testing-2026-HW02-group/issues/1#issuecomment-6950008056) |
+| BUG-04 → HW02 BUG-03 #3 – OTP of 4 digits | DT-01, DT-02 | Same | [comment on #3](https://github.com/angquoc/software-testing-2026-HW02-group/issues/3#issuecomment-6950009329) |
+| BUG-05 → HW02 BUG-04 #4 – no confirm field | DT-01, 28, 29, 30 | Same | [comment on #4](https://github.com/angquoc/software-testing-2026-HW02-group/issues/4#issuecomment-6950010734) |
+| BUG-06 → HW02 BUG-06 #6 – no step indicator | DT-01, DT-03 | Same | [comment on #6](https://github.com/angquoc/software-testing-2026-HW02-group/issues/6#issuecomment-6950012030) |
+| BUG-07 → HW02 BUG-07 #7 – no `*` on the email label | DT-01 | Same | [comment on #7](https://github.com/angquoc/software-testing-2026-HW02-group/issues/7#issuecomment-6950013137) |
+| BUG-08 → HW02 BUG-08 #8 – API reset without `newPassword` | DT-27 | Same (`200` "Password reset successfully") | [comment on #8](https://github.com/angquoc/software-testing-2026-HW02-group/issues/8#issuecomment-6950014477) |
+| BUG-09 → HW02 BUG-09 #9 – errors in a dialog, not above submit | DT-06, 11 … 15, 20 … 26, 35, BVA-01 … 03 | Same (dialog, or the browser blocking an empty field as in #9's DT-13); found by 17 tests on 3 browsers (HW02: DT-11 … 13) | [comment on #9](https://github.com/angquoc/software-testing-2026-HW02-group/issues/9#issuecomment-6950016053) |
+| BUG-10 → HW02 BUG-11 #11 – no "Quay lại đăng nhập" | DT-03 | Same | [comment on #11](https://github.com/angquoc/software-testing-2026-HW02-group/issues/11#issuecomment-6950017417) |
+| BUG-02 **new** – Web Bước 2 accepts a new password whose only special character is a space (`NewPass 2026`) and changes the password | DT-35 | Not in HW02 (HW02 BUG-02 is the API accepting weak passwords, not the Web) | issue [#117](https://github.com/angquoc/software-testing-2026-HW02-group/issues/117), label `hw: HW04` |
 
 **Trace viewer (student, rubric 32):** open one failure in the trace viewer, e.g. `npx playwright test tests/forgot-password/web.spec.ts --project=chromium -g "DT-35 " --output=test-output/dev` then `npm run trace -- test-output/dev/<DT-35 folder>/trace.zip` (development runs keep traces; the own `--output` folder is not emptied by another session's run). What it showed: `<student fills in>`.
