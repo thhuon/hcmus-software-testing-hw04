@@ -72,10 +72,35 @@ DT = domain testing (`02_domain_testing.md` §2.2), BVA = boundary value analysi
 
 ## 2. Locators and page objects (T2)
 
+**How the locators were found:** ARIA snapshot (`page.locator('body').ariaSnapshot()`) of each screen of the running Web app (`npm run sut`), then every locator counted on the live page on Chromium, Firefox and WebKit (1 match each; 0 for the elements FR-03 names but the app lacks). Codegen / Pick locator by the student: see the note below the table.
+
+Page objects: `pages/LoginPage.ts`, `pages/ForgotPasswordPage.ts`; API client (setup, `Yes (API)` rows, "password unchanged" checks): `pages/EshopApi.ts`. No `expect` in `pages/`.
+
 | Screen | Element | Locator | Why this locator |
 | --- | --- | --- | --- |
+| Đăng nhập `/login` | "Quên mật khẩu?" link | `getByRole('link', { name: 'Quên mật khẩu?' })` | Role + accessible name |
+| Đăng nhập | "Sign In" button | `getByRole('button', { name: 'Sign In' })` | Role + name; used to recognise that the login page is open (DT-03). The heading reads "Đăng Ký", so it cannot be used |
+| Quên mật khẩu (both steps) | Page heading | `getByRole('heading', { name: 'Quên Mật Khẩu' })` | Role + name |
+| Quên mật khẩu | Form of the current step | `getByRole('main').locator('form')` | The form has no accessible name, so it has no `form` role; one form per step. Fallback: CSS tag inside the `main` landmark |
+| Quên mật khẩu | Step indicator "Bước 1 / 2", "Bước 2 / 2" | `getByText(/Bước\s*[12]\s*\/\s*2/)` | Text named by FR-03 ("Bước 1 / 2"). 0 matches today (HW02 BUG-06) |
+| Quên mật khẩu | "Quay lại đăng nhập" | `getByRole('button', { name: 'Quay lại đăng nhập' }).or(getByRole('link', …))` | Name from FR-03; button or link, both accepted. 0 matches today (HW02 BUG-11) |
+| Bước 1 | Email field | `form.getByRole('textbox')` | No accessible name (label "Nhập Email của bạn" not linked to the input), so it is found by role inside the step's form (one textbox). The field is `type="text"`, not `type="email"` (HW02 BUG-10) |
+| Bước 1 | "Lấy mã OTP" button | `getByRole('button', { name: 'Lấy mã OTP' })` | Role + name |
+| Bước 2 | OTP message "Mã OTP của bạn là: …" | `getByText(/^Mã OTP của bạn là:/)` | Fixed prefix of the message; the code itself changes per request. `readOtp()` returns the text after the colon without assuming a length |
+| Bước 2 | OTP field | `form.locator('input[type="text"]')` | No accessible name (label "Mã OTP (4 số)" not linked); the label text also states the wrong length (HW02 BUG-03), so it is not used. Fallback: CSS on the stable `type` attribute (the only text input of the form) |
+| Bước 2 | "Mật khẩu mới" field | `form.locator('input[type="password"]')` | No accessible name; the only password input of the form. Must change when a confirmation field is added (two password inputs) |
+| Bước 2 | "Xác nhận mật khẩu mới" field | `getByLabel('Xác nhận mật khẩu mới')` | Label text from FR-03 ("**Xác nhận mật khẩu mới**"). 0 matches today (HW02 BUG-04): `resetPassword(otp, pw, confirm)` then fails on this field |
+| Bước 2 | "Đặt lại mật khẩu" button | `getByRole('button', { name: 'Đặt lại mật khẩu' })` | Role + name |
+| Bước 2 | "← Quay lại" button | `getByRole('button', { name: '← Quay lại' })` | Role + name; goes back to Bước 1 (used by DT-02 to ask for several OTPs) |
+| Both steps | Error / success messages | `page.on('dialog')` → `dialogMessages[]` | Every message is a browser `alert` (HW02 BUG-09), not an element; the page object records the text and accepts the dialog |
 
 Testability findings (elements without an accessible name, unstable text):
+
+- **No input has an accessible name** on Đăng nhập, Bước 1 and Bước 2: the `<label>` elements have no `for` and do not wrap the input, so `getByLabel` finds nothing and screen readers read "edit text" only. The fields are found by role or `type` inside the form; the locators break if a second text or password input is added. Accessibility / testability finding (WCAG 2.2 SC 1.3.1, 4.1.2), not filed as an FR-03 defect.
+- **Messages in `alert` dialogs** (HW02 BUG-09): they cannot be located or read by assistive technology inside the page; the tests read them through the `dialog` event.
+- **Wrong heading on Đăng nhập**: "Đăng Ký" (register) on the login page. Outside FR-03 (login page belongs to FR-02); noted only.
+- **Timing seen in the check:** on Firefox and WebKit the forgot-password page was not rendered yet right after the link click (counts 0); after waiting for the heading every locator matched. The specs must start each step with a web-first assertion (e.g. the heading is visible) before acting.
+- Codegen / Pick locator (student, by hand): `npm run sut`, then `npm run codegen`; record the flow Đăng nhập → Quên mật khẩu → Bước 1 → Bước 2 and compare the locators codegen picks with the table above. Result: `<student fills in>`.
 
 ## 3. Test data (T3)
 
