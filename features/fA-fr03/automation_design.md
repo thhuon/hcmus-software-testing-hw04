@@ -7,6 +7,7 @@
 | Screens / URLs | Web – Đăng nhập `http://localhost:5173/login` → Quên mật khẩu `http://localhost:5173/forgot-password` (Bước 1 email, Bước 2 OTP + mật khẩu mới) |
 | Specs · page objects · data | `tests/fA-fr03/` · `pages/` · `data/fA-fr03/` |
 | Count | Designed: 44 + 1 added in HW04 (DT-35) · Automated: 33 · Not automated: 12 · Assertion patterns: 0 |
+| Prompt log entries | Prompt006, Prompt008 (T1) · Prompt009 (T2) |
 
 ## 1. Test cases selected (T1)
 
