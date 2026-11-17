@@ -202,10 +202,10 @@ Categories: fragile selector · weak assertion · wrong oracle · missing edge c
 
 ## 6. Runs (T6)
 
-**Official runs** (third set, 17/11/2026, Chromium 15:39 – WebKit 15:42 UTC, `npm run feature -- checkout --reuse`: `run-browsers.mjs` runs Chromium, Firefox and WebKit one after the other). They replace a first set (14:00–14:05 UTC) in which DT-03 failed on Firefox only (setup, see below) and a second set (14:14–14:19 UTC, commit `cc8aee7`, same results as the third) run before the DT-03 change of path (b) (§5 #3, #4).
+**Official runs** (fourth set, 17/11/2026 22:52–22:56 local, 15:52–15:56 UTC, `npm run feature -- checkout --reuse`: `run-browsers.mjs` runs Chromium, Firefox and WebKit one after the other). Earlier sets, replaced: the first (14:00 UTC) had DT-03 fail on Firefox only (flaky, §5 #5); the second (14:14 UTC, commit `cc8aee7`) ran before DT-03 path (b) changed (§5 #3, #4); the third (15:39 UTC, commit `1b1414f`) had the DT-07 Web test read the order of the DT-07 API test (§5 #6, found in T7). Results of all four sets are the same apart from those points.
 
-- **Frozen specs:** `tests/checkout/`, `data/checkout/` and `page-objects/` at commit `b32d917` (last change: DT-03 path (b), §5 #3, #4; before it `35b0c42`, `ProductPage.addToCart`, §5 #5).
-- **SUT and data, without touching the parallel session:** the servers already running (`--reuse`), because the student's servers (`npm run sut`) were also in use by the parallel FR-03 session; a fresh SUT (`FRESH_SUT=1`) would have needed their ports and re-seeded the shared database. The database was not re-seeded: every test registers its own account (`fr08.{id}.{run}…@example.com`, design §3) and checks only its own cart and orders, except DT-03 … 06, which compare all orders before / after (no other running session creates orders). Before the run: no Playwright process of another session (`pgrep`), and the catalog prices of products 1, 4, 5 checked equal to the seed (`GET /api/products`).
+- **Frozen specs:** `tests/checkout/`, `data/checkout/` and `page-objects/` at commit `bc0de04` (last change: account e-mail prefix per spec, §5 #6).
+- **SUT and data, without touching the parallel session:** the servers already running (`--reuse`), because the student's servers (`npm run sut`) were also in use by the parallel FR-03 session; a fresh SUT (`FRESH_SUT=1`) would have needed their ports and re-seeded the shared database. The database was not re-seeded: every test registers its own account (`fr08.web|api.{id}.{run}…@example.com`, design §3) and checks only its own cart and orders, except DT-03 … 06, which compare all orders before / after (no other running session creates orders). Before the run: no Playwright process of another session (`pgrep`), and the catalog prices of products 1, 4, 5 checked equal to the seed (`GET /api/products`).
 - **Output folders:** reports in `reports/checkout/<browser>/`, screenshots in `test-output/checkout/<browser>/` (git-ignored); the FR-03 folders are not touched.
 - **Settings:** `retries: 0`, `workers: 1`; screenshot on failure; no traces in official runs (config, as FR-03).
 - **Reports:** `reports/checkout/<browser>/index.html` + `results.json`, committed as the tool wrote them. Title checked on all three ([Chromium](screenshots/t6/report-chromium.png), [Firefox](screenshots/t6/report-firefox.png), [WebKit](screenshots/t6/report-webkit.png)): "HW04 · FR-08 Checkout · <browser> · Run by: 23120046 · <ISO start time>".
@@ -217,9 +217,9 @@ Script output (`summarize-results.mjs --markdown`, FR-08 rows):
 
 | feature | browser | started | tests | passed | failed | flaky | skipped |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| checkout | chromium | 2026-11-17T15:39:01.456Z | 18 | 4 | 14 | 0 | 0 |
-| checkout | firefox | 2026-11-17T15:40:22.559Z | 18 | 4 | 14 | 0 | 0 |
-| checkout | webkit | 2026-11-17T15:42:00.834Z | 18 | 4 | 14 | 0 | 0 |
+| checkout | chromium | 2026-11-17T15:52:03.425Z | 18 | 4 | 14 | 0 | 0 |
+| checkout | firefox | 2026-11-17T15:53:24.511Z | 18 | 4 | 14 | 0 | 0 |
+| checkout | webkit | 2026-11-17T15:54:58.834Z | 18 | 4 | 14 | 0 | 0 |
 
 **Test cases (across browsers)**
 
@@ -262,6 +262,33 @@ The same 4 tests pass (DT-03, DT-04 … 06) and the same 14 fail on every browse
 
 ## 8. Failures and bugs (T7)
 
+Triage of every failed test of the fourth official set (§6), agent with the student, 17/11. Verdicts are **(proposed)** until the student confirms. Evidence for every row: the assertion's expected value is quoted from FR-08 / FR-07 / FR-23 or the HW02 decisions (data `source`), the failure is the same on Chromium, Firefox and WebKit, and it repeated in all four official sets and the development runs (§4, §5). Web screenshots: `reports/checkout/<browser>/screenshots/<TC ID>.png` (the page when the test ended); API tests have no page, their evidence is the report entry and the annotation `checkout response`.
+
 | TC ID | Browsers failing | Assertion (expected vs received) | Verdict | Bug / issue |
 | --- | --- | --- | --- | --- |
-| DT-07 (step 2, typed URL; T2 check, before the spec) | Chromium, Firefox, WebKit | no order can be placed (A6, Q4) vs `POST /api/checkout` `{"items": [], "total_amount": 0}` → 200, order 0 ₫ stored | Product defect (student 17/11) | [BUG-01](../../bugs/BUG_REPORT.md#bug-01) – [#116](https://github.com/angquoc/software-testing-2026-HW02-group/issues/116) |
+| DT-01 | all 3 | soft: editable total field: expected 0, received 1 · breadcrumb on Thanh toán: expected visible, not found · cart lines after the checkout: expected 0, received 3. Passed: 3 items with name and quantity, total `126,000,000 ₫`, stored order `pending` 126000000 | product defect (proposed): FR-08 "không cho phép người dùng chỉnh sửa trực tiếp"; FR-23 "Breadcrumb bắt buộc có ở các trang con (… Thanh toán …)"; FR-08 "Sau thanh toán thành công, giỏ hàng được xóa." | HW02 BUG-15 [#15](https://github.com/angquoc/software-testing-2026-HW02-group/issues/15), BUG-16 [#16](https://github.com/angquoc/software-testing-2026-HW02-group/issues/16), BUG-14 [#14](https://github.com/angquoc/software-testing-2026-HW02-group/issues/14) |
+| BVA-01 … 04 | all 3 | cart lines after the checkout: expected 0, received 1 / 2 / 3 / 3. Passed: stored order `pending` with 12000000 / 36000000 / 118000000 / 122000000 | product defect (proposed): FR-08 "Sau thanh toán thành công, giỏ hàng được xóa." (A8) | HW02 BUG-14 [#14](https://github.com/angquoc/software-testing-2026-HW02-group/issues/14) |
+| DT-02 (API) | all 3 | new order `total_amount`: expected 126000000, received `null` · server cart: expected 0 lines, received 3 | product defect (proposed): FR-08 "Backend phải tự tính lại tổng tiền" (A3, A5 – a missing `total_amount` is valid input); A8 | HW02 BUG-13 [#13](https://github.com/angquoc/software-testing-2026-HW02-group/issues/13), BUG-14 [#14](https://github.com/angquoc/software-testing-2026-HW02-group/issues/14) |
+| DT-07 (Web) | all 3 | soft: empty-cart illustration: expected visible, not found · own orders after "Xác Nhận Thanh Toán" on the typed `/checkout`: expected 0, received 1 (`total_amount` 0). Passed: empty-cart message, no "Tiến hành thanh toán" | product defect (proposed): FR-07 "Giỏ hàng trống phải có hình minh họa …"; A6 / Q4 (student 17/11: a bug) | HW04 BUG-01 [#116](https://github.com/angquoc/software-testing-2026-HW02-group/issues/116); FR-07 group issue [#80](https://github.com/angquoc/software-testing-2026-HW02-group/issues/80) (another member's feature) |
+| DT-07 (API) | all 3 | own orders after `POST /api/checkout` with an empty server cart: expected 0, received 1 (`total_amount` `null`) | product defect (proposed): A6 / Q4 (student 17/11) | HW04 BUG-01 [#116](https://github.com/angquoc/software-testing-2026-HW02-group/issues/116) (filed for the Web; same rule, through the API) |
+| DT-08 (API) | all 3 | new order `total_amount`: expected 12000000 (catalog price × 3), received `null` · server cart: expected 0, received 1 | product defect (proposed): FR-08 "Backend phải tự tính lại tổng tiền" (A3, A4); A8 | HW02 BUG-13 [#13](https://github.com/angquoc/software-testing-2026-HW02-group/issues/13), BUG-14 [#14](https://github.com/angquoc/software-testing-2026-HW02-group/issues/14) |
+| DT-09 … 13 (API) | all 3 | new order's total: expected 126000000 (or no order), received `1000` / `200000000` / `0` / `-1000` / `"abc"` · server cart: expected 0 after a stored order, received 3 | product defect (proposed): FR-08 "không chấp nhận giá trị `total_amount` do client gửi lên" (A5, Q2); A8 | HW02 BUG-12 [#12](https://github.com/angquoc/software-testing-2026-HW02-group/issues/12), BUG-14 [#14](https://github.com/angquoc/software-testing-2026-HW02-group/issues/14) |
+
+Passed: DT-03 (both guest paths refused, no order), DT-04 (401), DT-05 (403), DT-06 (403).
+
+**Script defects found in T7:** one – DT-07 Web read the order of DT-07 API (same account e-mail); fixed and rerun before this triage (§5 #6). No environment failure in the fourth set.
+
+**Matching with the HW02 issues (proposed; the next step writes the bug-report entries and the tracker text, sent only after the student's OK):**
+
+| HW02 / HW04 issue | Requirement sentence | HW04 tests | Same behaviour as the issue? | Proposed outcome |
+| --- | --- | --- | --- | --- |
+| [#12](https://github.com/angquoc/software-testing-2026-HW02-group/issues/12) client `total_amount` stored | FR-08 README:107 | DT-09 … 13 (API) | Yes: the same five values stored as the order total | Confirmed – comment |
+| [#13](https://github.com/angquoc/software-testing-2026-HW02-group/issues/13) no `total_amount` → order total `null` | FR-08 README:107 | DT-02, DT-08 (API) | Yes | Confirmed – comment |
+| [#14](https://github.com/angquoc/software-testing-2026-HW02-group/issues/14) cart not cleared after checkout | FR-08 README:108 | DT-01, BVA-01 … 04 (Web), DT-02, 08, 09 … 13 (API) | Yes on both the server cart and the Web cart page; HW04 adds the Web evidence of four boundary carts (HW02 ran BVA through the API) | Confirmed – comment |
+| [#15](https://github.com/angquoc/software-testing-2026-HW02-group/issues/15) Web total editable | FR-08 README:105 | DT-01 | Yes (an editable number field; typing changes "Tổng thanh toán", [screenshot](screenshots/DT-01-total-edited-chromium.png)) | Confirmed – comment |
+| [#16](https://github.com/angquoc/software-testing-2026-HW02-group/issues/16) no breadcrumb on Thanh toán | FR-23 README:263 | DT-01 | Yes | Confirmed – comment |
+| [#17](https://github.com/angquoc/software-testing-2026-HW02-group/issues/17) a guest can check out on the Web | FR-08 README:104 | DT-03 – **passes** | **No**: on both paths (cart button → alert + login page; "Thoát" on the checkout page → 401) no order is created, on 3 browsers. Seen first in T2 | Changed – comment ("not reproduced in HW04") |
+| [#116](https://github.com/angquoc/software-testing-2026-HW02-group/issues/116) empty cart accepted (HW04 BUG-01) | A6 / Q4 (FR-08 README:105–106) | DT-07 (Web and API) | Yes on the Web; the API accepts it too (order `total_amount` `null`) | Confirmed – comment with the automated evidence and the API result |
+| [#80](https://github.com/angquoc/software-testing-2026-HW02-group/issues/80) empty cart without illustration (FR-07, 23120061) | FR-07 README:100 | DT-07 (Web, soft) | Yes | Related – decision 2 in the reply |
+
+Not asserted, recorded only: "Thêm vào giỏ hàng" needs two clicks on every add (group issue [#73](https://github.com/angquoc/software-testing-2026-HW02-group/issues/73): its title speaks of the default quantity 1; HW04 sees it with quantity 3 as well), no cart badge ([#79](https://github.com/angquoc/software-testing-2026-HW02-group/issues/79)).

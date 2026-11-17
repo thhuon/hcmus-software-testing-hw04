@@ -21,7 +21,7 @@
     "maxFailures": 0,
     "metadata": {
       "Run by": "23120046",
-      "Started at": "2026-11-17T15:39:01.451Z",
+      "Started at": "2026-11-17T15:52:03.420Z",
       "Feature": "FR-08 Checkout",
       "Browser": "chromium",
       "actualWorkers": 1
@@ -34,7 +34,7 @@
         "retries": 0,
         "metadata": {
           "Run by": "23120046",
-          "Started at": "2026-11-17T15:39:01.451Z",
+          "Started at": "2026-11-17T15:52:03.420Z",
           "Feature": "FR-08 Checkout",
           "Browser": "chromium",
           "actualWorkers": 1
@@ -54,7 +54,7 @@
         "retries": 0,
         "metadata": {
           "Run by": "23120046",
-          "Started at": "2026-11-17T15:39:01.451Z",
+          "Started at": "2026-11-17T15:52:03.420Z",
           "Feature": "FR-08 Checkout",
           "Browser": "chromium",
           "actualWorkers": 1
@@ -74,7 +74,7 @@
         "retries": 0,
         "metadata": {
           "Run by": "23120046",
-          "Started at": "2026-11-17T15:39:01.451Z",
+          "Started at": "2026-11-17T15:52:03.420Z",
           "Feature": "FR-08 Checkout",
           "Browser": "chromium",
           "actualWorkers": 1
@@ -98,7 +98,7 @@
         "retries": 0,
         "metadata": {
           "Run by": "23120046",
-          "Started at": "2026-11-17T15:39:01.451Z",
+          "Started at": "2026-11-17T15:52:03.420Z",
           "Feature": "FR-08 Checkout",
           "Browser": "chromium",
           "actualWorkers": 1
@@ -141,7 +141,7 @@
       [
         "html",
         {
-          "title": "HW04 · FR-08 Checkout · chromium · Run by: 23120046 · 2026-11-17T15:39:01.451Z",
+          "title": "HW04 · FR-08 Checkout · chromium · Run by: 23120046 · 2026-11-17T15:52:03.420Z",
           "outputFolder": "reports/checkout/chromium",
           "open": "never"
         }
@@ -193,7 +193,7 @@
                     },
                     {
                       "type": "checkout response",
-                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":162}"
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":206}"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -204,7 +204,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 118,
+                      "duration": 139,
                       "error": {
                         "message": "Error: the new order (A3, A7)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"status\": \"pending\",\u001b[22m\n\u001b[32m-   \"total_amount\": 126000000,\u001b[39m\n\u001b[31m+   \"total_amount\": null,\u001b[39m\n\u001b[2m  }\u001b[22m",
                         "stack": "Error: the new order (A3, A7)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"status\": \"pending\",\u001b[22m\n\u001b[32m-   \"total_amount\": 126000000,\u001b[39m\n\u001b[31m+   \"total_amount\": null,\u001b[39m\n\u001b[2m  }\u001b[22m\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:137:58",
@@ -236,7 +236,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T15:39:02.159Z",
+                      "startTime": "2026-11-17T15:52:04.187Z",
                       "annotations": [
                         {
                           "type": "source",
@@ -244,7 +244,7 @@
                         },
                         {
                           "type": "checkout response",
-                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":162}"
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":206}"
                         }
                       ],
                       "attachments": [
@@ -294,12 +294,12 @@
                       "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 107,
+                      "duration": 111,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T15:39:02.959Z",
+                      "startTime": "2026-11-17T15:52:05.032Z",
                       "annotations": [
                         {
                           "type": "source",
@@ -346,12 +346,12 @@
                       "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 49,
+                      "duration": 51,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T15:39:03.108Z",
+                      "startTime": "2026-11-17T15:52:05.185Z",
                       "annotations": [
                         {
                           "type": "source",
@@ -398,12 +398,12 @@
                       "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 52,
+                      "duration": 53,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T15:39:03.168Z",
+                      "startTime": "2026-11-17T15:52:05.247Z",
                       "annotations": [
                         {
                           "type": "source",
@@ -439,7 +439,7 @@
                     },
                     {
                       "type": "checkout response",
-                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":163}"
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":207}"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -450,10 +450,10 @@
                       "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 42,
+                      "duration": 44,
                       "error": {
-                        "message": "Error: no new order of the account (A6, A9)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m1\u001b[39m\nReceived array:  \u001b[31m[{\"created_at\": \"2026-11-17 15:39:03\", \"id\": 163, \"shipping_address\": \"123 Le Loi, TP.HCM\", \"status\": \"pending\", \"total_amount\": null, \"user_id\": 523}]\u001b[39m",
-                        "stack": "Error: no new order of the account (A6, A9)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m1\u001b[39m\nReceived array:  \u001b[31m[{\"created_at\": \"2026-11-17 15:39:03\", \"id\": 163, \"shipping_address\": \"123 Le Loi, TP.HCM\", \"status\": \"pending\", \"total_amount\": null, \"user_id\": 523}]\u001b[39m\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:152:71",
+                        "message": "Error: no new order of the account (A6, A9)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m1\u001b[39m\nReceived array:  \u001b[31m[{\"created_at\": \"2026-11-17 15:52:05\", \"id\": 207, \"shipping_address\": \"123 Le Loi, TP.HCM\", \"status\": \"pending\", \"total_amount\": null, \"user_id\": 579}]\u001b[39m",
+                        "stack": "Error: no new order of the account (A6, A9)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m1\u001b[39m\nReceived array:  \u001b[31m[{\"created_at\": \"2026-11-17 15:52:05\", \"id\": 207, \"shipping_address\": \"123 Le Loi, TP.HCM\", \"status\": \"pending\", \"total_amount\": null, \"user_id\": 579}]\u001b[39m\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:152:71",
                         "location": {
                           "file": "/home/hg/source/software-testing/week04/tests/checkout/api.spec.ts",
                           "column": 71,
@@ -468,13 +468,13 @@
                             "column": 71,
                             "line": 152
                           },
-                          "message": "Error: no new order of the account (A6, A9)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m1\u001b[39m\nReceived array:  \u001b[31m[{\"created_at\": \"2026-11-17 15:39:03\", \"id\": 163, \"shipping_address\": \"123 Le Loi, TP.HCM\", \"status\": \"pending\", \"total_amount\": null, \"user_id\": 523}]\u001b[39m\n\n  150 |         }\n  151 |         if (e.newOrders !== undefined) {\n> 152 |           expect.soft(ownNew, 'no new order of the account (A6, A9)').toHaveLength(e.newOrders);\n      |                                                                       ^\n  153 |         }\n  154 |         expect.soft(linesAfter, 'server cart unchanged (A9)').toHaveLength(e.serverCartLinesAfter ?? row.cart.length);\n  155 |       } else {\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:152:71"
+                          "message": "Error: no new order of the account (A6, A9)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m1\u001b[39m\nReceived array:  \u001b[31m[{\"created_at\": \"2026-11-17 15:52:05\", \"id\": 207, \"shipping_address\": \"123 Le Loi, TP.HCM\", \"status\": \"pending\", \"total_amount\": null, \"user_id\": 579}]\u001b[39m\n\n  150 |         }\n  151 |         if (e.newOrders !== undefined) {\n> 152 |           expect.soft(ownNew, 'no new order of the account (A6, A9)').toHaveLength(e.newOrders);\n      |                                                                       ^\n  153 |         }\n  154 |         expect.soft(linesAfter, 'server cart unchanged (A9)').toHaveLength(e.serverCartLinesAfter ?? row.cart.length);\n  155 |       } else {\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:152:71"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T15:39:03.238Z",
+                      "startTime": "2026-11-17T15:52:05.315Z",
                       "annotations": [
                         {
                           "type": "source",
@@ -482,7 +482,7 @@
                         },
                         {
                           "type": "checkout response",
-                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":163}"
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":207}"
                         }
                       ],
                       "attachments": [
@@ -521,7 +521,7 @@
                     },
                     {
                       "type": "checkout response",
-                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":164}"
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":208}"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -532,7 +532,7 @@
                       "workerIndex": 2,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 102,
+                      "duration": 121,
                       "error": {
                         "message": "Error: the new order (A3, A7)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"status\": \"pending\",\u001b[22m\n\u001b[32m-   \"total_amount\": 12000000,\u001b[39m\n\u001b[31m+   \"total_amount\": null,\u001b[39m\n\u001b[2m  }\u001b[22m",
                         "stack": "Error: the new order (A3, A7)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"status\": \"pending\",\u001b[22m\n\u001b[32m-   \"total_amount\": 12000000,\u001b[39m\n\u001b[31m+   \"total_amount\": null,\u001b[39m\n\u001b[2m  }\u001b[22m\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:137:58",
@@ -564,7 +564,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T15:39:03.953Z",
+                      "startTime": "2026-11-17T15:52:06.014Z",
                       "annotations": [
                         {
                           "type": "source",
@@ -572,7 +572,7 @@
                         },
                         {
                           "type": "checkout response",
-                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":164}"
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":208}"
                         }
                       ],
                       "attachments": [
@@ -611,7 +611,7 @@
                     },
                     {
                       "type": "checkout response",
-                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":165}"
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":209}"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -622,7 +622,7 @@
                       "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 116,
+                      "duration": 122,
                       "error": {
                         "message": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   1000,\u001b[39m\n\u001b[2m  ]\u001b[22m",
                         "stack": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   1000,\u001b[39m\n\u001b[2m  ]\u001b[22m\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:160:12",
@@ -654,7 +654,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T15:39:04.715Z",
+                      "startTime": "2026-11-17T15:52:06.845Z",
                       "annotations": [
                         {
                           "type": "source",
@@ -662,7 +662,7 @@
                         },
                         {
                           "type": "checkout response",
-                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":165}"
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":209}"
                         }
                       ],
                       "attachments": [
@@ -701,7 +701,7 @@
                     },
                     {
                       "type": "checkout response",
-                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":166}"
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":210}"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -712,7 +712,7 @@
                       "workerIndex": 4,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 118,
+                      "duration": 117,
                       "error": {
                         "message": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   200000000,\u001b[39m\n\u001b[2m  ]\u001b[22m",
                         "stack": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   200000000,\u001b[39m\n\u001b[2m  ]\u001b[22m\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:160:12",
@@ -744,7 +744,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T15:39:05.518Z",
+                      "startTime": "2026-11-17T15:52:07.681Z",
                       "annotations": [
                         {
                           "type": "source",
@@ -752,7 +752,7 @@
                         },
                         {
                           "type": "checkout response",
-                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":166}"
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":210}"
                         }
                       ],
                       "attachments": [
@@ -791,7 +791,7 @@
                     },
                     {
                       "type": "checkout response",
-                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":167}"
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":211}"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -802,7 +802,7 @@
                       "workerIndex": 5,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 112,
+                      "duration": 123,
                       "error": {
                         "message": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   0,\u001b[39m\n\u001b[2m  ]\u001b[22m",
                         "stack": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   0,\u001b[39m\n\u001b[2m  ]\u001b[22m\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:160:12",
@@ -834,7 +834,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T15:39:06.332Z",
+                      "startTime": "2026-11-17T15:52:08.479Z",
                       "annotations": [
                         {
                           "type": "source",
@@ -842,7 +842,7 @@
                         },
                         {
                           "type": "checkout response",
-                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":167}"
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":211}"
                         }
                       ],
                       "attachments": [
@@ -881,7 +881,7 @@
                     },
                     {
                       "type": "checkout response",
-                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":168}"
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":212}"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -892,7 +892,7 @@
                       "workerIndex": 6,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 106,
+                      "duration": 128,
                       "error": {
                         "message": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   -1000,\u001b[39m\n\u001b[2m  ]\u001b[22m",
                         "stack": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   -1000,\u001b[39m\n\u001b[2m  ]\u001b[22m\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:160:12",
@@ -924,7 +924,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T15:39:07.117Z",
+                      "startTime": "2026-11-17T15:52:09.287Z",
                       "annotations": [
                         {
                           "type": "source",
@@ -932,7 +932,7 @@
                         },
                         {
                           "type": "checkout response",
-                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":168}"
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":212}"
                         }
                       ],
                       "attachments": [
@@ -971,7 +971,7 @@
                     },
                     {
                       "type": "checkout response",
-                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":169}"
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":213}"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -982,7 +982,7 @@
                       "workerIndex": 7,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 128,
+                      "duration": 133,
                       "error": {
                         "message": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   \"abc\",\u001b[39m\n\u001b[2m  ]\u001b[22m",
                         "stack": "Error: a new order carries the server total 126000000, never the client value (FR-08 README:107)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   126000000,\u001b[39m\n\u001b[31m+   \"abc\",\u001b[39m\n\u001b[2m  ]\u001b[22m\n    at /home/hg/source/software-testing/week04/tests/checkout/api.spec.ts:160:12",
@@ -1014,7 +1014,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T15:39:07.887Z",
+                      "startTime": "2026-11-17T15:52:10.115Z",
                       "annotations": [
                         {
                           "type": "source",
@@ -1022,7 +1022,7 @@
                         },
                         {
                           "type": "checkout response",
-                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":169}"
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":213}"
                         }
                       ],
                       "attachments": [
@@ -1094,7 +1094,7 @@
                     },
                     {
                       "type": "checkout response",
-                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":170}"
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":214}"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -1105,7 +1105,7 @@
                       "workerIndex": 8,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 20711,
+                      "duration": 20747,
                       "error": {
                         "message": "Error: the total cannot be typed into (FR-08 \"không cho phép người dùng chỉnh sửa trực tiếp\")\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div').filter({ has: locator('label').filter({ hasText: /^Tổng tiền thanh toán/ }) }).getByRole('spinbutton').and(locator('input:not([readonly]):not([disabled])'))\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - the total cannot be typed into (FR-08 \"không cho phép người dùng chỉnh sửa trực tiếp\") locator('div').filter({ has: locator('label').filter({ hasText: /^Tổng tiền thanh toán/ }) }).getByRole('spinbutton').and(locator('input:not([readonly]):not([disabled])')) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div').filter({ has: locator('label').filter({ hasText: /^Tổng tiền thanh toán/ }) }).getByRole('spinbutton').and(locator('input:not([readonly]):not([disabled])'))\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
                         "stack": "Error: the total cannot be typed into (FR-08 \"không cho phép người dùng chỉnh sửa trực tiếp\")\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div').filter({ has: locator('label').filter({ hasText: /^Tổng tiền thanh toán/ }) }).getByRole('spinbutton').and(locator('input:not([readonly]):not([disabled])'))\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - the total cannot be typed into (FR-08 \"không cho phép người dùng chỉnh sửa trực tiếp\") locator('div').filter({ has: locator('label').filter({ hasText: /^Tổng tiền thanh toán/ }) }).getByRole('spinbutton').and(locator('input:not([readonly]):not([disabled])')) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div').filter({ has: locator('label').filter({ hasText: /^Tổng tiền thanh toán/ }) }).getByRole('spinbutton').and(locator('input:not([readonly]):not([disabled])'))\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:195:12",
@@ -1145,7 +1145,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T15:39:08.696Z",
+                      "startTime": "2026-11-17T15:52:10.968Z",
                       "annotations": [
                         {
                           "type": "source",
@@ -1169,7 +1169,7 @@
                         },
                         {
                           "type": "checkout response",
-                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":170}"
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":214}"
                         }
                       ],
                       "attachments": [
@@ -1221,7 +1221,7 @@
                     },
                     {
                       "type": "checkout response",
-                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":171}"
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":215}"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -1232,7 +1232,7 @@
                       "workerIndex": 9,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 7325,
+                      "duration": 7295,
                       "error": {
                         "message": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
                         "stack": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:217:74",
@@ -1256,7 +1256,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T15:39:30.183Z",
+                      "startTime": "2026-11-17T15:52:32.476Z",
                       "annotations": [
                         {
                           "type": "source",
@@ -1272,7 +1272,7 @@
                         },
                         {
                           "type": "checkout response",
-                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":171}"
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":215}"
                         }
                       ],
                       "attachments": [
@@ -1328,7 +1328,7 @@
                     },
                     {
                       "type": "checkout response",
-                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":172}"
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":216}"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -1339,7 +1339,7 @@
                       "workerIndex": 10,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 9080,
+                      "duration": 8983,
                       "error": {
                         "message": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n",
                         "stack": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:217:74",
@@ -1363,7 +1363,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T15:39:38.310Z",
+                      "startTime": "2026-11-17T15:52:40.569Z",
                       "annotations": [
                         {
                           "type": "source",
@@ -1383,7 +1383,7 @@
                         },
                         {
                           "type": "checkout response",
-                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":172}"
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":216}"
                         }
                       ],
                       "attachments": [
@@ -1443,7 +1443,7 @@
                     },
                     {
                       "type": "checkout response",
-                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":173}"
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":217}"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -1454,7 +1454,7 @@
                       "workerIndex": 11,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 10694,
+                      "duration": 10702,
                       "error": {
                         "message": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n",
                         "stack": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:217:74",
@@ -1478,7 +1478,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T15:39:48.174Z",
+                      "startTime": "2026-11-17T15:52:50.342Z",
                       "annotations": [
                         {
                           "type": "source",
@@ -1502,7 +1502,7 @@
                         },
                         {
                           "type": "checkout response",
-                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":173}"
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":217}"
                         }
                       ],
                       "attachments": [
@@ -1562,7 +1562,7 @@
                     },
                     {
                       "type": "checkout response",
-                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":174}"
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":218}"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -1573,7 +1573,7 @@
                       "workerIndex": 12,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 10745,
+                      "duration": 10693,
                       "error": {
                         "message": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n",
                         "stack": "Error: no cart line after the checkout (A8)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ has: getByRole('cell') })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - no cart line after the checkout (A8) getByRole('row').filter({ has: getByRole('cell') }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ has: getByRole('cell') })\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:217:74",
@@ -1597,7 +1597,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T15:39:59.629Z",
+                      "startTime": "2026-11-17T15:53:01.830Z",
                       "annotations": [
                         {
                           "type": "source",
@@ -1621,7 +1621,7 @@
                         },
                         {
                           "type": "checkout response",
-                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":174}"
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":218}"
                         }
                       ],
                       "attachments": [
@@ -1692,12 +1692,12 @@
                       "workerIndex": 13,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 4249,
+                      "duration": 4183,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T15:40:11.211Z",
+                      "startTime": "2026-11-17T15:53:13.300Z",
                       "annotations": [
                         {
                           "type": "source",
@@ -1749,7 +1749,7 @@
                     },
                     {
                       "type": "checkout response",
-                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":175}"
+                      "description": "200 {\"message\":\"Checkout successful\",\"orderId\":219}"
                     },
                     {
                       "type": "issue",
@@ -1764,7 +1764,7 @@
                       "workerIndex": 13,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 5546,
+                      "duration": 5533,
                       "error": {
                         "message": "Error: empty-cart illustration (FR-07)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('img, svg').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - empty-cart illustration (FR-07) getByRole('main').locator('img, svg').first() with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('img, svg').first()\u001b[22m\n",
                         "stack": "Error: empty-cart illustration (FR-07)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main').locator('img, svg').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - empty-cart illustration (FR-07) getByRole('main').locator('img, svg').first() with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').locator('img, svg').first()\u001b[22m\n\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:284:87",
@@ -1790,13 +1790,13 @@
                             "column": 84,
                             "line": 295
                           },
-                          "message": "Error: no order for an empty cart (A6, A9)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m2\u001b[39m\nReceived array:  \u001b[31m[{\"created_at\": \"2026-11-17 15:40:21\", \"id\": 175, \"shipping_address\": null, \"status\": \"pending\", \"total_amount\": 0, \"user_id\": 523}, {\"created_at\": \"2026-11-17 15:39:03\", \"id\": 163, \"shipping_address\": \"123 Le Loi, TP.HCM\", \"status\": \"pending\", \"total_amount\": null, \"user_id\": 523}]\u001b[39m\n\n  293 |       testInfo.annotations.push({ type: 'checkout response', description: `${response.status()} ${await response.text()}` });\n  294 |       testInfo.annotations.push({ type: 'issue', description: 'BUG-01 https://github.com/angquoc/software-testing-2026-HW02-group/issues/116' });\n> 295 |       expect(await myOrders(account.token), 'no order for an empty cart (A6, A9)').toHaveLength(e.newOrders ?? 0);\n      |                                                                                    ^\n  296 |     });\n  297 |   }\n  298 | });\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:295:84"
+                          "message": "Error: no order for an empty cart (A6, A9)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m1\u001b[39m\nReceived array:  \u001b[31m[{\"created_at\": \"2026-11-17 15:53:23\", \"id\": 219, \"shipping_address\": null, \"status\": \"pending\", \"total_amount\": 0, \"user_id\": 592}]\u001b[39m\n\n  293 |       testInfo.annotations.push({ type: 'checkout response', description: `${response.status()} ${await response.text()}` });\n  294 |       testInfo.annotations.push({ type: 'issue', description: 'BUG-01 https://github.com/angquoc/software-testing-2026-HW02-group/issues/116' });\n> 295 |       expect(await myOrders(account.token), 'no order for an empty cart (A6, A9)').toHaveLength(e.newOrders ?? 0);\n      |                                                                                    ^\n  296 |     });\n  297 |   }\n  298 | });\n    at /home/hg/source/software-testing/week04/tests/checkout/web.spec.ts:295:84"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-17T15:40:15.588Z",
+                      "startTime": "2026-11-17T15:53:17.583Z",
                       "annotations": [
                         {
                           "type": "source",
@@ -1804,7 +1804,7 @@
                         },
                         {
                           "type": "checkout response",
-                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":175}"
+                          "description": "200 {\"message\":\"Checkout successful\",\"orderId\":219}"
                         },
                         {
                           "type": "issue",
@@ -1845,8 +1845,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-17T15:39:01.456Z",
-    "duration": 79745.03700000001,
+    "startTime": "2026-11-17T15:52:03.425Z",
+    "duration": 79761.72200000001,
     "expected": 4,
     "skipped": 0,
     "unexpected": 14,
