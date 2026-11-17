@@ -61,13 +61,17 @@ type Order = { id: number; total_amount: unknown; status: string };
 
 const data: DataFile = JSON.parse(readFileSync(path.join(__dirname, '../../data/checkout/web.json'), 'utf-8'));
 
-/** `{run}` of the account e-mail: start time of the run + browser (design §3). */
+/**
+ * `{run}` of the account e-mail: start time of the run + browser + repeat and retry
+ * index (design §3). The backend registers a taken e-mail again and logs in the first
+ * account, so a repeated or retried test must not reuse the e-mail of its earlier attempt.
+ */
 function runStamp(testInfo: TestInfo): string {
   const started = (process.env.RUN_STARTED ?? new Date().toISOString())
     .replace(/[-:]/g, '')
     .slice(0, 15)
     .toLowerCase();
-  return `${started}.${testInfo.project.name}`;
+  return `${started}.${testInfo.project.name}.r${testInfo.repeatEachIndex}t${testInfo.retry}`;
 }
 
 function accountEmail(row: Row, testInfo: TestInfo): string {

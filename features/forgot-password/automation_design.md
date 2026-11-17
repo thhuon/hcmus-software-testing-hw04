@@ -305,33 +305,33 @@ Script output (`summarize-results.mjs --markdown`, FR-03 rows):
 
 | TC ID | Browsers failing | Assertion (expected vs received) | Verdict | Bug / issue |
 | --- | --- | --- | --- | --- |
-| DT-01 | all 3 | soft: step indicator "Bước 1 / 2" → not found; `*` on the email label → "Nhập Email của bạn"; OTP `^\d{6}$` → `9594`; confirm field visible → not found; then "confirm field … (FR-03)" → not found (test stops) | product defect: FR-03 "Bước 1 / 2", "6 chữ số", "**Xác nhận mật khẩu mới**"; FR-22 `*`; A16 (proposed) | BUG-06 #6, BUG-07 #7, BUG-03 #3, BUG-04 #4 |
-| DT-02 | all 3 | OTP `^\d{6}$` ×3 → `4941`, `1900`, `2240` (the three differ: A17 holds) | product defect: FR-03 "6 chữ số ngẫu nhiên" (proposed) | BUG-03 #3 |
-| DT-03 | all 3 | soft: step indicator "Bước 1 / 2" → not found; button "Quay lại đăng nhập" visible → not found | product defect: FR-03 "Bước 1 / 2", "Có nút **Quay lại đăng nhập**." (proposed) | BUG-06 #6, BUG-11 #11 |
-| DT-04 | all 3 | login with the new password `NewPass@2026#` → `4xx` (dialog "Mật khẩu quá yếu! …") | product defect: FR-03 "Mật khẩu mới phải tuân thủ điều kiện như FR-01." + A5, A10 (proposed) | BUG-01 #1 |
-| DT-05 | all 3 | OTP used up after the reset (SEC-07) → `200`: the reset never happened (dialog "Mật khẩu quá yếu! …") | product defect: FR-01 / A11 (`Current@2026` is valid) + SEC-07 (proposed) | BUG-01 #1 |
-| DT-06 | all 3 | soft FR-22 → no element (dialog "Mật khẩu quá yếu! …" for `NewPass2026`); login with `NewPass@2026` after the retry → `4xx` | product defect: FR-22; FR-01 + A6 (OTP still usable, then accepted) (proposed) | BUG-09 #9, BUG-01 #1 |
-| DT-11 … 15, BVA-01, 02 | all 3 | soft FR-22 → no element (dialog "Mật khẩu quá yếu! …"; DT-13: browser blocks the empty OTP field, no dialog). API part as expected: reset `4xx`, old password logs in | product defect: FR-22 "Thông báo lỗi phải xuất hiện **trên** nút submit" (proposed) | BUG-09 #9 |
-| DT-20, 22 … 26, BVA-03 | all 3 | soft FR-22 → no element (dialog "Mật khẩu quá yếu! …"); password unchanged as expected | product defect: FR-22 "Thông báo lỗi phải xuất hiện **trên** nút submit" (proposed) | BUG-09 #9 |
-| DT-21 | all 3 | soft FR-22 → no element; no dialog: the browser blocks the empty `required` field. Password unchanged as expected | product defect: FR-22 "Thông báo lỗi phải xuất hiện **trên** nút submit" (proposed); differs from HW02, where the Web showed "Mật khẩu quá yếu!" for DT-21 | BUG-09 #9 |
-| DT-27 | all 3 (API) | reset without `newPassword` → `200` "Password reset successfully" (expected `4xx`) | product defect: FR-03 "Mật khẩu mới phải tuân thủ điều kiện như FR-01." + A4 (proposed) | BUG-08 #8 |
-| DT-28, 29, 30 | all 3 | confirm field "Xác nhận mật khẩu mới" visible → not found (test stops) | product defect: FR-03 "**Xác nhận mật khẩu mới**", "Hai trường mật khẩu phải khớp nhau." (proposed) | BUG-04 #4 |
-| DT-35 | all 3 | soft FR-22 → no element; login with the old password `Test1234!` → `4xx`: the Web accepted `NewPass 2026` (dialog "Đổi mật khẩu thành công!") and changed the password | product defect: FR-01 "1 ký tự đặc biệt (`@`, `$`, `!`, `%`, `*`, `?`, `&`)" + A10 (a space is not one) + A6 (proposed) | **new** (proposed: new issue `hw: HW04`) |
+| DT-01 | all 3 | soft: step indicator "Bước 1 / 2" → not found; `*` on the email label → "Nhập Email của bạn"; OTP `^\d{6}$` → `9594`; confirm field visible → not found; then "confirm field … (FR-03)" → not found (test stops) | product defect: FR-03 "Bước 1 / 2", "6 chữ số", "**Xác nhận mật khẩu mới**"; FR-22 `*`; A16 (proposed) | BUG-06 (#6), BUG-07 (#7), BUG-04 (#3), BUG-05 (#4) |
+| DT-02 | all 3 | OTP `^\d{6}$` ×3 → `4941`, `1900`, `2240` (the three differ: A17 holds) | product defect: FR-03 "6 chữ số ngẫu nhiên" (proposed) | BUG-04 (#3) |
+| DT-03 | all 3 | soft: step indicator "Bước 1 / 2" → not found; button "Quay lại đăng nhập" visible → not found | product defect: FR-03 "Bước 1 / 2", "Có nút **Quay lại đăng nhập**." (proposed) | BUG-06 (#6), BUG-10 (#11) |
+| DT-04 | all 3 | login with the new password `NewPass@2026#` → `4xx` (dialog "Mật khẩu quá yếu! …") | product defect: FR-03 "Mật khẩu mới phải tuân thủ điều kiện như FR-01." + A5, A10 (proposed) | BUG-03 (#1) |
+| DT-05 | all 3 | OTP used up after the reset (SEC-07) → `200`: the reset never happened (dialog "Mật khẩu quá yếu! …") | product defect: FR-01 / A11 (`Current@2026` is valid) + SEC-07 (proposed) | BUG-03 (#1) |
+| DT-06 | all 3 | soft FR-22 → no element (dialog "Mật khẩu quá yếu! …" for `NewPass2026`); login with `NewPass@2026` after the retry → `4xx` | product defect: FR-22; FR-01 + A6 (OTP still usable, then accepted) (proposed) | BUG-09 (#9), BUG-03 (#1) |
+| DT-11 … 15, BVA-01, 02 | all 3 | soft FR-22 → no element (dialog "Mật khẩu quá yếu! …"; DT-13: browser blocks the empty OTP field, no dialog). API part as expected: reset `4xx`, old password logs in | product defect: FR-22 "Thông báo lỗi phải xuất hiện **trên** nút submit" (proposed) | BUG-09 (#9) |
+| DT-20, 22 … 26, BVA-03 | all 3 | soft FR-22 → no element (dialog "Mật khẩu quá yếu! …"); password unchanged as expected | product defect: FR-22 "Thông báo lỗi phải xuất hiện **trên** nút submit" (proposed) | BUG-09 (#9) |
+| DT-21 | all 3 | soft FR-22 → no element; no dialog: the browser blocks the empty `required` field. Password unchanged as expected | product defect: FR-22 "Thông báo lỗi phải xuất hiện **trên** nút submit" (proposed); HW02's DT-21 run noted a dialog, issue #9 already covers the empty-field case (DT-13) | BUG-09 (#9) |
+| DT-27 | all 3 (API) | reset without `newPassword` → `200` "Password reset successfully" (expected `4xx`) | product defect: FR-03 "Mật khẩu mới phải tuân thủ điều kiện như FR-01." + A4 (proposed) | BUG-08 (#8) |
+| DT-28, 29, 30 | all 3 | confirm field "Xác nhận mật khẩu mới" visible → not found (test stops) | product defect: FR-03 "**Xác nhận mật khẩu mới**", "Hai trường mật khẩu phải khớp nhau." (proposed) | BUG-05 (#4) |
+| DT-35 | all 3 | soft FR-22 → no element; login with the old password `Test1234!` → `4xx`: the Web accepted `NewPass 2026` (dialog "Đổi mật khẩu thành công!") and changed the password | product defect: FR-01 "1 ký tự đặc biệt (`@`, `$`, `!`, `%`, `*`, `?`, `&`)" + A10 (a space is not one) + A6 (proposed) | BUG-02, **new** (issue to file, `hw: HW04`) |
 
 **Evidence and reruns.** Every row failed the same way in both official sets (19:47–19:59 and 20:08–20:20) and in the development runs (§5), on Chromium, Firefox and WebKit. Screenshot of each Web test at its end: `reports/forgot-password/<browser>/screenshots/<TC ID>.png`; the dialog text is the report's `dialog` annotation. DT-27 (API) and DT-35 (the screenshot shows only the login page the app moved to): report entry captured as `features/forgot-password/screenshots/DT-27-<browser>-report.png`, `DT-35-<browser>-report.png`. Script defects: none left after T5. Environment: ENV-01 (§6), first official set only, no verdict changed.
 
-**Bugs behind the failures** (proposed tracker action; decided in the bug-reporting step):
+**Bugs behind the failures** (entries BUG-02 … BUG-10 in `bugs/BUG_REPORT.md`; tracker actions wait for the student's OK):
 
-| Bug | Tests (HW04) | Same as HW02? | Proposed action |
+| Bug (HW04 report → HW02 issue) | Tests (HW04) | Same as HW02? | Proposed action |
 | --- | --- | --- | --- |
-| HW02 BUG-01 #1 – Web Bước 2 refuses valid passwords | DT-04, 05, 06, BVA-04, 05 | Same; HW04 adds DT-05 (SEC-07 check) and BVA-04, 05. Differs in one point: not *every* password is refused, `NewPass 2026` is accepted (DT-35) | comment on #1 |
-| HW02 BUG-03 #3 – OTP of 4 digits | DT-01, DT-02 | Same | comment on #3 |
-| HW02 BUG-04 #4 – no confirm field | DT-01, 28, 29, 30 | Same | comment on #4 |
-| HW02 BUG-06 #6 – no step indicator | DT-01, DT-03 | Same | comment on #6 |
-| HW02 BUG-07 #7 – no `*` on the email label | DT-01 | Same | comment on #7 |
-| HW02 BUG-08 #8 – API reset without `newPassword` | DT-27 | Same (`200` "Password reset successfully") | comment on #8 |
-| HW02 BUG-09 #9 – errors in a dialog, not above submit | DT-06, 11 … 15, 20 … 26, 35, BVA-01 … 03 | Same; found by 17 tests on 3 browsers (HW02: DT-11 … 13). Differs: for DT-21 the browser now blocks the empty password field (no dialog) where HW02 saw "Mật khẩu quá yếu!" | comment on #9 |
-| HW02 BUG-11 #11 – no "Quay lại đăng nhập" | DT-03 | Same | comment on #11 |
-| **New** – Web Bước 2 accepts a new password whose only special character is a space (`NewPass 2026`) and changes the password | DT-35 | Not in HW02 (HW02 BUG-02 is the API accepting weak passwords, not the Web) | new issue, label `hw: HW04` |
+| BUG-03 → HW02 BUG-01 #1 – Web Bước 2 refuses valid passwords | DT-04, 05, 06, BVA-04, 05 | Same; HW04 adds DT-05 (SEC-07 check) and BVA-04, 05. Differs in one point: not *every* password is refused, `NewPass 2026` is accepted (DT-35) | comment on #1 |
+| BUG-04 → HW02 BUG-03 #3 – OTP of 4 digits | DT-01, DT-02 | Same | comment on #3 |
+| BUG-05 → HW02 BUG-04 #4 – no confirm field | DT-01, 28, 29, 30 | Same | comment on #4 |
+| BUG-06 → HW02 BUG-06 #6 – no step indicator | DT-01, DT-03 | Same | comment on #6 |
+| BUG-07 → HW02 BUG-07 #7 – no `*` on the email label | DT-01 | Same | comment on #7 |
+| BUG-08 → HW02 BUG-08 #8 – API reset without `newPassword` | DT-27 | Same (`200` "Password reset successfully") | comment on #8 |
+| BUG-09 → HW02 BUG-09 #9 – errors in a dialog, not above submit | DT-06, 11 … 15, 20 … 26, 35, BVA-01 … 03 | Same (dialog, or the browser blocking an empty field as in #9's DT-13); found by 17 tests on 3 browsers (HW02: DT-11 … 13) | comment on #9 |
+| BUG-10 → HW02 BUG-11 #11 – no "Quay lại đăng nhập" | DT-03 | Same | comment on #11 |
+| BUG-02 **new** – Web Bước 2 accepts a new password whose only special character is a space (`NewPass 2026`) and changes the password | DT-35 | Not in HW02 (HW02 BUG-02 is the API accepting weak passwords, not the Web) | new issue, label `hw: HW04` |
 
 **Trace viewer (student, rubric 32):** open one failure in the trace viewer, e.g. `npx playwright test tests/forgot-password/web.spec.ts --project=chromium -g "DT-35 " --output=test-output/dev` then `npm run trace -- test-output/dev/<DT-35 folder>/trace.zip` (development runs keep traces; the own `--output` folder is not emptied by another session's run). What it showed: `<student fills in>`.
