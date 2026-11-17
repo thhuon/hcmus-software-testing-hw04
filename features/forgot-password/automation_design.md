@@ -222,7 +222,70 @@ Categories: fragile selector · weak assertion · wrong oracle · missing edge c
 
 ## 6. Runs (T6)
 
-Official runs (`summarize-results.mjs --markdown`):
+**Official runs** (17/11/2026, `node skills/test-automation/scripts/run-browsers.mjs --config automation.config.json forgot-password --browsers <browser> --reuse`, one browser after the other):
+
+- **Frozen specs:** `tests/forgot-password/` at commit 63f8508 (last spec change, after the T5 fixes); run script with its own output folder per run at d5bd0e0. Reports committed as the tool wrote them.
+- **SUT and data:** the servers already running (`--reuse`) instead of fresh ones, because the student's servers were also in use by the parallel FR-08 session; the database was not re-seeded. Clean data comes from the test data instead: every test registers its own account named after the TC, the run's start time and the browser (§3), and no test reads data that an earlier test or run left.
+- **Settings:** `retries: 0`, `workers: 1`; screenshots on failure, traces kept on failure.
+- **Reports:** `reports/forgot-password/<browser>/index.html` + `results.json`. Title checked in a browser on all three: "HW04 · FR-03 Forgot & reset password · <browser> · Run by: 23120046 · <ISO start time>" (chromium `2026-11-17T12:47:18.182Z`, firefox `…12:50:46.628Z`, webkit `…12:55:17.175Z`).
+
+Script output (`summarize-results.mjs --markdown`, FR-03 rows):
+
+**Runs**
+
+| feature | browser | started | tests | passed | failed | flaky | skipped |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| forgot-password | chromium | 2026-11-17T12:47:18.187Z | 33 | 5 | 28 | 0 | 0 |
+| forgot-password | firefox | 2026-11-17T12:50:46.634Z | 33 | 5 | 28 | 0 | 0 |
+| forgot-password | webkit | 2026-11-17T12:55:17.180Z | 33 | 5 | 28 | 0 | 0 |
+
+**Test cases (across browsers)**
+
+| feature | id | chromium | firefox | webkit | result |
+| --- | --- | --- | --- | --- | --- |
+| forgot-password | DT-17 | passed | passed | passed | passed |
+| forgot-password | DT-27 | failed | failed | failed | failed |
+| forgot-password | DT-32 | passed | passed | passed | passed |
+| forgot-password | DT-01 | failed | failed | failed | failed |
+| forgot-password | DT-04 | failed | failed | failed | failed |
+| forgot-password | DT-05 | failed | failed | failed | failed |
+| forgot-password | DT-20 | failed | failed | failed | failed |
+| forgot-password | DT-21 | failed | failed | failed | failed |
+| forgot-password | DT-22 | failed | failed | failed | failed |
+| forgot-password | DT-23 | failed | failed | failed | failed |
+| forgot-password | DT-24 | failed | failed | failed | failed |
+| forgot-password | DT-25 | failed | failed | failed | failed |
+| forgot-password | DT-26 | failed | failed | failed | failed |
+| forgot-password | DT-28 | failed | failed | failed | failed |
+| forgot-password | DT-29 | failed | failed | failed | failed |
+| forgot-password | DT-30 | failed | failed | failed | failed |
+| forgot-password | DT-35 | failed | failed | failed | failed |
+| forgot-password | BVA-03 | failed | failed | failed | failed |
+| forgot-password | BVA-04 | failed | failed | failed | failed |
+| forgot-password | BVA-05 | failed | failed | failed | failed |
+| forgot-password | DT-02 | failed | failed | failed | failed |
+| forgot-password | DT-03 | failed | failed | failed | failed |
+| forgot-password | DT-06 | failed | failed | failed | failed |
+| forgot-password | DT-07 | passed | passed | passed | passed |
+| forgot-password | DT-08 | passed | passed | passed | passed |
+| forgot-password | DT-09 | passed | passed | passed | passed |
+| forgot-password | DT-11 | failed | failed | failed | failed |
+| forgot-password | DT-12 | failed | failed | failed | failed |
+| forgot-password | DT-13 | failed | failed | failed | failed |
+| forgot-password | DT-14 | failed | failed | failed | failed |
+| forgot-password | DT-15 | failed | failed | failed | failed |
+| forgot-password | BVA-01 | failed | failed | failed | failed |
+| forgot-password | BVA-02 | failed | failed | failed | failed |
+
+**Totals**
+
+| feature | automated | executed | passed | failed | flaky | runs |
+| --- | --- | --- | --- | --- | --- | --- |
+| forgot-password | 33 | 33 | 5 | 28 | 0 | 3 |
+
+**Browser comparison:** the same 5 tests pass and the same 28 fail on all three browsers, each failing on the same check (compared from the first error of every test in the three `results.json`). Durations: chromium 3.4 min, firefox 4.3 min, webkit 3.7 min. No flaky test (no retries; the results agree across browsers).
+
+One difference: **DT-12 on Firefox** has a second error after the FR-22 failure, `apiRequestContext.post: socket hang up (ECONNRESET)` on the API reset, so its API part did not run in that run. Rerun three times on Firefox (private folder): 1 of 3 shows it again; never seen on Chromium or WebKit. Proposed cause (environment / script timing, to triage in T7): the API call comes right after the soft FR-22 check has waited its full 5 s, and Node / Express closes an idle keep-alive connection after 5 s (`keepAliveTimeout` default), so the request may go out on a socket the server is closing. It does not change the verdict of DT-12 (FR-22 fails on every browser) but leaves its API check unproven in the Firefox run.
 
 ## 7. Not automated (T8)
 
