@@ -190,7 +190,7 @@ Prompt used for generation: see the AI-use log entries of this step (the T4 prom
 | BVA-05 | failed | new products: expected 0, received 1 (`Ố` × 256 stored; BUG-38). [Screenshot](screenshots/first-run/BVA-05-chromium.png) |
 | BVA-06 | failed | new products: expected 0, received 1 (price 0 stored; BUG-39). [Screenshot](screenshots/first-run/BVA-06-chromium.png) |
 
-**First run of the generated API spec** (agent, 18/11 02:0x, Chromium project, temporary `REPORT_DIR` / `--output`; nothing fixed): 2 passed, 11 failed. Every request answered 200 (`Product created` / `Product updated` / `Product deleted`). Products afterwards: ids 1–5; categories 1–3 (DT-19's category was created and deleted, id 10).
+**First run of the generated API spec** (agent, 18/11 02:00, Chromium project, temporary `REPORT_DIR` / `--output`; nothing fixed): 2 passed, 11 failed. Every request answered 200 (`Product created` / `Product updated` / `Product deleted`). Products afterwards: ids 1–5; categories 1–3 (DT-19's category was created and deleted, id 10).
 
 | Test | Result | Failed assertions (expected vs received) |
 | --- | --- | --- |
