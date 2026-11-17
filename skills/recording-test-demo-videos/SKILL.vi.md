@@ -24,7 +24,7 @@ Video demo là bằng chứng tester đã tự làm. Video mất giá trị bằ
 
 Lấy các thông tin sau từ hướng dẫn của dự án hoặc đề bài: số video và mỗi video phải thể hiện gì, độ dài tối thiểu, ngôn ngữ thuyết minh, bằng chứng danh tính (face-cam, `whoami` + `hostname`, tên trên màn hình), có được dùng giọng tổng hợp không, nơi đăng (ví dụ YouTube unlisted), link đặt ở đâu (README, report).
 
-Nếu đề yêu cầu hai video có nội dung trùng nhau (ví dụ "skill được dùng cho trọn một feature" và "một script chạy từ đầu đến cuối kèm report"), hãy lên kế hoạch **một buổi quay** bao cả hai và cắt ra hai video từ đó; ghi rõ điều này trong shot list để tester quyết định.
+Nếu đề yêu cầu hai video (ví dụ "skill được dùng cho trọn một feature" và "một script chạy từ đầu đến cuối kèm report"), cho **mỗi video một danh sách cảnh và một buổi quay riêng**, đánh số theo video (1.1, 1.2 … / 2.1, 2.2 …), để không video nào là sản phẩm phụ của video kia và tester không phải dò số cảnh bị xáo trộn giữa hai bản dựng. Thứ tự thường gặp: quay video skill trong lúc làm feature; quay video script sau khi feature xong, đúng lúc chạy chính thức feature đó, để report trong video chính là report được nộp (không chạy lại feature đó sau này).
 
 ## V1 – Yêu cầu
 
@@ -32,13 +32,14 @@ Liệt kê mọi yêu cầu của mọi video thành checkbox, kèm dòng nguồ
 
 ## V2 – Shot list ([templates/shot-list.md](templates/shot-list.md))
 
-Mỗi cảnh một dòng: `# | Scene | On screen | Narration points | Requirement covered | Approx. duration`.
+Viết shot list bằng **ngôn ngữ thuyết minh** (tester đọc khi quay), lời lẽ dễ hiểu. Mỗi cảnh một dòng: `Cảnh | Bạn làm gì (lệnh / prompt / thao tác chính xác) | Màn hình cần thấy | Ý chính khi nói | Thời lượng`; một bảng yêu cầu chỉ ra mỗi yêu cầu nằm ở cảnh nào.
 
 - Mở đầu bằng danh tính: terminal chạy `whoami` và `hostname` (hoặc face-cam), ngày và thư mục dự án.
 - Cho thấy đầu vào trước đầu ra: test case / file dữ liệu trước lần chạy, prompt cho AI trước code được sinh.
 - Với chỗ sửa: lần chạy fail → dòng bị sai → vì sao AI làm sai → chỗ sửa (diff hoặc commit) → lần chạy lại pass hoặc fail đúng như mong đợi.
+- Với video skill: cho thấy các file của skill và cấu hình dự án giúp skill dùng lại được trước; sau đó mỗi bước của skill một cảnh, gồm prompt gõ chính xác, các phần trong câu trả lời của agent (kết quả, tự chấm, câu hỏi), quyết định của tester và commit của bước; cho thấy cả các bước bảo trì (review, sửa, phân tích lỗi) chứ không chỉ các bước sinh script.
 - Với lần chạy trên nhiều trình duyệt: chạy mọi trình duyệt bằng một lệnh và để terminal luôn hiện; sau đó mở từng report và chỉ vào tiêu đề của nó (danh tính + mốc thời gian).
-- Ý thuyết minh là các gạch đầu dòng ngắn bằng ngôn ngữ thuyết minh, theo lời của tester — đang xảy ra gì và vì sao — không phải kịch bản để đọc, trừ khi tester yêu cầu.
+- Ý thuyết minh là các gạch đầu dòng ngắn bằng ngôn ngữ thuyết minh, theo lời của tester — đang xảy ra gì và vì sao — không phải kịch bản để đọc, trừ khi tester yêu cầu. Khi tester yêu cầu kịch bản lồng tiếng thì viết thành file riêng, cùng số cảnh, mọi giá trị chỉ có sau buổi quay để dạng `⟨…⟩`.
 
 ## V3 – Chuẩn bị (checklist cho tester)
 
@@ -67,7 +68,7 @@ Tester tự quay. Agent có thể gợi ý các cách:
 1. Bước, một dòng.
 2. Checklist, shot list hoặc bảng kiểm.
 3. **AI tự review**: chấm P1–P6 của [../review-rubric-shared.vi.md](../review-rubric-shared.vi.md) và bảng của bước đó trong [review-rubric.vi.md](review-rubric.vi.md) theo dạng `# | Score (2/1/0/N/A) | Evidence | Action`, và kết thúc bằng `Gate: passed` hoặc `Gate: blocked by <#>`.
-4. **Decisions needed** (cần người dùng quyết: một hay hai video từ một buổi quay, thuyết minh trực tiếp hay voice-over) và **Next step** (bước tiếp theo). Rồi dừng lại.
+4. **Decisions needed** (cần người dùng quyết: mỗi video quay lúc nào, thuyết minh trực tiếp hay voice-over, kể chỗ sửa nào) và **Next step** (bước tiếp theo). Rồi dừng lại.
 
 ## Commit và log sử dụng AI
 

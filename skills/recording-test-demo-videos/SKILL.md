@@ -25,7 +25,7 @@ A demo video is evidence that the tester did the work. It fails as evidence when
 
 Take these from the project's instructions or the assignment: how many videos and what each must show, minimum length, language of the narration, identity proof (face-cam, `whoami` + `hostname`, name on screen), whether a synthetic voice is allowed, hosting (e.g. YouTube unlisted), where the links go (README, report).
 
-If two videos are required and their content overlaps (e.g. "the skill used on a whole feature" and "a script running end to end with the report"), plan **one recording session** that covers both and two cuts from it; say so in the shot list so the tester can decide.
+If two videos are required (e.g. "the skill used on a whole feature" and "a script running end to end with the report"), give **each video its own scene list and its own recording session**, numbered by video (1.1, 1.2 … / 2.1, 2.2 …), so neither video is a by-product of the other and the tester never has to map shuffled scene numbers to two cuts. Typical order: record the skill video while doing the feature; record the script video after the feature is done, at the feature's official run, so the report shown in the video is the report that is submitted (no later rerun of that feature).
 
 ## V1 – Requirements
 
@@ -33,13 +33,14 @@ List every requirement of every video as a checkbox with its source line from th
 
 ## V2 – Shot list ([templates/shot-list.md](templates/shot-list.md))
 
-One row per scene: `# | Scene | On screen | Narration points | Requirement covered | Approx. duration`.
+Write the shot list in the **narration language** (the tester reads it while recording), in plain words. One row per scene: `Scene | What you do (exact command / prompt / click) | What must be on screen | Narration points | Duration`; a requirements table maps every requirement to its scene numbers.
 
 - Start with identity: terminal running `whoami` and `hostname` (or the face-cam), date and the project folder.
 - Show the input before the output: the test cases / data file before the run, the AI prompt before the generated code.
 - For the fix: the failing run → the line that was wrong → why the AI got it wrong → the fix (diff or commit) → the passing or correctly failing rerun.
+- For a skill video: show the skill's files and the project configuration that makes it reusable first; then one scene per skill step with the exact prompt typed, the parts of the agent's reply (result, self-review, questions), the tester's decision and the step's commit; show the maintenance steps (review, fix, failure triage) as well as the generation steps.
 - For multi-browser runs: run all browsers in one command and keep the terminal visible; then open each report and point at its title (identity + timestamp).
-- Narration points are short bullets in the narration language, in the tester's words — what is happening and why — not a script to read, unless the tester asks for one.
+- Narration points are short bullets in the narration language, in the tester's words — what is happening and why — not a script to read, unless the tester asks for one. A requested voice-over script is a separate file with the same scene numbers and `⟨…⟩` for every value that only the recording session can give.
 
 ## V3 – Prepare (checklist for the tester)
 
@@ -68,7 +69,7 @@ The tester records. Options the agent can suggest:
 1. Step, one line.
 2. The checklist, shot list or check table.
 3. **AI self-review**: score P1–P6 of [../review-rubric-shared.md](../review-rubric-shared.md) and the step's table of [review-rubric.md](review-rubric.md) as `# | Score (2/1/0/N/A) | Evidence | Action`, and end with `Gate: passed` or `Gate: blocked by <#>`.
-4. **Decisions needed** (one or two videos from one session, live vs voice-over) and **Next step**. Then stop.
+4. **Decisions needed** (when each video is recorded, live vs voice-over, which fix is narrated) and **Next step**. Then stop.
 
 ## Commits and AI-use log
 

@@ -13,7 +13,7 @@ Source: [BRIEF] – the project's video requirements.
 
 | # | M/S | Criterion | How to check |
 | --- | --- | --- | --- |
-| 2 | M | Every requirement is covered by at least one scene | "Requirement covered" column reaches every V1 row |
+| 2 | M | Every requirement is covered by at least one scene | The "Scenes" column of the requirements table names a scene for every V1 row; each video has its own scene table |
 | 3 | M | Identity proof comes first and is live | Scene 1 = `whoami` / `hostname` or face-cam |
 | 4 | M | The fix scene shows a real fix | Names the commit and the review row it comes from |
 | 5 | S | Narration points are bullets in the narration language | No word-for-word script unless the tester asked |

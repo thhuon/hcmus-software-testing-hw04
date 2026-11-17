@@ -3,20 +3,29 @@
 | Field | Value |
 | --- | --- |
 | Videos | <video 1 – purpose> · <video 2 – purpose> |
-| Recording plan | <one session cut into two videos / separate sessions> |
+| Recording plan | <one recording session per video; when each is recorded> |
 | Narration | <language>, tester's own voice, <live / voice-over> |
 | Identity proof | <face-cam / `whoami` + `hostname`> |
 | Hosting | <YouTube Unlisted> → links in <README / report> |
 
 ## 1. Requirements (V1)
 
-| # | Requirement | Source | Video |
-| --- | --- | --- | --- |
+| # | Requirement | Source | Video | Scenes |
+| --- | --- | --- | --- | --- |
 
 ## 2. Scenes (V2)
 
-| # | Scene | On screen | Narration points | Requirement covered | Approx. duration |
-| --- | --- | --- | --- | --- | --- |
+Write this file in the narration language. One table per video, scenes numbered per video (1.1, 1.2 … / 2.1 …).
+
+### Video 1 – <purpose>
+
+| Scene | What you do (command / prompt / click) | What must be on screen | Narration points | Duration |
+| --- | --- | --- | --- | --- |
+
+### Video 2 – <purpose>
+
+| Scene | What you do (command / prompt / click) | What must be on screen | Narration points | Duration |
+| --- | --- | --- | --- | --- |
 
 ## 3. Preparation (V3)
 

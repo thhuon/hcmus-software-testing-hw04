@@ -15,7 +15,7 @@ Nguồn: [BRIEF] – yêu cầu về video của dự án.
 
 | # | M/S | Tiêu chí | Cách kiểm |
 | --- | --- | --- | --- |
-| 2 | M | Mỗi yêu cầu được ít nhất một cảnh bao phủ | Cột "Requirement covered" phủ hết mọi dòng của V1 |
+| 2 | M | Mỗi yêu cầu được ít nhất một cảnh bao phủ | Cột "Scenes" của bảng yêu cầu chỉ ra cảnh cho mọi dòng V1; mỗi video có bảng cảnh riêng |
 | 3 | M | Bằng chứng danh tính đi đầu và quay trực tiếp | Cảnh 1 = `whoami` / `hostname` hoặc face-cam |
 | 4 | M | Cảnh sửa lỗi cho thấy một chỗ sửa thật | Nêu commit và dòng review mà chỗ sửa đó xuất phát |
 | 5 | S | Ý thuyết minh là gạch đầu dòng bằng ngôn ngữ thuyết minh | Không có kịch bản từng chữ trừ khi tester yêu cầu |
