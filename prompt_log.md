@@ -4583,3 +4583,564 @@ Bash Write the entries and list their TODO lines
 - **Used in:** design §6–§8 + `bugs/screenshots/checkout_comment_*` (commit e0656a9), README §2 + `HW04_Report.md` §6–§8 + `PLAN.md` (commit 9c3be47, e0d0310); AI-02 Artifact #40
 
 ---
+
+## Prompt043 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 00:25 18/11/2026
+- **Output received:** 00:29 18/11/2026
+- **Feature / step:** Video (FR-15) – shot list and voice-over script
+- **Purpose:** Viết kịch bản quay video demo cho feature C và lời thoại để lồng tiếng
+- **Prompt (verbatim):**
+
+```text
+viét kịch bản để quay video demo cho feature C và script để lồng tiếng
+```
+
+- **AI output (verbatim):**
+
+```text
+Skill
+Bash ls; ls week04 week04/features; cat CLAUDE.md 2>/dev/null | head -80; ls .claude/skills/recording-tes
+Bash cd /home/hg/source/software-testing/week04 && cat CLAUDE.md; cat features/selected-features.md; cat
+Bash cat demo/shot_list.md; grep -n -i -A3 "video\|demo" HW04_Automation_Testing_Original.md | head -120
+Bash cat features/product-crud/automation_design.md; ls -R tests/product-crud data/product-crud page-obje
+Bash git log --oneline | head -60; grep -n -i "video\|phase 3\|fC\|product-crud\|FR-15" PLAN.md | head -4
+Đang đọc PLAN giai đoạn 3, các bước của skill test-automation và test case FR-15 ở HW02 để viết kịch bản bám đúng quy trình sẽ làm khi quay.
+Bash sed -n 60,80p PLAN.md; ls skills; grep -n "^## \|^### \|^| T[0-9]" skills/test-automation/SKILL.md |
+Bash grep -n "^| DT-\|^| BVA-" ../week02/features/fC-pool-C/02_domain_testing.md ../week02/features/fC-po
+Bash sed -n 96,112p HW04_Automation_Testing_Original.md; sed -n 140,150p HW04_Automation_Testing_Original
+Bash git status --short | head; grep -A20 '"scripts"' package.json; cat automation.config.json | head -30
+Bash ls -R skills/test-automation skills/automation-bug-reporting | head -40; grep -n "^| 2 |" features/c
+Đã đủ bối cảnh. Đang viết kịch bản quay (shot list) và lời thoại.
+Write /home/hg/source/software-testing/week04/demo/shot_list.md
+Write /home/hg/source/software-testing/week04/demo/narration_script.md
+Giờ thêm dòng AI-02 cho artifact này rồi commit.
+Bash grep -n "^## \|^| " AI-02_AI_Audit_Report.md | tail -8 | cut -c1-700
+Bash grep -n "^## \|^| Artifact\|^| #\|^| Prompt" AI-02_AI_Audit_Report.md | tail -12 | cut -c1-900
+Bash sed -n 41,48p AI-02_AI_Audit_Report.md | cut -c1-600; echo ----; sed -n 98,106p AI-02_AI_Audit_Repor
+Bash grep -o "Artifact #[0-9S]*" AI-02_AI_Audit_Report.md | tail -3; grep -o "^### Prompt[0-9]*" prompt_l
+Bash grep -n "Prompt04[0-9]" prompt_log.md | head -5; date "+%H:%M %d/%m/%Y"
+Bash python3 - <<'EOF'
+Mình đã viết xong kịch bản quay và lời thoại cho video feature C (FR-15 Quản lý sản phẩm). Đã commit và push.
+
+- [demo/shot_list.md](demo/shot_list.md) là kịch bản quay:
+  - **13 yêu cầu (R1–R13)** lấy từ đề: Task 2, §7, §11 và §13.
+  - **14 cảnh (S0–S13)**, xếp theo thứ tự quay trong một buổi, vừa làm FR-15 bằng skill từ bước T1 đến T8.
+  - **Hai bản dựng từ cùng bản quay:**
+    - Video Demo Task 2, khoảng 7:15 (đề yêu cầu ít nhất 5 phút). Thứ tự: xác thực → giới thiệu script → sửa lỗi → chạy 3 trình duyệt → báo cáo HTML.
+    - Video Skill, khoảng 10:30, đi đủ T1–T8.
+  - Có checklist chuẩn bị và bảng kiểm bản dựng cuối. Bảng kiểm để trống cột thời điểm, bạn điền sau khi dựng.
+- [demo/narration_script.md](demo/narration_script.md) là lời thoại tiếng Việt cho từng cảnh của cả hai video. Mỗi đoạn có ghi kèm hình đang chiếu. Chỗ `⟨…⟩` là số liệu, mã TC, hash commit, chỉ điền được sau buổi quay.
+
+Một số điểm bạn cần lưu ý khi quay:
+- **Lời thoại phải là giọng thật của bạn.** Đề §11 không cho dùng TTS hay giọng AI, khác với video seminar. Kịch bản viết sẵn từng chữ để bạn đọc; bạn cứ sửa câu cho tự nhiên.
+- **Chạy `whoami` và `hostname` hai lần:** ở đầu video và ngay trước lệnh `npm run feature -- product-crud`. Như vậy lần chạy gắn với tài khoản của bạn trong cùng một terminal.
+- **Không cắt lần chạy 3 trình duyệt.** Chỉ tua nhanh và có nhãn "×8" trên màn hình. Lệnh và output phải liền một đoạn.
+- **Tắt `npm run sut` sau khi dùng codegen.** Nếu không, `npm run feature` sẽ báo lỗi trùng cổng.
+- **Bản quay im không có tiếng.** Kịch bản đặt OBS tắt micro, quay im rồi lồng tiếng sau theo từng cảnh.
+- **Ghi giờ đầu mỗi cảnh ra giấy** để dựng nhanh hơn.
+
+**Tự chấm**
+
+| # | Điểm | Căn cứ | Việc cần làm |
+| --- | --- | --- | --- |
+| P1 | 2 | Chỉ sửa `demo/` và AI-02 | – |
+| P2 | 2 | Trước khi làm, `git status` không còn thay đổi chưa commit (chỉ có file PDF chưa theo dõi) | – |
+| P3 | N/A | Chưa có góp ý của bạn | – |
+| P4 | 2 | Kết quả chạy, lý do AI sai ở phương án A, kết luận lỗi đều để `⟨…⟩` cho bạn điền. Phương án B dùng nguyên nhân bạn đã xác nhận ngày 17/11 | – |
+| P5 | 2 | Có mục cần bạn quyết định bên dưới | – |
+| P6 | 2 | Commit `77d8e85` (kịch bản), `c597eed` (AI-02 Artifact #41) | Prompt043 sẽ ghi vào `prompt_log.md` cuối phiên |
+| 1 | 2 | R1–R13, mỗi dòng có mục đề và video tương ứng | – |
+| 2 | 2 | Mỗi R có cảnh tương ứng. R10 và R13 (đăng YouTube, dán link) kiểm ở bảng §4 | – |
+| 3 | 2 | Cảnh S1 là `whoami` + `hostname`, chạy lại ở S9 | – |
+| 4 | 1 | Phương án B có commit `f0b2152` và dòng 2 bảng review checkout. Phương án A chờ bước T5 của FR-15 | Chờ T5 |
+| 5 | 2 | Bạn yêu cầu lời thoại viết từng chữ | – |
+| 6 | 2 | Demo khoảng 7:15, trên mức 5:00 | – |
+| 7 | 2 | Agent không tạo âm thanh hay bản quay nào | – |
+| 8 | 2 | Có checklist chuẩn bị ở §3 | – |
+| 9–11 | N/A | Chưa quay | – |
+
+Gate: passed (tiêu chí 4 chỉ chờ bạn làm xong bước T5).
+
+**Cần bạn quyết định**
+
+1. **Quay một buổi, cắt thành 2 video?**
+   - PLAN đã ghi như vậy, nhưng shot list vẫn đang "chờ SV xác nhận".
+   - Lựa chọn: một buổi cho cả hai video, hoặc quay riêng từng video.
+   - Mình đề xuất **quay một buổi**: không phải làm lại FR-15 lần hai, và video Skill cho thấy đúng quy trình làm thật.
+2. **Kể lỗi nào ở cảnh sửa lỗi (S7)?**
+   - Phương án A là lỗi tìm được khi review FR-15 ngay trong buổi quay. Phương án B là lỗi assertion yếu ở FR-08 (commit `f0b2152`).
+   - Phải đợi đến bước T5 mới biết AI có sai ở FR-15 không.
+   - Mình đề xuất **chọn A nếu T5 tìm được lỗi thật**, vì người xem thấy cả quá trình sửa ngay trong video. Nếu không có lỗi thì dùng B.
+
+**Bước tiếp theo:** làm checklist chuẩn bị ở §3 của shot list (bước C0 trong PLAN), bật OBS, quay S1 rồi bắt đầu bước T1 cho FR-15.
+```
+
+- **Used in:** `demo/shot_list.md`, `demo/narration_script.md` (commit 77d8e85)
+
+---
+
+## Prompt044 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 00:36 18/11/2026
+- **Output received:** 00:40 18/11/2026
+- **Feature / step:** Video (FR-15) – shot list and voice-over script (Vietnamese, two videos)
+- **Purpose:** Chuyển kịch bản sang tiếng Việt, dễ hiểu hơn; thêm video demo Agent Skill bên cạnh video demo script
+- **Prompt (verbatim):**
+
+```text
+chuyển file kịch bản sang tiếng việt, kịch bản hiện tại đang bị khó hiểu
+và bên cạnh việc quay demo quá trình của một automation script thì cũng cần demo agent skill 
+hãy chỉnh sửa lại kịch bả
+```
+
+- **AI output (verbatim):**
+
+```text
+Bash ls skills/recording-test-demo-videos skills/recording-test-demo-videos/templates; cat skills/recordi
+Bash grep -o "Artifact #S[0-9]*[^|]\{0,120\}" AI-02_AI_Audit_Report.md | tail -3; grep -n "recording\|vid
+Bash grep -oE "Artifact #S[0-9]+" AI-02_AI_Audit_Report.md | sort -u | tail -3; grep -n "^## \|one record
+Write /home/hg/source/software-testing/week04/demo/shot_list.md
+Giờ viết lại file lời thoại theo đúng số cảnh mới.
+Write /home/hg/source/software-testing/week04/demo/narration_script.md
+Cập nhật PLAN cho khớp hai buổi quay, rồi áp góp ý vào skill `recording-test-demo-videos`.
+Bash python3 - <<'EOF'
+Edit /home/hg/source/software-testing/week04/PLAN.md
+Bash cd /home/hg/source/software-testing/week04/skills/recording-test-demo-videos && sed -n 24,43p SKILL.
+Bash python3 - <<'EOF'
+Bash sed -i 's/4\. \*\*Decisions needed\*\* (one or two videos from one session, live vs voice-over)/4. *
+Bash sed -i 's/| "Requirement covered" column reaches every V1 row |/| The "Scenes" column of the require
+Bash cd /home/hg/source/software-testing/week04 && sed -i 's/| Cột "Requirement covered" phủ hết mọi dòng
+Đã cập nhật skill; giờ ghi quy tắc ngôn ngữ vào CLAUDE.md, cập nhật AI-02 rồi commit.
+Bash python3 - <<'EOF'
+Bash git add demo/ PLAN.md CLAUDE.md && git commit -q -m "docs (video): rewrite the shot list and voice-o
+Mình đã viết lại kịch bản quay bằng tiếng Việt và tách hẳn phần demo Agent Skill thành một video riêng. Đã commit và push.
+
+**Hai video, hai buổi quay** ([demo/shot_list.md](demo/shot_list.md))
+
+| | Video 1 – Demo Agent Skill | Video 2 – Demo automation script |
+| --- | --- | --- |
+| Quay lúc nào | Buổi 1, trong lúc làm FR-15 | Buổi 2, sau khi FR-15 xong |
+| Cảnh | 1.1 → 1.12, khoảng 11 phút | 2.1 → 2.7, khoảng 7 phút (đề yêu cầu ít nhất 5 phút) |
+| Nội dung | Giới thiệu skill (SKILL.md, rubric, scripts, config). Sau đó mỗi bước T1 → T8 một cảnh; T7 có thêm skill `automation-bug-reporting` | `whoami`/`hostname` → giới thiệu script → kể lỗi đã sửa → chạy 3 trình duyệt → báo cáo HTML |
+
+**Những thay đổi chính**
+- **Bảng cảnh dễ theo hơn:** mỗi cảnh có 4 cột "Bạn làm gì / Màn hình cần thấy / Ý chính khi nói / Thời lượng". Cột "Bạn làm gì" ghi sẵn prompt cần gõ, ví dụ `/test-automation thực hiện bước T1 cho feature product-crud (FR-15)`.
+- **Video skill có cả phần bảo trì script.** Đề §7 yêu cầu cả sinh và bảo trì script, nên ngoài các bước sinh script, video còn quay review (1.7), sửa lỗi (1.8) và phân tích test fail (1.10).
+- **Bảng yêu cầu R1–R13 có thêm cột "Cảnh":** nhìn là biết yêu cầu nào nằm ở cảnh nào.
+- **Lời thoại** ([demo/narration_script.md](demo/narration_script.md)) đã đánh số lại theo cảnh mới. Các bước 1.2 → 1.11 có lời riêng, giải thích ba phần trong câu trả lời của AI: kết quả, bảng tự chấm, câu hỏi cho bạn.
+- **[PLAN.md](PLAN.md):** mục C1–C9 đã sửa theo hai buổi quay. Mục R1 có thêm ghi chú: không chạy lại `product-crud`, vì lần chạy ở cảnh 2.4 chính là lần chạy chính thức sẽ nộp.
+- **Skill `recording-test-demo-videos`:** đã áp góp ý của bạn (mỗi video một bảng cảnh riêng; kịch bản viết bằng ngôn ngữ thuyết minh; video skill có một cảnh cho mỗi bước). Template và rubric sửa theo.
+- **[CLAUDE.md](CLAUDE.md)** ghi thêm: hai file trong `demo/` viết bằng tiếng Việt.
+- **AI-02:** cập nhật dòng #41 và thêm dòng #S10 cho thay đổi của skill.
+
+**Cần bạn xác nhận:** PLAN trước đây ghi là quay một buổi rồi cắt thành hai video. Mình đã đổi sang **hai buổi quay riêng**, vì như vậy video skill là một video hoàn chỉnh, không phải cắt ra từ video kia. Cách này cũng giúp báo cáo trong Video 2 trùng với báo cáo nộp. Nếu bạn vẫn muốn quay một buổi thì báo mình, mình sẽ chỉnh lại.
+
+**Bước tiếp theo:** làm checklist chuẩn bị ở §4 của shot list, bật OBS, rồi quay cảnh 1.1 và bắt đầu bước T1 cho FR-15.
+```
+
+- **Used in:** `demo/shot_list.md`, `demo/narration_script.md` (commit 8dc5224); skill `recording-test-demo-videos` (commit 288e80b)
+
+---
+
+## Prompt045 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 01:03 18/11/2026
+- **Output received:** 01:07 18/11/2026
+- **Feature / step:** product-crud (fC) FR-15 – T1 select test cases
+- **Purpose:** Chọn test case HW02 để tự động hóa cho FR-15 bằng skill test-automation (bước T1)
+- **Prompt (verbatim):**
+
+```text
+dùng skill /test-automation thực hiện bước T1 cho feature C (FR-15)
+```
+
+- **AI output (verbatim):**
+
+```text
+Skill
+I'll start by reading the project context to find feature C (FR-15) and its designed test cases.
+Bash Find project instructions and FR-15 references
+Bash Read week04 instructions and feature selection
+Gate passes: the tree is clean apart from two untracked PDFs that aren't part of this step. Next I'll read the current design file, the HW02 test cases, and an example §1 from a finished feature.
+Bash Read product-crud design and checkout example
+Bash Read FR-15 test basis
+Bash Read FR-15 domain testing
+Bash Read FR-15 BVA
+Next I'll pull the 27 domain-testing (DT) test cases out of the HW02 file, showing only the columns T1 needs.
+Bash Show headings of domain testing file
+Bash Extract DT test case rows (key columns)
+Two things to check: why DT-04 was "Not run" in HW02, and what the Admin web form lets a user enter, which decides Web vs API for each row.
+Bash Read actual results and find admin pages
+Bash List admin frontend source files
+Bash Inspect admin product form code
+Bash Read admin product form and list markup
+The Admin form code settles which values the Web can reach. Before choosing between Web and API rows, I'll check what the brief says about UI versus API tests.
+Bash Check brief rules on UI vs API and plan entries
+The plan says FR-15 is done on camera (scenes 1.1–1.12), so I'll check what the shot list expects from the T1 scene.
+Bash Read shot list T1 scene and partition names
+Next I'll read the review rubrics I'm required to score against.
+Bash Read shared and T1 review rubrics
+Before writing §1, I'll check how the Admin web keeps the login and how a non-admin login is refused. Both affect the notes for T2–T4.
+Bash Read admin login and token handling
+I have what I need. I'll generate §1 with a script so the Expected column is copied straight from the HW02 files rather than retyped.
+Bash Generate §1 rows with expected text from HW02
+The Expected text matches HW02 apart from the A#/Q#/R# source codes I removed. Next I'll look at the AI-02 log format and the T1 entry from the checkout feature.
+Bash Find AI-02 table format and T1 rows
+Checking the last AI-02 artifact number and the last prompt number in the log so the new row is numbered correctly.
+Bash Find last artifact and prompt numbers
+Bash Read timing of the latest AI-02 rows
+Now I'll write §1 into the design file.
+Bash Write §1 into product-crud design file
+§1 is written: 36 rows, with the Expected text taken from HW02. Next I'll commit the step and push it.
+Bash Commit T1 design section and push
+Pushed as 84a1e72. Now the AI-02 row, committed on its own.
+Bash Add AI-02 row, commit and push
+**T1 – Chọn test case, feature `product-crud` (FR-15).** Điều kiện trước khi làm bước: git sạch, chỉ còn 2 file PDF chưa track, không liên quan. Đã đạt.
+
+## Kết quả
+
+Đã điền bảng §1 trong [automation_design.md](features/product-crud/automation_design.md#L3-L50): 36 dòng, gồm 27 TC domain testing và 9 TC BVA của HW02. ID giữ nguyên. Cột Expected chép nguyên văn từ HW02, chỉ bỏ các mã A#/Q#/R#.
+
+| Kênh | Số TC | TC |
+| --- | --- | --- |
+| Admin web | 23 | DT-01…05, 10, 11, 13, 22…27, BVA-01…09 |
+| Web + API | 5 | DT-09, 14…17 (Web bị chặn hoặc chưa có ô nhập, sau đó gửi qua API) |
+| Chỉ API | 8 | DT-06…08 (token), 12 (thiếu `name`), 18, 19 (danh mục không có trong danh sách), 20, 21 (id không tồn tại) |
+| Không tự động hóa | 0 | Không TC nào cần người đánh giá, cần hệ thống ngoài, cần chờ thời gian thật, hay trùng TC khác |
+
+**Đọc mã Admin web ([App.jsx](eshop-sut/frontend-admin/src/App.jsx)) để biết test nhập được gì, thấy được gì:**
+- **Form chỉ có placeholder, không có `<label>`.** Vì vậy DT-23 sẽ không tìm thấy dấu `*` nào.
+- **Ô giá không có `min`.** Nên `-50000` và `0` gõ được trên Web.
+- **Lỗi lưu hiện bằng `alert`, không phải dòng chữ phía trên nút Lưu.**
+- **DT-04 lần này chạy được.** HW02 để Not run vì BUG-34 che mất tên. Nay chạy được vì sau khi thêm sản phẩm, danh sách tải lại tên thật từ API.
+- **BUG-34 xuất hiện sau khi Sửa, không phải sau khi Thêm.** Sau một lần Sửa, trang chép tên vừa sửa cho mọi dòng ([App.jsx:109-115](eshop-sut/frontend-admin/src/App.jsx#L109-L115)). Ở HW02, thông báo "Cập nhật thành công" hiện ra trong lần chạy DT-01, mà thông báo này chỉ có ở nhánh Sửa.
+
+## AI tự review
+
+| # | Điểm | Bằng chứng | Hành động |
+| --- | --- | --- | --- |
+| P1 | 2 | Chỉ thay đổi §1 (84a1e72) và dòng AI-02 | – |
+| P2 | 2 | `git status` sạch trước khi bắt đầu | – |
+| P3 | N/A | Bước đầu của FR-15, chưa có chỉnh sửa nào của SV | – |
+| P4 | 2 | Mọi thay đổi kênh so với HW02 đều ghi "(proposed)"; không có verdict nào | – |
+| P5 | 2 | 2 quyết định ở dưới, mỗi cái có đủ vấn đề, lý do, phương án và đề xuất | – |
+| P6 | 2 | Commit 84a1e72 cho §1, commit 46d7371 cho AI-02 (#42), đều đã push; prompt log ghi cuối phiên | – |
+| 1 | 2 | 36 dòng §1 = 27 + 9 TC của HW02, ID không đổi | – |
+| 2 | 2 | 36 tự động hóa (tối thiểu 12); có hợp lệ, không hợp lệ, biên và kiểm tra hiển thị | – |
+| 3 | N/A | Không có dòng "No" | – |
+| 4 | 2 | Expected sinh bằng script từ cột Expected của HW02; chỉ bỏ mã nguồn, giữ nguyên câu trích SRS | – |
+
+Gate: passed (2 quyết định ở dưới chỉ thay đổi kênh chạy, không thay đổi oracle).
+
+## Cần SV quyết định
+
+1. **Chuyển 17 TC từ API (HW02) sang Admin web**
+   - Gồm DT-02, 03, 04, 05, 10, 11, 13, 22 và BVA-01…09; thêm phần Web cho DT-15 (bỏ trống ô giá) và DT-16 (giá `250000.5`).
+   - SV quyết vì ở HW02 SV đã chọn kênh API cho BVA (20/10 20:00).
+   - Phương án (a): chạy trên Web, giá trị đã lưu vẫn đọc qua API nên oracle giữ nguyên. Phương án (b): giữ kênh như HW02.
+   - **Đề xuất: (a).** Đề §5 yêu cầu tự động hóa giao diện web. Admin web nhập được các giá trị này vì ô tên không giới hạn độ dài, ô giá không có `min`.
+2. **DT-24 có kiểm tra danh sách sau một lần Sửa không?**
+   - Theo thiết kế, DT-24 xem danh sách sau khi Thêm. Theo mã, sau khi Thêm danh sách đúng, nên DT-24 có thể Pass, khác với HW02 (Fail, BUG-34).
+   - SV quyết vì việc này mở rộng bước của một TC đã thiết kế.
+   - Phương án (a): giữ đúng thiết kế. Phương án (b): kiểm tra danh sách sau khi Thêm và sau một lần Sửa P trên Admin web; oracle vẫn là "mỗi dòng hiện tên của chính sản phẩm đó".
+   - **Đề xuất: (b).** Cách này tái hiện đúng điều HW02 đã thấy.
+
+**Commit:** 84a1e72 `test (product-crud): select test cases to automate` và 46d7371 `docs (ai): add AI-02 row for the product-crud test case selection`, đều đã push. Khi có quyết định của SV, phần sửa §1 sẽ là một commit riêng.
+
+**Bước tiếp theo:** chạy `npm run sut` ở terminal 2, rồi `npm run codegen:admin`, sau đó gõ prompt `tiếp tục bước T2`.
+```
+
+- **Used in:** `features/product-crud/automation_design.md` §1 (commit 84a1e72); AI-02 #42
+
+---
+
+## Prompt046 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 01:26 18/11/2026
+- **Output received:** 01:31 18/11/2026
+- **Feature / step:** product-crud (fC) FR-15 – T1 decisions, T2 locators
+- **Purpose:** Áp dụng 2 quyết định T1 (17 TC sang Admin web, DT-24 xem danh sách sau khi sửa) và hoàn thiện bảng locator từ codegen của SV
+- **Prompt (verbatim):**
+
+```text
+1. chuyển 17 TC được xác định run bằng API trong bài tập tuần 2 sang admin web
+2. check danh sách sau khi thêm/sửa trên admin web
+bên dứoi là phần locator mà tôi đã xác định được thông qua codegen, hãy hoàn thiện bảng locator bên trong file design của phần product crud
+
+<pasted_content id="cf03">
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('http://localhost:5174/');
+  await page.getByRole('textbox', { name: 'Email' }).click();
+  await page.getByRole('textbox', { name: 'Email' }).fill('admin@eshop.com');
+  await page.getByRole('textbox', { name: 'Password' }).click();
+  await page.getByRole('textbox', { name: 'Password' }).fill('Admin123!');
+  await page.getByRole('textbox', { name: 'Password' }).press('Enter');
+  await page.getByText('Sản phẩm').click();
+  await page.getByRole('columnheader', { name: 'Ảnh' }).click();
+  await page.getByRole('columnheader', { name: 'Tên SP' }).click();
+  await page.getByRole('columnheader', { name: 'Giá' }).click();
+  await page.getByRole('columnheader', { name: 'Hành động' }).click();
+  await page.getByRole('cell', { name: 'iPhone 15 Pro Max' }).first().click();
+  await page.getByText('iPhone 15 Pro Max').click();
+  await page.getByRole('cell', { name: '30000000 ₫' }).click();
+  await page.getByRole('cell', { name: 'Sửa Xóa' }).first().click();
+  await page.getByRole('heading', { name: 'Thêm sản phẩm mới' }).click();
+  await page.getByText('Thêm sản phẩm mớiĐiện thoạ').click();
+  await page.getByRole('textbox', { name: 'Tên sản phẩm' }).click();
+  await page.getByRole('spinbutton', { name: 'Giá tiền' }).click();
+  await page.getByRole('textbox', { name: 'URL Ảnh' }).click();
+  await page.getByRole('textbox', { name: 'Mô tả' }).click();
+  await page.getByText('Thêm sản phẩm mớiĐiện thoạ').click();
+  await page.getByRole('textbox', { name: 'Tên sản phẩm' }).click();
+  await page.getByRole('textbox', { name: 'Tên sản phẩm' }).fill('iphone 12');
+  await page.getByRole('spinbutton', { name: 'Giá tiền' }).click();
+  await page.getByRole('spinbutton', { name: 'Giá tiền' }).fill('12');
+  await page.getByRole('textbox', { name: 'URL Ảnh' }).click();
+  await page.getByRole('textbox', { name: 'Mô tả' }).click();
+  await page.getByRole('textbox', { name: 'Mô tả' }).fill('ko có');
+  await page.getByRole('button', { name: 'Lưu sản phẩm' }).click();
+  await page.getByRole('cell', { name: 'iphone' }).nth(2).click();
+  await page.getByRole('button', { name: 'Xóa' }).nth(5).click();
+});
+</pasted_content id="cf03">
+```
+
+- **AI output (verbatim):**
+
+```text
+Áp dụng 2 quyết định vào §1 trước, rồi kiểm tra locator trên app đang chạy. Đầu tiên xem trạng thái server và các file liên quan.
+Bash Check repo state, page objects, and SUT servers
+SUT đang chạy (bạn đã `npm run sut`). Áp dụng 2 quyết định vào §1:
+Bash Apply student T1 decisions to §1
+Bash Commit decisions; read checkout §2 tail and helpers
+Quyết định đã áp dụng (5f2911e). Giờ xem cấu trúc trang Admin (đăng nhập, tab) để khảo sát locator trên app đang chạy:
+Bash Read admin login/nav markup and current data
+Bash Explore Admin web locators on Chromium
+Chromium đã khảo sát xong, dữ liệu dọn sạch (`leftover: []`). Chạy tiếp Firefox và WebKit:
+Bash Explore Admin web on Firefox and WebKit, compare
+WebKit khác ở danh sách sau khi sửa — xem chi tiết:
+Bash Show WebKit list after edit
+WebKit cũng lặp lại BUG-34 (khác biệt chỉ do cách tách chuỗi trong script). Kiểm tra thêm vài locator thay thế trên trang sản phẩm, cả 3 trình duyệt:
+Bash Count alternative locators on 3 browsers
+Bash Write §2 locator table into design file
+Sửa một câu chưa chính xác (`iphone` khớp 4 ô chứ không phải 3 tên), rồi commit:
+Edit /home/hg/source/software-testing/week04/features/product-crud/automation_design.md
+Bash Commit §2 locator table and push
+Giờ cập nhật AI-02: ghi quyết định của SV vào dòng #42 và thêm dòng #43 cho bảng locator.
+Bash Update AI-02 rows, commit and push
+Bash Count locator table rows
+AI-02 ghi nhầm "26 locator" (thực tế 27 dòng) — sửa:
+Bash Fix locator count in AI-02 and push
+**T2 (một phần) – Locator cho `product-crud` (FR-15).** Hai quyết định T1 đã đưa vào §1. Bảng locator §2 đã xong và đã kiểm trên app đang chạy. Page object và API client vẫn chưa viết.
+
+## Kết quả
+
+**Quyết định T1** (commit 5f2911e):
+- 17 TC chuyển sang chạy trên Admin web. Kết quả lưu vẫn đọc qua API.
+- DT-24 kiểm tra danh sách hai lần: sau khi thêm và sau khi sửa.
+- §1 không còn chữ "(proposed)", số TC đã chốt 36/36.
+
+**Bảng locator §2** ([automation_design.md](features/product-crud/automation_design.md#L57)) (commit 1387d9f):
+- 27 dòng, lấy từ ARIA snapshot và đếm locator trực tiếp trên Chromium 156, Firefox 157 và WebKit 27.2.
+- Mỗi locator khớp đúng 1 phần tử ở cả 3 trình duyệt.
+- Script khảo sát thêm, sửa, xóa một sản phẩm tạm trên mỗi trình duyệt. Sau đó DB về lại id 1–5.
+
+**So sánh với codegen của bạn:** giữ 7 locator, thay 7.
+
+| Codegen | Thay bằng | Lý do |
+| --- | --- | --- |
+| `getByText('Sản phẩm')` | `listitem` lọc theo nguyên văn | Ở tab Sản phẩm nó khớp tới 6 phần tử |
+| `cell 'iPhone 15 Pro Max'.first()` | Lọc dòng theo ô có đúng tên | Ô ảnh cũng có tên này (qua `alt`), nên codegen phải thêm `.first()` |
+| `button 'Xóa'.nth(5)`, `cell 'Sửa Xóa'.first()` | `row.getByRole('button', { name: 'Xóa' })` | Theo vị trí: bấm nhầm sản phẩm khi thứ tự đổi |
+| `cell '30000000 ₫'` | Cột "Giá" của dòng, vị trí cột đọc từ tiêu đề lúc chạy | Giá là dữ liệu, sẽ đổi |
+| Nhấn Enter, không chọn danh mục | Nút `Login`; `selectOption({ label: 'Phụ kiện' })` | Test cần bấm nút người dùng thấy và chọn đúng danh mục id 3 |
+
+**Phát hiện testability đáng chú ý:**
+- **BUG-34 lặp lại trên cả 3 trình duyệt.** Sau khi Sửa, mọi dòng đều hiện tên vừa sửa, trong khi API vẫn giữ đúng tên. Tải lại trang thì danh sách đúng lại.
+- **Ô giá chặn `abc` và `250000.5` nhưng cho gửi `-50000` và `0`.** Ô tên cho gửi tên chỉ có khoảng trắng.
+- **Form và danh sách thiếu tên truy cập:** form không có `<label>`, `<select>` không có tên, tab là `<li>` không có role.
+- **Khi thêm, form gửi giá dạng chuỗi** (`"250000"`). Khi sửa thì gửi số.
+
+## AI tự review
+
+| # | Điểm | Bằng chứng | Hành động |
+| --- | --- | --- | --- |
+| P1 | 2 | §1 (chỉ áp dụng quyết định) và §2 nằm ở 2 commit riêng | – |
+| P2 | 2 | Trước khi làm, git sạch | – |
+| P3 | 2 | Cả 2 quyết định của bạn ở commit riêng 5f2911e | – |
+| P4 | 1 | Ngày/trình duyệt codegen và câu kết luận để `[student]`; cột so sánh ghi rõ là agent đề xuất | Chờ bạn điền |
+| P5 | 2 | Có 1 quyết định ở dưới | – |
+| P6 | 2 | AI-02 sửa dòng #42, thêm dòng #43 (68b73fe; 50008bc sửa số đếm 26 → 27). Tất cả đã push | – |
+| 5 | 2 | Locator lấy từ ARIA snapshot và đếm trên app thật ở 3 trình duyệt | – |
+| 6 | 2 | Không có XPath hay `nth-child`. `nth` chỉ dùng cho chỉ số cột, và chỉ số này đọc từ tiêu đề lúc chạy | – |
+| 7 | 2 | Mỗi locator dự phòng (tab `<li>`, `<select>`, form) đều có lý do và ghi trong phần findings | – |
+| 8 | N/A | Chưa viết page object | Còn lại của T2 |
+
+Gate: blocked by P4 (chờ bạn điền ngày/trình duyệt codegen và câu kết luận). Phần còn lại của T2 là page object.
+
+## Cần bạn quyết định
+
+1. **Thông tin codegen trong §2**
+   - Dòng "Date / browser" và "Conclusion (one sentence, student)" đang để `[student]`.
+   - Đây là việc bạn tự làm bằng tay, nên agent không được viết thay.
+   - Nếu bạn chạy `npm run codegen:admin` không thêm tùy chọn thì trình duyệt mặc định là Chromium. Câu kết luận có thể theo mẫu FR-08.
+
+## Commit và bước tiếp theo
+
+**Commit (đã push):**
+- 5f2911e: áp dụng quyết định T1
+- 1387d9f: bảng locator §2
+- 68b73fe: AI-02 #42/#43
+- 50008bc: sửa số đếm trong AI-02
+
+**Bước tiếp theo:** gõ prompt `tiếp tục T2: viết page object và API client cho product-crud`. Prompt này tạo `AdminLoginPage.ts`, `AdminProductsPage.ts`, dùng lại `Dialogs.ts`, thêm phần products/categories vào `EshopApi.ts`, rồi kiểm tra trên 3 trình duyệt.
+```
+
+- **Used in:** `features/product-crud/automation_design.md` §1 (commit 5f2911e), §2 (commit 1387d9f); AI-02 #42, #43
+
+---
+
+## Prompt047 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 01:33 18/11/2026
+- **Output received:** 01:36 18/11/2026
+- **Feature / step:** product-crud (fC) FR-15 – T2 page objects
+- **Purpose:** Ghi ngày / trình duyệt codegen và hoàn tất T2: page object Admin web và API client sản phẩm
+- **Prompt (verbatim):**
+
+```text
+- cập nhật thời gian theo timestamp này 2026-11-18T01:31:59+07:00, trình duyệt chromium
+- tiếp tục hòan thiện bước T2
+```
+
+- **AI output (verbatim):**
+
+```text
+Cập nhật ngày/trình duyệt codegen trước, sau đó viết page object và API client. Xem config và phần còn lại của API client:
+Bash Update codegen date; read config and API client
+Xem route products/categories ở backend để viết API client cho đúng:
+Bash List product/category routes; read a page object example
+Bash Find product/category routes in backend
+Viết hai page object và mở rộng API client:
+Write /home/hg/source/software-testing/week04/page-objects/AdminLoginPage.ts
+Write /home/hg/source/software-testing/week04/page-objects/AdminProductsPage.ts
+Edit /home/hg/source/software-testing/week04/api/EshopApi.ts
+Cập nhật chú thích đầu file API client cho đúng phạm vi mới, rồi viết spec tạm (không giữ lại) để chạy thử page object trên 3 trình duyệt:
+Bash Read API client header comment
+Edit /home/hg/source/software-testing/week04/api/EshopApi.ts
+Bash Run temporary page-object check on 3 browsers
+3/3 passed, DB về id 1–5. Có một điểm lạ: WebKit đọc lại `price` dạng chuỗi `"250000"`, Firefox ra số `250000`, dù cả hai gửi giống nhau. Xem phần Chromium và schema:
+Bash Rerun check; inspect stored price type and schema
+Lần chạy thứ hai lại đảo ngược (Firefox chuỗi, WebKit số) → không phụ thuộc trình duyệt. Xem route GET:
+Bash Read product GET routes
+Bash Delete temp spec; add page objects and findings to §2
+Không có `tsc`. Hai page object và API client đã được Playwright biên dịch khi chạy spec tạm, nên mã TypeScript không lỗi. Commit phần T2:
+Bash Commit page objects and API client, push
+Bash Add AI-02 row #44, commit and push
+T2 cho `product-crud` (FR-15) đã xong, trừ câu kết luận codegen bạn chưa gửi. Page object và API client chạy được trên cả 3 trình duyệt.
+
+**Thời gian codegen:** §2 đã ghi `2026-11-18T01:31:59+07:00 – Chromium`.
+
+**Page object và API client:**
+- [AdminLoginPage.ts](page-objects/AdminLoginPage.ts): ô Email/Password, nút Login, `loginAsAdmin()`.
+- [AdminProductsPage.ts](page-objects/AdminProductsPage.ts):
+  - Mở tab "Sản phẩm", điền form, chọn danh mục theo tên hiển thị.
+  - Tìm dòng sản phẩm theo tên. Vị trí cột "Tên SP" và "Giá" đọc từ tiêu đề lúc chạy, không viết cứng.
+  - Thêm, sửa, xóa đều trả về request mà Admin web đã gửi, để spec kiểm tra status và body.
+  - `typePrice()` gõ từng phím như người dùng (cho DT-14), `validity()` đọc trạng thái kiểm tra của trình duyệt (cho DT-09, 14, 16).
+  - Không có `expect` nào trong page object.
+- `Dialogs.ts` dùng lại từ FR-08.
+- [EshopApi.ts](api/EshopApi.ts): thêm phần sản phẩm và danh mục. Header `Authorization` có thể truyền bất kỳ hoặc bỏ hẳn, để làm DT-06…08.
+
+**Kết quả chạy thử:** spec tạm (đã xóa, không commit) chạy 2 lần trên Chromium, Firefox, WebKit, cả 2 lần 3/3 passed.
+- Mọi locator khớp đúng 1 phần tử.
+- Thêm, sửa, xóa trên Admin web đều trả 200.
+- Sau khi sửa, cả 6 dòng hiện tên vừa sửa trên cả 3 trình duyệt (BUG-34).
+- DB về lại id 1–5.
+
+**Phát hiện mới (đã ghi vào §2):** `GET /api/products/:id` trả giá dạng chuỗi khi id chẵn (`"250000"` thay vì `250000`) và trả `{}` với status 200 khi id không tồn tại. Đây là mã cố ý trong [server.js:162](eshop-sut/backend/server.js#L162). Lần chạy thử đầu, Firefox nhận số, WebKit nhận chuỗi. Lần sau thì ngược lại, vì kiểu giá theo id được cấp chứ không theo trình duyệt.
+
+## AI tự review
+
+| # | Điểm | Bằng chứng | Hành động |
+| --- | --- | --- | --- |
+| P1 | 2 | Chỉ thay đổi §2, page object và API client (96f8c5b) | – |
+| P2 | 2 | Trước khi làm, git sạch | – |
+| P3 | 1 | Ngày và trình duyệt codegen đã ghi. Câu kết luận vẫn là `[student]` | Chờ bạn |
+| P4 | 2 | Phần so sánh codegen vẫn ghi là agent đề xuất | – |
+| P5 | 2 | Có 1 quyết định ở dưới | – |
+| P6 | 2 | AI-02 sửa dòng #43, thêm dòng #44 (5a090d2). Tất cả đã push | – |
+| 5 | 2 | Locator lấy từ ARIA snapshot và đếm trên app đang chạy | – |
+| 6 | 2 | Không có XPath, `nth-child` hay vị trí cứng | – |
+| 7 | 2 | Locator dự phòng (tab `<li>`, `<select>`, form) đều có lý do và có trong phần findings | – |
+| 8 | 2 | Không có `expect` trong `page-objects/` và `api/` | – |
+
+Gate: blocked by P3 (chỉ còn chờ câu kết luận codegen).
+
+## Cần bạn quyết định
+
+1. **Câu kết luận codegen** (dòng `Conclusion (one sentence, student)` trong §2)
+   - Đây là nhận xét của bạn về codegen, nên agent không viết thay.
+   - Gợi ý theo kết quả so sánh: codegen giữ được 7 locator; 7 cái còn lại phụ thuộc vị trí hoặc dữ liệu, ví dụ `getByText('Sản phẩm')` khớp 6 phần tử, `.nth(5)` để xóa.
+   - Bạn gửi câu đó, agent sẽ chép nguyên văn vào.
+
+Việc chọn cách đọc giá đã lưu (lỗi id chẵn ở trên) để tới T3 quyết.
+
+## Commit và bước tiếp theo
+
+Đã commit và push: 96f8c5b (page object, API client, §2) và 5a090d2 (AI-02).
+
+Bước tiếp theo: gõ prompt `tiếp tục bước T3` để tạo dữ liệu test cho `data/product-crud/`.
+```
+
+- **Used in:** `page-objects/AdminLoginPage.ts`, `page-objects/AdminProductsPage.ts`, `api/EshopApi.ts`, `features/product-crud/automation_design.md` §2 (commit 96f8c5b); AI-02 #44
+
+---
+
+## Prompt048 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 01:45 18/11/2026
+- **Output received:** 01:49 18/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Feature / step:** product-crud (fC) FR-15 – T2 codegen conclusion, T3 test data, prompt log
+- **Purpose:** Thêm câu kết luận codegen của SV, tạo dữ liệu test (T3), log các prompt chưa log của phiên
+- **Prompt (verbatim):**
+
+```text
+bổ sung kết luận cho phần codegen vào tài liệu: ưu tiên sử dụng role + accessible name, chỉ dùng các locator dựa trên nội dung hoặc cấu trúc DOM cần thiết; hạn chế phụ thuộc vòa vị trí của element để tăng độ chắc chắn, ổn định khi thực hiện automation test trên cả 3 browser
+sau khi bổ sung, tiếp tục bước T3 tạo data test cho feature C
+/logging-ai-prompts dùng skill này log các prompt chưa được log trong session này
+```
+
+- **AI output (verbatim):**
+
+```text
+Bổ sung câu kết luận (dịch sang tiếng Anh theo quy ước file design, giữ nguyên ý của bạn):
+Bash Add codegen conclusion, commit and push
+Giờ sang T3. Xem cách FR-08 làm dữ liệu test (§3 và file JSON) để giữ cùng định dạng:
+Bash Read checkout T3 section and data file
+Xem seed (danh mục, sản phẩm) để ghi nguồn cho dữ liệu và kiểm tra kiểu giá mà `GET /api/products` trả về:
+Bash Read seed data lines and API price types
+Kiểm tra số dòng các câu SRS sẽ trích trong cột `source`:
+Bash Find README line numbers of quoted sentences
+Tạo hai file dữ liệu bằng script (để giá trị lặp `Ố` × n và câu trích nguồn không gõ tay):
+Bash Generate web.json and api.json for product-crud
+Kiểm tra ký tự `Ố` trong dữ liệu là dạng dựng sẵn NFC (U+1ED0, một code point) như HW02 yêu cầu:
+Bash Verify NFC encoding of repeated name characters
+Dữ liệu đúng NFC. Viết §3 vào file design:
+Bash Write §3, commit data files and push
+Cập nhật AI-02: ghi câu kết luận vào dòng #43 và thêm dòng #45 cho bước T3.
+Bash Update AI-02 with T3 row, commit and push
+Giờ đến phần ghi log prompt:
+Skill
+Bash Find current transcript and preview prompts to log
+Có xung đột số thứ tự: AI-02 (#41, #S10, phiên khác) đã dùng sẵn Prompt043/044 cho kịch bản video nhưng log mới tới Prompt042. Kiểm tra phiên trước:
+Bash Preview unlogged prompts of previous sessions
+Bash Write log entries for video session and this session
+```
+
+- **Used in:** `features/product-crud/automation_design.md` §2 (commit 65743c4), §3 + `data/product-crud/web.json`, `api.json` (commit 74d4203); `prompt_log.md`; AI-02 #45
+
+---
