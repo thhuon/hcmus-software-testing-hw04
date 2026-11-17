@@ -21,7 +21,7 @@ Nguồn: [ISTQB] §6.2 · [PW] Best Practices, Locators, Assertions, Parameteriz
 | 5 | M | Locator lấy từ UI đang chạy | Có nêu cách làm (codegen, UI mode, aria snapshot); không chép từ source code |
 | 6 | M | Theo đúng thứ tự ưu tiên locator | Role + name → label → placeholder → text → test id → CSS ổn định; không có XPath theo vị trí, `nth-child`, class được sinh tự động |
 | 7 | M | Mọi locator dự phòng (fallback) đều có lý do | Cột "Why" ở §2 nêu accessible name bị thiếu; nó được liệt kê là một phát hiện về testability |
-| 8 | M | Page object chỉ chứa locator và thao tác | Không có `expect` trong `pages/` |
+| 8 | M | Page object chỉ chứa locator và thao tác | Không có `expect` trong thư mục page object (ví dụ `page-objects/`) |
 
 ## T3 – Dữ liệu test
 

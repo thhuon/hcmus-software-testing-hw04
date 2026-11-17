@@ -21,7 +21,7 @@ This skill turns designed test cases into a suite one step per prompt, with a hu
 | Step | Writes | Who decides |
 | --- | --- | --- |
 | T1 Select test cases | design §1 | The tester confirms which test cases are automated and why the others are not |
-| T2 Locators and page objects | design §2, `pages/` | The tester confirms the locator choice where the UI offers no accessible name |
+| T2 Locators and page objects | design §2, `page-objects/` | The tester confirms the locator choice where the UI offers no accessible name |
 | T3 Test data | design §3, `data/<feature>/` | Expected values come from the test basis, never from the app |
 | T4 Generate specs | design §4, `tests/<feature>/` | The AI generates; nothing is fixed yet |
 | T5 Review and fix | design §5, specs | The tester decides every "why the AI missed it" |
@@ -116,12 +116,12 @@ One row per designed test case of the feature: `TC ID | Technique | Partition / 
 - A TC that the UI cannot reach but the API can is `Yes (API)`: it is automated through `request`, and the design says so.
 - Mark `(proposed)` on every "No"; the tester confirms.
 
-### T2 Locators and page objects → design §2, `pages/`
+### T2 Locators and page objects → design §2, `page-objects/`
 
 1. Explore the running UI, not the source: Playwright codegen, `npx playwright test --ui`, or `page.ariaSnapshot()` / an accessibility snapshot of each screen.
 2. Inventory per screen: `Element | Locator | Why this locator`. Priority [PW Locators]: `getByRole(role, { name })` → `getByLabel` → `getByPlaceholder` → `getByText` → `getByTestId` → CSS on a stable attribute. Never XPath by position, `nth-child`, generated class names, or text that changes with data.
 3. An element without an accessible name forces a fallback locator: note it as a finding (accessibility / testability), not as a reason to use XPath.
-4. One page object per screen [POM]: locators as readonly fields, user actions as methods (`requestOtp(email)`, `resetPassword(otp, pw, confirm)`). **No assertions inside page objects**; they stay in the spec.
+4. One page object per screen [POM]: locators as readonly fields, user actions as methods (`requestOtp(email)`, `resetPassword(otp, pw, confirm)`). **No assertions inside page objects**; they stay in the spec: one action serves valid and invalid cases (the same `requestOtp` must succeed for one row and fail for the next), and the expected result belongs to the test case. Wait for a page to be ready with `locator.waitFor()`, not `expect`. An API client for setup and checks is not a page object: keep it in its own folder (e.g. `api/`).
 
 ### T3 Test data → design §3, `data/<feature>/*.json|csv`
 

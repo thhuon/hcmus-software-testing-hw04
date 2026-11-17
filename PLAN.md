@@ -85,7 +85,8 @@ Mỗi bước 1 prompt + 1 commit, SV review trước khi qua bước sau:
 | Thư mục / file | Nội dung |
 | --- | --- |
 | `tests/<feature>/*.spec.ts` | Script Playwright (`fA-fr03`, `fB-fr08`, `fC-fr15`), `tests/smoke.spec.ts` |
-| `pages/` | Page object dùng chung |
+| `page-objects/` | Page object dùng chung (mỗi màn hình một lớp: locator + thao tác) |
+| `api/` | Client gọi API của EShop (chuẩn bị dữ liệu, TC `Yes (API)`, kiểm tra kết quả đã lưu) |
 | `data/<feature>/` | Dữ liệu test `.json` / `.csv` |
 | `features/<feature>/` | Chọn TC, bảng review "AI sai gì / vì sao", TC không tự động hóa được |
 | `reports/<feature>/<browser>/` | Báo cáo HTML chính thức (9 bộ) |

@@ -915,6 +915,6 @@ Skill
 Bash ls -t ~/.claude/projects/-home-hg-source-software-testing/*.jsonl | head -3; cd /home/hg/source/soft
 ```
 
-- **Used in:** `pages/LoginPage.ts`, `pages/ForgotPasswordPage.ts`, `pages/EshopApi.ts`, `features/fA-fr03/automation_design.md` §2, `PLAN.md`, `CLAUDE.md`, `prompt_log.md` (AI-02 Artifact #10)
+- **Used in:** `page-objects/LoginPage.ts`, `page-objects/ForgotPasswordPage.ts`, `api/EshopApi.ts`, `features/fA-fr03/automation_design.md` §2, `PLAN.md`, `CLAUDE.md`, `prompt_log.md` (AI-02 Artifact #10)
 
 ---

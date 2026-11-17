@@ -5,7 +5,7 @@
 | Requirement | <FR-xx> – <requirement file:lines> |
 | Designed test cases | <file of the earlier test design> |
 | Screens / URLs | <screen – URL> |
-| Specs · page objects · data | `tests/<feature>/` · `pages/` · `data/<feature>/` |
+| Specs · page objects · API client · data | `tests/<feature>/` · `page-objects/` · `api/` · `data/<feature>/` |
 | Count | Designed: 0 · Automated: 0 · Not automated: 0 · Assertion patterns: 0 |
 
 ## 1. Test cases selected (T1)

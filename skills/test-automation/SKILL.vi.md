@@ -20,7 +20,7 @@ Skill này biến test case đã thiết kế thành một bộ test, mỗi prom
 | Bước | Ghi vào | Ai quyết định |
 | --- | --- | --- |
 | T1 Chọn test case | design §1 | Tester xác nhận test case nào được tự động hóa và vì sao các test case còn lại thì không |
-| T2 Locator và page object | design §2, `pages/` | Tester xác nhận cách chọn locator ở chỗ UI không có accessible name (tên truy cập) |
+| T2 Locator và page object | design §2, `page-objects/` | Tester xác nhận cách chọn locator ở chỗ UI không có accessible name (tên truy cập) |
 | T3 Dữ liệu test | design §3, `data/<feature>/` | Giá trị mong đợi lấy từ test basis (cơ sở kiểm thử), không bao giờ lấy từ app |
 | T4 Sinh spec | design §4, `tests/<feature>/` | AI sinh code; chưa sửa gì |
 | T5 Review và sửa | design §5, spec | Tester quyết định mọi "vì sao AI bỏ sót" |
@@ -115,12 +115,12 @@ Mỗi test case đã thiết kế của feature là một dòng: `TC ID | Techni
 - TC mà UI không đi tới được nhưng API thì được là `Yes (API)`: nó được tự động hóa qua `request`, và file design ghi rõ điều đó.
 - Đánh dấu `(proposed)` cho mọi "No"; tester xác nhận.
 
-### T2 Locator và page object → design §2, `pages/`
+### T2 Locator và page object → design §2, `page-objects/`
 
 1. Khám phá UI đang chạy, không đọc source: Playwright codegen, `npx playwright test --ui`, hoặc `page.ariaSnapshot()` / accessibility snapshot của từng màn hình.
 2. Kiểm kê theo từng màn hình: `Element | Locator | Why this locator`. Thứ tự ưu tiên [PW Locators]: `getByRole(role, { name })` → `getByLabel` → `getByPlaceholder` → `getByText` → `getByTestId` → CSS trên một thuộc tính ổn định. Không bao giờ dùng XPath theo vị trí, `nth-child`, tên class được sinh tự động, hoặc text thay đổi theo dữ liệu.
 3. Phần tử không có accessible name buộc phải dùng locator dự phòng (fallback): ghi nhận nó là một phát hiện (accessibility / testability), không phải lý do để dùng XPath.
-4. Mỗi màn hình một page object [POM]: locator là các field readonly, thao tác của người dùng là các method (`requestOtp(email)`, `resetPassword(otp, pw, confirm)`). **Không có assertion trong page object**; assertion nằm ở spec.
+4. Mỗi màn hình một page object [POM]: locator là các field readonly, thao tác của người dùng là các method (`requestOtp(email)`, `resetPassword(otp, pw, confirm)`). **Không có assertion trong page object**; assertion nằm ở spec: một thao tác phục vụ cả case hợp lệ lẫn không hợp lệ (cùng `requestOtp` phải thành công ở dòng này và báo lỗi ở dòng sau), và kết quả mong đợi thuộc về test case. Chờ trang sẵn sàng bằng `locator.waitFor()`, không bằng `expect`. API client dùng để chuẩn bị dữ liệu và kiểm tra không phải page object: để ở thư mục riêng (ví dụ `api/`).
 
 ### T3 Dữ liệu test → design §3, `data/<feature>/*.json|csv`
 

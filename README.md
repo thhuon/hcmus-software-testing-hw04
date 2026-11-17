@@ -65,7 +65,7 @@ The skills are generic (one per testing topic, sources in [skills/SOURCES.md](sk
 | File / folder | Content |
 | --- | --- |
 | `HW04_Report.md` + `pdf/HW04_Report.pdf` | Main report: automation report per feature, review / gap analysis of the AI-generated scripts, runs, bugs |
-| `tests/`, `pages/`, `data/` | Playwright specs (TypeScript), page objects, test data files (JSON / CSV) |
+| `tests/`, `page-objects/`, `api/`, `data/` | Playwright specs (TypeScript), page objects (one class per screen), API client (setup and checks through the API), test data files (JSON / CSV) |
 | `reports/<feature>/<browser>/` | Multi-browser HTML reports (Playwright HTML reporter) + `results.json` |
 | `features/<feature>/automation_design.md` | Selection, locators, data, assertion patterns, review table, runs, not automated, failures |
 | `bugs/BUG_REPORT.md` + `bugs/screenshots/` | Bug report + screenshots of the bugs and the GitHub Issues page |

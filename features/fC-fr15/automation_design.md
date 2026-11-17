@@ -5,7 +5,7 @@
 | Requirement | FR-15 – `eshop-sut/README.md` lines 191–198 |
 | Designed test cases | `../week02/features/fC-pool-C/02_domain_testing.md` (27 TC), `03_boundary_value_analysis.md` (9 TC) |
 | Screens / URLs | Admin web – quản lý sản phẩm `http://localhost:5174` |
-| Specs · page objects · data | `tests/fC-fr15/` · `pages/` · `data/fC-fr15/` |
+| Specs · page objects · API client · data | `tests/fC-fr15/` · `page-objects/` · `api/` · `data/fC-fr15/` |
 | Count | Designed: 36 · Automated: 0 · Not automated: 0 · Assertion patterns: 0 |
 
 ## 1. Test cases selected (T1)

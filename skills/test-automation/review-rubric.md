@@ -19,7 +19,7 @@ Sources: [ISTQB] §6.2 · [PW] Best Practices, Locators, Assertions, Parameteriz
 | 5 | M | Locators come from the running UI | Method stated (codegen, UI mode, aria snapshot); not copied from source code |
 | 6 | M | Locator priority is followed | Role + name → label → placeholder → text → test id → stable CSS; no positional XPath, `nth-child`, generated classes |
 | 7 | M | Every fallback locator has a reason | §2 "Why" names the missing accessible name; it is listed as a testability finding |
-| 8 | M | Page objects hold locators and actions only | No `expect` inside `pages/` |
+| 8 | M | Page objects hold locators and actions only | No `expect` inside the page-object folder (e.g. `page-objects/`) |
 
 ## T3 – Test data
 

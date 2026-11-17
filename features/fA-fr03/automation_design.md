@@ -5,7 +5,7 @@
 | Requirement | FR-03 – `eshop-sut/README.md` lines 46–60 |
 | Designed test cases | `../week02/features/fA-pool-A/02_domain_testing.md` (34 TC), `03_boundary_value_analysis.md` (10 TC); DT-35 added in HW04 (§1) |
 | Screens / URLs | Web – Đăng nhập `http://localhost:5173/login` → Quên mật khẩu `http://localhost:5173/forgot-password` (Bước 1 email, Bước 2 OTP + mật khẩu mới) |
-| Specs · page objects · data | `tests/fA-fr03/` · `pages/` · `data/fA-fr03/` |
+| Specs · page objects · API client · data | `tests/fA-fr03/` · `page-objects/` · `api/` · `data/fA-fr03/` |
 | Count | Designed: 44 + 1 added in HW04 (DT-35) · Automated: 33 · Not automated: 12 · Assertion patterns: 0 |
 | Prompt log entries | Prompt006, Prompt008 (T1) · Prompt009 (T2) |
 
@@ -75,7 +75,7 @@ DT = domain testing (`02_domain_testing.md` §2.2), BVA = boundary value analysi
 
 **How the locators were found:** ARIA snapshot (`page.locator('body').ariaSnapshot()`) of each screen of the running Web app (`npm run sut`), then every locator counted on the live page on Chromium, Firefox and WebKit (1 match each; 0 for the elements FR-03 names but the app lacks). Codegen / Pick locator by the student: see the note below the table.
 
-Page objects: `pages/LoginPage.ts`, `pages/ForgotPasswordPage.ts`; API client (setup, `Yes (API)` rows, "password unchanged" checks): `pages/EshopApi.ts`. No `expect` in `pages/`.
+Page objects: `page-objects/LoginPage.ts`, `page-objects/ForgotPasswordPage.ts`; API client (setup, `Yes (API)` rows, "password unchanged" checks): `api/EshopApi.ts`. No `expect` in `page-objects/` or `api/`.
 
 | Screen | Element | Locator | Why this locator |
 | --- | --- | --- | --- |
