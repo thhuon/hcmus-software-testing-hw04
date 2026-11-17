@@ -41,7 +41,7 @@ HW02 bugs to compare against: `../week02/bugs/BUG_REPORT.md` (group issues `angq
   - `npm run smoke` – environment check (add `-- --project=chromium` to limit).
   - `npm run feature -- fA` – one feature on 3 browsers, HTML report + `results.json` in `reports/fA/<browser>/` (fresh SUT per run; `--reuse` keeps running servers; `--browsers chromium` limits).
   - `npm run all` – the 9 official runs (3 features × 3 browsers); `npm run summary` – counts for the README and report.
-  - Tools (skill test-automation "Tools and approaches"): `npm run sut` (start the three servers for codegen), `npm run codegen` / `npm run codegen:admin`, `npm run ui -- tests/<dir>` (UI mode), `npm run report -- <report dir>`, `npm run trace -- <trace.zip>`, `npm run init-agents` (Playwright Test Agents, only if the student chooses it).
+  - Tools (skill test-automation "Tools and approaches"): `npm run sut` (start the three servers for codegen), `npm run codegen` / `npm run codegen:admin`, `npm run ui -- tests/<dir>` (UI mode), `npm run report -- <report dir>`, `npm run trace -- <trace.zip>`, `npm run init-agents` (Playwright Test Agents; not used in HW04, student 17/11).
 - During development use `npx playwright test tests/fA-fr03 --project=chromium` (output in the ignored `playwright-report/`); only the official runs go to `reports/` and are committed.
 
 ## Bug reports

@@ -48,7 +48,7 @@ Mỗi bước 1 prompt + 1 commit, SV review trước khi qua bước sau:
 - [ ] **A7. Bug** – test fail do bug thật → đối chiếu các bug FR-03 đã có ở HW02 (`bugs/BUG_REPORT.md` của HW02), ghi vào `bugs/BUG_REPORT.md`.
 - [ ] **A8. Tinh chỉnh skill** – đã có bản nháp 3 skill (`skills/`: test-automation, automation-bug-reporting, recording-test-demo-videos; viết sẵn 17/11, SV review). Sửa skill ở chỗ vướng khi làm A1–A7.
 
-**Công cụ và phương pháp automation được thực hành** (skill test-automation, mục "Tools and approaches"): codegen (ghi và phát lại) · Pick locator / ARIA snapshot · Page Object Model · data-driven · kiểm thử API (`request`) · UI mode · Inspector · HTML report · trace viewer. Tùy chọn, chờ SV chọn: Playwright Test Agents (`npm run init-agents`), CI bằng GitHub Actions, BDD, visual regression, quét accessibility, Allure.
+**Công cụ và phương pháp automation được thực hành** (skill test-automation, mục "Tools and approaches"): codegen (ghi và phát lại) · Pick locator / ARIA snapshot · Page Object Model · data-driven · kiểm thử API (`request`) · UI mode · Inspector · HTML report · trace viewer. Phương pháp tùy chọn (Test Agents, CI, BDD, visual regression, accessibility, Allure): **không dùng** (SV quyết định 17/11).
 
 ### Giai đoạn 2 – Feature B: FR-08 (≈ 1,5 giờ, chưa quay)
 
