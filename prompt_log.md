@@ -2537,7 +2537,7 @@ Prompt này (19:39) chưa vào log. Session FR-08 đã dùng các số 016–019
 ## Prompt021 – Claude Code (claude-opus-5-5)
 
 - **Prompt sent:** 20:07 17/11/2026
-- **Output received:** 20:21 17/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Output received:** 20:22 17/11/2026
 - **Feature / step:** forgot-password (fA) – T6 rerun, ENV-01, screenshots instead of traces; prompt log
 - **Purpose:** Record ECONNRESET as an environment error and rerun; drop traces if the brief does not need them, keep screenshots; log the prompts
 - **Prompt (verbatim):**
@@ -2575,6 +2575,79 @@ Report và §6 đã lên remote. Giờ cập nhật PLAN và báo cáo, kiểm t
 Bash Update PLAN A6 and report §3.3, commit
 Giờ đến log prompt: dùng đúng file transcript của session này, rồi điền các trường còn thiếu và cập nhật AI-02 trong cùng một commit.
 Bash Write this session's pending prompts to the shared log
+Bash Fill log fields, update AI-02 rows and totals, commit together
+Bash Renumber my duplicate AI-02 row to #25 and fix references
+Mình đã ghi lỗi `ECONNRESET` thành lỗi môi trường ENV-01, bỏ trace, và chạy lại 3 lần chạy chính thức. Lần này cả 3 trình duyệt đều cho **5 pass, 28 fail**, cùng các phép kiểm fail như trước, và không gặp `ECONNRESET`. Mọi thứ đã commit và push.
+
+## 1. Kết quả vào báo cáo ngay khi hết xung đột
+
+Mình làm như vậy trong suốt lượt này:
+- **Lần chạy thử:** ghi ra thư mục riêng.
+- **Lần chạy chính thức:** ghi vào `test-output/` riêng của từng lần chạy.
+- **File dùng chung:** kiểm `git status` ngay trước khi sửa PLAN, báo cáo và log, rồi commit ngay sau đó.
+
+Cách làm này cũng đã có trong memory.
+
+Có một lần mình vẫn đụng session FR-08: nó thêm AI-02 #24 trước khi mình ghi dòng của mình. Mình đã đổi dòng của mình thành **#25** (commit `95965fa`).
+
+## 2. Lỗi môi trường ENV-01 (`ECONNRESET`)
+
+Mục ENV-01 trong §6 của [automation_design.md](features/forgot-password/automation_design.md) ghi:
+- **Nơi gặp:** DT-12 trên Firefox, lần chạy chính thức đầu tiên.
+- **Tái hiện:** chạy lại riêng thì gặp 1/3 lần; chưa thấy trên Chromium và WebKit.
+- **Nguyên nhân đề xuất:** kết nối keep-alive bị server đóng sau đúng 5 giây chờ.
+- **Ảnh hưởng:** không đổi verdict nào.
+- **Quyết định của bạn:** chấp nhận là rủi ro, chạy lại.
+
+Lần chạy chính thức thứ hai (20:08–20:20) không gặp lỗi này ở cả 99 test, và thay cho lần đầu. Lần đầu vẫn còn trong lịch sử git (commit `4ec4bf5`).
+
+## 3. Trace và ảnh chụp
+
+**Đề bài không yêu cầu trace.** Đề chỉ cần HTML report có "Run by" và thời điểm ISO (§6 Task 1, §11), cùng ảnh chụp cho mỗi bug. Vì vậy:
+- **Lần chạy chính thức:** không giữ trace. Report giảm từ 10–25 MB xuống còn 2,9–5,9 MB mỗi trình duyệt.
+- **Lần chạy thử:** vẫn giữ trace, để bạn mở trace viewer ở T7.
+- **Ảnh chụp đủ cho mọi test fail:**
+  - 27 test Web fail mỗi trình duyệt đều có ảnh, ví dụ [reports/forgot-password/chromium/screenshots/DT-35.png](reports/forgot-password/chromium/screenshots/DT-35.png). Script của skill tự copy ảnh ra file đặt tên theo TC ID.
+  - DT-27 là test API, không có trang nên không có ảnh. Thay vào đó là ảnh chụp mục DT-27 trong report (lỗi `Expected "4xx", Received "200"`): [DT-27-chromium-report.png](features/forgot-password/screenshots/DT-27-chromium-report.png), có cho cả 3 trình duyệt.
+- **Lưu ý:** ảnh chụp là trạng thái trang **lúc test kết thúc**, không phải lúc hộp thoại hiện ra. Ví dụ DT-35 dừng ở trang Đăng nhập, vì app tự chuyển trang sau "Đổi mật khẩu thành công!". Câu chữ trong hộp thoại nằm ở annotation `dialog` của report. Ở T7 có thể cần chụp thêm ảnh cho issue nào cần hiện rõ hộp thoại.
+
+**Tiêu đề 3 report**, đã đọc trên trình duyệt: "HW04 · FR-03 Forgot & reset password · chromium · Run by: 23120046 · 2026-11-17T13:08:54.601Z". Firefox và WebKit có tiêu đề tương ứng.
+
+## Cập nhật tài liệu và log
+
+- **PLAN A6, HW04_Report §3.3:** ghi lần chạy chính thức thứ hai, ENV-01 và việc dùng ảnh chụp thay cho trace.
+- **AI-02:**
+  - #23 có review của bạn;
+  - thêm #25 (chạy lại, ENV-01, ảnh chụp) và #S10 (thay đổi skill);
+  - tổng: 35 dòng, VALID 30, INCOMPLETE 5.
+- **Log prompt:**
+  - **Prompt015:** đã cập nhật giờ nhận.
+  - **Prompt020** (19:39 → 20:02) và **Prompt021** (20:07, lượt này, `UNFINISHED`).
+  - Prompt016–019 là của session FR-08.
+  - Mình chỉ điền các mục của session này.
+
+**AI tự review (T6 lần 2)**
+
+| # | Điểm | Bằng chứng |
+| --- | --- | --- |
+| P1–P6 | 2 | Mỗi việc một commit; chỉ sửa dòng của mình; đã sửa số AI-02 bị trùng |
+| 22 | 2 | Có đủ 3 report, `results.json`, và 27 ảnh mỗi trình duyệt |
+| 23 | 2 | Đã đọc tiêu đề trên trình duyệt: có "Run by: 23120046" và thời điểm ISO |
+| 24 | 1 | Spec đóng băng ở `63f8508`, report commit nguyên trạng. Vẫn chạy `--reuse` (server không khởi động lại); dữ liệu sạch nhờ tài khoản riêng mỗi test (ghi ở §6) |
+| 25 | 2 | `retries: 0`; ENV-01 được ghi lại, không bị giấu |
+| LOG-1–12 | 2 / N/A | Dùng đúng transcript của session này; các trường đã điền; Prompt021 có đánh dấu UNFINISHED |
+
+**Gate: passed**
+
+## Commit (đã push)
+
+- `45800c0` chore (skills): keep failure screenshots and no traces in official runs
+- `21b20d0` test (forgot-password): rerun the official runs with failure screenshots and no traces
+- `a1f9da8` docs: record the second FR-03 official runs in the plan and report
+- `0a3ea51` docs (ai): log Prompt020–Prompt021 and add AI-02 rows for the second official runs
+- `95965fa` docs (ai): renumber the FR-03 rerun row to Artifact #25
+
+**Bước tiếp theo:** gửi "bước T7 cho forgot-password: phân loại lỗi". Mình sẽ đề xuất verdict cho 28 test fail, trong đó có lỗi mới ở DT-35. Sau đó dùng skill automation-bug-reporting để comment vào các issue HW02 có sẵn hoặc tạo issue mới với nhãn `hw: HW04`.
 ```
 
 - **Used in:** `playwright.config.ts`, `skills/test-automation/` (no traces, screenshots per TC); `reports/forgot-password/` (second official set, screenshots); `features/forgot-password/screenshots/`; design §6 (ENV-01); `PLAN.md` A6, `HW04_Report.md` §3.3 (AI-02 Artifact #25, #S10)
@@ -2839,5 +2912,442 @@ Bash Preview with interrupted turns included
 ```
 
 - **Used in:** `prompt_log.md` Prompt023–025, AI-02 Artifact #27 (thời gian), design header
+
+---
+
+## Prompt026 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 20:23 17/11/2026
+- **Output received:** 20:25 17/11/2026
+- **Feature / step:** forgot-password (fA) – T7 failure triage
+- **Purpose:** Triage the failures of the official runs
+- **Prompt (verbatim):**
+
+```text
+tiếp tục thực hiện bước T7
+```
+
+- **AI output (verbatim):**
+
+````text
+Bắt đầu T7. Mình kiểm tra trạng thái repo, xem template §7–§8, rồi lấy toàn bộ các phép kiểm fail của từng test từ `results.json` của lần chạy chính thức.
+Bash Read §7–§8 template and every failing check of the official Chromium run
+Bash Read HW02 results for DT-13, DT-21 and the BUG-09 entry
+Bash Capture the DT-35 report entries on the three browsers
+Read /home/hg/source/software-testing/week04/features/forgot-password/screenshots/DT-35-chromium-report.png
+Bash Write §8 failure triage with verdicts, evidence and bug mapping
+Bash Fix the trace command and commit the T7 triage
+Triage đã commit. Giờ cập nhật báo cáo, README, PLAN và AI-02, kiểm tra trạng thái trước mỗi file dùng chung.
+Bash Update report, README and PLAN with the triage
+Bash Get prompt time and the current last AI-02 rows
+Bash Add the T7 AI-02 row with the next free number and commit
+Mình đã phân loại xong 28 test fail của FR-03 (T7). Đề xuất: **cả 28 đều là lỗi sản phẩm**, không còn lỗi script nào. Chúng đến từ 8 bug đã có ở HW02 và **1 bug mới (DT-35)**. Mọi thứ đã commit và push.
+
+## Bước T7 – phân loại lỗi
+
+Lúc bắt đầu, T6 đã commit hết. Bảng chi tiết ở §8 của [automation_design.md](features/forgot-password/automation_design.md). Mỗi dòng ghi: trình duyệt, phép kiểm fail (mong đợi / thực tế), verdict kèm câu trích từ tài liệu yêu cầu, và bug.
+
+| Bug | Test fail (cả 3 trình duyệt) | So với HW02 | Hành động đề xuất |
+| --- | --- | --- | --- |
+| BUG-01 #1: Web từ chối mật khẩu hợp lệ | DT-04, 05, 06, BVA-04, 05 | Giống. **Khác một điểm:** không phải *mọi* mật khẩu đều bị từ chối, `NewPass 2026` lại được chấp nhận | comment #1 |
+| BUG-03 #3: OTP 4 chữ số | DT-01, 02 (`9594`, `4941`, `1900`, `2240`) | Giống | comment #3 |
+| BUG-04 #4: không có ô xác nhận | DT-01, 28, 29, 30 | Giống | comment #4 |
+| BUG-06 #6: không có chỉ báo bước | DT-01, 03 | Giống | comment #6 |
+| BUG-07 #7: không có `*` | DT-01 | Giống | comment #7 |
+| BUG-08 #8: API reset thiếu `newPassword` | DT-27 (`200`) | Giống | comment #8 |
+| BUG-09 #9: lỗi hiện trong hộp thoại | 17 test (HW02 chỉ có 3) | Giống. **Khác:** ở DT-21, trình duyệt chặn ô rỗng thay vì hiện hộp thoại "Mật khẩu quá yếu!" như HW02 ghi | comment #9 |
+| BUG-11 #11: không có "Quay lại đăng nhập" | DT-03 | Giống | comment #11 |
+| **Mới:** Web chấp nhận `NewPass 2026` (ký tự đặc biệt duy nhất là dấu cách) và đổi mật khẩu | DT-35 | Không có ở HW02 (BUG-02 là phía API) | **issue mới, nhãn `hw: HW04`** |
+
+**Bằng chứng:**
+- **Tái hiện:** cả 2 bộ chạy chính thức và các lần chạy thử đều cho cùng kết quả.
+- **Ảnh chụp:** mỗi test Web có `reports/forgot-password/<browser>/screenshots/<TC ID>.png`.
+- **DT-35:** ảnh chụp trang chỉ thấy trang Đăng nhập, nên mình chụp thêm mục DT-35 trong report: [DT-35-chromium-report.png](features/forgot-password/screenshots/DT-35-chromium-report.png). Ảnh này có bước điền `NewPass 2026`, hộp thoại "Đổi mật khẩu thành công!", và lỗi đăng nhập bằng mật khẩu cũ ra `4xx`.
+- **DT-27:** chụp mục trong report, như ở T6.
+
+**Cập nhật tài liệu:**
+- HW04_Report §3.3: phần phân loại.
+- README: cột bug ghi `6 / 2 / 1 (proposed)`, nghĩa là 6 giống HW02, 2 có điểm khác (#1, #9), 1 mới.
+- PLAN A7: ghi T7 xong, còn phần comment và tạo issue.
+- AI-02: thêm #26. Mình đã đọc số lớn nhất ngay trước khi ghi.
+
+**AI tự review (T7)**
+
+| # | Điểm | Bằng chứng |
+| --- | --- | --- |
+| P1–P6 | 2 | T6 đã commit trước; triage, tài liệu và AI-02 mỗi thứ một commit; chỉ commit file của mình (session FR-08 có file chưa commit ở `features/checkout/`, `tests/checkout/`) |
+| 26 | 2 | §8 có verdict cho cả 28 test fail, đánh dấu `(proposed)` |
+| 27 | 2 | Oracle trích FR-01, FR-03, FR-22, SEC-07; tái hiện ở mọi lần chạy; có ảnh chụp cho từng test, riêng DT-27 và DT-35 có thêm ảnh chụp report |
+| 28 | 2 | Mọi assertion vẫn để fail. Chưa có annotation link tới issue: link chỉ có sau khi tạo issue, và thêm annotation thì phải sửa spec rồi chạy lại |
+| 32 (S) | 1 | §8 có lệnh mở trace viewer; phần ghi kết quả chờ bạn |
+
+**Gate: passed**
+
+## Cần bạn quyết định / làm
+
+1. **Xác nhận verdict** của 28 test fail (đều là lỗi sản phẩm) và **hành động trên tracker**: comment vào 8 issue, tạo 1 issue mới cho DT-35.
+2. **Severity của bug mới DT-35**
+   - Web nhận một mật khẩu yếu theo FR-01 và đổi mật khẩu thật. Đây là lỗi bảo mật ở luồng đặt lại mật khẩu.
+   - **Đề xuất: High.**
+3. **Mở trace viewer:** chạy hai lệnh trong §8:
+
+   ```bash
+   npx playwright test tests/forgot-password/web.spec.ts --project=chromium -g "DT-35 " --output=test-output/dev
+   npm run trace -- test-output/dev/<thư mục DT-35>/trace.zip
+   ```
+
+   Sau đó điền một câu vào dòng "What it showed". Mục đích: thấy được lúc gửi `NewPass 2026` và request `reset-password` trả về 200.
+
+## Commit (đã push)
+
+- `04cb262` test (forgot-password): triage the failures of the official runs
+- `717c2e8` docs: record the FR-03 failure triage in the report, README and plan
+- `0bd96c5` docs (ai): add AI-02 row for the FR-03 failure triage
+
+Prompt này (20:23) chưa vào log; lần chạy `/logging-ai-prompts` tới sẽ thêm.
+
+**Bước tiếp theo:** sau khi bạn xác nhận, gửi "báo bug FR-03 bằng skill automation-bug-reporting". Mình sẽ viết mục bug vào `bugs/BUG_REPORT.md`, comment vào 8 issue HW02 và tạo issue mới cho DT-35 trên repo nhóm. T8 (tổng kết §7) làm sau đó.
+````
+
+- **Used in:** `features/forgot-password/automation_design.md` §8, `features/forgot-password/screenshots/DT-35-*`; `HW04_Report.md` §3.3, `README.md`, `PLAN.md` A7 (AI-02 Artifact #26)
+
+---
+
+## Prompt027 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 20:28 17/11/2026
+- **Output received:** 20:34 17/11/2026
+- **Feature / step:** forgot-password (fA) – bug reporting step 1 (automation-bug-reporting)
+- **Purpose:** Match the FR-03 failures with the tracker and write the bug entries
+- **Prompt (verbatim):**
+
+```text
+dùng skill /automation-bug-reporting báo bug cho fr-03
+```
+
+- **AI output (verbatim):**
+
+```text
+Skill
+Bash Check gh account, group repo labels and the bug report file
+Bash Read the bug report file and the group README §4–§6
+Mình đọc template Bug report, nhãn của các issue HW02 liên quan, và tìm trên tracker các issue có thể trùng với bug mới DT-35.
+Bash Read the bug template fields and the eight HW02 issues
+Bash Search the tracker for issues that could match the DT-35 defect
+Bash Get browser and Playwright versions, check bug numbering
+Bash Copy failure screenshots and capture report entries for the bugs
+Read /home/hg/source/software-testing/week04/bugs/screenshots/DT-01_chromium.png
+Read /home/hg/source/software-testing/week04/bugs/screenshots/DT-11_chromium.png
+Read /home/hg/source/software-testing/week04/bugs/screenshots/DT-03_chromium.png
+Bash Find README line numbers for the quoted requirements
+Bash Reproduce DT-35 and check which password logs in afterwards
+Bash Write BUG-02 to BUG-10 for FR-03 into the bug report
+Bash Get the time of the DT-35 recheck from its e-mail stamp
+Lần kiểm lại DT-35 chạy lúc 20:30. Mình điền giờ đó vào BUG-02, và nối số BUG của HW04 vào §8 của file design.
+Bash Fill the recheck time and link the HW04 bug IDs in design §8
+Bash Check DT-21 row and update README bug counts
+Bash Update the report text and stage the bug entries and screenshots
+Bash Commit and push the FR-03 bug entries
+Bash See which commit took the staged files
+Bash Push, and add the stage-and-commit rule to memory
+Giờ mình soạn 9 nội dung sẽ gửi lên tracker: 8 comment và 1 issue mới. Mình lưu nháp trong scratchpad, **chưa gửi gì**.
+Bash Draft the eight comments and the new issue body (not sent)
+Bản nháp đã sẵn sàng. Giờ thêm dòng AI-02: đọc số lớn nhất, ghi và commit trong cùng một lệnh.
+Bash Add the bug-reporting AI-02 row and get the prompt time
+Bash Fix the prompt time and commit AI-02 in one command
+Nội dung gửi tracker đã soạn xong, AI-02 đã cập nhật. Mình đọc rubric của skill để tự chấm.
+Bash Read the Step 1 rubric of the bug-reporting skill
+Mình đã viết xong mục bug cho FR-03 và soạn sẵn 9 nội dung gửi tracker, **chưa gửi gì**: **BUG-02 mới** (DT-35), **BUG-03 Changed** (#1), và **BUG-04 … BUG-10 Confirmed** (#3, #4, #6, #7, #8, #9, #11).
+
+**Có một sự cố khi commit.** Mục bug và 18 ảnh của mình đang stage thì session FR-08 chạy `git commit`, nên chúng nằm trong commit `f4b4d10` của nó ("test (checkout): …"). Nội dung vẫn đầy đủ và đã push. Mình không viết lại lịch sử: đã ghi chú vào AI-02 #28 và lưu vào memory quy tắc "stage và commit trong cùng một lệnh".
+
+## Bước 1: đối chiếu và viết mục bug
+
+**Tìm trên tracker:** `gh issue list --search` với "FR-03 in:title", "khoảng trắng", "space", "Mật khẩu quá yếu", "reset-password"; cộng với HW02 `bugs/BUG_REPORT.md`.
+
+| HW04 | Test | Kết quả | Issue | Severity / Priority |
+| --- | --- | --- | --- | --- |
+| BUG-02 | DT-35 | **New** | tạo mới, nhãn `hw: HW04` | High / High (đề xuất) |
+| BUG-03 | DT-04, 05, 06, BVA-04, 05 | **Changed** | #1 | Critical / High (lấy theo #1) |
+| BUG-04 | DT-01, 02 | Confirmed | #3 | High / High |
+| BUG-05 | DT-01, 28, 29, 30 | Confirmed | #4 | Medium / Medium |
+| BUG-06 | DT-01, 03 | Confirmed | #6 | Low / Low |
+| BUG-07 | DT-01 | Confirmed | #7 | Low / Low |
+| BUG-08 | DT-27 (API) | Confirmed | #8 | High / High |
+| BUG-09 | 17 test | Confirmed | #9 | Low / Low |
+| BUG-10 | DT-03 | Confirmed | #11 | Low / Low |
+
+**Sửa lại so với T7:** ở T7 mình đề xuất #9 là "Changed" vì DT-21. Nhưng chính #9 đã ghi trường hợp ô rỗng (DT-13: trình duyệt chặn, không có dòng lỗi phía trên nút). Nên #9 là **Confirmed**. README giờ ghi `7 / 1 / 1`.
+
+**Mỗi mục trong [bugs/BUG_REPORT.md](bugs/BUG_REPORT.md) gồm:**
+- câu yêu cầu kèm `file:line`;
+- các bước tái hiện bằng lời, không cần Playwright;
+- kết quả assertion (mong đợi / thực tế);
+- ảnh lúc fail và ảnh chụp mục trong report, đặt trong `bugs/screenshots/`.
+
+Mục §8 của file design đã ghi lại số BUG của HW04.
+
+**DT-35 đã được kiểm lại riêng lúc 20:30:**
+- Web gửi `{"newPassword":"NewPass 2026"}` lên server và nhận `200`;
+- hộp thoại hiện "Đổi mật khẩu thành công!";
+- mật khẩu cũ `Test1234!` bị từ chối (`401`), còn `NewPass 2026` đăng nhập được (`200`).
+
+**Nội dung sẽ gửi** (nháp trong `/tmp/claude-1000/-home-hg-source-software-testing/fc5a277e-e51e-4a5c-b0af-eca264cbfd6b/scratchpad/tracker/`):
+
+Issue mới, file `issue-new-DT-35.md`, theo đúng template "Bug report" của nhóm:
+- **Tiêu đề:** `[23120046][FR-03][Web] Bước 2 accepts a new password whose only special character is a space (NewPass 2026) and changes the password`
+- **Nhãn:** `bug`, `severity: high`, `platform: web`, `technique: EP`, `pool: A`, `hw: HW04`; giao issue cho chính mình.
+- **Các mục:**
+  - **Test case:** HW04 DT-35, kèm đường dẫn script và dòng dữ liệu.
+  - **Mong đợi:** trích `README.md:58` và `README.md:34`.
+  - **Thực tế:** request `200`, hộp thoại "Đổi mật khẩu thành công!", đăng nhập `Test1234!` → `401` và `NewPass 2026` → `200`, assertion fail trên 3 trình duyệt.
+  - **Ghi chú:** "Related #1, #2".
+
+Comment, mỗi file một issue (`comment-<n>.md`), cùng mẫu:
+- tiêu đề **HW04 – automated re-test**;
+- Script, Browsers (Chromium 156 / Firefox 157 / WebKit 27.2 đều ✗), Assertion, Report (thời điểm chạy và commit `21b20d0`), Difference, Screenshot;
+- dòng Reporter.
+
+Dòng "Difference from this issue" của từng comment:
+
+| Issue | Difference |
+| --- | --- |
+| #1 | **not *every* new password is refused: `NewPass 2026` is accepted and changes the password – filed separately as <new issue>** |
+| #3, #4, #6, #7, #8, #11 | none – same behaviour |
+| #9 | none – same behaviour; found by 17 automated tests on 3 browsers (HW02: DT-11 … 13) |
+
+## Cần bạn xác nhận
+
+1. **Verdict và kết quả đối chiếu**
+   - Bạn xác nhận 28 test fail đều là lỗi sản phẩm (T7).
+   - DT-35 là bug **mới**. Các ứng viên đã loại:
+     - #1: hành vi ngược lại (từ chối mật khẩu hợp lệ);
+     - #2: là API chấp nhận mật khẩu yếu, không phải check của Web;
+     - #42, #49: FR-01 đăng ký, feature khác.
+   - #1 là **Changed**, 7 issue còn lại là **Confirmed**.
+2. **Severity của BUG-02:** đề xuất **High / High**.
+   - Theo thang ở README nhóm §4.3: hệ thống nhận và lưu một mật khẩu sai quy tắc FR-01.
+   - Cùng mức với #2 (API nhận mật khẩu yếu).
+3. **Cách đưa ảnh lên GitHub** (`gh` không upload được ảnh)
+   - (a) Bạn tự kéo ảnh vào từng comment / issue trên trình duyệt.
+   - (b) Chạy `skills/automation-bug-reporting/scripts/upload_attachments.js`: một cửa sổ Chrome mở ra, bạn đăng nhập, script lấy link ảnh rồi mình chèn vào nội dung. Không có gì được đăng trong bước này.
+   - **Đề xuất (b)**, vì có 15 ảnh.
+4. **Gửi không?** Khi bạn đồng ý, mình sẽ:
+   1. tạo issue mới trước, để comment #1 trỏ được tới số issue mới;
+   2. gửi 8 comment;
+   3. ghi số issue / link comment vào bug report và §8;
+   4. xóa các file nháp.
+
+**AI tự review**
+
+| # | Điểm | Bằng chứng |
+| --- | --- | --- |
+| P1–P6 | 1 | Các bước và quyết định đều rõ. Nhưng một commit lẫn sang session khác (`f4b4d10`): đã ghi chú, đã lưu quy tắc mới |
+| 1 | 1 | Oracle được trích, tái hiện ở mọi lần chạy; verdict T7 chưa được bạn xác nhận rõ (câu hỏi 1) |
+| 2, 3 | 2 | Có câu tìm kiếm và ứng viên bị loại kèm lý do; Confirmed / Changed / New theo đúng quy tắc khớp |
+| 4 | 2 | Câu yêu cầu trích đúng nguyên văn tại `README.md:34, 51, 52, 53, 57, 58, 59, 252, 255, 284` |
+| 5 | 2 | "Thực tế" là giá trị assertion nhận được và ảnh; không suy ra nguyên nhân từ code |
+| 6 | 2 | Các bước bằng lời, có dữ liệu test |
+| 7 | 2 | 18 ảnh trong `bugs/screenshots/`, tên `<TC ID>_<browser>` hoặc `<TC ID>_report_<browser>` |
+| 8 | 2 | Số BUG ghi ở §8 và trong bảng tổng quan của bug report |
+| 9 | 2 | Bug cũ lấy severity theo issue; bug mới ghi `(proposed)` theo thang §4.3 |
+
+**Gate: blocked by 1**: chờ bạn xác nhận verdict. Việc gửi tracker cũng chờ bạn đồng ý.
+
+## Commit (đã push)
+
+- `f4b4d10`: mục BUG-02 … BUG-10 và ảnh (nằm trong commit của session FR-08, xem trên)
+- `4fb6951` docs (ai): add AI-02 row for the FR-03 bug report entries
+
+**Bước tiếp theo:** trả lời 4 ý trên, ví dụ "đồng ý, gửi; dùng cách (b)". Mình sẽ làm bước 2 (gửi và ghi link), rồi đến T8 (tổng kết §7) cho FR-03.
+```
+
+- **Used in:** `bugs/BUG_REPORT.md` BUG-02 … BUG-10, `bugs/screenshots/`; design §8 (AI-02 Artifact #28)
+
+---
+
+## Prompt028 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 20:46 17/11/2026
+- **Output received:** 20:47 17/11/2026
+- **Feature / step:** forgot-password (fA) – bug reporting step 2
+- **Purpose:** Confirm the verdicts and proposals; upload screenshots by script; send
+- **Prompt (verbatim):**
+
+```text
+- tôi xác nhận các test fail là lỗi của sản phẩm và cũng đồng ý với các đề xuất khác của bạn
+- đưa ảnh lên github theo option 
+- tiếp tục
+```
+
+- **AI output (verbatim):**
+
+```text
+Bạn đồng ý mọi đề xuất, nên mình đưa ảnh lên bằng cách (b), là cách mình đề xuất, qua script `upload_attachments.js`. Trước hết mình đọc phần đầu của script để biết cách dùng.
+Bash Read the upload script header and usage
+Bash Let the upload script take several images per issue
+Bash Document the new map keys and commit the skill change
+Giờ mình lập map ảnh (15 ảnh cho 9 nội dung) và chạy script ở chế độ nền. Một cửa sổ Chrome sẽ mở ra trên máy bạn.
+Bash Check Chrome and write the image map
+Bash Upload the screenshots to GitHub through a Chrome window (student logs in)
+Cửa sổ Chrome đang mở trang đăng nhập GitHub và chờ bạn đăng nhập. Mình sẽ tiếp tục ngay khi script chạy xong.
+
+**Việc bạn cần làm:**
+1. Đăng nhập GitHub trong cửa sổ Chrome bằng tài khoản **thhuon**.
+2. Sau khi đăng nhập, script tự mở từng issue (#1, #3, #4, #6, #7, #8, #9, #11) và thả ảnh vào ô comment để lấy link. Không comment nào được gửi; ô comment được xóa ngay sau mỗi ảnh.
+3. Đừng bấm gì trong cửa sổ đó cho tới khi nó tự đóng. Có 17 lượt upload cho 15 ảnh, mỗi lượt khoảng 5–10 giây.
+
+Script chờ đăng nhập tối đa 15 phút. Khi script xong, mình sẽ:
+1. tạo issue mới cho BUG-02 (có ảnh);
+2. gửi 8 comment, trong đó comment #1 trỏ tới số issue mới;
+3. ghi link vào bug report và §8;
+4. xóa thư mục profile Chrome (vì nó giữ phiên đăng nhập) và các file nháp;
+5. làm tiếp T8.
+```
+
+- **Used in:** `skills/automation-bug-reporting/scripts/upload_attachments.js`; issue #117 and eight comments on the HW02 group repo (AI-02 Artifact #30)
+
+---
+
+## Prompt029 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 20:50 17/11/2026
+- **Output received:** 21:06 17/11/2026
+- **Feature / step:** Tracker – language and screenshots of every issue of the student
+- **Purpose:** Fix Vietnamese issues, add every missing screenshot
+- **Prompt (verbatim):**
+
+```text
+các issue được viết bằng tiếng anh, issue nào còn được viết bằng tiếng việt thì sửa đi, bổ sung các screenshot còn thiếu, đảm bảo ko còn issue nào bị thiếu screenshots
+```
+
+- **AI output (verbatim):**
+
+```text
+Mình kiểm tra lại toàn bộ issue do tài khoản **thhuon** tạo trên repo nhóm (cả HW02 lẫn HW04): issue nào có nội dung tiếng Việt, issue nào chưa có ảnh. Issue của thành viên khác mình không đụng tới. Script upload ảnh vẫn đang chờ bạn đăng nhập trong cửa sổ Chrome.
+Bash Audit the student's issues for Vietnamese content and screenshots
+Bash Show the screenshot section and find Vietnamese prose lines
+Bash List referenced screenshots per HW02 issue and check the files exist
+Bash Check the upload result and list HW02 screenshot files
+Bash Insert the uploaded image markup into the drafts
+Ảnh đã nằm trong cả 9 nội dung. Giờ tạo issue mới cho BUG-02.
+Bash Create the new HW04 issue for BUG-02 (DT-35)
+Ô tìm trước khi tạo trả về 1 kết quả. Mình kiểm tra đó có phải #1 (tiêu đề có `NewPass@2026`) hay không, để chắc chắn không có issue trùng.
+Bash Confirm no duplicate issue and check labels of #117
+Không có issue trùng: kết quả lúc nãy là #1. Giờ điền `#117` vào comment #1 rồi gửi 8 comment, kiểm tra trước để không comment trùng.
+Bash Send the eight HW04 comments, skipping any already posted
+Phần HW04 đã gửi xong: issue mới **#117** và 8 comment. Giờ đến phần ảnh còn thiếu ở #1 – #41. Trước hết xem #41 (Mobile) ghi gì ở mục ảnh.
+Bash Read the screenshot sections of #41 and #2 and list mobile screenshots
+Bash Render the recorded API evidence files of API-only issues to images
+Read /tmp/claude-1000/-home-hg-source-software-testing/fc5a277e-e51e-4a5c-b0af-eca264cbfd6b/scratchpad/tracker/render/19-DT-07.png
+Bash Build the image map for the 41 HW02 issues
+Bash Upload the 58 HW02 screenshots through the logged-in Chrome profile
+Bash Write tracker links into the bug report and §8, commit
+Bash Prepare the issue-body edit script (adds images to the screenshot section)
+Đang chờ script upload 58 ảnh cho #1 – #41. Đã xong:
+- **Kiểm ngôn ngữ:** không issue nào của bạn có câu văn tiếng Việt. Chữ tiếng Việt còn lại là tiêu đề mục của template nhóm, nhãn giao diện và tên riêng, theo quy tắc thì giữ nguyên.
+- **Phần HW04 đã gửi:** issue mới [#117](https://github.com/angquoc/software-testing-2026-HW02-group/issues/117) (BUG-02, có 2 ảnh) và 8 comment trên #1, #3, #4, #6, #7, #8, #9, #11 (mỗi comment 1–2 ảnh). Link đã ghi vào bug report và §8 (commit `7b608a4`).
+
+Khi upload xong, mình sẽ thêm ảnh vào mục "Ảnh chụp" của #1 – #41, xóa profile Chrome và các file nháp, rồi kiểm lại lần cuối là không issue nào thiếu ảnh.
+Bash Check that all 58 images were uploaded
+Cả 58 ảnh đã lên. Giờ thêm ảnh vào mục "Ảnh chụp" của #1 – #41.
+Bash Add the uploaded images to the screenshot section of issues 1–41
+Bash Verify every issue and comment by thhuon has an image
+Cả 43 issue và 8 comment do thhuon tạo đều có ảnh. Giờ xóa profile Chrome (vì nó giữ phiên đăng nhập GitHub) và các file nháp, rồi thêm dòng AI-02.
+Bash Delete the browser profile and drafts, get prompt times
+Bash Add the AI-02 row for sending and screenshots, commit in one command
+Cuối cùng, cập nhật README, báo cáo và PLAN vì các bug đã được xác nhận và gửi.
+Bash Mark the FR-03 bugs as confirmed and sent in README, report and plan
+Mình đã gửi bug FR-03 lên tracker và bổ sung ảnh cho mọi issue của bạn. Kiểm lại lần cuối: **cả 43 issue và 8 comment của tài khoản thhuon trên repo nhóm đều có ảnh nhúng**.
+
+## Ngôn ngữ
+
+Mình kiểm 42 issue của bạn: **không có câu văn tiếng Việt nào**, nên không phải dịch gì. Chữ tiếng Việt còn lại chỉ là:
+- tiêu đề mục của template "Bug report" của nhóm ("MSSV người báo", "Ảnh chụp", …): sửa sẽ lệch với template chung;
+- nhãn giao diện, tên yêu cầu, tên sản phẩm, tên người báo: là phần trích nguyên văn, theo quy tắc thì giữ.
+
+## Bug FR-03 đã gửi
+
+- **Issue mới [#117](https://github.com/angquoc/software-testing-2026-HW02-group/issues/117)** (BUG-02, DT-35):
+  - nhãn `bug`, `severity: high`, `platform: web`, `technique: EP`, `pool: A`, `hw: HW04`; giao cho bạn;
+  - 2 ảnh: mục DT-35 trong report và trang lúc test kết thúc.
+- **8 comment "HW04 – automated re-test"**, mỗi comment 1–2 ảnh:
+  - #1 là **Changed**, có ghi "filed separately as #117";
+  - #3, #4, #6, #7, #8, #9, #11 là **Confirmed**.
+- **Link** đã ghi vào [bugs/BUG_REPORT.md](bugs/BUG_REPORT.md) và §8 của file design.
+
+## Ảnh còn thiếu ở HW02 (#1 – #41)
+
+Cả 41 issue HW02 ghi "Screenshots … (attached below)" nhưng không có ảnh nào được nhúng. Mình chỉ thêm ảnh vào cuối mục "Ảnh chụp", không sửa chữ nào khác:
+- **21 issue có giao diện:** thêm 26 ảnh chụp có sẵn từ `week02/features/*/screenshots/`. Trong đó có #41: file `Dt-17.png` mà issue ghi, trong thư mục tên là `DT-17.png`.
+- **20 issue chỉ có lỗi API** (#2, #5, #8, #12–#14, #18–#32, #38–#40): không có màn hình, nên mình thêm 32 ảnh chụp chính file evidence đã ghi ở HW02.
+  - Ảnh hiển thị nguyên văn request và response, JWT đã che.
+  - Mỗi ảnh có dòng tiêu đề ghi file nguồn, ví dụ `week02/features/fC-pool-C/evidence/DT-07.md`.
+  - Bạn nên mở thử một issue, ví dụ #19, để xem cách trình bày này có ổn không.
+
+## Script và dọn dẹp
+
+- Script `upload_attachments.js` của skill giờ nhận key `<issue>#<nhãn>`, cho phép upload nhiều ảnh qua cùng một issue (commit `d6d11f8`).
+- Đã xóa profile Chrome (vì nó giữ phiên đăng nhập GitHub của bạn) và toàn bộ file nháp.
+
+**AI tự review (bước 2 – gửi)**
+
+| # | Điểm | Bằng chứng |
+| --- | --- | --- |
+| P1–P6 | 2 | Bạn đồng ý trước khi gửi; mỗi việc một commit, stage và commit trong cùng một lệnh |
+| Đối chiếu trước khi gửi | 2 | Tìm issue trùng trước khi tạo #117 (chỉ khớp #1, khác lỗi); kiểm comment HW04 đã có trước khi gửi |
+| Ảnh hiển thị trên tracker | 2 | Ảnh dùng link `user-attachments`; đã kiểm bằng API: 43 issue và 8 comment đều có ảnh |
+| Link ghi lại | 2 | Bug report, §8, README (`7 / 1 / 1`), HW04_Report, PLAN A7 |
+| Dọn file tạm | 2 | Đã xóa profile và file nháp |
+
+**Gate: passed**
+
+## Commit (đã push)
+
+- `d6d11f8` chore (skills): upload several images per issue in upload_attachments.js
+- `7b608a4` docs (bugs): link BUG-02 to issue #117 and BUG-03 … BUG-10 to their comments
+- `5260a9d` docs (ai): add AI-02 row for the FR-03 tracker actions and the issue screenshots
+- `38c1fa8` docs: record the FR-03 bugs sent to the tracker in the README, report and plan
+
+Việc của bạn khi chuẩn bị nộp: chụp trang Issues lọc theo `label:"hw: HW04"` và các issue đã comment (README nhóm §6). Ba prompt 20:23, 20:28, 20:46 và prompt này chưa vào log; lần chạy `/logging-ai-prompts` tới sẽ thêm.
+
+**Bước tiếp theo:** gửi "bước T8 cho forgot-password: tổng kết" (§7 liệt kê 12 TC không tự động hóa và lý do, §6 / §8 hoàn chỉnh) để đóng feature A.
+```
+
+- **Used in:** Issues #1 – #41 of the HW02 group repo (screenshots embedded); `bugs/BUG_REPORT.md`, design §8 links (AI-02 Artifact #30)
+
+---
+
+## Prompt030 – Claude Code (claude-opus-5-5)
+
+- **Prompt sent:** 21:18 17/11/2026
+- **Output received:** 21:19 17/11/2026 (UNFINISHED – run the skill again after this turn to complete)
+- **Feature / step:** forgot-password (fA) – T8 summary, closing feature A; prompt log
+- **Purpose:** Log the prompts; finish T8 and the rest of feature A
+- **Prompt (verbatim):**
+
+```text
+/logging-ai-prompts log các prompt chưa được log ở session này
+tiếp tục hòan thiện bước T8, và các việc còn lại để đóng feature A
+```
+
+- **AI output (verbatim):**
+
+```text
+Mình làm T8 trước, sau đó dọn các việc còn lại của feature A, và ghi log prompt ở cuối. Bước đầu: lấy 12 TC "No" ở §1 cùng kết quả HW02 tương ứng, để điền cột "Tested instead" của §7.
+Bash List the not-automated TCs with their HW02 results
+Giờ mình xem HW02 đã chạy 12 TC này qua giao diện nào (API hay Web).
+Bash Show the interface HW02 used for the 12 not-automated TCs
+HW02 đã chạy cả 12 TC này qua API, ngày 20/10. Giờ mình viết §7.
+Bash Write §7 with the 12 not-automated TCs
+Mình đối chiếu §6 với kết quả mới nhất của `summarize-results.mjs` (tiêu chí 29) và dòng `Count` với §1, §4, §7 (tiêu chí 31), rồi commit.
+Bash Check §6 against the script, the Count line against §1/§4/§7, commit §7
+Bash Find the PLAN A8 line and the report's not-automated sentence
+Bash Update PLAN A8 and the report's not-automated part, commit
+Giờ ghi log prompt (dùng đúng file transcript của session này), rồi cập nhật AI-02 trong cùng một commit: thay các chỗ "logged later" và thêm dòng cho T8.
+Bash Write this session's pending prompts to the log
+```
+
+- **Used in:** `features/forgot-password/automation_design.md` §7; `HW04_Report.md` §3.1, `PLAN.md` A8; `prompt_log.md` (AI-02 Artifact #31)
 
 ---

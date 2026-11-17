@@ -7,7 +7,7 @@
 | Screens / URLs | Web – Đăng nhập `http://localhost:5173/login` → Quên mật khẩu `http://localhost:5173/forgot-password` (Bước 1 email, Bước 2 OTP + mật khẩu mới) |
 | Specs · page objects · API client · data | `tests/forgot-password/` · `page-objects/` · `api/` · `data/forgot-password/` |
 | Count | Designed: 44 + 1 added in HW04 (DT-35) · Automated: 33 · Not automated: 12 · Assertion patterns: 8 |
-| Prompt log entries | Prompt006, Prompt008 (T1) · Prompt009 – Prompt013 (T2) · Prompt012, Prompt013 (T3) · Prompt014, Prompt015 (T4) · Prompt015, Prompt020 (T5) · Prompt020, Prompt021 (T6) |
+| Prompt log entries | Prompt006, Prompt008 (T1) · Prompt009 – Prompt013 (T2) · Prompt012, Prompt013 (T3) · Prompt014, Prompt015 (T4) · Prompt015, Prompt020 (T5) · Prompt020, Prompt021 (T6) · Prompt026 (T7) · Prompt027 – Prompt029 (bugs) · Prompt030 (T8) |
 
 ## 1. Test cases selected (T1)
 
