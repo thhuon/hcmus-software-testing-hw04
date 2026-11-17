@@ -85,7 +85,7 @@ The same tests pass (DT-07, 08, 09, 17, 32) and fail on every browser ([design �
 
 <!-- From design §5: what the AI got wrong or missed, the fix, why (Prompt / Model / Feature). -->
 
-First run of the generated specs on Chromium (17/11, development runs): Web 1 passed, 6 failed ([report](features/checkout/screenshots/first-run/web-report-chromium.png)); API 3 passed, 8 failed ([report](features/checkout/screenshots/first-run/api-report-chromium.png)). Every failed assertion has an oracle quoted from the requirement or the HW02 decisions. The review ([design §5](features/checkout/automation_design.md#5-review-of-the-ai-generated-scripts-t5)) found six problems; cause types confirmed by the student (17/11) for #1–#5: #1 and #5 **Feature** (seen only when the app runs: a taken e-mail registered again, a click lost on a busy browser), #2 and #4 **Model**, #3 **Prompt**; #6 (found in T7) proposed **Model**:
+First run of the generated specs on Chromium (17/11, development runs): Web 1 passed, 6 failed ([report](features/checkout/screenshots/first-run/web-report-chromium.png)); API 3 passed, 8 failed ([report](features/checkout/screenshots/first-run/api-report-chromium.png)). Every failed assertion has an oracle quoted from the requirement or the HW02 decisions. The review ([design §5](features/checkout/automation_design.md#5-review-of-the-ai-generated-scripts-t5)) found six problems; cause types confirmed by the student (17/11): #1 and #5 **Feature** (seen only when the app runs: a taken e-mail registered again, a click lost on a busy browser), #2 and #4 **Model**, #3 **Prompt**; #6 (found in T7) **Model**:
 
 | # | What the AI got wrong | Category | Fix |
 | --- | --- | --- | --- |
